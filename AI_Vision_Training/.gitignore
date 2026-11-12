@@ -1,0 +1,71 @@
+# ============================================================
+# 広島化成 第1週 AI・マシンビジョン研修 / Hiroshima Kasei Week 1 AI & Machine Vision Training
+# このファイルは「Git に保存しないもの」を指定します。
+# This file tells Git which files must NOT be saved.
+# ============================================================
+
+# --- Python 仮想環境 / virtual environments ---
+.venv/
+.venv-*/
+venv/
+env/
+ENV/
+*.egg-info/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ipynb_checkpoints/
+
+# --- 大きなモデル重み / large model weights (再ダウンロード可能 / re-downloadable) ---
+*.pt
+*.pth
+*.onnx
+*.engine
+*.ckpt
+weights/
+assets/models/
+
+# --- 学習出力 / training outputs ---
+runs/
+runs_*/
+wandb/
+lightning_logs/
+mlruns/
+*.log
+training_results/
+
+# --- 生成データセット / generated datasets (スクリプトで再生成可能 / reproducible) ---
+assets/yolo_dataset/images/
+assets/yolo_dataset/labels/
+assets/yolo_dataset/data.yaml
+assets/yolo_dataset/dataset_summary.json
+assets/normal_samples/
+assets/defect_samples/
+assets/anomaly_dataset/
+assets/diagrams/*.json
+assets/external_samples/*
+!assets/external_samples/PROVENANCE.md
+!assets/external_samples/.gitkeep
+
+# 生成された図 / generated diagrams (スクリプトで再生成可能 / reproducible)
+assets/diagrams/*.png
+
+# --- 受講者の提出物 / student submissions ---
+submissions/*/*.ipynb
+submissions/*/*.png
+submissions/*/*.csv
+submissions/*/*.txt
+submissions/*/*.json
+submissions/*/*.pt
+submissions/*/*.ckpt
+submissions/*/heatmaps/
+!submissions/*/README.md
+!submissions/*/*_TEMPLATE.md
+!submissions/reports/*.md
+
+# --- Jupyter / OS ---
+*.tmp
+~$*
+.DS_Store
+Thumbs.db
+desktop.ini

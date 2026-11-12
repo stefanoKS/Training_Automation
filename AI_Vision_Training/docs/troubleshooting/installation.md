@@ -1,0 +1,294 @@
+# インストール時のトラブル対処 / Installation troubleshooting
+
+**日本語：** セットアップでつまずいたときの手順書です。
+**上から順に** 確認してください。9 割は最初の 3 つで解決します。
+
+**English:** Use this when setup fails. Work **top to bottom**; the first three sections solve about
+90 % of cases.
+
+---
+
+## 0. まずこれを実行する / Run this first
+
+**日本語：** 何かおかしいと感じたら、まず環境を確認します。
+
+**English:** Whenever something feels wrong, check the environment first.
+
+```powershell
+cd "$HOME\Documents\AI_Vision_Training"
+.\.venv\Scripts\Activate.ps1
+python assets\scripts\verify_environment.py --profile all
+```
+
+**日本語：** 表示の見方です。
+
+| 表示 / Output | 意味 / Meaning | 対処 / Action |
+|---|---|---|
+| `Virtual env : YES / はい` | 仮想環境が有効 / venv active | OK |
+| `Virtual env : NO` | **仮想環境が無効** / venv inactive | 下の 1 節 / see section 1 |
+| `[MISSING] numpy ...` | パッケージ不足 / missing package | 下の 3 節 / see section 3 |
+| `[MISS] ... assets` | 素材が未生成 / assets not generated | 下の 6 節 / see section 6 |
+| `READY` | 準備完了 / ready | 次へ / continue |
+
+---
+
+## 1. `Activate.ps1 cannot be loaded because running scripts is disabled`
+
+**原因 / Cause:** Windows の実行ポリシーが、PowerShell スクリプトの実行を止めています。
+Windows policy blocks running PowerShell scripts.
+
+**対処 / Fix:**
+
+```powershell
+Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
+```
+
+**日本語：** `Y` を押して確定し、もう一度有効化します。
+**English:** Answer `Y`, then activate again.
+
+```powershell
+.\.venv\Scripts\Activate.ps1
+```
+
+**日本語：** 成功すると、プロンプトの先頭に `(.venv)` が付きます。
+**English:** On success the prompt starts with `(.venv)`.
+
+---
+
+## 2. `python` と打つと Microsoft Store が開く / typing `python` opens the Store
+
+**原因 / Cause:** Windows の「アプリ実行エイリアス」が、`python.exe` を横取りしています。
+A Windows app-execution alias intercepts `python.exe`.
+
+**対処 / Fix:**
+
+1. Windows の設定を開く / open Windows Settings
+2. 「アプリ」→「アプリ実行エイリアス」 / "Apps" -> "App execution aliases"
+3. `python.exe` と `python3.exe` を **オフ** / turn both **off**
+4. PowerShell を **閉じて開き直す** / close and reopen PowerShell
+
+**日本語：** それでも直らない場合は、Python が PATH に入っていません。
+[python.org](https://www.python.org/downloads/) のインストーラを実行し、
+最初の画面で「**Add python.exe to PATH**」にチェックを入れて「Install Now」を押してください。
+
+**English:** If that does not fix it, Python is not on PATH. Run the python.org installer and tick
+"**Add python.exe to PATH**" on the first screen before choosing "Install Now".
+
+---
+
+## 3. `ModuleNotFoundError: No module named 'numpy'`（ノートブック内）/ inside a notebook
+
+**原因 / Cause は 2 つ / two causes:**
+
+### 3.1 カーネルが違う / the wrong kernel (most common)
+
+**日本語：** ノートブックが、別の Python を使っています。
+
+**対処 / Fix:**
+
+1. ノートブック右上のカーネル名をクリック / click the kernel name top-right
+2. `Python 3 (AI Vision)` を選ぶ / choose it
+3. `Kernel` → `Restart Kernel and Run All Cells`
+
+**確認 / Check:** 次のセルの出力が `.venv` を含むか見てください。
+
+```python
+import sys
+print(sys.executable)
+```
+
+### 3.2 パッケージが本当に入っていない / the package really is missing
+
+```powershell
+.\.venv\Scripts\Activate.ps1
+python -m pip install -r requirements\base.txt
+python -m ipykernel install --user --name aivision --display-name "Python 3 (AI Vision)"
+```
+
+**日本語：** `ipykernel install` を忘れると、Jupyter から見えません。**必ず実行してください。**
+**English:** Forgetting `ipykernel install` hides the environment from Jupyter.
+
+---
+
+## 4. ダウンロードが `Read timed out` で止まる / downloads time out
+
+**原因 / Cause:** ネットワークの一時的な失敗、または社内プロキシ。
+Transient network failure, or a corporate proxy.
+
+**対処 / Fix:**
+
+1. **同じコマンドをもう一度実行**（最も効きます）/ **re-run the same command** (most effective)
+2. それでもだめなら、プロキシを設定 / if it persists, configure the proxy
+
+```powershell
+$env:HTTP_PROXY  = "http://proxy.example.co.jp:8080"
+$env:HTTPS_PROXY = "http://proxy.example.co.jp:8080"
+python -m pip install -r requirements\base.txt
+```
+
+**日本語：** プロキシのアドレスは情報システム部門に確認してください。
+**English:** Ask IT for the proxy address.
+
+3. 社内ミラーがある場合は `--index-url` を指定 / with an internal mirror:
+
+```powershell
+python -m pip install -r requirements\base.txt --index-url https://pypi.example.co.jp/simple
+```
+
+---
+
+## 5. OpenCV がおかしい / OpenCV behaves strangely
+
+**症状 / Symptoms:** 色が反転する、`cv2` の動作が不安定、`findContours` の戻り値が違う。
+Colours inverted, unstable `cv2`, unexpected `findContours` return values.
+
+**原因 / Cause:** `opencv-python` と `opencv-python-headless` は**別の配布物**ですが、
+どちらも `cv2` を提供します。**同じ環境に両方入れると壊れます。**
+Both distributions provide `cv2`; installing both into one environment breaks it.
+
+**確認 / Check:**
+
+```powershell
+.\.venv\Scripts\Activate.ps1
+python -m pip list | Select-String "opencv"
+```
+
+**日本語：** **1 行だけ** 表示されるのが正常です。2 行出たら壊れています。
+
+**English:** **Exactly one line** is correct. Two lines means it is broken.
+
+**対処 / Fix:**
+
+```powershell
+# .venv（第0〜4日）/ .venv (Days 0-4)
+python -m pip uninstall -y opencv-python opencv-python-headless opencv-contrib-python
+python -m pip install opencv-python==4.12.0.88
+```
+
+```powershell
+# .venv-anomalib（第5日）/ .venv-anomalib (Day 5)
+python -m pip uninstall -y opencv-python opencv-python-headless opencv-contrib-python
+python -m pip install opencv-python-headless==4.12.0.88
+```
+
+**日本語：** 2 つの環境を混ぜないでください。どの環境で実行しているかを
+プロンプト（`(.venv)` か `(.venv-anomalib)`）で必ず確認してください。
+
+**English:** Never mix the two environments. Always check the prompt (`(.venv)` or
+`(.venv-anomalib)`) before installing.
+
+---
+
+## 6. 画像やデータが見つからない / assets or datasets are missing
+
+**症状 / Symptom:** `FileNotFoundError`、`画像がありません`、`data.yaml がありません`。
+
+**対処 / Fix:**
+
+```powershell
+.\.venv\Scripts\Activate.ps1
+python assets\scripts\generate_training_assets.py
+python assets\scripts\prepare_datasets.py --force
+```
+
+**日本語：** `--force` は既存データを消して作り直します。
+**受講者の提出物（`submissions/`）は消えません。**
+
+**English:** `--force` deletes and rebuilds only the generated datasets. Student work in
+`submissions/` is untouched.
+
+---
+
+## 7. モデルのダウンロードに失敗する / model download fails
+
+**症状 / Symptom:** `URLError`、`TimeoutError`、`yolo26n.pt` が取得できない。
+
+**対処 / Fix の順序 / in this order:**
+
+1. **同じセルをもう一度実行**する / re-run the same cell
+2. ブラウザで取得する / download manually:
+
+```text
+https://github.com/ultralytics/assets/releases
+```
+
+`yolo26n.pt`（約 5 MB）をダウンロードし、`assets\models\` に置きます。
+Download `yolo26n.pt` (~5 MB) and place it in `assets\models\`.
+
+3. 社内プロキシがある場合は管理者に確認 / ask IT about the proxy
+
+**日本語：** **取得できなかったときに、それらしい結果を作ってはいけません。**
+エラーをそのまま記録し、講師に相談してください。
+
+**English:** **Never fabricate a result when the download fails.** Record the error and ask the
+instructor.
+
+---
+
+## 8. `anomalib` が見つからない / `No module named 'anomalib'`
+
+**日本語：** 第 5 日のノートブックは、**`aivision-anomalib` カーネル** で実行します。
+`anomalib` は `.venv` には **入っていません**（意図的に分けています）。
+
+**English:** The Day 5 notebooks run on the **`aivision-anomalib`** kernel. `anomalib` is
+**deliberately not** in `.venv`.
+
+**対処 / Fix:**
+
+```powershell
+python -m venv .venv-anomalib
+.\.venv-anomalib\Scripts\Activate.ps1
+python -m pip install --upgrade pip
+python -m pip install -r requirements\anomalib.txt
+python -m ipykernel install --user --name aivision-anomalib --display-name "Python 3 (AI Vision Anomalib)"
+```
+
+---
+
+## 9. `OSError: Error loading "...\torch\lib\c10.dll"`
+
+**原因 / Cause:** `torch==2.10.0` の Windows ホイールが、この環境で import できませんでした。
+The `torch==2.10.0` Windows wheel failed to import on the verification machine.
+
+**対処 / Fix:**
+
+```powershell
+.\.venv-anomalib\Scripts\Activate.ps1
+python -m pip uninstall -y torch torchvision
+python -m pip install torch==2.15.0 torchvision==0.29.2
+```
+
+**日本語：** それでも直らない場合は、Microsoft Visual C++ 再頒布可能パッケージを入れ直してください。
+**English:** If it persists, reinstall the Microsoft Visual C++ Redistributable.
+
+---
+
+## 10. メモリ不足 / out of memory
+
+**症状 / Symptom:** `MemoryError`、`CUDA out of memory`、PC が極端に遅くなる。
+
+**対処 / Fix:**
+
+| 場面 / Situation | 対処 / Fix |
+|---|---|
+| YOLO の学習 / YOLO training | `BATCH` を 8 → 4、`IMGSZ` を 320 → 224 |
+| PatchCore の学習 / PatchCore fit | `train_batch_size` と `eval_batch_size` を 4 に |
+| ノートブック全般 / general | 他のアプリを閉じる / close other apps |
+
+---
+
+## 11. それでも解決しないとき / when nothing works
+
+**日本語：** 次の 4 つをメモして講師に伝えてください。これがあると解決が早くなります。
+
+1. **どのノートブックの、どのセル** か（`In [ ]` の番号でも可）
+2. **エラーメッセージ**（最後の 3 行をコピー）
+3. `python assets\scripts\verify_environment.py --profile all` の出力
+4. **すでに試したこと** と、その結果
+
+**English:** Note these four things for the instructor; they make diagnosis much faster.
+
+1. which notebook and which cell (the `In [ ]` number is fine)
+2. the error message (copy the last three lines)
+3. the output of `verify_environment.py --profile all`
+4. what you already tried, and what happened

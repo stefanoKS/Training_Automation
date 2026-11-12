@@ -1,0 +1,143 @@
+# 参考資料 / Reference materials
+
+**日本語：** この研修で参照した公式ドキュメントと、追加で学ぶための資料です。
+**必ず公式ドキュメントを優先** してください。ブログ記事は古いことがあります。
+
+**English:** Official documentation used by this course, plus material for further study.
+**Always prefer the official documentation**; blog posts are often out of date.
+
+---
+
+## 1. コア（必須）/ Core (required reading)
+
+| 内容 / Topic | リンク / Link | どこで使う / Used in |
+|---|---|---|
+| Python 公式チュートリアル（日本語） | <https://docs.python.org/ja/3/tutorial/> | 第2日 01・02 |
+| Python 標準ライブラリ | <https://docs.python.org/ja/3/library/> | 全体 / throughout |
+| Jupyter 公式 | <https://jupyter.org/> | 第0日 |
+| NumPy 入門 | <https://numpy.org/doc/stable/user/absolute_beginners.html> | 第1日 02 |
+| NumPy 配列の作成 | <https://numpy.org/doc/stable/user/basics.creation.html> | 第1日 02 |
+| Matplotlib `imshow` | <https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.imshow.html> | 第1日〜第5日 |
+| Matplotlib フォント設定 | <https://matplotlib.org/stable/users/explain/text/fonts.html> | 日本語表示 / Japanese text |
+| Pillow リファレンス | <https://pillow.readthedocs.io/en/stable/reference/Image.html> | 第1日 02 |
+| pandas 入門 | <https://pandas.pydata.org/docs/user_guide/10min.html> | 第3日〜第5日 |
+
+---
+
+## 2. OpenCV
+
+| 内容 / Topic | リンク / Link |
+|---|---|
+| OpenCV-Python チュートリアル（目次） | <https://docs.opencv.org/4.x/d6/d00/tutorial_py_root.html> |
+| 画像の読み込み・表示・保存 | <https://docs.opencv.org/4.x/db/deb/tutorial_display_image.html> |
+| 色空間の変換（BGR↔GRAY↔RGB） | <https://docs.opencv.org/4.x/d8/d01/group__imgproc__color__conversions.html> |
+| しきい値処理 | <https://docs.opencv.org/4.x/d7/d4d/tutorial_py_thresholding.html> |
+| 輪郭（contours） | <https://docs.opencv.org/4.x/d3/d05/tutorial_py_table_of_contents_contours.html> |
+| カメラ校正の考え方 | <https://docs.opencv.org/4.x/dc/dbb/tutorial_py_calibration.html> |
+
+**日本語：** 第2日で扱う内容は、上の 5 つでほぼすべてです。
+`cv2.findContours` は **OpenCV 4 系では 2 つ**（contours, hierarchy）を返します。
+3 系の記事（3 つ返す）と混同しないでください。
+
+**English:** Day 2 is covered by the five links above. Note that `cv2.findContours` returns **two**
+values in OpenCV 4 (contours, hierarchy); articles written for OpenCV 3 return three.
+
+---
+
+## 3. PyTorch
+
+| 内容 / Topic | リンク / Link |
+|---|---|
+| ローカルインストール（CPU/GPU の選び方） | <https://pytorch.org/get-started/locally/> |
+| 60 分でわかる PyTorch | <https://pytorch.org/tutorials/beginner/deep_learning_60min_blitz.html> |
+| 学習ループの基礎 | <https://pytorch.org/tutorials/beginner/basics/optimization_tutorial.html> |
+| torchvision のモデル一覧 | <https://pytorch.org/vision/stable/models.html> |
+
+**日本語：** インストールページは、**OS・パッケージマネージャ・計算プラットフォーム** を
+選ぶとコマンドが変わります。この研修のコマンドは Windows + pip + CPU のものです。
+
+**English:** The install page generates a different command depending on OS, package manager and
+compute platform. This course's commands are Windows + pip + CPU.
+
+---
+
+## 4. Ultralytics YOLO
+
+| 内容 / Topic | リンク / Link |
+|---|---|
+| ドキュメント（全体） | <https://docs.ultralytics.com/> |
+| 物体検出タスク | <https://docs.ultralytics.com/tasks/detect/> |
+| Predict モード（推論） | <https://docs.ultralytics.com/modes/predict/> |
+| Train モード（学習） | <https://docs.ultralytics.com/modes/train/> |
+| Val モード（評価） | <https://docs.ultralytics.com/modes/val/> |
+| データセット形式 | <https://docs.ultralytics.com/datasets/detect/> |
+| モデル一覧 | <https://docs.ultralytics.com/models/> |
+| 学習のヒント | <https://docs.ultralytics.com/guides/model-training-tips/> |
+
+**日本語：** モデル名は版によって変わります。本教材は `ultralytics 8.4.211` で
+**`yolo26n.pt`**（既定の nano モデル）を使用しています。古い記事の `yolov5*.pt` や
+`yolov8*.pt` をそのまま使わないでください。
+
+**English:** Model names change between releases. This course uses `ultralytics 8.4.211` with
+**`yolo26n.pt`** (the default nano model). Do not copy `yolov5*.pt` / `yolov8*.pt` names from older
+articles without checking.
+
+---
+
+## 5. Anomalib
+
+| 内容 / Topic | リンク / Link |
+|---|---|
+| ドキュメント（全体） | <https://anomalib.readthedocs.io/> |
+| PatchCore | <https://anomalib.readthedocs.io/en/latest/markdown/guides/reference/models/image/patchcore.html> |
+| Folder データモジュール | <https://anomalib.readthedocs.io/en/latest/markdown/guides/reference/data/image/folder.html> |
+| Engine | <https://anomalib.readthedocs.io/en/latest/markdown/guides/reference/engine.html> |
+| リリースノート | <https://github.com/open-edge-platform/anomalib/releases> |
+
+**日本語：** 本教材は **Anomalib 2.7.0** で検証しています。
+**1.x 系のサンプルコードは動きません**（`anomalib.data.Folder` など 2.x で API が変わっています）。
+
+**English:** Verified with **Anomalib 2.7.0**. **1.x sample code does not run**: the API changed in
+2.x (for example `anomalib.data.Folder`). Do not mix versions.
+
+---
+
+## 6. データセットと評価の考え方 / Datasets and evaluation
+
+| 内容 / Topic | リンク / Link |
+|---|---|
+| COCO データセット（80 クラス） | <https://cocodataset.org/#explore> |
+| COCO の評価指標 | <https://cocodataset.org/#detection-eval> |
+| MVTec AD（異常検知の標準データセット） | <https://www.mvtec.com/company/research/datasets/mvtec-ad> |
+| scikit-learn: 混同行列 | <https://scikit-learn.org/stable/modules/model_evaluation.html#confusion-matrix> |
+| scikit-learn: precision / recall | <https://scikit-learn.org/stable/modules/model_evaluation.html#precision-recall-f-measure-metrics> |
+| PatchCore 論文 | <https://arxiv.org/abs/2106.08265> |
+
+**日本語：** MVTec AD は、異常検知の研究で最もよく使われる公開データセットです。
+**工業製品の画像が公開されており、ライセンスも明記** されています。第 2 週以降の参考になります。
+
+**English:** MVTec AD is the standard public dataset for anomaly detection research, with real
+industrial images and a clearly stated licence. It is a useful reference for Week 2.
+
+---
+
+## 7. ライセンスの確認 / Licence checks
+
+**日本語：** 教材・モデル・データを使うときは、必ずライセンスを確認してください。
+**教育目的の利用が、そのまま製品への利用を許可するわけではありません。**
+
+| 対象 / Item | ライセンス / Licence | 注意 / Caution |
+|---|---|---|
+| Python, NumPy, Matplotlib, Pillow, pandas | PSF / BSD 系 / BSD-like | 比較的自由 / relatively permissive |
+| OpenCV | Apache 2.0 | 可 / fine |
+| PyTorch, torchvision | BSD 系 / BSD-like | 可 / fine |
+| **Ultralytics（YOLO）** | **AGPL-3.0** | **製品組み込みは要確認** / **review before embedding in a product** |
+| **COCO 事前学習の重み** | Ultralytics の配布条件に従う / per Ultralytics terms | 同上 / same as above |
+| **Anomalib** | Apache 2.0 | 可 / fine |
+| ImageNet 事前学習の重み（torchvision） | モデルごとに条件あり / per-model terms | 用途を確認 / check intended use |
+
+**日本語：** YOLO を社内システムに組み込む場合は、**AGPL-3.0 の扱いを法務・情報システム部門に
+確認** してください。この研修の範囲（学習・評価）では問題ありません。
+
+**English:** Before embedding YOLO in an internal system, **have Legal/IT review AGPL-3.0**. Within
+this course's scope (learning and evaluation) there is no issue.

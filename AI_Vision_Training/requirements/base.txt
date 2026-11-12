@@ -1,0 +1,35 @@
+# ============================================================================
+# 基本環境 / base environment
+# 広島化成 第1週 AI・マシンビジョン研修 — 第1日〜第2日
+# Hiroshima Kasei Week 1 AI & Machine Vision course — Day 1 and Day 2
+#
+# 検証済み / verified on: Windows 11, CPython 3.11.4 (64-bit), 2026-11
+# 詳細 / details: requirements/tested_versions.md
+#
+# 使い方 / usage (PowerShell, with the virtual environment activated):
+#   python -m pip install -r requirements\base.txt
+# ============================================================================
+
+# --- 数値・画像・表示 / numerics, images, plotting ---
+numpy==2.2.6
+matplotlib==3.11.2
+pillow==13.0.0
+pandas==3.1.1
+
+# OpenCV は 4.12 系に固定します。5.0 系は新しいメジャー版で、
+# 教材のコードと実機検証がまだ十分ではありません。
+# OpenCV is pinned to 4.12: version 5.0 is a brand-new major release and the
+# course code has not been verified against it.
+opencv-python==4.12.0.88
+scikit-image==0.26.0
+
+# --- Jupyter / notebook tooling ---
+jupyterlab==4.6.6
+ipykernel==7.4.0
+nbclient==0.11.0
+nbformat==5.11.1
+nbconvert==7.17.2
+
+# --- 検証用 / validation ---
+pytest==9.2.0
+requests==2.34.2

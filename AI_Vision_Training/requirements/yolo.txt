@@ -1,0 +1,31 @@
+# ============================================================================
+# YOLO 環境 / YOLO environment
+# 広島化成 第1週 AI・マシンビジョン研修 — 第3日〜第4日
+# Hiroshima Kasei Week 1 AI & Machine Vision course — Day 3 and Day 4
+#
+# base.txt と同じ仮想環境（.venv）に追加でインストールします。
+# Installed into the SAME virtual environment (.venv) as base.txt.
+#
+#   python -m pip install -r requirements\base.txt
+#   python -m pip install -r requirements\yolo.txt
+#
+# 検証済み / verified on: Windows 11, CPython 3.11.4 (64-bit), CPU only
+# ============================================================================
+
+# CPU 版の PyTorch（PyPI の Windows ホイールは CPU 版です）
+# CPU build of PyTorch (the PyPI Windows wheel is the CPU build)
+torch==2.15.0
+torchvision==0.29.2
+
+ultralytics==8.4.211
+
+# 注 / note:
+#   NVIDIA GPU を使う場合は、torch / torchvision を次のように入れ替えます。
+#   For an NVIDIA GPU, replace torch/torchvision with:
+#     python -m pip install torch==2.15.0 torchvision==0.29.2 \
+#         --index-url https://download.pytorch.org/whl/cu126
+#
+#   ultralytics は opencv-python を要求します。この環境には
+#   opencv-python-headless を入れないでください（二重インストールになります）。
+#   ultralytics requires opencv-python. Do NOT install opencv-python-headless
+#   here: both distributions provide cv2 and the environment breaks.

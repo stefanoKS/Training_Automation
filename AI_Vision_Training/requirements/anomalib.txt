@@ -1,0 +1,57 @@
+# ============================================================================
+# Anomalib 環境 / Anomalib environment
+# 広島化成 第1週 AI・マシンビジョン研修 — 第5日
+# Hiroshima Kasei Week 1 AI & Machine Vision course — Day 5
+#
+# この環境は YOLO 環境とは分けます。理由は下の「重要な注意」を読んでください。
+# This environment is SEPARATE from the YOLO environment. Read the note below.
+#
+# セットアップ / setup:
+#   python -m venv .venv-anomalib
+#   .\.venv-anomalib\Scripts\Activate.ps1
+#   python -m pip install --upgrade pip setuptools wheel
+#   python -m pip install -r requirements\anomalib.txt
+#   python -m ipykernel install --user --name aivision-anomalib --display-name "Python 3 (AI Vision Anomalib)"
+#
+# 検証済み / verified on: Windows 11, CPython 3.11.4 (64-bit), CPU only
+# ============================================================================
+
+# --- PyTorch（anomalib 2.7.0 は torch>=2.10 を要求します）---
+# PyTorch (anomalib 2.7.0 requires torch>=2.10)
+torch==2.15.0
+torchvision==0.29.2
+
+# --- 異常検知フレームワーク / anomaly detection framework ---
+anomalib==2.7.0
+lightning==2.6.6
+
+# --- ノートブック実行環境 / notebook runtime ---
+jupyterlab==4.6.6
+ipykernel==7.4.0
+nbclient==0.11.0
+nbformat==5.11.1
+nbconvert==7.17.2
+pandas==3.1.1
+matplotlib==3.11.2
+numpy==2.2.6
+pytest==9.2.0
+
+# ============================================================================
+# 重要な注意 / IMPORTANT
+#
+# 1. anomalib は opencv-python-headless を要求し、ultralytics は
+#    opencv-python を要求します。両方を同じ環境に入れると cv2 が二重になり、
+#    どちらかが壊れます。だから環境を分けています。
+#    anomalib requires opencv-python-headless while ultralytics requires
+#    opencv-python. Installing both into one environment gives two cv2
+#    distributions and breaks OpenCV. Hence two environments.
+#
+# 2. この環境には ultralytics を入れないでください。
+#    Do NOT install ultralytics into this environment.
+#
+# 3. torch 2.10.0 の Windows ホイールは、この検証環境で
+#    "Error loading c10.dll" により起動できませんでした。
+#    torch 2.15.0 は同じ条件で正常に動作しました。
+#    The torch 2.10.0 Windows wheel failed to load (c10.dll) on the verification
+#    machine; torch 2.15.0 works. anomalib only requires torch>=2.10.
+# ============================================================================
