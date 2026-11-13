@@ -6,17 +6,17 @@
 
 ## 記入のルール / How to fill this in
 
-**日本語：** 空欄はすべて埋めてください。「なし」も立派な記録です。**他人の答えを写さないでください。**
+空欄はすべて埋めてください。「なし」も立派な記録です。**他人の答えを写さないでください。**
 
-**English:** Fill in every field. "None" is a perfectly good record. Do not copy anyone else's answers.
+Fill in every field. "None" is a perfectly good record. Do not copy anyone else's answers.
 
 ---
 ## 1. 本日の学習内容 / Today's learning
 
-**日本語：** YOLO が何をするのか、confidence とは何か、なぜ事前学習モデルが PVC 欠陥を
+YOLO が何をするのか、confidence とは何か、なぜ事前学習モデルが PVC 欠陥を
 検出できないのかを、自分の言葉でまとめてください。
 
-**English:** Summarise what YOLO does, what confidence means, and why a pretrained model cannot
+Summarise what YOLO does, what confidence means, and why a pretrained model cannot
 detect PVC defects.
 
 ```text
@@ -78,9 +78,9 @@ detect PVC defects.
 
 ## 4. 発生した問題 / Problems encountered
 
-**日本語：** どのノートブックの、どのセルで、どんなメッセージが出たかを書いてください。
+どのノートブックの、どのセルで、どんなメッセージが出たかを書いてください。
 
-**English:** Record which notebook, which cell, and the exact message.
+Record which notebook, which cell, and the exact message.
 
 | # | ノートブック / Notebook | セル / Cell | エラーメッセージ / Error message |
 |---|---|---|---|
@@ -102,9 +102,9 @@ detect PVC defects.
 
 ## 6. 理解できなかった内容 / Questions remaining
 
-**日本語：** 質問の形で書いてください。
+質問の形で書いてください。
 
-**English:** Write them as questions.
+Write them as questions.
 
 1. 
 2. 
@@ -114,9 +114,9 @@ detect PVC defects.
 
 ## 7. 化成品工程への応用 / Application to Kaseihin
 
-**日本語：** 今日学んだことが、あなたの工程のどこに使えそうか。うまくいかないと思う点も書いてください。
+今日学んだことが、あなたの工程のどこに使えそうか。うまくいかないと思う点も書いてください。
 
-**English:** Where could today's topic be applied in your process? Include what you think would not work.
+Where could today's topic be applied in your process? Include what you think would not work.
 
 ```text
 （ここに記入 / write here）

@@ -1,9 +1,9 @@
 # 広島化成 第1週 AI・マシンビジョン研修 / Hiroshima Kasei Week 1 AI & Machine Vision Training
 
-**日本語：** 化成品（Kaseihin）部門の方を対象とした、**5 日間・16 ノートブック**の
+化成品（Kaseihin）部門の方を対象とした、**5 日間・16 ノートブック**の
 自習型 AI 研修教材です。Python も AI も画像処理も未経験の方を前提に作っています。
 
-**English:** A five-day, **16-notebook** self-study AI course for the Kaseihin (化成品)
+A five-day, **16-notebook** self-study AI course for the Kaseihin (化成品)
 department, written for people with **no prior experience** in Python, AI or image processing.
 
 | 項目 / Item | 内容 / Details |
@@ -18,20 +18,37 @@ department, written for people with **no prior experience** in Python, AI or ima
 
 ## 1. 最初に読むもの / Read this first
 
-**日本語：** 次の順番で進めてください。
+次の順番で進めてください。
 
 1. [`START_HERE.md`](START_HERE.md) — パソコンの電源を入れるところから始める、超初心者向け手順
-2. [`COURSE_SYLLABUS.md`](COURSE_SYLLABUS.md) — 5 日間の時間割
-3. `notebooks/00_Setup/00_Environment_Setup.ipynb` — 環境のセットアップと確認
+2. [`COURSE_SYLLABUS.md`](COURSE_SYLLABUS.md) — **時間割の唯一の正**。各日の必須時間・予備時間・前日までの準備
+3. `notebooks/00_Setup/00_Environment_Setup.ipynb` — 環境のセットアップと確認（**授業時間の外** に行います）
 
-**English:** Follow this order: `START_HERE.md` (from switching the PC on), then
-`COURSE_SYLLABUS.md` (the five-day timetable), then the setup notebook.
+Follow this order: `START_HERE.md` (from switching the PC on), then `COURSE_SYLLABUS.md` (the
+**single source of truth** for the timetable, including preflight), then the setup notebook —
+which is done **outside the lesson hours**.
+
+---
+
+## 1.1 時間の考え方 / How the time adds up
+
+自習は 1 日 **360 分**（09:00–12:00 と 13:50–16:50）です。そのうち
+**必須の学習・演習は 270〜300 分**、残りの **60〜90 分** は休憩・トラブル対応・提出に使います。
+
+Self-study gives **360 minutes** a day. **270-300 minutes** are required lesson and exercise work;
+the remaining **60-90 minutes** are explicitly budgeted for breaks, troubleshooting and submission.
+
+ノートブックの所要時間は **暫定値** です。初学者 1 名とのパイロットで測るまで確定しません。
+The notebook durations are **provisional** until measured in a pilot with one beginner.
+
+**演習 3（発展）は任意** です。完了チェックリストには入っていません。
+**Exercise 3 (challenge) is optional** and is never part of the completion checklist.
 
 ---
 
 ## 2. この研修で身につくこと / What you will be able to do
 
-**日本語：** 5 日間の終わりに、次のことができるようになります。
+5 日間の終わりに、次のことができるようになります。
 
 | 日 / Day | できるようになること / You will be able to |
 |---|---|
@@ -45,7 +62,7 @@ department, written for people with **no prior experience** in Python, AI or ima
 
 ## 3. インストール / Installation
 
-**日本語：** 2 つの仮想環境を作ります。**理由を必ず読んでください。**
+2 つの仮想環境を作ります。**理由を必ず読んでください。**
 
 | 環境 / Environment | 使う日 / Used on | 主なパッケージ / Main packages |
 |---|---|---|
@@ -54,11 +71,11 @@ department, written for people with **no prior experience** in Python, AI or ima
 
 > **なぜ分けるのか / Why two environments?**
 >
-> **日本語：** `anomalib` は `opencv-python-headless` を要求し、`ultralytics` は
+> `anomalib` は `opencv-python-headless` を要求し、`ultralytics` は
 > `opencv-python` を要求します。同じ環境に入れると `cv2` が二重になり、OpenCV が壊れます。
 > これは公式ドキュメントの依存関係から確認できる、避けられない衝突です。
 >
-> **English:** `anomalib` requires `opencv-python-headless` while `ultralytics` requires
+> `anomalib` requires `opencv-python-headless` while `ultralytics` requires
 > `opencv-python`. Installing both into one environment gives two `cv2` distributions and breaks
 > OpenCV. This is an unavoidable conflict visible in the official dependency metadata.
 
@@ -84,9 +101,9 @@ python -m pip install -r requirements\anomalib.txt
 python -m ipykernel install --user --name aivision-anomalib --display-name "Python 3 (AI Vision Anomalib)"
 ```
 
-**日本語：** GPU が無くても、この研修はすべて動きます。GPU がある場合の手順は
+GPU が無くても、この研修はすべて動きます。GPU がある場合の手順は
 `requirements/yolo.txt` のコメントを見てください。
-**English:** Everything works without a GPU. GPU instructions are in the comments of
+Everything works without a GPU. GPU instructions are in the comments of
 `requirements/yolo.txt`.
 
 **検証済みのバージョン / Verified versions:** [`requirements/tested_versions.md`](requirements/tested_versions.md)
@@ -95,14 +112,22 @@ python -m ipykernel install --user --name aivision-anomalib --display-name "Pyth
 
 ## 4. 素材（データ）の生成 / Generating the assets
 
-**日本語：** 画像・図・データセットはすべて **Python で生成** します。ダウンロード不要です。
+画像・図・データセットはすべて **Python で生成** します。ダウンロード不要です。
 
-**English:** All images, diagrams and datasets are **generated locally by Python**; nothing is
+All images, diagrams and datasets are **generated locally by Python**; nothing is
 downloaded.
 
 ```powershell
-# 図とサンプル画像 / diagrams and sample images
+# 図とサンプル画像 / concept diagrams and sample images
 python assets\scripts\generate_training_assets.py
+
+# 追加の教材図（ノートブックから Markdown で直接参照する静的な図）
+# the additional teaching diagrams referenced directly from notebook Markdown
+python assets\scripts\generate_teaching_diagrams.py
+
+# 保存済みの実行結果から作る参考図（実際のログ・スコア・出力を使用）
+# reference figures built from the saved runs (real logs, scores and outputs)
+python assets\scripts\generate_reference_outputs.py
 
 # YOLO 用データセットと PatchCore 用データセット / the two datasets
 python assets\scripts\prepare_datasets.py
@@ -110,20 +135,66 @@ python assets\scripts\prepare_datasets.py
 
 | 出力 / Output | 中身 / Contents |
 |---|---|
-| `assets/diagrams/` | 15 枚の概念図と校正用画像 / 15 concept diagrams plus a calibration image |
+| `assets/diagrams/` | 概念図・校正用画像・教材図 / concept diagrams, a calibration image and the teaching diagrams |
+| `assets/reference_outputs/` | 実際の実行結果から作った参考図（出所は同フォルダの `README.md`） / figures built from real saved runs |
 | `assets/normal_samples/`, `assets/defect_samples/` | 正常例・欠陥例（正解マスクと座標付き） / normal and defective examples with masks and coordinates |
 | `assets/yolo_dataset/` | 96 枚（train 64 / val 16 / test 16）、ラベル、`data.yaml` |
 | `assets/anomaly_dataset/pvc_sheet/` | 正常 44 枚、異常 40 枚、正解マスク / 44 normal, 40 abnormal, ground-truth masks |
 
+`assets/diagrams/teach_*.png` と `assets/reference_outputs/ref_*.png` は **配布物に含まれます**
+（`.gitignore` の例外）。Python を実行しなくても図が見えるようにするためです。
+それ以外の生成物（データセット・重み・学習結果）は従来どおり Git に入れません。
+
+The `assets/diagrams/teach_*.png` and `assets/reference_outputs/ref_*.png` files **ship with the
+repository** (exceptions in `.gitignore`) so that the essential figures are readable without
+running Python. Everything else — datasets, weights, training outputs — stays out of Git.
+
+`generate_reference_outputs.py` は、教材の実行で保存された結果が無い場合は**図を作らずに
+理由を表示して止まります**。数値を創作して埋めることはありません。
+
+`generate_reference_outputs.py` stops and prints why if the saved results are missing. It never
+invents numbers to fill a gap.
+
 > **重要 / Important**
 >
-> **日本語：** これらは **合成画像** です。実際の PVC の光学的な振る舞いを再現したものでは
+> これらは **合成画像** です。実際の PVC の光学的な振る舞いを再現したものでは
 > **ありません**。実際の工場画像での検証は第 2 週以降に行います。
 > 合成データで得られた精度を、製品の検査精度として引用してはいけません。
 >
-> **English:** These are **synthetic images**. They do NOT reproduce the optical behaviour of the
+> These are **synthetic images**. They do NOT reproduce the optical behaviour of the
 > factory's PVC material. Real images are required for a meaningful feasibility check in Week 2.
 > Never quote accuracy obtained on synthetic data as a product inspection accuracy.
+
+---
+
+## 4.1 解説 PDF / Explanation PDFs
+
+ノートブックの説明から自動で組んだ冊子を `docs/pdf/` に置いています。オフラインで読むための
+副教材で、演習はノートブックで行います。
+
+Companion booklets typeset from the notebooks' own Markdown live in `docs/pdf/`. They are for
+offline reading; the exercises are still done in Jupyter.
+
+| ファイル / File | 内容 / Contents |
+|---|---|
+| `docs/pdf/Day01_explanation_ja_en.pdf` … `Day05_…` | 各日の解説（日本語 → 英語） / one booklet per day |
+| `docs/pdf/Week1_explanation_ja_en.pdf` | 5 日分をまとめたもの / all five days |
+| `docs/pdf/README.md` | 作り方・含まれるもの・限界 / how to rebuild, what is in, limitations |
+
+```powershell
+python -m pip install -r requirements\pdf.txt          # 生成・点検用（学習には不要）
+python assets\scripts\export_explanations_pdf.py        # 6 つの PDF を作り直す
+python assets\scripts\inspect_pdf_pages.py              # 全ページを画像にして点検
+```
+
+* 実行ログ・スタックトレース・長い準備コード・講師用の解答は入りません。
+* 対話ウィジェットは、静的図＋「ノートブックで操作する」注記に置き換えています。
+* モデルのダウンロードも学習のやり直しも行いません。
+* 横長の図は読みやすさのため A4 横向きのページに置いています。
+
+The exporter includes no execution logs, no stack traces, no long setup code and no instructor
+answer keys; widgets become a static figure plus a note. It downloads nothing and retrains nothing.
+Wide figures sit on landscape A4 pages so their labels stay readable.
 
 ---
 
@@ -135,12 +206,44 @@ cd "$HOME\Documents\AI_Vision_Training"
 jupyter lab
 ```
 
-**日本語：** ブラウザが開いたら、`notebooks` → `00_Setup` → `00_Environment_Setup.ipynb`
+ブラウザが開いたら、`notebooks` → `00_Setup` → `00_Environment_Setup.ipynb`
 の順に開きます。**第 5 日のノートブックだけは、カーネルを
 `Python 3 (AI Vision Anomalib)` に切り替えてください。**
 
-**English:** Open `notebooks` -> `00_Setup` -> `00_Environment_Setup.ipynb`. For the **Day 5
+Open `notebooks` -> `00_Setup` -> `00_Environment_Setup.ipynb`. For the **Day 5
 notebooks only**, switch the kernel to `Python 3 (AI Vision Anomalib)`.
+
+### 5.1 セルの指示 / Cell instructions
+
+すべてのコードセルの先頭に、次のどれかが付きます。
+Every code cell starts with one of these banners.
+
+| 表示 / Banner | 意味 / Meaning |
+|---|---|
+| `実行のみ / Run only` | **Shift + Enter** でそのまま実行。書き換えない / run it, do not edit |
+| `この値を変更 / Change this value` | 値を変えて、結果を予想してから実行 / change the value, predict, then run |
+| `自分でコードを書く / Write your code` | 空欄を自分で埋める / fill in the blanks |
+
+### 5.2 対話デモ / Interactive demos
+
+5 つの短い対話デモがあります。**スライダーを動かすには、生きているカーネルが必要** です。
+
+There are five short interactive demos. **Moving a slider requires a live kernel.**
+
+| 場所 / Where | 何を動かすか / What you move |
+|---|---|
+| `Day01_02` Part 3 | RGB の 3 つの値 / the three RGB values |
+| `Day02_02` Part 2 | ループのステップ（1 つずつ）/ the loop step |
+| `Day02_03` Part 2 | OpenCV のしきい値 / the OpenCV threshold |
+| `Day03_01` Part 3 | 予測の四角の位置（IoU）/ the predicted box position (IoU) |
+| `Day03_03` Part 1 | YOLO の confidence / the YOLO confidence |
+| `Day05_03` Part 4 | PatchCore のしきい値（**較正用データのみ**）/ the PatchCore threshold (calibration data only) |
+
+> GitHub のプレビューや静的な HTML では、スライダーは動きません。
+> どのデモにも **ウィジェットを使わないパラメータセル** が付いていて、同じ実験ができます。
+>
+> Sliders do **not** run in GitHub previews or static HTML. Every demo has a **parameter cell that
+> needs no widget**, and it runs the same experiment.
 
 ---
 
@@ -158,11 +261,28 @@ python assets\scripts\validate_notebooks.py --execute lightweight
 
 # アセットとデータセットの自動テスト / automated asset and dataset tests
 python -m pytest assets\tests -v
+
+# 言語ラベルが残っていないか（CI 向け。書き換えません）
+# check that no repetitive language label came back (read-only)
+python assets\scripts\normalize_language_labels.py --check
+
+# 指示バナーを付け直す（何度実行しても同じ結果 / idempotent）
+# re-apply the cell instruction banners
+python assets\scripts\scaffold_notebooks.py
+
+# 対話デモが本当に「表示」されるか / check that the interactive demos really render
+python assets\scripts\check_widgets.py
 ```
 
 `assets/scripts/validate_notebooks.py --execute all` は **モデルのダウンロード** と
 **学習** を含むため、長時間かかります。
 `--execute all` includes model downloads and training, so it takes a long time.
+
+`check_widgets.py` はノートブックを実行して、`widgets.interact` を使うセルが
+ウィジェット表示（`application/vnd.jupyter.widget-view+json`）を出したかを確認します。
+ブラウザで実際にクリックする確認は別です。
+`check_widgets.py` executes a notebook and checks that the cells using `widgets.interact` emitted a
+widget view. Clicking the controls in a browser is a separate, manual check.
 
 ---
 
@@ -185,6 +305,7 @@ AI_Vision_Training/
 │   └── Day05_PatchCore/          <- 3 冊
 ├── assets/
 │   ├── diagrams/                 <- 生成された概念図 / generated diagrams
+│   ├── reference_outputs/        <- 実際の実行結果から作った参考図 / figures from real runs
 │   ├── normal_samples/           <- 正常例 / normal examples
 │   ├── defect_samples/           <- 欠陥例 / defect examples
 │   ├── yolo_dataset/             <- YOLO データセット / YOLO dataset
@@ -193,6 +314,7 @@ AI_Vision_Training/
 │   ├── scripts/                  <- 生成・検証スクリプト / generation and validation scripts
 │   └── tests/                    <- pytest
 ├── docs/
+│   ├── pdf/                      <- 解説 PDF と再生成手順 / explanation PDFs and how to rebuild
 │   ├── instructor/               <- 講師用ガイド（各日）/ instructor guides (per day)
 │   ├── troubleshooting/          <- トラブル対処 / troubleshooting
 │   └── reference_materials.md    <- 公式ドキュメントへのリンク / official links
@@ -204,38 +326,36 @@ AI_Vision_Training/
 
 ## 8. 提出物 / Submissions
 
-**日本語：** 毎日、`submissions/day0N/` に次の 4 つを保存してください。
+毎日、`submissions/day0N/` に次の 4 つを保存してください。
 
 1. 実行済みのノートブック（`File` → `Save`）
 2. `Day0N_Report_Template.md` を埋めたもの
 3. 保存した画像・CSV・JSON
 4. エラーが出た場合はそのメッセージと、試したこと
 
-**English:** Each day, leave four things in `submissions/day0N/`: the executed notebook, the filled
+Each day, leave four things in `submissions/day0N/`: the executed notebook, the filled
 report template, the saved images/CSVs/JSONs, and — if you hit an error — the message plus what you
 tried.
 
-**日本語：** 講師用の解答例は `docs/instructor/` にあります。**先に自分で書いてください。**
-**English:** Model answers live in `docs/instructor/`. **Write your own answer first.**
+講師用の解答例は `docs/instructor/` にあります。**先に自分で書いてください。**
+Model answers live in `docs/instructor/`. **Write your own answer first.**
 
 ---
 
 ## 9. 困ったとき / When something goes wrong
 
-**日本語：** まず次の順番で確認してください。
+まず次の順番で確認してください。
 
 1. 各ノートブック末尾の「困ったときは / Troubleshooting」表
 2. [`docs/troubleshooting/installation.md`](docs/troubleshooting/installation.md)
 3. `python assets\scripts\verify_environment.py --profile all`
 
-**English:** Check the troubleshooting table at the end of each notebook, then
+Check the troubleshooting table at the end of each notebook, then
 `docs/troubleshooting/installation.md`, then run the environment verifier.
 
 ---
 
 ## 10. 既知の制限 / Known limitations
-
-**日本語：**
 
 | 制限 / Limitation | 理由 / Reason |
 |---|---|
@@ -244,8 +364,10 @@ tried.
 | 学習画像 64 枚 / 64 training images | 1 日で終わる分量に抑えている / keeps the exercise within one day |
 | PatchCore の評価データは半数 / half of the eval data | 検証と試験に分けるため / split into validation and test |
 | YOLO と PatchCore は別環境 / two environments | OpenCV の衝突（上記 3 節）/ the OpenCV conflict described in section 3 |
+| PDF の図内文字は検索できない / figure text in the PDFs is not searchable | 図は画像として埋め込んでいる / figures are embedded as images |
+| PDF に実行ログは入らない / no execution logs in the PDFs | 出力は環境ごとに変わるため / outputs differ per machine |
 
-**English:** Every limitation above is deliberate and documented; none of them is a workaround for a
+Every limitation above is deliberate and documented; none of them is a workaround for a
 failing component. Real production feasibility requires real images, a fixed camera and lighting
 design, and a threshold study on known-good production — all of which are Week 2 topics.
 
@@ -253,13 +375,13 @@ design, and a threshold study on known-good production — all of which are Week
 
 ## 11. ライセンスと出所 / Licensing and provenance
 
-**日本語：** この研修で使う外部素材の出所とライセンスは
+この研修で使う外部素材の出所とライセンスは
 [`assets/external_samples/PROVENANCE.md`](assets/external_samples/PROVENANCE.md) に記録しています。
 
 **重要 / Important:** 学習目的での利用は問題ありませんが、
 **Ultralytics のモデルとコードは AGPL-3.0** です。製品への組み込みは、
 ライセンスの確認なしに行わないでください。
 
-**English:** Provenance and licences of external assets are recorded in
+Provenance and licences of external assets are recorded in
 `assets/external_samples/PROVENANCE.md`. Educational use is fine, but **Ultralytics code and released
 models are AGPL-3.0** — do not embed them in a product without a licence review.

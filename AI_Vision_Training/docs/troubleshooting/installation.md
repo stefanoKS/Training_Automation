@@ -1,18 +1,18 @@
 # インストール時のトラブル対処 / Installation troubleshooting
 
-**日本語：** セットアップでつまずいたときの手順書です。
+セットアップでつまずいたときの手順書です。
 **上から順に** 確認してください。9 割は最初の 3 つで解決します。
 
-**English:** Use this when setup fails. Work **top to bottom**; the first three sections solve about
+Use this when setup fails. Work **top to bottom**; the first three sections solve about
 90 % of cases.
 
 ---
 
 ## 0. まずこれを実行する / Run this first
 
-**日本語：** 何かおかしいと感じたら、まず環境を確認します。
+何かおかしいと感じたら、まず環境を確認します。
 
-**English:** Whenever something feels wrong, check the environment first.
+Whenever something feels wrong, check the environment first.
 
 ```powershell
 cd "$HOME\Documents\AI_Vision_Training"
@@ -20,7 +20,7 @@ cd "$HOME\Documents\AI_Vision_Training"
 python assets\scripts\verify_environment.py --profile all
 ```
 
-**日本語：** 表示の見方です。
+表示の見方です。
 
 | 表示 / Output | 意味 / Meaning | 対処 / Action |
 |---|---|---|
@@ -43,15 +43,15 @@ Windows policy blocks running PowerShell scripts.
 Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
 ```
 
-**日本語：** `Y` を押して確定し、もう一度有効化します。
-**English:** Answer `Y`, then activate again.
+`Y` を押して確定し、もう一度有効化します。
+Answer `Y`, then activate again.
 
 ```powershell
 .\.venv\Scripts\Activate.ps1
 ```
 
-**日本語：** 成功すると、プロンプトの先頭に `(.venv)` が付きます。
-**English:** On success the prompt starts with `(.venv)`.
+成功すると、プロンプトの先頭に `(.venv)` が付きます。
+On success the prompt starts with `(.venv)`.
 
 ---
 
@@ -67,11 +67,11 @@ A Windows app-execution alias intercepts `python.exe`.
 3. `python.exe` と `python3.exe` を **オフ** / turn both **off**
 4. PowerShell を **閉じて開き直す** / close and reopen PowerShell
 
-**日本語：** それでも直らない場合は、Python が PATH に入っていません。
+それでも直らない場合は、Python が PATH に入っていません。
 [python.org](https://www.python.org/downloads/) のインストーラを実行し、
 最初の画面で「**Add python.exe to PATH**」にチェックを入れて「Install Now」を押してください。
 
-**English:** If that does not fix it, Python is not on PATH. Run the python.org installer and tick
+If that does not fix it, Python is not on PATH. Run the python.org installer and tick
 "**Add python.exe to PATH**" on the first screen before choosing "Install Now".
 
 ---
@@ -82,7 +82,7 @@ A Windows app-execution alias intercepts `python.exe`.
 
 ### 3.1 カーネルが違う / the wrong kernel (most common)
 
-**日本語：** ノートブックが、別の Python を使っています。
+ノートブックが、別の Python を使っています。
 
 **対処 / Fix:**
 
@@ -105,8 +105,8 @@ python -m pip install -r requirements\base.txt
 python -m ipykernel install --user --name aivision --display-name "Python 3 (AI Vision)"
 ```
 
-**日本語：** `ipykernel install` を忘れると、Jupyter から見えません。**必ず実行してください。**
-**English:** Forgetting `ipykernel install` hides the environment from Jupyter.
+`ipykernel install` を忘れると、Jupyter から見えません。**必ず実行してください。**
+Forgetting `ipykernel install` hides the environment from Jupyter.
 
 ---
 
@@ -126,8 +126,8 @@ $env:HTTPS_PROXY = "http://proxy.example.co.jp:8080"
 python -m pip install -r requirements\base.txt
 ```
 
-**日本語：** プロキシのアドレスは情報システム部門に確認してください。
-**English:** Ask IT for the proxy address.
+プロキシのアドレスは情報システム部門に確認してください。
+Ask IT for the proxy address.
 
 3. 社内ミラーがある場合は `--index-url` を指定 / with an internal mirror:
 
@@ -153,9 +153,9 @@ Both distributions provide `cv2`; installing both into one environment breaks it
 python -m pip list | Select-String "opencv"
 ```
 
-**日本語：** **1 行だけ** 表示されるのが正常です。2 行出たら壊れています。
+**1 行だけ** 表示されるのが正常です。2 行出たら壊れています。
 
-**English:** **Exactly one line** is correct. Two lines means it is broken.
+**Exactly one line** is correct. Two lines means it is broken.
 
 **対処 / Fix:**
 
@@ -171,10 +171,10 @@ python -m pip uninstall -y opencv-python opencv-python-headless opencv-contrib-p
 python -m pip install opencv-python-headless==4.12.0.88
 ```
 
-**日本語：** 2 つの環境を混ぜないでください。どの環境で実行しているかを
+2 つの環境を混ぜないでください。どの環境で実行しているかを
 プロンプト（`(.venv)` か `(.venv-anomalib)`）で必ず確認してください。
 
-**English:** Never mix the two environments. Always check the prompt (`(.venv)` or
+Never mix the two environments. Always check the prompt (`(.venv)` or
 `(.venv-anomalib)`) before installing.
 
 ---
@@ -191,10 +191,10 @@ python assets\scripts\generate_training_assets.py
 python assets\scripts\prepare_datasets.py --force
 ```
 
-**日本語：** `--force` は既存データを消して作り直します。
+`--force` は既存データを消して作り直します。
 **受講者の提出物（`submissions/`）は消えません。**
 
-**English:** `--force` deletes and rebuilds only the generated datasets. Student work in
+`--force` deletes and rebuilds only the generated datasets. Student work in
 `submissions/` is untouched.
 
 ---
@@ -217,20 +217,20 @@ Download `yolo26n.pt` (~5 MB) and place it in `assets\models\`.
 
 3. 社内プロキシがある場合は管理者に確認 / ask IT about the proxy
 
-**日本語：** **取得できなかったときに、それらしい結果を作ってはいけません。**
+**取得できなかったときに、それらしい結果を作ってはいけません。**
 エラーをそのまま記録し、講師に相談してください。
 
-**English:** **Never fabricate a result when the download fails.** Record the error and ask the
+**Never fabricate a result when the download fails.** Record the error and ask the
 instructor.
 
 ---
 
 ## 8. `anomalib` が見つからない / `No module named 'anomalib'`
 
-**日本語：** 第 5 日のノートブックは、**`aivision-anomalib` カーネル** で実行します。
+第 5 日のノートブックは、**`aivision-anomalib` カーネル** で実行します。
 `anomalib` は `.venv` には **入っていません**（意図的に分けています）。
 
-**English:** The Day 5 notebooks run on the **`aivision-anomalib`** kernel. `anomalib` is
+The Day 5 notebooks run on the **`aivision-anomalib`** kernel. `anomalib` is
 **deliberately not** in `.venv`.
 
 **対処 / Fix:**
@@ -258,8 +258,8 @@ python -m pip uninstall -y torch torchvision
 python -m pip install torch==2.15.0 torchvision==0.29.2
 ```
 
-**日本語：** それでも直らない場合は、Microsoft Visual C++ 再頒布可能パッケージを入れ直してください。
-**English:** If it persists, reinstall the Microsoft Visual C++ Redistributable.
+それでも直らない場合は、Microsoft Visual C++ 再頒布可能パッケージを入れ直してください。
+If it persists, reinstall the Microsoft Visual C++ Redistributable.
 
 ---
 
@@ -277,16 +277,39 @@ python -m pip install torch==2.15.0 torchvision==0.29.2
 
 ---
 
-## 11. それでも解決しないとき / when nothing works
+## 11. スライダーが動かない / the sliders do nothing
 
-**日本語：** 次の 4 つをメモして講師に伝えてください。これがあると解決が早くなります。
+スライダーは **生きているカーネル** でしか動きません。GitHub のプレビューや
+静的な HTML では動きません。それは故障ではありません。
+
+Sliders only work with a **live kernel**. They do nothing in GitHub previews or static HTML;
+that is not a fault.
+
+| 症状 / Symptom | 原因 / Cause | 対処 / Fix |
+|---|---|---|
+| 何も表示されない / nothing appears | `ipywidgets` が入っていない / not installed | `python -m pip install -r requirements\base.txt` を実行し、カーネルを再起動 / install, then restart the kernel |
+| `ipywidgets が見つかりません` と出る | 同上 / same | 下の「パラメータセル」で同じ実験ができます / use the parameter cell below it |
+| スライダーは出るが図が変わらない / the slider appears, the figure does not change | カーネルが古い / stale kernel | **Kernel → Restart & Run All** |
+| 前の図が残って増えていく / figures pile up | 出力が消えていない / outputs not cleared | そのセルの出力を消して再実行 / clear the cell output and re-run |
+
+`ipywidgets` は **必修ではありません**。どのデモにも、ウィジェットを使わない
+「パラメータセル」が用意してあります。時間がないときは、そちらを使ってください。
+
+`ipywidgets` is **not required**. Every demo has a parameter cell that needs no widget. If time is
+short, use that.
+
+---
+
+## 12. それでも解決しないとき / when nothing works
+
+次の 4 つをメモして講師に伝えてください。これがあると解決が早くなります。
 
 1. **どのノートブックの、どのセル** か（`In [ ]` の番号でも可）
 2. **エラーメッセージ**（最後の 3 行をコピー）
 3. `python assets\scripts\verify_environment.py --profile all` の出力
 4. **すでに試したこと** と、その結果
 
-**English:** Note these four things for the instructor; they make diagnosis much faster.
+Note these four things for the instructor; they make diagnosis much faster.
 
 1. which notebook and which cell (the `In [ ]` number is fine)
 2. the error message (copy the last three lines)

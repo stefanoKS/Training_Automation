@@ -29,13 +29,11 @@
 
 ### 実演 / Demonstration（10 分程度）
 
-**日本語：**
-
 1. `data.yaml` と `labels/train/train_0001.txt` を開いて見せる
 2. ラベルを画像に描いた図（ノートブック 01 の点検セル）を見せる
 3. **わざとデータ漏れを作り**、ハッシュ検査が検出することを見せる
 
-**English:** Show `data.yaml`, one label file, the drawn labels, then deliberately copy a test image
+Show `data.yaml`, one label file, the drawn labels, then deliberately copy a test image
 into train and let the hash check catch it.
 
 ### よくある誤解 / Common beginner misunderstandings
@@ -76,15 +74,15 @@ into train and let the hash check catch it.
 | 02 Training | **学習が完走**し、`best.pt` と `results.csv` が生成される |
 | 03 Evaluation | `split="test"` の評価、混同行列、失敗例、共通画像の JSON |
 
-**日本語：** **学習時間はハードウェアで大きく変わります。** 「終了時間は保証できない」と
+**学習時間はハードウェアで大きく変わります。** 「終了時間は保証できない」と
 最初に明言してください。遅い受講者には `EPOCHS=5`、`IMGSZ=160` を案内します。
 
-**English:** State up front that runtime depends on hardware and cannot be guaranteed. For slow
+State up front that runtime depends on hardware and cannot be guaranteed. For slow
 machines, use `EPOCHS=5` and `IMGSZ=160`.
 
-**日本語：** 参考実測（CPU）: precision 0.872 / recall 0.889 / mAP50 0.918 / mAP50-95 0.609。
+参考実測（CPU）: precision 0.872 / recall 0.889 / mAP50 0.918 / mAP50-95 0.609。
 
-**English:** Reference measurement on CPU: precision 0.872, recall 0.889, mAP50 0.918, mAP50-95 0.609.
+Reference measurement on CPU: precision 0.872, recall 0.889, mAP50 0.918, mAP50-95 0.609.
 
 ### よくあるエラー / Common errors
 
@@ -98,10 +96,10 @@ machines, use `EPOCHS=5` and `IMGSZ=160`.
 
 ### 次に導入する概念 / Next concepts to introduce
 
-**日本語：** 第 5 日は「**正解ラベルが無い** 世界」に入ります。
+第 5 日は「**正解ラベルが無い** 世界」に入ります。
 今日「ラベルを作るのが大変だ」と感じたことが、異常検知が必要になる理由です。
 
-**English:** Day 5 enters a world without labels. The pain of annotating today is exactly why
+Day 5 enters a world without labels. The pain of annotating today is exactly why
 anomaly detection exists.
 
 ### 午後の課題説明 / Afternoon assignment briefing

@@ -6,16 +6,16 @@
 
 ## 記入のルール / How to fill this in
 
-**日本語：** 空欄はすべて埋めてください。「なし」も立派な記録です。**他人の答えを写さないでください。**
+空欄はすべて埋めてください。「なし」も立派な記録です。**他人の答えを写さないでください。**
 
-**English:** Fill in every field. "None" is a perfectly good record. Do not copy anyone else's answers.
+Fill in every field. "None" is a perfectly good record. Do not copy anyone else's answers.
 
 ---
 ## 1. 本日の学習内容 / Today's learning
 
-**日本語：** 学習・検証・試験の役割、注釈の作り方、学習の進み方（loss）をまとめてください。
+学習・検証・試験の役割、注釈の作り方、学習の進み方（loss）をまとめてください。
 
-**English:** Summarise the roles of train/val/test, how annotations are made, and how training
+Summarise the roles of train/val/test, how annotations are made, and how training
 progress shows up in the loss.
 
 ```text
@@ -88,9 +88,9 @@ progress shows up in the loss.
 
 ## 4. 発生した問題 / Problems encountered
 
-**日本語：** どのノートブックの、どのセルで、どんなメッセージが出たかを書いてください。
+どのノートブックの、どのセルで、どんなメッセージが出たかを書いてください。
 
-**English:** Record which notebook, which cell, and the exact message.
+Record which notebook, which cell, and the exact message.
 
 | # | ノートブック / Notebook | セル / Cell | エラーメッセージ / Error message |
 |---|---|---|---|
@@ -112,9 +112,9 @@ progress shows up in the loss.
 
 ## 6. 理解できなかった内容 / Questions remaining
 
-**日本語：** 質問の形で書いてください。
+質問の形で書いてください。
 
-**English:** Write them as questions.
+Write them as questions.
 
 1. 
 2. 
@@ -124,9 +124,9 @@ progress shows up in the loss.
 
 ## 7. 化成品工程への応用 / Application to Kaseihin
 
-**日本語：** 今日学んだことが、あなたの工程のどこに使えそうか。うまくいかないと思う点も書いてください。
+今日学んだことが、あなたの工程のどこに使えそうか。うまくいかないと思う点も書いてください。
 
-**English:** Where could today's topic be applied in your process? Include what you think would not work.
+Where could today's topic be applied in your process? Include what you think would not work.
 
 ```text
 （ここに記入 / write here）

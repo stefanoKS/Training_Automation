@@ -26,14 +26,14 @@
 
 ### 実演 / Demonstration（10 分程度）
 
-**日本語：** **必ず「うまくいかない例」を見せてください。**
+**必ず「うまくいかない例」を見せてください。**
 
 1. `bus.jpg` に YOLO をかけ、バスと人が検出されることを見せる（**動く**）
 2. 同じモデルを `defect_multi.png` にかけ、何も出ないことを見せる（**動かない**）
 3. 「なぜ動かないか」を受講者に考えさせる
 4. 4 つの理由（クラスが無い／見た目／大きさ／正解データが無い）を板書
 
-**English:** Show both sides: the model works on `bus.jpg` and does nothing on the PVC-like image.
+Show both sides: the model works on `bus.jpg` and does nothing on the PVC-like image.
 Let learners explain why before you list the four reasons.
 
 ### よくある誤解 / Common beginner misunderstandings
@@ -74,10 +74,10 @@ Let learners explain why before you list the four reasons.
 | 02 Inference | モデル取得、注釈画像と CSV の保存 |
 | 03 Experiments | しきい値の表、座標の読み取り、失敗例 1 件 |
 
-**日本語：** **02 の最初の実行だけは講師が見届けてください。** モデルのダウンロードで
+**02 の最初の実行だけは講師が見届けてください。** モデルのダウンロードで
 つまずく受講者が必ず出ます（`assets/models/` に置く手順を案内）。
 
-**English:** Supervise the first run of Notebook 02. Some learners will hit the model download;
+Supervise the first run of Notebook 02. Some learners will hit the model download;
 walk them through placing `yolo26n.pt` in `assets/models/`.
 
 ### よくあるエラー / Common errors
@@ -92,10 +92,10 @@ walk them through placing `yolo26n.pt` in `assets/models/`.
 
 ### 次に導入する概念 / Next concepts to introduce
 
-**日本語：** 第 4 日は「**このモデルに、自分たちの欠陥を覚えさせる**」話です。
+第 4 日は「**このモデルに、自分たちの欠陥を覚えさせる**」話です。
 今日見た「検出できない理由」が、そのまま第 4 日の作業項目になります。
 
-**English:** Day 4 teaches the model your own defects. Today's four reasons become tomorrow's
+Day 4 teaches the model your own defects. Today's four reasons become tomorrow's
 checklist.
 
 ### 午後の課題説明 / Afternoon assignment briefing

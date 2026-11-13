@@ -28,14 +28,12 @@
 
 ### 実演 / Demonstration（10 分程度）
 
-**日本語：**
-
 1. 正常画像 3 枚と異常画像 3 枚を見せ、**違いを言葉にさせる**（意外と難しい）
 2. 「この違いをルールで書けますか？」と問いかける → 書けないことを確認
 3. ノートブック 01 の最近傍距離の散布図を見せる
 4. PatchCore の 4 ステップ図を見せる
 
-**English:** Show three normal and three abnormal images and ask learners to describe the difference
+Show three normal and three abnormal images and ask learners to describe the difference
 in words. They will struggle — that is the point. Then show the nearest-neighbour scatter and the
 four-step diagram.
 
@@ -57,13 +55,65 @@ four-step diagram.
 
 ### 午前の課題説明 / Explaining the morning assignment
 
-ノートブック 01 の全 Part と演習 1〜3。
+ノートブック 01 の Part 0〜5 と演習 1〜2（必須）。**演習 3（発展）は任意** です。
 
-**日本語：** 第 5 日のノートブック 02・03 は **`aivision-anomalib` カーネル** です。
+Notebooks 01, Parts 0-5 and exercises 1-2 (required). **Exercise 3 (challenge) is optional.**
+
+第 5 日のノートブック 02・03 は **`aivision-anomalib` カーネル** です。
 午前中に、カーネルが一覧に出るか確認させてください。
 
-**English:** Notebooks 02 and 03 need the `aivision-anomalib` kernel. Verify during the morning that
+Notebooks 02 and 03 need the `aivision-anomalib` kernel. Verify during the morning that
 it appears in the kernel list.
+
+---
+
+## 比較の較正（重要） / How the comparison is calibrated (important)
+
+> **受講者向けの説明はノートブックにあります。この節は講師用です。**
+> The learner-facing explanation is in the notebook; this section is for the instructor.
+
+以前の版では、PatchCore のしきい値を「正常スコアの最大と異常スコアの最小の中央」で決め、
+**同じデータで成績を出して** いました。これは「答えを見てから採点する」のと同じで、
+受講者に教えてはいけない手順です。現在は次の 2 段階です。
+
+The earlier version chose the PatchCore threshold as the midpoint between the maximum normal score
+and the minimum abnormal score, **and then scored the same data** — marking your own exam. Do not
+teach that. The current workflow has two steps:
+
+| 段階 / Step | データ / Data | 何をするか / What happens |
+|---|---|---|
+| 1. 較正 / calibration | `calibration`（anomalib の val 分割）/ the anomalib validation split | 2 つのしきい値を、共通の目的関数で決める / choose both thresholds with one shared objective |
+| 2. 評価 / evaluation | `test`（較正に使っていない残り）/ the untouched remainder | しきい値を **固定** して 1 回だけ成績を出す / freeze and score once |
+
+**目的関数 / objective:** 正常品の誤報率（false reject rate）≤ 10% の条件で、再現率（recall）を最大にする。
+等しい再現率なら、しきい値が高い方（誤報の余裕が大きい方）を選びます。
+maximise recall subject to a false-reject rate of at most 10%; among equal recall, take the higher
+threshold.
+
+**必ず伝えること / Always say this:**
+
+- 較正用は 26 枚（正常 6・異常 20）。**正常 6 枚では誤報率 10% は「誤報 0 枚」** と同じです。
+  実際に 2026-11 の検証では、両手法とも較正で recall 1.0 / FP 0 になりました。
+- 試験用は別の 26 枚（正常 6・異常 20）。検証では YOLO が 20/20、PatchCore が 19/20 でした。
+  **較正で完璧だった PatchCore が、試験で 1 件見逃した** — これが一般化の差であり、
+  この研修で一番伝えたい事実です。
+- 数値は環境とシードで変わります。**この数字を製品の精度として引用させないでください。**
+
+- The calibration partition is 26 images (6 normal, 20 abnormal). **With 6 normal images a 10% cap
+  means zero false alarms.** In the November 2026 verification both methods reached recall 1.0 with
+  0 false alarms on calibration.
+- The test partition is a different 26 images (6 normal, 20 abnormal). YOLO scored 20/20 and
+  PatchCore 19/20 — **the method that looked perfect on calibration missed one defect on test**.
+  That gap is the most important fact in this course.
+- Numbers depend on the machine and the seed. **Never let anyone quote them as product accuracy.**
+
+`submissions/day05/comparison_test_results.json` に、分割・モデル・しきい値・目的関数・
+スコアの定義がすべて入っています。古い `yolo_vs_patchcore.csv` は
+`superseded`（旧方式）として残してあります。**上書きしないでください。**
+
+`submissions/day05/comparison_test_results.json` records the split, the model, the thresholds, the
+objective and the score convention. The old `yolo_vs_patchcore.csv` is kept as `superseded`;
+**do not overwrite it**.
 
 ---
 
@@ -83,11 +133,11 @@ it appears in the kernel list.
 | 02 PatchCore Training | fit 完了、4 指標、ヒートマップ、JSON 保存 |
 | 03 YOLO vs PatchCore | 共通画像での比較表、限界の説明、推奨の作成 |
 
-**日本語：** 参考実測（CPU, resnet18）:
+参考実測（CPU, resnet18）:
 `image_AUROC 1.000 / image_F1 0.974 / pixel_AUROC 0.984 / pixel_F1 0.386`。
 **pixel_F1 が低いのは異常** ではなく、**画素単位の一致が厳しい** ためです。説明できるようにしてください。
 
-**English:** Reference values on CPU with ResNet-18: image_AUROC 1.000, image_F1 0.974,
+Reference values on CPU with ResNet-18: image_AUROC 1.000, image_F1 0.974,
 pixel_AUROC 0.984, pixel_F1 0.386. The low pixel_F1 is not a fault — pixel-level agreement is simply
 demanding.
 
@@ -104,13 +154,13 @@ demanding.
 
 ### 次に導入する概念 / Next concepts to introduce（第2週へ）
 
-**日本語：** 第 1 週の締めくくりとして、次の 3 つを伝えてください。
+第 1 週の締めくくりとして、次の 3 つを伝えてください。
 
 1. **合成データの精度は製品の精度ではない**
 2. 実際の PVC では、色ムラ・照明ムラ・反射が加わる
 3. 第 2 週で、カメラ・照明・校正・実画像の収集に取り組む
 
-**English:** Close Week 1 with three messages: synthetic accuracy is not product accuracy; real PVC
+Close Week 1 with three messages: synthetic accuracy is not product accuracy; real PVC
 adds mottling, uneven lighting and reflections; Week 2 tackles camera, lighting, calibration and real
 data collection.
 
@@ -121,10 +171,10 @@ data collection.
 3. 提出物：PatchCore の指標、ヒートマップ、比較表、
    **PVC 検査への推奨（判断と理由）**
 
-**日本語：** 推奨には **必ず根拠の数字を引用させる** でください。「なんとなく」を許さないのが
+推奨には **必ず根拠の数字を引用させる** でください。「なんとなく」を許さないのが
 第 1 週の到達点です。
 
-**English:** Require every recommendation to cite a concrete number. That is the standard Week 1
+Require every recommendation to cite a concrete number. That is the standard Week 1
 should reach.
 
 ---

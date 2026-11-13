@@ -50,6 +50,53 @@ assets/external_samples/*
 # 生成された図 / generated diagrams (スクリプトで再生成可能 / reproducible)
 assets/diagrams/*.png
 
+# ただし、ノートブックの Markdown から直接参照する「必須の教材図」は配布物に含めます。
+# これらは Python を実行しなくても見える必要があるため、Git に入れます。
+# Exception: the essential teaching diagrams referenced directly from notebook Markdown
+# must be visible without running Python, so they DO ship. Nothing else is un-ignored:
+# datasets, model weights and training outputs stay ignored.
+!assets/diagrams/diagram_pixel_grid.png
+!assets/diagrams/diagram_detection.png
+!assets/diagrams/teach_setup_jupyter_ui.png
+!assets/diagrams/teach_rule_vs_learned.png
+!assets/diagrams/teach_brightness_shift.png
+!assets/diagrams/teach_rgb_channels.png
+!assets/diagrams/teach_downsample_defect.png
+!assets/diagrams/teach_cv_tasks_outputs.png
+!assets/diagrams/teach_variable_trace.png
+!assets/diagrams/teach_loop_trace.png
+!assets/diagrams/teach_function_io.png
+!assets/diagrams/teach_opencv_pipeline.png
+!assets/diagrams/teach_pixel_to_mm.png
+!assets/diagrams/teach_iou_rects.png
+!assets/diagrams/teach_yolo_label_fields.png
+!assets/diagrams/teach_split_roles.png
+!assets/diagrams/teach_epoch_batch.png
+!assets/diagrams/teach_train_val_curves.png
+!assets/diagrams/teach_image_level_confusion.png
+!assets/diagrams/teach_image_level_confusion_matrix.png
+!assets/diagrams/teach_patch_neighbour.png
+!assets/diagrams/teach_score_map_overlay.png
+!assets/diagrams/teach_setup_workflow.png
+!assets/diagrams/teach_train_vs_inference.png
+!assets/diagrams/teach_condition_branch.png
+!assets/diagrams/teach_bbox_coords.png
+!assets/diagrams/teach_confidence_filter.png
+!assets/diagrams/teach_resolution_effect.png
+!assets/diagrams/teach_object_level_matching.png
+
+# 実行結果から作った参考図 / figures built from saved runs of this course
+# （作り話ではなく、submissions/ と training_results/ に残った実際の出力から生成）
+# (built from the real outputs left in submissions/ and training_results/, not invented)
+assets/reference_outputs/*
+!assets/reference_outputs/README.md
+!assets/reference_outputs/ref_train_val_curves.png
+!assets/reference_outputs/ref_score_distribution.png
+!assets/reference_outputs/ref_confidence_counts.png
+!assets/reference_outputs/ref_detections_label_vs_pred.png
+!assets/reference_outputs/ref_anomaly_panels.png
+!assets/reference_outputs/ref_comparison_5col.png
+
 # --- 受講者の提出物 / student submissions ---
 submissions/*/*.ipynb
 submissions/*/*.png
@@ -63,8 +110,12 @@ submissions/*/heatmaps/
 !submissions/*/*_TEMPLATE.md
 !submissions/reports/*.md
 
-# --- Jupyter / OS ---
-*.tmp
+# --- 解説 PDF / explanation PDFs ---
+# 生成物そのものは配布します（読むための資料）。ページ画像は点検用なので含めません。
+# The PDFs themselves ship (they are the reading material); the page renders are only for
+# inspection and stay out of the repository.
+docs/pdf/_pages/
+docs/pdf/**/*.tmp
 ~$*
 .DS_Store
 Thumbs.db

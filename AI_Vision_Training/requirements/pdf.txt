@@ -1,0 +1,24 @@
+# ============================================================================
+# PDF 解説資料の生成・点検用 / PDF explanation export and inspection tools
+# 第1週 AI・マシンビジョン研修 / Hiroshima Kasei Week 1 course
+#
+# これは **教材を読むための依存ではありません**。学習者は requirements/base.txt だけで
+# 研修を進められます。PDF を作り直す人・点検する人だけがこれを入れます。
+# These are **not** learner runtime dependencies. A learner needs only
+# requirements/base.txt. Install this file only to rebuild or inspect the PDFs.
+#
+# 使い方 / usage (PowerShell, with the course virtual environment activated):
+#   python -m pip install -r requirements\pdf.txt
+#   python assets\scripts\export_explanations_pdf.py
+#   python assets\scripts\inspect_pdf_pages.py
+#
+# 検証済み / verified on: Windows 11, CPython 3.11.4, 2026-11
+# ============================================================================
+
+# 組版 / typesetting
+reportlab==5.1.0
+
+# 生成物の点検 / checking the generated files
+pypdf==7.0.1
+pypdfium2==5.15.2
+pillow==13.0.0

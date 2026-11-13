@@ -1,9 +1,19 @@
 # 検証レポート / Test and validation report
 
-**日本語：** このファイルは「**実際に実行して確認した**」結果だけを記録します。
+> **このレポートは 2026 年 11 月 12 日時点の記録です。**
+> その後の変更（言語ラベルの整理、時間割の一本化、教材図の追加、対話デモ、比較の較正手順）は
+> [`implementation_report.md`](implementation_report.md) に記載しています。
+> このファイルは **履歴として残します**。数字を現在の状態として引用しないでください。
+>
+> **This report records the state on 12 November 2026.** Later changes (language-label cleanup,
+> the single authoritative timetable, the added teaching diagrams, the interactive demos and the
+> calibration-first comparison) are described in [`implementation_report.md`](implementation_report.md).
+> This file is **kept as history**; do not quote its numbers as the current state.
+
+このファイルは「**実際に実行して確認した**」結果だけを記録します。
 実行していないものは「未検証」と明記します。
 
-**English:** This file records **only results that were actually executed**. Anything not run is
+This file records **only results that were actually executed**. Anything not run is
 marked as unverified.
 
 **検証日 / Date:** 2026 年 11 月 12 日 / 12 November 2026
@@ -16,15 +26,22 @@ marked as unverified.
 | 項目 / Item | 結果 / Result |
 |---|---|
 | ノートブックの本数 / notebooks | **16 / 16 作成済み** |
-| 構造検証 / structural validation | **146 件すべて合格 / 146 passed, 0 failed** |
-| 実行検証 / execution validation | **16 / 16 実行成功** |
-| 自動テスト / automated tests | **63 passed** |
-| 未検証項目 / unverified | **なし / none** |
+| 構造検証 / structural validation | **194 件すべて合格 / 194 passed, 0 failed**（2026-11-13 再実行） |
+| 実行検証 / execution validation | **16 / 16 実行成功**（初回検証。追補はコードセルを変更していません） |
+| 自動テスト / automated tests | **258 passed**（2026-11-13 再実行） |
+| 未検証項目 / unverified | 下表のとおり / see the list below |
 
-**日本語：** 「未検証：なし」は、**16 冊すべてを実際に最後まで実行した** という意味です。
+追補（視覚教材と PDF）の内容は [`implementation_report.md`](implementation_report.md) の §10〜§15 に
+あります。追補ではコードセルを変更していないため、実行検証の結果はそのまま有効です。
+
+The visual-material and PDF update is described in §10–§15 of
+[`implementation_report.md`](implementation_report.md). It changed no code cell, so the execution
+results above still hold.
+
+「未検証：なし」は、**16 冊すべてを実際に最後まで実行した** という意味です。
 GPU を使う設定（`device=0`）だけは、GPU が無いため実行していません（後述）。
 
-**English:** "No unverified items" means **all 16 notebooks were executed end to end**. The only
+"No unverified items" means **all 16 notebooks were executed end to end**. The only
 exception is the GPU configuration (`device=0`), which cannot be run on a machine without a GPU
 (see section 7).
 
@@ -52,9 +69,9 @@ python -m pytest assets\tests -v
 
 ## 3. ノートブック実行結果 / Notebook execution results
 
-**日本語：** 16 冊すべてを、**上から順に最後まで実行** しました。
+16 冊すべてを、**上から順に最後まで実行** しました。
 
-**English:** All 16 notebooks were executed **from top to bottom, to completion**.
+All 16 notebooks were executed **from top to bottom, to completion**.
 
 | # | ノートブック / Notebook | カーネル / Kernel | 実行時間 / Time | 結果 / Result |
 |---|---|---|---|---|
@@ -75,16 +92,16 @@ python -m pytest assets\tests -v
 | 15 | **Day05_02_PatchCore_Training** | aivision-anomalib | **42.0 s** | PASS |
 | 16 | Day05_03_YOLO_vs_PatchCore | aivision-anomalib | 2.7 s | PASS |
 
-**日本語：** 合計は約 **3 分 20 秒**。学習を含む 2 冊が大半を占めます。
-**English:** Total about **3 min 20 s**, dominated by the two notebooks that actually train.
+合計は約 **3 分 20 秒**。学習を含む 2 冊が大半を占めます。
+Total about **3 min 20 s**, dominated by the two notebooks that actually train.
 
 ### 3.1 意図的なエラーセルの扱い / Handling of the deliberate-error cell
 
-**日本語：** セットアップノートブックには、**わざと `NameError` を起こすセル** があります
+セットアップノートブックには、**わざと `NameError` を起こすセル** があります
 （エラーメッセージの読み方を学ぶため）。このセルには `raises-exception` タグを付けてあり、
 検証ツールはそのセルだけエラーを許します。**それ以外のセルでエラーが出れば失敗** として扱います。
 
-**English:** The setup notebook contains a cell that **deliberately raises `NameError`** (to teach how
+The setup notebook contains a cell that **deliberately raises `NameError`** (to teach how
 to read error messages). It is tagged `raises-exception`, and the validator tolerates errors only
 there. **An error anywhere else fails the run.**
 
@@ -92,12 +109,12 @@ there. **An error anywhere else fails the run.**
 
 ## 4. 自動テストの結果 / Automated test results
 
-**日本語：** `python -m pytest assets\tests -v` の結果です。
+`python -m pytest assets\tests -v` の結果です。
 
-**English:** Result of `python -m pytest assets\tests -v`.
+Result of `python -m pytest assets\tests -v`.
 
 ```text
-63 passed in 5.39s
+258 passed in 54.63s
 ```
 
 | ファイル / File | 主な検証内容 / What is checked |
@@ -105,13 +122,18 @@ there. **An error anywhere else fails the run.**
 | `test_assets.py` | 15 枚の図の存在と可読サイズ、校正画像と記録値の一致、欠陥マスクとバウンディングボックスの一致、生成の再現性、YOLO 座標の正規化 |
 | `test_datasets.py` | データ構造、`data.yaml` の必須キー、画像とラベルの 1 対 1 対応、ラベルの値域（0〜1）、ボックスが画像内、**分割間のデータ漏れ 0 件**、学習データが**正常のみ**、マスクの存在と内容 |
 | `test_notebooks.py` | 16 冊の存在、日本語→英語の順序、必須セクション、演習 3 つ、コードの構文、禁止パターン（`cv2.imshow`・絶対パス）、参照アセットの実在 |
+| `test_visual_assets.py` | 実行前から見える図（必須トピック 13 ノートブック分）、図の解決、Git 追跡、図ごとの「気づいてほしいこと」と問い、参考出力の出所、差し込みの冪等性、コード表示のみの図に対する静的代替 |
+| `test_pdf_exports.py` | 6 つの PDF の存在とページ数、日本語文字の抽出、目次・出典ページ、空白ページ 0、ウィジェットがコードとして漏れていないこと、横長ページの使用、再生成コマンドの記載 |
+| `test_language_labels.py` | `日本語：` / `English:` が戻っていないこと（17 件の fixture） |
+| `test_schedule.py` | 各日の時間割が 360 分で連続していること、参照した Part の実在 |
+| `test_evaluation_provenance.py` | 較正用と試験用の分離、旧方式の復活禁止、しきい値決定関数の動作 |
 
-**日本語：** 特に重要なのは次の 2 つです。
+特に重要なのは次の 2 つです。
 
 1. **データ漏れが 0 件**（train / val / test で画像ハッシュが重複しない）
 2. **PatchCore の学習データが正常のみ**（異常画像が 1 枚でも混ざればテストが落ちる）
 
-**English:** Two checks matter most:
+Two checks matter most:
 
 1. **zero data leakage** (no image hash appears in two splits)
 2. **PatchCore training data is normal-only** (a single abnormal image fails the test)
@@ -120,9 +142,9 @@ there. **An error anywhere else fails the run.**
 
 ## 5. AI 機能の検証 / Verification of the AI functionality
 
-**日本語：** 「本物の AI が動いたか」を、実際の出力で確認しました。**作った数字はありません。**
+「本物の AI が動いたか」を、実際の出力で確認しました。**作った数字はありません。**
 
-**English:** "Did real AI actually run?" was confirmed from real output. **No numbers were invented.**
+"Did real AI actually run?" was confirmed from real output. **No numbers were invented.**
 
 ### 5.1 YOLO 推論 / YOLO inference
 
@@ -133,15 +155,15 @@ there. **An error anywhere else fails the run.**
 | 検出 / Detections | 5 件（`bus` 0.881、`person` 0.872 / 0.861 / 0.846 / 0.656） |
 | クラス数 / Classes | 80（`black_spot` は **含まれない** ことを確認 / confirmed absent） |
 
-**日本語：** PVC 風画像（`defect_multi.png`）では検出 0 件でした。これも **期待どおり** です
+PVC 風画像（`defect_multi.png`）では検出 0 件でした。これも **期待どおり** です
 （COCO クラスに欠陥が無いため）。
 
-**English:** On the PVC-like image (`defect_multi.png`) there were zero detections — also **expected**,
+On the PVC-like image (`defect_multi.png`) there were zero detections — also **expected**,
 because COCO has no defect classes.
 
 ### 5.2 YOLO 学習と評価 / YOLO training and evaluation
 
-**日本語：** 実際にファインチューニングし、**学習に使っていない** 試験データで評価しました。
+実際にファインチューニングし、**学習に使っていない** 試験データで評価しました。
 
 | 項目 / Item | 値 / Value |
 |---|---|
@@ -155,7 +177,7 @@ because COCO has no defect classes.
 
 ### 5.3 PatchCore 学習と推論 / PatchCore fit and inference
 
-**日本語：** Anomalib 2.7.0 の **本物の PatchCore** を CPU で学習させ、推論しました。
+Anomalib 2.7.0 の **本物の PatchCore** を CPU で学習させ、推論しました。
 
 | 項目 / Item | 値 / Value |
 |---|---|
@@ -169,35 +191,35 @@ because COCO has no defect classes.
 | 正常スコア最大 / max normal score | 0.356 |
 | 異常スコア最小 / min abnormal score | 0.473 |
 
-**日本語：** 正常品の最大スコア（0.356）と異常品の最小スコア（0.473）の間にしきい値を置けば
+正常品の最大スコア（0.356）と異常品の最小スコア（0.473）の間にしきい値を置けば
 分離できました。**これは合成画像だからです。** 実際の PVC ではここまで分離しません。
 
-**English:** A threshold between the maximum normal score (0.356) and the minimum abnormal score
+A threshold between the maximum normal score (0.356) and the minimum abnormal score
 (0.473) separates the two groups — **because the images are synthetic**. Real PVC will not separate
 this cleanly.
 
 ### 5.4 YOLO と PatchCore の比較 / YOLO versus PatchCore
 
-**日本語：** 共通の 26 枚（YOLO の学習には未使用）で比較しました。
+共通の 26 枚（YOLO の学習には未使用）で比較しました。
 
 | 手法 / Method | precision | recall | 正解 / correct | accuracy |
 |---|---|---|---|---|
 | YOLO | 1.000 | 0.550 | 17 / 26 | 0.654 |
 | PatchCore | 1.000 | 1.000 | 26 / 26 | 1.000 |
 
-**日本語：** **この表は公平ではありません。** PatchCore のしきい値は、この比較データ自身から
+**この表は公平ではありません。** PatchCore のしきい値は、この比較データ自身から
 決めているため楽観的です。ノートブック内にもその旨を明記しています。
 
-**English:** **This table is not fair.** The PatchCore threshold was derived from the comparison set
+**This table is not fair.** The PatchCore threshold was derived from the comparison set
 itself, so its numbers are optimistic. The notebook states this explicitly.
 
 ---
 
 ## 6. ライブラリのバージョン / Library versions
 
-**日本語：** 詳細は [`requirements/tested_versions.md`](../requirements/tested_versions.md)。
+詳細は [`requirements/tested_versions.md`](../requirements/tested_versions.md)。
 
-**English:** Full detail in `requirements/tested_versions.md`.
+Full detail in `requirements/tested_versions.md`.
 
 | 環境 / Env | 主要パッケージ / Key packages |
 |---|---|
@@ -208,9 +230,9 @@ itself, so its numbers are optimistic. The notebook states this explicitly.
 
 ## 7. 実行できなかった・未検証の項目 / Not executed or unverified
 
-**日本語：** 正直に記載します。
+正直に記載します。
 
-**English:** Listed honestly.
+Listed honestly.
 
 | 項目 / Item | 状態 / Status | 理由 / Reason |
 |---|---|---|
@@ -225,16 +247,12 @@ itself, so its numbers are optimistic. The notebook states this explicitly.
 
 ## 8. 残っている制限 / Remaining limitations
 
-**日本語：**
-
 1. **データはすべて合成** — 実際の PVC の光学的挙動を再現していない
 2. **学習画像は 64 枚** — 過学習が起きやすい条件。数字は低めに出る
 3. **PatchCore の評価データは 26 枚** — 検証と試験に半分ずつ分けているため
 4. **比較の公平性** — PatchCore のしきい値が比較データ由来で楽観的
 5. **YOLO の共通画像での recall 0.55** — 学習時（320 px）と比較画像（256 px）の差、分布の差
 6. **コンソール出力は英字のみ** — Windows の文字コード（cp932）対策。日本語はノートブックと `docs` にある
-
-**English:**
 
 1. **All data is synthetic** — the optical behaviour of real PVC is not reproduced
 2. **64 training images** — a setting where overfitting is likely; scores stay modest

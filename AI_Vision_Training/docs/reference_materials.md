@@ -1,10 +1,25 @@
 # 参考資料 / Reference materials
 
-**日本語：** この研修で参照した公式ドキュメントと、追加で学ぶための資料です。
+この研修で参照した公式ドキュメントと、追加で学ぶための資料です。
 **必ず公式ドキュメントを優先** してください。ブログ記事は古いことがあります。
 
-**English:** Official documentation used by this course, plus material for further study.
+Official documentation used by this course, plus material for further study.
 **Always prefer the official documentation**; blog posts are often out of date.
+
+---
+
+## 0. この研修の解説資料 / This course's own explanations
+
+| 内容 / Topic | 場所 / Where | 使い方 / How to use |
+|---|---|---|
+| 第 1〜5 日の解説 PDF / explanation PDFs for Days 1–5 | `docs/pdf/Day0N_explanation_ja_en.pdf` | ノートブックの説明をそのまま組んだ冊子。オフラインで読む / offline reading |
+| 第 1 週まとめ PDF / the whole week | `docs/pdf/Week1_explanation_ja_en.pdf` | 復習と印刷 / revision and printing |
+| PDF の作り直し方 / how to rebuild | `docs/pdf/README.md` | `python assets\scripts\export_explanations_pdf.py` |
+| 図の出所 / figure provenance | `assets/reference_outputs/README.md` | 実測図と模式図の区別 / measured versus schematic |
+
+PDF は Markdown から自動生成しているので、ノートブックを直せば同じコマンドで追随できます。
+The PDFs are generated from the notebooks' Markdown, so correcting a notebook and re-running the
+export keeps both in step. The export never executes the notebooks and never downloads a model.
 
 ---
 
@@ -35,11 +50,11 @@
 | 輪郭（contours） | <https://docs.opencv.org/4.x/d3/d05/tutorial_py_table_of_contents_contours.html> |
 | カメラ校正の考え方 | <https://docs.opencv.org/4.x/dc/dbb/tutorial_py_calibration.html> |
 
-**日本語：** 第2日で扱う内容は、上の 5 つでほぼすべてです。
+第2日で扱う内容は、上の 5 つでほぼすべてです。
 `cv2.findContours` は **OpenCV 4 系では 2 つ**（contours, hierarchy）を返します。
 3 系の記事（3 つ返す）と混同しないでください。
 
-**English:** Day 2 is covered by the five links above. Note that `cv2.findContours` returns **two**
+Day 2 is covered by the five links above. Note that `cv2.findContours` returns **two**
 values in OpenCV 4 (contours, hierarchy); articles written for OpenCV 3 return three.
 
 ---
@@ -53,10 +68,10 @@ values in OpenCV 4 (contours, hierarchy); articles written for OpenCV 3 return t
 | 学習ループの基礎 | <https://pytorch.org/tutorials/beginner/basics/optimization_tutorial.html> |
 | torchvision のモデル一覧 | <https://pytorch.org/vision/stable/models.html> |
 
-**日本語：** インストールページは、**OS・パッケージマネージャ・計算プラットフォーム** を
+インストールページは、**OS・パッケージマネージャ・計算プラットフォーム** を
 選ぶとコマンドが変わります。この研修のコマンドは Windows + pip + CPU のものです。
 
-**English:** The install page generates a different command depending on OS, package manager and
+The install page generates a different command depending on OS, package manager and
 compute platform. This course's commands are Windows + pip + CPU.
 
 ---
@@ -74,11 +89,11 @@ compute platform. This course's commands are Windows + pip + CPU.
 | モデル一覧 | <https://docs.ultralytics.com/models/> |
 | 学習のヒント | <https://docs.ultralytics.com/guides/model-training-tips/> |
 
-**日本語：** モデル名は版によって変わります。本教材は `ultralytics 8.4.211` で
+モデル名は版によって変わります。本教材は `ultralytics 8.4.211` で
 **`yolo26n.pt`**（既定の nano モデル）を使用しています。古い記事の `yolov5*.pt` や
 `yolov8*.pt` をそのまま使わないでください。
 
-**English:** Model names change between releases. This course uses `ultralytics 8.4.211` with
+Model names change between releases. This course uses `ultralytics 8.4.211` with
 **`yolo26n.pt`** (the default nano model). Do not copy `yolov5*.pt` / `yolov8*.pt` names from older
 articles without checking.
 
@@ -94,10 +109,10 @@ articles without checking.
 | Engine | <https://anomalib.readthedocs.io/en/latest/markdown/guides/reference/engine.html> |
 | リリースノート | <https://github.com/open-edge-platform/anomalib/releases> |
 
-**日本語：** 本教材は **Anomalib 2.7.0** で検証しています。
+本教材は **Anomalib 2.7.0** で検証しています。
 **1.x 系のサンプルコードは動きません**（`anomalib.data.Folder` など 2.x で API が変わっています）。
 
-**English:** Verified with **Anomalib 2.7.0**. **1.x sample code does not run**: the API changed in
+Verified with **Anomalib 2.7.0**. **1.x sample code does not run**: the API changed in
 2.x (for example `anomalib.data.Folder`). Do not mix versions.
 
 ---
@@ -113,17 +128,17 @@ articles without checking.
 | scikit-learn: precision / recall | <https://scikit-learn.org/stable/modules/model_evaluation.html#precision-recall-f-measure-metrics> |
 | PatchCore 論文 | <https://arxiv.org/abs/2106.08265> |
 
-**日本語：** MVTec AD は、異常検知の研究で最もよく使われる公開データセットです。
+MVTec AD は、異常検知の研究で最もよく使われる公開データセットです。
 **工業製品の画像が公開されており、ライセンスも明記** されています。第 2 週以降の参考になります。
 
-**English:** MVTec AD is the standard public dataset for anomaly detection research, with real
+MVTec AD is the standard public dataset for anomaly detection research, with real
 industrial images and a clearly stated licence. It is a useful reference for Week 2.
 
 ---
 
 ## 7. ライセンスの確認 / Licence checks
 
-**日本語：** 教材・モデル・データを使うときは、必ずライセンスを確認してください。
+教材・モデル・データを使うときは、必ずライセンスを確認してください。
 **教育目的の利用が、そのまま製品への利用を許可するわけではありません。**
 
 | 対象 / Item | ライセンス / Licence | 注意 / Caution |
@@ -136,8 +151,8 @@ industrial images and a clearly stated licence. It is a useful reference for Wee
 | **Anomalib** | Apache 2.0 | 可 / fine |
 | ImageNet 事前学習の重み（torchvision） | モデルごとに条件あり / per-model terms | 用途を確認 / check intended use |
 
-**日本語：** YOLO を社内システムに組み込む場合は、**AGPL-3.0 の扱いを法務・情報システム部門に
+YOLO を社内システムに組み込む場合は、**AGPL-3.0 の扱いを法務・情報システム部門に
 確認** してください。この研修の範囲（学習・評価）では問題ありません。
 
-**English:** Before embedding YOLO in an internal system, **have Legal/IT review AGPL-3.0**. Within
+Before embedding YOLO in an internal system, **have Legal/IT review AGPL-3.0**. Within
 this course's scope (learning and evaluation) there is no issue.

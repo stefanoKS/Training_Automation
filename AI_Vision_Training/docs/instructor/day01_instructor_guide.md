@@ -8,8 +8,8 @@
 
 ### 学習目標 / Learning goals
 
-**日本語：** 受講者が今日 1 日で到達する状態を示します。
-**English:** State where learners should be by the end of the day.
+受講者が今日 1 日で到達する状態を示します。
+State where learners should be by the end of the day.
 
 1. AI・機械学習・深層学習が **入れ子** であることを言える
 2. 「学習」と「推論」の違いを、時間とデータの量で説明できる
@@ -29,14 +29,14 @@
 
 ### 実演 / Demonstration（10 分程度）
 
-**日本語：** ノートブック 01 の Part 1〜Part 4 を、プロジェクタで実演してください。
+ノートブック 01 の Part 1〜Part 4 を、プロジェクタで実演してください。
 
 1. `judge_width()` に 100.3 / 100.6 を入れて OK / NG を出す
 2. 1000 個を一括判定し、NG 率を出す（**自動化の速さ** を見せる）
 3. 正常品 200 枚から正常範囲を学習する（**学習の最小形** を見せる）
 4. 暗い日のデータで学習すると、正常品が NG になる（**データの偏り** を見せる）
 
-**English:** Run Parts 1-4 of Notebook 01 on the projector: a hand-written rule, a batch run to show
+Run Parts 1-4 of Notebook 01 on the projector: a hand-written rule, a batch run to show
 speed, learning a normal range from 200 good products, then the same model trained on a dark day
 mislabelling a good product.
 
@@ -58,11 +58,26 @@ mislabelling a good product.
 
 ### 午前の課題説明 / Explaining the morning assignment
 
-**日本語：** ノートブック 01 の演習 1〜3 を午前中に終えるよう伝えてください。
-特に **演習 3（ルールで書ける部分と AI が必要な部分の切り分け）** が今日の核心です。
+ノートブック 01 の **演習 1〜2（必須）** を午前中に終えるよう伝えてください。
+**演習 3（発展）は任意** です。完了チェックリストには入っていません。
 
-**English:** Aim to finish Exercises 1-3 of Notebook 01 before lunch. Exercise 3 (separating
-rule-writable tasks from AI tasks) is the heart of the day.
+Aim to finish **Exercises 1-2 (required)** of Notebook 01 before lunch.
+**Exercise 3 (challenge) is optional** and is not part of the completion checklist.
+
+> **変更点 / Change:** 以前の演習 1 は「判定関数を自分で書く」でしたが、
+> **関数は第 2 日に教える** ため、第2日ノートブック02 の演習 1 に移しました。
+> 第 1 日の演習 1 は、**用意された関数を実行して結果を予想する** 課題になっています。
+> 第 1 日で関数の文法を説明する必要はありません。
+>
+> The old Exercise 1 asked learners to write a judgement function, but **functions are taught on
+> Day 2**, so it moved to Exercise 1 of Day 2 Notebook 02. Day 1 Exercise 1 now asks learners to
+> **run a supplied function and predict its result**. You do not need to explain function syntax on
+> Day 1.
+
+今日の核心は **演習 3（発展）** の「ルールで書ける部分と AI が必要な部分の切り分け」ですが、
+時間が無ければ講師のまとめで扱ってください。
+The heart of the day is Exercise 3's split between rule-writable and AI tasks; if time is short,
+cover it in the instructor wrap-up instead.
 
 ---
 
@@ -70,13 +85,13 @@ rule-writable tasks from AI tasks) is the heart of the day.
 
 ### 午前の振り返り / What to review
 
-**日本語：** 次の 3 点だけ、受講者に **言わせて** 確認してください（講師が説明しない）。
+次の 3 点だけ、受講者に **言わせて** 確認してください（講師が説明しない）。
 
 1. AI・機械学習・深層学習の関係
 2. 学習と推論の違い
 3. 偽陽性と偽陰性の違い
 
-**English:** Have learners **say** these three things rather than hearing them again.
+Have learners **say** these three things rather than hearing them again.
 
 ### 期待される結果 / Expected results
 
@@ -86,10 +101,10 @@ rule-writable tasks from AI tasks) is the heart of the day.
 | 02 Pixels and Images | Part 1〜Part 4 完了（画素・解像度・RGB・座標） |
 | 03 Computer Vision Tasks | Part 1〜Part 4 完了（4 つのタスクの違い） |
 
-**日本語：** 遅れている受講者には、**02 と 03 の順序を入れ替えてもよい** と伝えてください。
+遅れている受講者には、**02 と 03 の順序を入れ替えてもよい** と伝えてください。
 02 の方が具体的で取り組みやすいためです。
 
-**English:** For anyone falling behind, allow swapping the order of 02 and 03; 02 is more concrete.
+For anyone falling behind, allow swapping the order of 02 and 03; 02 is more concrete.
 
 ### よくあるエラー / Common errors
 
@@ -102,10 +117,10 @@ rule-writable tasks from AI tasks) is the heart of the day.
 
 ### 次に導入する概念 / Next concepts to introduce
 
-**日本語：** 第 2 日の冒頭で「**今日から自分でプログラムを書きます**」と伝えてください。
+第 2 日の冒頭で「**今日から自分でプログラムを書きます**」と伝えてください。
 第 1 日で見た「数字の表を書き換える」が、第 2 日では「条件で判定する」に進みます。
 
-**English:** Announce that Day 2 starts writing programs. Modifying a table of numbers becomes
+Announce that Day 2 starts writing programs. Modifying a table of numbers becomes
 judging with conditions.
 
 ### 午後の課題説明 / Afternoon assignment briefing

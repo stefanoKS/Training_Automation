@@ -30,14 +30,14 @@
 
 ### 実演 / Demonstration（10 分程度）
 
-**日本語：** **必ず「エラーを見せる」実演を入れてください。**
+**必ず「エラーを見せる」実演を入れてください。**
 
 1. `print(sheet_width)` を未定義で実行 → `NameError` を見せる
 2. `"abc" + 100` → `TypeError` を見せる
 3. `if` の `:` を消す → `SyntaxError` を見せる
 4. そのあと正しく直して動かす
 
-**English:** Always demonstrate errors: an undefined name, adding text to a number, a missing colon —
+Always demonstrate errors: an undefined name, adding text to a number, a missing colon —
 then fix each one. Learners need to see that errors are information, not failure.
 
 ### よくある誤解 / Common beginner misunderstandings
@@ -59,9 +59,16 @@ then fix each one. Learners need to see that errors are information, not failure
 
 ### 午前の課題説明 / Explaining the morning assignment
 
-**日本語：** ノートブック 01 の全 Part と、02 の Part 1〜Part 3 まで。
+ノートブック 01 の全 Part と、02 の Part 1〜Part 3 まで。
 
-**English:** All of Notebook 01 and Parts 1-3 of Notebook 02.
+All of Notebook 01 and Parts 1-3 of Notebook 02.
+
+> **第1日から移した演習 / Moved here from Day 1:** ノートブック 02 の **演習 1** が
+> 「判定関数を自分で書く」課題です。以前は第1日に置かれていましたが、
+> 関数を教えるのは今日なので、ここへ移しました。**Part 3（関数）の直後に扱ってください。**
+>
+> **Exercise 1 of Notebook 02** is the "write the judgement function yourself" task. It used to sit
+> on Day 1; since functions are taught today, it moved here. Run it **right after Part 3**.
 
 ---
 
@@ -73,10 +80,10 @@ then fix each one. Learners need to see that errors are information, not failure
 2. 小数の誤差（**なぜ** 起きるか）
 3. `if` の 2 つの必須事項（`:` とインデント）
 
-**日本語：** エラー記録を見せ合う時間を 5 分取ってください。「同じエラーを 3 人が出した」
+エラー記録を見せ合う時間を 5 分取ってください。「同じエラーを 3 人が出した」
 という発見が、受講者の不安を大きく下げます。
 
-**English:** Spend five minutes comparing error logs. Discovering that three people hit the same
+Spend five minutes comparing error logs. Discovering that three people hit the same
 error greatly reduces anxiety.
 
 ### 期待される結果 / Expected results
@@ -99,11 +106,11 @@ error greatly reduces anxiety.
 
 ### 次に導入する概念 / Next concepts to introduce
 
-**日本語：** 第 3 日は「**自分では書けないルールを、学習済みモデルに任せる**」話に入ります。
+第 3 日は「**自分では書けないルールを、学習済みモデルに任せる**」話に入ります。
 第 2 日で「しきい値は人間が決める」と学んだことが、第 3 日では
 「confidence のしきい値」として再登場します。
 
-**English:** Day 3 delegates the rules you cannot write to a pretrained model. The human-chosen
+Day 3 delegates the rules you cannot write to a pretrained model. The human-chosen
 threshold from Day 2 returns as the confidence threshold.
 
 ### 午後の課題説明 / Afternoon assignment briefing

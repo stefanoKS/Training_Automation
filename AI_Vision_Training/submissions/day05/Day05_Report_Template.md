@@ -6,16 +6,16 @@
 
 ## 記入のルール / How to fill this in
 
-**日本語：** 空欄はすべて埋めてください。「なし」も立派な記録です。**他人の答えを写さないでください。**
+空欄はすべて埋めてください。「なし」も立派な記録です。**他人の答えを写さないでください。**
 
-**English:** Fill in every field. "None" is a perfectly good record. Do not copy anyone else's answers.
+Fill in every field. "None" is a perfectly good record. Do not copy anyone else's answers.
 
 ---
 ## 1. 本日の学習内容 / Today's learning
 
-**日本語：** 異常検知が「正常だけ」で学ぶ仕組みと、YOLO との違いをまとめてください。
+異常検知が「正常だけ」で学ぶ仕組みと、YOLO との違いをまとめてください。
 
-**English:** Summarise how anomaly detection learns from normal data only, and how it differs from YOLO.
+Summarise how anomaly detection learns from normal data only, and how it differs from YOLO.
 
 ```text
 （ここに記入 / write here）
@@ -81,9 +81,9 @@
 
 ## 4. YOLO と PatchCore の比較 / YOLO versus PatchCore
 
-**日本語：** 同じ画像で比べた結果を書いてください。
+同じ画像で比べた結果を書いてください。
 
-**English:** Record the comparison on the same images.
+Record the comparison on the same images.
 
 | 項目 / Item | YOLO | PatchCore |
 |---|---|---|
@@ -107,9 +107,9 @@
 
 ## 5. PVC 検査への推奨 / Recommendation for PVC inspection
 
-**日本語：** 根拠となる数字を必ず引用してください。
+根拠となる数字を必ず引用してください。
 
-**English:** Cite concrete numbers as evidence.
+Cite concrete numbers as evidence.
 
 | 項目 / Item | あなたの推奨 / Your recommendation |
 |---|---|
@@ -124,9 +124,9 @@
 
 ## 4. 発生した問題 / Problems encountered
 
-**日本語：** どのノートブックの、どのセルで、どんなメッセージが出たかを書いてください。
+どのノートブックの、どのセルで、どんなメッセージが出たかを書いてください。
 
-**English:** Record which notebook, which cell, and the exact message.
+Record which notebook, which cell, and the exact message.
 
 | # | ノートブック / Notebook | セル / Cell | エラーメッセージ / Error message |
 |---|---|---|---|
@@ -148,9 +148,9 @@
 
 ## 6. 理解できなかった内容 / Questions remaining
 
-**日本語：** 質問の形で書いてください。
+質問の形で書いてください。
 
-**English:** Write them as questions.
+Write them as questions.
 
 1. 
 2. 
@@ -160,9 +160,9 @@
 
 ## 7. 化成品工程への応用 / Application to Kaseihin
 
-**日本語：** 今日学んだことが、あなたの工程のどこに使えそうか。うまくいかないと思う点も書いてください。
+今日学んだことが、あなたの工程のどこに使えそうか。うまくいかないと思う点も書いてください。
 
-**English:** Where could today's topic be applied in your process? Include what you think would not work.
+Where could today's topic be applied in your process? Include what you think would not work.
 
 ```text
 （ここに記入 / write here）

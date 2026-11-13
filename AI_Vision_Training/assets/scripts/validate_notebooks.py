@@ -83,6 +83,7 @@ DOC_FILES = [
     "START_HERE.md",
     "COURSE_SYLLABUS.md",
     "docs/reference_materials.md",
+    "docs/implementation_report.md",
     "docs/instructor/day01_instructor_guide.md",
     "docs/instructor/day02_instructor_guide.md",
     "docs/instructor/day03_instructor_guide.md",
@@ -90,6 +91,7 @@ DOC_FILES = [
     "docs/instructor/day05_instructor_guide.md",
     "docs/troubleshooting/installation.md",
     "requirements/tested_versions.md",
+    "assets/helpers/aivision.py",
 ]
 
 ASSET_FILES = [
@@ -107,6 +109,10 @@ ASSET_FILES = [
     "assets/diagrams/calibration_image.png",
     "assets/diagrams/diagram_patchcore_concept.png",
     "assets/diagrams/diagram_yolo_vs_patchcore.png",
+    "assets/diagrams/teach_setup_jupyter_ui.png",
+    "assets/diagrams/teach_brightness_shift.png",
+    "assets/diagrams/teach_iou_rects.png",
+    "assets/diagrams/teach_score_map_overlay.png",
     "assets/yolo_dataset/data.yaml",
     "assets/anomaly_dataset/pvc_sheet/dataset_layout.json",
 ]
@@ -121,6 +127,21 @@ JP_RE = re.compile(r"[\u3040-\u30ff\u4e00-\u9fff]")
 EN_RE = re.compile(r"[A-Za-z]{3,}")
 ASSET_REF_RE = re.compile(r'ASSETS\s*/\s*((?:"[^"]+"\s*(?:/\s*)*)+)')
 STR_RE = re.compile(r'"([^"]+)"')
+# Markdown の画像参照 / markdown image references
+MD_IMAGE_RE = re.compile(r"!\[[^\]]*\]\(([^)\s]+)")
+# 言語ラベルだけの接頭辞（残っていてはいけない）/ a standalone language label that must be gone
+LANG_LABEL_RE = re.compile(
+    r"^[ \t]*(?:>[ \t]*)*(?:\*\*)?(?:日本語|English)(?:\*\*)?[ \t]*[：:]",
+    re.M,
+)
+# コードセルの指示バナー / the instruction banner of a code cell
+BANNER_MARK = "# ▸ "
+ROLE_BANNERS = {
+    "run-only": "実行のみ / Run only",
+    "change-value": "この値を変更 / Change this value",
+    "write-code": "自分でコードを書く / Write your code",
+}
+LONG_ENGLISH_LINE_LENGTH = 60
 
 
 # ---------------------------------------------------------------------------
@@ -185,25 +206,63 @@ def check_notebook(path: Path, result: Result) -> dict:
 
     text = _markdown_text(nb)
 
-    # --- Japanese before English in every bilingual cell ---
-    order_problems = []
+    # --- 言語ラベルが残っていない / no standalone language labels remain ---
+    leftover = [m.group(0).strip() for m in LANG_LABEL_RE.finditer(text)]
+    if leftover:
+        result.fail(f"{path.name}: language label(s) still present -> {leftover[:3]}")
+    else:
+        result.ok(f"{path.name}: no language labels")
+
+    # --- 日本語と英語がそろい、日本語が先 / bilingual and Japanese first ---
+    bilingual_problems = []
     for idx, cell in enumerate(md_cells):
         src = cell.source
-        if "日本語" not in src and "English" not in src:
+        has_japanese = bool(JP_RE.search(src))
+        has_english = bool(EN_RE.search(src))
+        if not has_japanese and not has_english:
             continue
-        if not JP_RE.search(src):
-            order_problems.append(f"cell {idx}: no Japanese text")
-        if not EN_RE.search(src):
-            order_problems.append(f"cell {idx}: no English text")
-        ja_pos, en_pos = src.find("日本語"), src.find("English")
-        if ja_pos == -1 or en_pos == -1:
-            order_problems.append(f"cell {idx}: missing one heading")
-        elif ja_pos > en_pos:
-            order_problems.append(f"cell {idx}: English appears before Japanese")
-    if order_problems:
-        result.fail(f"{path.name}: bilingual problems -> {order_problems[:4]}")
+        if has_japanese and not has_english:
+            bilingual_problems.append(f"cell {idx}: Japanese without English")
+            continue
+        if has_english and not has_japanese:
+            bilingual_problems.append(f"cell {idx}: English without Japanese")
+            continue
+        lines = src.split("\n")
+        first_japanese = next(k for k, line in enumerate(lines) if JP_RE.search(line))
+        first_long_english = next(
+            (k for k, line in enumerate(lines)
+             if not JP_RE.search(line)
+             and len(line.strip()) >= LONG_ENGLISH_LINE_LENGTH
+             and EN_RE.search(line)),
+            None,
+        )
+        if first_long_english is not None and first_long_english < first_japanese:
+            bilingual_problems.append(f"cell {idx}: English paragraph before Japanese")
+    if bilingual_problems:
+        result.fail(f"{path.name}: bilingual problems -> {bilingual_problems[:4]}")
     else:
         result.ok(f"{path.name}: bilingual Japanese-first")
+
+    # --- コードセルの指示バナー / instruction banner in every code cell ---
+    banner_problems = []
+    for idx, cell in enumerate(nb.cells):
+        if cell.cell_type != "code":
+            continue
+        role = cell.get("metadata", {}).get("aivision_role")
+        first_lines = cell.source.split("\n")
+        marks = [line for line in first_lines if line.startswith(BANNER_MARK)]
+        if role not in ROLE_BANNERS:
+            banner_problems.append(f"cell {idx}: no aivision_role metadata")
+            continue
+        if len(marks) != 2:
+            banner_problems.append(f"cell {idx}: expected 2 banner lines, found {len(marks)}")
+            continue
+        if ROLE_BANNERS[role] not in marks[0]:
+            banner_problems.append(f"cell {idx}: banner does not match role {role!r}")
+    if banner_problems:
+        result.fail(f"{path.name}: banner problems -> {banner_problems[:4]}")
+    else:
+        result.ok(f"{path.name}: every code cell has a role banner")
 
     # --- required sections ---
     missing_sections = [
@@ -268,6 +327,45 @@ def check_notebook(path: Path, result: Result) -> dict:
         result.fail(f"{path.name}: referenced assets missing -> {unresolved[:3]}")
     else:
         result.ok(f"{path.name}: referenced assets exist")
+
+    # --- Markdown の画像が、ノートブックの場所から解決できるか ---
+    # every image referenced from Markdown must exist relative to this notebook
+    markdown_images = []
+    for idx, cell in enumerate(nb.cells):
+        if cell.cell_type != "markdown":
+            continue
+        for target in MD_IMAGE_RE.findall(cell.source):
+            if target.startswith(("http://", "https://", "data:")):
+                continue
+            resolved = (path.parent / target).resolve()
+            markdown_images.append((idx, target, resolved))
+    broken = [f"cell {idx}: {target}" for idx, target, resolved in markdown_images
+              if not resolved.is_file()]
+    if broken:
+        result.fail(f"{path.name}: broken markdown image(s) -> {broken[:3]}")
+    else:
+        result.ok(f"{path.name}: markdown images resolve ({len(markdown_images)})")
+    info["markdown_images"] = [target for _idx, target, _resolved in markdown_images]
+
+    # --- 図が、その Part のコードより先に見えるか ---
+    # A figure must sit between its Part heading and that Part's first code cell.
+    part_headings = []
+    for idx, cell in enumerate(nb.cells):
+        if cell.cell_type == "markdown" and re.search(r"^## Part ", cell.source, re.M):
+            part_headings.append(idx)
+    order_problems = []
+    for cell_index, target, _resolved in markdown_images:
+        heading = max((p for p in part_headings if p <= cell_index), default=None)
+        if heading is None:
+            continue
+        between = [i for i in range(heading + 1, cell_index)
+                   if nb.cells[i].cell_type == "code"]
+        if between:
+            order_problems.append(f"cell {cell_index} ({target}) comes after code in the same Part")
+    if order_problems:
+        result.fail(f"{path.name}: figure after code -> {order_problems[:2]}")
+    elif markdown_images:
+        result.ok(f"{path.name}: every figure comes before its Part's code")
 
     return info
 
