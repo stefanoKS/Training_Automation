@@ -19,12 +19,22 @@
 | 概念 / Concept | 説明の要点 / Key message |
 |---|---|
 | 異常検知 | 正常の見え方を学び、そこからの外れを数値化する |
-| 正常のみ学習 | ラベル作成が不要。**現場の最大の利点** |
-| パッチ | 画像の小片。異常は **局所** に起きる |
+| 正常画像のみ学習 | fit にラベルが要らない。**現場の最大の利点**。ただし較正と評価にはラベル付き画像が必要 |
+| パッチ | 特徴マップの 1 つの位置。入力の **重なり合う範囲** をまとめたもの（画素の切り出しではない） |
 | 特徴 | パッチを数値の並びにしたもの（見た目の「住所」） |
 | メモリバンク | 正常パッチの特徴を保存したもの（コアセットに間引き） |
-| 異常スコア | 一番近い正常パッチまでの距離 |
-| ヒートマップ | 画素ごとの異常の度合い。**種類は分からない** |
+| 異常スコア | 一番近い正常特徴までの距離を、較正用データの統計で 0〜1 に変換した値。**生の距離は 0〜1 ではない** |
+| ヒートマップ | 画素ごとの異常の度合い。**種類は分からない**。色は表示範囲とカラーマップで決まる |
+
+用語は **「正常画像のみを使って学習する異常検知 / anomaly detection fitted using normal images only」**
+で統一してください。文献の one-class・semi-supervised は「呼び名が複数ある」とだけ説明し、
+fit（正常画像だけで合わせる）と、較正・評価（ラベル付き画像でしきい値を決め誤りを測る）を
+分けて話します。「ラベルがまったく不要」と言わせないでください。
+
+Use **"anomaly detection fitted using normal images only"** throughout. Mention one-class and
+semi-supervised only as other names in the literature, and separate fitting (normal images only)
+from calibration and evaluation (labelled images give the threshold and the error counts). Never
+let anyone say labels are entirely unnecessary.
 
 ### 実演 / Demonstration（10 分程度）
 
@@ -42,10 +52,12 @@ four-step diagram.
 | 誤解 / Misunderstanding | 実際 / Reality |
 |---|---|
 | 「異常検知は何でも見つける」 | 正常に似た欠陥は見逃す |
-| 「異常スコアが高い＝不良」 | 正常なばらつきを異常と言うことがある |
+| 「異常スコアが高い＝不良」 | スコアは正常からの隔たり。しきい値で決めた判定は間違うことがある |
 | 「学習＝ネットワークを賢くする」 | 特徴を計算して保存するだけ。重みは更新しない |
-| 「エポックを増やせば精度が上がる」 | PatchCore は 1 回で完了。増やしても無意味 |
-| 「YOLO と AUROC を比べられる」 | 測っているものが違う |
+| 「エポックを増やせば精度が上がる」 | この合わせ方は 1 回で足りる。データを変えたら fit と較正をやり直す |
+| 「YOLO と AUROC を比べられる」 | 測っているものが違う。比べるのは同じ正解に対する画像単位の判定 |
+| 「画像スコア＝ヒートマップの最大値」 | この設定では重み付きの値と補間・平滑化したマップなので別の数（保存例 21.439 と 21.762、後処理後 1.000） |
+| 「train に異常が混ざると、その欠陥は二度と検出できない」 | スコアが下がり見逃しの危険が増える。混入画像を除いてメモリバンクを作り直し、較正・評価用画像で確かめる |
 
 ### 受講者に投げかける質問 / Questions to ask
 
@@ -55,9 +67,15 @@ four-step diagram.
 
 ### 午前の課題説明 / Explaining the morning assignment
 
-ノートブック 01 の Part 0〜5 と演習 1〜2（必須）。**演習 3（発展）は任意** です。
+ノートブック 01 の Part 0〜5 と演習 1〜2（必須）。**演習 3（発展・任意）** に取り組むかどうかは
+任意です。
+ノートブック 02 も演習 1〜2 が必須です（**重いバックボーン自体は任意** で、CPU が厳しければ別の設定で
+同じ比較をしてかまいません）。ノートブック 03 の演習 1〜2 は必須、演習 3（発展・任意）は任意です。
 
-Notebooks 01, Parts 0-5 and exercises 1-2 (required). **Exercise 3 (challenge) is optional.**
+Notebooks 01, Parts 0-5 and exercises 1-2 (required). **Exercise 3 (optional challenge)** is not
+required. Notebook 02 also requires exercises 1-2 (**the heavier backbone itself is optional**; on a
+slow CPU the same comparison may use another setting). In Notebook 03, exercises 1-2 are required and
+Exercise 3 (optional challenge) is optional.
 
 第 5 日のノートブック 02・03 は **`aivision-anomalib` カーネル** です。
 午前中に、カーネルが一覧に出るか確認させてください。
@@ -93,18 +111,24 @@ threshold.
 **必ず伝えること / Always say this:**
 
 - 較正用は 26 枚（正常 6・異常 20）。**正常 6 枚では誤報率 10% は「誤報 0 枚」** と同じです。
-  実際に 2026-11 の検証では、両手法とも較正で recall 1.0 / FP 0 になりました。
-- 試験用は別の 26 枚（正常 6・異常 20）。検証では YOLO が 20/20、PatchCore が 19/20 でした。
+  これは **この研修の目標値（教室での基準）** で、生産での誤報率を保証する数字ではありません。
+  記録された実行（2026-11）では、両手法とも較正で recall 1.0（20/20）・FP 0（0/6）になりました。
+- 試験用は別の 26 枚（正常 6・異常 20）。記録された実行では YOLO が 20/20、PatchCore が 19/20 でした。
   **較正で完璧だった PatchCore が、試験で 1 件見逃した** — これが一般化の差であり、
-  この研修で一番伝えたい事実です。
+  この研修で一番伝えたい事実です。しきい値 0.06 と 0.50 は **この 1 回の実行の値** です。
+- 件数は分母と一緒に言ってください（20/20、19/20、0/6）。件数だけでは率は伝わりません。
 - 数値は環境とシードで変わります。**この数字を製品の精度として引用させないでください。**
 
 - The calibration partition is 26 images (6 normal, 20 abnormal). **With 6 normal images a 10% cap
-  means zero false alarms.** In the November 2026 verification both methods reached recall 1.0 with
-  0 false alarms on calibration.
-- The test partition is a different 26 images (6 normal, 20 abnormal). YOLO scored 20/20 and
-  PatchCore 19/20 — **the method that looked perfect on calibration missed one defect on test**.
-  That gap is the most important fact in this course.
+  means zero false alarms.** That 10% is a **classroom objective**, not a production guarantee. In
+  the recorded run (2026-11) both methods reached recall 1.0 (20/20) with 0 false alarms (0/6) on
+  calibration.
+- The test partition is a different 26 images (6 normal, 20 abnormal). In the recorded run YOLO
+  scored 20/20 and PatchCore 19/20 — **the method that looked perfect on calibration missed one
+  defect on test**. That gap is the most important fact in this course. The thresholds 0.06 and 0.50
+  belong to **that one recorded run**.
+- Always quote the denominator with the count (20/20, 19/20, 0/6); a bare count does not convey a
+  rate.
 - Numbers depend on the machine and the seed. **Never let anyone quote them as product accuracy.**
 
 `submissions/day05/comparison_test_results.json` に、分割・モデル・しきい値・目的関数・
@@ -114,6 +138,39 @@ threshold.
 `submissions/day05/comparison_test_results.json` records the split, the model, the thresholds, the
 objective and the score convention. The old `yolo_vs_patchcore.csv` is kept as `superseded`;
 **do not overwrite it**.
+
+### スコアの読み方（講師用） / Reading the scores (instructor notes)
+
+- 画像スコアは **最大のパッチ距離 × 近傍 9 個から作る重み** です。表示するマップは、その距離を
+  **画像サイズに補間し平滑化** したものです。**画像スコア＝マップの最大値ではありません。**
+  保存した `black_spot_0000` では、生の画像スコア **21.439**、表示したマップの最大値 **21.762**、
+  後処理後のスコア **1.000** で、3 つとも違う数です。
+- 生の距離は 0〜1 に収まりません（この実行では約 9〜21）。0〜1 になるのは、**較正用データの統計で
+  変換したあとのスコア** です。
+- anomalib 2.7.0 の変換式は `clip((raw - threshold) / (max - min) + 0.5, 0, 1)` です。
+  `min`・`max`・`threshold` は **較正用（validation）分割** から求めます。`max - min = 0` の
+  ときはしきい値との比較で 1 / 0.5 / 0 に落とし、統計が無い（NaN の）ときは生の値をそのまま返します。
+  この式のため、**較正で決めたしきい値は 0〜1 の目盛りで 0.5** になります。
+  画像用と画素用の統計は **別々** です。
+- 「`pred_score` はいつも 0〜1」と言わないでください。後処理が無効、または統計が未 fit のときは
+  0〜1 になりません。
+- ヒートマップの色は **カラーマップと表示範囲** で決まります。比較するときは表示範囲を固定し、
+  カラーバーを付け、範囲外がクリップされることを伝えてください。
+
+- The image score is **the largest patch distance multiplied by a weight from its 9 nearest
+  features**; the displayed map is those distances **interpolated and smoothed**. **The image
+  score is not the map maximum.** For the saved `black_spot_0000`: raw image score **21.439**,
+  displayed map maximum **21.762**, post-processed score **1.000** — three different numbers.
+- Raw distances are not bounded to 0-1 (about 9-21 in this run). Only the **score rescaled with
+  calibration statistics** is on 0-1.
+- Anomalib 2.7.0 normalises with `clip((raw - threshold) / (max - min) + 0.5, 0, 1)`, where the
+  `min`, `max` and `threshold` come from the **calibration (validation)** partition. A degenerate
+  range falls back to 1 / 0.5 / 0 by comparison with the threshold, and missing (NaN) statistics
+  leave the raw value untouched. This is why **the calibrated threshold sits at 0.5 on the 0-1
+  scale**. Image-level and pixel-level statistics are fitted separately.
+- Never say "`pred_score` is always 0-1". With postprocessing disabled or unfitted it is not.
+- Heatmap colours come from the **colormap and the display range**. Fix the range when comparing,
+  show a colourbar, and say that values outside the range are clipped.
 
 ---
 
@@ -133,13 +190,15 @@ objective and the score convention. The old `yolo_vs_patchcore.csv` is kept as `
 | 02 PatchCore Training | fit 完了、4 指標、ヒートマップ、JSON 保存 |
 | 03 YOLO vs PatchCore | 共通画像での比較表、限界の説明、推奨の作成 |
 
-参考実測（CPU, resnet18）:
-`image_AUROC 1.000 / image_F1 0.974 / pixel_AUROC 0.984 / pixel_F1 0.386`。
+参考実測（CPU, resnet18, `image_size=256`, seed 2026 の **較正用 = validation** データ）:
+`image_AUROC 1.0000 / image_F1Score 0.9744 / pixel_AUROC 0.9851 / pixel_F1Score 0.4307`。
+この 4 つは **較正用データ** の値で、試験用の値はノートブック 03 で出します。
 **pixel_F1 が低いのは異常** ではなく、**画素単位の一致が厳しい** ためです。説明できるようにしてください。
 
-Reference values on CPU with ResNet-18: image_AUROC 1.000, image_F1 0.974,
-pixel_AUROC 0.984, pixel_F1 0.386. The low pixel_F1 is not a fault — pixel-level agreement is simply
-demanding.
+Reference values on CPU with ResNet-18 (`image_size=256`, seed 2026) **on the calibration
+(validation) partition**: image_AUROC 1.0000, image_F1Score 0.9744, pixel_AUROC 0.9851,
+pixel_F1Score 0.4307. These four are **calibration** numbers; the test numbers appear in Notebook 03.
+The low pixel_F1 is not a fault — pixel-level agreement is simply demanding.
 
 ### よくあるエラー / Common errors
 
@@ -171,11 +230,32 @@ data collection.
 3. 提出物：PatchCore の指標、ヒートマップ、比較表、
    **PVC 検査への推奨（判断と理由）**
 
-推奨には **必ず根拠の数字を引用させる** でください。「なんとなく」を許さないのが
+推奨には、**判断の根拠となる数値を必ず示すように指導してください。** 「なんとなく」を許さないのが
 第 1 週の到達点です。
 
 Require every recommendation to cite a concrete number. That is the standard Week 1
 should reach.
+
+### 比較の 4 つの限界（受講者に必ず言わせる） / The four limits of the comparison
+
+ノートブック 03 の Part 5 に 4 項目のリストがあります。口頭でも次の 4 つを確認してください。
+
+1. **合成画像と実画像の差** — 合成は欠陥がはっきりし、背景のばらつきが小さい。
+2. **少ないサンプルによる不確かさ** — 正常 6 枚・異常 20 枚。1 枚で率が動く。
+3. **学習とラベルの予算が違う** — YOLO はラベル付き欠陥画像、PatchCore は正常画像のみ。
+4. **解像度・前処理・運用しきい値への依存** — 入力サイズ、前処理、しきい値で結果が変わる。
+
+5 列の比較図では **一致しない行は 1 つだけ** です。PatchCore が見逃した `streak_0005` の行
+（YOLO NG・PatchCore OK（スコア 0.464 < 0.50）・正解 NG の **PatchCore の見逃し 1 件**）だけで、
+ほかの行は 3 者一致です。「2 つの手法が一致したか」ではなく、**それぞれの判定を正解と突き合わせる**
+ことを強調してください。
+
+Notebook 03 Part 5 lists four limits; confirm all four orally: synthetic-to-real gap; small-sample
+uncertainty; differing training and label budgets; dependence on resolution, preprocessing and the
+operating threshold. In the five-column figure **exactly one row disagrees** — the image PatchCore
+missed, `streak_0005` (YOLO NG, PatchCore OK with score 0.464 < 0.50, truth NG), which is the single
+PatchCore miss — while every other row agrees across all three. Stress that each method's decision is
+checked **against the ground truth**, not just against the other method.
 
 ---
 
@@ -186,7 +266,7 @@ should reach.
 | 異常検知の概念 | 未着手 | 用語のみ | 正常のみ学習を説明 | 利点と代償を説明 |
 | パッチ・特徴・スコア | 未着手 | 図の写し | 流れを説明 | 比喩で人に説明できる |
 | PatchCore の実行 | 未実行 | 助けを借りて実行 | 一人で実行 | パラメータの影響を説明 |
-| ヒートマップの解釈 | 未着手 | 見るだけ | 明るい場所を説明 | 誤検知の原因を推測 |
+| ヒートマップの解釈 | 未着手 | 見るだけ | 表示範囲と色の意味を説明 | 誤検知の原因を推測 |
 | 比較の妥当性 | なし | 表を写す | 出力の違いを説明 | 比較の限界を指摘できる |
 | 推奨の作成 | なし | 手法名のみ | 理由付き | 数字を引用し順序まで提案 |
 
@@ -198,28 +278,42 @@ should reach.
 
 ### ノートブック 01
 
-1. **不要。** 正常品の見え方だけを学び、そこからの外れを測るため。ラベル作成の手間が最大の利点。
-2. 異常は **画像全体ではなく局所** に起きるから。小片ごとに比べたほうが敏感。
+1. **fit には不要。** 正常品の見え方だけを学び、そこからの外れを測るため。ラベル作成の手間が
+   最大の利点。ただし **較正（しきい値）と評価には** 正常・異常のラベル付き画像が要る。
+   文献では one-class・semi-supervised などと呼ぶことも添える。
+2. 異常は **画像全体ではなく局所** に起きるから。小片ごとに比べたほうが敏感。ただし大域的・
+   構造的な異常は局所の比較だけでは捉えにくい。
 3. **正常パッチの特徴**（代表的なものを間引いたコアセット）。
 4. スコアは **正常からの距離** であり、正常なばらつき（色ムラ・模様）でも高くなる。
-   しきい値と学習データの範囲で決まる。
-5. 正常なばらつきを異常と判定し、**偽陽性が増える**。現場が検査を信用しなくなる。
+   しきい値と学習データの範囲で決まる。したがって **しきい値を通した結果は予測** で、間違うことがある。
+5. 正常なばらつきを異常と判定し、**誤報（偽陽性）が増える**。現場が検査を信用しなくなる。
 
 ### ノートブック 02
 
-1. **異常画像を「正常」として覚えてしまい、二度と検出できなくなる** から。
+1. **異常画像を「正常」として覚えてしまい、同じような見え方の異常のスコアが下がって見逃しが
+   増える** から。「二度と検出できない」と断定はできない（コアセットの選ばれ方、特徴の近傍、
+   位置や周囲の見え方、しきい値で変わる）。混入画像を除いてメモリバンクを作り直し、
+   較正用・評価用の画像で確かめる。
 2. 正常画像をバックボーンに通して **特徴を計算し、メモリバンクに保存** する。
-   **重みは更新しない。**
+   **重みは更新しない。** データで決まるのはメモリバンクと、そのあとの較正（しきい値と
+   正規化の統計）。
 3. `image_AUROC` は **画像単位で OK/NG を分ける力**、`pixel_AUROC` は **画素単位で異常領域を
-   当てる力**。
+   当てる力**。**AUROC 1.0 は「この 26 枚で順位が完璧」** という意味で、どのしきい値でも完璧、
+   という意味ではない。見逃しと誤報の件数は別に数える。
 4. しきい値を **検証データで決め、成績を試験データで測る** ため（同じデータで両方はできない）。
+   分かれる比率は `val_split_ratio=0.5` で決まる（`from_test` だけでは決まらない）。
 5. **合成画像は実際より簡単** で、実際の PVC の光学的条件（ムラ・反射）を含まないから。
+   較正用は正常 6 枚・異常 20 枚しかなく、その枚数で測った数字は生産の性能にならない。
 
 ### ノートブック 03
 
 1. mAP は **四角とクラス** を必要とし、AUROC は **スコア** を必要とする。測っている対象が違う。
-2. それぞれの手法に **正解ラベル付きデータで決めたしきい値**。
-3. **正常に近い見た目の欠陥**（低コントラスト・正常のばらつきに似たもの）。
+2. それぞれの手法に **正解ラベル付きデータで決めたしきい値（判定規則）**。そのうえで
+   **2 つの手法どうしの一致ではなく、それぞれの判定を同じ正解と突き合わせる**。
+   しきい値の数値そのものは直接比べられない。
+3. **正常に近い見た目の欠陥**（低コントラスト・正常のばらつきに似たもの）。記録された実行では
+   試験用の `streak_0005` を 1 件見逃した（0.464 < 0.50）。
 4. **学習していない種類の欠陥**、小さすぎる欠陥、学習時と分布が違う画像。
 5. 意見が分かれる。**まず異常検知で網をかけ、確定した不良は YOLO で種類と位置を記録する**
    という順序が現実的。理由として、ラベルの無い未知欠陥に対応でき、種類の記録は YOLO が得意。
+   ただし **組み合わせれば必ず補完するわけではなく**、計算時間と新しい誤りの組み合わせが増える。

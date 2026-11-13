@@ -191,8 +191,9 @@ def ref_score_distribution(root: Path, out_dir: Path) -> Path:
     ax.set_yticklabels(["異常品 / abnormal", "正常品 / normal"], fontsize=8.5)
     ax.set_ylim(-0.45, 1.45)
     ax.set_xlim(0, 1.02)
-    ax.set_xlabel("画像単位の異常スコア（較正用データの min/max で 0〜1 に正規化）/ "
-                  "image-level score, normalised on the calibration partition", fontsize=8.5)
+    ax.set_xlabel("画像単位の異常スコア（較正用データで 0〜1 に変換。学習したしきい値が 0.5 になる）/ "
+                  "image-level score after calibration post-processing (the learned threshold maps "
+                  "to 0.5)", fontsize=8.2)
     ax.tick_params(labelsize=7.5)
     ax.grid(axis="x", alpha=0.25)
 
@@ -212,13 +213,59 @@ def ref_score_distribution(root: Path, out_dir: Path) -> Path:
 
     ax.set_title("較正用（validation）データだけを使った分布 / distribution on the calibration partition only",
                  fontsize=10)
-    _note(fig, "図：" + PROVENANCE_TEST + " — 試験用データは含みません / test partition not shown here")
+    _note(fig, "図：" + PROVENANCE_TEST + " — 試験用データは含みません / test partition not shown here\n"
+              f"正常 {normal.size} 枚・異常 {abnormal.size} 枚（この研修の分割）。"
+              "変換式（anomalib 2.7.0）：clip((生の値 − しきい値) ÷ (較正の最大 − 最小) + 0.5, 0, 1)。"
+              "較正の統計は試験用データでは作りません。"
+              " / denominator 6 normals and 20 abnormals from this course's split; formula of anomalib 2.7.0 "
+              "PostProcessor: clip((raw - threshold) / (cal_max - cal_min) + 0.5, 0, 1); statistics are "
+              "never fitted on the test partition.")
     return _save(fig, out_dir / "ref_score_distribution.png")
 
 
 # ---------------------------------------------------------------------------
 # Day 3: 実際の confidence と残る件数 / real confidences and how many survive
 # ---------------------------------------------------------------------------
+
+
+def _panel_spans(constant_indices: np.ndarray, length: int) -> list[tuple[int, int]]:
+    """区切り線の位置から、パネルの範囲を取り出す / panel spans between uniform separators."""
+    groups: list[list[int]] = []
+    for index in constant_indices.tolist():
+        if groups and index == groups[-1][-1] + 1:
+            groups[-1].append(index)
+        else:
+            groups.append([index])
+    cuts = [0]
+    for group in groups:
+        centre = (group[0] + group[-1]) // 2
+        if 4 < centre < length - 4:
+            cuts.append(centre)
+    cuts.append(length)
+    spans = [(cuts[i] + 2, cuts[i + 1] - 2) for i in range(len(cuts) - 1)]
+    return [span for span in spans if span[1] - span[0] > 20]
+
+
+def _batch_image_count(image) -> int:
+    """バッチ画像に実際に並んでいる枚数を数える / count the panels actually drawn in a batch figure.
+
+    Ultralytics は「そのバッチに入った枚数」を grid に並べるので、16 枚とは限りません。
+    区切り線（ほぼ一色の行・列）で区切って、中身のあるパネルだけを数えます。
+    Ultralytics draws as many panels as the batch contained, so the count must come from the picture
+    itself: split on the uniform separator rows/columns and count the non-blank panels.
+    """
+    array = np.asarray(image.convert("RGB")).astype(float)
+    columns = _panel_spans(np.where(array.std(axis=(0, 2)) <= 5)[0], array.shape[1])
+    rows = _panel_spans(np.where(array.std(axis=(1, 2)) <= 5)[0], array.shape[0])
+    count = 0
+    for top, bottom in rows:
+        for left, right in columns:
+            panel = array[top:bottom, left:right]
+            if panel.size and panel.std() > 3:
+                count += 1
+    if count == 0:
+        raise MissingSource("no panel found in the batch figure")
+    return count
 
 
 def ref_confidence_counts(root: Path, out_dir: Path) -> Path:
@@ -228,44 +275,60 @@ def ref_confidence_counts(root: Path, out_dir: Path) -> Path:
     if not images:
         raise MissingSource(f"no per-image entries in {path}")
 
+    floor = float(payload.get("min_inference_conf", 0.01))
     max_conf = np.array([float(row["yolo_max_conf"]) for row in images])
+    detections = np.array([int(row.get("yolo_detections_at_min_conf", 0)) for row in images])
     is_abnormal = np.array([row.get("true_label") == "bad" for row in images])
-    thresholds = np.round(np.arange(0.0, 1.001, 0.01), 2)
-    # NG と判定される枚数 = その画像の最大 confidence がしきい値以上の枚数
-    # An image is called NG when its highest confidence reaches the threshold.
-    ng_counts = np.array([int((max_conf >= t).sum()) for t in thresholds])
+    # 検出が 1 件も残らなかった画像の 0 は「弱い検出」ではなく「候補なし」の番兵値です。
+    # しきい値を 0 にしても、その画像が NG になるわけではありません。
+    # A stored 0 for an image with no retained box is a sentinel, not a weak detection: lowering the
+    # threshold to 0 does not turn that image into an NG decision.
+    has_candidate = (detections > 0) & (max_conf > 0)
+    thresholds = np.round(np.arange(floor, 1.0 + 1e-9, 0.01), 2)
+    # NG と判定される枚数 = 候補のある画像のうち、最大 confidence がしきい値以上の枚数
+    # An image with a candidate is called NG when its highest confidence reaches the threshold.
+    ng_counts = np.array([int((max_conf[has_candidate] >= t).sum()) for t in thresholds])
 
-    fig, axes = plt.subplots(1, 2, figsize=(11.2, 4.1))
+    fig, axes = plt.subplots(1, 2, figsize=(11.6, 4.3))
     ax = axes[0]
     ax.step(thresholds, ng_counts, where="post", color=ACCENT, linewidth=2)
-    ax.set_xlabel("しきい値 / threshold", fontsize=8.5)
+    ax.set_xlim(floor, 1.0)
+    ax.set_ylim(0, int(has_candidate.sum()) + 3)
+    ax.set_xlabel(f"しきい値 / threshold（推論した下限 {floor:.2f} から）", fontsize=8.5)
     ax.set_ylabel("NG と判定される枚数 / images called NG", fontsize=8.5)
-    ax.set_title(f"① 実際の最大 confidence から数えた件数（全 {max_conf.size} 枚）", fontsize=9)
+    ax.set_title(f"① 候補のある {int(has_candidate.sum())} 枚での件数"
+                 f"（全 {max_conf.size} 枚）", fontsize=9)
     ax.tick_params(labelsize=7.5)
     ax.grid(alpha=0.25)
-    for t in (0.01, 0.25, 0.5, 0.75):
-        count = int((max_conf >= t).sum())
+    for t in (floor, 0.25, 0.5, 0.75):
+        count = int((max_conf[has_candidate] >= t).sum())
         ax.plot([t], [count], marker="o", color=WARN, markersize=5)
         ax.annotate(f"{t:.2f}→{count}", (t, count), textcoords="offset points",
                     xytext=(4, 6), fontsize=7.4, color=WARN)
+    missing = int((~has_candidate).sum())
 
     ax2 = axes[1]
-    bins = np.linspace(0, 1, 21)
-    ax2.hist(max_conf[~is_abnormal], bins=bins, color=ACCENT, alpha=0.75,
-             label=f"正常品 / normal (n={int((~is_abnormal).sum())})")
-    ax2.hist(max_conf[is_abnormal], bins=bins, color=BAD, alpha=0.65,
-             label=f"異常品 / abnormal (n={int(is_abnormal.sum())})")
-    ax2.set_xlabel("画像ごとの最大 confidence / highest confidence in the image", fontsize=8.5)
+    bins = np.linspace(floor, 1, 21)
+    ax2.hist(max_conf[has_candidate & ~is_abnormal], bins=bins, color=ACCENT, alpha=0.75,
+             label=f"正常品 / normal (n={int((has_candidate & ~is_abnormal).sum())})")
+    ax2.hist(max_conf[has_candidate & is_abnormal], bins=bins, color=BAD, alpha=0.65,
+             label=f"異常品 / abnormal (n={int((has_candidate & is_abnormal).sum())})")
+    ax2.set_xlim(floor, 1.0)
+    ax2.set_xlabel(f"画像ごとの最大 confidence / highest confidence in the image（≥ {floor:.2f}）",
+                   fontsize=8.5)
     ax2.set_ylabel("枚数 / number of images", fontsize=8.5)
-    ax2.set_title("② 落とした検出だけでなく、残った最大値も見る", fontsize=9)
+    ax2.set_title(f"② 候補が残った画像の最大値（0 の {missing} 枚は除く）", fontsize=9)
     ax2.tick_params(labelsize=7.5)
     ax2.legend(fontsize=7.6)
     ax2.grid(alpha=0.25)
 
     fig.suptitle(f"実際の推論結果での confidence の効き方（{payload.get('imgsz', '?')} px, "
-                 f"推論は conf={payload.get('min_inference_conf', '?')} で 1 回だけ）", fontsize=10)
-    _note(fig, "図：" + PROVENANCE_TEST + " — source: submissions/day04/yolo_predictions_on_shared_set.json"
-              + "（しきい値を変えても推論はやり直していません / no re-inference）")
+                 f"推論は conf={floor:.2f} で 1 回だけ）", fontsize=10)
+    _note(fig, f"検出が残らなかった {missing} 枚は、候補そのものが無いため、どのしきい値でも NG になりません。"
+              f" / {missing} images kept no box at all, so no threshold can call them NG.\n"
+              "図：" + PROVENANCE_TEST + " — source: submissions/day04/yolo_predictions_on_shared_set.json"
+              + f"（しきい値を変えても推論はやり直していません / no re-inference; 表示は推論の下限 "
+                f"{floor:.2f} から / the axis starts at the inference floor）")
     return _save(fig, out_dir / "ref_confidence_counts.png")
 
 
@@ -278,10 +341,15 @@ def ref_detections_label_vs_pred(root: Path, out_dir: Path) -> Path:
     folder = root / "training_results" / "day04" / "test_evaluation"
     truth = Image.open(_require(folder / "val_batch0_labels.jpg")).convert("RGB")
     pred = Image.open(_require(folder / "val_batch0_pred.jpg")).convert("RGB")
+    shown = _batch_image_count(truth)
+    if _batch_image_count(pred) != shown:
+        raise MissingSource("the label and prediction batches show different numbers of images")
 
     fig, axes = plt.subplots(1, 2, figsize=(11.6, 4.3))
     axes[0].imshow(truth)
-    axes[0].set_title("① 正解ラベル / ground truth\n（人が付けた四角 / boxes drawn by a person）", fontsize=9)
+    axes[0].set_title("① 正解ラベル / ground truth\n"
+                      "（この研修の生成スクリプトが付けた四角 / boxes written by this course's generator）",
+                      fontsize=9)
     axes[1].imshow(pred)
     axes[1].set_title("② モデルの予測 / prediction\n（同じ画像・同じ学習済み重み / same images and weights）",
                       fontsize=9)
@@ -289,10 +357,13 @@ def ref_detections_label_vs_pred(root: Path, out_dir: Path) -> Path:
         ax.set_xticks([])
         ax.set_yticks([])
 
-    fig.suptitle("同じ 16 枚を、正解と予測で並べる / the same batch seen as truth and as prediction",
-                 fontsize=10)
+    fig.suptitle(f"同じ {shown} 枚を、正解と予測で並べる / the same {shown} images seen as truth and "
+                 f"as prediction", fontsize=10)
     _note(fig, "図：" + PROVENANCE_TEST
-               + " — source: training_results/day04/test_evaluation/val_batch0_{labels,pred}.jpg")
+               + " — source: training_results/day04/test_evaluation/val_batch0_{labels,pred}.jpg"
+               + "（並んでいる枚数は図から数えた値です / the number of panels is counted from the figure; "
+                 "ラベルは人が描いたものではなく、生成時の欠陥記録から作った正解です / the labels come from "
+                 "the generator's defect records, not from hand drawing）")
     return _save(fig, out_dir / "ref_detections_label_vs_pred.png")
 
 
@@ -354,6 +425,7 @@ def ref_anomaly_panels(root: Path, out_dir: Path) -> Path:
     image = _dataset_image(root, record["image"])
     score_row = _saved_scores(root).get(record["image"])
     normalised_score = float(score_row["score"]) if score_row else float("nan")
+    raw_score = record["raw_score"]
 
     anomaly_map = record["map"]
     top = float(anomaly_map.max())
@@ -362,7 +434,7 @@ def ref_anomaly_panels(root: Path, out_dir: Path) -> Path:
     vmax = float(np.ceil(top * 2) / 2)          # 0.5 刻みの上限 / a round upper bound
 
     fig, axes = plt.subplots(1, 4, figsize=(13.4, 3.9),
-                             gridspec_kw={"width_ratios": [1, 1.05, 1, 1.15]})
+                             gridspec_kw={"width_ratios": [1, 1.05, 1, 1.25]})
     axes[0].imshow(image)
     axes[0].set_title("① 元の画像 / original", fontsize=8.8)
 
@@ -385,25 +457,32 @@ def ref_anomaly_panels(root: Path, out_dir: Path) -> Path:
 
     axes[3].axis("off")
     axes[3].set_title("④ 数値の読み方 / reading the numbers", fontsize=8.8)
-    axes[3].text(0.02, 0.94,
-                 f"画像スコア（較正で正規化）/ image score = {normalised_score:.3f}\n"
-                 f"マップの最大値 / map maximum     = {top:.2f}\n"
-                 f"最大の位置 / at (x, y)           = ({top_x}, {top_y})\n"
-                 f"最大の 90 % 以上の面積 / area ≥ 90 % of max = {share_above_90 * 100:.1f} %\n\n"
-                 "画像スコアは『マップの最大値』を、較正用データの\n"
-                 "最小・最大で 0〜1 に直したものです。マップの色は\n"
-                 "正規化前の距離なので、両方の数値を分けて読みます。\n\n"
-                 "the image score is the map maximum, rescaled 0–1 with\n"
-                 "calibration statistics; the colours show the raw distance.",
-                 fontsize=7.6, color=INK, va="top", linespacing=1.7)
+    axes[3].text(0.02, 0.96,
+                 f"生の画像スコア / raw image score   = {raw_score:.3f}\n"
+                 f"   = 最大パッチ距離 × 重み（近傍 9 点）\n"
+                 f"表示マップの最大値 / map maximum = {top:.3f}\n"
+                 f"   = 補間・平滑化のあとの値\n"
+                 f"保存済みスコア / saved score 0–1   = {normalised_score:.3f}\n"
+                 f"最大の位置 / at (x, y)             = ({top_x}, {top_y})\n"
+                 f"最大の 90 % 以上の面積 / area ≥ 90 % = {share_above_90 * 100:.1f} %\n\n"
+                 "3 つの数は別のものです。生のスコアは「最も遠いパッチ距離」に\n"
+                 "近傍の重みを掛けた値、マップはそれを画像サイズに補間して\n"
+                 "平滑化したもの、保存済みスコアは較正で 0〜1 に直した値です。\n"
+                 "しきい値と比べるのは保存済みスコアです。\n\n"
+                 "the three numbers differ: the raw score weights the largest\n"
+                 "patch distance with its 9 nearest memory features, the map is\n"
+                 "that value interpolated and smoothed, and the saved 0–1 score\n"
+                 "is the post-processed value compared with the threshold.",
+                 fontsize=7.3, color=INK, va="top", linespacing=1.55)
 
     fig.suptitle(f"{name}: 数値マップから読む / read from the numeric map "
                  f"(truth: {'NG' if record['truly_abnormal'] else 'OK'})", fontsize=10)
     _note(fig, "図：" + PROVENANCE_TEST
                + " — 保存済みモデル（training_results/day05/.../model.ckpt）から再計算した生のパッチ距離マップ。"
                  "source: submissions/day05/maps/" + f"{name}_map.npz\n"
-                 "右の数値は submissions/day05/patchcore_scores.csv の保存値。描画済みの画像を切り抜いたものではありません。"
-                 " / the numbers on the right are the saved scores; nothing is cropped from a rendered screenshot.")
+                 "生のスコアと保存済みスコアは submissions/day05/maps/ と patchcore_scores.csv の保存値です。"
+                 "描画済みの画像を切り抜いたものではありません。 / the raw and saved scores are the stored values;"
+                 " nothing is cropped from a rendered screenshot.")
     return _save(fig, out_dir / "ref_anomaly_panels.png")
 
 

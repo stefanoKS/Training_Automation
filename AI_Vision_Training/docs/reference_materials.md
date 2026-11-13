@@ -150,9 +150,40 @@ industrial images and a clearly stated licence. It is a useful reference for Wee
 | **COCO 事前学習の重み** | Ultralytics の配布条件に従う / per Ultralytics terms | 同上 / same as above |
 | **Anomalib** | Apache 2.0 | 可 / fine |
 | ImageNet 事前学習の重み（torchvision） | モデルごとに条件あり / per-model terms | 用途を確認 / check intended use |
+| scikit-image のサンプル写真（`chelsea`・`camera`・`brick`） | CC0 1.0 | 出所表示は任意だが、この教材では明記 / attribution kept anyway |
+| VisA データセットの概要図 | CC BY 4.0（VisA データセット） | 出所表示が必要 / attribution required |
 
 YOLO を社内システムに組み込む場合は、**AGPL-3.0 の扱いを法務・情報システム部門に
 確認** してください。この研修の範囲（学習・評価）では問題ありません。
 
 Before embedding YOLO in an internal system, **have Legal/IT review AGPL-3.0**. Within
 this course's scope (learning and evaluation) there is no issue.
+
+---
+
+## 8. 実写の参考画像 / Reference photographs
+
+レッスンの一部では、実写の参考画像を **ローカルのファイル** として表示します。表示のたびに
+インターネットへ取りに行くのではなく、**設置時に一度だけ取得**します。
+
+```powershell
+python assets/scripts/download_reference_images.py --course-root .
+python assets/scripts/download_reference_images.py --course-root . --offline
+```
+
+| ファイル / File | 内容 / What it is | 出所 / Source | ライセンス / Licence |
+|---|---|---|---|
+| `chelsea.png` | 実写のカラー写真 / a real colour photograph | [scikit-image `chelsea`](https://scikit-image.org/docs/stable/api/skimage.data.html#skimage.data.chelsea)（Stefan van der Walt） | CC0 1.0 |
+| `camera.png` | 実写のグレースケール写真 / a real greyscale photograph | [scikit-image `camera`](https://scikit-image.org/docs/stable/api/skimage.data.html#skimage.data.camera)（Lav Varshney） | CC0 1.0 |
+| `brick.png` | 模様のある背景 / repeated texture | [scikit-image `brick`](https://scikit-image.org/docs/stable/api/skimage.data.html#skimage.data.brick)（CC0Textures を加工） | CC0 1.0 |
+| `VisA_samples.png` | 産業用異常検知データの概要 / industrial anomaly-dataset overview | [amazon-science/spot-diff（VisA）](https://github.com/amazon-science/spot-diff/tree/2a692ab575001cbde74d402d897a7286086c6199) | CC BY 4.0 |
+
+- 取得したファイルは改変せず、`assets/external_samples/open_reference/manifest.json` と
+  `ATTRIBUTION.md` に出所・ライセンス・SHA-256 を記録します。
+- 参考画像は授業で見るためのもので、**学習・較正・試験のデータには使いません**。
+- VisA の図は実在の産業製品の写真で、この研修の PVC 製品でも、この研修のモデルの出力でもありません。
+
+Downloaded once at installation, unchanged, with `manifest.json` and `ATTRIBUTION.md` (source,
+licence, SHA-256) stored beside them. The photographs are teaching references only and are never
+used for training, calibration or test data. The VisA overview shows real industrial objects; it is
+neither a photograph of this factory's PVC products nor an output of this course's models.

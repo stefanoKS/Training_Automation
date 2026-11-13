@@ -1,6 +1,6 @@
 # 実装・検証レポート / Implementation and validation report
 
-**実施日 / Date:** 2026 年 11 月 13 日 / 13 November 2026
+**実施日 / Date:** 2026 年 11 月 13 日（初版）/ 14 日（改訂）/ 13 November 2026 (first issue), 14 November 2026 (revision)
 **作業ディレクトリ / Working directory:** `C:\Users\14413\Documents\Training_Automation`
 **教材ルート / Course root:** `C:\Users\14413\Documents\Training_Automation\AI_Vision_Training`
 **検証環境 / Environment:** Windows 11 (64-bit), CPython 3.11.4, CPU only
@@ -10,6 +10,79 @@
 
 This report separates **checks that were actually executed**, **source-only checks**, and
 **items that still need classroom validation**.
+
+---
+
+## 改訂（2026-11-14）：Day 1–5 校正パス / Revision: Day 1–5 correction pass
+
+**基準リビジョン / Base revision:** `4628ebf1f0f2a4f05c4866a4a318540188d2906e`
+（`day1-5_review.md` の 82 件の指摘にもとづく校正。未コミット / uncommitted）
+**実施日 / Date:** 2026 年 11 月 14 日 / 14 November 2026
+
+### 現行の数値（ノートブックから集計）/ Current figures, counted from the notebooks
+
+| 項目 / Item | 値 / Value |
+|---|---|
+| ノートブック / notebooks | 16（Setup 1 ＋ Day 1〜5 各 3） |
+| Markdown セル / markdown cells | 725（うち「実行結果の例」を含むセル 43） |
+| コードセル / code cells | 263（すべて `metadata.aivision_role` と指示バナーあり） |
+| Markdown の画像参照 / Markdown image references | 70 |
+| 参照されている画像ファイル / unique image files | 66（`assets/diagrams` 55、`assets/reference_outputs` 7、`assets/external_samples/open_reference` 4） |
+| Git 追跡 / tracked by git | 62（教材図と参考出力） |
+| Git 対象外（設置時に取得）/ gitignored, downloaded at installation | 4（CC0 3 枚＋VisA 概要 1 枚） |
+
+以下の §1〜§12 は **前回（2026-11-13）の実装時点の記録** です。図の枚数・テスト件数などは
+当時の値であり、現在の検証結果ではありません。
+
+Sections §1–§12 below record the **previous (13 November 2026) implementation**. Their figure
+counts and test totals describe that revision, not the checks listed here.
+
+### この改訂で直したこと / What this revision corrected
+
+- 82 件の指摘（G01–G07、D101–D118、D201–D215、D301–D309、D401–D414、D501–D515、S01–S04）を
+  ノートブック・講師ガイド・図の生成コード・参考出力の生成コードに反映。
+- 誤った説明の代表例：AI が「決める」段階だけに限られる、左右対称＝正規分布、
+  縮小するとキズが消える、YOLO ラベルの 5 値すべてが 0〜1、batch = 重み更新 1 回、
+  `dfl_loss` の提示、`best.pt` の古い fitness 式、PatchCore の画像スコア = マップ最大値、
+  しきい値 0 で全数 NG、テスト用データを固定前に表示、較正から報告への近道。
+- 図を **生成コードから作り直し**（`generate_teaching_diagrams.py`）。矢印・軸・単位・
+  コントラスト・キャプションの折り返しを修正し、模式図・合成データの明記を維持。
+- 参考出力を **保存済みの数値から作り直し**（`generate_reference_outputs.py`）。
+  confidence の下限 0.01（52 枚中 42 枚が候補あり）、PatchCore の
+  生スコア 21.439 / 表示マップ最大 21.762 / 後処理後 1.000 を図に明記。
+- 実写の参考画像 4 枚を **設置時に一度だけ取得**する仕組みを追加
+  （`assets/scripts/download_reference_images.py`、Setup のセル、`ATTRIBUTION.md`・`manifest.json`）。
+- 英語のみだった完了条件・表の本文を日本語と対にして整理し、
+  「数値は環境によって変わります」という定型文を、決定論的な出力と記録済み実行で分けた。
+
+### この改訂で実際に実行した確認 / Checks actually executed in this revision
+
+| 確認 / Check | 結果 / Result |
+|---|---|
+| `validate_notebooks.py`（構造・二言語・図の配置） | ✅ `passed=194 failed=0` |
+| `python -m pytest assets\tests -q` | ✅ **264 passed**（PDF 33 件を含む） |
+| `insert_lesson_figures.py` を 2 回実行 | ✅ 2 回目は `inserted=0 updated=0`（冪等） |
+| `generate_teaching_diagrams.py` で全図を再生成 | ✅ グリフ欠落なし。主要図を目視 |
+| `generate_reference_outputs.py` で参考図を再生成 | ✅ 7 枚（保存済み CSV/JSON/NPZ から） |
+| 画像インストーラ（空の一時フォルダ） | ✅ 4 枚取得、SHA-256 一致、`--offline` 成功、破損ファイルを拒否、復旧成功 |
+| 解説 PDF の再出力 | ✅ Day01 66 ページ、Day02 74、Day03 50、Day04 59、Day05 58、Week1 297 |
+| PDF のページ画像点検（Day01・Day05 全ページ） | ✅ 空白ページ 0、印刷範囲外の文字 0、表・二言語順序を目視 |
+| ノートブックの再実行（学習・PatchCore の再 fit） | ❌ **未実施**（下記の限界を参照） |
+
+### 残っている限界 / Remaining limitations
+
+1. **ノートブックの全実行はしていません。** 変更したセルのうち、コードを変えたものは
+   単体の Python スニペットで確認しましたが、Day04_02 の学習と Day05_02 の PatchCore fit は
+   再実行していません（再学習は不要と判断）。
+2. `submissions/day05/` の保存済み JSON（`split_manifest.json`・`patchcore_predictions.json`・
+   `comparison_test_results.json`）は **前回の実行の産物** で、`score_convention` の文が
+   古いままです。ノートブック側は修正済みで、Day05_02 を再実行すると新しい文で上書きされます。
+3. `submissions/day05/heatmaps/` の画像も前回の産物（テスト用画像の重ね表示）です。
+   Day05_03 は較正用の重ね表示として説明するため、Day05_02 を再実行するまでは
+   保存済み画像と説明が一致しません。
+4. 教室での実測（所要時間・ブラウザでのスライダー操作・初学者 1 名のパイロット）は未実施です。
+5. 実写の参考写真は CC0/CC BY の 4 枚のみで、工場の実写や校正用の実写は含みません
+   （校正の実写は今後の撮影待ち）。
 
 ---
 

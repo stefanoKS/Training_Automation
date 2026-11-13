@@ -197,6 +197,32 @@ python assets\scripts\prepare_datasets.py --force
 `--force` deletes and rebuilds only the generated datasets. Student work in
 `submissions/` is untouched.
 
+### 6.1 実写の参考画像が見つからない / the reference photographs are missing
+
+**症状 / Symptom:** `assets/external_samples/open_reference/` に 4 枚そろっていない、
+または「参考画像がそろっていません / reference images are incomplete」と表示される。
+
+**対処 / Fix:**
+
+```powershell
+.\.venv\Scripts\Activate.ps1
+python assets\scripts\download_reference_images.py --course-root .
+```
+
+- 取得するのは **参考画像 4 枚だけ** です（`chelsea.png`・`camera.png`・`brick.png`・`VisA_samples.png`）。
+- 何度実行しても、正しく保存済みのファイルはそのまま再利用します（取得は 1 回だけ）。
+- 失敗したファイル名が表示されます。**別の画像で代用しないでください。** 接続を確認して
+  同じコマンドをもう一度実行します。
+- ネットワークを使わずに、保存済みファイルだけを確認できます。
+
+```powershell
+python assets\scripts\download_reference_images.py --course-root . --offline
+```
+
+Only the four reference photographs are downloaded; valid cached files are reused and the failing
+file name is printed. Never substitute a different image: check the connection and rerun the same
+command. `--offline` verifies the saved files without any network request.
+
 ---
 
 ## 7. モデルのダウンロードに失敗する / model download fails
