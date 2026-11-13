@@ -9,12 +9,12 @@ so correcting a notebook and re-running the command below keeps the two in step.
 
 | ファイル / File | 内容 / Contents | ページ / Pages |
 |---|---|---|
-| `Day01_explanation_ja_en.pdf` | 第 1 日（ノートブック 01〜03） | 47 |
-| `Day02_explanation_ja_en.pdf` | 第 2 日（ノートブック 01〜03） | 50 |
-| `Day03_explanation_ja_en.pdf` | 第 3 日（ノートブック 01〜03） | 40 |
-| `Day04_explanation_ja_en.pdf` | 第 4 日（ノートブック 01〜03） | 42 |
-| `Day05_explanation_ja_en.pdf` | 第 5 日（ノートブック 01〜03） | 43 |
-| `Week1_explanation_ja_en.pdf` | 5 日分をまとめたもの / all five days | 214 |
+| `Day01_explanation_ja_en.pdf` | 第 1 日（ノートブック 01〜03） | 61 |
+| `Day02_explanation_ja_en.pdf` | 第 2 日（ノートブック 01〜03） | 65 |
+| `Day03_explanation_ja_en.pdf` | 第 3 日（ノートブック 01〜03） | 45 |
+| `Day04_explanation_ja_en.pdf` | 第 4 日（ノートブック 01〜03） | 47 |
+| `Day05_explanation_ja_en.pdf` | 第 5 日（ノートブック 01〜03） | 52 |
+| `Week1_explanation_ja_en.pdf` | 5 日分をまとめたもの / all five days | 260 |
 
 ページ数は生成のたびに `export_explanations_pdf.py` が表示します。上の表は 2026-11-13 の生成結果です。
 The page counts are printed by the export script; the numbers above are from the 2026-11-13 build.

@@ -164,25 +164,39 @@ def test_every_visual_has_a_purpose_and_a_question() -> None:
 # ---------------------------------------------------------------------------
 
 REQUIRED_VISUALS = {
-    "Day01_01_Introduction_to_AI": ["teach_train_vs_inference.png"],
+    "00_Environment_Setup": ["teach_setup_jupyter_ui.png", "teach_execution_state.png",
+                             "teach_nameerror_recovery.png"],
+    "Day01_01_Introduction_to_AI": ["teach_inspection_roles.png", "teach_ai_ml_dl_nested.png",
+                                    "teach_train_vs_inference.png", "teach_gaussian_vs_skewed.png",
+                                    "teach_brightness_shift.png"],
     "Day01_02_Pixels_and_Images": ["diagram_pixel_grid.png", "teach_rgb_channels.png",
-                                   "teach_downsample_defect.png"],
-    "Day01_03_Computer_Vision_Tasks": ["teach_cv_tasks_outputs.png"],
-    "Day02_02_Conditions_Loops_Functions": ["teach_condition_branch.png", "teach_loop_trace.png",
-                                            "teach_function_io.png"],
-    "Day02_03_OpenCV_Image_Processing": ["teach_opencv_pipeline.png", "teach_pixel_to_mm.png"],
-    "Day03_01_YOLO_Concepts": ["teach_bbox_coords.png", "teach_iou_rects.png"],
+                                   "teach_downsample_defect.png", "teach_array_indexing.png",
+                                   "teach_resize_profile.png"],
+    "Day01_03_Computer_Vision_Tasks": ["teach_cv_tasks_outputs.png", "teach_segmentation_modes.png"],
+    "Day02_01_Python_Basics": ["teach_units_conversion.png", "teach_assign_vs_compare.png",
+                               "teach_traceback_annotated.png"],
+    "Day02_02_Conditions_Loops_Functions": ["teach_tolerance_boundary.png",
+                                            "teach_condition_branch.png", "teach_loop_trace.png",
+                                            "teach_function_io.png", "teach_definition_vs_call.png"],
+    "Day02_03_OpenCV_Image_Processing": ["teach_opencv_pipeline.png", "teach_threshold_sweep.png",
+                                         "teach_contour_merge.png", "teach_distance_345.png",
+                                         "teach_pixel_to_mm.png"],
+    "Day03_01_YOLO_Concepts": ["teach_bbox_coords.png", "teach_score_vs_correctness.png",
+                               "teach_iou_rects.png"],
     "Day03_03_YOLO_Experiments": ["teach_confidence_filter.png", "ref_confidence_counts.png",
-                                  "teach_resolution_effect.png"],
-    "Day04_01_YOLO_Dataset_Annotation": ["teach_yolo_label_fields.png", "teach_split_roles.png"],
-    "Day04_02_YOLO_Training": ["teach_epoch_batch.png", "teach_train_val_curves.png",
-                               "ref_train_val_curves.png"],
+                                  "teach_score_vs_correctness.png", "teach_resolution_effect.png"],
+    "Day04_01_YOLO_Dataset_Annotation": ["teach_yolo_label_fields.png", "teach_split_roles.png",
+                                         "teach_dataset_contact_sheet.png", "teach_leakage_split.png"],
+    "Day04_02_YOLO_Training": ["teach_training_update.png", "teach_epoch_batch.png",
+                               "teach_train_val_curves.png", "ref_train_val_curves.png"],
     "Day04_03_YOLO_Evaluation": ["teach_object_level_matching.png",
                                  "teach_image_level_confusion.png",
                                  "ref_detections_label_vs_pred.png"],
-    "Day05_01_Anomaly_Detection_Concepts": ["teach_patch_neighbour.png"],
-    "Day05_02_PatchCore_Training": ["ref_anomaly_panels.png"],
-    "Day05_03_YOLO_vs_PatchCore": ["ref_score_distribution.png", "ref_comparison_5col.png"],
+    "Day05_01_Anomaly_Detection_Concepts": ["teach_normal_variation.png", "teach_patch_neighbour.png",
+                                            "teach_memory_bank.png", "teach_score_levels.png"],
+    "Day05_02_PatchCore_Training": ["teach_backbone_vs_memory.png", "ref_anomaly_panels.png"],
+    "Day05_03_YOLO_vs_PatchCore": ["teach_evaluation_sequence.png", "teach_threshold_freeze.png",
+                                   "ref_score_distribution.png", "ref_comparison_5col.png"],
 }
 
 
@@ -213,6 +227,65 @@ def test_reference_generator_states_its_sources() -> None:
     generator = (SCRIPTS / "generate_reference_outputs.py").read_text(encoding="utf-8")
     for phrase in ("参考出力", "Reference output", "MissingSource", "results.csv"):
         assert phrase in generator, f"reference generator does not mention {phrase!r}"
+
+
+def test_anomaly_panel_is_drawn_from_numbers_not_from_a_screenshot() -> None:
+    """異常マップの図は、描画済み画像の切り抜きではなく保存済みの数値から作ること。"""
+    generator = (SCRIPTS / "generate_reference_outputs.py").read_text(encoding="utf-8")
+    assert "submissions" in generator and "maps" in generator
+    assert "_load_map" in generator, "the panel figure must read the saved numeric maps"
+    assert "_split_panels" not in generator, "the old screenshot-cropping helper is still present"
+    # 描画済み画像に色目盛りを足す、という誤りを繰り返さないこと
+    assert generator.count("ScalarMappable") == 0, (
+        "a colour bar was added to an already-rendered picture")
+
+
+def test_every_anomaly_map_is_saved_as_numbers_by_the_notebook() -> None:
+    """数値マップを保存するセルが Day 5 Notebook 02 にあること（図の再生成ができる）。"""
+    import json as _json
+
+    notebook = _json.loads(_notebook("Day05_02_PatchCore_Training").read_text(encoding="utf-8"))
+    code = "\n".join("".join(cell["source"]) for cell in notebook["cells"]
+                     if cell["cell_type"] == "code")
+    assert "np.savez_compressed" in code, "the notebook no longer saves numeric anomaly maps"
+    assert '"maps"' in code, "the numeric maps are not written to submissions/day05/maps"
+    assert "raw_score" in code, "the numeric map has no raw score recorded"
+
+
+def test_figure_insertion_updates_an_obsolete_caption() -> None:
+    """差し込みスクリプトは、古い説明文を残さず更新できること（重複は作らない）。"""
+    import insert_lesson_figures as ilf
+
+    entry = next(e for e in ilf.FIGURES if e["image"] == "teach_execution_state.png")
+    sample = entry
+    stale = {
+        "cells": [{
+            "cell_type": "markdown",
+            "id": ilf._cell_id(sample),
+            "metadata": {},
+            "source": [f"### old title\n\n![](../../assets/{sample['folder']}/{sample['image']})\n",
+                       "\n", "古い説明 / an obsolete caption\n"],
+        }],
+    }
+    assert ilf._update(stale, sample) is True
+    assert "".join(stale["cells"][0]["source"]) == ilf._markdown(sample)
+
+
+def test_figure_insertion_leaves_hand_written_cells_alone() -> None:
+    """手で書いた図のセルは書き換えないこと。"""
+    import insert_lesson_figures as ilf
+
+    sample = ilf.FIGURES[0]
+    handler_written = {
+        "cells": [{
+            "cell_type": "markdown",
+            "id": "hand-written",
+            "metadata": {"tags": ["keep"]},
+            "source": [f"![](../../assets/{sample['folder']}/{sample['image']})\n",
+                       "人が書いた説明 / written by hand\n"],
+        }],
+    }
+    assert ilf._update(handler_written, sample) is False
 
 
 def test_figure_insertion_is_idempotent() -> None:

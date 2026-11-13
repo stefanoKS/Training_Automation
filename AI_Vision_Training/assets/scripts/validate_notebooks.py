@@ -347,25 +347,50 @@ def check_notebook(path: Path, result: Result) -> dict:
         result.ok(f"{path.name}: markdown images resolve ({len(markdown_images)})")
     info["markdown_images"] = [target for _idx, target, _resolved in markdown_images]
 
-    # --- 図が、その Part のコードより先に見えるか ---
-    # A figure must sit between its Part heading and that Part's first code cell.
+    # --- 図が、実行しなくても見えるか ---
+    # A Part must show at least one figure before its first code cell, so a learner who cannot start
+    # a kernel still sees a picture in that Part. A figure may also sit next to a later explanation,
+    # but it must never split a code cell from its "Expected output" cell.
     part_headings = []
     for idx, cell in enumerate(nb.cells):
         if cell.cell_type == "markdown" and re.search(r"^## Part ", cell.source, re.M):
             part_headings.append(idx)
+
+    def part_of(index: int) -> int | None:
+        return max((p for p in part_headings if p <= index), default=None)
+
     order_problems = []
-    for cell_index, target, _resolved in markdown_images:
-        heading = max((p for p in part_headings if p <= cell_index), default=None)
-        if heading is None:
+    parts_with_code: dict[int, list[int]] = {}
+    for idx, cell in enumerate(nb.cells):
+        if cell.cell_type != "code":
             continue
-        between = [i for i in range(heading + 1, cell_index)
-                   if nb.cells[i].cell_type == "code"]
-        if between:
-            order_problems.append(f"cell {cell_index} ({target}) comes after code in the same Part")
+        heading = part_of(idx)
+        if heading is not None:
+            parts_with_code.setdefault(heading, []).append(idx)
+
+    for heading, code_indices in parts_with_code.items():
+        figures = [idx for idx, _t, _r in markdown_images if part_of(idx) == heading]
+        if not figures:
+            continue
+        first_code = min(code_indices)
+        if min(figures) > first_code:
+            order_problems.append(
+                f"Part at cell {heading} has no figure before its first code cell (cell {first_code})")
+
+    expected_re = re.compile(r"実行結果の例|Expected output")
+    for cell_index, target, _resolved in markdown_images:
+        previous = nb.cells[cell_index - 1] if cell_index > 0 else None
+        following = nb.cells[cell_index + 1] if cell_index + 1 < len(nb.cells) else None
+        if (previous is not None and previous.cell_type == "code"
+                and following is not None and following.cell_type == "markdown"
+                and expected_re.search(following.source)):
+            order_problems.append(
+                f"cell {cell_index} ({target}) splits a code cell from its expected output")
+
     if order_problems:
-        result.fail(f"{path.name}: figure after code -> {order_problems[:2]}")
+        result.fail(f"{path.name}: figure placement -> {order_problems[:2]}")
     elif markdown_images:
-        result.ok(f"{path.name}: every figure comes before its Part's code")
+        result.ok(f"{path.name}: every Part shows a figure before its code")
 
     return info
 

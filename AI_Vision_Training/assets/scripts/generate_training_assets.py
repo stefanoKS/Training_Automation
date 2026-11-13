@@ -574,8 +574,10 @@ def build_calibration_image(assets: Path, seed: int) -> dict:
 
     基準線は 120 px = 100 mm として描画します。受講者はこの 2 つの数値から
     px/mm を計算し、別の距離測定に利用します。
-
-    The bar is drawn as 120 px = 100 mm. Students derive px/mm from these two numbers.
+    さらに **校正に使っていない** 検査用の線（60 px = 50 mm）も描きます。倍率を決めたあと、
+    こちらを測って 50 mm に戻るか確かめれば、独立した確認になります。
+    A second bar (60 px = 50 mm) that is **not** used to derive the scale is also drawn, so the
+    scale can be checked independently afterwards.
     """
     width, height = 320, 240
     image = ps.render_normal(height, width, seed=seed + 3000)
@@ -583,11 +585,19 @@ def build_calibration_image(assets: Path, seed: int) -> dict:
     image[y - 1 : y + 2, x1:x2] = 30.0          # 横の基準線 / horizontal reference bar
     image[y - 12 : y + 13, x1 : x1 + 2] = 30.0  # 左の目盛 / left tick
     image[y - 12 : y + 13, x2 - 2 : x2] = 30.0  # 右の目盛 / right tick
+
+    check_x, check_y1, check_y2 = 45, 60, 120   # 縦の検査線（校正には使わない）/ check bar
+    image[check_y1:check_y2, check_x - 1 : check_x + 2] = 30.0
+    image[check_y1 : check_y1 + 2, check_x - 9 : check_x + 10] = 30.0
+    image[check_y2 - 2 : check_y2, check_x - 9 : check_x + 10] = 30.0
+
     path = assets / "diagrams" / "calibration_image.png"
     ps.save_rgb(image, path)
     info = {"image": "calibration_image.png", "reference_px": x2 - x1,
             "reference_mm": 100.0, "px_per_mm": (x2 - x1) / 100.0,
-            "bar_y": y, "bar_x1": x1, "bar_x2": x2}
+            "bar_y": y, "bar_x1": x1, "bar_x2": x2,
+            "check_px": check_y2 - check_y1, "check_mm": 50.0,
+            "check_x": check_x, "check_y1": check_y1, "check_y2": check_y2}
     (assets / "diagrams" / "calibration_ground_truth.json").write_text(
         json.dumps(info, indent=2), encoding="utf-8"
     )

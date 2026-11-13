@@ -84,6 +84,32 @@ assets/diagrams/*.png
 !assets/diagrams/teach_confidence_filter.png
 !assets/diagrams/teach_resolution_effect.png
 !assets/diagrams/teach_object_level_matching.png
+!assets/diagrams/teach_execution_state.png
+!assets/diagrams/teach_nameerror_recovery.png
+!assets/diagrams/teach_inspection_roles.png
+!assets/diagrams/teach_ai_ml_dl_nested.png
+!assets/diagrams/teach_gaussian_vs_skewed.png
+!assets/diagrams/teach_array_indexing.png
+!assets/diagrams/teach_resize_profile.png
+!assets/diagrams/teach_segmentation_modes.png
+!assets/diagrams/teach_units_conversion.png
+!assets/diagrams/teach_assign_vs_compare.png
+!assets/diagrams/teach_traceback_annotated.png
+!assets/diagrams/teach_tolerance_boundary.png
+!assets/diagrams/teach_definition_vs_call.png
+!assets/diagrams/teach_threshold_sweep.png
+!assets/diagrams/teach_contour_merge.png
+!assets/diagrams/teach_distance_345.png
+!assets/diagrams/teach_score_vs_correctness.png
+!assets/diagrams/teach_training_update.png
+!assets/diagrams/teach_dataset_contact_sheet.png
+!assets/diagrams/teach_leakage_split.png
+!assets/diagrams/teach_normal_variation.png
+!assets/diagrams/teach_memory_bank.png
+!assets/diagrams/teach_score_levels.png
+!assets/diagrams/teach_backbone_vs_memory.png
+!assets/diagrams/teach_evaluation_sequence.png
+!assets/diagrams/teach_threshold_freeze.png
 
 # 実行結果から作った参考図 / figures built from saved runs of this course
 # （作り話ではなく、submissions/ と training_results/ に残った実際の出力から生成）
@@ -96,6 +122,7 @@ assets/reference_outputs/*
 !assets/reference_outputs/ref_detections_label_vs_pred.png
 !assets/reference_outputs/ref_anomaly_panels.png
 !assets/reference_outputs/ref_comparison_5col.png
+!assets/reference_outputs/ref_inference_boxes_table.png
 
 # --- 受講者の提出物 / student submissions ---
 submissions/*/*.ipynb
@@ -106,6 +133,7 @@ submissions/*/*.json
 submissions/*/*.pt
 submissions/*/*.ckpt
 submissions/*/heatmaps/
+submissions/*/maps/
 !submissions/*/README.md
 !submissions/*/*_TEMPLATE.md
 !submissions/reports/*.md

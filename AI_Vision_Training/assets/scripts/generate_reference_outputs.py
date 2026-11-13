@@ -48,7 +48,7 @@ matplotlib.use("Agg")
 
 import matplotlib.pyplot as plt
 import numpy as np
-from matplotlib import cm, patches
+from matplotlib import patches
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 from PIL import Image
 
@@ -301,50 +301,109 @@ def ref_detections_label_vs_pred(root: Path, out_dir: Path) -> Path:
 # ---------------------------------------------------------------------------
 
 
-def _anomalib_panels(root: Path) -> list[Path]:
-    folder = root / "training_results" / "day05" / "Patchcore" / "pvc_sheet" / "latest" / "images" / "test"
-    panel_paths = sorted(folder.rglob("*.png")) if folder.exists() else []
-    if not panel_paths:
-        raise MissingSource(f"no anomalib visualisations under {folder}")
-    return panel_paths
+def _maps_dir(root: Path) -> Path:
+    return root / "submissions" / "day05" / "maps"
 
 
-def _split_panels(path: Path) -> list[np.ndarray]:
-    image = np.asarray(Image.open(path).convert("RGB"))
-    width = image.shape[1] // 4
-    # 各パネル上部の「Image」「Gt Mask」という見出し帯を落とす（列見出しは図の側で付ける）
-    # drop the per-panel banner strip; the column titles are added by the figure itself
-    band = int(round(image.shape[0] * 0.17))   # 見出し帯は上から約 17% / the banner sits in the top 17%
-    return [image[band:, i * width:(i + 1) * width] for i in range(4)]
+def _load_map(root: Path, name: str) -> dict:
+    """保存された数値マップを読む / read one saved numeric anomaly map."""
+    path = _require(_maps_dir(root) / f"{name}_map.npz")
+    with np.load(path) as data:
+        return {
+            "map": data["anomaly_map"].astype(np.float64),
+            "raw_score": float(data["raw_score"]),
+            "truly_abnormal": bool(data["truly_abnormal"]),
+            "image": str(data["image"]).replace("\\", "/"),
+        }
+
+
+def _saved_scores(root: Path) -> dict:
+    return {row["image"].replace("\\", "/"): row for row in _read_scores(root)}
+
+
+def _dataset_image(root: Path, relative: str) -> np.ndarray:
+    path = _require(root / "assets" / "anomaly_dataset" / "pvc_sheet" / relative)
+    return np.asarray(Image.open(path).convert("RGB"))
+
+
+def _ground_truth_mask(root: Path, relative: str) -> np.ndarray:
+    """正解マスクをファイルから読む / read the ground-truth mask file."""
+    parts = relative.split("/")
+    name = Path(parts[-1]).stem
+    mask_path = (root / "assets" / "anomaly_dataset" / "pvc_sheet" / "ground_truth"
+                 / parts[-2] / f"{name}_mask.png")
+    if not mask_path.exists():
+        return np.zeros((256, 256), dtype=float)      # 正常画像にはマスクが無い / no mask for good parts
+    mask = np.asarray(Image.open(mask_path).convert("L"), dtype=float)
+    return mask / 255.0
 
 
 def ref_anomaly_panels(root: Path, out_dir: Path) -> Path:
-    panels = _split_panels(_anomalib_panels(root)[0])
-    original, overlay = panels[0], panels[2]
+    """数値マップそのものを描く（描画済み画像の切り抜きは使わない）。"""
+    name = "black_spot_0000"
+    if not (_maps_dir(root) / f"{name}_map.npz").exists():
+        candidates = sorted(p.stem.replace("_map", "") for p in _maps_dir(root).glob("*_map.npz"))
+        abnormal = [candidate for candidate in candidates
+                    if bool(np.load(_maps_dir(root) / f"{candidate}_map.npz")["truly_abnormal"])]
+        if not abnormal:
+            raise MissingSource(f"no numeric anomaly map in {_maps_dir(root)}; "
+                                "run Day 5 Notebook 02 to save them")
+        name = abnormal[0]
 
-    fig, axes = plt.subplots(1, 3, figsize=(12.2, 4.0))
-    axes[0].imshow(original)
+    record = _load_map(root, name)
+    image = _dataset_image(root, record["image"])
+    score_row = _saved_scores(root).get(record["image"])
+    normalised_score = float(score_row["score"]) if score_row else float("nan")
+
+    anomaly_map = record["map"]
+    top = float(anomaly_map.max())
+    top_y, top_x = np.unravel_index(int(np.argmax(anomaly_map)), anomaly_map.shape)
+    share_above_90 = float((anomaly_map >= 0.9 * top).mean()) if top > 0 else 0.0
+    vmax = float(np.ceil(top * 2) / 2)          # 0.5 刻みの上限 / a round upper bound
+
+    fig, axes = plt.subplots(1, 4, figsize=(13.4, 3.9),
+                             gridspec_kw={"width_ratios": [1, 1.05, 1, 1.15]})
+    axes[0].imshow(image)
     axes[0].set_title("① 元の画像 / original", fontsize=8.8)
 
-    axes[1].imshow(overlay)
-    axes[1].set_title("② 異常マップ / anomaly map", fontsize=8.8)
-
-    axes[2].imshow(overlay)
-    axes[2].set_title("③ 同じ図に目盛り / with a scale", fontsize=8.8)
-    cax = make_axes_locatable(axes[2]).append_axes("right", size="6%", pad=0.06)
-    cbar = fig.colorbar(cm.ScalarMappable(cmap="jet", norm=plt.Normalize(0, 1)), cax=cax)
-    cbar.set_label("正規化スコア / normalised score", fontsize=7.4)
+    plotted = axes[1].imshow(anomaly_map, cmap="inferno", vmin=0, vmax=vmax)
+    axes[1].set_title(f"② 異常マップ（数値）/ numeric map\n0–{vmax:.1f}（距離 / distance）",
+                      fontsize=8.8)
+    cax = make_axes_locatable(axes[1]).append_axes("right", size="6%", pad=0.06)
+    cbar = fig.colorbar(plotted, cax=cax)
+    cbar.set_label("パッチ距離 / patch distance", fontsize=7.4)
     cbar.ax.tick_params(labelsize=7)
 
-    for ax in axes:
+    axes[2].imshow(image)
+    axes[2].imshow(anomaly_map, cmap="inferno", vmin=0, vmax=vmax, alpha=0.55)
+    axes[2].set_title("③ 同じ数値を重ねる / same values, overlaid", fontsize=8.8)
+
+    for ax in (axes[1], axes[2]):
+        ax.plot([top_x], [top_y], marker="+", markersize=12, color="#66ffcc", markeredgewidth=1.6)
         ax.set_xticks([])
         ax.set_yticks([])
 
-    fig.suptitle("元画像・異常マップ・重ね表示（同じ 1 枚の実際の出力）/ "
-                 "original, anomaly map and overlay for one real image", fontsize=10)
+    axes[3].axis("off")
+    axes[3].set_title("④ 数値の読み方 / reading the numbers", fontsize=8.8)
+    axes[3].text(0.02, 0.94,
+                 f"画像スコア（較正で正規化）/ image score = {normalised_score:.3f}\n"
+                 f"マップの最大値 / map maximum     = {top:.2f}\n"
+                 f"最大の位置 / at (x, y)           = ({top_x}, {top_y})\n"
+                 f"最大の 90 % 以上の面積 / area ≥ 90 % of max = {share_above_90 * 100:.1f} %\n\n"
+                 "画像スコアは『マップの最大値』を、較正用データの\n"
+                 "最小・最大で 0〜1 に直したものです。マップの色は\n"
+                 "正規化前の距離なので、両方の数値を分けて読みます。\n\n"
+                 "the image score is the map maximum, rescaled 0–1 with\n"
+                 "calibration statistics; the colours show the raw distance.",
+                 fontsize=7.6, color=INK, va="top", linespacing=1.7)
+
+    fig.suptitle(f"{name}: 数値マップから読む / read from the numeric map "
+                 f"(truth: {'NG' if record['truly_abnormal'] else 'OK'})", fontsize=10)
     _note(fig, "図：" + PROVENANCE_TEST
-               + " — source: training_results/day05/Patchcore/pvc_sheet/latest/images/test/\n"
-                 "色の目盛りは 0〜1 に正規化したスコアです。0 が「学習した正常の範囲」、1 がこの較正での最大に対応します。")
+               + " — 保存済みモデル（training_results/day05/.../model.ckpt）から再計算した生のパッチ距離マップ。"
+                 "source: submissions/day05/maps/" + f"{name}_map.npz\n"
+                 "右の数値は submissions/day05/patchcore_scores.csv の保存値。描画済みの画像を切り抜いたものではありません。"
+                 " / the numbers on the right are the saved scores; nothing is cropped from a rendered screenshot.")
     return _save(fig, out_dir / "ref_anomaly_panels.png")
 
 
@@ -368,9 +427,10 @@ def _yolo_boxes(weights: Path, image_path: Path, conf: float, imgsz: int) -> lis
 
 
 def ref_comparison_5col(root: Path, out_dir: Path) -> Path:
+    """判定・不等式・画像・スコアを、同じ保存結果から組み立てる。"""
     from ultralytics import YOLO  # noqa: F401  (fail early and clearly if it is missing)
 
-    scores = {row["image"].replace("\\", "/"): row for row in _read_scores(root)}
+    scores = _saved_scores(root)
     summary = json.loads(_require(root / "submissions" / "day05" / "comparison_test_results.json")
                          .read_text(encoding="utf-8"))
     thresholds = {row["method"]: float(row["threshold"]) for row in summary.get("test", [])}
@@ -382,17 +442,21 @@ def ref_comparison_5col(root: Path, out_dir: Path) -> Path:
     image_size = json.loads((root / "submissions" / "day05" / "split_manifest.json")
                             .read_text(encoding="utf-8"))["image_size"]
 
-    wanted = ["test/black_spot/black_spot_0000.png", "test/good/good_test_0000.png"]
-    images_root = (root / "training_results" / "day05" / "Patchcore" / "pvc_sheet"
-                   / "latest" / "images")
-    panel_files = {p.relative_to(images_root).as_posix(): p for p in _anomalib_panels(root)}
+    # 一致する 2 枚と、食い違う 1 枚（PatchCore の見逃し）を保存結果から選ぶ
+    # two agreed images and one disagreement (a PatchCore miss) taken from the saved results
+    wanted = []
+    for key, row in sorted(scores.items()):
+        if not key.startswith("test/") or key == "test/good/good_test_0000.png":
+            continue
+        if row["truly_abnormal"].strip() == "True" and float(row["score"]) < patch_thr and len(wanted) < 1:
+            wanted.append(key)
+    wanted += ["test/black_spot/black_spot_0000.png", "test/good/good_test_0000.png"]
+    wanted = wanted[:3]
 
     rows = []
     for key in wanted:
-        vis = panel_files.get(key)
-        if vis is None:
-            raise MissingSource(f"no anomalib visualisation for {key}")
-        panels = _split_panels(vis)
+        stem = Path(key).stem
+        record = _load_map(root, stem)
         image_path = _require(dataset_root / key)
         boxes = _yolo_boxes(weights, image_path, conf=yolo_thr, imgsz=image_size)
         score_row = scores.get(key)
@@ -401,21 +465,23 @@ def ref_comparison_5col(root: Path, out_dir: Path) -> Path:
         rows.append({
             "key": key,
             "original": np.asarray(Image.open(image_path).convert("RGB")),
-            "overlay": panels[2],
-            "gt": panels[1],
+            "map": record["map"],
+            "gt": _ground_truth_mask(root, key),
             "boxes": boxes,
             "score": float(score_row["score"]),
             "truly_abnormal": score_row["truly_abnormal"].strip() == "True",
         })
 
-    fig, axes = plt.subplots(len(rows), 5, figsize=(13.2, 3.4 * len(rows)),
-                             gridspec_kw={"width_ratios": [1, 1, 1, 1, 1.05]})
+    vmax = max(float(row_["map"].max()) for row_ in rows)
+    fig, axes = plt.subplots(len(rows), 5, figsize=(13.2, 2.9 * len(rows)),
+                             gridspec_kw={"width_ratios": [1, 1, 1.05, 1, 1.05]})
     if len(rows) == 1:
         axes = np.array([axes])
     titles = ["① 元画像 / original", "② YOLO の四角 / YOLO boxes",
-              "③ PatchCore の異常マップ / anomaly map", "④ 正解マスク / ground truth",
+              "③ PatchCore の数値マップ / numeric map", "④ 正解マスク（ファイル）/ ground truth",
               "⑤ 画像単位の判定 / image-level decision"]
 
+    agreements = 0
     for r, row_ in enumerate(rows):
         axes[r, 0].imshow(row_["original"])
         axes[r, 1].imshow(row_["original"])
@@ -423,8 +489,8 @@ def ref_comparison_5col(root: Path, out_dir: Path) -> Path:
             axes[r, 1].add_patch(patches.Rectangle((x1, y1), x2 - x1, y2 - y1, fill=False,
                                                    edgecolor=WARN, linewidth=1.8))
             axes[r, 1].text(x1, max(8, y1 - 5), f"{name} {conf:.2f}", fontsize=6.6, color=WARN)
-        axes[r, 2].imshow(row_["overlay"])
-        axes[r, 3].imshow(row_["gt"])
+        plotted = axes[r, 2].imshow(row_["map"], cmap="inferno", vmin=0, vmax=vmax)
+        axes[r, 3].imshow(row_["gt"], cmap="gray", vmin=0, vmax=1)
 
         yolo_ng = any(conf >= yolo_thr for *_, conf, _ in row_["boxes"])
         patch_ng = row_["score"] >= patch_thr
@@ -434,31 +500,110 @@ def ref_comparison_5col(root: Path, out_dir: Path) -> Path:
             f"  検出 {len(row_['boxes'])} 件 (conf ≥ {yolo_thr:.2f})",
             "",
             f"PatchCore: {'NG' if patch_ng else 'OK'}",
-            f"  score {row_['score']:.2f} (≥ {patch_thr:.2f})",
+            f"  score {row_['score']:.3f} (≥ {patch_thr:.2f})",
             "",
             f"正解 / truth: {'NG' if row_['truly_abnormal'] else 'OK'}",
         ]
-        axes[r, 4].text(0.02, 0.95, "\n".join(lines), fontsize=8, va="top", color=INK,
+        axes[r, 4].text(0.02, 0.95, "\n".join(lines), fontsize=7.8, va="top", color=INK,
                         family="monospace")
         agreement = (yolo_ng == patch_ng == row_["truly_abnormal"])
-        axes[r, 4].text(0.02, 0.06, "3 者が一致 / all agree" if agreement
+        agreements += int(agreement)
+        axes[r, 4].text(0.02, 0.06,
+                        "3 者が一致 / all agree" if agreement
                         else "一致しない：どこで食い違ったかを見る\nnot all agree: say where",
                         fontsize=7.6, color=OK if agreement else BAD, va="bottom")
 
         for c in range(4):
             axes[r, c].set_xticks([])
             axes[r, c].set_yticks([])
+        axes[r, 0].text(0.02, 0.98, Path(row_["key"]).stem, transform=axes[r, 0].transAxes,
+                        fontsize=7.4, color="white", va="top",
+                        bbox=dict(boxstyle="round,pad=0.18", facecolor=INK, edgecolor="none"))
         if r == 0:
             for c in range(5):
-                axes[r, c].set_title(titles[c], fontsize=8.4)
+                axes[r, c].set_title(titles[c], fontsize=8.2)
 
-    fig.suptitle("同じ画像を 5 つの列で並べる（試験用データ・しきい値は固定済み）/ "
-                 "the same images in five aligned columns (test partition, frozen thresholds)",
-                 fontsize=10)
-    _note(fig, "図：" + PROVENANCE_TEST + " — 試しに 2 枚だけを示しています。全 26 枚の集計はノートブックで計算します。\n"
-               "Source: anomalib visualisations + submissions/day04/best.pt + "
-               "submissions/day05/patchcore_scores.csv. Ground truth is panel ④, never used for tuning.")
+    cax = make_axes_locatable(axes[0, 2]).append_axes("right", size="5%", pad=0.05)
+    cbar = fig.colorbar(plotted, cax=cax)
+    cbar.set_label("パッチ距離 / patch distance", fontsize=7)
+    cbar.ax.tick_params(labelsize=6.6)
+
+    fig.suptitle(f"同じ画像を 5 つの列で並べる（試験用データ・しきい値は固定済み・"
+                 f"{agreements}/{len(rows)} 行が一致）/ the same images in five aligned columns "
+                 f"(test partition, frozen thresholds)", fontsize=10)
+    _note(fig, "図：" + PROVENANCE_TEST + " — 試しに 3 枚だけを示しています。\n"
+               "すべて同じ保存結果から作っています：四角＝submissions/day04/best.pt としきい値 "
+               f"{yolo_thr:.2f}、マップ＝submissions/day05/maps/、スコア＝submissions/day05/patchcore_scores.csv、"
+               "正解マスク＝assets/anomaly_dataset/pvc_sheet/ground_truth/。"
+               "正解は判定に使っていません。 / every column comes from the same saved results; "
+               "the ground truth was never used for tuning.")
     return _save(fig, out_dir / "ref_comparison_5col.png")
+
+
+# ---------------------------------------------------------------------------
+# Day 3: 推論画像と表を対応させる / the inference image and its table
+# ---------------------------------------------------------------------------
+
+
+def ref_inference_boxes_table(root: Path, out_dir: Path) -> Path:
+    import ultralytics
+
+    csv_path = _require(root / "submissions" / "day03" / "yolo_bus_detections.csv")
+    with csv_path.open(encoding="utf-8-sig", newline="") as handle:
+        rows = [row for row in csv.DictReader(handle) if row.get("name")]
+    if not rows:
+        raise MissingSource(f"no detections in {csv_path}")
+
+    image_path = Path(ultralytics.__file__).parent / "assets" / "bus.jpg"
+    if not image_path.is_file():
+        raise MissingSource(f"the bundled sample image is missing: {image_path}")
+    image = np.asarray(Image.open(image_path).convert("RGB"))
+
+    fig, axes = plt.subplots(1, 2, figsize=(13.0, 5.2),
+                             gridspec_kw={"width_ratios": [1.35, 1.0]})
+    ax = axes[0]
+    ax.imshow(image)
+    for index, row in enumerate(rows, start=1):
+        x1, y1, x2, y2 = (float(row[key]) for key in ("x1", "y1", "x2", "y2"))
+        ax.add_patch(patches.Rectangle((x1, y1), x2 - x1, y2 - y1, fill=False,
+                                       edgecolor=WARN, linewidth=1.8))
+        ax.text(x1 + 4, y1 + 4, str(index), fontsize=11, color="white", weight="bold",
+                bbox=dict(boxstyle="round,pad=0.18", facecolor=BAD, edgecolor="none"))
+    ax.set_title("① 保存した検出に番号を付ける / the saved detections, numbered", fontsize=9)
+    ax.set_xticks([])
+    ax.set_yticks([])
+
+    ax2 = axes[1]
+    ax2.axis("off")
+    ax2.set_title("② 同じ番号の行 / the matching rows", fontsize=9)
+    header = f"{'No.':>3} {'class':<8} {'conf':>5} {'x1':>7} {'y1':>7} {'x2':>7} {'y2':>7}"
+    ax2.text(0.0, 0.93, header, fontsize=7.6, family="monospace", color=ACCENT, va="top")
+    ax2.text(0.0, 0.885, "-" * len(header), fontsize=7.6, family="monospace", color=LINE, va="top")
+    for index, row in enumerate(rows, start=1):
+        line = (f"{index:>3} {row['name']:<8} {float(row['confidence']):>5.2f} "
+                f"{float(row['x1']):>7.1f} {float(row['y1']):>7.1f} "
+                f"{float(row['x2']):>7.1f} {float(row['y2']):>7.1f}")
+        ax2.text(0.0, 0.845 - (index - 1) * 0.055, line, fontsize=7.6, family="monospace",
+                 color=INK, va="top")
+    confidences = [float(row["confidence"]) for row in rows]
+    ax2.text(0.0, 0.50,
+             f"検出 / detections : {len(rows)}\n"
+             f"最大 confidence / max : {max(confidences):.2f}\n"
+             f"最小 confidence / min : {min(confidences):.2f}\n\n"
+             "表の行と四角の番号は同じデータです。番号が合わないときは、\n"
+             "表の並び順（confidence 順か、座標順か）を確かめてください。\n\n"
+             "The row order and the numbering come from the same list; if they\n"
+             "disagree, check whether the table was sorted before saving.",
+             fontsize=7.8, color=INK, va="top", linespacing=1.7)
+
+    fig.suptitle("推論画像と表の対応 / the inference image and its table are one result",
+                 fontsize=10)
+    _note(fig, "図：" + PROVENANCE_TEST
+               + " — source: submissions/day03/yolo_bus_detections.csv + the bundled ultralytics "
+                 "sample image (bus.jpg).\n"
+                 "この画像は COCO のサンプルで、PVC の欠陥ではありません。モデルが動くことの確認用です。 / "
+                 "a COCO sample, not a PVC defect: it only shows that the model runs.")
+    return _save(fig, out_dir / "ref_inference_boxes_table.png")
 
 
 # ---------------------------------------------------------------------------
@@ -470,6 +615,7 @@ OUTPUTS = {
     "ref_score_distribution.png": ref_score_distribution,
     "ref_confidence_counts.png": ref_confidence_counts,
     "ref_detections_label_vs_pred.png": ref_detections_label_vs_pred,
+    "ref_inference_boxes_table.png": ref_inference_boxes_table,
     "ref_anomaly_panels.png": ref_anomaly_panels,
     "ref_comparison_5col.png": ref_comparison_5col,
 }

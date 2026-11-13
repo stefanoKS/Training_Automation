@@ -26,8 +26,18 @@ python assets\scripts\generate_reference_outputs.py
 | `ref_score_distribution.png` | `submissions/day05/patchcore_scores.csv`（calibration 26 枚） | 較正用データのスコア分布と、そこから決めたしきい値 0.50 / calibration scores and the chosen threshold |
 | `ref_confidence_counts.png` | `submissions/day04/yolo_predictions_on_shared_set.json` | 実際の最大 confidence から数えた「NG と判定される枚数」 / how many images are called NG at each threshold |
 | `ref_detections_label_vs_pred.png` | `training_results/day04/test_evaluation/val_batch0_{labels,pred}.jpg` | 同じ 8 枚の正解と予測 / the same eight images as truth and as prediction |
-| `ref_anomaly_panels.png` | `training_results/day05/Patchcore/pvc_sheet/latest/images/test/...` | 元画像・異常マップ・目盛り付きの重ね表示 / original, anomaly map and a scaled overlay |
-| `ref_comparison_5col.png` | 上記 + `submissions/day04/best.pt` + `submissions/day05/patchcore_scores.csv` | 同じ試験画像を 5 つの列で比較 / five aligned columns for the same test images |
+| `ref_anomaly_panels.png` | `submissions/day05/maps/black_spot_0000_map.npz`（保存済みモデルから再計算した生のパッチ距離）+ `submissions/day05/patchcore_scores.csv` | 元画像・数値マップ・同じ数値の重ね表示・数値の読み方 / original, the numeric map, an overlay of the same values, and how to read the numbers |
+| `ref_comparison_5col.png` | `submissions/day05/maps/*` + `submissions/day04/best.pt` + `submissions/day05/patchcore_scores.csv` + `assets/anomaly_dataset/.../ground_truth/` | 同じ試験画像を 5 つの列で比較（一致 2 枚・不一致 1 枚）/ five aligned columns for the same test images (two agreements, one disagreement) |
+| `ref_inference_boxes_table.png` | `submissions/day03/yolo_bus_detections.csv` + 同梱の `bus.jpg` | 検出に番号を振り、同じ番号の表の行と並べる / numbered detections next to the matching table rows |
+
+## 数値マップについて / About the numeric maps
+
+Day 5 ノートブック 02 は、ヒートマップの画像に加えて **`submissions/day05/maps/*.npz`** を保存します
+（`anomaly_map` / `raw_score` / `truly_abnormal` / `image`）。`ref_anomaly_panels.png` と
+`ref_comparison_5col.png` は、この数値から描いています。描画済みの画像を切り抜いて貼ることはしません。
+Day 5 Notebook 02 saves **`submissions/day05/maps/*.npz`** next to the heatmap pictures
+(`anomaly_map`, `raw_score`, `truly_abnormal`, `image`), and the two figures above are drawn from
+those numbers — never cropped out of an already-rendered picture.
 
 ## 注意 / Cautions
 
