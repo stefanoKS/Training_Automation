@@ -26,6 +26,7 @@ import json
 import re
 import sys
 from pathlib import Path
+from course_notebooks import course_notebooks
 
 COURSE_ROOT = Path(__file__).resolve().parents[2]
 NOTEBOOK_DIR = COURSE_ROOT / "notebooks"
@@ -488,7 +489,7 @@ FIGURES = [
         title_en="the numbers on the image and the rows in the table",
         caption_ja="図：この研修で実際に保存した検出（5 件）に番号を振り、同じ番号の表の行と並べたもの。参考出力（実際の結果）。",
         caption_en="Figure: the five detections actually saved by this course, numbered, next to the matching table rows. Reference output — real results.",
-        notice_ja="この表と図は同一の 1 回の推論結果です（`yolo26n.pt`、conf=0.25、imgsz=640 の記録）。写真は ultralytics パッケージに同梱のサンプル画像で、COCO で学習したモデルの予習用です。写真の出所と権利はパッケージのライセンスとは別に確認が必要です（`assets/external_samples/PROVENANCE.md`）。PVC の欠陥ではありません。",
+        notice_ja="この表と図は同一の 1 回の推論結果です（`yolo26n.pt`、conf=0.25、imgsz=640 の記録）。写真は ultralytics パッケージに同梱のサンプル画像で、COCO で学習したモデルの予習用です。写真の出所と権利はパッケージのライセンスとは別に確認が必要です（`assets/external_samples/PROVENANCE.md`）。塩ビの欠陥ではありません。",
         notice_en="The table and the figure come from one inference pass (`yolo26n.pt`, conf = 0.25, imgsz = 640). The photograph is a sample bundled with the ultralytics package, used to introduce a model pretrained on COCO. Its provenance and rights need checking separately from the package licence (`assets/external_samples/PROVENANCE.md`). It is not a PVC defect.",
         question_ja="この表の confidence は、正しい検出である確率ですか。",
         question_en="Is the confidence in this table a probability of being a correct detection?",
@@ -528,8 +529,8 @@ FIGURES = [
         image="teach_leakage_split.png",
         title_ja="フレームで分ける／撮影で分ける",
         title_en="split by frame or by capture",
-        caption_ja="図：実際のデータセット画像 1 枚と、それに 1 画素未満のノイズを加えた「ほぼ同じ画像」。フレームで分けると、この 2 枚が train と test に分かれてしまいます。",
-        caption_en="Figure: one real dataset image and a copy with sub-pixel noise — two frames that a frame-level split would put on opposite sides.",
+        caption_ja="図：実際の合成データセット画像 1 枚と、小さな画素値ノイズを加えた「ほぼ同じ画像」。位置はずらしていません。フレームで分けると、この 2 枚が train と test に分かれてしまいます。",
+        caption_en="Figure: one synthetic dataset image and a copy with small pixel-intensity noise, not a spatial shift — two frames that a frame-level split would put on opposite sides.",
         notice_ja="同じ製品・同じ撮影回の画像が学習と試験に分かれると、見た目が近すぎて性能が実際より高く出ます（leakage）。分割は**製品・撮影回などのグループ単位**で行います。この教材のノイズは画素値の小さな変化で、位置をずらすものではありません。ハッシュ検査で見つかるのは 1 バイトも違わない重複だけです。",
         notice_en="If images of the same product or the same capture session land in both training and test, they look too alike and performance is overstated (leakage). Split by **group**, such as product or session. The noise in this course is a small change in pixel intensity, not a sub-pixel shift. A hash check finds only byte-identical duplicates.",
         question_ja="連番の連続写真をランダムに分けると、なぜ性能が高く出ますか。",
@@ -544,10 +545,10 @@ FIGURES = [
         title_en="what one batch does",
         caption_ja="図：予測 → 損失 → 勾配 → 更新 の 1 サイクルと、batch・step・epoch の数え方（重みの変化は例示用）。",
         caption_en="Figure: one cycle of forward → loss → backward → update, and how batch, step and epoch are counted (weight changes illustrative).",
-        notice_ja="バッチ（データをまとめて読む単位）と、重みを更新する回数は同じとは限りません。この研修の設定は `nbs=64`・`batch=8` で、8 バッチ分の勾配をためてから 1 回更新します（gradient accumulation）。64 枚を 1 周すると、データローダは 8 回まわり、重みの更新は 1 回です。学習の最初は warmup で更新の幅が変わります。",
-        notice_en="A batch (how many samples the loader reads together) is not necessarily how often the weights update. This course uses `nbs=64` and `batch=8`, accumulating the gradients of 8 batches into one update: one pass over 64 images gives 8 loader iterations and 1 weight update. Warmup changes the step size at the start.",
-        question_ja="batch=8 で 64 枚を 1 周すると、重みは何回更新されますか（nbs=64 のとき）。",
-        question_en="With batch=8 and 64 images per epoch, how many weight updates happen when nbs=64?",
+        notice_ja="バッチ（データをまとめて読む単位）と、重みの更新回数は別です。`nbs=64`・`batch=8` の名目累積は8バッチです。64枚は8回のデータローダ反復になりますが、warmup 中は累積数も変わり得ます。実際の更新回数を常に1回と決めつけず、実行設定とログを確認します。",
+        notice_en="A batch and an optimizer update are different units. With `nbs=64` and `batch=8`, nominal accumulation is 8 batches. A pass over 64 images gives 8 loader iterations, but warmup can also change the accumulation count. Do not promise exactly one update; check the run settings and logs.",
+        question_ja="64枚・batch=8 の反復数と、実際の更新回数を決める設定は何ですか。",
+        question_en="For 64 images and batch=8, how many loader iterations occur, and which settings determine actual updates?",
     ),
     dict(
         notebook="Day05_01_Anomaly_Detection_Concepts",
@@ -640,7 +641,7 @@ FIGURES = [
         image="chelsea.png",
         title_ja="実写写真でも、1 画素は 3 つの数",
         title_en="in a real photograph, one pixel is still three numbers",
-        caption_ja="写真：スキャンした実写（scikit-image `chelsea`、Stefan van der Walt、CC0 1.0）。下の説明の RGB の表と**同じ並び**（高さ × 幅 × 3）で保存されています。工場の PVC の画像ではなく、色の仕組みを見るための例です。",
+        caption_ja="写真：スキャンした実写（scikit-image `chelsea`、Stefan van der Walt、CC0 1.0）。下の説明の RGB の表と**同じ並び**（高さ × 幅 × 3）で保存されています。工場の塩ビの画像ではなく、色の仕組みを見るための例です。",
         caption_en="Photograph: a scanned real photo (scikit-image `chelsea`, Stefan van der Walt, CC0 1.0). It is stored in the **same layout** as the RGB arrays below (height × width × 3). This is an example for colour, not a factory PVC image.",
         notice_ja="この写真も、1 画素につき R・G・B の 3 つの整数（0〜255）を持つだけです。「写真だから特別な仕組み」はありません。表示するときに、その 3 つの数を光の三原色として混ぜているだけです。",
         notice_en="This photograph also stores three integers (0–255) per pixel: R, G and B. Nothing special happens \"because it is a photo\"; the display mixes those three numbers as red, green and blue light.",
@@ -654,7 +655,7 @@ FIGURES = [
         image="VisA_samples.png",
         title_ja="実在の産業向け異常検知データの例",
         title_en="a real industrial anomaly-detection dataset",
-        caption_ja="図：VisA データセットの概要（Yang Zou ほか / Amazon Science、VisA データセットは CC BY 4.0）。回路基板・部品・カプセルなど、**工業製品の実写**が並びます。この研修の PVC 製品ではなく、この研修のモデルの出力でもありません。",
+        caption_ja="図：VisA データセットの概要（Yang Zou ほか / Amazon Science、VisA データセットは CC BY 4.0）。回路基板・部品・カプセルなど、**工業製品の実写**が並びます。この研修の塩ビ製品ではなく、この研修のモデルの出力でもありません。",
         caption_en="Figure: the VisA overview (Yang Zou et al. / Amazon Science; VisA dataset, CC BY 4.0). Real photographs of industrial objects — circuit boards, parts, capsules. These are not this course's PVC products and not outputs of its models.",
         notice_ja="欠陥の見え方は製品ごとに違います。明るさの平均 1 つでは表せない差（形・模様・位置）が、どの製品にもあります。",
         notice_en="What counts as an anomaly differs by product. In every product there are differences — shape, pattern, position — that one average brightness value cannot describe.",
@@ -696,7 +697,7 @@ FIGURES = [
         image="VisA_samples.png",
         title_ja="正常だけを集める難しさ",
         title_en="why collecting only normal samples is hard",
-        caption_ja="図：VisA データセットの概要（Yang Zou ほか / Amazon Science、VisA データセットは CC BY 4.0）。正常・異常の両方を人が見分けて集めた、実在の産業データです。この研修の PVC 製品ではありません。",
+        caption_ja="図：VisA データセットの概要（Yang Zou ほか / Amazon Science、VisA データセットは CC BY 4.0）。正常・異常の両方を人が見分けて集めた、実在の産業データです。この研修の塩ビ製品ではありません。",
         caption_en="Figure: the VisA overview (Yang Zou et al. / Amazon Science; VisA dataset, CC BY 4.0). A real industrial dataset where people separated normal and abnormal examples. Not this course's PVC products.",
         notice_ja="異常検知は正常画像だけで学習できますが、**しきい値を決める較正**と**性能を測る評価**には、正常・異常のラベルが付いた別の画像が必要です。この研修でも、較正用に 26 枚、評価用に 26 枚を分けて使います。",
         notice_en="Anomaly detection can be fitted on normal images only, but **choosing a threshold** and **measuring performance** need labelled normal and abnormal images from a separate set. This course uses 26 images for calibration and 26 for evaluation.",
@@ -707,7 +708,7 @@ FIGURES = [
 
 
 def _notebook(stem: str) -> Path:
-    matches = sorted(NOTEBOOK_DIR.rglob(f"{stem}.ipynb"))
+    matches = course_notebooks(NOTEBOOK_DIR, f"{stem}.ipynb")
     if len(matches) != 1:
         raise SystemExit(f"{stem}: expected exactly one notebook, found {len(matches)}")
     return matches[0]

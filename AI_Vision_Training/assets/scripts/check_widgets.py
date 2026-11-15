@@ -82,7 +82,12 @@ def main(argv=None) -> int:
     for stem in WIDGET_NOTEBOOKS:
         if args.notebook and args.notebook not in stem:
             continue
-        path = next(NOTEBOOK_DIR.rglob(f"{stem}.ipynb"))
+        from course_notebooks import course_notebooks
+
+        matches = course_notebooks(NOTEBOOK_DIR, f"{stem}.ipynb")
+        if len(matches) != 1:
+            raise SystemExit(f"{stem}: expected exactly one notebook, found {matches}")
+        path = matches[0]
         try:
             record = check(path)
         except Exception as exc:

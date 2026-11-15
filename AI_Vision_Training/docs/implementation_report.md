@@ -1,5 +1,13 @@
 # 実装・検証レポート / Implementation and validation report
 
+> **2026-11-15 CMD 移行:** 現行手順は [START_HERE](../START_HERE.md)、
+> 今回の検査は [CMD 移行記録](reviews/2026-11-15_cmd_migration.md) を参照してください。
+> 以下は過去の実装・実行記録です。今回の結果に読み替えないでください。
+>
+> **2026-11-15 CMD migration:** Current setup is in [START_HERE](../START_HERE.md);
+> this pass's checks are in the [migration record](reviews/2026-11-15_cmd_migration.md).
+> The historical implementation/execution records below are not new results.
+
 ## 追補 2026-11-15 / Audit remediation amendment
 
 今回の変更・実行した検査は [監査対応記録](reviews/2026-11-15_audit_remediation.md)、

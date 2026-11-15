@@ -166,9 +166,12 @@ this course's scope (learning and evaluation) there is no issue.
 レッスンの一部では、実写の参考画像を **ローカルのファイル** として表示します。表示のたびに
 インターネットへ取りに行くのではなく、**設置時に一度だけ取得**します。
 
-```powershell
-python assets/scripts/download_reference_images.py --course-root .
-python assets/scripts/download_reference_images.py --course-root . --offline
+基本環境を有効化したコマンド プロンプトで、教材ルートから実行します（[START_HERE](../START_HERE.md)）。
+Run from the course root in Command Prompt with the base environment activated (see [START_HERE](../START_HERE.md)).
+
+```cmd
+python assets\scripts\download_reference_images.py --course-root .
+python assets\scripts\download_reference_images.py --course-root . --offline
 ```
 
 | ファイル / File | 内容 / What it is | 出所 / Source | ライセンス / Licence |
@@ -181,7 +184,7 @@ python assets/scripts/download_reference_images.py --course-root . --offline
 - 取得したファイルは改変せず、`assets/external_samples/open_reference/manifest.json` と
   `ATTRIBUTION.md` に出所・ライセンス・SHA-256 を記録します。
 - 参考画像は授業で見るためのもので、**学習・較正・試験のデータには使いません**。
-- VisA の図は実在の産業製品の写真で、この研修の PVC 製品でも、この研修のモデルの出力でもありません。
+- VisA の図は実在の産業製品の写真で、この研修の塩ビ製品でも、この研修のモデルの出力でもありません。
 
 Downloaded once at installation, unchanged, with `manifest.json` and `ATTRIBUTION.md` (source,
 licence, SHA-256) stored beside them. The photographs are teaching references only and are never

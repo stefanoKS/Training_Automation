@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+from course_notebooks import course_notebooks
 
 from generate_svg_figures import FIGURES
 from teaching_data import calibrated_defects
@@ -66,7 +67,6 @@ def correct_notebook(stem: str, nb: dict) -> None:
         if stem == "00_Environment_Setup":
             s = s.replace("第0日（第1日の朝に実施）", "第0日（第1日より前・授業時間外）")
             s = s.replace("Day 0 (done in the morning of Day 1)", "Day 0 (before Day 1, outside lesson hours)")
-            s = s.replace("Set-ExecutionPolicy -Scope CurrentUser", "Set-ExecutionPolicy -Scope Process")
             s = s.replace("```python\n%pip", "```text\n%pip")
             if c["cell_type"] == "markdown" and any(key in s for key in
                     ("#### 手順 3：", "#### 手順 4：", "#### 手順 5：")):
@@ -75,11 +75,11 @@ def correct_notebook(stem: str, nb: dict) -> None:
                     "インストールの正式手順は [START_HERE](../../START_HERE.md) ステップ3〜9です。\n"
                     "Python 3.11、両環境、両カーネル、素材、写真・重みを授業前に準備します。\n"
                     "ここでは再インストールせず、準備済みの状態を確認します。有効化が禁止されている場合は\n"
-                    "仮想環境の python.exe を直接使います。ポリシー変更は許可された場合のみ現在の窓に限定します。\n\n"
+                    "引用符付きの仮想環境の python.exe を直接使います。CMD の有効化にポリシー変更は不要です。\n\n"
                     "Use [START_HERE](../../START_HERE.md) Steps 3–9 as the authoritative installation sequence.\n"
                     "Prepare Python 3.11, both environments/kernels, assets, photos and weights before class.\n"
                     "Here, check the prepared state; do not reinstall. If activation is blocked, use the venv's\n"
-                    "python.exe directly. Any permitted policy change is limited to the current window.\n"
+                    "quoted python.exe directly. CMD activation requires no policy changes.\n"
                 )
         elif stem == "Day01_02_Pixels_and_Images":
             s = s.replace("欠陥は残っているか / defect visible", "最小画素値が150未満 / min pixel below 150")
@@ -302,7 +302,7 @@ LEARNING_LOOPS = {
 
 
 def main() -> int:
-    paths = sorted((ROOT / "notebooks").glob("*/*.ipynb"))
+    paths = course_notebooks(ROOT / "notebooks")
     if len(paths) != 16:
         raise ValueError(f"Expected 16 lesson notebooks, found {len(paths)}")
     for path in paths:

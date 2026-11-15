@@ -19,6 +19,7 @@ from __future__ import annotations
 
 import json
 import re
+import sys
 from pathlib import Path
 
 import pytest
@@ -26,6 +27,8 @@ import pytest
 COURSE_ROOT = Path(__file__).resolve().parents[2]
 SYLLABUS = COURSE_ROOT / "COURSE_SYLLABUS.md"
 NOTEBOOK_DIR = COURSE_ROOT / "notebooks"
+sys.path.insert(0, str(COURSE_ROOT / "assets" / "scripts"))
+from course_notebooks import course_notebooks  # noqa: E402
 
 SELF_STUDY_BLOCKS = (("09:00", "12:00"), ("13:50", "16:50"))
 REQUIRED_RANGE = (270, 300)
@@ -175,7 +178,7 @@ def test_fixed_instructor_and_lunch_times(syllabus_text: str) -> None:
 
 
 def _notebook_path(token: str) -> Path:
-    matches = sorted(NOTEBOOK_DIR.rglob(f"{token}_*.ipynb"))
+    matches = course_notebooks(NOTEBOOK_DIR, f"{token}_*.ipynb")
     assert len(matches) == 1, f"{token}: expected exactly one notebook, found {matches}"
     return matches[0]
 
@@ -237,7 +240,28 @@ def test_notebook_durations_match_required_minutes(day, days) -> None:
 
 
 def _all_notebooks() -> list[Path]:
-    return sorted(NOTEBOOK_DIR.rglob("*.ipynb"))
+    return course_notebooks(NOTEBOOK_DIR)
+
+
+def test_discovery_ignores_checkpoints_but_rejects_real_duplicates(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    directory = tmp_path / "notebooks"
+    lesson = directory / "Day01_AI_Fundamentals" / "Day01_01_Example.ipynb"
+    checkpoint = lesson.parent / ".ipynb_checkpoints" / "Day01_01_Example-checkpoint.ipynb"
+    root_checkpoint = directory / ".ipynb_checkpoints" / lesson.name
+    unrelated = directory / "learner_notes" / lesson.name
+    for path in (lesson, checkpoint, root_checkpoint, unrelated):
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text("{}", encoding="utf-8")
+    monkeypatch.setattr(sys.modules[__name__], "NOTEBOOK_DIR", directory)
+    assert _all_notebooks() == [lesson]
+    assert _notebook_path("Day01_01") == lesson
+    duplicate = lesson.with_name("Day01_01_Duplicate.ipynb")
+    duplicate.write_text("{}", encoding="utf-8")
+    with pytest.raises(AssertionError, match="expected exactly one notebook"):
+        _notebook_path("Day01_01")
+    assert checkpoint.read_text(encoding="utf-8") == "{}"
 
 
 @pytest.mark.parametrize("path", _all_notebooks(), ids=lambda p: p.stem)

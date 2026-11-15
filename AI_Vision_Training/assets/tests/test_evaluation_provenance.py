@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import json
 import re
+import sys
 from pathlib import Path
 
 import numpy as np
@@ -18,16 +19,18 @@ import pytest
 
 COURSE_ROOT = Path(__file__).resolve().parents[2]
 NOTEBOOK_DIR = COURSE_ROOT / "notebooks"
+sys.path.insert(0, str(COURSE_ROOT / "assets" / "scripts"))
+from course_notebooks import course_notebooks  # noqa: E402
 
 
 def _notebook_text(stem: str) -> str:
-    path = next(NOTEBOOK_DIR.rglob(f"{stem}.ipynb"))
+    path, = course_notebooks(NOTEBOOK_DIR, f"{stem}.ipynb")
     notebook = json.loads(path.read_text(encoding="utf-8"))
     return "\n".join("".join(cell["source"]) for cell in notebook["cells"])
 
 
 def _cell_sources(stem: str) -> list[str]:
-    path = next(NOTEBOOK_DIR.rglob(f"{stem}.ipynb"))
+    path, = course_notebooks(NOTEBOOK_DIR, f"{stem}.ipynb")
     notebook = json.loads(path.read_text(encoding="utf-8"))
     return ["".join(cell["source"]) for cell in notebook["cells"]
             if cell["cell_type"] == "code"]

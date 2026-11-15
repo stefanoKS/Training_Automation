@@ -6,9 +6,9 @@
 # この環境は YOLO 環境とは分けます。理由は下の「重要な注意」を読んでください。
 # This environment is SEPARATE from the YOLO environment. Read the note below.
 #
-# セットアップ / setup:
-#   python -m venv .venv-anomalib
-#   .\.venv-anomalib\Scripts\Activate.ps1
+# セットアップ（CMD、正式手順は START_HERE.md）/ setup (CMD; see START_HERE.md):
+#   py -3.11 -m venv .venv-anomalib
+#   .\.venv-anomalib\Scripts\activate.bat
 #   python -m pip install --upgrade pip setuptools wheel
 #   python -m pip install -r requirements\anomalib.txt
 #   python -m ipykernel install --user --name aivision-anomalib --display-name "Python 3 (AI Vision Anomalib)"

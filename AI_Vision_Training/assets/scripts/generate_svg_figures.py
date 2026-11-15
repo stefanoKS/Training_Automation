@@ -12,8 +12,8 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 
 from teaching_data import (
-    BBOX_IMAGE_SIZE, BBOX_XYXY, MASS_INPUTS,
-    calibrated_defects, mask_box, spot_mask,
+    BBOX_IMAGE_SIZE, BBOX_XYXY, GRAY_EXAMPLE, MASS_INPUTS, PIXEL_THRESHOLD,
+    calibrated_defects, mask_box, pixel_canvas, spot_mask,
 )
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -30,9 +30,9 @@ FONT = "Yu Gothic, Meiryo, Noto Sans JP, sans-serif"
 FIGURES = {
     "teach_code_cell_lifecycle": ("00_Environment_Setup", "Part 4", "値はセルではなくカーネルに残ります。", "Values persist in the kernel, not the cell.",
         "加算セルだけをもう一度実行すると、4 は何になりますか。", "What happens to 4 if only the increment cell runs again?"),
-    "teach_pixel_inspector": ("Day01_02_Pixels_and_Images", "canvas = np.zeros", "行が y、列が x です。", "Rows are y; columns are x.",
+    "teach_pixel_inspector": ("Day01_02_Pixels_and_Images", "canvas = np.zeros", "5行7列の canvas[2,3] は100です。最初の添字は行 y、次は列 x です。", "In the 5-by-7 array, canvas[2,3] is 100; index row/y first, then column/x.",
         "canvas[2, 3] と canvas[3, 2] は同じですか。", "Are canvas[2, 3] and canvas[3, 2] the same?"),
-    "teach_slice_walkthrough": ("Day01_02_Pixels_and_Images", "canvas = np.zeros", "終点の番号は含めません。", "The stop index is excluded.",
+    "teach_slice_walkthrough": ("Day01_02_Pixels_and_Images", "canvas = np.zeros", "canvas[1:4,2:5] は3行3列を取り出します。終点4と5は含めません。", "canvas[1:4,2:5] extracts a 3-by-3 array; stops 4 and 5 are excluded.",
         "[1:4, 2:5] の列の終点を 6 に変えると shape はどうなりますか。", "What shape results if the column stop changes from 5 to 6?"),
     "teach_cv_tasks_outputs": ("Day01_03_Computer_Vision_Tasks", "teach_cv_tasks_outputs.png", "同じマスクから四角を求めます。", "The box is derived from the same mask.",
         "マスクの画素数と四角の面積は等しいですか。", "Does mask pixel count equal box area?"),
@@ -125,33 +125,103 @@ class Canvas:
         self.preview.save(png)
 
 
-def pixel_canvas() -> np.ndarray:
-    canvas = np.zeros((5, 7), dtype=np.uint8)
-    canvas[0, 0], canvas[0, 6], canvas[4, 0], canvas[2, 3] = 255, 200, 150, 100
-    return canvas
-
-
-def draw_pixels(name: str) -> Canvas:
-    c = Canvas("画素とスライス / pixels and slices", "computed synthetic; Day01_02 canvas")
-    array = pixel_canvas()
-    for row in range(5):
-        c.text(28, 147 + row * 60, f"y={row}", 17)
-        for col in range(7):
-            x, y = 84 + col * 60, 110 + row * 60
-            selected = 1 <= row < 4 and 2 <= col < 5
-            c.rect(x, y, 58, 58, "#e8f0ff" if selected else "#f6f8fa", BLUE if selected else "#d0d7de")
-            c.text(x + 9, y + 35, str(array[row, col]), 18)
+def draw_pixel_grid(c: Canvas, array: np.ndarray, x: int, y: int, size: int,
+                    selected: set[tuple[int, int]]) -> None:
+    for row in range(array.shape[0]):
+        c.text(x - 48, y + row * size + 33, f"y={row}", 16)
+        for col in range(array.shape[1]):
+            px, py = x + col * size, y + row * size
+            active = (row, col) in selected
+            c.rect(px, py, size - 2, size - 2, "#e8f0ff" if active else "#f6f8fa",
+                   BLUE if active else "#d0d7de")
+            c.text(px + 7, py + 33, str(array[row, col]), 18)
             if row == 0:
-                c.text(x + 8, 96, f"x={col}", 17)
-    c.text(540, 140, "canvas.shape = (5, 7)", 20, BLUE)
-    c.text(540, 180, "canvas[2, 3] = 100", 20)
-    c.text(540, 225, "canvas[1:4, 2:5]", 20, AMBER)
+                c.text(px + 5, y - 14, f"x={col}", 16)
+
+
+def draw_pixel_inspector() -> Canvas:
+    c = Canvas("1画素の住所と値 / one pixel: address and value", "computed synthetic; Day01_02 canvas")
+    array = pixel_canvas()
+    row, col = 2, 3
+    draw_pixel_grid(c, array, 80, 120, 55, {(row, col)})
+    c.arrow(470, 257, 520)
+    c.text(540, 142, f"canvas.shape = {array.shape}", 21, BLUE)
+    c.text(540, 197, f"canvas[{row}, {col}] = {array[row, col]}", 23, BLUE)
+    c.text(540, 253, "第1添字: 行 / row = y", 21)
+    c.text(540, 295, "第2添字: 列 / column = x", 21)
+    c.text(540, 355, f"canvas[{col}, {row}] = {array[col, row]}", 21, AMBER)
+    c.text(80, 466, "青枠は1画素だけ。添字は0から始まります。", 22, BLUE)
+    c.text(80, 509, "One blue cell; zero-based indices. Swapping row/column changes the address.", 18)
+    return c
+
+
+def draw_slice_walkthrough() -> Canvas:
+    c = Canvas("スライスから新しい配列へ / slice to extracted array", "computed synthetic; Day01_02 canvas")
+    array = pixel_canvas()
     selected = array[1:4, 2:5]
-    c.text(540, 264, f"shape = {selected.shape}", 20)
-    for row, values in enumerate(selected):
-        c.text(540, 305 + row * 33, str(values.tolist()), 20)
-    c.text(84, 466, "青枠: y=1,2,3 / x=2,3,4（終点は含めない）", 21)
-    c.text(84, 508, "Blue selection: stop indices 4 and 5 are excluded.", 20)
+    c.text(80, 78, "canvas[1:4, 2:5]", 23, BLUE)
+    draw_pixel_grid(c, array, 80, 120, 55, {(r, col) for r in range(1, 4) for col in range(2, 5)})
+    c.arrow(480, 265, 553, AMBER)
+    c.text(580, 112, "取り出した配列 / extracted", 21, BLUE)
+    draw_pixel_grid(c, selected, 620, 180, 62, set(np.ndindex(selected.shape)))
+    c.text(580, 416, f"shape = {selected.shape}", 23, BLUE)
+    c.text(80, 469, "行: 1,2,3（4は除外）/ 列: 2,3,4（5は除外）", 22)
+    c.text(80, 512, "Rows [1,4), columns [2,5): stop-exclusive; the output is 3 by 3.", 20)
+    return c
+
+
+def draw_lifecycle() -> Canvas:
+    c = Canvas("実行順とメモリ / execution order and memory", "schematic; executable kernel transitions")
+    for x, code, value in ((50, "defect_count = 3", 3),
+                           (335, "defect_count += 1", 4),
+                           (620, "defect_count += 1", 5)):
+        c.text(x, 88, code, 20, BLUE)
+        c.rect(x, 110, 230, 98, "#e8f0ff", BLUE)
+        c.text(x + 16, 149, "カーネル / kernel", 22)
+        c.text(x + 16, 188, f"defect_count: {value}", 22, BLUE)
+        c.text(x, 249, f"print -> {value}", 23)
+    c.arrow(281, 160, 329)
+    c.arrow(566, 160, 614)
+    for x, title, first, second, color in (
+        (50, "再起動 / restart", "メモリを消去 / cleared", "No defect_count", AMBER),
+        (335, "加算を試す / increment", "defect_count += 1", "NameError", RED),
+        (620, "復旧 / recover", "defect_count = 3", "increment -> 4", GREEN),
+    ):
+        c.rect(x, 301, 230, 139, "#f6f8fa", color)
+        c.text(x + 10, 333, title, 19, color)
+        c.text(x + 10, 374, first, 18)
+        c.text(x + 10, 414, second, 20, color)
+    c.arrow(281, 375, 329, RED)
+    c.arrow(566, 375, 614, GREEN)
+    c.text(50, 486, "加算だけを再実行すると値が増えます。再起動後は初期化が必要です。", 21)
+    c.text(50, 526, "Rerunning increment changes memory; after restart, initialise before increment.", 19)
+    return c
+
+
+def draw_opencv_pixels() -> Canvas:
+    import cv2
+
+    values = np.array(GRAY_EXAMPLE, dtype=np.uint8)
+    _, mask = cv2.threshold(values, PIXEL_THRESHOLD, 255, cv2.THRESH_BINARY_INV)
+    count = cv2.connectedComponents(mask)[0] - 1
+    contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    c = Canvas("画素から反転マスクへ / pixels to inverse mask", "computed synthetic; cv2.threshold")
+    for x, array, title in ((70, values, "グレー / gray"), (550, mask, "反転マスク / inverse mask")):
+        c.text(x, 99, title, 23, BLUE)
+        for row, data in enumerate(array):
+            for col, value in enumerate(data):
+                px, py = x + col * 80, 130 + row * 80
+                fill = f"#{int(value):02x}{int(value):02x}{int(value):02x}"
+                c.rect(px, py, 78, 78, fill)
+                c.text(px + 17, py + 48, str(value), 24, "white" if value < 128 else INK)
+    c.arrow(330, 210, 525)
+    c.text(335, 170, f"threshold = {PIXEL_THRESHOLD}", 20, AMBER)
+    c.text(335, 255, "<= -> 255", 20)
+    c.text(335, 290, "> -> 0", 20)
+    c.text(70, 356, f"白画素 / foreground: {np.count_nonzero(mask)} pixels", 23)
+    c.text(70, 404, f"連結成分 / connected regions: {count}", 23)
+    c.text(70, 452, f"輪郭面積 / contour area: {sum(cv2.contourArea(cn) for cn in contours):g} px²", 23)
+    c.text(70, 513, "画素数・連結成分数・輪郭面積は別の量 / counts and geometric area differ", 20)
     return c
 
 
@@ -179,7 +249,7 @@ def draw_tasks() -> Canvas:
                     c.rect(x + cx + dx, y + 15 + cy + dy, 2, 2, color, color)
         labels = [
             ["NG / 異常あり", "画像ラベル / label"],
-            [f"GT: {x1},{y1}", f"to {x2},{y2}", "右下は含めない"],
+            [f"GT: {x1},{y1}", f"to {x2},{y2}", "注釈 / annotation", "not model output"],
             [f"GT: {int(mask.sum())} pixels", "同じ描画マスク"],
             ["模式値 / schematic", "not model output"],
         ][i]
@@ -289,11 +359,18 @@ def draw_matching() -> Canvas:
         for x1, y1, x2, y2 in boxes:
             c.rect(50 + x1 * 1.5, 110 + y1 * 1.5, (x2-x1) * 1.5, (y2-y1) * 1.5, "none", color)
     c.text(50, 80, "青: GT / 紫: predictions", 20)
+    c.text(80, 126, "GT1", 17, BLUE)
+    c.text(215, 126, "GT2", 17, BLUE)
+    c.text(80, 270, "P1", 17, VIOLET)
+    c.text(147, 307, "P2", 17, VIOLET)
+    c.line(94, 250, 80, 230, VIOLET)
+    c.line(155, 286, 173, 230, VIOLET)
     c.text(50, 330, "GT1 と P1 は一致。P2 は重複。", 20)
     c.text(50, 369, "GT2 に対応する予測はありません。", 20, RED)
     c.text(405, 110, "IoU matrix: columns P1, P2", 22, VIOLET)
+    c.text(405, 143, "P1 -> GT1: 1.0; P2: 3480/3720", 18)
     for row in range(2):
-        c.text(405, 160 + row * 45, f"GT{row+1}:  {matrix[row,0]:.4f}   {matrix[row,1]:.4f}", 22)
+        c.text(405, 181 + row * 45, f"GT{row+1}:  {matrix[row,0]:.4f}   {matrix[row,1]:.4f}", 22)
     c.text(405, 268, "Same class; IoU >= 0.50", 22)
     c.text(405, 312, "Match highest IoU first, one to one.", 20)
     used_truth, used_predictions = set(), set()
@@ -310,11 +387,13 @@ def draw_matching() -> Canvas:
 
 
 def build_figure(name: str) -> Canvas:
-    if name in ("teach_pixel_inspector", "teach_slice_walkthrough"):
-        return draw_pixels(name)
     if name == "teach_cv_tasks_outputs":
         return draw_tasks()
     special = {
+        "teach_pixel_inspector": draw_pixel_inspector,
+        "teach_slice_walkthrough": draw_slice_walkthrough,
+        "teach_code_cell_lifecycle": draw_lifecycle,
+        "teach_opencv_pixel_pipeline": draw_opencv_pixels,
         "teach_calibration_same_plane": draw_calibration,
         "teach_bbox_one_example": draw_bbox,
         "teach_epoch_batch_step": draw_batches,
@@ -323,16 +402,7 @@ def build_figure(name: str) -> Canvas:
     if name in special:
         return special[name]()
     c = Canvas(name.removeprefix("teach_").replace("_", " "), "schematic; source-checked course constants")
-    if name == "teach_code_cell_lifecycle":
-        panels = [
-            ("① 初期化 / initialise", ["defect_count = 3", "Shift+Enter -> kernel: 3"]),
-            ("② 加算セル / increment cell", ["defect_count = defect_count + 1", "kernel: 3 -> 4"]),
-            ("③ 出力 / stdout", ["print(defect_count)", "4"]),
-            ("④ 加算だけ再実行 / rerun", ["kernel: 4 -> 5", "print -> 5"]),
-            ("⑤ 再起動 / restart", ["Variables are cleared.", "Run initialise before increment."]),
-            ("⑥ エラー / error", ["Undefined name -> NameError", "Run the missing earlier cell."]),
-        ]
-    elif name == "teach_mass_units_chain":
+    if name == "teach_mass_units_chain":
         width, length, thickness, density = MASS_INPUTS
         panels = [
             ("① 長さ / lengths", [f"{width:g} mm x {length:g} mm", f"thickness = {thickness:g} mm"]),
@@ -351,19 +421,6 @@ def build_figure(name: str) -> Canvas:
             ("④ 出力 / output", ["print -> 判定 / result : OK", "100.5001 -> NG"]),
             ("⑤ 境界を含む / inclusive", ["99.5 -> OK; 100.5 -> OK", "No rounding before comparison."]),
             ("⑥ 実数表現 / float caveat", ["2.1 - 2.0 > 0.1 in float.", "Resolution needs a separate policy."]),
-        ]
-    elif name == "teach_opencv_pixel_pipeline":
-        import cv2
-        values = np.array([[40, 120, 121], [210, 40, 210]], dtype=np.uint8)
-        _, mask = cv2.threshold(values, 120, 255, cv2.THRESH_BINARY_INV)
-        count = cv2.connectedComponents(mask)[0] - 1
-        panels = [
-            ("① 入力 / source", ["cv2.imread -> BGR channels", "BGR -> cv2.cvtColor -> gray"]),
-            ("② 画素値 / gray toy array", [str(row.tolist()) for row in values]),
-            ("③ 反転しきい値 / inverse", ["gray <= 120 -> 255 (white)", "gray > 120 -> 0 (black)"]),
-            ("④ マスク / binary mask", [str(row.tolist()) for row in mask]),
-            ("⑤ 輪郭 / contours", [f"Foreground: {np.count_nonzero(mask)} pixels", f"Connected regions: {count}"]),
-            ("⑥ 面積条件 / area filter", ["cv2.contourArea -> px²", "Not brightness, not pixel count."]),
         ]
     elif name == "teach_yolo_result_object":
         panels = [
@@ -429,7 +486,10 @@ def main() -> int:
         "|---|---|---|---|---|---|\n" + "\n".join(rows) + "\n\n"
         "Source-checked values: box (96,72,168,132), image 240×240 -> YOLO 0 0.550 0.425 0.300 0.250; "
         "spot radius 9 px at (84,110), bounding edges from mask; "
-        "canvas[1:4,2:5] has shape (3,3); 120 px / 100 mm = 1.2 px/mm; independent 60 px = 50 mm. "
+        "pixel inspector selects only canvas[2,3]=100 in shape (5,7), with canvas[3,2]=0; "
+        "slice walkthrough highlights rows 1..3 and columns 2..4, excludes stops 4/5, and draws "
+        "canvas[1:4,2:5] = [[0,0,0],[0,100,0],[0,0,0]] with shape (3,3). "
+        "120 px / 100 mm = 1.2 px/mm; independent 60 px = 50 mm. "
         "Calibrated target contour areas: 475 / 925 px² -> 329.861111 / 642.361111 mm²; "
         "foreground pixel count is 1508, not the sum of geometric contour areas. "
         "Mass inputs match the unsolved exercise; its calculated answer is not inserted into exercise code.\n",

@@ -11,7 +11,7 @@ department, written for people with **no prior experience** in Python, AI or ima
 | 期間 / Period | 2026 年 11 月 16 日（月）〜 20 日（金） / 16-20 November 2026 |
 | 対象 / Audience | プログラミング未経験の化成品部門スタッフ / Kaseihin staff with no programming background |
 | 時間 / Hours | 08:00–16:50（昼休み 12:00–12:50） / with lunch 12:00-12:50 |
-| 到達点 / Outcome | 高速 PVC シート検査のための AI の基礎を、自分のことばで説明し、実際に動かせること / explain and run the AI foundations needed for high-speed PVC sheet inspection |
+| 到達点 / Outcome | 高速塩ビシート検査のための AI の基礎を、自分のことばで説明し、実際に動かせること / explain and run the AI foundations needed for high-speed PVC sheet inspection |
 | 範囲 / Scope | **第 1 週のみ**。実際の検査システム構築は第 2 週で行います。 / **Week 1 only**; the real inspection system is Week 2. |
 
 ---
@@ -56,7 +56,7 @@ The notebook durations are **provisional** until measured in a pilot with one be
 | 2 | Python で判定プログラムを書く。OpenCV で画像を読み、2 値化し、ピクセルを mm に換算する。 / Write a judgement program; read and threshold an image; convert pixels to mm. |
 | 3 | 学習済み YOLO を動かし、検出結果を読み、しきい値を変えて挙動を説明する。 / Run a pretrained YOLO, read its results, explain threshold effects. |
 | 4 | データセットを点検し、YOLO をファインチューニングし、試験データで評価する。 / Inspect a dataset, fine-tune YOLO, evaluate on held-out data. |
-| 5 | PatchCore で異常検知を実行し、YOLO と比較して、PVC 検査への推奨を作る。 / Run PatchCore anomaly detection, compare it with YOLO, and recommend an approach for PVC. |
+| 5 | PatchCore で異常検知を実行し、YOLO と比較して、塩ビ検査への推奨を作る。 / Run PatchCore anomaly detection, compare it with YOLO, and recommend an approach for PVC. |
 
 ---
 
@@ -85,33 +85,15 @@ prepare both environments, photos and weights before class. The following is an 
 > `opencv-python`. Installing both into one environment gives two `cv2` distributions and breaks
 > OpenCV. This is an unavoidable conflict visible in the official dependency metadata.
 
-### 3.1 基本環境（第 0〜4 日）/ Base environment (Days 0-4)
+Windows の検索で「コマンド プロンプト」（`cmd`）を開き、
+[START_HERE のステップ1〜8](START_HERE.md) を順番に実行してください。
+ZIP・OneDrive・空白を含むパスの扱い、有効化、両カーネルの登録もそこにまとめています。
+GPU は必須ではありません。GPU 用ホイールの組み合わせはこの変更では未検証です。
 
-```powershell
-cd "$HOME\Documents\AI_Vision_Training"
-py -3.11 -m venv .venv
-.\.venv\Scripts\Activate.ps1
-python -m pip install --upgrade pip
-python -m pip install -r requirements\base.txt
-python -m pip install -r requirements\yolo.txt
-python -m ipykernel install --user --name aivision --display-name "Python 3 (AI Vision)"
-```
-
-### 3.2 Anomalib 環境（第 5 日）/ Anomalib environment (Day 5)
-
-```powershell
-deactivate
-py -3.11 -m venv .venv-anomalib
-.\.venv-anomalib\Scripts\Activate.ps1
-python -m pip install --upgrade pip
-python -m pip install -r requirements\anomalib.txt
-python -m ipykernel install --user --name aivision-anomalib --display-name "Python 3 (AI Vision Anomalib)"
-```
-
-GPU が無くても、この研修はすべて動きます。GPU がある場合の手順は
-`requirements/yolo.txt` のコメントを見てください。
-Everything works without a GPU. GPU instructions are in the comments of
-`requirements/yolo.txt`.
+Open **Command Prompt** (`cmd`) from Windows Search and follow
+[START_HERE Steps 1–8](START_HERE.md) in order. That single sequence covers ZIP/OneDrive paths,
+spaces, activation and both kernels. A GPU is not required; GPU wheel combinations are not
+verified by this change.
 
 **検証済みのバージョン / Verified versions:** [`requirements/tested_versions.md`](requirements/tested_versions.md)
 
@@ -124,24 +106,12 @@ Everything works without a GPU. GPU instructions are in the comments of
 Synthetic images, diagrams and datasets are **generated locally by Python**.
 Reference photographs and pretrained weights must be downloaded before class.
 
-```powershell
-# 基本環境に戻る / return to the base environment
-deactivate
-.\.venv\Scripts\Activate.ps1
-# 図とサンプル画像 / concept diagrams and sample images
-python assets\scripts\generate_training_assets.py
+生成コマンドは [START_HERE ステップ6](START_HERE.md)、
+参考写真・重みの取得とオフライン検査はステップ7を使います。
+同梱の参考図は、元の保存記録がある講師だけが再生成します。
 
-# 追加の教材図（ノートブックから Markdown で直接参照する静的な図）
-# the additional teaching diagrams referenced directly from notebook Markdown
-python assets\scripts\generate_teaching_diagrams.py
-python assets\scripts\generate_svg_figures.py
-
-# 参考図は同梱済み。再生成は元の保存記録がある講師だけが行います。
-# Reference figures ship with the course; only instructors with saved sources rebuild them.
-
-# YOLO 用データセットと PatchCore 用データセット / the two datasets
-python assets\scripts\prepare_datasets.py
-```
+Use [START_HERE Step 6](START_HERE.md) for generation and Step 7 for photo/weight preloading
+and offline checks. Only instructors with the original saved records rebuild reference figures.
 
 | 出力 / Output | 中身 / Contents |
 |---|---|
@@ -167,7 +137,7 @@ invents numbers to fill a gap.
 
 > **重要 / Important**
 >
-> これらは **合成画像** です。実際の PVC の光学的な振る舞いを再現したものでは
+> これらは **合成画像** です。実際の塩ビの光学的な振る舞いを再現したものでは
 > **ありません**。実際の工場画像での検証は第 2 週以降に行います。
 > 合成データで得られた精度を、製品の検査精度として引用してはいけません。
 >
@@ -191,10 +161,11 @@ offline reading; the exercises are still done in Jupyter.
 | `docs/pdf/Week1_explanation_ja_en.pdf` | 5 日分をまとめたもの / all five days |
 | `docs/pdf/README.md` | 作り方・含まれるもの・限界 / how to rebuild, what is in, limitations |
 
-```powershell
-python -m pip install -r requirements\pdf.txt          # 生成・点検用（学習には不要）
-python assets\scripts\export_explanations_pdf.py        # 6 つの PDF を作り直す
-python assets\scripts\inspect_pdf_pages.py              # 全ページを画像にして点検
+```cmd
+REM PDF generation and inspection only; not needed by learners.
+".\.venv\Scripts\python.exe" -m pip install -r requirements\pdf.txt
+".\.venv\Scripts\python.exe" assets\scripts\export_explanations_pdf.py
+".\.venv\Scripts\python.exe" assets\scripts\inspect_pdf_pages.py
 ```
 
 * 実行ログ・スタックトレース・長い準備コード・講師用の解答は入りません。
@@ -210,11 +181,22 @@ Wide figures sit on landscape A4 pages so their labels stay readable.
 
 ## 5. 起動 / Starting JupyterLab
 
-```powershell
-cd "$HOME\Documents\AI_Vision_Training"
-.\.venv\Scripts\Activate.ps1
-jupyter lab
+準備完了後、エクスプローラーで実際の `AI_Vision_Training` を開き、
+アドレス欄に `cmd` と入力して Enter。次を実行します。
+または同じフォルダの `start_training.cmd` をダブルクリックします。
+起動用ファイルはインストール・ダウンロード・学習を行いません。
+
+After preflight, open your actual `AI_Vision_Training` folder in File Explorer, type `cmd`
+in its address bar and press Enter, then run the following. Alternatively double-click
+`start_training.cmd` there. The launcher never installs, downloads or trains.
+
+```cmd
+.\.venv\Scripts\activate.bat
+".\.venv\Scripts\python.exe" -m jupyter lab
 ```
+
+有効化は別の Python の Jupyter 起動ファイルが選ばれるのを防ぎます。この CMD 内だけ有効です。
+Activation prevents selecting another Python's Jupyter executable; it affects this CMD only.
 
 ブラウザが開いたら、`notebooks` → `00_Setup` → `00_Environment_Setup.ipynb`
 の順に開きます。**第 5 日のノートブックだけは、カーネルを
@@ -259,28 +241,29 @@ There are five short interactive demos. **Moving a slider requires a live kernel
 
 ## 6. 検証とテスト / Validation and tests
 
-```powershell
-# 環境の確認 / check the environment
+準備済みの基本環境を有効化した CMD で実行します（[START_HERE](START_HERE.md)）。
+Run in CMD with the prepared base environment activated (see [START_HERE](START_HERE.md)).
+
+```cmd
+REM Check the environment.
 python assets\scripts\verify_environment.py --profile all
 
-# ノートブックの構造検証（速い）/ structural validation (fast)
+REM Structural validation (fast).
 python assets\scripts\validate_notebooks.py
 
-# 軽いノートブックを実際に実行して検証 / actually execute the lightweight notebooks
+REM Execute the lightweight notebooks.
 python assets\scripts\validate_notebooks.py --execute lightweight
 
-# アセットとデータセットの自動テスト / automated asset and dataset tests
+REM Automated asset and dataset tests.
 python -m pytest assets\tests -v
 
-# 言語ラベルが残っていないか（CI 向け。書き換えません）
-# check that no repetitive language label came back (read-only)
+REM Check language labels without writing.
 python assets\scripts\normalize_language_labels.py --check
 
-# 指示バナーを付け直す（何度実行しても同じ結果 / idempotent）
-# re-apply the cell instruction banners
+REM Re-apply cell instruction banners (maintainers only; writes notebooks).
 python assets\scripts\scaffold_notebooks.py
 
-# 対話デモが本当に「表示」されるか / check that the interactive demos really render
+REM Check widget rendering.
 python assets\scripts\check_widgets.py
 ```
 
@@ -369,7 +352,7 @@ Check the troubleshooting table at the end of each notebook, then
 
 | 制限 / Limitation | 理由 / Reason |
 |---|---|
-| 合成画像のみ / synthetic data only | 実際の PVC 画像はまだ提供されていない / no real PVC images available yet |
+| 合成画像のみ / synthetic data only | 実際の塩ビ画像はまだ提供されていない / no real PVC images available yet |
 | CPU 前提の小さな設定 / small CPU-oriented configuration | 研修 PC に GPU が無いことを前提 / assumes training PCs without a GPU |
 | 学習画像 64 枚 / 64 training images | 1 日で終わる分量に抑えている / keeps the exercise within one day |
 | PatchCore の評価データは半数 / half of the eval data | 検証と試験に分けるため / split into validation and test |

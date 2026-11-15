@@ -42,6 +42,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 
 import nbformat
+from course_notebooks import course_notebooks
 
 # ---------------------------------------------------------------------------
 # 正規表現 / patterns
@@ -352,7 +353,7 @@ def iter_targets(root: Path) -> list[Path]:
     targets: list[Path] = []
     notebooks = root / "notebooks"
     if notebooks.is_dir():
-        targets.extend(sorted(notebooks.rglob("*.ipynb")))
+        targets.extend(course_notebooks(notebooks))
     for pattern in DOC_GLOBS:
         targets.extend(sorted(root.glob(pattern)))
     seen: set[Path] = set()
@@ -361,7 +362,8 @@ def iter_targets(root: Path) -> list[Path]:
         resolved = path.resolve()
         if resolved in seen:
             continue
-        if any(part in {".git", ".venv", ".venv-anomalib", "__pycache__", ".pytest_cache"}
+        if any(part in {".git", ".venv", ".venv-anomalib", "__pycache__", ".pytest_cache",
+                        ".ipynb_checkpoints"}
                for part in resolved.parts):
             continue
         seen.add(resolved)

@@ -6,7 +6,7 @@
 # 検証済み / verified on: Windows 11, CPython 3.11.4 (64-bit), 2026-11
 # 詳細 / details: requirements/tested_versions.md
 #
-# 使い方 / usage (PowerShell, with the virtual environment activated):
+# 使い方（有効化済み CMD）/ usage (Command Prompt, virtual environment activated):
 #   python -m pip install -r requirements\base.txt
 # ============================================================================
 

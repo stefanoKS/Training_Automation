@@ -73,7 +73,7 @@ Write the numbers and results **exactly as they appeared**. Do not make them loo
 | セグメンテーション / segmentation | | | |
 | 異常検知 / anomaly detection | | | |
 
-**PVC 検査への提案 / proposal for PVC inspection**
+**塩ビ検査への提案 / proposal for PVC inspection**
 
 | 項目 / Item | 内容 / Details |
 |---|---|

@@ -9,33 +9,42 @@ so correcting a notebook and re-running the command below keeps the two in step.
 
 | ファイル / File | 内容 / Contents | ページ / Pages |
 |---|---|---|
-| `Day01_explanation_ja_en.pdf` | 第 1 日（ノートブック 01〜03） | 61 |
-| `Day02_explanation_ja_en.pdf` | 第 2 日（ノートブック 01〜03） | 65 |
-| `Day03_explanation_ja_en.pdf` | 第 3 日（ノートブック 01〜03） | 45 |
-| `Day04_explanation_ja_en.pdf` | 第 4 日（ノートブック 01〜03） | 47 |
-| `Day05_explanation_ja_en.pdf` | 第 5 日（ノートブック 01〜03） | 52 |
-| `Week1_explanation_ja_en.pdf` | 5 日分をまとめたもの / all five days | 260 |
+| `Day01_explanation_ja_en.pdf` | 第 1 日（ノートブック 01〜03） | 73 |
+| `Day02_explanation_ja_en.pdf` | 第 2 日（ノートブック 01〜03） | 82 |
+| `Day03_explanation_ja_en.pdf` | 第 3 日（ノートブック 01〜03） | 56 |
+| `Day04_explanation_ja_en.pdf` | 第 4 日（ノートブック 01〜03） | 66 |
+| `Day05_explanation_ja_en.pdf` | 第 5 日（ノートブック 01〜03） | 63 |
+| `Week1_explanation_ja_en.pdf` | 5 日分をまとめたもの / all five days | 329 |
 
-ページ数は生成のたびに `export_explanations_pdf.py` が表示します。上の表は 2026-11-13 の生成結果です。
-The page counts are printed by the export script; the numbers above are from the 2026-11-13 build.
+ページ数は生成のたびに `export_explanations_pdf.py` が表示します。上の表は 2026-11-15 の生成結果です。
+全669ページの描画検査と図の点検範囲は [今回の検証記録](../reviews/2026-11-15_cmd_migration.md) にあります。
+The page counts are from the 2026-11-15 rebuild. All 669 pages were rendered; see the
+[verification record](../reviews/2026-11-15_cmd_migration.md) for the exact visual-review scope.
+
+準備ノートブックはこの6冊に含みません。今回だけ一時的な準備用PDFを作り、CMDの説明と残り1枚のSVG図を点検しました。
+Setup is not included in these six books. A temporary setup sample was also inspected for CMD text
+and the fifteenth SVG fallback; it is not an additional distributed booklet.
 
 ## 作り直す方法 / Regenerating
 
 インストール（学習用の環境とは分けています / separate from the learner requirements）:
 
-```powershell
+コマンド プロンプトで教材ルートから実行します。環境の準備は [START_HERE](../../START_HERE.md)。
+Run in Command Prompt from the course root; prepare the environment via [START_HERE](../../START_HERE.md).
+
+```cmd
 python -m pip install -r requirements\pdf.txt
 ```
 
 生成（**この 1 コマンドだけ** / this exact command is all that is needed）:
 
-```powershell
+```cmd
 python assets\scripts\export_explanations_pdf.py
 ```
 
 点検（全ページを画像にして、空白・はみ出しを確認 / render every page and check it）:
 
-```powershell
+```cmd
 python assets\scripts\inspect_pdf_pages.py
 ```
 

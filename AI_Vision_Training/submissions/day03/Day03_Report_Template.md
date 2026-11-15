@@ -13,7 +13,7 @@ Fill in every field. "None" is a perfectly good record. Do not copy anyone else'
 ---
 ## 1. 本日の学習内容 / Today's learning
 
-YOLO が何をするのか、confidence とは何か、なぜ事前学習モデルが PVC 欠陥を
+YOLO が何をするのか、confidence とは何か、なぜ事前学習モデルが塩ビ欠陥を
 検出できないのかを、自分の言葉でまとめてください。
 
 Summarise what YOLO does, what confidence means, and why a pretrained model cannot

@@ -680,7 +680,7 @@ def ref_inference_boxes_table(root: Path, out_dir: Path) -> Path:
     _note(fig, "図：" + PROVENANCE_TEST
                + " — source: submissions/day03/yolo_bus_detections.csv + the bundled ultralytics "
                  "sample image (bus.jpg).\n"
-                 "この画像は COCO のサンプルで、PVC の欠陥ではありません。モデルが動くことの確認用です。 / "
+                 "この画像は COCO のサンプルで、塩ビの欠陥ではありません。モデルが動くことの確認用です。 / "
                  "a COCO sample, not a PVC defect: it only shows that the model runs.")
     return _save(fig, out_dir / "ref_inference_boxes_table.png")
 

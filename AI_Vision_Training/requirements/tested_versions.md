@@ -182,7 +182,7 @@ They are **not** product inspection accuracy.
 
 正常品スコアの最大は **0.356**、異常品スコアの最小は **0.473** で、
 その間にしきい値を置けば分離できました。**合成画像では分離が容易** だということです。
-実際の PVC では、これほどきれいには分かれません。
+実際の塩ビでは、これほどきれいには分かれません。
 
 The maximum normal score was **0.356** and the minimum abnormal score **0.473**, so a
 threshold in between separates them. **Synthetic images are easy**; real PVC will not separate this

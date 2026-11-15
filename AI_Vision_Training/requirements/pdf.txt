@@ -7,7 +7,7 @@
 # These are **not** learner runtime dependencies. A learner needs only
 # requirements/base.txt. Install this file only to rebuild or inspect the PDFs.
 #
-# 使い方 / usage (PowerShell, with the course virtual environment activated):
+# 使い方（有効化済み CMD）/ usage (Command Prompt, course environment activated):
 #   python -m pip install -r requirements\pdf.txt
 #   python assets\scripts\export_explanations_pdf.py
 #   python assets\scripts\inspect_pdf_pages.py

@@ -10,6 +10,14 @@ MASS_INPUTS = (1300.0, 2500.0, 0.35, 1.4)
 CALIBRATION_REFERENCE = ((30, 190), (150, 190), 100.0)
 CALIBRATION_CHECK = ((270, 60), (270, 120), 50.0)
 CALIBRATION_TARGETS = ((60, 40, 85, 59), (150, 90, 187, 115))
+PIXEL_THRESHOLD = 120
+GRAY_EXAMPLE = ((40, 120, 121), (210, 40, 210))
+
+
+def pixel_canvas() -> np.ndarray:
+    canvas = np.zeros((5, 7), dtype=np.uint8)
+    canvas[0, 0], canvas[0, 6], canvas[4, 0], canvas[2, 3] = 255, 200, 150, 100
+    return canvas
 
 
 def spot_mask(size: int) -> np.ndarray:

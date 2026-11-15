@@ -154,6 +154,50 @@ def test_mass_figure_inputs_match_unsolved_exercise() -> None:
     assert namespace["mass_kg"] == 0.0  # The learner must still complete the exercise.
 
 
+def test_current_batch_and_leakage_captions_keep_their_technical_caveats() -> None:
+    import insert_lesson_figures as figures
+
+    entry = next(e for e in figures.FIGURES if e["image"] == "teach_training_update.png")
+    caption = next(s for s in sources("Day04_02_YOLO_Training", "markdown")
+                   if "teach_training_update.png" in s)
+    assert entry["notice_en"] in caption
+    assert "warmup can also change the accumulation count" in caption
+    assert "8 loader iterations and 1 weight update" not in caption
+    leakage = next(s for s in sources("Day04_01_YOLO_Dataset_Annotation", "markdown")
+                   if "teach_leakage_split.png" in s)
+    assert "pixel-intensity noise, not a spatial shift" in leakage
+
+
+def test_legacy_figures_do_not_reintroduce_rounding_or_universal_update_counts(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path,
+) -> None:
+    import matplotlib.pyplot as plt
+    from matplotlib.text import Text
+    import generate_teaching_diagrams as diagrams
+
+    text = []
+
+    def capture(figure, output):
+        text.extend(artist.get_text() for artist in figure.findobj(Text))
+        plt.close(figure)
+        return output
+
+    monkeypatch.setattr(diagrams, "_save", capture)
+    diagrams.teach_loop_trace(tmp_path / "loop.png")
+    assert "difference = measured_mm - nominal_mm" in text
+    assert not any("round(" in line for line in text)
+    text.clear()
+    diagrams.teach_units_conversion(tmp_path / "units.png")
+    assert any("later thickness exercise only" in line for line in text)
+    for function in (diagrams.teach_epoch_batch, diagrams.teach_training_update):
+        text.clear()
+        function(tmp_path / "updates.png")
+        joined = "\n".join(text)
+        assert "nominal" in joined and "warmup" in joined
+        assert "updates depend" in joined or "depends on settings" in joined
+        assert not any("weight update per epoch" in line or "epoch 10" == line for line in text)
+
+
 def test_model_selection_uses_mtime_not_lexical_order(tmp_path: Path) -> None:
     older = tmp_path / "training_results" / "day04" / "z_run" / "weights" / "best.pt"
     newer = tmp_path / "training_results" / "day04" / "a_run" / "weights" / "best.pt"
@@ -265,3 +309,31 @@ def test_svg_pdf_fallback_uses_same_generated_asset() -> None:
     vector = ROOT / "assets" / "svg" / "teach_slice_walkthrough.svg"
     assert _pdf_image_path(vector).name == "teach_slice_walkthrough_svg.png"
     assert _image_size(vector) == (1800, 1180)
+
+
+def test_pixel_and_slice_figures_are_distinct_and_match_the_executed_array() -> None:
+    from PIL import Image, ImageChops
+
+    source = next(s for s in sources("Day01_02_Pixels_and_Images") if "canvas = np.zeros" in s)
+    namespace = {"np": np}
+    exec(compile(source, "<pixel lesson>", "exec"), namespace)
+    array = namespace["canvas"]
+    np.testing.assert_array_equal(svg.pixel_canvas(), array)
+    assert array.shape == (5, 7) and array[2, 3] == 100 and array[3, 2] == 0
+    np.testing.assert_array_equal(array[1:4, 2:5], [[0, 0, 0], [0, 100, 0], [0, 0, 0]])
+    figures = [svg.build_figure(name) for name in ("teach_pixel_inspector", "teach_slice_walkthrough")]
+    assert ET.tostring(figures[0].root) != ET.tostring(figures[1].root)
+    pixel_text, slice_text = [" ".join(n.text or "" for n in figure.root.iter()) for figure in figures]
+    assert "canvas[2, 3] = 100" in pixel_text and "canvas[1:4" not in pixel_text
+    assert "canvas[1:4, 2:5]" in slice_text and "shape = (3, 3)" in slice_text
+    assert "stop-exclusive" in slice_text
+    for figure, selected_count in zip(figures, (1, 18)):
+        selected = [n for n in figure.root.iter() if n.tag.endswith("rect")
+                    and n.attrib.get("fill") == "#e8f0ff" and n.attrib.get("stroke") == svg.BLUE]
+        assert len(selected) == selected_count  # One cell vs nine source cells + nine output cells.
+    paths = [ROOT / "assets" / "svg" / f"{name}.svg"
+             for name in ("teach_pixel_inspector", "teach_slice_walkthrough")]
+    assert paths[0].read_bytes() != paths[1].read_bytes()
+    with Image.open(ROOT / "assets" / "diagrams" / "teach_pixel_inspector_svg.png") as pixel:
+        with Image.open(ROOT / "assets" / "diagrams" / "teach_slice_walkthrough_svg.png") as sliced:
+            assert ImageChops.difference(pixel, sliced).getbbox() is not None

@@ -3,13 +3,18 @@
 ### 2026-11-15 の出典確認 / Provenance status on 2026-11-15
 
 以下の数値（YOLO 0.06、PatchCore 0.50、streak_0005 など）は**保存済み参考実行の例**です。
-この改訂では元のモデル・数値記録がないため再検証していません。図の画素は変更していません。
+この改訂では元のモデル・数値記録がないため再検証していません。数値・検出枠・表は変更していません。
+用語更新では、`ref_inference_boxes_table.png` の日本語注記の材料名だけを「塩ビ」に変更しました。
+英語の注記と図の他の画素は変更せず、モデルの再実行もしていません。
 旧 YOLO 17/26・PatchCore 26/26 は **SUPERSEDED / biased** であり現在の主成績ではありません。
 新しい比較は Day05_03 の `comparison_test_results.json` / CSV と分割記録で報告します。
 
 Numbers below (including YOLO 0.06, PatchCore 0.50 and streak_0005) are **saved reference-run examples**.
 Source models/numeric records are unavailable for this amendment, so these results were not reverified.
-Image pixels are unchanged. Historical YOLO 17/26 and PatchCore 26/26 are **SUPERSEDED / biased**,
+Numeric results, detection boxes and tables are unchanged. Only the Japanese material name in
+the caption of `ref_inference_boxes_table.png` now uses 「塩ビ」; the English caption and pixels
+outside that word are unchanged, and no model was rerun.
+Historical YOLO 17/26 and PatchCore 26/26 are **SUPERSEDED / biased**,
 not current headline results. Report a new Day05_03 run using its `comparison_test_results.json` / CSV
 and split manifest.
 

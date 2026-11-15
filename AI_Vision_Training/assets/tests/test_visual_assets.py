@@ -22,6 +22,7 @@ DIAGRAM_DIR = COURSE_ROOT / "assets" / "diagrams"
 SCRIPTS = COURSE_ROOT / "assets" / "scripts"
 
 sys.path.insert(0, str(SCRIPTS))
+from course_notebooks import course_notebooks  # noqa: E402
 
 MD_IMAGE_RE = re.compile(r"!\[[^\]]*\]\(([^)\s]+)\)")
 ASSET_DIR_RE = re.compile(r"^assets/diagrams/", re.I)
@@ -45,7 +46,7 @@ CONCEPT_NOTEBOOKS = [
 
 
 def _notebook(stem: str) -> Path:
-    matches = sorted(NOTEBOOK_DIR.rglob(f"{stem}.ipynb"))
+    matches = course_notebooks(NOTEBOOK_DIR, f"{stem}.ipynb")
     assert len(matches) == 1, (stem, matches)
     return matches[0]
 
@@ -91,7 +92,7 @@ def test_markdown_images_resolve_relative_to_the_notebook(stem: str) -> None:
 def test_essential_diagrams_are_not_gitignored() -> None:
     """配布物に含まれること / the essential diagrams are part of the deliverable."""
     referenced = set()
-    for path in NOTEBOOK_DIR.rglob("*.ipynb"):
+    for path in course_notebooks(NOTEBOOK_DIR):
         for target in _markdown_images(path):
             resolved = (path.parent / target).resolve()
             try:
@@ -121,7 +122,7 @@ def test_diagram_generator_covers_every_reference() -> None:
 
     registered = set(gtd.DIAGRAMS) | {f"{name}.svg" for name in gsf.FIGURES}
     referenced = set()
-    for path in NOTEBOOK_DIR.rglob("*.ipynb"):
+    for path in course_notebooks(NOTEBOOK_DIR):
         for target in _markdown_images(path):
             referenced.add(Path(target).name)
     produced = {name for name in referenced if name.startswith("teach_")}
@@ -212,7 +213,7 @@ def test_reference_outputs_are_tracked_and_labelled() -> None:
     """実際の結果から作った図が配布物に入り、図の中で「参考出力」と名乗っていること。"""
     folder = COURSE_ROOT / "assets" / "reference_outputs"
     referenced = set()
-    for path in NOTEBOOK_DIR.rglob("*.ipynb"):
+    for path in course_notebooks(NOTEBOOK_DIR):
         for target in _markdown_images(path):
             if "reference_outputs" in target:
                 referenced.add(Path(target).name)
@@ -309,7 +310,7 @@ def test_every_code_only_diagram_has_a_static_equivalent() -> None:
     import json as _json
 
     code_images = {}
-    for path in NOTEBOOK_DIR.rglob("*.ipynb"):
+    for path in course_notebooks(NOTEBOOK_DIR):
         notebook = _json.loads(path.read_text(encoding="utf-8"))
         for cell in notebook["cells"]:
             if cell["cell_type"] != "code":
@@ -317,7 +318,7 @@ def test_every_code_only_diagram_has_a_static_equivalent() -> None:
             for name in re.findall(r"diagram_[a-z_]+\.png", "".join(cell["source"])):
                 code_images.setdefault(path.stem, set()).add(name)
 
-    static = {Path(target).name for path in NOTEBOOK_DIR.rglob("*.ipynb")
+    static = {Path(target).name for path in course_notebooks(NOTEBOOK_DIR)
               for target in _markdown_images(path)}
     # コードで表示する図は、同じノートブックか同じ日の静的図で代替できること
     coverage = {

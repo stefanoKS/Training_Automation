@@ -20,10 +20,11 @@ torchvision==0.29.2
 ultralytics==8.4.211
 
 # 注 / note:
-#   NVIDIA GPU を使う場合は、torch / torchvision を次のように入れ替えます。
-#   For an NVIDIA GPU, replace torch/torchvision with:
-#     python -m pip install torch==2.15.0 torchvision==0.29.2 \
-#         --index-url https://download.pytorch.org/whl/cu126
+#   GPU 用ホイールの URL・版の組み合わせは未検証です。GPU は必須ではありません。
+#   GPU wheel URLs/version combinations are NOT VERIFIED; a GPU is not required.
+#   GPU を使う場合は講師と公式の選択画面で互換性を確認します。未検証の install 例は載せません。
+#   For GPU use, confirm compatibility with the instructor and the official selector:
+#   https://pytorch.org/get-started/locally/
 #
 #   ultralytics は opencv-python を要求します。この環境には
 #   opencv-python-headless を入れないでください（二重インストールになります）。

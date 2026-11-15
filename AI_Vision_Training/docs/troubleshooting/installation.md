@@ -1,10 +1,10 @@
 # インストール時のトラブル対処 / Installation troubleshooting
 
 セットアップでつまずいたときの手順書です。
-**上から順に** 確認してください。9 割は最初の 3 つで解決します。
+**上から順に** 確認してください。正式な準備手順は [START_HERE](../../START_HERE.md) です。
 
-Use this when setup fails. Work **top to bottom**; the first three sections solve about
-90 % of cases.
+Use this when setup fails. Work **top to bottom**. The authoritative preflight is
+[START_HERE](../../START_HERE.md).
 
 ---
 
@@ -14,11 +14,26 @@ Use this when setup fails. Work **top to bottom**; the first three sections solv
 
 Whenever something feels wrong, check the environment first.
 
-```powershell
-cd "$HOME\Documents\AI_Vision_Training"
-.\.venv\Scripts\Activate.ps1
+エクスプローラーで実際の教材フォルダを開き、アドレス欄に `cmd` と入力して Enter。
+以下はそのコマンド プロンプトで実行します。現在地は `cd`、中身は `dir` で確認できます。
+ZIP・OneDrive の場合も実際の展開先を使います。
+
+Open the actual course folder in File Explorer, type `cmd` in its address bar and press Enter.
+Run these commands in that Command Prompt. Use `cd` to print your location and `dir` to list files.
+For ZIP/OneDrive installations use the actual extracted folder too.
+
+```cmd
+.\.venv\Scripts\activate.bat
+where python
+python -c "import sys; print(sys.executable)"
 python assets\scripts\verify_environment.py --profile all
 ```
+
+第5日は新しい CMD 窓で `.venv-anomalib` を有効化して同じ検査をします。
+この検査は実行した環境だけが対象です。
+
+For Day 5, activate `.venv-anomalib` in a fresh CMD window and repeat the check.
+It checks only the interpreter that runs it.
 
 表示の見方です。
 
@@ -32,28 +47,25 @@ python assets\scripts\verify_environment.py --profile all
 
 ---
 
-## 1. `Activate.ps1 cannot be loaded because running scripts is disabled`
+## 1. 仮想環境を有効化できない / Cannot activate the virtual environment
 
-**原因 / Cause:** Windows の実行ポリシーが、PowerShell スクリプトの実行を止めています。
-Windows policy blocks running PowerShell scripts.
+教材フォルダの CMD で `dir .venv\Scripts\python.exe` を実行します。
+無ければ [START_HERE ステップ3](../../START_HERE.md) の作成手順に戻ります。
+有れば `.\.venv\Scripts\activate.bat` で有効化します。成功すると `(.venv)` が付きます。
+実行ポリシーや管理者権限の変更は不要です。組織の制限は IT に相談してください。
 
-**対処 / Fix:**
+In CMD at the course folder, run `dir .venv\Scripts\python.exe`. If missing, return to
+[START_HERE Step 3](../../START_HERE.md). Otherwise activate with
+`.\.venv\Scripts\activate.bat`; the prompt should start with `(.venv)`.
+No execution-policy or administrator changes are needed. Ask IT about organisational restrictions.
 
-```powershell
-Set-ExecutionPolicy -Scope Process -ExecutionPolicy RemoteSigned
+有効化せず実行する方法もあります。この場合 `deactivate` は不要です。
+You may also call the interpreter directly without activation; then omit `deactivate`.
+
+```cmd
+".\.venv\Scripts\python.exe" assets\scripts\verify_environment.py --profile all
+".\.venv-anomalib\Scripts\python.exe" assets\scripts\verify_environment.py --profile all
 ```
-
-組織が許可する場合だけ現在の窓で設定し、もう一度有効化します。管理者権限は不要です。
-ポリシーを変えられなければ `.\.venv\Scripts\python.exe` を直接使います。
-Only if permitted by your organisation, apply this to the current window and activate again.
-No administrator is needed. Otherwise call `.\.venv\Scripts\python.exe` directly.
-
-```powershell
-.\.venv\Scripts\Activate.ps1
-```
-
-成功すると、プロンプトの先頭に `(.venv)` が付きます。
-On success the prompt starts with `(.venv)`.
 
 ---
 
@@ -67,7 +79,7 @@ A Windows app-execution alias intercepts `python.exe`.
 1. Windows の設定を開く / open Windows Settings
 2. 「アプリ」→「アプリ実行エイリアス」 / "Apps" -> "App execution aliases"
 3. `python.exe` と `python3.exe` を **オフ** / turn both **off**
-4. PowerShell を **閉じて開き直す** / close and reopen PowerShell
+4. コマンド プロンプトを **閉じて開き直す** / close and reopen Command Prompt
 
 それでも直らない場合は、Python が PATH に入っていません。
 [python.org](https://www.python.org/downloads/) のインストーラを実行し、
@@ -101,8 +113,8 @@ print(sys.executable)
 
 ### 3.2 パッケージが本当に入っていない / the package really is missing
 
-```powershell
-.\.venv\Scripts\Activate.ps1
+```cmd
+.\.venv\Scripts\activate.bat
 python -m pip install -r requirements\base.txt
 python -m ipykernel install --user --name aivision --display-name "Python 3 (AI Vision)"
 ```
@@ -122,9 +134,17 @@ Transient network failure, or a corporate proxy.
 1. **同じコマンドをもう一度実行**（最も効きます）/ **re-run the same command** (most effective)
 2. それでもだめなら、プロキシを設定 / if it persists, configure the proxy
 
-```powershell
-$env:HTTP_PROXY  = "http://proxy.example.co.jp:8080"
-$env:HTTPS_PROXY = "http://proxy.example.co.jp:8080"
+次は**架空の例**で、会社の実設定ではありません。IT に確認した値に置き換えてから実行します。
+`set` はこの CMD 窓と、その窓から起動したプログラムだけに作用します。
+窓を閉じれば設定は消えます。既存の正しい設定を例の値で上書きしないでください。
+
+These are **example addresses, not company configuration**. Replace them with values confirmed
+by IT before running. `set` affects only this CMD session and its child processes; closing the
+window discards it. Never overwrite a working configuration with these example values.
+
+```cmd
+set "HTTP_PROXY=http://proxy.example.co.jp:8080"
+set "HTTPS_PROXY=http://proxy.example.co.jp:8080"
 python -m pip install -r requirements\base.txt
 ```
 
@@ -133,7 +153,10 @@ Ask IT for the proxy address.
 
 3. 社内ミラーがある場合は `--index-url` を指定 / with an internal mirror:
 
-```powershell
+次のミラーも例です。実際の URL は IT に確認します。
+The following mirror is also an example; obtain the actual URL from IT.
+
+```cmd
 python -m pip install -r requirements\base.txt --index-url https://pypi.example.co.jp/simple
 ```
 
@@ -150,9 +173,9 @@ Both distributions provide `cv2`; installing both into one environment breaks it
 
 **確認 / Check:**
 
-```powershell
-.\.venv\Scripts\Activate.ps1
-python -m pip list | Select-String "opencv"
+```cmd
+.\.venv\Scripts\activate.bat
+python -m pip list | findstr /I opencv
 ```
 
 **1 行だけ** 表示されるのが正常です。2 行出たら壊れています。
@@ -161,16 +184,16 @@ python -m pip list | Select-String "opencv"
 
 **対処 / Fix:**
 
-```powershell
-# .venv（第0〜4日）/ .venv (Days 0-4)
-python -m pip uninstall -y opencv-python opencv-python-headless opencv-contrib-python
-python -m pip install opencv-python==4.12.0.88
+```cmd
+REM .venv (Days 0-4); direct interpreter, no activation needed.
+".\.venv\Scripts\python.exe" -m pip uninstall -y opencv-python opencv-python-headless opencv-contrib-python
+".\.venv\Scripts\python.exe" -m pip install opencv-python==4.12.0.88
 ```
 
-```powershell
-# .venv-anomalib（第5日）/ .venv-anomalib (Day 5)
-python -m pip uninstall -y opencv-python opencv-python-headless opencv-contrib-python
-python -m pip install opencv-python-headless==4.12.0.88
+```cmd
+REM .venv-anomalib (Day 5); direct interpreter, no activation needed.
+".\.venv-anomalib\Scripts\python.exe" -m pip uninstall -y opencv-python opencv-python-headless opencv-contrib-python
+".\.venv-anomalib\Scripts\python.exe" -m pip install opencv-python-headless==4.12.0.88
 ```
 
 2 つの環境を混ぜないでください。どの環境で実行しているかを
@@ -187,8 +210,8 @@ Never mix the two environments. Always check the prompt (`(.venv)` or
 
 **対処 / Fix:**
 
-```powershell
-.\.venv\Scripts\Activate.ps1
+```cmd
+.\.venv\Scripts\activate.bat
 python assets\scripts\generate_training_assets.py
 python assets\scripts\prepare_datasets.py
 ```
@@ -203,8 +226,8 @@ Normally reuse existing data. Discuss deliberate regeneration with the instructo
 
 **対処 / Fix:**
 
-```powershell
-.\.venv\Scripts\Activate.ps1
+```cmd
+.\.venv\Scripts\activate.bat
 python assets\scripts\download_reference_images.py --course-root .
 ```
 
@@ -214,7 +237,7 @@ python assets\scripts\download_reference_images.py --course-root .
   同じコマンドをもう一度実行します。
 - ネットワークを使わずに、保存済みファイルだけを確認できます。
 
-```powershell
+```cmd
 python assets\scripts\download_reference_images.py --course-root . --offline
 ```
 
@@ -268,12 +291,15 @@ The Day 5 notebooks run on the **`aivision-anomalib`** kernel. `anomalib` is
 
 **対処 / Fix:**
 
-```powershell
-python -m venv .venv-anomalib
-.\.venv-anomalib\Scripts\Activate.ps1
-python -m pip install --upgrade pip
-python -m pip install -r requirements\anomalib.txt
-python -m ipykernel install --user --name aivision-anomalib --display-name "Python 3 (AI Vision Anomalib)"
+未作成なら [START_HERE ステップ4〜5](../../START_HERE.md) を実行します。
+既存環境の修復は有効化せず、その Python を直接指定できます。
+
+If not yet created, follow [START_HERE Steps 4–5](../../START_HERE.md).
+To repair an existing environment, call its Python directly without activation:
+
+```cmd
+".\.venv-anomalib\Scripts\python.exe" -m pip install -r requirements\anomalib.txt
+".\.venv-anomalib\Scripts\python.exe" -m ipykernel install --user --name aivision-anomalib --display-name "Python 3 (AI Vision Anomalib)"
 ```
 
 ---
@@ -285,10 +311,9 @@ The `torch==2.10.0` Windows wheel failed to import on the verification machine.
 
 **対処 / Fix:**
 
-```powershell
-.\.venv-anomalib\Scripts\Activate.ps1
-python -m pip uninstall -y torch torchvision
-python -m pip install torch==2.15.0 torchvision==0.29.2
+```cmd
+".\.venv-anomalib\Scripts\python.exe" -m pip uninstall -y torch torchvision
+".\.venv-anomalib\Scripts\python.exe" -m pip install torch==2.15.0 torchvision==0.29.2
 ```
 
 それでも直らない場合は、Microsoft Visual C++ 再頒布可能パッケージを入れ直してください。
@@ -348,3 +373,9 @@ Note these four things for the instructor; they make diagnosis much faster.
 2. the error message (copy the last three lines)
 3. the output of `verify_environment.py --profile all`
 4. what you already tried, and what happened
+
+CMD の `where python` と、両環境それぞれの検査結果も添えてください。
+プロキシの認証情報や秘密情報は貼り付けないでください。
+
+Include CMD's `where python` and the separate check results for both environments.
+Do not paste proxy credentials or other secrets.

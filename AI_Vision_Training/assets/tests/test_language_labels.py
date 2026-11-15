@@ -208,3 +208,15 @@ def test_targets_cover_notebooks_and_documents(suffix: str) -> None:
     targets = nll.iter_targets(COURSE_ROOT)
     assert any(path.suffix == suffix for path in targets)
     assert all(".venv" not in path.parts for path in targets)
+
+
+def test_cleanup_preserves_user_checkpoints(tmp_path: Path) -> None:
+    checkpoint = tmp_path / "notebooks" / "Day01_AI_Fundamentals" / ".ipynb_checkpoints" / "lesson.ipynb"
+    checkpoint.parent.mkdir(parents=True)
+    checkpoint.write_text("user checkpoint; not valid JSON", encoding="utf-8")
+    document = tmp_path / "docs" / ".ipynb_checkpoints" / "notes.md"
+    document.parent.mkdir(parents=True)
+    document.write_text(PLAIN, encoding="utf-8")
+    assert nll.run(tmp_path, write=True) == []
+    assert checkpoint.read_text(encoding="utf-8") == "user checkpoint; not valid JSON"
+    assert document.read_text(encoding="utf-8") == PLAIN

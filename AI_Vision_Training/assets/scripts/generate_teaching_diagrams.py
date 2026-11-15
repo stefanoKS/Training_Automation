@@ -127,7 +127,7 @@ def _caption(fig, text: str, y: float = -0.02) -> None:
 
 
 def _pvc_sheet(size: int = 240, defect: str | None = None, seed: int = 7) -> np.ndarray:
-    """PVC シートの合成画像 / a synthetic PVC sheet."""
+    """塩ビシートの合成画像 / a synthetic PVC sheet."""
     rng = np.random.default_rng(seed)
     yy, xx = np.mgrid[0:size, 0:size]
     base = 205 + 6 * np.sin(xx / 18.0) + 4 * np.cos(yy / 23.0)
@@ -474,7 +474,7 @@ def teach_loop_trace(out: Path) -> Path:
             fontsize=9, family="monospace")
     ax.text(0.02, 0.905, "def judge(measured_mm, nominal_mm=100.0, tolerance_mm=0.5):", fontsize=8.6,
             family="monospace", color=MUTED)
-    ax.text(0.04, 0.862, "difference = round(measured_mm - nominal_mm, 6)", fontsize=8.4,
+    ax.text(0.04, 0.862, "difference = measured_mm - nominal_mm", fontsize=8.4,
             family="monospace", color=MUTED)
     ax.text(0.04, 0.822, "if abs(difference) <= tolerance_mm:  →  OK   else  →  NG", fontsize=8.4,
             family="monospace", color=MUTED)
@@ -485,7 +485,7 @@ def teach_loop_trace(out: Path) -> Path:
     for xpos, head in zip(x, headers):
         ax.text(xpos, 0.745, head, fontsize=8.5, color=INK, weight="bold")
     for row, value in enumerate(measurements):
-        difference = round(abs(value - nominal), 6)
+        difference = abs(value - nominal)
         ok = difference <= tolerance
         y = 0.655 - row * 0.105
         ax.add_patch(Rectangle((0.015, y - 0.035), 0.95, 0.072,
@@ -497,12 +497,12 @@ def teach_loop_trace(out: Path) -> Path:
                 fontsize=8.5, family="monospace", color=OK if ok else BAD)
         ax.text(x[4], y, "OK" if ok else "NG", fontsize=9.5, color=OK if ok else BAD, weight="bold")
     ng_indices = [row for row, value in enumerate(measurements)
-                  if round(abs(value - nominal), 6) > tolerance]
+                  if abs(value - nominal) > tolerance]
     ng_text = "、".join(f"i={i}" for i in ng_indices) if ng_indices else "なし / none"
     ax.text(0.02, 0.075,
             f"NG は {len(ng_indices)} 件（{ng_text}）。演習の問題と同じ測定値・同じ規格です。\n"
             f"{len(ng_indices)} NG ({ng_text}) — the same measurements and limits as the exercise.\n"
-            "ループは「今どの値か」を毎回確かめる作業です。 / A loop re-checks the current value each time.",
+            "表示だけ小数1桁に整え、比較では丸めません。 / Only the display is rounded; compare raw values.",
             fontsize=8.2, color=MUTED, va="top", linespacing=1.6)
     _caption(fig, "図：5 つの測定値を順に判定するときの実行トレース（値はノートブックと同じ）/ "
                   "Figure: the trace of judging five measurements in a loop (same values as the notebook)")
@@ -831,8 +831,6 @@ def teach_epoch_batch(out: Path) -> Path:
     batch_size, nominal_batch, images = 8, 64, 64
     accumulate = max(1, round(nominal_batch / batch_size))
     batches = images // batch_size
-    updates = batches // accumulate
-    update_word = "update" if updates == 1 else "updates"
 
     fig, ax = _canvas((11.8, 5.2))
     ax.text(0.5, 0.965, f"1 epoch = 学習画像 {images} 枚を 1 回ずつ見る / "
@@ -849,7 +847,7 @@ def teach_epoch_batch(out: Path) -> Path:
          edge=MUTED, face="#f7f8fa", fontsize=8.0)
 
     ax.text(0.02, 0.60,
-            f"この研修の設定 / course settings：batch = {batch_size}、nbs（nominal batch）= "
+            f"名目累積の例 / nominal example：batch = {batch_size}、nbs（nominal batch）= "
             f"{nominal_batch} → {accumulate} batch 分の勾配を貯めて 1 回更新\n"
             f"gradients from {accumulate} batches are accumulated into one optimizer step",
             fontsize=8.0, color=INK, va="top", linespacing=1.6)
@@ -866,16 +864,14 @@ def teach_epoch_batch(out: Path) -> Path:
     ax.text(0.534, 0.475, "optimizer step（重みの更新）/ the update", fontsize=8.8, color=OK,
             va="top")
     ax.text(0.534, 0.415,
-            f"貯めた勾配で重みを 1 回動かす操作。\nここでは {accumulate} batch ごとに 1 回。\n"
-            f"one move of the weights, every {accumulate}\nbatches with this configuration.",
+            f"貯めた勾配で重みを 1 回動かす操作。\n名目累積は {accumulate} batch（warmup 中は変動）。\n"
+            f"one move of the weights; nominally {accumulate}\nbatches, but warmup can change this.",
             fontsize=7.8, color=INK, va="top", linespacing=1.6)
 
     ax.text(0.02, 0.205,
-            f"1 epoch = {batches} batch。勾配の累積があるため、この設定では 1 epoch の更新は "
-            f"{updates} 回です。\n"
-            f"{batches} batches per epoch; with accumulation this configuration makes {updates} "
-            f"weight {update_word} per epoch.\n"
-            "warmup の間は学習率を徐々に上げます。学習率と更新回数は設定で変わります。\n"
+            f"1 epoch = {batches} batch。実際の更新回数は、累積数や warmup の設定で変わります。\n"
+            f"{batches} batches per epoch; actual updates depend on accumulation and warmup.\n"
+            "warmup 中は学習率だけでなく累積数も変わり得ます。保存した設定とログを確認します。\n"
             "During warmup the learning rate ramps up; the rate and the number of updates are "
             "configuration choices.\n"
             "簡略化：この図は「1 batch = 1 更新」ではありません。 / Simplification: this is not "
@@ -2074,7 +2070,7 @@ def teach_units_conversion(out: Path) -> Path:
     ax.text(0.60, 0.600, "③ 許容差と丸めの取り決め / tolerance and the rounding policy",
             fontsize=9.4, color=ACCENT)
     ax.text(0.60, 0.550,
-            "この研修の比べ方 / how this course compares:\n"
+            "後半の板厚演習だけ / later thickness exercise only:\n"
             "  difference = round(measured − nominal, 6)\n"
             "  if abs(difference) <= tolerance:  → OK",
             fontsize=8.0, family="monospace", color=INK, va="top", linespacing=1.8)
@@ -2558,7 +2554,6 @@ def teach_training_update(out: Path) -> Path:
     batch_size, nominal_batch = 8, 64
     accumulate = max(1, round(nominal_batch / batch_size))
     batches_per_epoch = 64 // batch_size
-    updates_per_epoch = batches_per_epoch // accumulate
 
     fig, ax = _canvas((11.8, 5.4))
     ax.text(0.5, 0.97, "1 つの batch で起きること / what one batch does", ha="center",
@@ -2571,8 +2566,8 @@ def teach_training_update(out: Path) -> Path:
          WARN, "#fff8ec"),
         ("③ 勾配を求める / backward", "どの重みをどちらへ\n動かすかを計算し、\n勾配を貯める",
          ACCENT, "#eef4ff"),
-        ("④ 重みを更新する / step", f"{accumulate} batch 分を\nまとめて 1 回動かす\n"
-                                    "one update per group", OK, "#f2fbf5"),
+        ("④ 重みを更新する / step", f"名目累積 {accumulate} batch\nwarmup 中は変動\n"
+                                    "nominal group size", OK, "#f2fbf5"),
     ]
     for index, (title, body, edge, face) in enumerate(steps):
         x = 0.02 + index * 0.245
@@ -2590,11 +2585,9 @@ def teach_training_update(out: Path) -> Path:
     ax.text(0.02, 0.475, "数え方 / how the numbers are counted", fontsize=9, color=INK)
     numbering = [
         ("batch", f"{batch_size} 枚のまとまり / a group of {batch_size} images"),
-        ("optimizer step", f"重みの更新 1 回（{accumulate} batch ごと）/ one update per "
-                           f"{accumulate} batches"),
-        ("epoch", f"64 枚を 1 周 = {batches_per_epoch} batch = {updates_per_epoch} 回の更新 / "
-                  f"one pass = {batches_per_epoch} batches"),
-        ("epoch 10", f"更新は {10 * updates_per_epoch} 回 / {10 * updates_per_epoch} updates"),
+        ("optimizer step", "貯めた勾配で重みを1回更新 / apply gradients"),
+        ("epoch", f"64枚を1周 = {batches_per_epoch} batch / one pass"),
+        ("updates", "累積と warmup 次第 / depends on settings"),
     ]
     for index, (name, note) in enumerate(numbering):
         y = 0.415 - index * 0.075
@@ -2613,8 +2606,8 @@ def teach_training_update(out: Path) -> Path:
                 color=MUTED)
     ax.text(0.62, 0.215,
             "1 回の更新で変わる量は小さいので、\n何度も繰り返します。\n"
-            "warmup の間は学習率を徐々に上げます。\n"
-            "One update changes little, so the loop\nrepeats; warmup ramps the learning rate up.",
+            "warmup 中は学習率と累積数が変わり得ます。\n"
+            "One update changes little; warmup can\nchange the learning rate and accumulation.",
             fontsize=7.9, color=MUTED, va="top", linespacing=1.6)
     ax.text(0.02, 0.105,
             "推論では ① だけを行い、重みは動かしません。 / Inference runs only ①; the weights stay.",
@@ -2706,8 +2699,8 @@ def teach_leakage_split(out: Path) -> Path:
     difference = float(np.abs(original.astype(float) - twin.astype(float)).mean())
 
     fig = plt.figure(figsize=(11.8, 5.2))
-    left = fig.add_axes([0.02, 0.48, 0.20, 0.38])
-    right = fig.add_axes([0.24, 0.48, 0.20, 0.38])
+    left = fig.add_axes([0.02, 0.47, 0.20, 0.36])
+    right = fig.add_axes([0.24, 0.47, 0.20, 0.36])
     left.imshow(original)
     right.imshow(twin)
     left.set_title("① 撮影セッション A\ntrain_0000.png", fontsize=8.2)

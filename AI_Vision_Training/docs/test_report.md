@@ -1,5 +1,13 @@
 # 検証レポート / Test and validation report
 
+> **2026-11-15 CMD 移行:** 現行の準備手順は [START_HERE](../START_HERE.md)、
+> 今回の実行結果は [CMD 移行記録](reviews/2026-11-15_cmd_migration.md) を参照してください。
+> 以下の過去のシェル・コマンド・数値は当時の記録として保持しています。
+>
+> **2026-11-15 CMD migration:** Use [START_HERE](../START_HERE.md) for current setup and
+> the [migration record](reviews/2026-11-15_cmd_migration.md) for this pass's checks.
+> Historical shells, commands and results below are preserved, not re-executed claims.
+
 > **2026-11-15 の追補:** 最新の変更・検査は
 > [監査対応記録](reviews/2026-11-15_audit_remediation.md) を参照してください。
 > コードも変更したため、以下の過去の「16 冊実行成功」は今回の版の実行検証ではありません。
@@ -163,7 +171,7 @@ Two checks matter most:
 | 検出 / Detections | 5 件（`bus` 0.881、`person` 0.872 / 0.861 / 0.846 / 0.656） |
 | クラス数 / Classes | 80（`black_spot` は **含まれない** ことを確認 / confirmed absent） |
 
-PVC 風画像（`defect_multi.png`）では検出 0 件でした。これも **期待どおり** です
+塩ビ風画像（`defect_multi.png`）では検出 0 件でした。これも **期待どおり** です
 （COCO クラスに欠陥が無いため）。
 
 On the PVC-like image (`defect_multi.png`) there were zero detections — also **expected**,
@@ -200,7 +208,7 @@ Anomalib 2.7.0 の **本物の PatchCore** を CPU で学習させ、推論し�
 | 異常スコア最小 / min abnormal score | 0.473 |
 
 正常品の最大スコア（0.356）と異常品の最小スコア（0.473）の間にしきい値を置けば
-分離できました。**これは合成画像だからです。** 実際の PVC ではここまで分離しません。
+分離できました。**これは合成画像だからです。** 実際の塩ビではここまで分離しません。
 
 A threshold between the maximum normal score (0.356) and the minimum abnormal score
 (0.473) separates the two groups — **because the images are synthetic**. Real PVC will not separate
@@ -282,7 +290,7 @@ Listed honestly.
 
 ## 8. 残っている制限 / Remaining limitations
 
-1. **データはすべて合成** — 実際の PVC の光学的挙動を再現していない
+1. **データはすべて合成** — 実際の塩ビの光学的挙動を再現していない
 2. **学習画像は 64 枚** — 過学習が起きやすい条件。数字は低めに出る
 3. **PatchCore の評価データは 26 枚** — 検証と試験に半分ずつ分けているため
 4. **旧比較は撤回済み** — 同じデータでしきい値を調整した楽観的な記録（5.4 のアーカイブ）

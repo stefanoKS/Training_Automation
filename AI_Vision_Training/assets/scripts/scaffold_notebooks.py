@@ -365,8 +365,10 @@ def main(argv=None) -> int:
     args = parser.parse_args(argv)
 
     root = args.root.resolve()
+    from course_notebooks import course_notebooks
+
     reports = [scaffold(path, root, write=not args.report)
-               for path in sorted((root / "notebooks").rglob("*.ipynb"))]
+               for path in course_notebooks(root / "notebooks")]
 
     if args.json:
         print(json.dumps(reports, indent=2, ensure_ascii=False))

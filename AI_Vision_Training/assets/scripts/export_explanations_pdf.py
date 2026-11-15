@@ -44,6 +44,7 @@ import os
 import re
 import sys
 from pathlib import Path
+from course_notebooks import course_notebooks
 
 from PIL import Image as PILImage
 from reportlab.lib import colors
@@ -840,7 +841,7 @@ def _sources(styles: dict, day_keys: list[str]) -> list:
     for key in day_keys:
         flowables.append(Paragraph(f"{DAYS[key]['ja']} / {DAYS[key]['en']}", styles["h3"]))
         for stem in DAYS[key]["notebooks"]:
-            matches = sorted(NOTEBOOK_DIR.rglob(f"{stem}.ipynb"))
+            matches = course_notebooks(NOTEBOOK_DIR, f"{stem}.ipynb")
             if matches:
                 flowables.append(_bullet_flowable(
                     matches[0].relative_to(COURSE_ROOT).as_posix(), styles))
@@ -895,9 +896,9 @@ def build_pdf(out_path: Path, day_keys: list[str], footer_label: str, styles: di
             story.append(_bullet_flowable(f"{index}. {objective}", styles))
 
         for stem in info["notebooks"]:
-            matches = sorted(NOTEBOOK_DIR.rglob(f"{stem}.ipynb"))
-            if not matches:
-                raise SystemExit(f"notebook not found: {stem}")
+            matches = course_notebooks(NOTEBOOK_DIR, f"{stem}.ipynb")
+            if len(matches) != 1:
+                raise SystemExit(f"{stem}: expected exactly one notebook, found {matches}")
             story.extend(notebook_flowables(matches[0], styles,
                                             title_toc_level=0 if single else 1))
 

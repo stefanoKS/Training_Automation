@@ -105,7 +105,7 @@ Record the comparison on the same images.
 
 ---
 
-## 5. PVC 検査への推奨 / Recommendation for PVC inspection
+## 5. 塩ビ検査への推奨 / Recommendation for PVC inspection
 
 根拠となる数字を必ず引用してください。
 

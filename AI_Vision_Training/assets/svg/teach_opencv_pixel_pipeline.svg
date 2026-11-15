@@ -1,40 +1,43 @@
 <?xml version='1.0' encoding='utf-8'?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 590" width="900" height="590" role="img">
-  <title>opencv pixel pipeline</title>
+  <title>画素から反転マスクへ / pixels to inverse mask</title>
   <rect x="0" y="0" width="900" height="590" fill="white" stroke="#d0d7de" />
-  <text x="24" y="36" font-size="23" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="223.00">opencv pixel pipeline</text>
-  <text x="24" y="572" font-size="15" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="413.00">出典 / source: schematic; source-checked course constants</text>
-  <rect x="24" y="62" width="414" height="141" fill="#f6f8fa" stroke="#1f6feb" />
-  <text x="38" y="91" font-size="20" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#1f6feb" data-text-width="147.50">① 入力 / source</text>
-  <text x="38" y="121" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="237.50">cv2.imread -&gt; BGR channels</text>
-  <text x="38" y="148" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="236.00">BGR -&gt; cv2.cvtColor -&gt; gray</text>
-  <rect x="462" y="62" width="414" height="141" fill="#f6f8fa" stroke="#9a6700" />
-  <text x="476" y="91" font-size="20" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#9a6700" data-text-width="231.50">② 画素値 / gray toy array</text>
-  <text x="476" y="121" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="113.00">[40, 120, 121]</text>
-  <text x="476" y="148" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="113.00">[210, 40, 210]</text>
-  <rect x="24" y="219" width="414" height="141" fill="#f6f8fa" stroke="#8250df" />
-  <text x="38" y="248" font-size="20" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#8250df" data-text-width="232.00">③ 反転しきい値 / inverse</text>
-  <text x="38" y="278" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="227.00">gray &lt;= 120 -&gt; 255 (white)</text>
-  <text x="38" y="305" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="192.50">gray &gt; 120 -&gt; 0 (black)</text>
-  <rect x="462" y="219" width="414" height="141" fill="#f6f8fa" stroke="#1a7f37" />
-  <text x="476" y="248" font-size="20" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#1a7f37" data-text-width="216.50">④ マスク / binary mask</text>
-  <text x="476" y="278" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="103.00">[255, 255, 0]</text>
-  <text x="476" y="305" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="83.00">[0, 255, 0]</text>
-  <rect x="24" y="376" width="414" height="141" fill="#f6f8fa" stroke="#a40e26" />
-  <text x="38" y="405" font-size="20" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#a40e26" data-text-width="166.00">⑤ 輪郭 / contours</text>
-  <text x="38" y="435" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="168.00">Foreground: 3 pixels</text>
-  <text x="38" y="462" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="175.50">Connected regions: 1</text>
-  <rect x="462" y="376" width="414" height="141" fill="#f6f8fa" stroke="#9a6700" />
-  <text x="476" y="405" font-size="20" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#9a6700" data-text-width="214.50">⑥ 面積条件 / area filter</text>
-  <text x="476" y="435" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="191.50">cv2.contourArea -&gt; px²</text>
-  <text x="476" y="462" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="258.50">Not brightness, not pixel count.</text>
-  <line x1="438" y1="132" x2="459" y2="132" stroke="#9a6700" stroke-width="2" />
-  <line x1="453" y1="128" x2="459" y2="132" stroke="#9a6700" stroke-width="2" />
-  <line x1="453" y1="136" x2="459" y2="132" stroke="#9a6700" stroke-width="2" />
-  <line x1="438" y1="289" x2="459" y2="289" stroke="#9a6700" stroke-width="2" />
-  <line x1="453" y1="285" x2="459" y2="289" stroke="#9a6700" stroke-width="2" />
-  <line x1="453" y1="293" x2="459" y2="289" stroke="#9a6700" stroke-width="2" />
-  <line x1="438" y1="446" x2="459" y2="446" stroke="#9a6700" stroke-width="2" />
-  <line x1="453" y1="442" x2="459" y2="446" stroke="#9a6700" stroke-width="2" />
-  <line x1="453" y1="450" x2="459" y2="446" stroke="#9a6700" stroke-width="2" />
+  <text x="24" y="36" font-size="23" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="488.50">画素から反転マスクへ / pixels to inverse mask</text>
+  <text x="24" y="572" font-size="15" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="339.00">出典 / source: computed synthetic; cv2.threshold</text>
+  <text x="70" y="99" font-size="23" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#1f6feb" data-text-width="138.50">グレー / gray</text>
+  <rect x="70" y="130" width="78" height="78" fill="#282828" stroke="#d0d7de" />
+  <text x="87" y="178" font-size="24" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="white" data-text-width="27.00">40</text>
+  <rect x="150" y="130" width="78" height="78" fill="#787878" stroke="#d0d7de" />
+  <text x="167" y="178" font-size="24" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="white" data-text-width="40.50">120</text>
+  <rect x="230" y="130" width="78" height="78" fill="#797979" stroke="#d0d7de" />
+  <text x="247" y="178" font-size="24" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="white" data-text-width="40.50">121</text>
+  <rect x="70" y="210" width="78" height="78" fill="#d2d2d2" stroke="#d0d7de" />
+  <text x="87" y="258" font-size="24" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="40.50">210</text>
+  <rect x="150" y="210" width="78" height="78" fill="#282828" stroke="#d0d7de" />
+  <text x="167" y="258" font-size="24" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="white" data-text-width="27.00">40</text>
+  <rect x="230" y="210" width="78" height="78" fill="#d2d2d2" stroke="#d0d7de" />
+  <text x="247" y="258" font-size="24" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="40.50">210</text>
+  <text x="550" y="99" font-size="23" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#1f6feb" data-text-width="278.50">反転マスク / inverse mask</text>
+  <rect x="550" y="130" width="78" height="78" fill="#ffffff" stroke="#d0d7de" />
+  <text x="567" y="178" font-size="24" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="40.50">255</text>
+  <rect x="630" y="130" width="78" height="78" fill="#ffffff" stroke="#d0d7de" />
+  <text x="647" y="178" font-size="24" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="40.50">255</text>
+  <rect x="710" y="130" width="78" height="78" fill="#000000" stroke="#d0d7de" />
+  <text x="727" y="178" font-size="24" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="white" data-text-width="13.50">0</text>
+  <rect x="550" y="210" width="78" height="78" fill="#000000" stroke="#d0d7de" />
+  <text x="567" y="258" font-size="24" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="white" data-text-width="13.50">0</text>
+  <rect x="630" y="210" width="78" height="78" fill="#ffffff" stroke="#d0d7de" />
+  <text x="647" y="258" font-size="24" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="40.50">255</text>
+  <rect x="710" y="210" width="78" height="78" fill="#000000" stroke="#d0d7de" />
+  <text x="727" y="258" font-size="24" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="white" data-text-width="13.50">0</text>
+  <line x1="330" y1="210" x2="525" y2="210" stroke="#1f6feb" stroke-width="2" />
+  <line x1="519" y1="206" x2="525" y2="210" stroke="#1f6feb" stroke-width="2" />
+  <line x1="519" y1="214" x2="525" y2="210" stroke="#1f6feb" stroke-width="2" />
+  <text x="335" y="170" font-size="20" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#9a6700" data-text-width="144.50">threshold = 120</text>
+  <text x="335" y="255" font-size="20" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="96.00">&lt;= -&gt; 255</text>
+  <text x="335" y="290" font-size="20" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="59.50">&gt; -&gt; 0</text>
+  <text x="70" y="356" font-size="23" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="303.50">白画素 / foreground: 3 pixels</text>
+  <text x="70" y="404" font-size="23" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="338.00">連結成分 / connected regions: 1</text>
+  <text x="70" y="452" font-size="23" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="336.00">輪郭面積 / contour area: 0.5 px²</text>
+  <text x="70" y="513" font-size="20" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="678.50">画素数・連結成分数・輪郭面積は別の量 / counts and geometric area differ</text>
 </svg>

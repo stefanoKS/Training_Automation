@@ -1,40 +1,48 @@
 <?xml version='1.0' encoding='utf-8'?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 590" width="900" height="590" role="img">
-  <title>code cell lifecycle</title>
+  <title>実行順とメモリ / execution order and memory</title>
   <rect x="0" y="0" width="900" height="590" fill="white" stroke="#d0d7de" />
-  <text x="24" y="36" font-size="23" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="189.00">code cell lifecycle</text>
-  <text x="24" y="572" font-size="15" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="413.00">出典 / source: schematic; source-checked course constants</text>
-  <rect x="24" y="62" width="414" height="141" fill="#f6f8fa" stroke="#1f6feb" />
-  <text x="38" y="91" font-size="20" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#1f6feb" data-text-width="181.50">① 初期化 / initialise</text>
-  <text x="38" y="121" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="141.50">defect_count = 3</text>
-  <text x="38" y="148" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="198.50">Shift+Enter -&gt; kernel: 3</text>
-  <rect x="462" y="62" width="414" height="141" fill="#f6f8fa" stroke="#9a6700" />
-  <text x="476" y="91" font-size="20" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#9a6700" data-text-width="255.00">② 加算セル / increment cell</text>
-  <text x="476" y="121" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="273.00">defect_count = defect_count + 1</text>
-  <text x="476" y="148" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="112.00">kernel: 3 -&gt; 4</text>
-  <rect x="24" y="219" width="414" height="141" fill="#f6f8fa" stroke="#8250df" />
-  <text x="38" y="248" font-size="20" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#8250df" data-text-width="144.00">③ 出力 / stdout</text>
-  <text x="38" y="278" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="161.00">print(defect_count)</text>
-  <text x="38" y="305" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="10.00">4</text>
-  <rect x="462" y="219" width="414" height="141" fill="#f6f8fa" stroke="#1a7f37" />
-  <text x="476" y="248" font-size="20" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#1a7f37" data-text-width="235.00">④ 加算だけ再実行 / rerun</text>
-  <text x="476" y="278" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="112.00">kernel: 4 -&gt; 5</text>
-  <text x="476" y="305" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="79.50">print -&gt; 5</text>
-  <rect x="24" y="376" width="414" height="141" fill="#f6f8fa" stroke="#a40e26" />
-  <text x="38" y="405" font-size="20" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#a40e26" data-text-width="167.00">⑤ 再起動 / restart</text>
-  <text x="38" y="435" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="178.50">Variables are cleared.</text>
-  <text x="38" y="462" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="257.50">Run initialise before increment.</text>
-  <rect x="462" y="376" width="414" height="141" fill="#f6f8fa" stroke="#9a6700" />
-  <text x="476" y="405" font-size="20" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#9a6700" data-text-width="150.50">⑥ エラー / error</text>
-  <text x="476" y="435" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="257.50">Undefined name -&gt; NameError</text>
-  <text x="476" y="462" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="228.00">Run the missing earlier cell.</text>
-  <line x1="438" y1="132" x2="459" y2="132" stroke="#9a6700" stroke-width="2" />
-  <line x1="453" y1="128" x2="459" y2="132" stroke="#9a6700" stroke-width="2" />
-  <line x1="453" y1="136" x2="459" y2="132" stroke="#9a6700" stroke-width="2" />
-  <line x1="438" y1="289" x2="459" y2="289" stroke="#9a6700" stroke-width="2" />
-  <line x1="453" y1="285" x2="459" y2="289" stroke="#9a6700" stroke-width="2" />
-  <line x1="453" y1="293" x2="459" y2="289" stroke="#9a6700" stroke-width="2" />
-  <line x1="438" y1="446" x2="459" y2="446" stroke="#9a6700" stroke-width="2" />
-  <line x1="453" y1="442" x2="459" y2="446" stroke="#9a6700" stroke-width="2" />
-  <line x1="453" y1="450" x2="459" y2="446" stroke="#9a6700" stroke-width="2" />
+  <text x="24" y="36" font-size="23" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="490.00">実行順とメモリ / execution order and memory</text>
+  <text x="24" y="572" font-size="15" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="382.00">出典 / source: schematic; executable kernel transitions</text>
+  <text x="50" y="88" font-size="20" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#1f6feb" data-text-width="156.00">defect_count = 3</text>
+  <rect x="50" y="110" width="230" height="98" fill="#e8f0ff" stroke="#1f6feb" />
+  <text x="66" y="149" font-size="22" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="175.00">カーネル / kernel</text>
+  <text x="66" y="188" font-size="22" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#1f6feb" data-text-width="157.50">defect_count: 3</text>
+  <text x="50" y="249" font-size="23" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="102.00">print -&gt; 3</text>
+  <text x="335" y="88" font-size="20" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#1f6feb" data-text-width="170.50">defect_count += 1</text>
+  <rect x="335" y="110" width="230" height="98" fill="#e8f0ff" stroke="#1f6feb" />
+  <text x="351" y="149" font-size="22" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="175.00">カーネル / kernel</text>
+  <text x="351" y="188" font-size="22" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#1f6feb" data-text-width="157.50">defect_count: 4</text>
+  <text x="335" y="249" font-size="23" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="102.00">print -&gt; 4</text>
+  <text x="620" y="88" font-size="20" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#1f6feb" data-text-width="170.50">defect_count += 1</text>
+  <rect x="620" y="110" width="230" height="98" fill="#e8f0ff" stroke="#1f6feb" />
+  <text x="636" y="149" font-size="22" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="175.00">カーネル / kernel</text>
+  <text x="636" y="188" font-size="22" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#1f6feb" data-text-width="157.50">defect_count: 5</text>
+  <text x="620" y="249" font-size="23" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="102.00">print -&gt; 5</text>
+  <line x1="281" y1="160" x2="329" y2="160" stroke="#1f6feb" stroke-width="2" />
+  <line x1="323" y1="156" x2="329" y2="160" stroke="#1f6feb" stroke-width="2" />
+  <line x1="323" y1="164" x2="329" y2="160" stroke="#1f6feb" stroke-width="2" />
+  <line x1="566" y1="160" x2="614" y2="160" stroke="#1f6feb" stroke-width="2" />
+  <line x1="608" y1="156" x2="614" y2="160" stroke="#1f6feb" stroke-width="2" />
+  <line x1="608" y1="164" x2="614" y2="160" stroke="#1f6feb" stroke-width="2" />
+  <rect x="50" y="301" width="230" height="139" fill="#f6f8fa" stroke="#9a6700" />
+  <text x="60" y="333" font-size="19" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#9a6700" data-text-width="134.50">再起動 / restart</text>
+  <text x="60" y="374" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="187.50">メモリを消去 / cleared</text>
+  <text x="60" y="414" font-size="20" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#9a6700" data-text-width="151.00">No defect_count</text>
+  <rect x="335" y="301" width="230" height="139" fill="#f6f8fa" stroke="#a40e26" />
+  <text x="345" y="333" font-size="19" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#a40e26" data-text-width="203.00">加算を試す / increment</text>
+  <text x="345" y="374" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="154.50">defect_count += 1</text>
+  <text x="345" y="414" font-size="20" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#a40e26" data-text-width="100.00">NameError</text>
+  <rect x="620" y="301" width="230" height="139" fill="#f6f8fa" stroke="#1a7f37" />
+  <text x="630" y="333" font-size="19" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#1a7f37" data-text-width="123.00">復旧 / recover</text>
+  <text x="630" y="374" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="141.50">defect_count = 3</text>
+  <text x="630" y="414" font-size="20" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#1a7f37" data-text-width="137.00">increment -&gt; 4</text>
+  <line x1="281" y1="375" x2="329" y2="375" stroke="#a40e26" stroke-width="2" />
+  <line x1="323" y1="371" x2="329" y2="375" stroke="#a40e26" stroke-width="2" />
+  <line x1="323" y1="379" x2="329" y2="375" stroke="#a40e26" stroke-width="2" />
+  <line x1="566" y1="375" x2="614" y2="375" stroke="#1a7f37" stroke-width="2" />
+  <line x1="608" y1="371" x2="614" y2="375" stroke="#1a7f37" stroke-width="2" />
+  <line x1="608" y1="379" x2="614" y2="375" stroke="#1a7f37" stroke-width="2" />
+  <text x="50" y="486" font-size="21" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="672.00">加算だけを再実行すると値が増えます。再起動後は初期化が必要です。</text>
+  <text x="50" y="526" font-size="19" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="696.00">Rerunning increment changes memory; after restart, initialise before increment.</text>
 </svg>

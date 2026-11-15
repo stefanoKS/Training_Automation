@@ -1,6 +1,6 @@
-"""合成PVCシート表面画像ジェネレータ / Synthetic PVC sheet surface generator.
+"""合成塩ビシート表面画像ジェネレータ / Synthetic PVC sheet surface generator.
 
-このモジュールは研修教材用の「PVC シートらしい」合成画像を作るための共通部品です。
+このモジュールは研修教材用の「塩ビシートらしい」合成画像を作るための共通部品です。
 実際の工場画像ではありません。見た目の傾向（明るさ・テクスチャ・ノイズ・欠陥）を
 学習用に簡略化して再現しているだけです。
 
@@ -139,7 +139,7 @@ def make_base_surface(
     grain_strength: float = 3.4,
     tint: Sequence[float] = (1.0, 1.0, 1.005),
 ) -> np.ndarray:
-    """正常な PVC シート表面を float32 の HxWx3 配列 (0-255) で返す。
+    """正常な塩ビシート表面を float32 の HxWx3 配列 (0-255) で返す。
 
     Render a normal PVC-like surface as a float32 HxWx3 array in the 0-255 range.
     """

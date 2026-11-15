@@ -148,7 +148,7 @@ Reference results are **not** measurements taken on your machine. Never submit t
 **任意 / Optional:** the colour and area experiments under "さらに学ぶ" in `Day01_01`.
 
 **課題 / Assignment:** AI と画像認識の説明、画像を Python で加工した結果、
-PVC 検査に使えそうな手法の提案。
+塩ビ検査に使えそうな手法の提案。
 Explain AI and image recognition, show one image you modified in Python, and propose a method that
 could work for PVC inspection.
 
@@ -232,7 +232,7 @@ pixel-to-mm conversion with its error.
 | 順番 / # | ノートブック / Notebook | 所要 / Duration | 前提 / Prerequisites |
 |---|---|---|---|
 | 1 | `Day03_01_YOLO_Concepts.ipynb` | 80 分 | 第2日 / Day 2 |
-| 2 | `Day03_02_YOLO_Inference.ipynb` | 85 分 | `Day03_01`、`yolo11n.pt` のダウンロード完了 |
+| 2 | `Day03_02_YOLO_Inference.ipynb` | 85 分 | `Day03_01`、`yolo26n.pt` のダウンロード完了 |
 | 3 | `Day03_03_YOLO_Experiments.ipynb` | 110 分 | `Day03_02` |
 
 **任意 / Optional:** `Day03_03` の「さらに学ぶ」にある `imgsz` を 1280 より大きくする実験。
@@ -336,7 +336,7 @@ PatchCore's `fit` takes several minutes on CPU; the 11:10–12:00 slot includes 
 **任意 / Optional:** the three-way validation threshold sweep under "さらに学ぶ" in `Day05_03`.
 
 **課題 / Assignment:** PatchCore の学習結果、ヒートマップ、比較表、
-PVC 検査への推薦（判断と理由）。
+塩ビ検査への推薦（判断と理由）。
 The PatchCore result, the heatmaps, the comparison table and a recommendation for PVC with reasons.
 
 ---
@@ -404,7 +404,7 @@ Week 1 is the **foundation**; the real inspection system is covered in Week 2.
 
 | 第 2 週の内容 / Week 2 content |
 |---|
-| PVC 固有の検査要件の整理 / the actual PVC inspection requirements |
+| 塩ビ固有の検査要件の整理 / the actual PVC inspection requirements |
 | カメラ・レンズ・照明の選定（0.3 mm を写すには何画素必要か） / camera, lens and lighting selection |
 | 撮影条件の設計と校正 / imaging setup and calibration |
 | 実画像でのデータ収集と注釈 / collecting and annotating real images |
