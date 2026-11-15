@@ -355,12 +355,23 @@ def _note_flowable(text: str, styles: dict, colour=NOTE_BG) -> Table:
 
 
 def _image_size(path: Path) -> tuple[int, int]:
+    path = _pdf_image_path(path)
     with PILImage.open(path) as handle:
         return handle.size
 
 
+def _pdf_image_path(path: Path) -> Path:
+    if path.suffix.lower() == ".svg":
+        fallback = path.parent.parent / "diagrams" / f"{path.stem}_svg.png"
+        if not fallback.is_file():
+            raise FileNotFoundError(f"SVG PDF fallback missing: {fallback}; run generate_svg_figures.py")
+        return fallback
+    return path
+
+
 def _image_flowable(path: Path, max_w: float = MAX_IMAGE_W,
                     max_h: float = MAX_IMAGE_H) -> Image:
+    path = _pdf_image_path(path)
     width, height = _image_size(path)
     scale = min(max_w / width, max_h / height, 1.0)
     return Image(str(path), width=width * scale, height=height * scale)

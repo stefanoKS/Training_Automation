@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 590" width="900" height="590" role="img">
+  <title>yolo result object</title>
+  <rect x="0" y="0" width="900" height="590" fill="white" stroke="#d0d7de" />
+  <text x="24" y="36" font-size="23" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="183.50">yolo result object</text>
+  <text x="24" y="572" font-size="15" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="413.00">出典 / source: schematic; source-checked course constants</text>
+  <rect x="24" y="62" width="414" height="141" fill="#f6f8fa" stroke="#1f6feb" />
+  <text x="38" y="91" font-size="20" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#1f6feb" data-text-width="132.50">① 入力 / input</text>
+  <text x="38" y="121" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="294.50">Local image + saved YOLO weights</text>
+  <text x="38" y="148" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="177.00">model.predict(image)</text>
+  <rect x="462" y="62" width="414" height="141" fill="#f6f8fa" stroke="#9a6700" />
+  <text x="476" y="91" font-size="20" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#9a6700" data-text-width="162.00">② 戻り値 / return</text>
+  <text x="476" y="121" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="112.00">list of Results</text>
+  <text x="476" y="148" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="187.00">One Results per image</text>
+  <rect x="24" y="219" width="414" height="141" fill="#f6f8fa" stroke="#8250df" />
+  <text x="38" y="248" font-size="20" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#8250df" data-text-width="141.50">③ 四角 / Boxes</text>
+  <text x="38" y="278" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="233.50">result.boxes.cls -&gt; class IDs</text>
+  <text x="38" y="305" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="225.50">result.boxes.conf -&gt; scores</text>
+  <rect x="462" y="219" width="414" height="141" fill="#f6f8fa" stroke="#1a7f37" />
+  <text x="476" y="248" font-size="20" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#1a7f37" data-text-width="193.00">④ 座標 / coordinates</text>
+  <text x="476" y="278" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="256.50">result.boxes.xyxy -&gt; original px</text>
+  <text x="476" y="305" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="277.50">N boxes -&gt; N rows, 4 coordinates</text>
+  <rect x="24" y="376" width="414" height="141" fill="#f6f8fa" stroke="#a40e26" />
+  <text x="38" y="405" font-size="20" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#a40e26" data-text-width="215.50">⑤ 表示と保存 / outputs</text>
+  <text x="38" y="435" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="220.00">result.plot() -&gt; BGR image</text>
+  <text x="38" y="462" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="241.00">CSV: class, score, x1,y1,x2,y2</text>
+  <rect x="462" y="376" width="414" height="141" fill="#f6f8fa" stroke="#9a6700" />
+  <text x="476" y="405" font-size="20" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#9a6700" data-text-width="210.50">⑥ 解釈 / interpretation</text>
+  <text x="476" y="435" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="286.50">Confidence is not truth probability.</text>
+  <text x="476" y="462" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="279.50">No boxes -&gt; empty table (0 rows)</text>
+  <line x1="438" y1="132" x2="459" y2="132" stroke="#9a6700" stroke-width="2" />
+  <line x1="453" y1="128" x2="459" y2="132" stroke="#9a6700" stroke-width="2" />
+  <line x1="453" y1="136" x2="459" y2="132" stroke="#9a6700" stroke-width="2" />
+  <line x1="438" y1="289" x2="459" y2="289" stroke="#9a6700" stroke-width="2" />
+  <line x1="453" y1="285" x2="459" y2="289" stroke="#9a6700" stroke-width="2" />
+  <line x1="453" y1="293" x2="459" y2="289" stroke="#9a6700" stroke-width="2" />
+  <line x1="438" y1="446" x2="459" y2="446" stroke="#9a6700" stroke-width="2" />
+  <line x1="453" y1="442" x2="459" y2="446" stroke="#9a6700" stroke-width="2" />
+  <line x1="453" y1="450" x2="459" y2="446" stroke="#9a6700" stroke-width="2" />
+</svg>

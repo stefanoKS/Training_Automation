@@ -40,11 +40,13 @@ Windows policy blocks running PowerShell scripts.
 **対処 / Fix:**
 
 ```powershell
-Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy RemoteSigned
 ```
 
-`Y` を押して確定し、もう一度有効化します。
-Answer `Y`, then activate again.
+組織が許可する場合だけ現在の窓で設定し、もう一度有効化します。管理者権限は不要です。
+ポリシーを変えられなければ `.\.venv\Scripts\python.exe` を直接使います。
+Only if permitted by your organisation, apply this to the current window and activate again.
+No administrator is needed. Otherwise call `.\.venv\Scripts\python.exe` directly.
 
 ```powershell
 .\.venv\Scripts\Activate.ps1
@@ -188,14 +190,11 @@ Never mix the two environments. Always check the prompt (`(.venv)` or
 ```powershell
 .\.venv\Scripts\Activate.ps1
 python assets\scripts\generate_training_assets.py
-python assets\scripts\prepare_datasets.py --force
+python assets\scripts\prepare_datasets.py
 ```
 
-`--force` は既存データを消して作り直します。
-**受講者の提出物（`submissions/`）は消えません。**
-
-`--force` deletes and rebuilds only the generated datasets. Student work in
-`submissions/` is untouched.
+通常は既存データを再利用します。意図的に再生成する場合だけ講師と相談してください。
+Normally reuse existing data. Discuss deliberate regeneration with the instructor first.
 
 ### 6.1 実写の参考画像が見つからない / the reference photographs are missing
 
@@ -226,6 +225,14 @@ command. `--offline` verifies the saved files without any network request.
 ---
 
 ## 7. モデルのダウンロードに失敗する / model download fails
+
+授業前の取得・オフライン検査は [START_HERE.md](../../START_HERE.md) ステップ7です。
+`preload_models.py` は YOLO の重みと bus の例、Anomalib の resnet18 キャッシュを検査します。
+`--offline` はネットワークに接続せず、不足をエラーとして報告します。
+
+Use [START_HERE.md](../../START_HERE.md) Step 7 to preload and verify offline.
+`preload_models.py` checks YOLO weights/bus example and Anomalib's resnet18 cache.
+`--offline` never requests the network and reports missing inputs as errors.
 
 **症状 / Symptom:** `URLError`、`TimeoutError`、`yolo26n.pt` が取得できない。
 

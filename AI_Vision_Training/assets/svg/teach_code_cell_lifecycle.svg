@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 590" width="900" height="590" role="img">
+  <title>code cell lifecycle</title>
+  <rect x="0" y="0" width="900" height="590" fill="white" stroke="#d0d7de" />
+  <text x="24" y="36" font-size="23" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="189.00">code cell lifecycle</text>
+  <text x="24" y="572" font-size="15" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="413.00">出典 / source: schematic; source-checked course constants</text>
+  <rect x="24" y="62" width="414" height="141" fill="#f6f8fa" stroke="#1f6feb" />
+  <text x="38" y="91" font-size="20" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#1f6feb" data-text-width="181.50">① 初期化 / initialise</text>
+  <text x="38" y="121" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="141.50">defect_count = 3</text>
+  <text x="38" y="148" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="198.50">Shift+Enter -&gt; kernel: 3</text>
+  <rect x="462" y="62" width="414" height="141" fill="#f6f8fa" stroke="#9a6700" />
+  <text x="476" y="91" font-size="20" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#9a6700" data-text-width="255.00">② 加算セル / increment cell</text>
+  <text x="476" y="121" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="273.00">defect_count = defect_count + 1</text>
+  <text x="476" y="148" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="112.00">kernel: 3 -&gt; 4</text>
+  <rect x="24" y="219" width="414" height="141" fill="#f6f8fa" stroke="#8250df" />
+  <text x="38" y="248" font-size="20" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#8250df" data-text-width="144.00">③ 出力 / stdout</text>
+  <text x="38" y="278" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="161.00">print(defect_count)</text>
+  <text x="38" y="305" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="10.00">4</text>
+  <rect x="462" y="219" width="414" height="141" fill="#f6f8fa" stroke="#1a7f37" />
+  <text x="476" y="248" font-size="20" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#1a7f37" data-text-width="235.00">④ 加算だけ再実行 / rerun</text>
+  <text x="476" y="278" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="112.00">kernel: 4 -&gt; 5</text>
+  <text x="476" y="305" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="79.50">print -&gt; 5</text>
+  <rect x="24" y="376" width="414" height="141" fill="#f6f8fa" stroke="#a40e26" />
+  <text x="38" y="405" font-size="20" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#a40e26" data-text-width="167.00">⑤ 再起動 / restart</text>
+  <text x="38" y="435" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="178.50">Variables are cleared.</text>
+  <text x="38" y="462" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="257.50">Run initialise before increment.</text>
+  <rect x="462" y="376" width="414" height="141" fill="#f6f8fa" stroke="#9a6700" />
+  <text x="476" y="405" font-size="20" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#9a6700" data-text-width="150.50">⑥ エラー / error</text>
+  <text x="476" y="435" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="257.50">Undefined name -&gt; NameError</text>
+  <text x="476" y="462" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="228.00">Run the missing earlier cell.</text>
+  <line x1="438" y1="132" x2="459" y2="132" stroke="#9a6700" stroke-width="2" />
+  <line x1="453" y1="128" x2="459" y2="132" stroke="#9a6700" stroke-width="2" />
+  <line x1="453" y1="136" x2="459" y2="132" stroke="#9a6700" stroke-width="2" />
+  <line x1="438" y1="289" x2="459" y2="289" stroke="#9a6700" stroke-width="2" />
+  <line x1="453" y1="285" x2="459" y2="289" stroke="#9a6700" stroke-width="2" />
+  <line x1="453" y1="293" x2="459" y2="289" stroke="#9a6700" stroke-width="2" />
+  <line x1="438" y1="446" x2="459" y2="446" stroke="#9a6700" stroke-width="2" />
+  <line x1="453" y1="442" x2="459" y2="446" stroke="#9a6700" stroke-width="2" />
+  <line x1="453" y1="450" x2="459" y2="446" stroke="#9a6700" stroke-width="2" />
+</svg>

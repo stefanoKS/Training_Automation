@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 590" width="900" height="590" role="img">
+  <title>1つの四角、3つの形式 / one box, three formats</title>
+  <rect x="0" y="0" width="900" height="590" fill="white" stroke="#d0d7de" />
+  <text x="24" y="36" font-size="23" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="497.50">1つの四角、3つの形式 / one box, three formats</text>
+  <text x="24" y="572" font-size="15" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="340.00">出典 / source: computed schematic; BBOX_XYXY</text>
+  <rect x="60" y="110" width="240" height="240" fill="#e8f0ff" stroke="#1f6feb" />
+  <rect x="156" y="182" width="72" height="60" fill="none" stroke="#a40e26" />
+  <line x1="186.0" y1="212.0" x2="198.0" y2="212.0" stroke="#a40e26" stroke-width="2" />
+  <line x1="192.0" y1="206.0" x2="192.0" y2="218.0" stroke="#a40e26" stroke-width="2" />
+  <text x="60" y="87" font-size="22" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#1f6feb" data-text-width="215.00">W=240 px; H=240 px</text>
+  <text x="60" y="391" font-size="21" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#a40e26" data-text-width="216.00">左上 / top-left: (96,72)</text>
+  <text x="60" y="430" font-size="21" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#a40e26" data-text-width="288.50">右下 / bottom-right: (168,132)</text>
+  <text x="370" y="123" font-size="20" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="222.00">xyxy = (96, 72, 168, 132)</text>
+  <text x="370" y="166" font-size="20" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="271.00">OpenCV xywh = (96,72,72,60)</text>
+  <text x="370" y="209" font-size="20" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="311.00">Ultralytics xywh = (132,102,72,60)</text>
+  <text x="370" y="256" font-size="20" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="317.50">xc=(x1+x2)/2/W; yc=(y1+y2)/2/H</text>
+  <text x="370" y="299" font-size="20" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="250.50">w=(x2-x1)/W; h=(y2-y1)/H</text>
+  <text x="370" y="348" font-size="22" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#8250df" data-text-width="324.50">YOLO: 0 0.550 0.425 0.300 0.250</text>
+  <text x="370" y="391" font-size="20" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="216.50">class_id=0 is an integer</text>
+  <text x="370" y="434" font-size="20" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="377.00">Only the four coordinates are normalised.</text>
+  <text x="60" y="502" font-size="21" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#9a6700" data-text-width="565.50">右下の端は含めない / right and bottom edges are exclusive</text>
+</svg>

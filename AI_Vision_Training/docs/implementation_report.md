@@ -1,5 +1,17 @@
 # 実装・検証レポート / Implementation and validation report
 
+## 追補 2026-11-15 / Audit remediation amendment
+
+今回の変更・実行した検査は [監査対応記録](reviews/2026-11-15_audit_remediation.md)、
+図の出典は [図の一覧](visual_figure_manifest.md) を参照してください。以下の過去の実行記録は
+今回の再実行を意味しません。旧26枚比較は **SUPERSEDED / biased**（しきい値を同じデータで調整）。
+現在は Day05_03 の較正 → 全設定固定 → 未使用試験を主手順とします。
+
+See the [remediation record](reviews/2026-11-15_audit_remediation.md) for this amendment's checks,
+and the [figure manifest](visual_figure_manifest.md) for sources. Historical execution records below
+are not new reruns. The old 26-image comparison is **SUPERSEDED / biased** (threshold tuned on the
+same data). The main method is now Day05_03: calibration → freeze all settings → untouched test.
+
 **実施日 / Date:** 2026 年 11 月 13 日（初版）/ 14 日（改訂）/ 13 November 2026 (first issue), 14 November 2026 (revision)
 **作業ディレクトリ / Working directory:** `C:\Users\14413\Documents\Training_Automation`
 **教材ルート / Course root:** `C:\Users\14413\Documents\Training_Automation\AI_Vision_Training`

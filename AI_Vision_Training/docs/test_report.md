@@ -1,5 +1,13 @@
 # 検証レポート / Test and validation report
 
+> **2026-11-15 の追補:** 最新の変更・検査は
+> [監査対応記録](reviews/2026-11-15_audit_remediation.md) を参照してください。
+> コードも変更したため、以下の過去の「16 冊実行成功」は今回の版の実行検証ではありません。
+>
+> **15 November 2026 amendment:** See the
+> [remediation record](reviews/2026-11-15_audit_remediation.md) for current checks.
+> Code changed in this amendment; the historical “16 notebooks executed” below does not certify this revision.
+
 > **このレポートは 2026 年 11 月 12 日時点の記録です。**
 > その後の変更（言語ラベルの整理、時間割の一本化、教材図の追加、対話デモ、比較の較正手順）は
 > [`implementation_report.md`](implementation_report.md) に記載しています。
@@ -200,7 +208,34 @@ this cleanly.
 
 ### 5.4 YOLO と PatchCore の比較 / YOLO versus PatchCore
 
-共通の 26 枚（YOLO の学習には未使用）で比較しました。
+**現在の主手順：較正 → 固定 → 試験。** Day05_03 で較正データだけからしきい値を選び、
+重み・前処理・メモリ・後処理も固定して、未使用の試験データを評価します。
+保存先は `submissions/day05/comparison_test_results.json` と CSV です。
+この改訂では学習・比較を再実行していません。元の JSON、分割記録、重みがないため、
+同梱参考図の数値は**保存実行の例**であり、今回検証した最新成績ではありません。
+
+**Current main protocol: calibrate → freeze → test.** Day05_03 chooses thresholds using
+calibration only, freezes weights, preprocessing, memory and postprocessing too, then evaluates
+untouched test data. Outputs are `submissions/day05/comparison_test_results.json` and CSV.
+No training/comparison was rerun for this amendment. Without the source JSON, split record and weights,
+numbers in supplied reference figures are **saved-run examples**, not freshly verified results.
+
+再生成には Day04_02 → Day04_03 → Day05_02 → Day05_03 を実行し、保存記録と版を添付します。
+異常を陽性とすると、TP=異常をNG、FP=正常をNG、FN=異常をOK、TN=正常をOK。
+少数の合成画像、異なるラベル・学習予算の比較であり、工場の検査精度を示しません。
+
+To regenerate, run Day04_02 → Day04_03 → Day05_02 → Day05_03 and retain records and versions.
+With anomaly as positive: TP=abnormal called NG, FP=normal called NG, FN=abnormal called OK,
+TN=normal called OK. The tiny synthetic sample and unequal labelling/training budgets do not
+establish factory inspection performance.
+
+#### SUPERSEDED / biased — 旧比較の記録 / Historical comparison archive (2026-11-15)
+
+以下は旧方式の26枚の記録です。2026-11-15に主成績としての利用を取り下げました。
+PatchCore のしきい値を同じ比較データから選んだためです。追跡のため数値を残します。
+
+The following historical 26-image record was superseded on 2026-11-15 because PatchCore's
+threshold was selected from that same comparison set. Values are retained for traceability.
 
 | 手法 / Method | precision | recall | 正解 / correct | accuracy |
 |---|---|---|---|---|
@@ -250,8 +285,8 @@ Listed honestly.
 1. **データはすべて合成** — 実際の PVC の光学的挙動を再現していない
 2. **学習画像は 64 枚** — 過学習が起きやすい条件。数字は低めに出る
 3. **PatchCore の評価データは 26 枚** — 検証と試験に半分ずつ分けているため
-4. **比較の公平性** — PatchCore のしきい値が比較データ由来で楽観的
-5. **YOLO の共通画像での recall 0.55** — 学習時（320 px）と比較画像（256 px）の差、分布の差
+4. **旧比較は撤回済み** — 同じデータでしきい値を調整した楽観的な記録（5.4 のアーカイブ）
+5. **旧 YOLO recall 0.55 は最新成績ではない** — 現在の成績は固定した未使用試験の保存記録から報告する
 6. **コンソール出力は英字のみ** — Windows の文字コード（cp932）対策。日本語はノートブックと `docs` にある
 
 1. **All data is synthetic** — the optical behaviour of real PVC is not reproduced

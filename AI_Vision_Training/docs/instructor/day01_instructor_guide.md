@@ -2,6 +2,16 @@
 
 **AI の基礎と画像認識 / AI fundamentals and image recognition**
 
+### 監査対応の確認 / Audit-remediation checks
+
+授業前の準備は [START_HERE](../../START_HERE.md) の番号順に、授業時間外で完了します。
+両カーネル・生成素材・写真・重みを確認します。Day01_02 の最小画素値は検出性能ではありません。
+Day01_03 の同じ欠陥図は半径9 pxの描画マスクと、その外接四角を使います。
+
+Complete [START_HERE](../../START_HERE.md) in order, outside lesson hours. Check both kernels,
+generated assets, photos and weights. Day01_02's minimum pixel is not detection performance.
+Day01_03's same-defect figure uses one drawn 9 px-radius mask and its derived box.
+
 ---
 
 ## 午前（08:00–09:00）／ Morning session

@@ -62,6 +62,12 @@ The notebook durations are **provisional** until measured in a pilot with one be
 
 ## 3. インストール / Installation
 
+正式な番号付き手順は [START_HERE.md](START_HERE.md) です。Python 3.11 を使い、授業前に
+両環境・写真・重みを準備します。以下は環境の概要です。
+
+The authoritative numbered sequence is [START_HERE.md](START_HERE.md). Use Python 3.11 and
+prepare both environments, photos and weights before class. The following is an environment overview.
+
 2 つの仮想環境を作ります。**理由を必ず読んでください。**
 
 | 環境 / Environment | 使う日 / Used on | 主なパッケージ / Main packages |
@@ -83,7 +89,7 @@ The notebook durations are **provisional** until measured in a pilot with one be
 
 ```powershell
 cd "$HOME\Documents\AI_Vision_Training"
-python -m venv .venv
+py -3.11 -m venv .venv
 .\.venv\Scripts\Activate.ps1
 python -m pip install --upgrade pip
 python -m pip install -r requirements\base.txt
@@ -94,7 +100,8 @@ python -m ipykernel install --user --name aivision --display-name "Python 3 (AI 
 ### 3.2 Anomalib 環境（第 5 日）/ Anomalib environment (Day 5)
 
 ```powershell
-python -m venv .venv-anomalib
+deactivate
+py -3.11 -m venv .venv-anomalib
 .\.venv-anomalib\Scripts\Activate.ps1
 python -m pip install --upgrade pip
 python -m pip install -r requirements\anomalib.txt
@@ -112,22 +119,25 @@ Everything works without a GPU. GPU instructions are in the comments of
 
 ## 4. 素材（データ）の生成 / Generating the assets
 
-画像・図・データセットはすべて **Python で生成** します。ダウンロード不要です。
+合成画像・図・データセットは **Python で生成** します。参考写真と学習済み重みは授業前に取得します。
 
-All images, diagrams and datasets are **generated locally by Python**; nothing is
-downloaded.
+Synthetic images, diagrams and datasets are **generated locally by Python**.
+Reference photographs and pretrained weights must be downloaded before class.
 
 ```powershell
+# 基本環境に戻る / return to the base environment
+deactivate
+.\.venv\Scripts\Activate.ps1
 # 図とサンプル画像 / concept diagrams and sample images
 python assets\scripts\generate_training_assets.py
 
 # 追加の教材図（ノートブックから Markdown で直接参照する静的な図）
 # the additional teaching diagrams referenced directly from notebook Markdown
 python assets\scripts\generate_teaching_diagrams.py
+python assets\scripts\generate_svg_figures.py
 
-# 保存済みの実行結果から作る参考図（実際のログ・スコア・出力を使用）
-# reference figures built from the saved runs (real logs, scores and outputs)
-python assets\scripts\generate_reference_outputs.py
+# 参考図は同梱済み。再生成は元の保存記録がある講師だけが行います。
+# Reference figures ship with the course; only instructors with saved sources rebuild them.
 
 # YOLO 用データセットと PatchCore 用データセット / the two datasets
 python assets\scripts\prepare_datasets.py

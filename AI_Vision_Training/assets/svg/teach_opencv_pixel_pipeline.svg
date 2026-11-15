@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 590" width="900" height="590" role="img">
+  <title>opencv pixel pipeline</title>
+  <rect x="0" y="0" width="900" height="590" fill="white" stroke="#d0d7de" />
+  <text x="24" y="36" font-size="23" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="223.00">opencv pixel pipeline</text>
+  <text x="24" y="572" font-size="15" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="413.00">出典 / source: schematic; source-checked course constants</text>
+  <rect x="24" y="62" width="414" height="141" fill="#f6f8fa" stroke="#1f6feb" />
+  <text x="38" y="91" font-size="20" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#1f6feb" data-text-width="147.50">① 入力 / source</text>
+  <text x="38" y="121" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="237.50">cv2.imread -&gt; BGR channels</text>
+  <text x="38" y="148" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="236.00">BGR -&gt; cv2.cvtColor -&gt; gray</text>
+  <rect x="462" y="62" width="414" height="141" fill="#f6f8fa" stroke="#9a6700" />
+  <text x="476" y="91" font-size="20" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#9a6700" data-text-width="231.50">② 画素値 / gray toy array</text>
+  <text x="476" y="121" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="113.00">[40, 120, 121]</text>
+  <text x="476" y="148" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="113.00">[210, 40, 210]</text>
+  <rect x="24" y="219" width="414" height="141" fill="#f6f8fa" stroke="#8250df" />
+  <text x="38" y="248" font-size="20" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#8250df" data-text-width="232.00">③ 反転しきい値 / inverse</text>
+  <text x="38" y="278" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="227.00">gray &lt;= 120 -&gt; 255 (white)</text>
+  <text x="38" y="305" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="192.50">gray &gt; 120 -&gt; 0 (black)</text>
+  <rect x="462" y="219" width="414" height="141" fill="#f6f8fa" stroke="#1a7f37" />
+  <text x="476" y="248" font-size="20" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#1a7f37" data-text-width="216.50">④ マスク / binary mask</text>
+  <text x="476" y="278" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="103.00">[255, 255, 0]</text>
+  <text x="476" y="305" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="83.00">[0, 255, 0]</text>
+  <rect x="24" y="376" width="414" height="141" fill="#f6f8fa" stroke="#a40e26" />
+  <text x="38" y="405" font-size="20" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#a40e26" data-text-width="166.00">⑤ 輪郭 / contours</text>
+  <text x="38" y="435" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="168.00">Foreground: 3 pixels</text>
+  <text x="38" y="462" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="175.50">Connected regions: 1</text>
+  <rect x="462" y="376" width="414" height="141" fill="#f6f8fa" stroke="#9a6700" />
+  <text x="476" y="405" font-size="20" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#9a6700" data-text-width="214.50">⑥ 面積条件 / area filter</text>
+  <text x="476" y="435" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="191.50">cv2.contourArea -&gt; px²</text>
+  <text x="476" y="462" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="258.50">Not brightness, not pixel count.</text>
+  <line x1="438" y1="132" x2="459" y2="132" stroke="#9a6700" stroke-width="2" />
+  <line x1="453" y1="128" x2="459" y2="132" stroke="#9a6700" stroke-width="2" />
+  <line x1="453" y1="136" x2="459" y2="132" stroke="#9a6700" stroke-width="2" />
+  <line x1="438" y1="289" x2="459" y2="289" stroke="#9a6700" stroke-width="2" />
+  <line x1="453" y1="285" x2="459" y2="289" stroke="#9a6700" stroke-width="2" />
+  <line x1="453" y1="293" x2="459" y2="289" stroke="#9a6700" stroke-width="2" />
+  <line x1="438" y1="446" x2="459" y2="446" stroke="#9a6700" stroke-width="2" />
+  <line x1="453" y1="442" x2="459" y2="446" stroke="#9a6700" stroke-width="2" />
+  <line x1="453" y1="450" x2="459" y2="446" stroke="#9a6700" stroke-width="2" />
+</svg>

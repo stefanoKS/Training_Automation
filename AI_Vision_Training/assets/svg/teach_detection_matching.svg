@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 590" width="900" height="590" role="img">
+  <title>四角を1対1で対応させる / one-to-one matching</title>
+  <rect x="0" y="0" width="900" height="590" fill="white" stroke="#d0d7de" />
+  <text x="24" y="36" font-size="23" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="505.00">四角を1対1で対応させる / one-to-one matching</text>
+  <text x="24" y="572" font-size="15" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="449.00">出典 / source: computed schematic; same class; IoU cutoff=0.50</text>
+  <rect x="50" y="110" width="300" height="180" fill="#f6f8fa" stroke="#d0d7de" />
+  <rect x="80.0" y="140.0" width="90.0" height="90.0" fill="none" stroke="#1f6feb" />
+  <rect x="215.0" y="140.0" width="75.0" height="75.0" fill="none" stroke="#1f6feb" />
+  <rect x="80.0" y="140.0" width="90.0" height="90.0" fill="none" stroke="#8250df" />
+  <rect x="83.0" y="140.0" width="90.0" height="90.0" fill="none" stroke="#8250df" />
+  <text x="50" y="80" font-size="20" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="211.00">青: GT / 紫: predictions</text>
+  <text x="50" y="330" font-size="20" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="288.00">GT1 と P1 は一致。P2 は重複。</text>
+  <text x="50" y="369" font-size="20" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#a40e26" data-text-width="323.50">GT2 に対応する予測はありません。</text>
+  <text x="405" y="110" font-size="22" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#8250df" data-text-width="276.00">IoU matrix: columns P1, P2</text>
+  <text x="405" y="160" font-size="22" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="212.00">GT1:  1.0000   0.9355</text>
+  <text x="405" y="205" font-size="22" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="212.00">GT2:  0.0000   0.0000</text>
+  <text x="405" y="268" font-size="22" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="251.00">Same class; IoU &gt;= 0.50</text>
+  <text x="405" y="312" font-size="20" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="322.00">Match highest IoU first, one to one.</text>
+  <text x="405" y="358" font-size="20" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="326.50">Both predictions pass conf &gt;= 0.50.</text>
+  <text x="405" y="405" font-size="20" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="313.50">Object counts: TP=1, FP=1, FN=1</text>
+  <text x="50" y="467" font-size="21" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#1a7f37" data-text-width="561.00">画像単位: 異常画像1枚をNG → TP=1（四角の件数とは別）</text>
+  <text x="50" y="511" font-size="20" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="632.00">Image-level: one abnormal image called NG -&gt; TP=1, not box counts.</text>
+</svg>

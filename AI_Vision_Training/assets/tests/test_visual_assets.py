@@ -117,8 +117,9 @@ def test_non_teaching_assets_stay_out_of_the_deliverable() -> None:
 
 def test_diagram_generator_covers_every_reference() -> None:
     import generate_teaching_diagrams as gtd
+    import generate_svg_figures as gsf
 
-    registered = set(gtd.DIAGRAMS)
+    registered = set(gtd.DIAGRAMS) | {f"{name}.svg" for name in gsf.FIGURES}
     referenced = set()
     for path in NOTEBOOK_DIR.rglob("*.ipynb"):
         for target in _markdown_images(path):

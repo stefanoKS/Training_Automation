@@ -38,6 +38,7 @@ from matplotlib.patches import FancyArrowPatch, FancyBboxPatch, Rectangle
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import pvc_synth as ps  # noqa: E402  (パス追加後に読み込む / loaded after sys.path tweak)
+from teaching_data import calibrated_defects  # noqa: E402
 
 DPI = 130
 ACCENT = "#1f6feb"
@@ -604,6 +605,17 @@ def build_calibration_image(assets: Path, seed: int) -> dict:
     return info
 
 
+def build_calibrated_defects(assets: Path) -> dict:
+    image, info = calibrated_defects()
+    directory = assets / "diagrams"
+    directory.mkdir(parents=True, exist_ok=True)
+    ps.save_rgb(image, directory / info["image"])
+    (directory / "calibrated_defects_ground_truth.json").write_text(
+        json.dumps(info, indent=2), encoding="utf-8"
+    )
+    return info
+
+
 # ---------------------------------------------------------------------------
 # メイン / entry point
 # ---------------------------------------------------------------------------
@@ -659,6 +671,7 @@ def main(argv: list[str] | None = None) -> int:
         print(f"[diagram] {path.relative_to(root)}")
 
     calibration = build_calibration_image(assets, args.seed)
+    build_calibrated_defects(assets)
     print(f"[calibration] {calibration['reference_px']} px = {calibration['reference_mm']} mm "
           f"({calibration['px_per_mm']} px/mm)")
 

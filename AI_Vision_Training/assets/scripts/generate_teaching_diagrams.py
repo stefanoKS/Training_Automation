@@ -11,8 +11,8 @@ These are the **static diagrams** a learner must see before running any code.
   Synthetic data, schematics and saved examples are labelled inside the figure.
 * 色だけで OK/NG を伝えません。文字と形も使います。
   OK/NG is never communicated by colour alone; text and shape are always present.
-* 出力先は ``assets/diagrams/`` です。既存の図は上書きしません。
-  Output goes to ``assets/diagrams/`` and existing figures are not overwritten.
+* 出力先は ``assets/diagrams/`` です。登録された教材図だけを再生成します。
+  Output goes to ``assets/diagrams/``; registered teaching figures are regenerated.
 
 使い方 / Usage
 --------------
@@ -38,6 +38,7 @@ from matplotlib.patches import FancyArrowPatch, FancyBboxPatch, Rectangle
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from generate_training_assets import configure_matplotlib  # noqa: E402
+from teaching_data import BBOX_XYXY, mask_box, spot_mask  # noqa: E402
 
 DPI = 140
 INK = "#24292f"
@@ -133,7 +134,7 @@ def _pvc_sheet(size: int = 240, defect: str | None = None, seed: int = 7) -> np.
     image = np.stack([base * 1.00, base * 0.99, base * 0.96], axis=-1)
     image += rng.normal(0, 2.2, image.shape)
     if defect == "spot":
-        mask = (xx - size * 0.42) ** 2 + (yy - size * 0.55) ** 2 < (size * 0.045) ** 2
+        mask = spot_mask(size)
         image[mask] = [40, 40, 44]
     elif defect == "scratch":
         mask = (np.abs((yy - size * 0.30) - 0.35 * (xx - size * 0.15)) < 2.0) & (xx > size * 0.2) \
@@ -384,9 +385,10 @@ def teach_cv_tasks_outputs(out: Path) -> Path:
     image = _pvc_sheet(200, defect="spot", seed=44)
     yy, xx = np.mgrid[0:image.shape[0], 0:image.shape[1]]
     # 4 つの出力は、どれも「同じ 1 つの欠陥」を表す / all four outputs describe the same defect
-    mask = ((xx - 84) ** 2 + (yy - 110) ** 2 < 22 ** 2)
+    mask = spot_mask(image.shape[0])
+    x1, y1, x2, y2 = mask_box(mask)
     ys, xs = np.nonzero(mask)
-    x1, x2, y1, y2 = int(xs.min()), int(xs.max()), int(ys.min()), int(ys.max())
+    cx, cy = xs.mean(), ys.mean()
 
     fig, axes = plt.subplots(1, 4, figsize=(11.8, 4.0))
     titles = [
@@ -401,19 +403,19 @@ def teach_cv_tasks_outputs(out: Path) -> Path:
         ax.set_xticks([])
         ax.set_yticks([])
 
-    axes[1].add_patch(Rectangle((x1, y1), x2 - x1, y2 - y1, fill=False, edgecolor=BAD,
+    axes[1].add_patch(Rectangle((x1 - 0.5, y1 - 0.5), x2 - x1, y2 - y1, fill=False, edgecolor=BAD,
                                 linewidth=1.8, linestyle="--"))
-    axes[1].text(x1, y1 - 4, f"defect 0.87  ({x1},{y1})-({x2},{y2})", fontsize=6.8, color=BAD,
+    axes[1].text(4, 20, f"GT box ({x1},{y1})-({x2},{y2})", fontsize=7.5, color=BAD,
                  va="bottom")
 
     overlay = image.astype(float).copy()
     overlay[mask] = overlay[mask] * 0.35 + np.array([255, 90, 90]) * 0.65
     axes[2].imshow(np.clip(overlay, 0, 255).astype(np.uint8))
-    axes[2].text(4, 196, f"mask: {int(mask.sum())} px", fontsize=7, color="white", va="bottom")
+    axes[2].text(4, 196, f"GT mask: {int(mask.sum())} pixels", fontsize=7.5, color=INK, va="bottom")
 
-    heat = np.exp(-(((xx - 84) ** 2 + (yy - 110) ** 2) / (2 * 22.0 ** 2)))
+    heat = np.exp(-(((xx - cx) ** 2 + (yy - cy) ** 2) / (2 * (image.shape[0] * 0.045) ** 2)))
     axes[3].imshow(heat, cmap="magma", vmin=0, vmax=1)
-    axes[3].text(4, 192, "score 0.93", fontsize=7, color="white")
+    axes[3].text(4, 192, "schematic map; not inference", fontsize=7, color="white")
 
     for ax in axes:
         ax.text(0.5, -0.05, "欠陥は 1 つ / one defect", transform=ax.transAxes, ha="center",
@@ -605,30 +607,17 @@ def teach_opencv_pipeline(out: Path) -> Path:
 
 
 def teach_pixel_to_mm(out: Path) -> Path:
-    fig, ax = plt.subplots(figsize=(9.4, 4.2))
-    ax.set_xlim(0, 400)
-    ax.set_ylim(0, 180)
-    ax.set_facecolor("#f7f8fa")
-    ax.add_patch(Rectangle((30, 40), 200, 90, facecolor="#dfe7f3", edgecolor=ACCENT))
-    ax.text(130, 90, "シートの幅 / sheet width\n200 px", ha="center", fontsize=9)
-    ax.annotate("", xy=(30, 140), xytext=(230, 140),
-                arrowprops=dict(arrowstyle="<|-|>", color=INK, linewidth=1.4))
-    ax.text(130, 148, "200 px", ha="center", fontsize=8.5)
-    ax.add_patch(Rectangle((260, 40), 100, 12, facecolor="#c6f0d3", edgecolor=OK))
-    ax.annotate("", xy=(260, 64), xytext=(360, 64),
-                arrowprops=dict(arrowstyle="<|-|>", color=OK, linewidth=1.4))
-    ax.text(310, 72, "参照長 / reference\n100 px = 50.0 mm", ha="center", fontsize=8.5, color=OK)
-    ax.text(30, 22,
-            "px/mm = 100 px ÷ 50.0 mm = 2.00 px/mm\n"
-            "200 px ÷ 2.00 px/mm = 100.0 mm\n"
-            "誤差 / error = 0.5 px ÷ 2.00 px/mm = ±0.25 mm",
-            fontsize=9, color=INK, family="monospace")
-    ax.set_xticks([])
-    ax.set_yticks([])
-    ax.set_title("画素 → ミリメートル（参照長が基準）/ pixels to millimetres, based on a reference length",
-                 fontsize=10)
-    _caption(fig, "図：倍率は「参照長」から決める。単位を必ず書く / "
-                  "Figure: the scale comes from a reference length; always write the unit")
+    fig, axes = plt.subplots(2, 2, figsize=(9.4, 5.6))
+    texts = [
+        "① 基準 / reference\n100 px = 50 mm\n同じ平面 / same plane",
+        "② 換算 / conversion\n100 / 50 = 2 px/mm\n50 / 100 = 0.5 mm/px",
+        "③ 測定 / measurement\n200 px / (2 px/mm) = 100 mm\n面積 / area: px² / (px/mm)²",
+        "④ 位置の不確かさ / edge-location uncertainty\n±0.5 px / (2 px/mm) = ±0.25 mm\n仮定値 / assumed, not guaranteed accuracy",
+    ]
+    for ax, text in zip(axes.flat, texts):
+        ax.axis("off")
+        ax.text(0.05, 0.85, text, va="top", fontsize=11, linespacing=1.8)
+    _caption(fig, "模式図 / schematic: square pixels, same plane; check perspective, distortion and reference uncertainty.")
     return _save(fig, out)
 
 
@@ -1255,9 +1244,10 @@ def teach_condition_branch(out: Path) -> Path:
 
 
 def teach_bbox_coords(out: Path) -> Path:
-    image = _pvc_sheet(240, defect="spot", seed=41)
+    image = _pvc_sheet(240, seed=41)
     h, w = image.shape[:2]
-    x1, y1, x2, y2 = 84, 108, 132, 152
+    x1, y1, x2, y2 = BBOX_XYXY
+    image[y1:y2, x1:x2] = [40, 40, 44]
     bw, bh = x2 - x1, y2 - y1
     cx, cy = (x1 + x2) / 2, (y1 + y2) / 2
 
@@ -1312,7 +1302,7 @@ def teach_bbox_coords(out: Path) -> Path:
              "  角 / corners  xyxy = (x1, y1, x2, y2)\n"
              "  cv2.boundingRect → xywh = (x, y, w, h)\n"
              "  Ultralytics box.xywh → xywh（中心と大きさ / centre and size）\n"
-             "  YOLO ラベル → class_id cx cy w h（0〜1）",
+             "  YOLO ラベル → class_id（整数 / integer）+ cx cy w h（0〜1）",
              fontsize=7.6, family="monospace", color=INK, va="top", linespacing=1.5)
 
     _caption(fig, "図：画素の数で書いた四角と、画像サイズで割った四角（同じ 1 つの箱）。"
@@ -2727,7 +2717,7 @@ def teach_leakage_split(out: Path) -> Path:
         ax.set_yticks([])
     fig.text(0.02, 0.445,
              f"1 枚をコピーし、画素値に ±1 のノイズを加えただけ。位置はずらしていません。\n"
-             f"±1 intensity noise only — no spatial shift; mean difference = {difference:.2f}",
+             f"±1 intensity-level noise only — no spatial shift; mean difference = {difference:.2f}",
              fontsize=7.8, color=MUTED, va="top", linespacing=1.6)
 
     fig.text(0.50, 0.905, "③ 2 通りの分け方 / two ways to split", fontsize=9.2, color=INK, va="top")

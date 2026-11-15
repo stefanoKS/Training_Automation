@@ -2,6 +2,20 @@
 
 **Python プログラミングと OpenCV / Python programming and OpenCV**
 
+### 監査対応の確認 / Audit-remediation checks
+
+幅の基本判定は丸めず境界を含む `<=`：99.5 / 100.5 mm はOK、100.5001 mm はNGです。
+厚さ演習の明示的な丸め方針と混同しないでください。面積の演習では
+`calibrated_defects.png` の輪郭と**同じ画像**の基準を使います。旧 `defect_multi.png` の
+輪郭に別画像の倍率を適用しません。確認値は475 / 925 px²、1508前景画素、
+1.2 px/mm、独立検査50 mm、329.861111 / 642.361111 mm²です。
+
+The base width rule uses unrounded inclusive `<=`: 99.5 / 100.5 mm pass; 100.5001 mm fails.
+Do not confuse it with the thickness exercise's explicit rounding convention. The area exercise
+uses contours and the reference from **the same** `calibrated_defects.png` scene, not old
+`defect_multi.png` contours with another image's scale. Check values: 475 / 925 px², 1508 foreground
+pixels, 1.2 px/mm, independent check 50 mm, 329.861111 / 642.361111 mm².
+
 ---
 
 ## 午前（08:00–09:00）／ Morning session
@@ -22,7 +36,7 @@
 | 変数 | 名前の付いた箱。`=` は「入れる」、`==` は「等しいか」 |
 | 型 | `int`（整数）/ `float`（小数）/ `str`（文字列）/ `bool`（真偽） |
 | 真偽値 | `True` は「**条件を満たす**」、`False` は「**満たさない**」。正しい／間違いではない |
-| 小数の誤差 | `100.3 - 100.0` の表示は `0.29999999999999716`。表示は `round`、比較は「決めた桁で丸めてから」か「許容誤差つきの不等号」。**不等号だけでは誤差は消えない** |
+| 小数の誤差 | `100.3 - 100.0` の表示は `0.29999999999999716`。基本判定は丸めず `<=`、表示だけ桁をそろえる。測定分解能・丸め・合否方針は別に宣言する。**不等号だけでは表現誤差は消えない** |
 | 単位と丸め | 単位（mm・cm）と、2 進数の表現誤差と、丸めの方針は **別の話**。規格の境界は宣言した値のまま使い、広げて通さない |
 | 条件分岐 | `:` と **一貫したインデント** が必須（4 文字を推奨）。**最初に当てはまった枝だけ** 実行 |
 | 関数 | 仮引数（定義側の名前）と引数（呼ぶ側の値）→ 処理 → 戻り値。**1 か所直せば全部直る** |

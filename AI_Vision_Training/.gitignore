@@ -49,6 +49,7 @@ assets/external_samples/*
 
 # 生成された図 / generated diagrams (スクリプトで再生成可能 / reproducible)
 assets/diagrams/*.png
+!assets/diagrams/teach_*_svg.png
 
 # ただし、ノートブックの Markdown から直接参照する「必須の教材図」は配布物に含めます。
 # これらは Python を実行しなくても見える必要があるため、Git に入れます。

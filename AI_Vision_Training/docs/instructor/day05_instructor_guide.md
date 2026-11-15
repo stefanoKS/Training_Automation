@@ -2,6 +2,18 @@
 
 **PatchCore 異常検知と YOLO との比較 / PatchCore anomaly detection and comparison with YOLO**
 
+### 監査対応の確認 / Audit-remediation checks
+
+主手順は較正 → 全設定固定 → 未使用試験です。しきい値だけでなく重み・前処理・
+正常メモリ・後処理も固定します。旧17/26対26/26は **SUPERSEDED / biased**。
+同梱参考図の0.06 / 0.50は保存実行の例であり、受講者の再実行を保証しません。
+streak_0005 の元の数値記録がない場合、新しい数値付き拡大図を作りません。
+
+Use calibration → freeze all settings → untouched test. Freeze weights, preprocessing, normal
+memory and postprocessing as well as thresholds. Historical 17/26 versus 26/26 is
+**SUPERSEDED / biased**. Supplied 0.06 / 0.50 values are saved-run examples, not guaranteed reruns.
+Do not create a new numeric streak_0005 zoom without the original numerical records.
+
 ---
 
 ## 午前（08:00–09:00）／ Morning session

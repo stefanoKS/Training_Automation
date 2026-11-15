@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 590" width="900" height="590" role="img">
+  <title>画素とスライス / pixels and slices</title>
+  <rect x="0" y="0" width="900" height="590" fill="white" stroke="#d0d7de" />
+  <text x="24" y="36" font-size="23" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="359.00">画素とスライス / pixels and slices</text>
+  <text x="24" y="572" font-size="15" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="367.50">出典 / source: computed synthetic; Day01_02 canvas</text>
+  <text x="28" y="147" font-size="17" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="30.50">y=0</text>
+  <rect x="84" y="110" width="58" height="58" fill="#f6f8fa" stroke="#d0d7de" />
+  <text x="93" y="145" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="30.00">255</text>
+  <text x="92" y="96" font-size="17" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="30.50">x=0</text>
+  <rect x="144" y="110" width="58" height="58" fill="#f6f8fa" stroke="#d0d7de" />
+  <text x="153" y="145" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="10.00">0</text>
+  <text x="152" y="96" font-size="17" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="30.50">x=1</text>
+  <rect x="204" y="110" width="58" height="58" fill="#f6f8fa" stroke="#d0d7de" />
+  <text x="213" y="145" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="10.00">0</text>
+  <text x="212" y="96" font-size="17" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="30.50">x=2</text>
+  <rect x="264" y="110" width="58" height="58" fill="#f6f8fa" stroke="#d0d7de" />
+  <text x="273" y="145" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="10.00">0</text>
+  <text x="272" y="96" font-size="17" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="30.50">x=3</text>
+  <rect x="324" y="110" width="58" height="58" fill="#f6f8fa" stroke="#d0d7de" />
+  <text x="333" y="145" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="10.00">0</text>
+  <text x="332" y="96" font-size="17" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="30.50">x=4</text>
+  <rect x="384" y="110" width="58" height="58" fill="#f6f8fa" stroke="#d0d7de" />
+  <text x="393" y="145" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="10.00">0</text>
+  <text x="392" y="96" font-size="17" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="30.50">x=5</text>
+  <rect x="444" y="110" width="58" height="58" fill="#f6f8fa" stroke="#d0d7de" />
+  <text x="453" y="145" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="30.00">200</text>
+  <text x="452" y="96" font-size="17" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="30.50">x=6</text>
+  <text x="28" y="207" font-size="17" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="30.50">y=1</text>
+  <rect x="84" y="170" width="58" height="58" fill="#f6f8fa" stroke="#d0d7de" />
+  <text x="93" y="205" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="10.00">0</text>
+  <rect x="144" y="170" width="58" height="58" fill="#f6f8fa" stroke="#d0d7de" />
+  <text x="153" y="205" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="10.00">0</text>
+  <rect x="204" y="170" width="58" height="58" fill="#e8f0ff" stroke="#1f6feb" />
+  <text x="213" y="205" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="10.00">0</text>
+  <rect x="264" y="170" width="58" height="58" fill="#e8f0ff" stroke="#1f6feb" />
+  <text x="273" y="205" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="10.00">0</text>
+  <rect x="324" y="170" width="58" height="58" fill="#e8f0ff" stroke="#1f6feb" />
+  <text x="333" y="205" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="10.00">0</text>
+  <rect x="384" y="170" width="58" height="58" fill="#f6f8fa" stroke="#d0d7de" />
+  <text x="393" y="205" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="10.00">0</text>
+  <rect x="444" y="170" width="58" height="58" fill="#f6f8fa" stroke="#d0d7de" />
+  <text x="453" y="205" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="10.00">0</text>
+  <text x="28" y="267" font-size="17" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="30.50">y=2</text>
+  <rect x="84" y="230" width="58" height="58" fill="#f6f8fa" stroke="#d0d7de" />
+  <text x="93" y="265" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="10.00">0</text>
+  <rect x="144" y="230" width="58" height="58" fill="#f6f8fa" stroke="#d0d7de" />
+  <text x="153" y="265" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="10.00">0</text>
+  <rect x="204" y="230" width="58" height="58" fill="#e8f0ff" stroke="#1f6feb" />
+  <text x="213" y="265" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="10.00">0</text>
+  <rect x="264" y="230" width="58" height="58" fill="#e8f0ff" stroke="#1f6feb" />
+  <text x="273" y="265" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="30.00">100</text>
+  <rect x="324" y="230" width="58" height="58" fill="#e8f0ff" stroke="#1f6feb" />
+  <text x="333" y="265" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="10.00">0</text>
+  <rect x="384" y="230" width="58" height="58" fill="#f6f8fa" stroke="#d0d7de" />
+  <text x="393" y="265" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="10.00">0</text>
+  <rect x="444" y="230" width="58" height="58" fill="#f6f8fa" stroke="#d0d7de" />
+  <text x="453" y="265" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="10.00">0</text>
+  <text x="28" y="327" font-size="17" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="30.50">y=3</text>
+  <rect x="84" y="290" width="58" height="58" fill="#f6f8fa" stroke="#d0d7de" />
+  <text x="93" y="325" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="10.00">0</text>
+  <rect x="144" y="290" width="58" height="58" fill="#f6f8fa" stroke="#d0d7de" />
+  <text x="153" y="325" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="10.00">0</text>
+  <rect x="204" y="290" width="58" height="58" fill="#e8f0ff" stroke="#1f6feb" />
+  <text x="213" y="325" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="10.00">0</text>
+  <rect x="264" y="290" width="58" height="58" fill="#e8f0ff" stroke="#1f6feb" />
+  <text x="273" y="325" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="10.00">0</text>
+  <rect x="324" y="290" width="58" height="58" fill="#e8f0ff" stroke="#1f6feb" />
+  <text x="333" y="325" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="10.00">0</text>
+  <rect x="384" y="290" width="58" height="58" fill="#f6f8fa" stroke="#d0d7de" />
+  <text x="393" y="325" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="10.00">0</text>
+  <rect x="444" y="290" width="58" height="58" fill="#f6f8fa" stroke="#d0d7de" />
+  <text x="453" y="325" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="10.00">0</text>
+  <text x="28" y="387" font-size="17" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="30.50">y=4</text>
+  <rect x="84" y="350" width="58" height="58" fill="#f6f8fa" stroke="#d0d7de" />
+  <text x="93" y="385" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="30.00">150</text>
+  <rect x="144" y="350" width="58" height="58" fill="#f6f8fa" stroke="#d0d7de" />
+  <text x="153" y="385" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="10.00">0</text>
+  <rect x="204" y="350" width="58" height="58" fill="#f6f8fa" stroke="#d0d7de" />
+  <text x="213" y="385" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="10.00">0</text>
+  <rect x="264" y="350" width="58" height="58" fill="#f6f8fa" stroke="#d0d7de" />
+  <text x="273" y="385" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="10.00">0</text>
+  <rect x="324" y="350" width="58" height="58" fill="#f6f8fa" stroke="#d0d7de" />
+  <text x="333" y="385" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="10.00">0</text>
+  <rect x="384" y="350" width="58" height="58" fill="#f6f8fa" stroke="#d0d7de" />
+  <text x="393" y="385" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="10.00">0</text>
+  <rect x="444" y="350" width="58" height="58" fill="#f6f8fa" stroke="#d0d7de" />
+  <text x="453" y="385" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="10.00">0</text>
+  <text x="540" y="140" font-size="20" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#1f6feb" data-text-width="197.00">canvas.shape = (5, 7)</text>
+  <text x="540" y="180" font-size="20" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="170.00">canvas[2, 3] = 100</text>
+  <text x="540" y="225" font-size="20" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#9a6700" data-text-width="144.50">canvas[1:4, 2:5]</text>
+  <text x="540" y="264" font-size="20" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="128.00">shape = (3, 3)</text>
+  <text x="540" y="305" font-size="20" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="69.00">[0, 0, 0]</text>
+  <text x="540" y="338" font-size="20" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="91.00">[0, 100, 0]</text>
+  <text x="540" y="371" font-size="20" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="69.00">[0, 0, 0]</text>
+  <text x="84" y="466" font-size="21" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="407.00">青枠: y=1,2,3 / x=2,3,4（終点は含めない）</text>
+  <text x="84" y="508" font-size="20" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="449.00">Blue selection: stop indices 4 and 5 are excluded.</text>
+</svg>

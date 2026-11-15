@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 590" width="900" height="590" role="img">
+  <title>group split vs frame split</title>
+  <rect x="0" y="0" width="900" height="590" fill="white" stroke="#d0d7de" />
+  <text x="24" y="36" font-size="23" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="262.00">group split vs frame split</text>
+  <text x="24" y="572" font-size="15" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="413.00">出典 / source: schematic; source-checked course constants</text>
+  <rect x="24" y="62" width="414" height="141" fill="#f6f8fa" stroke="#1f6feb" />
+  <text x="38" y="91" font-size="20" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#1f6feb" data-text-width="263.50">① フレーム分割 / frame split</text>
+  <text x="38" y="121" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="232.50">Session A: A1 train / A2 test</text>
+  <text x="38" y="148" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="293.50">Related frames cross the boundary.</text>
+  <rect x="462" y="62" width="414" height="141" fill="#f6f8fa" stroke="#9a6700" />
+  <text x="476" y="91" font-size="20" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#9a6700" data-text-width="242.50">② 撮影群分割 / group split</text>
+  <text x="476" y="121" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="189.00">Session A -&gt; train only</text>
+  <text x="476" y="148" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="183.50">Session B -&gt; test only</text>
+  <rect x="24" y="219" width="414" height="141" fill="#f6f8fa" stroke="#8250df" />
+  <text x="38" y="248" font-size="20" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#8250df" data-text-width="235.00">③ バイト比較 / byte hash</text>
+  <text x="38" y="278" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="245.00">SHA-256 compares file bytes.</text>
+  <text x="38" y="305" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="272.00">Re-encoding changes the digest.</text>
+  <rect x="462" y="219" width="414" height="141" fill="#f6f8fa" stroke="#1a7f37" />
+  <text x="476" y="248" font-size="20" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#1a7f37" data-text-width="266.50">④ 近似画像 / near duplicates</text>
+  <text x="476" y="278" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="199.00">±1 intensity-level noise</text>
+  <text x="476" y="305" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="258.00">No spatial shift was performed.</text>
+  <rect x="24" y="376" width="414" height="141" fill="#f6f8fa" stroke="#a40e26" />
+  <text x="38" y="405" font-size="20" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#a40e26" data-text-width="135.00">⑤ 限界 / limits</text>
+  <text x="38" y="435" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="260.50">Different hashes != no leakage.</text>
+  <text x="38" y="462" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="295.50">Perceptual checks are not infallible.</text>
+  <rect x="462" y="376" width="414" height="141" fill="#f6f8fa" stroke="#9a6700" />
+  <text x="476" y="405" font-size="20" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#9a6700" data-text-width="145.00">⑥ 記録 / record</text>
+  <text x="476" y="435" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="306.50">Keep lot/session IDs before splitting.</text>
+  <text x="476" y="462" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="304.50">Audit groups and capture conditions.</text>
+  <line x1="438" y1="132" x2="459" y2="132" stroke="#9a6700" stroke-width="2" />
+  <line x1="453" y1="128" x2="459" y2="132" stroke="#9a6700" stroke-width="2" />
+  <line x1="453" y1="136" x2="459" y2="132" stroke="#9a6700" stroke-width="2" />
+  <line x1="438" y1="289" x2="459" y2="289" stroke="#9a6700" stroke-width="2" />
+  <line x1="453" y1="285" x2="459" y2="289" stroke="#9a6700" stroke-width="2" />
+  <line x1="453" y1="293" x2="459" y2="289" stroke="#9a6700" stroke-width="2" />
+  <line x1="438" y1="446" x2="459" y2="446" stroke="#9a6700" stroke-width="2" />
+  <line x1="453" y1="442" x2="459" y2="446" stroke="#9a6700" stroke-width="2" />
+  <line x1="453" y1="450" x2="459" y2="446" stroke="#9a6700" stroke-width="2" />
+</svg>

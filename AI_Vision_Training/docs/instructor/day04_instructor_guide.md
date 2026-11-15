@@ -2,6 +2,16 @@
 
 **YOLO モデルの準備と学習 / Preparing and training a YOLO model**
 
+### 監査対応の確認 / Audit-remediation checks
+
+Day04_02 が `submissions/day04/training_run.json` に重みのパスと設定を保存します。
+Day04_03 はその記録を優先します。旧実行は更新時刻を使う警告付きの代替で、
+パス・設定を確認してから評価します。SHA-256 の一致検査だけで「データ漏れなし」と言わないでください。
+
+Day04_02 saves weights and settings in `submissions/day04/training_run.json`; Day04_03 prefers
+that record. Older runs use a warned modification-time fallback; inspect path/settings before
+evaluation. SHA-256 alone must never be described as proving absence of leakage.
+
 ---
 
 ## 午前（08:00–09:00）／ Morning session
@@ -24,7 +34,7 @@
 | データ漏れ | 同じ画像（ほぼ同じ画像）が train と test にあると **丸暗記** で高得点。現場では無意味。ハッシュ検査で分かるのは完全一致だけ |
 | epoch | 全学習画像を 1 周 |
 | batch | データローダが一度に読み込む枚数。大きいほど重い。安定性は検証の指標で確かめる |
-| 勾配の累積 / warmup | 1 batch = 1 更新ではない。この実行は `nbs=64`・`batch=8` で 8 バッチごとに更新し、最初の 3 epoch は warmup |
+| 勾配の累積 / warmup | 1 batch = 1 更新ではない。`nbs=64`・`batch=8` の名目累積は8バッチ。warmup 中は累積数が変わり得るので、実行の `args.yaml` と設定を確認する |
 | loss | 正解との差。下がれば学習は進んでいるが、**損失だけでは性能を判断できない** |
 | ファインチューニング | 学習済みモデルを自分のデータで追加学習 |
 

@@ -1,0 +1,178 @@
+TASK: Implement the corrections and beginner-focused visual improvements from the Training_Automation detailed audit. This is an IMPLEMENTATION task, not another review or a proposal. Inspect the actual current repository, edit the relevant source files and notebooks, regenerate assets where needed, add tests, run safe validation, and give a concise summary of changes and evidence. Do not stop after producing a plan.
+
+REPOSITORY:
+  https://github.com/stefanoKS/Training_Automation
+EXPECTED LOCAL LOCATION (if present):
+  This file folder
+COURSE ROOT WITHIN REPO:
+  AI_Vision_Training\
+REFERENCE REPORT:
+  Training_Automation_Detailed_Audit_Report.md (downloaded separately from ChatGPT)
+
+IMPORTANT: If the reference report exists in the repository or in your accessible workspace, read it fully before editing. If it is missing, do NOT stop; this prompt includes the complete priority worklist and implementation requirements. Do not assume you can access files attached to ChatGPT; ask the user to place the report in the repo only if it is essential to resolve a concrete ambiguity. Do not require the report to proceed.
+
+GOAL AND AUDIENCE:
+- Two industrial/manufacturing trainees with ZERO Python and AI experience should be able to explain exactly what each important cell's input is, what each meaningful line/operation does, how values are transformed, what result appears, and WHY.
+- Preserve the existing five-day bilingual Japanese/English syllabus, course sequence, exercises, interactive Jupyter workflow, hardware constraints (Windows/CPU supported), existing module choices (OpenCV, YOLO, PatchCore), and instructor/submission structure.
+- Explain Japanese FIRST then English within the SAME notebook Markdown cells; short, natural workplace Japanese and comprehensible English. No artificial "日本語:" / "English:" prefixes.
+- VISUALS MUST MATCH CODE, NOT JUST LOOK ATTRACTIVE. Use source-authored, editable SVG for clean conceptual diagrams and coordinate/flow/math graphics, but retain actual image/model-output PNGs for photo and prediction evidence. Do not hallucinate experimental results.
+- Target complete conceptual understanding via predict → run → inspect → explain → change a single parameter → run again. Do not promise 100% guaranteed individual comprehension.
+
+BEFORE CHANGING ANYTHING:
+1) Inspect `git status`, branch, HEAD, and all relevant files. The reviewer saw `main` tree `b8c496f8c0c96ff027adb148669d3c29e56e9b03` with 16 notebooks and 55 teaching PNGs on 2026-11-15. This is a reference only: HEAD may have advanced. Never discard newer work, uncommitted changes or user files.
+2) If it helps, create a non-destructive branch such as `codex/training-visual-audit-fixes`. Do not force-reset or rewrite history. Do NOT push, open a PR, or merge without explicit user approval.
+3) Build a compact baseline inventory: notebook paths, code/Markdown cells, Markdown image references, generator registration, current test results (when feasible), all source data needed for diagrams, provenance of reference outputs.
+4) Treat items below as findings to VERIFY against the latest checkout; if already fixed, note and skip. Preserve existing correct work.
+
+IMPLEMENT THESE P0 CORRECTNESS FIXES FIRST:
+
+P0-A | SETUP INSTRUCTIONS ARE INTERNALLY INCONSISTENT.
+Affected: `AI_Vision_Training/START_HERE.md`, `COURSE_SYLLABUS.md`, `README.md`, `notebooks/00_Setup/00_Environment_Setup.ipynb`, relevant instructor/troubleshooting documents.
+- Current START_HERE readiness checklist demands BOTH kernels on Day 1, but the `.venv-anomalib` environment is explained later as something that can wait until after Day 4. The guide duplicates "Step 7" and requires image readiness before asset-generation step. Setup notebook's "Day 0 (morning of Day 1)" clashes with the syllabus's earlier preflight requirement.
+- Make one authoritative numbered Windows 11/PowerShell sequence: clone/download; use tested Python version (verified Python 3.11 is safer; disclose other untested versions); create `.venv`; install base + YOLO dependencies; create `.venv-anomalib`; install anomalib dependencies; register kernels; produce locally generated assets/datasets; fetch any licensed external samples or pretrained model weights needed for offline classroom use; verify environments; launch JupyterLab; run preflight readiness checklist; start lessons. Treat installation of the Anomalib kernel after Day 4 only as an optional documented alternative, not as the default if preflight requires it.
+- Mark actual shell commands as PowerShell, notebook code as Python, and magic commands as Jupyter `%pip`; explain which environment to activate for asset generation and which kernel for Day 5. Ensure paths resolve and no prerequisite is checked before it exists. Do not silently change the timetable or make setup consume mandatory learning hours.
+- Use minimally permissive PowerShell activation guidance; avoid forcing machine-wide security setting changes. Provide troubleshooting for `python` PATH, wrong kernel, missing packages, blocked PowerShell activation, missing model download.
+- Fix course fallback path `submissions/reference_results/` if the actual offline examples are under `assets/reference_outputs/`; identify generated student outputs versus supplied instructor reference results explicitly.
+
+P0-B | INVALID SAME-DEFECT FOUR-TASK DIAGRAM.
+Affected: `assets/scripts/generate_teaching_diagrams.py` `teach_cv_tasks_outputs()`, `assets/diagrams/teach_cv_tasks_outputs.png`, Day01_03 notebook.
+- `_pvc_sheet(200, defect="spot", seed=44)` generates the underlying spot using a radius `200*0.045 = 9 px`; the current illustration independently uses radius 22 px for the segmentation mask and its detection rectangle. Fix this mismatch.
+- Implement one canonical ground-truth synthetic mask from the SAME source geometry, derive its bounding box and any schematic heatmap centre from it. The diagram must truthfully distinguish a ground-truth mask from a deliberately imperfect prediction. If confidence/score numbers are invented for explanation, label them `illustrative/schematic`, never actual model output.
+- Add unit-level checks on mask pixels, box bounds, same-source alignment and consistency of labels.
+
+P0-C | PIXEL→MM² EXERCISE APPLIES CALIBRATION TO UNRELATED IMAGE.
+Affected: `notebooks/Day02_Python_OpenCV/Day02_03_OpenCV_Image_Processing.ipynb` Part 5 Exercise 1; associated synthetic image generation and calibration diagrams.
+- The exercise derives `px_per_mm` from `calibration_image.png` then applies it to contours extracted from `defect_multi.png`, despite no demonstrated common imaging scale. Do not present the computed mm² as physically calibrated.
+- Preferred solution: generate an explicitly calibrated defect image that includes a known-length reference in the SAME imaging geometry/plane, use its reference scale to convert contours from THAT image, and verify against a separate independent test feature in the same image. Keep explanatory distinction between `area_px2` geometric contour area and foreground-pixel count. Explain validity assumptions: square pixels, perpendicular view or calibrated perspective, limited lens distortion, same object plane, reference uncertainty.
+- If a new sample would disrupt upstream exercises, keep old image for processing and introduce the calibrated image only in the conversion lesson. Preserve prior hands-on results, add exact numeric expected output generated by the code, and test all units.
+- Use correct dimensional analysis: length_mm = pixels / (px/mm); area_mm2 = area_px2 / (px/mm)^2. Make sure every graph and label has units.
+
+P0-D | HISTORICAL BIASED COMPARISON PRESENTED AS MAIN TEST RESULT.
+Affected: `docs/test_report.md` Section 5.4, `docs/implementation_report.md` where relevant, `assets/reference_outputs/README.md` where relevant, Day05_03 notebook and its outputs.
+- The current test report prominently shows historical YOLO 17/26 vs PatchCore 26/26 and admits PatchCore threshold was chosen using the same comparison data. The later Day05_03 notebook has a methodologically improved calibration → freeze → test evaluation, saved to `submissions/day05/comparison_test_results.json` and CSV.
+- Explicitly mark the old numbers **SUPERSEDED / biased** and archive them with reasons and date. DO NOT erase traceability. Use the corrected protocol as the main method; show current frozen-run outcomes only if you really rerun them or can verify provenance of the saved reference records. Otherwise describe how to regenerate the current results and label all numeric examples as examples from a saved run.
+- Ensure threshold selection uses calibration ONLY, never test data; freeze model and preprocessing as well as threshold; correct definitions of FP/FN/TP/TN; note very small sample size, synthetic dataset, unequal labelling/training budgets. Do not imply real factory inspection precision from these numbers.
+
+NEXT IMPLEMENT P1/P2 ACCURACY FIXES:
+
+P1-E | EXACT-HASH CHECK CLAIMS NO LEAKAGE.
+- In Day04_01, replace `no leakage detected` after SHA-256 with `No byte-identical duplicate files detected / 同一バイト列の重複ファイルは検出されませんでした`, PLUS a note that near-identical frames, different encodings of visually identical frames, lot or capture-session leakage are not excluded.
+- In `teach_leakage_split()` captions, replace the inaccurate phrase `sub-pixel noise` with `±1 intensity-level noise`; no spatial shift was performed.
+- Create/upgrade the diagram for frame-wise versus session/lot-wise splitting. Ensure the code/demo does not claim perceptual hash is infallible.
+
+P1-F | CHOOSE THE CORRECT MODEL TO EVALUATE.
+- Day04_03 currently uses `candidates = sorted(glob(...best.pt))` then `best_weights = candidates[-1]`, while calling the choice "latest". Use explicit saved run manifest/path from Day04_02 or a clearly labelled, tested timestamp-based fallback. Show path and run parameters. If multiple runs exist, ensure behavior is deterministic and visible.
+- Add test for lexical order that disagrees with file modification order.
+
+P1-G | ONE BOUNDING BOX EXAMPLE ACROSS DIAGRAM/CODE/TEXT.
+- Day03_01 currently has `(84,108)`→`(132,152)` in `teach_bbox_coords.png` and `(96,72)`→`(168,132)` in nearby code (both on 240×240). Use a SINGLE selected example in figure, equations, prints and exercise reference. Make exact formulas visible: xc=(x1+x2)/2/W, yc=(y1+y2)/2/H, w=(x2-x1)/W, h=(y2-y1)/H; YOLO class ID is integer, not normalised. Label if a second independent worked example is present. Add numeric tests.
+
+P1-H | FLOAT ROUNDING IN TOLERANCE JUDGMENT.
+- Day02_02 `judge()` currently rounds the measurement difference to 6 decimals before comparing to tolerance, described as dropping floating-point noise. Rounding changes the decision around a strict engineering boundary. Separate formatting, measurement resolution and acceptance policy. Use a clear inclusive comparison (`<=`) for the base example, with tests for exact boundary 99.5/100.5, just outside 100.5001, and floating-point caveat; do not silently change acceptance criteria in other notebooks. Consider Decimal only if needed, explain complexity to beginners.
+
+P1-I | PIXEL-TO-MM DIAGRAM LAYOUT AND WORDING.
+- `teach_pixel_to_mm.png` puts equations overlapping the blue rectangle. Redraw with separate reference, conversion, measurement and uncertainty panels. Explain `±0.5 px → ±0.25 mm` at 2 px/mm as the assumed edge-location uncertainty; do not call it an unrestricted one-pixel error.
+
+P1-J | RESIZE EXPERIMENT MISLABELS GLOBAL MINIMUM AS VISIBLE DEFECT.
+- Day01_02 currently labels `darkest < 150` as `defect visible YES/NO`. Rename to `min pixel below threshold`; it does not establish that a defect is located, distinguishable, resolved, or detectable by a model. Separate visual inspection from a numeric heuristic. Provide actual before/after views from the same image, consistent zoom and appropriate color scale.
+
+P2-K | READABILITY AND BILINGUAL REFINEMENT.
+- Simplify dense existing figures such as `teach_epoch_batch.png`, `teach_training_update.png`, `teach_threshold_freeze.png` and `assets/reference_outputs/ref_comparison_5col.png` (do not alter empirical/reference data while making explanatory overlays). Add a zoomed error case from actual saved results if available. Ensure readable labels and no overlapping Japanese/English text.
+- Use clear source labels (`schematic`, `computed synthetic`, `saved reference run`, `student live run`), particularly for YOLO confidence 0.06 and PatchCore threshold 0.50. Never assume the learner's rerun reproduces those values exactly.
+- Review 16 notebooks for grammar, straightforward Japanese and English, consistent terms and units, newly introduced variable/function concepts, the learner's motivation, and code/diagram/output agreement. Preserve deliberately erroneous cells and intentionally unsolved exercises. Avoid giving answers away inside exercise code.
+
+VISUAL DELIVERABLES — BUILD EDITABLE GPT-6-STYLE SVG, CODE-CREATED AND VALIDATED:
+Create `AI_Vision_Training/assets/svg/` and output any necessary PNG fallback under `assets/diagrams/`. Use SVG for conceptual vector diagrams, not for faking real model outputs. The following assets are a prioritized specification; reuse/simplify accurate existing diagrams rather than adding duplicates. Generate as many as are genuinely necessary to cover the teaching gaps, prioritizing Day 0–2. At least cover the high-priority concepts listed below, and record a figure manifest mapping asset→notebook section→source code/data→provenance→learning question.
+
+01 `teach_code_cell_lifecycle.svg` — actual cell code/Shift+Enter→kernel persistent variable state→stdout/errors; example count 3→4 and rerun behavior.
+02 `teach_pixel_inspector.svg` / `teach_slice_walkthrough.svg` — 5×7 matrix, `(y,x)` and `[1:4, 2:5]`, end-exclusive selection, selected output shape and values.
+03 `teach_cv_tasks_outputs.svg` — classification, detection, segmentation, anomaly heatmap from ONE correctly aligned synthetic defect with labelled illustrative scores.
+04 `teach_mass_units_chain.svg` — mm×mm×mm→mm³→cm³→g→kg with exact exercise constants and formula.
+05 `teach_if_live_trace.svg` — show measured 100.3, nominal 100, tolerance ±0.5, `abs` delta, inclusive branch, print output; mark boundaries.
+06 `teach_opencv_pixel_pipeline.svg` — source BGR→gray→inverse threshold→binary mask→contours→region count; threshold and area distinct.
+07 `teach_calibration_same_plane.svg` — reference and target in same image; px/mm and mm/px; mm²; independent test line; uncertainty/perspective caveat.
+08 `teach_bbox_one_example.svg` — one box in `xyxy`, `xywh` and normalized YOLO row; calculated values must be source-checked.
+09 `teach_yolo_result_object.svg` — `model.predict()`→Results→Boxes (`cls`, `conf`, `xyxy`)→plot image/CSV; label confidence as model score, not truth probability.
+10 `teach_epoch_batch_step.svg` — 64 training images, batch=8, possible gradient accumulation, optimizer step; explicitly course-specific settings; clarify warmup.
+11 `teach_detection_matching.svg` — GT/pred boxes, same-class IoU, one-to-one matching, TP/FP/FN versus image-level decision.
+12 `teach_patchcore_stages.svg` — frozen pretrained feature extractor, embeddings, coreset memory, nearest-neighbour distances, map, image score, calibration. State that 2D scatter axes are illustrative feature space, not image coordinates.
+13 `teach_frozen_threshold_pipeline.svg` — split acquisition groups→fit→calibrate→freeze→test→report; no feedback path from test into tuning.
+14 `teach_streak_false_negative_case.svg` — zoomed annotated error explanation for saved `streak_0005` ONLY if source/run verified: YOLO NG, PatchCore score 0.464 below 0.50, GT NG. Label reference-run provenance; otherwise omit numeric claims.
+
+Keep existing correct figures when they teach well:
+- `teach_array_indexing` slice semantics correctly show end-exclusive ranges.
+- `teach_iou_rects` is mathematically consistent (6750 / 15150 ≈ 0.4455).
+- Image-level confusion matrix and nearest-neighbor memory schematic are useful.
+- Preserve the `teach_score_levels` distinction: PatchCore image score is not necessarily equal to max of interpolated displayed map.
+- Preserve actual `ref_anomaly_panels` distinction between raw feature distance and normalized score.
+
+VISUAL QUALITY CONTRACT:
+- Self-contained standalone SVG XML, native editable text/shapes, valid `viewBox`, scalable 900px notebook-wide without squinting, no outside fonts/images/scripts/remote resources. Use Japanese-safe fallback fonts; do not distribute font binaries.
+- Each figure has no cropped labels, overlapping annotation, bogus score values or physically invalid geometric relationships. Give each figure a short JP caption then EN caption, plus "What to notice" and a question requiring code prediction. Larger explanations should live in Markdown, not be squeezed inside figure.
+- Use consistent color semantics plus shapes/text: blue source/input, amber operation/warning, green OK, red NG/miss, violet model output. Avoid color-only meaning.
+- Auto-generate calculations from the code's same constants/data rather than hand-entering different example numbers in Markdown/diagram generation. For each new figure test math and referenced asset existence.
+- Keep source photos/model maps as real PNG/JPEG with appropriate licenses/provenance; do not use synthetic stock photos to pretend to be production data. If open-source references are used, download to an approved local asset folder with credited source/licence and a reproducible fetch script; do not make notebooks require internet at lesson time.
+
+FOR EACH NOTEBOOK IN ORDER, PERFORM A PEDAGOGICAL PASS:
+00_Environment_Setup
+Day01_01_Introduction_to_AI
+Day01_02_Pixels_and_Images
+Day01_03_Computer_Vision_Tasks
+Day02_01_Python_Basics
+Day02_02_Conditions_Loops_Functions
+Day02_03_OpenCV_Image_Processing
+Day03_01_YOLO_Concepts
+Day03_02_YOLO_Inference
+Day03_03_YOLO_Experiments
+Day04_01_YOLO_Dataset_Annotation
+Day04_02_YOLO_Training
+Day04_03_YOLO_Evaluation
+Day05_01_Anomaly_Detection_Concepts
+Day05_02_PatchCore_Training
+Day05_03_YOLO_vs_PatchCore
+
+For each one check:
+A) The learning objective is understandable to someone unfamiliar with variables or arrays.
+B) Each important code cell has a short conceptual before-example; students can predict the output.
+C) The input variables and calculations are IDENTICAL across code, diagram and expected-output Markdown.
+D) Each important figure explains a single intended concept and links to a next experiment.
+E) Japanese grammar is natural, correctly uses technical terms, and precedes equivalent English; no untranslated jargon on first encounter.
+F) Examples distinguish actual model output, saved reference, toy mathematical schematic and synthetic image.
+G) Follow-up question tests understanding, not just whether the cell ran.
+H) Existing exercises and optional/required status remain intact; avoid giving exercise solutions away.
+
+BUILD/VALIDATION:
+- Run/review the repository's own existing tests and generators; confirm which files are intentionally ignored and which teaching assets are committed.
+- Structural: `python assets\scripts\validate_notebooks.py`
+- Python tests: `python -m pytest assets\tests -q`
+- Generators only where appropriate: `python assets\scripts\generate_training_assets.py`, `python assets\scripts\prepare_datasets.py`, `python assets\scripts\generate_teaching_diagrams.py`.
+- If feasible, execute lightweight notebooks via the repository's validator and record results. Run heavy YOLO/PatchCore only if dependencies, CPU resources and needed test data are available; never execute expensive GPU examples automatically. If skipped, say so honestly.
+- Add tests for: SVG parse/refs; complete offline assets; overlap/clipping where scriptable; same-defect mask geometry; consistent YOLO normalized values; IoU; tolerance boundaries; px→mm and px²→mm² calibration; correct exact-hash language; model selection; no tuning on test; bilingual Markdown/visual references.
+- Verify diagrams visually at common notebook width and export a PDF sample if the repo has that pipeline; preserve the existing PDF generation workflow.
+- Do not silently modify referenced saved model outputs, regenerate training results and claim they are identical, or erase historical reports.
+
+DELIVERABLES INSIDE THE REPO:
+1) Updated notebook Markdown/code where necessary; no broken kernels, no broken code cells, preserved assignments.
+2) Editable SVG assets plus PNG fallback only where required, and source generator functions with deterministic inputs.
+3) Updated START_HERE, COURSE_SYLLABUS, test/implementation reports and any affected instructor documentation.
+4) New/updated tests and a figure manifest: `docs/visual_figure_manifest.md` with source, target sections, correct numbers, provenance and preview path.
+5) A concise report `docs/reviews/2026-11-15_audit_remediation.md` describing each TA-001...TA-014 item as FIXED / PARTIAL / NOT APPLICABLE / BLOCKED, with evidence and limitations. Do not overwrite the provided independent audit report.
+6) Final answer listing changed files, number of new/corrected figures, tests actually run + results, anything unverified, and how students should open the materials.
+
+ORDER OF WORK:
+1. Inspect current HEAD and report; baseline tests and asset map.
+2. Implement P0-A through P0-D with tests, fixing actual errors before additional visuals.
+3. Implement P1-E through P1-J plus P2 correctness and code/text consistency.
+4. Create high-priority SVGs starting from Day 0–2, then Day 3–5; wire figures into notebooks and instructor support text.
+5. Apply the bilingual novice-learning pass to all 16 notebooks.
+6. Run tests, inspect rendered diagrams, fix regressions, update reports/manifest, and summarize evidence.
+
+CONSTRAINTS:
+- Do not change the course scope or duration, replace key models, rewrite entire notebooks unnecessarily, introduce web-dependent runtime, or install new heavy libraries just to draw a figure.
+- Do not fabricate training outputs, unsupported production performance, confirmed run times, image provenance or live scores.
+- Do not say checks passed if not executed.
+- Do not delete user-created files, cached data, uncommitted changes or training results.
+- Work locally and leave a reviewable diff. Do NOT push or merge without approval.
+- When a finding is already fixed in current HEAD, record it as already resolved rather than undoing newer work.
+
+START IMPLEMENTING NOW. Prioritize correctness and executable code–diagram traceability over decorative quantity. Do not stop after a general plan. If time/resources are limited, complete as many P0/P1 changes and validations as feasible and transparently mark remaining items, rather than claiming full completion.

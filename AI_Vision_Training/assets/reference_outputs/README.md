@@ -1,5 +1,18 @@
 # 参考出力の図 / Figures built from real runs
 
+### 2026-11-15 の出典確認 / Provenance status on 2026-11-15
+
+以下の数値（YOLO 0.06、PatchCore 0.50、streak_0005 など）は**保存済み参考実行の例**です。
+この改訂では元のモデル・数値記録がないため再検証していません。図の画素は変更していません。
+旧 YOLO 17/26・PatchCore 26/26 は **SUPERSEDED / biased** であり現在の主成績ではありません。
+新しい比較は Day05_03 の `comparison_test_results.json` / CSV と分割記録で報告します。
+
+Numbers below (including YOLO 0.06, PatchCore 0.50 and streak_0005) are **saved reference-run examples**.
+Source models/numeric records are unavailable for this amendment, so these results were not reverified.
+Image pixels are unchanged. Historical YOLO 17/26 and PatchCore 26/26 are **SUPERSEDED / biased**,
+not current headline results. Report a new Day05_03 run using its `comparison_test_results.json` / CSV
+and split manifest.
+
 ここにある図は、**この研修を実際に実行して保存された結果**から作ったものです。
 手描きのイメージや、AI が生成した画像ではありません。
 These figures are built from outputs that this course actually produced and saved. Nothing here

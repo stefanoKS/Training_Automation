@@ -62,13 +62,20 @@ total — `python -m pytest assets/tests/test_schedule.py` does this automatical
 準備は授業時間の外で終わらせます。**授業時間に準備時間を隠していません。**
 Preflight happens outside the lesson hours. Setup time is **not** hidden inside the lesson budget.
 
+番号付きの正式手順は [START_HERE.md](START_HERE.md) です。Python 3.11、両環境、
+素材生成、写真・重みの事前取得、両環境の検査を第1日前に完了します。下表は時間の見積もりです。
+
+Follow the authoritative numbered sequence in [START_HERE.md](START_HERE.md): Python 3.11,
+both environments, generated assets, preloaded photos/weights, and verification in both environments
+before Day 1. The table below estimates time; it is not a second installation sequence.
+
 | # | やること / Task | 目安 / Time | 確認方法 / How to check |
 |---|---|---|---|
 | 1 | 受講者用フォルダを決める / choose the learner folder | 5 分 | — |
 | 2 | Python 環境を作る / create the Python environment | 20 分 | `python assets\scripts\verify_environment.py --profile base` |
 | 3 | Jupyter のカーネルを 2 つ登録する / register both kernels | 10 分 | `jupyter kernelspec list` に `aivision` と `aivision-anomalib` |
 | 4 | データセットを作る / build the datasets | 10 分 | `python assets\scripts\prepare_datasets.py` |
-| 5 | モデルの重みをダウンロードする / download the model weights | 10 分 | `python assets\scripts\verify_environment.py --profile all` |
+| 5 | 写真・モデルの重みを取得する / preload photos and weights | 10 分 | `START_HERE.md` ステップ7のオフライン検査 / Step 7 offline checks |
 | 6 | `00_Environment_Setup.ipynb` を通す / run the setup notebook | 60 分 | Part 7 のレポートが `submissions/day00/` に保存される |
 | 7 | 第1日の準備確認 / Day 1 readiness check | 10 分 | 下の表の 4 項目すべてにチェック |
 
@@ -80,7 +87,7 @@ Preflight happens outside the lesson hours. Setup time is **not** hidden inside 
 | チェック / Check | 合格の条件 / Passes when |
 |---|---|
 | カーネル / kernels | 「Python 3 (AI Vision)」と「Python 3 (AI Vision Anomalib)」の両方が一覧に出る |
-| ライブラリ / libraries | `python assets\scripts\verify_environment.py --profile all` が 0 で終わる |
+| ライブラリ / libraries | 両環境で `verify_environment.py --profile all` が 0、素材の不足なし / exit 0 in both environments, no missing assets |
 | 画像 / images | `Day01_02` の Part 1 が画像を 1 枚表示できる |
 | フォント / font | 図のタイトルに `□` が出ない |
 
@@ -94,7 +101,7 @@ longer fits.**
 |---|---|
 | 環境が 1 台も動かない / no environment works | 講師の PC で環境を見せ、受講者は紙の観察記録と予想に集中する。実行が要る必須部分は翌朝 08:00–09:00 に回収する。 |
 | 一部の受講者だけ動く / some machines work | 動く人と 2 人 1 組にする。動かない人は「予想 → 隣の人の結果を見る → 一文で説明」を行う。 |
-| モデルのダウンロードだけ失敗 / only the model download fails | 第3日以降は `submissions/reference_results/` の **参考結果** を使って読み進める。参考結果は実行結果ではないと明記する。 |
+| モデルのダウンロードだけ失敗 / only the model download fails | 第3日以降は `assets/reference_outputs/` の **参考結果** を使って読み進める。受講者の実行結果（`submissions/`）と区別する。 |
 
 参考結果は「実際に測った結果」ではありません。数字を自分の結果として提出してはいけません。
 Reference results are **not** measurements taken on your machine. Never submit them as your own.

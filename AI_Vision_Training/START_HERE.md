@@ -1,321 +1,220 @@
 # はじめかた / START HERE
 
-このファイルは、**パソコンの電源を入れるところから**始める方向けの手順書です。
-むずかしい言葉はできるだけ避けて書いています。上から順番に進めてください。
+これは Windows 11 / PowerShell の**正式な準備手順**です。第1日より前に、授業時間外で
+上から順に進めます。インストールが終わってから準備ノートブックを開きます。
 
-This is the **from-switching-the-PC-on** guide. It avoids jargon wherever possible.
-Work through it from top to bottom.
+This is the **authoritative Windows 11 / PowerShell preflight sequence**. Complete it before
+Day 1, outside lesson hours. Open the preparatory notebook after installation.
 
----
+## ステップ 1　取得してフォルダを開く / Download and open the folder
 
-## ステップ 0　この手順書のゴール / Goal of this guide
-
-ゴールは 1 つだけです。
-
-> `notebooks/00_Setup/00_Environment_Setup.ipynb` を開いて、最後までエラーなく実行できること。
-
-There is exactly one goal: open
-`notebooks/00_Setup/00_Environment_Setup.ipynb` and run it to the end without errors.
-
----
-
-## ステップ 1　フォルダを確認する / Check the folder
-
-`AI_Vision_Training` フォルダを、次の場所に置いてください。
-
-```text
-C:\Users\<あなたの名前>\Documents\AI_Vision_Training
-```
-
-デスクトップやダウンロードのままでも動きますが、**Documents** を推奨します。
-あとで探しやすく、パスも短くなるからです。
-
-Put the `AI_Vision_Training` folder under
-`C:\Users\<your-name>\Documents\`. It also works from the Desktop or Downloads, but Documents is
-recommended: it is easier to find and keeps the path short.
-
----
-
-## ステップ 2　PowerShell を開く / Open PowerShell
-
-画面下の検索欄に `PowerShell` と入力し、出てきた **Windows PowerShell** をクリックします。
-
-黒い（または青い）窓が開きます。これが **ターミナル** です。
-
-Type `PowerShell` in the Windows search box and click **Windows PowerShell**.
-A dark (or blue) window opens. That is the **terminal**.
-
-> マウスでクリックする代わりに、**文字で** コンピュータに命令する窓です。
-> It is the window where you type instructions instead of clicking.
-
----
-
-## ステップ 3　フォルダに移動する / Move into the folder
-
-次の 1 行をコピーして、PowerShell に貼り付け、`Enter` を押します。
-
-Copy the following single line, paste it into PowerShell and press `Enter`.
+GitHub の Code → Download ZIP を展開するか、Git がある場合は次を実行します。
+Use Code → Download ZIP on GitHub and extract it, or use Git:
 
 ```powershell
-cd "$HOME\Documents\AI_Vision_Training"
-```
-
-うまくいかない場合は、自分のユーザー名を直接書きます。
-
-If that does not work, type your user name explicitly:
-
-```powershell
-cd "C:\Users\あなたの名前\Documents\AI_Vision_Training"
-```
-
-正しく移動できたか確認します。
-
-Check that you are in the right place:
-
-```powershell
-pwd
+Set-Location "$HOME\Documents"
+git clone https://github.com/stefanoKS/Training_Automation.git
+Set-Location .\Training_Automation\AI_Vision_Training
 Get-ChildItem
 ```
 
-`README.md` と `notebooks` が見えれば成功です。
-If you can see `README.md` and `notebooks`, you are in the right folder.
+ZIP の場合は展開先の `AI_Vision_Training` に移動します。以後のコマンドはすべて
+`README.md` と `requirements` があるこのフォルダで実行します。
 
----
+For a ZIP, move into the extracted `AI_Vision_Training` folder. Run all following commands
+there, where `README.md` and `requirements` are visible.
 
-## ステップ 4　Python があるか確認する / Check Python
+## ステップ 2　Python 3.11 を確認する / Check Python 3.11
 
 ```powershell
-python --version
+py -3.11 --version
 ```
 
-`Python 3.11.x` または `Python 3.12.x` と表示されれば OK です。
+検証済みの系列は **Python 3.11** です。3.12 など他の系列は未検証です。
+詳細は [tested_versions.md](requirements/tested_versions.md) を参照してください。
+`py` が無ければ python.org の Python 3.11 を入れ、Add python.exe to PATH を選び、
+PowerShell を開き直します。`python --version` が 3.11 なら以後の `py -3.11` を
+`python` に置き換えられます。
 
-| 表示 / What you see | 意味 / Meaning | 対処 / What to do |
-|---|---|---|
-| `Python 3.11.9` | 正常 / fine | 次へ / continue |
-| `Python was not found` | 入っていない / not installed | 下の「Python の入れ方」 / see below |
-| Microsoft Store が開く / the Store opens | Windows の機能 / Windows alias | 設定 →「アプリ実行エイリアス」→ `python.exe` をオフ / Settings -> App execution aliases -> turn `python.exe` off |
+**Python 3.11** is the tested series; 3.12 and other series are unverified.
+See [tested_versions.md](requirements/tested_versions.md). If `py` is missing, install
+Python 3.11 from python.org, select Add python.exe to PATH, and reopen PowerShell.
+If `python --version` reports 3.11, substitute `python` for `py -3.11` below.
 
-### Python の入れ方（必要な場合のみ）/ Installing Python (only if needed)
+## ステップ 3　基本環境を作る / Create the base environment
 
-[python.org](https://www.python.org/downloads/) を開き、**Python 3.11** を選びます。
-
-**必ず** インストーラの最初の画面で
-
-- ☑ **Add python.exe to PATH**
-
-にチェックを入れ、「Install Now」を押します。**このチェックを忘れると動きません。**
-
-Open [python.org](https://www.python.org/downloads/) and choose **Python 3.11**.
-On the first installer screen you **must** tick "**Add python.exe to PATH**", then click "Install Now".
-Forgetting that tick is the most common cause of failure.
-
-入れ終わったら PowerShell を **閉じて、もう一度開き**、`python --version` を確認してください。
-Afterwards **close and reopen** PowerShell and check `python --version` again.
-
----
-
-## ステップ 5　仮想環境を作る / Create the virtual environment
-
-**仮想環境** は「この研修専用の道具箱」です。作っておくと、
-他の仕事の Python を壊しません。
-
-A **virtual environment** is a private toolbox for this course. It keeps you from
-breaking the Python used by other work.
+仮想環境は研修用の道具箱です。他の仕事の Python と分けます。
+A virtual environment is a course toolbox, separate from Python used for other work.
 
 ```powershell
-python -m venv .venv
-```
-
-何も表示されなければ成功です（1〜2 分かかります）。
-
-Success is silent; it takes a minute or two.
-
-次に、この道具箱を **使う状態** にします。
-
-Now switch the toolbox on:
-
-```powershell
+py -3.11 -m venv .venv
 .\.venv\Scripts\Activate.ps1
-```
-
-プロンプトの先頭に `(.venv)` が付きます。
-
-```text
-(.venv) PS C:\Users\あなたの名前\Documents\AI_Vision_Training>
-```
-
-The prompt now starts with `(.venv)`.
-
-**エラーが出た場合 / If it fails**
-
-```text
-Activate.ps1 cannot be loaded because running scripts is disabled
-```
-
-次の 1 行を実行し、`Y` を押してから、もう一度 `Activate.ps1` を実行します。
-Run the line below, answer `Y`, then activate again.
-
-```powershell
-Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
-```
-
----
-
-## ステップ 6　必要なものを入れる / Install the packages
-
-`(.venv)` が付いた状態で、上から順に実行します。**数分かかります。**
-
-With `(.venv)` visible, run these in order. It takes several minutes.
-
-```powershell
 python -m pip install --upgrade pip
 python -m pip install -r requirements\base.txt
 python -m pip install -r requirements\yolo.txt
-python -m ipykernel install --user --name aivision --display-name "Python 3 (AI Vision)"
 ```
 
-最後の `ipykernel install` は「この道具箱を、Jupyter から選べるように登録する」作業です。
-**これを忘れると、Jupyter から研修用の環境が見えません。**
+有効化が禁止されている場合、最も狭い回避策は有効化せず
+`.\.venv\Scripts\python.exe` を直接使うことです。組織が許可する場合だけ、
+現在の PowerShell 窓に限って次を設定して再度有効化します。管理者権限は不要です。
 
-The last line registers this environment so Jupyter can offer it as a kernel.
-**Skip it and Jupyter will not see the course environment.**
-
-エラーで止まったら、**同じコマンドをもう一度実行** してください。
-ネットワークの一時的な失敗がほとんどです。何度も失敗する場合は講師に連絡してください。
-
-If a command fails, **run the same command again**; transient network errors are common.
-Contact the instructor if it keeps failing.
-
----
-
-## ステップ 7　第1日の準備確認 / Day 1 readiness check
-
-ここまで終わったら、第1日の朝 09:00–09:10 の 10 分で次の 4 つを確認します。
-**全部そろってから第1日を始めます。** 準備を授業時間に持ち込むと、その日の必須学習が入りません。
-
-At 09:00-09:10 on Day 1 you check these four items. **Day 1 starts when they all pass.**
-Carrying setup into lesson time means the required work no longer fits.
-
-| チェック / Check | 合格の条件 / Passes when |
-|---|---|
-| カーネル / kernels | 「Python 3 (AI Vision)」と「Python 3 (AI Vision Anomalib)」の両方が一覧に出る |
-| ライブラリ / libraries | `python assets\scripts\verify_environment.py --profile all` が 0 で終わる |
-| 画像 / images | `Day01_02` の Part 1 が画像を 1 枚表示できる |
-| フォント / font | 図のタイトルに `□` が出ない |
-
-**準備が終わらなかった場合 / If it is not finished:**
-
-`COURSE_SYLLABUS.md` の「準備が終わらなかった場合」に、3 つの現実的な選択肢を書いてあります。
-ごまかさず、そのどれかを選んでください。
-
-Three realistic recovery options are listed in `COURSE_SYLLABUS.md` under "if preflight is not
-finished". Do not pretend; choose one of them.
-
----
-
-## ステップ 7　（第5日の前に）2つ目の環境を作る / Create the second environment (before Day 5)
-
-**第 5 日だけ** 別の道具箱を使います。第 4 日が終わってからで構いません。
-
-**Day 5 only** uses a second toolbox. You can do this after Day 4.
+If activation is blocked, the narrowest workaround is to call
+`.\.venv\Scripts\python.exe` directly without activating. Only if your organisation permits it,
+apply the following to this PowerShell window and activate again. No administrator is needed.
 
 ```powershell
-python -m venv .venv-anomalib
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy RemoteSigned
+```
+
+## ステップ 4　Anomalib 環境を作る / Create the Anomalib environment
+
+第5日は別の道具箱を使います。**標準手順では第1日前に両方を準備**します。
+Day 5 uses another toolbox. **The default is to prepare both before Day 1.**
+
+```powershell
+deactivate
+py -3.11 -m venv .venv-anomalib
 .\.venv-anomalib\Scripts\Activate.ps1
 python -m pip install --upgrade pip
 python -m pip install -r requirements\anomalib.txt
-python -m ipykernel install --user --name aivision-anomalib --display-name "Python 3 (AI Vision Anomalib)"
 ```
 
-なぜ分けるのかは [`README.md`](README.md) の 3 節に書いています。
-Section 3 of `README.md` explains why they are separate.
+有効化せず直接 Python を使っている場合は `deactivate` は不要です。
+If you use Python executables directly, omit `deactivate`.
 
----
+## ステップ 5　両方のカーネルを登録する / Register both kernels
 
-## ステップ 8　素材を作る / Generate the assets
-
-画像・図・データセットを生成します（`(.venv)` の状態で）。
-
-Generate the images, diagrams and datasets (with `(.venv)` active).
+カーネルはノートブックのコードを実行する Python です。
+A kernel is the Python process that executes notebook code.
 
 ```powershell
+.\.venv\Scripts\python.exe -m ipykernel install --user --name aivision --display-name "Python 3 (AI Vision)"
+.\.venv-anomalib\Scripts\python.exe -m ipykernel install --user --name aivision-anomalib --display-name "Python 3 (AI Vision Anomalib)"
+```
+
+## ステップ 6　教材とデータを作る / Generate teaching assets and datasets
+
+**基本環境 `.venv`** に戻ります。`--force` や `--clean` は不要です。
+既存の提出物や保存済みモデル出力を再生成しません。
+
+Return to **the base `.venv`**. Do not use `--force` or `--clean`. Do not regenerate
+student submissions or saved model outputs.
+
+```powershell
+deactivate
+.\.venv\Scripts\Activate.ps1
 python assets\scripts\generate_training_assets.py
 python assets\scripts\prepare_datasets.py
+python assets\scripts\generate_teaching_diagrams.py
+python assets\scripts\generate_svg_figures.py
 ```
 
-`Done.` と表示されれば成功です。
-You should see `Done.`
+## ステップ 7　オフライン授業の素材を先に取得する / Preload offline lesson inputs
 
----
+参考写真はライセンス付きの原本です。合成画像や工場の実測結果ではありません。
+重みも授業前に取得します。初回はネットワークが必要です。
 
-## ステップ 9　JupyterLab を起動する / Start JupyterLab
+Reference photographs are licensed originals, not synthetic images or factory measurements.
+Download weights before lessons too. The initial download needs network access.
 
 ```powershell
-jupyter lab
+python assets\scripts\download_reference_images.py --course-root .
+python assets\scripts\preload_models.py --profile yolo
+.\.venv-anomalib\Scripts\python.exe assets\scripts\preload_models.py --profile anomalib
+python assets\scripts\download_reference_images.py --course-root . --offline
+python assets\scripts\preload_models.py --profile yolo --offline
+.\.venv-anomalib\Scripts\python.exe assets\scripts\preload_models.py --profile anomalib --offline
 ```
 
-ブラウザが自動で開きます。開かない場合は、PowerShell に表示された
-`http://localhost:8888/...` の URL をブラウザに貼り付けてください。
+重みの配布・使用条件は提供元（Ultralytics / timm / torchvision）を確認してください。
+取得に失敗したら授業前に講師へ連絡します。参考結果は
+`assets/reference_outputs/`、受講者が実行して保存する結果は `submissions/` です。
 
-Your browser opens automatically. If not, copy the `http://localhost:8888/...` URL from
-PowerShell into the browser.
+Check the providers' licence terms (Ultralytics / timm / torchvision) before redistribution/use.
+Report download failures before class. Supplied references live in `assets/reference_outputs/`;
+students' live outputs go into `submissions/`.
 
-画面の左にファイル一覧が出ます。`notebooks` → `00_Setup` →
-`00_Environment_Setup.ipynb` の順にクリックして開いてください。
+## ステップ 8　環境と教材を確認する / Verify environments and assets
 
-A file list appears on the left. Click `notebooks` -> `00_Setup` ->
-`00_Environment_Setup.ipynb`.
+`--profile all` は**実行した環境だけ**を検査します。両方で実行してください。
+`--profile all` checks **only the current environment**. Run it in both.
 
----
+```powershell
+.\.venv\Scripts\python.exe assets\scripts\verify_environment.py --profile all
+.\.venv-anomalib\Scripts\python.exe assets\scripts\verify_environment.py --profile all
+python assets\scripts\validate_notebooks.py
+python -m jupyter kernelspec list
+```
 
-## ステップ 10　ノートブックの操作 / Working with a notebook
+終了コード 0 に加え、表示された素材の不足がないことも確認します。
+Check exit code 0 **and** that the printed asset list contains no missing items.
 
-| 操作 / Action | やり方 / How |
+## ステップ 9　JupyterLab を起動する / Launch JupyterLab
+
+```powershell
+.\.venv\Scripts\python.exe -m jupyter lab
+```
+
+ブラウザが開かなければ表示された localhost の URL を開きます。
+`notebooks` → `00_Setup` → `00_Environment_Setup.ipynb` を開き、
+`Python 3 (AI Vision)` を選びます。第5日だけ `Python 3 (AI Vision Anomalib)` を選びます。
+
+If no browser opens, open the printed localhost URL. Open
+`notebooks` → `00_Setup` → `00_Environment_Setup.ipynb`, select `Python 3 (AI Vision)`.
+Only Day 5 uses `Python 3 (AI Vision Anomalib)`.
+
+## ステップ 10　準備完了を確認する / Complete preflight
+
+第1日前に準備ノートブックを上から実行します。意図的なエラーの練習は説明どおり直します。
+第1日 09:00–09:10 は準備済みの状態を再確認する時間で、インストール時間ではありません。
+
+Run the setup notebook before Day 1; repair the deliberate error exercise as instructed.
+Day 1 09:00–09:10 rechecks readiness; it is not installation time.
+
+- [ ] 両カーネルが選べる / both kernels selectable
+- [ ] 両環境の検査が成功し、素材に不足がない / both environment checks pass, no missing assets
+- [ ] オフライン写真・重み検査が成功 / offline photo and weight checks pass
+- [ ] Day01_02 Part 1 で画像が出る / Day01_02 Part 1 displays an image
+- [ ] 図の日本語が四角に化けない / Japanese labels are not missing-glyph squares
+- [ ] `submissions/day00/` に準備レポートを保存 / setup report saved in `submissions/day00/`
+
+間に合わなければ [COURSE_SYLLABUS.md](COURSE_SYLLABUS.md) の回復手順を使います。
+Use the recovery procedure in [COURSE_SYLLABUS.md](COURSE_SYLLABUS.md) if preflight is incomplete.
+
+## ステップ 11　授業を始める / Start lessons
+
+セルを選んで Shift+Enter、保存は Ctrl+S。セルは上から順番に実行します。
+値はカーネルに残ります。順序を見失ったら Kernel → Restart Kernel and Run All Cells。
+翌日はステップ1のフォルダに移動し、ステップ9で起動します。環境は作り直しません。
+終了時は保存してブラウザを閉じ、PowerShell で Ctrl+C を押して停止を確認します。
+
+Select a cell and press Shift+Enter; Ctrl+S saves. Run top to bottom. Values persist in the
+kernel. If confused, use Kernel → Restart Kernel and Run All Cells.
+Next day return to the Step 1 folder and launch with Step 9; do not recreate environments.
+To finish, save, close the browser, then stop Jupyter with Ctrl+C in PowerShell.
+
+### 例外：第4日後の Anomalib 準備 / Alternative: Anomalib setup after Day 4
+
+講師が明示的に許可した場合のみ、ステップ4と Anomalib の登録・重み取得・検査を第4日後に
+延期できます。この場合、第1日の確認は基本環境のみで、**全日程の準備完了とは言いません**。
+第5日前に残りを完了します。標準の両環境チェックリストとは別の例外です。
+
+Only with explicit instructor approval may Step 4 and Anomalib registration/preload/verification
+wait until after Day 4. Then Day 1 checks only the base environment; **full-course readiness is
+not achieved**. Finish the remaining checks before Day 5. This is an exception, not the default.
+
+### 困ったとき / Troubleshooting
+
+| 症状 / Symptom | 対処 / Action |
 |---|---|
-| セルを実行 / run a cell | セルを選び、`Shift` + `Enter` |
-| セルを追加 / add a cell | 上の `+` ボタン / the `+` button |
-| カーネルを選ぶ / choose the kernel | 右上のカーネル名 → `Python 3 (AI Vision)` |
-| カーネルを再起動 / restart | 上部メニュー `Kernel` → `Restart Kernel and Run All Cells` |
-| 保存 / save | `Ctrl` + `S` |
+| `python` / `py` が無い / missing | ステップ2。PATH・アプリ実行エイリアスを確認 / Step 2, check PATH and app aliases |
+| パッケージ不足 / missing package | 正しい環境で requirements を入れる / install requirements in the correct environment |
+| カーネルが違う / wrong kernel | `import sys; print(sys.executable)` を Python セルで確認 / check in a Python cell |
+| 有効化が禁止 / activation blocked | ステップ3の直接実行を使う / use Step 3's direct executable |
+| 重みが無い / missing weights | ステップ7を再実行し、失敗を記録 / rerun Step 7 and record the failure |
 
-**セルは上から順番に実行してください。** 途中を飛ばすとエラーになります。
+PowerShell の `python -m pip` と、ノートブック専用の Jupyter `%pip` は別物です。
+授業中の自動インストールはしません。詳細は [installation.md](docs/troubleshooting/installation.md)。
 
-**Run the cells from top to bottom.** Skipping cells causes errors.
-
----
-
-## ステップ 11　最初の壁 / The first wall
-
-うまくいかないときの **9 割は、次の 3 つ** です。
-
-| 症状 / Symptom | 原因 / Cause | 対処 / Fix |
-|---|---|---|
-| `No module named 'numpy'` | カーネルが違う / wrong kernel | 右上で `Python 3 (AI Vision)` を選ぶ / choose it top-right |
-| `python が見つからない` | PATH 未設定 / PATH not set | Python を入れ直す（PATH にチェック）/ reinstall with the PATH tick |
-| `Activate.ps1 cannot be loaded` | 実行ポリシー / execution policy | `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned` |
-
-それでも分からないときは、**次の 3 つをメモして** 講師に伝えてください。
-
-1. どのノートブックの、どのセルか
-2. エラーメッセージ（最後の 2 行）
-3. すでに試したこと
-
-If you are still stuck, note three things for the instructor: which notebook and cell,
-the last two lines of the error message, and what you already tried.
-
----
-
-## ステップ 12　終わるとき / When you finish for the day
-
-1. `Ctrl` + `S` でノートブックを保存
-2. ブラウザのタブを閉じる
-3. PowerShell に戻り、`Ctrl` + `C` を **2 回** 押して JupyterLab を止める
-4. PowerShell の窓を閉じる
-
-Save with `Ctrl` + `S`, close the browser tab, press `Ctrl` + `C` twice in PowerShell to
-stop JupyterLab, then close the PowerShell window.
-
-PowerShell を閉じると、`(.venv)` も解除されます。翌日はステップ 3 からやり直してください。
-
-Closing PowerShell also deactivates `(.venv)`. Next day, start again from Step 3.
+PowerShell `python -m pip` and notebook-only Jupyter `%pip` are different.
+Lessons do not install automatically. See [installation.md](docs/troubleshooting/installation.md).

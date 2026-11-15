@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 590" width="900" height="590" role="img">
+  <title>frozen threshold pipeline</title>
+  <rect x="0" y="0" width="900" height="590" fill="white" stroke="#d0d7de" />
+  <text x="24" y="36" font-size="23" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="264.50">frozen threshold pipeline</text>
+  <text x="24" y="572" font-size="15" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="413.00">出典 / source: schematic; source-checked course constants</text>
+  <rect x="24" y="62" width="414" height="141" fill="#f6f8fa" stroke="#1f6feb" />
+  <text x="38" y="91" font-size="20" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#1f6feb" data-text-width="282.50">① 撮影群を分ける / group split</text>
+  <text x="38" y="121" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="271.50">Fit / calibration / untouched test</text>
+  <text x="38" y="148" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="292.50">No acquisition group crosses splits.</text>
+  <rect x="462" y="62" width="414" height="141" fill="#f6f8fa" stroke="#9a6700" />
+  <text x="476" y="91" font-size="20" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#9a6700" data-text-width="105.00">② 学習 / fit</text>
+  <text x="476" y="121" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="279.00">YOLO labels / PatchCore normals</text>
+  <text x="476" y="148" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="299.50">Freeze weights and normal memory.</text>
+  <rect x="24" y="219" width="414" height="141" fill="#f6f8fa" stroke="#8250df" />
+  <text x="38" y="248" font-size="20" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#8250df" data-text-width="248.50">③ 較正のみ / calibrate only</text>
+  <text x="38" y="278" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="276.00">Choose thresholds on calibration.</text>
+  <text x="38" y="305" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="231.00">Fit normalisation there only.</text>
+  <rect x="462" y="219" width="414" height="141" fill="#f6f8fa" stroke="#1a7f37" />
+  <text x="476" y="248" font-size="20" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#1a7f37" data-text-width="249.00">④ 全設定を固定 / freeze all</text>
+  <text x="476" y="278" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="296.00">Weights + preprocessing + memory</text>
+  <text x="476" y="305" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="302.00">Postprocessor + decision thresholds</text>
+  <rect x="24" y="376" width="414" height="141" fill="#f6f8fa" stroke="#a40e26" />
+  <text x="38" y="405" font-size="20" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#a40e26" data-text-width="201.50">⑤ 試験1回 / test once</text>
+  <text x="38" y="435" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="231.00">No test-to-tuning feedback.</text>
+  <text x="38" y="462" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="302.50">Changed settings need new holdout.</text>
+  <rect x="462" y="376" width="414" height="141" fill="#f6f8fa" stroke="#9a6700" />
+  <text x="476" y="405" font-size="20" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#9a6700" data-text-width="141.50">⑥ 報告 / report</text>
+  <text x="476" y="435" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="295.50">comparison_test_results.json / CSV</text>
+  <text x="476" y="462" font-size="18" font-family="Yu Gothic, Meiryo, Noto Sans JP, sans-serif" fill="#24292f" data-text-width="325.50">Tiny synthetic set, not factory accuracy</text>
+  <line x1="438" y1="132" x2="459" y2="132" stroke="#9a6700" stroke-width="2" />
+  <line x1="453" y1="128" x2="459" y2="132" stroke="#9a6700" stroke-width="2" />
+  <line x1="453" y1="136" x2="459" y2="132" stroke="#9a6700" stroke-width="2" />
+  <line x1="438" y1="289" x2="459" y2="289" stroke="#9a6700" stroke-width="2" />
+  <line x1="453" y1="285" x2="459" y2="289" stroke="#9a6700" stroke-width="2" />
+  <line x1="453" y1="293" x2="459" y2="289" stroke="#9a6700" stroke-width="2" />
+  <line x1="438" y1="446" x2="459" y2="446" stroke="#9a6700" stroke-width="2" />
+  <line x1="453" y1="442" x2="459" y2="446" stroke="#9a6700" stroke-width="2" />
+  <line x1="453" y1="450" x2="459" y2="446" stroke="#9a6700" stroke-width="2" />
+</svg>
