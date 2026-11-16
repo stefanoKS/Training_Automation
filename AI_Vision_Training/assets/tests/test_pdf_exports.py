@@ -8,6 +8,7 @@ survived the export, a table of contents, the sources page, and no empty pages.
 from __future__ import annotations
 
 import re
+import hashlib
 from pathlib import Path
 
 import pytest
@@ -97,3 +98,36 @@ def test_installation_and_regeneration_commands_are_documented() -> None:
     assert "requirements\\pdf.txt" in readme
     requirements = (COURSE_ROOT / "requirements" / "pdf.txt").read_text(encoding="utf-8")
     assert "reportlab" in requirements
+
+
+@pytest.mark.parametrize("name", ["Day05", "Week1"])
+def test_learner_pdfs_exclude_archived_test_images_and_worked_answers(name) -> None:
+    from PIL import Image
+
+    forbidden_images = set()
+    for filename in ("ref_anomaly_panels.png", "ref_comparison_5col.png"):
+        with Image.open(COURSE_ROOT / "assets" / "reference_outputs" / filename) as image:
+            forbidden_images.add((image.size, hashlib.sha256(image.convert("RGB").tobytes()).digest()))
+    with Image.open(COURSE_ROOT / "assets" / "reference_outputs" / "teach_numeric_map_toy.png") as image:
+        expected_toy = (image.size, hashlib.sha256(image.convert("RGB").tobytes()).digest())
+    reader = _reader(name)
+    day5_started = name == "Day05"
+    day5_text = []
+    toy_seen = False
+    for page in reader.pages:
+        text = page.extract_text() or ""
+        if "notebooks/Day05_PatchCore/Day05_01_" in text:
+            day5_started = True
+        if day5_started:
+            day5_text.append(text)
+        for embedded in page.images:
+            image = embedded.image.convert("RGB")
+            fingerprint = (image.size, hashlib.sha256(image.tobytes()).digest())
+            assert fingerprint not in forbidden_images, f"{name}: archived TEST panel embedded"
+            toy_seen |= fingerprint == expected_toy
+    text = "\n".join(day5_text)
+    for evidence in ("21.439", "21.762", "black_spot_0000", "streak_0005"):
+        assert evidence not in text, f"{name}: archived TEST worked answer {evidence}"
+    assert "CALCULATED SYNTHETIC TOY" in text or "Calculated synthetic toy numeric map" in text
+    assert "0.600" in text
+    assert toy_seen, f"{name}: the declared synthetic toy was not embedded unchanged"

@@ -16,6 +16,8 @@ YOLO detections. Every figure says inside itself where the numbers came from.
   never downloads anything (`weights_only` local checkpoint, `imgsz` fixed).
 * 出力は ``assets/reference_outputs/`` です。
   Output goes to ``assets/reference_outputs/``.
+* ``teach_numeric_map_toy.png`` alone is a calculated synthetic teaching example, not inference.
+  Archived TEST PNGs are kept byte-for-byte when present; never substitute them for this toy.
 
 使い方 / Usage
 --------------
@@ -409,8 +411,52 @@ def _ground_truth_mask(root: Path, relative: str) -> np.ndarray:
     return mask / 255.0
 
 
+def toy_numeric_map() -> tuple[np.ndarray, np.ndarray, float, float]:
+    """Chosen arithmetic only: no dataset, saved scores or model outputs."""
+    distances = np.ones((5, 5), dtype=float)
+    distances[2, 2] = 6
+    distances[1, 2] = distances[3, 2] = distances[2, 1] = distances[2, 3] = 2
+    windows = np.lib.stride_tricks.sliding_window_view(np.pad(distances, 1, mode="edge"), (3, 3))
+    smoothed = windows.mean(axis=(-2, -1))
+    raw_score = float(distances.max() * 0.8)
+    transformed = float(np.clip((raw_score - 4) / 8 + 0.5, 0, 1))
+    return distances, smoothed, raw_score, transformed
+
+
+def teach_numeric_map_toy(root: Path, out_dir: Path) -> Path:
+    distances, smoothed, raw_score, transformed = toy_numeric_map()
+    image = np.repeat((220 - distances * 20)[..., None], 3, axis=2).astype(np.uint8)
+    fig, axes = plt.subplots(1, 3, figsize=(10.5, 3.8))
+    axes[0].imshow(image)
+    axes[0].set_title("① 合成入力 / synthetic input", fontsize=9)
+    plotted = axes[1].imshow(smoothed, cmap="inferno", vmin=0, vmax=3, interpolation="nearest")
+    axes[1].set_title("② 3×3平均 / 3×3 mean", fontsize=9)
+    axes[2].imshow(image)
+    axes[2].imshow(smoothed, cmap="inferno", vmin=0, vmax=3, alpha=0.55, interpolation="nearest")
+    axes[2].set_title("③ 同じ値の重ね表示 / same values overlaid", fontsize=9)
+    for ax in axes:
+        ax.set_xticks([])
+        ax.set_yticks([])
+    cax = make_axes_locatable(axes[1]).append_axes("right", size="6%", pad=0.06)
+    fig.colorbar(plotted, cax=cax).set_label("おもちゃの距離 / toy distance", fontsize=8)
+    fig.suptitle("計算した合成おもちゃ / CALCULATED SYNTHETIC TOY\n"
+                 "較正・TESTデータやモデル出力ではない / no calibration/TEST data or model output",
+                 fontsize=10)
+    _note(fig, f"生の画像スカラー / raw = {raw_score:.3f}; "
+               f"マップ最大 / map max = {smoothed.max():.3f}; "
+               f"変換後 / transformed = {transformed:.3f}\n"
+               "source: toy_numeric_map(); 5×5 grid: 1, centre 6, four neighbours 2; edge-padded 3×3 mean\n"
+               "raw = max × 0.8; transformed = clip((raw − 4) / 8 + 0.5, 0, 1); threshold = 0.50\n"
+               "全て説明用の定数・実際のPatchCore計算ではない / chosen constants, not the actual PatchCore algorithm")
+    return _save(fig, out_dir / "teach_numeric_map_toy.png")
+
+
 def ref_anomaly_panels(root: Path, out_dir: Path) -> Path:
-    """数値マップそのものを描く（描画済み画像の切り抜きは使わない）。"""
+    """AFTER-FREEZE TEST archive only; never a pre-freeze learner figure."""
+    archived = out_dir / "ref_anomaly_panels.png"
+    if archived.is_file():
+        print(f"[preserved AFTER-FREEZE TEST archive] {archived.name}")
+        return archived
     name = "black_spot_0000"
     if not (_maps_dir(root) / f"{name}_map.npz").exists():
         candidates = sorted(p.stem.replace("_map", "") for p in _maps_dir(root).glob("*_map.npz"))
@@ -422,9 +468,13 @@ def ref_anomaly_panels(root: Path, out_dir: Path) -> Path:
         name = abnormal[0]
 
     record = _load_map(root, name)
+    if not record["image"].startswith("test/"):
+        raise MissingSource("archived anomaly panel requires a TEST numeric map")
     image = _dataset_image(root, record["image"])
     score_row = _saved_scores(root).get(record["image"])
-    normalised_score = float(score_row["score"]) if score_row else float("nan")
+    if score_row is None or score_row.get("partition") != "test":
+        raise MissingSource("archived anomaly panel requires the matching TEST score row")
+    normalised_score = float(score_row["score"])
     raw_score = record["raw_score"]
 
     anomaly_map = record["map"]
@@ -507,6 +557,10 @@ def _yolo_boxes(weights: Path, image_path: Path, conf: float, imgsz: int) -> lis
 
 def ref_comparison_5col(root: Path, out_dir: Path) -> Path:
     """判定・不等式・画像・スコアを、同じ保存結果から組み立てる。"""
+    archived = out_dir / "ref_comparison_5col.png"
+    if archived.is_file():
+        print(f"[preserved AFTER-FREEZE TEST archive] {archived.name}")
+        return archived
     from ultralytics import YOLO  # noqa: F401  (fail early and clearly if it is missing)
 
     scores = _saved_scores(root)
@@ -690,6 +744,7 @@ def ref_inference_boxes_table(root: Path, out_dir: Path) -> Path:
 # ---------------------------------------------------------------------------
 
 OUTPUTS = {
+    "teach_numeric_map_toy.png": teach_numeric_map_toy,
     "ref_train_val_curves.png": ref_train_val_curves,
     "ref_score_distribution.png": ref_score_distribution,
     "ref_confidence_counts.png": ref_confidence_counts,

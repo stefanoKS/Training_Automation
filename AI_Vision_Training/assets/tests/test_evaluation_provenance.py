@@ -169,3 +169,100 @@ def test_schedule_has_a_day5_calibration_slot() -> None:
     syllabus = (COURSE_ROOT / "COURSE_SYLLABUS.md").read_text(encoding="utf-8")
     assert "Day05_03" in syllabus
     assert re.search(r"Day05_03.*Part 4", syllabus), "Day 5 timetable does not cover Part 4"
+
+
+def test_prefreeze_toy_is_calculated_without_any_saved_data(tmp_path, monkeypatch) -> None:
+    import generate_reference_outputs as figures
+
+    def forbidden(*args, **kwargs):
+        pytest.fail("the synthetic toy attempted to read inference/dataset evidence")
+
+    for helper in ("_read_scores", "_saved_scores", "_load_map", "_dataset_image"):
+        monkeypatch.setattr(figures, helper, forbidden)
+    distances, smoothed, raw, transformed = figures.toy_numeric_map()
+    assert distances.shape == smoothed.shape == (5, 5)
+    assert raw == pytest.approx(4.8)
+    assert smoothed.max() == pytest.approx(2)
+    assert transformed == pytest.approx(.6)
+    assert raw != smoothed.max() and transformed >= .5
+    for value in (raw, smoothed.max(), transformed):
+        assert f"{value:.3f}" in _notebook_text("Day05_02_PatchCore_Training")
+    family = figures.configure_matplotlib()
+    with figures.plt.rc_context({"font.family": [family, "DejaVu Sans"]}):
+        first = figures.teach_numeric_map_toy(tmp_path, tmp_path).read_bytes()
+        second = figures.teach_numeric_map_toy(tmp_path, tmp_path).read_bytes()
+    assert first == second
+
+
+@pytest.mark.parametrize("name", ["ref_anomaly_panels", "ref_comparison_5col"])
+def test_reference_generation_preserves_existing_test_archive_bytes(name, tmp_path) -> None:
+    import generate_reference_outputs as figures
+
+    archive = tmp_path / f"{name}.png"
+    archive.write_bytes(b"historical evidence, never overwrite")
+    for _ in range(2):
+        assert getattr(figures, name)(tmp_path, tmp_path) == archive
+        assert archive.read_bytes() == b"historical evidence, never overwrite"
+
+
+def test_score_distribution_uses_only_calibration_even_when_test_rows_exist(tmp_path, monkeypatch) -> None:
+    import generate_reference_outputs as figures
+
+    monkeypatch.setattr(figures, "_read_scores", lambda root: [
+        {"partition": "calibration", "score": ".2", "truly_abnormal": "False"},
+        {"partition": "calibration", "score": ".7", "truly_abnormal": "True"},
+        {"partition": "test", "score": ".123456", "truly_abnormal": "False"},
+        {"partition": "test", "score": ".987654", "truly_abnormal": "True"},
+    ])
+    plotted = []
+
+    def capture(fig, path):
+        plotted.extend(float(point[0]) for artist in fig.axes[0].collections
+                       for point in artist.get_offsets())
+        figures.plt.close(fig)
+        return path
+
+    monkeypatch.setattr(figures, "_save", capture)
+    figures.ref_score_distribution(tmp_path, tmp_path)
+    assert sorted(plotted) == [.2, .7]
+
+
+@pytest.mark.parametrize("role", ["calibration", "test"])
+def test_archived_panel_rejects_non_test_source_or_missing_matching_score(role, tmp_path, monkeypatch) -> None:
+    import generate_reference_outputs as figures
+
+    maps = tmp_path / "submissions" / "day05" / "maps"
+    maps.mkdir(parents=True)
+    (maps / "black_spot_0000_map.npz").touch()
+    monkeypatch.setattr(figures, "_load_map", lambda *args: {"image": f"{role}/fixture.png"})
+    monkeypatch.setattr(figures, "_dataset_image", lambda *args: np.zeros((2, 2, 3)))
+    monkeypatch.setattr(figures, "_saved_scores", lambda *args: {})
+    with pytest.raises(figures.MissingSource, match="TEST"):
+        figures.ref_anomaly_panels(tmp_path, tmp_path)
+
+
+def test_all_day5_static_images_have_explicit_provenance_and_only_one_prefreeze_reference() -> None:
+    manifest = (COURSE_ROOT / "docs" / "visual_figure_manifest.md").read_text(encoding="utf-8")
+    provenance = manifest.split("### Day 5 follow-up:", 1)[1].split("## Existing source-checked", 1)[0]
+    reference_images = set()
+    for path in course_notebooks(NOTEBOOK_DIR, "Day05_*.ipynb"):
+        notebook = json.loads(path.read_text(encoding="utf-8"))
+        for cell in notebook["cells"]:
+            if cell.get("id") == "clarity-freeze-record":
+                break
+            source = "".join(cell["source"])
+            for name in re.findall(r'"(diagram_[^"]+\.png)"', source):
+                assert f"`{name}`" in provenance, f"unclassified runtime diagram: {name}"
+            for target in re.findall(r"!\[[^\]]*\]\(([^)]+)\)", source):
+                name = Path(target).name
+                assert f"`{name}`" in provenance, f"unclassified learner figure: {name}"
+                assert (path.parent / target).resolve().is_file()
+                if name.startswith("ref_"):
+                    reference_images.add(name)
+    assert reference_images == {"ref_score_distribution.png"}
+    archive = (COURSE_ROOT / "docs" / "instructor" / "day05_after_freeze_archive.md").read_text(encoding="utf-8")
+    for target in re.findall(r"!\[[^\]]*\]\(([^)]+)\)", archive):
+        assert (COURSE_ROOT / "docs" / "instructor" / target).resolve().is_file()
+    for evidence in ("21.439", "21.762", "1.000", "test/black_spot/black_spot_0000.png",
+                     "ref_anomaly_panels.png", "ref_comparison_5col.png"):
+        assert evidence in archive

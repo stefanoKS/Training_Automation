@@ -36,12 +36,40 @@ They use no external images, distributed fonts or network access; PNGs use the s
 | V09 | Day03_02 / returned object→row | Existing result-object SVG; new adjacent text schema documents (N,4)/(N,)/(N,) and zero-row case. |
 | V10 | Day03_03 / experiment sources | Table only: A toy, B archived52, C1 live640 cache, C2 live320 cache. Archived charts not regenerated. |
 | V12 | Day04_03 / choose counting unit | Worked image-vs-box table precedes metrics; correct matching/confusion figures retained with original axes. |
-| V14 | Day05_02 / score reading order | Adjacent bilingual annotation card for unchanged `ref_anomaly_panels.png`: historical raw21.439, mapMax21.762, normalized1.000, image threshold0.50. Not new inference. |
+| V14 | Day05_02 / score reading order | `teach_numeric_map_toy.png` and bilingual card: calculated synthetic, raw4.800 / mapMax2.000 / transformed0.600. Original TEST panel and historical reading card retained only in after-freeze instructor archive. |
 | V15 | Day05_03 / primary comparison protocol | Existing frozen-pipeline SVG moved to primary position; other overlap reduced, calibration controls moved before freeze. Archived five-column TEST panel opt-in after assessment; subsequent gallery explicitly CALIBRATION. |
 
 The three new pairs passed deterministic generation, numeric/bounds tests and PNG inspection.
 Live output is labelled calculated synthetic; archived model values are never presented as current computation.
 New diagrams have no external licensing dependencies. Existing reference-image licenses/provenance remain unchanged.
+
+### Day 5 follow-up: every learner figure's role / 各図の役割
+
+Reviewed 2026-11-16. `ref_` is a filename convention, not a partition guarantee.
+No saved calibration numeric maps/checkpoint are available locally, so the replacement is a
+transparently calculated synthetic toy, **not** a fabricated calibration model result.
+Only one PNG is new; all existing figures remain byte-for-byte unchanged.
+
+| Asset(s) | Placement / cell ID | Source / classification and limits |
+|---|---|---|
+| `teach_normal_variation.png` | Day05_01 / `fig-teach_normal_variation` | `generate_teaching_diagrams.teach_normal_variation`: seeded synthetic texture/noise/defect; no held-out course images. |
+| `VisA_samples.png` | Day05_01 / `fig-VisA_samples` | Licensed external VisA overview (CC BY 4.0); not this course's calibration or TEST set. |
+| `teach_patch_overlap.svg` | Day05_01 / `clarity-patch-overlap` | `generate_clarity_figures.patch_overlap`: schematic, not model output. |
+| `diagram_patchcore_concept.png`, `diagram_anomaly_heatmap.png`, `diagram_yolo_vs_patchcore.png` | Runtime diagrams: Day05_01 / `aa520d8d`, `73cca871`; Day05_03 / `7877dce2` | `generate_training_assets`: schematic pipeline, synthetic heat hill and illustrative comparison; no saved TEST outputs. |
+| `teach_patch_neighbour.png`, `teach_memory_bank.png`, `teach_score_levels.png` | Day05_01 / `e9df232d`, `fig-teach_memory_bank`, `fig-teach_score_levels` | `generate_teaching_diagrams`: chosen/seeded synthetic feature-space points and illustrative aggregation; not saved predictions. |
+| `teach_patchcore_stages.svg`, `teach_backbone_vs_memory.png` | Day05_02 / `audit-teach_patchcore_stages`, `fig-teach_backbone_vs_memory` | `generate_svg_figures`, `generate_teaching_diagrams`: schematic pipeline/state, no held-out output. |
+| `teach_score_map_overlay.png` | Day05_02 / `8cfeab62`; Day05_03 / `bf9157ac` | `generate_teaching_diagrams.teach_score_map_overlay`: synthetic smooth hill/layout, not inference. |
+| `teach_numeric_map_toy.png` | Day05_02 / `fig-ref_anomaly_panels` (ID preserved), `clarity-score-card` | `generate_reference_outputs.toy_numeric_map`: all-one 5×5 grid, centre6, direct neighbours2; edge-padded 3×3 mean. Raw=max×0.8=4.800, mapMax=2.000, clip((raw−4)/8+0.5,0,1)=0.600. All constants chosen, no fitted calibration statistics. |
+| `teach_frozen_threshold_pipeline.svg`, `teach_threshold_freeze.png` | Day05_03 / `fig-teach_evaluation_sequence`, `fig-teach_threshold_freeze` | Schematic protocol; archived calibration settings 0.06/0.50, no TEST outcomes. |
+| `ref_score_distribution.png` | Day05_03 / `fig-ref_score_distribution` | **CALIBRATION**: `ref_score_distribution` filters `patchcore_scores.csv` by partition before plotting; 6 normal/20 abnormal. Threshold from saved calibration summary. Historical PNG retained; original run files unavailable locally. |
+| Live heatmaps/overlays | Day05_02 / `dfe98874`, `39a9c510`; Day05_03 gallery | **CALIBRATION**: `predictions_by_partition["calibration"]`, then calibration rows and `heatmaps/`. Numeric TEST maps are saved separately, not displayed. |
+| `ref_anomaly_panels.png` | Instructor `day05_after_freeze_archive.md` only, through Day05_03 / `clarity-archive-gate` | **AFTER-FREEZE TEST**: `ref_anomaly_panels` reads `maps/black_spot_0000_map.npz` saved from `predictions_by_partition["test"]`, plus TEST CSV row. Raw21.439/mapMax21.762/normalized1.000, truthNG are historical evidence. Original PNG preserved. |
+| `ref_comparison_5col.png` | Same after-freeze instructor gate only | **AFTER-FREEZE TEST**: TEST maps + TEST scores + local YOLO weights + truth masks; original three-image PNG preserved. |
+
+Regenerate only the toy with `python assets\scripts\generate_reference_outputs.py --only teach_numeric_map_toy`.
+Generation preserves existing archived TEST PNGs; the lesson inserter no longer registers either TEST panel.
+The existing archive gate still defaults to hidden and requires freeze/evaluation. Neither archived PNG
+nor its worked TEST answers are embedded in learner Day05/Week1 PDFs.
 
 ## Existing source-checked figures / 既存の検証済み図
 

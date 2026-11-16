@@ -124,6 +124,7 @@ assets/reference_outputs/*
 !assets/reference_outputs/ref_anomaly_panels.png
 !assets/reference_outputs/ref_comparison_5col.png
 !assets/reference_outputs/ref_inference_boxes_table.png
+!assets/reference_outputs/teach_numeric_map_toy.png
 
 # --- 受講者の提出物 / student submissions ---
 submissions/*/*.ipynb

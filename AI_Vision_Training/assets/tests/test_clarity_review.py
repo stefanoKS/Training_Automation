@@ -141,7 +141,7 @@ def test_test_archive_is_opt_in_and_calibration_controls_precede_freeze(capsys) 
 def test_legacy_figure_inserter_does_not_restore_retired_or_curated_captions() -> None:
     import insert_lesson_figures as figures
 
-    retired = {"ref_comparison_5col.png", "teach_evaluation_sequence.png"}
+    retired = {"ref_comparison_5col.png", "ref_anomaly_panels.png", "teach_evaluation_sequence.png"}
     assert not retired.intersection(entry["image"] for entry in figures.FIGURES)
     sample = figures.FIGURES[0]
     edited = {"cell_type": "markdown", "id": figures._cell_id(sample),
@@ -149,6 +149,63 @@ def test_legacy_figure_inserter_does_not_restore_retired_or_curated_captions() -
               "source": [f"![](../../assets/{sample['folder']}/{sample['image']})\n",
                          "意図的に短くした説明 / intentionally concise caption\n"]}
     assert figures._update({"cells": [edited]}, sample) is False
+
+
+@pytest.mark.parametrize("prefix", ["Day05_01", "Day05_02", "Day05_03"])
+def test_prefreeze_day5_has_no_archived_test_panel_or_worked_answer(prefix) -> None:
+    prefreeze = []
+    for cell in cells(prefix):
+        if cell.get("id") == "clarity-freeze-record":
+            break
+        prefreeze.append("".join(cell["source"]))
+        prefreeze.append(json.dumps(cell.get("outputs", []), ensure_ascii=False))
+    text = "\n".join(prefreeze)
+    for forbidden in ("ref_anomaly_panels.png", "ref_comparison_5col.png",
+                      "21.439", "21.762", "saved scalar 1.000", "archived 1.000", "保存例1.000",
+                      "black_spot_0000", "streak_0005"):
+        assert forbidden not in text, f"{prefix}: early TEST evidence {forbidden}"
+
+
+def test_assignment_prompt_has_an_immediate_editable_equality_example(capsys) -> None:
+    notebook = cells("Day02_01")
+    index = next(i for i, c in enumerate(notebook) if c.get("id") == "fig-teach_assign_vs_compare")
+    example = notebook[index + 1]
+    assert example["cell_type"] == "code"
+    text = "".join(example["source"])
+    assert 2 <= len(text.splitlines()) <= 4
+    run(text)
+    assert capsys.readouterr().out == "True\n"
+    run(text.replace("width = 100.3", "width = 100.4"))
+    assert capsys.readouterr().out == "False\n"
+    assert notebook[index + 2]["id"] == "9ff42d85"
+
+
+def test_bilingual_threshold_caption_and_calibration_cross_references() -> None:
+    caption = "".join(next(c for c in cells("Day02_03") if c["id"] == "4a6c53f8")["source"])
+    assert "左の元画像は、しきい値を変えても変わりません。" in caption
+    assert "The left-hand original stays unchanged when the threshold T changes." in caption
+    scoring = "".join(next(c for c in cells("Day05_03") if c["id"] == "3d343aab")["source"])
+    assert "前の較正用スライダー" in scoring and "earlier calibration slider" in scoring
+    assert "次の節のスライダー" not in scoring and "next section" not in scoring
+    assert "original final test score" in scoring and "new untouched holdout" in scoring
+    training = cells("Day05_02")
+    index = next(i for i, c in enumerate(training) if c["id"] == "6c5c2682")
+    bridge = "".join(training[index - 1]["source"])
+    assert "engine.test()" in bridge and "val_dataloader()" in bridge
+    assert "ライブラリのメソッド名" in bridge and "library method name" in bridge
+    assert "not the held-out TEST" in bridge
+
+
+def test_float_surprise_has_adjacent_explanation_and_toy_not_spec_tolerance() -> None:
+    notebook = cells("Day02_01")
+    expected = "".join(next(c for c in notebook if c["id"] == "acfe495e")["source"])
+    assert "0.29999999999999716" in expected
+    assert "保存した数の近似" in expected and "stored-number approximation" in expected
+    optional = "\n".join("".join(c["source"]) for c in notebook
+                         if c["id"] in {"1b60ce34", "50c7ee88", "91118470"})
+    assert "safe comparison" not in optional
+    assert "not a manufacturing acceptance criterion" in optional
+    assert "規格" in optional and "1e-9" in optional
 
 
 def test_original_figure_generator_preserves_clarity_manifest_section(tmp_path, monkeypatch) -> None:

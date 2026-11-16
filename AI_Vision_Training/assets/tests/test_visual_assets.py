@@ -120,9 +120,11 @@ def test_diagram_generator_covers_every_reference() -> None:
     import generate_teaching_diagrams as gtd
     import generate_svg_figures as gsf
     import generate_clarity_figures as gcf
+    import generate_reference_outputs as gro
 
     registered = set(gtd.DIAGRAMS) | {f"{name}.svg" for name in gsf.FIGURES}
     registered |= {f"{name}.svg" for name in gcf.BUILDERS}
+    registered |= set(gro.OUTPUTS)
     referenced = set()
     for path in course_notebooks(NOTEBOOK_DIR):
         for target in _markdown_images(path):
@@ -200,7 +202,7 @@ REQUIRED_VISUALS = {
     "Day05_01_Anomaly_Detection_Concepts": ["teach_normal_variation.png", "teach_patch_neighbour.png",
                                             "teach_memory_bank.png", "teach_score_levels.png",
                                             "teach_patch_overlap.svg"],
-    "Day05_02_PatchCore_Training": ["teach_backbone_vs_memory.png", "ref_anomaly_panels.png"],
+    "Day05_02_PatchCore_Training": ["teach_backbone_vs_memory.png", "teach_numeric_map_toy.png"],
     "Day05_03_YOLO_vs_PatchCore": ["teach_frozen_threshold_pipeline.svg", "teach_threshold_freeze.png",
                                    "ref_score_distribution.png"],
 }
