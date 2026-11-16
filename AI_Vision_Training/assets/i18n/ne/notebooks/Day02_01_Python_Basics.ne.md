@@ -70,7 +70,8 @@ Do not translate code, file names, URLs or kernel names.
 ## Part 1 मान देखाउने
 
 <!-- ne-cell: 4c543e1a | after-heading -->
-#### `print()` को आधार
+**`print()` को आधार**
+<!-- ne-pair: The basics of `print()` -->
 
 <!-- ne-cell: 4c543e1a -->
 `print()` ले कोष्ठकभित्रको मान स्क्रिनमा देखाउँछ। माथिको कोड उदाहरण हेर्नुहोस्।
@@ -95,7 +96,7 @@ Do not translate code, file names, URLs or kernel names.
 <!-- ne-cell: 56698643 | after-heading -->
 ### चलमा मान पुग्ने क्रम
 
-<!-- ne-cell: 56698643 -->
+<!-- ne-cell: 56698643 | after-image:../../assets/diagrams/teach_variable_trace.png -->
 चित्र: तीन लाइनको कोड र प्रत्येक लाइन सकिँदा चलमा रहेको मान। तेस्रो लाइनले `100.7 < 101.0` भन्ने
 सर्त तुलना गर्छ; सर्त पुगेको हुनाले `is_ok` को मान `True` हुन्छ। यसको अर्थ 100.7 भन्ने सङ्ख्या आफैं
 "सही" हो भन्ने चाहिँ होइन।
@@ -114,7 +115,8 @@ Do not translate code, file names, URLs or kernel names.
 - तेस्रो लाइन सकिँदा `width_mm` को मान कति हुन्छ? र `is_ok` `True` हुनुको कारण कुन सर्त पूरा हुनु हो?
 
 <!-- ne-cell: 710318fa | after-heading -->
-#### चल भनेको नाम भएको बाकस
+**चल भनेको नाम भएको बाकस**
+<!-- ne-pair: A variable is a named box -->
 
 <!-- ne-cell: 710318fa -->
 चल (variable) भनेको मान राख्ने **नाम भएको बाकस** हो। माथिको `sheet_width = 100.3` लेखिएको कोडले
@@ -137,7 +139,8 @@ Do not translate code, file names, URLs or kernel names.
 ## Part 3 सङ्ख्या र गणना
 
 <!-- ne-cell: 9fb383b4 | after-heading -->
-#### सङ्ख्याका प्रकार र चार गणित
+**सङ्ख्याका प्रकार र चार गणित**
+<!-- ne-pair: Number types and the four operations -->
 
 <!-- ne-cell: 9fb383b4 -->
 Python मा मुख्यतः दुई प्रकारका सङ्ख्या हुन्छन्।
@@ -164,7 +167,7 @@ Python मा मुख्यतः दुई प्रकारका सङ्
 <!-- ne-cell: fig-teach_units_conversion | after-heading -->
 ### नाप र एकाइ परिवर्तन
 
-<!-- ne-cell: fig-teach_units_conversion -->
+<!-- ne-cell: fig-teach_units_conversion | after-image:../../assets/diagrams/teach_units_conversion.png -->
 चित्र: एकाइ परिवर्तन र कम्प्युटरभित्र सङ्ख्या कसरी राखिन्छ (योजनाबद्ध चित्र)। माथिल्लो लहर भौतिक
 एकाइ हो, तल्लो लहर 2-आधारित (binary) अनुमान र राउन्ड गर्ने नीति हो।
 
@@ -186,7 +189,8 @@ Python मा मुख्यतः दुई प्रकारका सङ्
 परिशुद्धता र विशेष सञ्चालक" भागमा आउँछ। यो एकाइ वा निरीक्षण-मापदण्ड बदल्ने कारण होइन।
 
 <!-- ne-cell: 8464d545 | after-heading -->
-#### अक्षर (string)
+**अक्षर (string)**
+<!-- ne-pair: Strings -->
 
 <!-- ne-cell: 8464d545 -->
 अक्षरको लहर (string) भनेको `"..."` भित्र राखिएको अक्षरहरूको क्रम हो। `'...'` पनि उही हो। माथिको
@@ -211,7 +215,8 @@ Python मा मुख्यतः दुई प्रकारका सङ्
 ## Part 4 तुलना र सत्य/असत्य मान
 
 <!-- ne-cell: 1bde6236 | after-heading -->
-#### तुलना गर्ने सञ्चालक
+**तुलना गर्ने सञ्चालक**
+<!-- ne-pair: Comparison operators -->
 
 <!-- ne-cell: 1bde6236 -->
 तुलना गर्दा नतिजा `True` वा `False` आउँछ। यी दुईलाई **सत्य/असत्य मान (boolean)** भनिन्छ।
@@ -235,7 +240,7 @@ Python मा मुख्यतः दुई प्रकारका सङ्
 <!-- ne-cell: fig-teach_assign_vs_compare | after-heading -->
 ### `=` र `==` फरक काम हुन्
 
-<!-- ne-cell: fig-teach_assign_vs_compare -->
+<!-- ne-cell: fig-teach_assign_vs_compare | after-image:../../assets/diagrams/teach_assign_vs_compare.png -->
 चित्र: मान राख्ने (`=`) र सत्य/असत्य सोध्ने (`==`) को फरक, र साँच्चै गणना गरिएका चार नतिजा।
 
 **ध्यान दिनुपर्ने कुरा**
@@ -260,7 +265,8 @@ Python मा मुख्यतः दुई प्रकारका सङ्
 ## Part 5 किबोर्डबाट मान लिने
 
 <!-- ne-cell: e9217fc0 | after-heading -->
-#### `input()` को प्रयोग र ध्यान दिनुपर्ने कुरा
+**`input()` को प्रयोग र ध्यान दिनुपर्ने कुरा**
+<!-- ne-pair: How `input()` works, and its warnings -->
 
 <!-- ne-cell: e9217fc0 -->
 `input()` ले किबोर्डबाट एक लाइन पढ्छ। यसले **सधैं अक्षर (`str`)** फर्काउँछ। माथिको कोड उदाहरण हेर्नुहोस्।
@@ -284,7 +290,8 @@ Python मा मुख्यतः दुई प्रकारका सङ्
 ## Part 6 त्रुटि र डिबगिङ
 
 <!-- ne-cell: 0f6a8f0a | after-heading -->
-#### प्रायः देखिने पाँच त्रुटि
+**प्रायः देखिने पाँच त्रुटि**
+<!-- ne-pair: The five errors you will meet most -->
 
 <!-- ne-cell: 0f6a8f0a -->
 त्रुटि "असफलता" होइन, "जानकारी" हो। नामैले कारण बताउँछ।
@@ -306,7 +313,7 @@ Python मा मुख्यतः दुई प्रकारका सङ्
 <!-- ne-cell: fig-teach_traceback_annotated | after-heading -->
 ### traceback कसरी पढ्ने
 
-<!-- ne-cell: fig-teach_traceback_annotated -->
+<!-- ne-cell: fig-teach_traceback_annotated | after-image:../../assets/diagrams/teach_traceback_annotated.png -->
 चित्र: 0 ले भाग गर्दा आउने traceback, कुन क्रममा पढ्ने भनेर चिन्ह लगाइएको (योजनाबद्ध चित्र)।
 
 **ध्यान दिनुपर्ने कुरा**
@@ -323,7 +330,8 @@ Python मा मुख्यतः दुई प्रकारका सङ्
 ### नतिजाको उदाहरण
 
 <!-- ne-cell: 90a7e4fa | after-heading -->
-#### डिबग गर्ने क्रम
+**डिबग गर्ने क्रम**
+<!-- ne-pair: A debugging procedure -->
 
 <!-- ne-cell: 90a7e4fa -->
 त्रुटि आएपछि यही क्रममा जाँच्नुहोस्।
@@ -348,7 +356,8 @@ Python मा मुख्यतः दुई प्रकारका सङ्
 हुँदैन। आवश्यक रिजोल्युसन र निर्णय नीति पहिले नै तोक्नुहोस्।
 
 <!-- ne-cell: 1b60ce34 | after-heading -->
-#### दशमलव गणनामा त्रुटि आउँछ
+**दशमलव गणनामा त्रुटि आउँछ**
+<!-- ne-pair: Floating-point rounding error -->
 
 <!-- ne-cell: 1b60ce34 -->
 माथिको नतिजामा `0.29999999999999716` देख्नुभयो? `100.3 - 100.0` को गणितीय उत्तर `0.3` हो, तर Python
@@ -390,7 +399,8 @@ Python मा मुख्यतः दुई प्रकारका सङ्
 ## अभ्यास
 
 <!-- ne-cell: 7d48e791 | after-heading -->
-#### अभ्यास 1 (आधारभूत): आफ्नो परिचय देखाउने
+**अभ्यास 1 (आधारभूत): आफ्नो परिचय देखाउने**
+<!-- ne-pair: Exercise 1 (basic): print an introduction -->
 
 <!-- ne-cell: 7d48e791 -->
 चलमा "नाम", "विभाग" र "आजको सिकाइ लक्ष्य" राखेर `print()` ले 3 लाइन देखाउनुहोस्। एउटा लाइन नेपालीमा
@@ -401,7 +411,7 @@ Python मा मुख्यतः दुई प्रकारका सङ्
 <!-- ne-cell: audit-teach_mass_units_chain | after-heading -->
 ### कोड कसरी पढ्ने
 
-<!-- ne-cell: audit-teach_mass_units_chain -->
+<!-- ne-cell: audit-teach_mass_units_chain | after-image:../../assets/svg/teach_mass_units_chain.svg -->
 चित्र: क्षेत्रफल र आयतन छुट्याउनुहोस्। उत्तर आफैं गणना गर्नुहोस्। (गणना गरिएको संश्लेषित उदाहरण र
 योजनाबद्ध चित्र; model को वास्तविक नापिएको नतिजा होइन।)
 
@@ -430,7 +440,8 @@ Python मा मुख्यतः दुई प्रकारका सङ्
 अभ्यासका खाली ठाउँ आफैं भर्नुहोस्। सानो प्रयोग: मोटाइ मात्र दोब्बर बनाउँदा क्षेत्रफल र तौल के हुन्छ?
 
 <!-- ne-cell: 3ab12dde | after-heading -->
-#### अभ्यास 2 (मध्यम): चौडाइ, लम्बाइ र क्षेत्रफल गणना
+**अभ्यास 2 (मध्यम): चौडाइ, लम्बाइ र क्षेत्रफल गणना**
+<!-- ne-pair: Exercise 2 (intermediate): compute width, length and area -->
 
 <!-- ne-cell: 3ab12dde -->
 चौडाइ 1,300 mm र लम्बाइ 2,500 mm भएको सिट छ।

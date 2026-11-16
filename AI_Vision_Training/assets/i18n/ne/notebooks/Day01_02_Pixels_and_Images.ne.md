@@ -67,7 +67,8 @@ array भनेको सङ्ख्या मिलाएर राखिए�
 ## Part 0 तयारी
 
 <!-- ne-cell: 328beddc | after-heading -->
-#### चित्रमा प्रयोग हुने फन्ट मिलाउनुहोस्
+**चित्रमा प्रयोग हुने फन्ट मिलाउनुहोस्**
+<!-- ne-pair: Configure Japanese text in figures -->
 
 <!-- ne-cell: 328beddc -->
 Matplotlib को पूर्वनिर्धारित फन्टले जापानी अक्षर देखाउन सक्दैन। त्यसैले चित्रको शीर्षक `□□□` जस्तो
@@ -80,7 +81,7 @@ Matplotlib को पूर्वनिर्धारित फन्टले 
 <!-- ne-cell: e4ad5e50 | after-heading -->
 ### pixel र निर्देशांक
 
-<!-- ne-cell: e4ad5e50 -->
+<!-- ne-cell: e4ad5e50 | after-image:../../assets/diagrams/diagram_pixel_grid.png -->
 चित्र: 8×8 pixel को उदाहरण (8-bit, १ channel)। एउटा खण्ड एउटा pixel हो, र प्रत्येकमा 0–255 को एउटा
 मान हुन्छ।
 
@@ -98,7 +99,8 @@ Matplotlib को पूर्वनिर्धारित फन्टले 
   खण्डमा कतिवटा सङ्ख्या हुन्छन्?
 
 <!-- ne-cell: 610c3045 | after-heading -->
-#### pixel (चित्रबिन्दु)
+**pixel (चित्रबिन्दु)**
+<!-- ne-pair: Pixel -->
 
 <!-- ne-cell: 610c3045 -->
 डिजिटल चित्र साना चौकोण **तलमाथि र छेउछाउ मिलाएर राखिएको** हुन्छ।
@@ -125,7 +127,8 @@ Matplotlib को पूर्वनिर्धारित फन्टले 
 तलको चित्र हेर्नुहोस्। बायाँ 8×8 pixel को चित्र, दायाँ त्यसलाई ठुलो बनाएर सङ्ख्या देखाइएको छ।
 
 <!-- ne-cell: c69e86d8 | after-heading -->
-#### सङ्ख्या र उज्यालोको सम्बन्ध
+**सङ्ख्या र उज्यालोको सम्बन्ध**
+<!-- ne-pair: The relationship between numbers and brightness -->
 
 <!-- ne-cell: c69e86d8 -->
 तलको चित्रले 0–255 को मान वास्तवमा कति उज्यालो देखिन्छ भनेर देखाउँछ।
@@ -152,7 +155,7 @@ sampling मा पनि भर पर्छ।
 <!-- ne-cell: clarity-fixed-fov | after-heading -->
 ### उही दृश्यक्षेत्रमा pixel सङ्ख्या बदल्ने
 
-<!-- ne-cell: clarity-fixed-fov -->
+<!-- ne-cell: clarity-fixed-fov | after-image:../../assets/svg/teach_fixed_fov_sampling.svg -->
 **सोच्नुहोस्**
 
 अनुमान: 1300 mm चौडाइ 13000 pixel ले खिच्दा 0.3 mm कति pixel मा पर्छ?
@@ -175,7 +178,8 @@ sampling मा पनि भर पर्छ।
 लागि उही गुणनफल हुन्। उही आकारको रङ चित्रमा तीन गुणा बढी मान भण्डारण हुन्छ।
 
 <!-- ne-cell: 6d88b3b1 | after-heading -->
-#### resolution र देखिने दोषको आकार
+**resolution र देखिने दोषको आकार**
+<!-- ne-pair: Resolution and the smallest visible defect -->
 
 <!-- ne-cell: 6d88b3b1 -->
 यो उत्पादन निरीक्षणमा निर्णायक कुरा हो।
@@ -209,7 +213,7 @@ resolved नहुने" भनेर बुझ्नु ठीक हुन्
 <!-- ne-cell: 77008bda | after-heading -->
 ### एउटा चित्र भनेको तीनवटा तालिका
 
-<!-- ne-cell: 77008bda -->
+<!-- ne-cell: 77008bda | after-image:../../assets/diagrams/teach_rgb_channels.png -->
 चित्र: उही चित्रलाई R, G, B channel मा छुट्याइएको। तीनवटा तालिकाले उही pixel स्थानलाई फरक-फरक
 सङ्ख्याले देखाउँछन्।
 
@@ -229,7 +233,7 @@ resolved नहुने" भनेर बुझ्नु ठीक हुन्
 <!-- ne-cell: fig-chelsea | after-heading -->
 ### वास्तविक फोटोमा पनि १ pixel = ३ सङ्ख्या
 
-<!-- ne-cell: fig-chelsea -->
+<!-- ne-cell: fig-chelsea | after-image:../../assets/external_samples/open_reference/chelsea.png -->
 फोटो: स्क्यान गरिएको वास्तविक तस्बिर (scikit-image `chelsea`, Stefan van der Walt, CC0 1.0)। तलको
 व्याख्यामा भएका RGB तालिकासँग **उही क्रम** (उचाइ × चौडाइ × 3) मा सुरक्षित छ। कारखानाको PVC चित्र
 होइन, रङको बनावट हेर्नका लागि मात्र उदाहरण हो।
@@ -244,7 +248,8 @@ resolved नहुने" भनेर बुझ्नु ठीक हुन्
 - यो फोटोको एउटा pixel को मान (34, 139, 34) थियो भने देखिने रङमा रातो, हरियो, निलोमध्ये कुन बलियो हुन्छ?
 
 <!-- ne-cell: a067440a | after-heading -->
-#### रङ चित्र भनेको तीनवटा तालिका
+**रङ चित्र भनेको तीनवटा तालिका**
+<!-- ne-pair: A colour image is three tables -->
 
 <!-- ne-cell: a067440a -->
 रङ चित्रमा **रातो, हरियो, निलो** तीन सङ्ख्याले एउटा pixel देखाइन्छ।
@@ -276,7 +281,8 @@ OpenCV मा **BGR** (निलो, हरियो, रातो) क्रम
 Part 4 मा व्याख्या गरिएको `image[y, x]` क्रम।
 
 <!-- ne-cell: 710f8ada | after-heading -->
-#### greyscale मा बदल्ने
+**greyscale मा बदल्ने**
+<!-- ne-pair: Converting to greyscale -->
 
 <!-- ne-cell: 710f8ada -->
 RGB बाट greyscale मा बदल्नु भनेको तीन मानको **भारित औसत** हो।
@@ -320,7 +326,8 @@ RGB बाट greyscale मा बदल्नु भनेको तीन म�
 ## Part 4 चित्रको निर्देशांक
 
 <!-- ne-cell: a54f4513 | after-heading -->
-#### मूलबिन्दु माथि-बायाँ, y तलतिर
+**मूलबिन्दु माथि-बायाँ, y तलतिर**
+<!-- ne-pair: The origin is top-left, and y increases downward -->
 
 <!-- ne-cell: a54f4513 -->
 गणितको ग्राफभन्दा **उल्टो** हुन्छ। ध्यान दिनुहोस्।
@@ -335,7 +342,7 @@ NumPy array पनि उही हो। `image[y, x]` क्रममा ल�
 <!-- ne-cell: fig-teach_array_indexing | after-heading -->
 ### array को index र slice
 
-<!-- ne-cell: fig-teach_array_indexing -->
+<!-- ne-cell: fig-teach_array_indexing | after-image:../../assets/diagrams/teach_array_indexing.png -->
 चित्र: `image[1:4]` ले छान्ने पङ्क्ति। पङ्क्ति index 1, 2, 3 भनेको माथिबाट दोस्रोदेखि चौथो पङ्क्ति
 सम्म (योजनाबद्ध)।
 
@@ -359,7 +366,7 @@ NumPy array पनि उही हो। `image[y, x]` क्रममा ल�
 <!-- ne-cell: audit-teach_pixel_inspector | after-heading -->
 ### कोड पढ्ने तरिका
 
-<!-- ne-cell: audit-teach_pixel_inspector -->
+<!-- ne-cell: audit-teach_pixel_inspector | after-image:../../assets/svg/teach_pixel_inspector.svg -->
 चित्र: 5 पङ्क्ति 7 स्तम्भको canvas[2,3] को मान 100 हो। पहिलो index पङ्क्ति y, दोस्रो स्तम्भ x हो।
 (हिसाब गरिएको कृत्रिम उदाहरण/योजनाबद्ध। model को मापन गरिएको नतिजा होइन।)
 
@@ -382,7 +389,7 @@ canvas[2, 3] र canvas[3, 2] उही हुन्?
 <!-- ne-cell: audit-teach_slice_walkthrough | after-heading -->
 ### कोड पढ्ने तरिका
 
-<!-- ne-cell: audit-teach_slice_walkthrough -->
+<!-- ne-cell: audit-teach_slice_walkthrough | after-image:../../assets/svg/teach_slice_walkthrough.svg -->
 चित्र: canvas[1:4,2:5] ले 3 पङ्क्ति 3 स्तम्भ निकाल्छ। अन्त्य 4 र 5 समावेश हुँदैन।
 (हिसाब गरिएको कृत्रिम उदाहरण/योजनाबद्ध। model को मापन गरिएको नतिजा होइन।)
 
@@ -409,7 +416,8 @@ canvas[2, 3] र canvas[3, 2] उही हुन्?
 ## Part 5 चित्र बनाएर बदल्ने
 
 <!-- ne-cell: e313b7d9 | after-heading -->
-#### सिटजस्तो देखिने चित्र बनाउने
+**सिटजस्तो देखिने चित्र बनाउने**
+<!-- ne-pair: Build a sheet-like image -->
 
 <!-- ne-cell: e313b7d9 -->
 अब वास्तवमा "PVC सिटजस्तो" चित्र बनाएर काम गर्छौं।
@@ -430,7 +438,8 @@ canvas[2, 3] र canvas[3, 2] उही हुन्?
 भनेको प्रत्येक मान 0 देखि 255 सम्मको पूर्णाङ्कको रूपमा भण्डारण हुन्छ।
 
 <!-- ne-cell: 159783f0 | after-heading -->
-#### pixel बदलेर दोष बनाउने
+**pixel बदलेर दोष बनाउने**
+<!-- ne-pair: Modify pixels to create a defect -->
 
 <!-- ne-cell: 159783f0 -->
 pixel को मान बदल्दा त्यो भागको देखिने रूप बदलिन्छ। यो उदाहरणमा मूल मान (210 आसपास) भन्दा सानो `40`
@@ -448,7 +457,7 @@ Part 4 को चित्र "array को index र slice" को उही �
 <!-- ne-cell: eff2d8cf | after-heading -->
 ### सानो बनाउँदा सूक्ष्म विवरण र contrast हराउँछ
 
-<!-- ne-cell: eff2d8cf -->
+<!-- ne-cell: eff2d8cf | after-image:../../assets/diagrams/teach_downsample_defect.png -->
 चित्र: उही कृत्रिम चित्रलाई 480 px, 120 px र 30 px मा सानो बनाएको नतिजा (Pillow को BILINEAR
 interpolation ले वास्तवमै हिसाब गरेको चित्र)।
 
@@ -464,7 +473,8 @@ interpolation ले वास्तवमै हिसाब गरेको �
 - 0.3 mm को चोट ३ pixel मा देखाउन प्रति mm कति pixel चाहिन्छ?
 
 <!-- ne-cell: be892bb2 | after-heading -->
-#### सानो बनाउँदा के हुन्छ
+**सानो बनाउँदा के हुन्छ**
+<!-- ne-pair: What happens when you shrink an image -->
 
 <!-- ne-cell: be892bb2 -->
 चित्र सानो बनाउँदा **pixel घट्छ**, त्यसैले जानकारी हराउँछ।
@@ -480,7 +490,7 @@ interpolation ले वास्तवमै हिसाब गरेको �
 <!-- ne-cell: fig-teach_resize_profile | after-heading -->
 ### उही क्षेत्रलाई ३ resolution मा तुलना गर्ने
 
-<!-- ne-cell: fig-teach_resize_profile -->
+<!-- ne-cell: fig-teach_resize_profile | after-image:../../assets/diagrams/teach_resize_profile.png -->
 चित्र: यो उदाहरणको कृत्रिम चित्र सानो बनाउँदा दोषबाट जाने काट्छेदको उज्यालो (मापन गरिएको मान)।
 तेर्सो अक्ष स्थान, ठाडो अक्ष 0–255 को pixel मान हो।
 
@@ -495,7 +505,8 @@ interpolation ले वास्तवमै हिसाब गरेको �
 - सानो बनाए पनि अँध्यारोपनको न्यूनतम मान खासै नबदलिने अवस्था कस्तो होला?
 
 <!-- ne-cell: 28884f36 | after-heading -->
-#### सानो बनाउँदा दोष कहाँसम्म रहन्छ
+**सानो बनाउँदा दोष कहाँसम्म रहन्छ**
+<!-- ne-pair: How much of the defect survives? -->
 
 <!-- ne-cell: 28884f36 -->
 तलको सेलले हरेक resolution मा "सबैभन्दा अँध्यारो pixel" जाँच्छ।
@@ -518,7 +529,8 @@ interpolation ले वास्तवमै हिसाब गरेको �
 ## Part 7 अनुमान गरेपछि चलाउने
 
 <!-- ne-cell: e6e142e9 | after-heading -->
-#### नतिजा अनुमान गर्नुहोस्
+**नतिजा अनुमान गर्नुहोस्**
+<!-- ne-pair: Predict the result -->
 
 <!-- ne-cell: e6e142e9 -->
 तलको सेलले `predict_me` भन्ने चित्र बनाउँछ। **चलाउनुअघि**
@@ -531,7 +543,8 @@ interpolation ले वास्तवमै हिसाब गरेको �
 लेखिसकेपछि चलाएर अनुमानसँग तुलना गर्नुहोस्।
 
 <!-- ne-cell: 46ee1d4a | after-heading -->
-#### त्यस्तो किन भयो
+**त्यस्तो किन भयो**
+<!-- ne-pair: Why it looks like that -->
 
 <!-- ne-cell: 46ee1d4a -->
 बायाँ भाग रातो देखिनुको कारण रातोको मान मात्र `230` बनाइयो। दायाँको गाढा भागमा तीनवटै मान `60`
@@ -544,7 +557,8 @@ interpolation ले वास्तवमै हिसाब गरेको �
 ## अभ्यास
 
 <!-- ne-cell: c13aea22 | after-heading -->
-#### अभ्यास १ (आधारभूत): आफ्नै चित्र बनाउने
+**अभ्यास १ (आधारभूत): आफ्नै चित्र बनाउने**
+<!-- ne-pair: Exercise 1 (basic): make your own image -->
 
 100×100 को greyscale चित्र बनाएर बीचको 20×20 pixel `30` बनाउनुहोस्।
 त्यसपछि `plt.imshow()` ले देखाउनुहोस्।
@@ -552,7 +566,8 @@ interpolation ले वास्तवमै हिसाब गरेको �
 **सकिएको ठान्ने आधार:** देखाइएको चित्रको बीचमा एउटा अँध्यारो चौकोण देखिन्छ।
 
 <!-- ne-cell: b8228fc7 | after-heading -->
-#### अभ्यास २ (मध्यम): रङ बदल्ने
+**अभ्यास २ (मध्यम): रङ बदल्ने**
+<!-- ne-pair: Exercise 2 (intermediate): change colours -->
 
 अभ्यास १ को चित्रलाई **रङ** बनाएर बीचको चौकोण "रातो खालको खैरो" बनाउनुहोस्।
 त्यसपछि हरियो र निलो अंश 0 बनाएर देखाउनुहोस्। यो **रातो मात्र भएको RGB चित्र** हो।
@@ -563,7 +578,8 @@ interpolation ले वास्तवमै हिसाब गरेको �
 pixel) भनेर बुझाउन सक्ने।
 
 <!-- ne-cell: 6850a83e | after-heading -->
-#### अभ्यास ३ (विकास/ऐच्छिक): resolution र दोषको सम्बन्ध व्याख्या गर्ने
+**अभ्यास ३ (विकास/ऐच्छिक): resolution र दोषको सम्बन्ध व्याख्या गर्ने**
+<!-- ne-pair: Exercise 3 (optional challenge): relate resolution to detectability -->
 
 Part 6 को नतिजा प्रयोग गरेर "चौडाइ 1,300 mm को सिटमा 0.3 mm को दोष भेट्टाउन तेर्सोतिर कति pixel
 चाहिन्छ" हिसाब गर्नुहोस्। कारण पनि लेख्नुहोस्।

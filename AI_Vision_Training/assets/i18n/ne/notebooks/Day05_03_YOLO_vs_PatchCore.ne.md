@@ -69,7 +69,8 @@ notebooks/Day05_PatchCore/Day05_03_YOLO_vs_PatchCore.ipynb
 ## Part 1 नतिजाको फरक सम्झने
 
 <!-- ne-cell: 404278ad | after-heading -->
-#### जो मिलाउन सकिँदैन, त्यसलाई उही ढाँचामा नराख्ने
+**जो मिलाउन सकिँदैन, त्यसलाई उही ढाँचामा नराख्ने**
+<!-- ne-pair: Do not pretend different things are the same -->
 
 <!-- ne-cell: 404278ad -->
 दुई विधिले **फरक कुरा फर्काउँछन्**।
@@ -93,7 +94,7 @@ notebooks/Day05_PatchCore/Day05_03_YOLO_vs_PatchCore.ipynb
 <!-- ne-cell: fig-teach_evaluation_sequence | after-heading -->
 ### तुलनाको मुख्य क्रम
 
-<!-- ne-cell: fig-teach_evaluation_sequence -->
+<!-- ne-cell: fig-teach_evaluation_sequence | after-image:../../assets/svg/teach_frozen_threshold_pipeline.svg -->
 चित्र: स्थिर गर्नुअघिको क्यालिब्रेसन र स्थिर गरेपछिको परीक्षण छुट्याउने योजनाबद्ध चित्र। यो पाठमा यसलाई
 छ चरणमा मिलाइन्छ।
 
@@ -117,7 +118,8 @@ notebooks/Day05_PatchCore/Day05_03_YOLO_vs_PatchCore.ipynb
 यो पटकको थ्रेसहोल्ड क्यालिब्रेसन कोडले गणना गरेको मानबाट आउँछ।
 
 <!-- ne-cell: be4aa133 | after-heading -->
-#### तीन फाइल पढ्ने
+**तीन फाइल पढ्ने**
+<!-- ne-pair: Read the three files -->
 
 <!-- ne-cell: be4aa133 -->
 | फाइल | बनाएको ठाउँ | भित्र के छ |
@@ -130,7 +132,8 @@ notebooks/Day05_PatchCore/Day05_03_YOLO_vs_PatchCore.ipynb
 तुलनाको आधार बन्न सक्दैन। पुरानो ढाँचाको फाइल भए कारण देखाएर रोकिन्छ।
 
 <!-- ne-cell: 415b6d88 | after-heading -->
-#### frame बनाउने
+**frame बनाउने**
+<!-- ne-pair: Turn them into frames -->
 
 <!-- ne-cell: 415b6d88 -->
 `image` स्तम्भ दुवै विधिमा एउटै तरिकाले (`प्रकार/फाइलनाम.png`) मिलाइन्छ। नमिलाए एउटै तस्बिरलाई दुई
@@ -140,14 +143,16 @@ notebooks/Day05_PatchCore/Day05_03_YOLO_vs_PatchCore.ipynb
 ## Part 3 एउटै तस्बिरमा सँगै राख्ने
 
 <!-- ne-cell: a0a1bf15 | after-heading -->
-#### दुवै विधिको नतिजा भएका तस्बिर मात्र प्रयोग गर्ने
+**दुवै विधिको नतिजा भएका तस्बिर मात्र प्रयोग गर्ने**
+<!-- ne-pair: Use only images where both methods produced a result -->
 
 <!-- ne-cell: a0a1bf15 -->
 एक विधिको मात्र नतिजा भएको तस्बिर **तुलना गर्न सकिँदैन**। चुपचाप फाल्दा "अनुकूल तस्बिर मात्रको
 तुलना" बन्छ। त्यसैले पहिले **कति तस्बिर मिले र कति छुटे** गनेर देखाइन्छ।
 
 <!-- ne-cell: 38cb927e | after-heading -->
-#### भागअनुसार छुट्याउने
+**भागअनुसार छुट्याउने**
+<!-- ne-pair: Split the images into their roles -->
 
 <!-- ne-cell: 38cb927e -->
 | भाग | के का लागि | कहिले हेर्न मिल्छ |
@@ -168,7 +173,8 @@ notebooks/Day05_PatchCore/Day05_03_YOLO_vs_PatchCore.ipynb
 ## Part 4 एउटै आधारमा OK/NG निकाल्ने
 
 <!-- ne-cell: d8230d25 | after-heading -->
-#### थ्रेसहोल्ड "क्यालिब्रेसन" मा तय गर्ने
+**थ्रेसहोल्ड "क्यालिब्रेसन" मा तय गर्ने**
+<!-- ne-pair: Choose the thresholds on the calibration partition -->
 
 <!-- ne-cell: d8230d25 -->
 अघिल्लो संस्करणमा सामान्य स्कोरको अधिकतम र असामान्य स्कोरको न्यूनतमबाट थ्रेसहोल्ड तय गरेर
@@ -195,7 +201,7 @@ notebooks/Day05_PatchCore/Day05_03_YOLO_vs_PatchCore.ipynb
 <!-- ne-cell: fig-ref_score_distribution | after-heading -->
 ### क्यालिब्रेसन डेटाको वितरण
 
-<!-- ne-cell: fig-ref_score_distribution -->
+<!-- ne-cell: fig-ref_score_distribution | after-image:../../assets/reference_outputs/ref_score_distribution.png -->
 चित्र: क्यालिब्रेसन (validation) डेटाको मात्र स्कोर वितरण र त्यसैबाट तय गरिएको थ्रेसहोल्ड 0.50
 (सुरक्षित 0–1 मापनमा)। परीक्षण डेटा समावेश छैन।
 
@@ -218,7 +224,8 @@ notebooks/Day05_PatchCore/Day05_03_YOLO_vs_PatchCore.ipynb
 परीक्षण हेरेर सेटिङ बदलियो भने नयाँ अन्तिम मूल्याङ्कनका लागि नयाँ प्रयोग नभएको डेटा चाहिन्छ।
 
 <!-- ne-cell: c818bf0a | after-heading -->
-#### थ्रेसहोल्ड सार्न मिल्ने क्यालिब्रेसन डेटामा मात्र
+**थ्रेसहोल्ड सार्न मिल्ने क्यालिब्रेसन डेटामा मात्र**
+<!-- ne-pair: You may move thresholds on the calibration data only -->
 
 <!-- ne-cell: c818bf0a -->
 तलको slider ले **क्यालिब्रेसन डेटा** को स्कोर वितरण मात्र प्रयोग गर्छ। परीक्षणको स्कोर लोड गरिएको छैन।
@@ -239,7 +246,7 @@ notebooks/Day05_PatchCore/Day05_03_YOLO_vs_PatchCore.ipynb
 <!-- ne-cell: fig-teach_threshold_freeze | after-heading -->
 ### क्यालिब्रेसनमा तय गरेर स्थिर गर्ने
 
-<!-- ne-cell: fig-teach_threshold_freeze -->
+<!-- ne-cell: fig-teach_threshold_freeze | after-image:../../assets/diagrams/teach_threshold_freeze.png -->
 चित्र: क्यालिब्रेसन डेटामा थ्रेसहोल्ड तय गरेर स्थिर गर्ने क्रम (योजनाबद्ध चित्र)। चित्रको YOLO 0.06 र
 PatchCore 0.50 सुरक्षित पुराना उदाहरण हुन्; यो पटकको मान क्यालिब्रेसन कोडले तय गर्छ।
 
@@ -269,7 +276,8 @@ PatchCore 0.50 सुरक्षित पुराना उदाहरण �
 `assessment_role` बुझाउनुपर्ने काममा समावेश गर्नुहोस्।
 
 <!-- ne-cell: 3d343aab | after-heading -->
-#### स्थिर गरिएको थ्रेसहोल्डले परीक्षण एक पटक मात्र मूल्याङ्कन गर्ने
+**स्थिर गरिएको थ्रेसहोल्डले परीक्षण एक पटक मात्र मूल्याङ्कन गर्ने**
+<!-- ne-pair: Score the test partition once, with the frozen thresholds -->
 
 <!-- ne-cell: 3d343aab -->
 थ्रेसहोल्ड क्यालिब्रेसन डेटामा तय गरेर **यहाँ स्थिर** गरियो। अब परीक्षणको सङ्ख्या हेरेर थ्रेसहोल्ड
@@ -299,7 +307,7 @@ slider **क्यालिब्रेसन डेटा** मा प्रय
 <!-- ne-cell: bf9157ac | after-heading -->
 ### तुलना गर्नुअघि: तीन प्यानल कसरी पढ्ने
 
-<!-- ne-cell: bf9157ac -->
+<!-- ne-cell: bf9157ac | after-image:../../assets/diagrams/teach_score_map_overlay.png -->
 यो योजनाबद्ध चित्र **तीन प्यानल** को छ: मूल तस्बिर, असामान्यता नक्सा र मिलाएर देखाइएको चित्र।
 यो वास्तविक model को नतिजा पनि होइन र पाँच-स्तम्भ तुलना पनि होइन।
 
@@ -333,7 +341,8 @@ False राख्नुहोस्। देखाइसकेपछि यो
 ## अभ्यास
 
 <!-- ne-cell: 38937c33 | after-heading -->
-#### अभ्यास 1 (आधारभूत): तुलनाको तालिका पूरा गर्ने
+**अभ्यास 1 (आधारभूत): तुलनाको तालिका पूरा गर्ने**
+<!-- ne-pair: Exercise 1 (basic): complete the comparison table -->
 
 <!-- ne-cell: 38937c33 -->
 तलको तालिका आफ्नै नतिजाले भर्नुहोस्।
@@ -349,7 +358,8 @@ False राख्नुहोस्। देखाइसकेपछि यो
 | झुटो अलार्म (FP) सङ्ख्या | | |
 
 <!-- ne-cell: b9498efe | after-heading -->
-#### अभ्यास 2 (मध्यम): क्यालिब्रेसन डेटामा थ्रेसहोल्ड सार्ने
+**अभ्यास 2 (मध्यम): क्यालिब्रेसन डेटामा थ्रेसहोल्ड सार्ने**
+<!-- ne-pair: Exercise 2 (intermediate): move the threshold on the calibration data -->
 
 <!-- ne-cell: b9498efe -->
 PatchCore को थ्रेसहोल्ड 0.30 / 0.50 / 0.80 बदलेर **छुट्नु (FN) र झुटो अलार्म (FP)** कसरी बदलिन्छ
@@ -366,7 +376,8 @@ PatchCore को थ्रेसहोल्ड 0.30 / 0.50 / 0.80 बदले�
 एकैचोटि नसर्न पनि सक्छन्) भनेर एक वाक्यमा लेखियो। सङ्ख्या नबदलिने लाइन भए कारण पनि लेख्नुहोस्।
 
 <!-- ne-cell: 09fc3b55 | after-heading -->
-#### अभ्यास 3 (वैकल्पिक): PVC निरीक्षणका लागि सिफारिस बनाउने
+**अभ्यास 3 (वैकल्पिक): PVC निरीक्षणका लागि सिफारिस बनाउने**
+<!-- ne-pair: Exercise 3 (optional challenge): build a recommendation for PVC -->
 
 <!-- ne-cell: 09fc3b55 -->
 तलको ढाँचामा **तपाईंको सिफारिस** लेख्नुहोस्। आधारका रूपमा यी ५ दिनमा पाएका सङ्ख्या वा अवलोकन

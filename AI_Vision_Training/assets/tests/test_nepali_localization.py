@@ -148,6 +148,32 @@ def test_doc_applier_is_idempotent(doc_applier) -> None:
         assert once == twice, f"{target_rel}: not idempotent"
 
 
+@pytest.mark.parametrize("name", ["START_HERE.md", "README.md",
+                                 "docs/troubleshooting/installation.md"])
+def test_nepali_keeps_each_actionable_cmd_line(name, doc_applier) -> None:
+    text = (COURSE_ROOT / name).read_text(encoding="utf-8")
+    original = doc_applier.strip_regions(text)
+    nepali = "\n".join(match.group("body") for match in doc_applier.REGION_RE.finditer(text))
+    for block in re.findall(r"```cmd\n(.*?)```", original, re.S):
+        for line in block.splitlines():
+            if line.strip() and not line.startswith("REM "):
+                assert line in nepali, (name, line)
+
+
+def test_nepali_timetable_keeps_every_window_and_notebook_part(doc_applier) -> None:
+    text = (COURSE_ROOT / "COURSE_SYLLABUS.md").read_text(encoding="utf-8")
+    original = doc_applier.strip_regions(text)
+    nepali = "\n".join(match.group("body") for match in doc_applier.REGION_RE.finditer(text))
+    pattern = r"^\| (\d\d:\d\d–\d\d:\d\d) \| (\d+) \| ([^|]+) \| ([^|]+) \|"
+    original_rows = re.findall(pattern, original, re.M)
+    nepali_rows = re.findall(pattern, nepali, re.M)
+    assert [(r[0], r[1]) for r in nepali_rows] == [(r[0], r[1]) for r in original_rows]
+    for source, translated in zip(original_rows, nepali_rows):
+        tokens = r"`Day\d\d_\d\d`|Part \d+(?:–\d+)?"
+        assert list(dict.fromkeys(re.findall(tokens, source[3]))) == list(
+            dict.fromkeys(re.findall(tokens, translated[3])))
+
+
 @pytest.mark.parametrize("name", TRILINGUAL_PDFS)
 def test_trilingual_pdf_exists(name: str) -> None:
     path = PDF_DIR / name

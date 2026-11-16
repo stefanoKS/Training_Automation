@@ -68,7 +68,7 @@ confidence देखाउने सर्त मात्र बदलेर �
 <!-- ne-cell: audit-teach_yolo_result_object | after-heading -->
 ### कोड कसरी पढ्ने
 
-<!-- ne-cell: audit-teach_yolo_result_object -->
+<!-- ne-cell: audit-teach_yolo_result_object | after-image:../../assets/svg/teach_yolo_result_object.svg -->
 चित्र: confidence model को स्कोर हो, सही हुने ग्यारेन्टी होइन। (गणना गरिएको संश्लेषित उदाहरण र योजनाबद्ध
 चित्र; model को वास्तविक नापिएको नतिजा होइन।)
 
@@ -81,7 +81,8 @@ confidence model को स्कोर हो, सही हुने ग्य
 पहिचान शून्य भए तालिकामा कति लाइन हुन्छन्?
 
 <!-- ne-cell: 907c6b68 | after-heading -->
-#### पुस्तकालय र GPU को अवस्था हेर्ने
+**पुस्तकालय र GPU को अवस्था हेर्ने**
+<!-- ne-pair: Look at the library and the GPU -->
 
 <!-- ne-cell: 907c6b68 -->
 पहिले चाहिने साधन सबै छन् कि छैन जाँचौं।
@@ -89,7 +90,8 @@ confidence model को स्कोर हो, सही हुने ग्य
 `torch.cuda.is_available()` ले `False` दिए पनि **समस्या छैन**। यो तालिमको आधारभूत भाग CPU मा चल्छ।
 
 <!-- ne-cell: b514e5ac | after-heading -->
-#### यो नोटबुकमा प्रयोग हुने model र तस्बिरको स्रोत
+**यो नोटबुकमा प्रयोग हुने model र तस्बिरको स्रोत**
+<!-- ne-pair: Where the model and the image come from -->
 
 <!-- ne-cell: b514e5ac -->
 यो नोटबुकमा दुई कुरा प्रयोग हुन्छन्।
@@ -116,7 +118,8 @@ confidence model को स्कोर हो, सही हुने ग्य
 ## Part 2 model पढ्ने
 
 <!-- ne-cell: ced84bb3 | after-heading -->
-#### पहिलो पटक मात्र डाउनलोड हुन्छ
+**पहिलो पटक मात्र डाउनलोड हुन्छ**
+<!-- ne-pair: Downloaded once, cached afterwards -->
 
 model फाइल (करिब 5 MB) **पहिलो पटक मात्र** डाउनलोड हुन्छ। दोस्रो पटकदेखि `assets/models/` बाट पढिन्छ,
 त्यसैले इन्टरनेट नभए पनि चल्छ।
@@ -138,7 +141,8 @@ model फाइल (करिब 5 MB) **पहिलो पटक मात्�
 यो नतिजा उही model फाइल भएमा उही आउँछ। model अद्यावधिक गर्दा class सङ्ख्या वा नामको क्रम बदलिन सक्छ।
 
 <!-- ne-cell: c1293292 | after-heading -->
-#### जाँच्नुपर्ने कुरा
+**जाँच्नुपर्ने कुरा**
+<!-- ne-pair: What to verify here -->
 
 <!-- ne-cell: c1293292 -->
 class सूचीमा `black_spot` र `scratch` **छैनन्** भनेर पक्का गर्नुहोस्। दिन ४ मा नयाँ तालिम किन चाहिन्छ
@@ -150,7 +154,7 @@ class सूचीमा `black_spot` र `scratch` **छैनन्** भन�
 <!-- ne-cell: cf0e60bc | after-heading -->
 ### पहिचानको नतिजा "आयतहरूको सूची" हो
 
-<!-- ne-cell: cf0e60bc -->
+<!-- ne-cell: cf0e60bc | after-image:../../assets/diagrams/diagram_detection.png -->
 चित्र: पहिचानले के फर्काउँछ (योजनाबद्ध चित्र, वास्तविक अनुमानको नतिजा होइन, उदाहरणका लागि बनाइएको डेटा)।
 आयत Ultralytics को `result.boxes.xyxy` ढाँचामा (`x1, y1, x2, y2`) फर्किन्छ, र confidence model ले दिएको
 स्कोर हो, सही हुने सम्भावना होइन। वास्तविक नतिजा तलको सेलले तपाईंको कम्प्युटरमा बनाउँछ।
@@ -165,7 +169,8 @@ class सूचीमा `black_spot` र `scratch` **छैनन्** भन�
 - पहिचान शून्य भन्नु "केही असामान्य छैन" भन्ने अर्थ हो?
 
 <!-- ne-cell: 674b1102 | after-heading -->
-#### तस्बिर पढेर अनुमान गर्ने
+**तस्बिर पढेर अनुमान गर्ने**
+<!-- ne-pair: Load an image and predict -->
 
 <!-- ne-cell: 674b1102 -->
 `model.predict()` का मुख्य argument:
@@ -184,7 +189,8 @@ class सूचीमा `black_spot` र `scratch` **छैनन्** भन�
 विस्तृत हेरिन्छ।
 
 <!-- ne-cell: 1a88508f | after-heading -->
-#### के-के देखियो
+**के-के देखियो**
+<!-- ne-pair: What you should see -->
 
 <!-- ne-cell: 1a88508f -->
 तस्बिरमा **एउटा बस र केही मानिस** छन्। हरेकमा आयत बन्छ र class नामसँग confidence देखिन्छ। यो तालिमको
@@ -225,7 +231,8 @@ class सूचीमा `black_spot` र `scratch` **छैनन्** भन�
 बढाउँदा तालिकाको लाइन सङ्ख्या के हुन्छ?
 
 <!-- ne-cell: 541f0482 | after-heading -->
-#### आयत, class र confidence सङ्ख्याको रूपमा निकाल्ने
+**आयत, class र confidence सङ्ख्याको रूपमा निकाल्ने**
+<!-- ne-pair: Pull out boxes, classes and confidences -->
 
 <!-- ne-cell: 541f0482 -->
 तस्बिरमा बनाएर मात्र अभिलेख वा निर्णयका लागि पुग्दैन। **सङ्ख्या** को रूपमा निकाल्नुपर्छ।
@@ -244,7 +251,7 @@ class सूचीमा `black_spot` र `scratch` **छैनन्** भन�
 <!-- ne-cell: fig-ref_inference_boxes_table | after-heading -->
 ### सुरक्षित गरिएको उदाहरण: तस्बिरको नम्बर र तालिकाको लाइन
 
-<!-- ne-cell: fig-ref_inference_boxes_table -->
+<!-- ne-cell: fig-ref_inference_boxes_table | after-image:../../assets/reference_outputs/ref_inference_boxes_table.png -->
 चित्र: यो तालिममा साँच्चै सुरक्षित गरिएका 5 पहिचानमा नम्बर लगाएर उही नम्बरका तालिका लाइनसँग राखिएको।
 सन्दर्भ नतिजा (वास्तविक नतिजा)।
 
@@ -272,7 +279,8 @@ class सूचीमा `black_spot` र `scratch` **छैनन्** भन�
 ## Part 5 नतिजा सुरक्षित गर्ने
 
 <!-- ne-cell: 4635e510 | after-heading -->
-#### तस्बिर र तालिका सुरक्षित गर्ने
+**तस्बिर र तालिका सुरक्षित गर्ने**
+<!-- ne-pair: Save the image and the table -->
 
 <!-- ne-cell: 4635e510 -->
 बुझाउनुपर्ने कामका रूपमा दुई कुरा सुरक्षित गरिन्छ।
@@ -284,7 +292,8 @@ class सूचीमा `black_spot` र `scratch` **छैनन्** भन�
 ठाउँमा निर्भर हुँदैन।
 
 <!-- ne-cell: 7886dfe4 | after-heading -->
-#### `utf-8-sig` किन लगाउने
+**`utf-8-sig` किन लगाउने**
+<!-- ne-pair: Why `utf-8-sig` -->
 
 <!-- ne-cell: 7886dfe4 -->
 CSV Excel मा खोल्दा `utf-8` मात्र भए जापानी अक्षर बिग्रन सक्छ। `utf-8-sig` लगाउँदा Excel मा पनि ठीक
@@ -294,7 +303,8 @@ CSV Excel मा खोल्दा `utf-8` मात्र भए जापा�
 ## अभ्यास
 
 <!-- ne-cell: fbd218e2 | after-heading -->
-#### अभ्यास 1 (आधारभूत): confidence का आधारमा क्रममा राख्ने
+**अभ्यास 1 (आधारभूत): confidence का आधारमा क्रममा राख्ने**
+<!-- ne-pair: Exercise 1 (basic): sort by confidence -->
 
 <!-- ne-cell: fbd218e2 -->
 पहिचानको नतिजा confidence को **बढीबाट घटी** क्रममा मिलाएर माथिल्ला 3 वटा देखाउनुहोस्।
@@ -305,7 +315,8 @@ CSV Excel मा खोल्दा `utf-8` मात्र भए जापा�
 फरक हुन सक्छ, अभिलेखको `bus 0.88` सँग मिल्नैपर्छ भन्ने छैन।
 
 <!-- ne-cell: 744ed2c5 | after-heading -->
-#### अभ्यास 2 (मध्यम): `zidane.jpg` मा पनि अनुमान चलाउने
+**अभ्यास 2 (मध्यम): `zidane.jpg` मा पनि अनुमान चलाउने**
+<!-- ne-pair: Exercise 2 (intermediate): run it on `zidane.jpg` too -->
 
 <!-- ne-cell: 744ed2c5 -->
 Ultralytics सँगै `zidane.jpg` पनि आउँछ। उही क्रममा अनुमान चलाएर **भेटिएका class र सङ्ख्या** देखाउनुहोस्।
@@ -313,7 +324,8 @@ Ultralytics सँगै `zidane.jpg` पनि आउँछ। उही क्
 पूरा भएको मापन: आफ्नै नतिजाबाट कति `person` भेटियो र अरू के भेटियो भनेर बताउन सक्ने।
 
 <!-- ne-cell: 5759f10e | after-heading -->
-#### अभ्यास 3 (वैकल्पिक): PVC को तस्बिरमा लगाएर हेर्ने
+**अभ्यास 3 (वैकल्पिक): PVC को तस्बिरमा लगाएर हेर्ने**
+<!-- ne-pair: Exercise 3 (optional challenge): try it on a PVC-like image -->
 
 <!-- ne-cell: 5759f10e -->
 `assets/defect_samples/defect_multi.png` मा अनुमान चलाउनुहोस्। **के बाँकी रह्यो? केही बाँकी रहेन भने

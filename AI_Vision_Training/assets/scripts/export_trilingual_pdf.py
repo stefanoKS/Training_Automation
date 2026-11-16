@@ -16,7 +16,7 @@ learner-facing Markdown/docs and the pictures those files already reference.
 ------------------------------------------
     Day01_explanation_ja_en_ne.pdf … Day05_explanation_ja_en_ne.pdf
     Week1_explanation_ja_en_ne.pdf
-    Setup_explanation_ja_en_ne.pdf              (notebooks/00_Setup)
+    Setup_ja_en_ne.pdf                          (notebooks/00_Setup)
     Installation_Guide_ja_en_ne.pdf             (START_HERE.md + installation troubleshooting)
     Repository_Guide_ja_en_ne.pdf               (README.md)
     Course_Syllabus_ja_en_ne.pdf                (COURSE_SYLLABUS.md)
@@ -37,6 +37,7 @@ The first run needs the Chromium that Playwright manages (PDF-author step only, 
 from __future__ import annotations
 
 import argparse
+import bisect
 import datetime as _dt
 import html
 import json
@@ -49,6 +50,7 @@ from pathlib import Path
 from PIL import Image as PILImage
 
 from course_notebooks import course_notebooks
+from apply_nepali_translations import REGION_RE, CAPTION_RE, image_captions
 
 COURSE_ROOT = Path(__file__).resolve().parents[2]
 NOTEBOOK_DIR = COURSE_ROOT / "notebooks"
@@ -214,7 +216,7 @@ class Document:
 
 def _heading_html(heading: Heading) -> str:
     level = heading.level
-    parts = [f'<span class="ja">{inline(heading.ja)}</span>']
+    parts = [f'<span class="ja">{inline(heading.ja)}</span>'] if heading.ja else []
     if heading.en:
         parts.append(f'<span class="en">{inline(heading.en)}</span>')
     if heading.ne:
@@ -251,18 +253,90 @@ def _table_html(rows: list[list[str]], header: bool) -> str:
     return "".join(out)
 
 
-def _figure_html(path: Path, captions: list[str], wide: bool) -> str:
+def _figure_html(path: Path, captions: list[str], wide: bool, notes_html: str = "") -> str:
     classes = "figure wide" if wide else "figure"
     caption = "".join(
         f'<div class="cap {script_class(text)}">{inline(text)}</div>' for text in captions)
-    return (f'<div class="{classes}"><img src="{file_uri(image_path(path))}" alt=""/>'
-            f"{caption}</div>")
+    return (f'<div class="{classes}" data-image="{html.escape(path.name, quote=True)}">'
+            f'<img src="{file_uri(image_path(path))}" alt=""/>'
+            f'{caption}<div class="visual-notes">{notes_html}</div></div>')
+
+
+def semantic_headings(lines: list[str]) -> tuple[dict[int, Heading], set[int]]:
+    """Only explicit localization anchors may join non-adjacent semantic headings."""
+    headings = {}
+    fenced = False
+    for index, line in enumerate(lines):
+        if line.strip().startswith("```"):
+            fenced = not fenced
+        item = is_heading(line.strip())
+        if item and not fenced:
+            level, title = item
+            language = script_class(title)
+            headings[index] = Heading(level, title if language == "ja" else "",
+                                      title if language == "en" else None,
+                                      title if language == "ne" else None)
+    suppressed = set()
+    text = "\n".join(lines) + "\n"
+    for match in REGION_RE.finditer(text):
+        if match.group("anchor") != "after-heading":
+            continue
+        start = text[:match.start("body")].count("\n")
+        end = text[:match.end("body")].count("\n")
+        preceding = [i for i in headings if i < start]
+        if not preceding:
+            raise ValueError("after-heading translation has no source heading")
+        body = match.group("body")
+        pair = re.search(r"^<!-- ne-pair: (.+) -->$", body, re.M)
+        source_index = max(preceding)
+        if pair and headings[source_index].en == pair.group(1):
+            sources = [i for i in preceding if headings[i].ja
+                       and headings[i].level == headings[source_index].level]
+            if not sources:
+                raise ValueError(f"paired English heading has no Japanese source: {pair.group(1)!r}")
+            source_index = max(sources)
+        source = headings[source_index]
+        translated = [(i, headings[i].ne) for i in headings
+                      if start <= i <= end and headings[i].ne]
+        bold = re.search(r"^\*\*(.+)\*\*$", body, re.M)
+        if translated:
+            source.ne = translated[0][1]
+            suppressed.add(translated[0][0])
+        elif bold and DEVANAGARI_RE.search(bold.group(1)):
+            source.ne = bold.group(1)
+            suppressed.add(start + body[:bold.start()].count("\n"))
+        else:
+            raise ValueError("after-heading region needs a Nepali title")
+        if pair:
+            targets = [i for i, h in headings.items()
+                       if h.en == pair.group(1) and h.level == source.level]
+            if len(targets) != 1 or targets[0] <= source_index:
+                raise ValueError(f"ambiguous or missing English heading: {pair.group(1)!r}")
+            source.en = headings[targets[0]].en
+            suppressed.add(targets[0])
+    return headings, suppressed
 
 
 def markdown_cell_html(text: str, notebook_dir: Path, anchor_prefix: str,
                        document: Document) -> str:
     """1 つの Markdown セルを HTML にする / one Markdown cell to HTML."""
+    visual_regions = {}
+    for match in REGION_RE.finditer(text):
+        anchor = match.group("anchor")
+        if anchor.startswith("after-image:"):
+            target = anchor.partition(":")[2]
+            if target in visual_regions:
+                raise ValueError(f"duplicate image translation target: {target!r}")
+            visual_regions[target] = match.group("body")
+    for target in visual_regions:
+        count = sum(match.group(2) == target for match in IMAGE_RE.finditer(text))
+        if count != 1:
+            raise ValueError(f"image translation target {target!r}: expected one image, found {count}")
+    text = REGION_RE.sub(
+        lambda match: "\n" if match.group("anchor").startswith("after-image:") else match.group(),
+        text)
     lines = text.splitlines()
+    grouped, suppressed = semantic_headings(lines)
     out: list[str] = []
     index = 0
 
@@ -279,6 +353,9 @@ def markdown_cell_html(text: str, notebook_dir: Path, anchor_prefix: str,
             return "".join(out)
 
     while index < len(lines):
+        if index in suppressed:
+            index += 1
+            continue
         raw = lines[index]
         line = raw.strip()
 
@@ -300,41 +377,12 @@ def markdown_cell_html(text: str, notebook_dir: Path, anchor_prefix: str,
             index += 1
             continue
 
-        heading = is_heading(line)
-        if heading:
-            level, title = heading
-            parts: dict[str, str | None] = {"ja": None, "en": None, "ne": None}
-
-            def add(text_: str) -> bool:
-                if DEVANAGARI_RE.search(text_):
-                    key = "ne"
-                elif JP_CHAR_RE.search(text_):
-                    key = "ja"
-                else:
-                    key = "en"
-                if parts[key] is not None:
-                    return False
-                parts[key] = text_
-                return True
-
-            add(title)
-            probe = index + 1
-            while probe < len(lines):
-                candidate_line = lines[probe].strip()
-                if not candidate_line or candidate_line.startswith("<!--"):
-                    probe += 1
-                    continue
-                candidate = is_heading(candidate_line)
-                if not candidate or candidate[0] != level:
-                    break
-                if not add(candidate[1]):
-                    break
-                probe += 1
-            item = Heading(level=level, ja=parts["ja"] or "", en=parts["en"], ne=parts["ne"],
-                           anchor=f"{anchor_prefix}-h{len(document.toc)}")
+        if index in grouped:
+            item = grouped[index]
+            item.anchor = f"{anchor_prefix}-h{len(document.toc)}"
             document.toc.append(item)
             out.append(_heading_html(item))
-            index = probe
+            index += 1
             continue
 
         image_match = IMAGE_RE.search(line)
@@ -342,17 +390,17 @@ def markdown_cell_html(text: str, notebook_dir: Path, anchor_prefix: str,
             target = image_match.group(2)
             resolved = (notebook_dir / target).resolve()
             if not target.startswith(("http://", "https://", "data:")) and resolved.is_file():
-                captions = []
-                probe = index + 1
-                while probe < len(lines) and len(captions) < 3:
-                    candidate = lines[probe].strip()
-                    if candidate and candidate.startswith(
-                            ("図", "Figure", "चित्र", "चित्रमा")):
-                        captions.append(candidate)
-                    elif candidate:
-                        break
-                    probe += 1
-                out.append(_figure_html(resolved, captions, image_is_wide(resolved)))
+                captions, probe = image_captions(lines, index + 1)
+                body = visual_regions.pop(target, "")
+                notes = [part for part in body.split("\n\n") if part.strip()]
+                caption_index = 0
+                if notes and re.fullmatch(r"\*\*[AB]: .+\*\*", notes[0]):
+                    caption_index = 1
+                if len(notes) > caption_index and CAPTION_RE.match(notes[caption_index]):
+                    captions.append(" ".join(notes.pop(caption_index).splitlines()))
+                notes_html = markdown_cell_html("\n\n".join(notes), notebook_dir,
+                                                anchor_prefix + "-visual", document)
+                out.append(_figure_html(resolved, captions, image_is_wide(resolved), notes_html))
                 index = probe if captions else index + 1
                 continue
             index += 1
@@ -450,6 +498,8 @@ def markdown_cell_html(text: str, notebook_dir: Path, anchor_prefix: str,
         else:
             index += 1
 
+    if visual_regions:
+        raise ValueError(f"unmatched image translation(s): {list(visual_regions)}")
     return "".join(out)
 
 
@@ -724,6 +774,14 @@ tr { break-inside: avoid; }
 .figure .cap { font-size: 8.4pt; color: #57606a; margin-top: 2pt; }
 .figure.wide { page: landscape; break-before: page; break-after: page; }
 .figure.wide img { max-width: 100%%; max-height: 150mm; }
+.figure.wide:has(.visual-notes:not(:empty)) {
+  display: flex; flex-direction: column; height: 175mm; }
+.figure.wide:has(.visual-notes:not(:empty)) img {
+  flex: 0 1 auto; min-height: 0; width: 100%%;
+  object-fit: contain; object-position: left top; }
+.figure.wide .cap, .figure.wide .visual-notes { flex-shrink: 0; }
+.visual-notes { margin-top: 5pt; }
+.visual-notes .ne, .figure .cap.ne { font-size: 9pt; }
 .cover { break-after: page; padding-top: 34mm; }
 .cover .t { font-size: 25pt; color: #1f6feb; line-height: 1.3; }
 .cover .m { font-size: 10pt; color: #57606a; margin-top: 3pt; }
@@ -739,10 +797,11 @@ tr { break-inside: avoid; }
 .toc li.l3 { margin-left: 2.2em; font-size: 0.93em; color: #57606a; }
 .toc .en { font-size: 0.86em; color: #57606a; }
 .toc .ne { font-size: 9pt; color: #3b3b3b; }
-.toc .pg { float: right; font-variant-numeric: tabular-nums; }
-.toc a { color: #24292f; }
+.toc .pg { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.toc a { color: #24292f; display: grid; grid-template-columns: minmax(0, 1fr) 3em;
+         column-gap: 0.6em; }
 .section { break-before: page; }
-.sentinel { font-size: 1pt; line-height: 0; color: transparent; height: 0; margin: 0; }
+.sentinel { font-size: 1pt; line-height: 1pt; color: transparent; height: 1pt; margin: 0; }
 /* Chromium keeps the Devanagari text layer clean only when the type size is a multiple of 1.5 pt
    (measured at 6, 7.5, 9, 10.5, 12, 13.5, 15, 16.5 and 18 pt). Every Nepali container is pinned
    here so a later style change cannot silently break searchability again. */
@@ -879,13 +938,14 @@ def toc_html(toc: list[Heading], pages: dict[str, int] | None = None,
             continue
         level = min(heading.level, 3)
         page = (pages or {}).get(heading.anchor, 0)
-        parts = [f'<span class="ja">{inline(heading.ja)}</span>']
+        parts = [f'<span class="ja">{inline(heading.ja)}</span>'] if heading.ja else []
         if heading.en:
             parts.append(f'<span class="en">{inline(heading.en)}</span>')
         if heading.ne:
             parts.append(f'<span class="ne">{inline(heading.ne)}</span>')
         label = " ".join(parts)
-        items.append(f'<li class="l{level}"><a href="#{heading.anchor}">{label}'
+        items.append(f'<li class="l{level}"><a href="#{heading.anchor}">'
+                     f'<span class="toc-label">{label}</span>'
                      f'<span class="pg">{page}</span></a></li>')
     classes = "toc hidden" if hidden else "toc"
     return f'<nav class="{classes}"><ol>' + "".join(items) + "</ol></nav>"
@@ -991,6 +1051,36 @@ def build_document(day_keys: list[str], *, single: bool) -> tuple[Document, int]
     return document, toc_marker
 
 
+def check_devanagari_font(page) -> list[str]:
+    """Check actual Chromium platform fonts, not fonts.check's generic fallback."""
+    page.evaluate("""async () => {
+        const probe = document.createElement('span');
+        probe.id = 'ne-font-check';
+        probe.className = 'ne';
+        probe.style.cssText = 'position:fixed;left:0;top:0';
+        probe.textContent = 'प्रशिक्षणक्षत्रज्ञश्रनिर्देशाङ्क';
+        document.body.append(probe);
+        await document.fonts.ready;
+        probe.getBoundingClientRect();
+    }""")
+    session = page.context.new_cdp_session(page)
+    session.send("DOM.enable")
+    session.send("CSS.enable")
+    root = session.send("DOM.getDocument")["root"]["nodeId"]
+    node = session.send("DOM.querySelector",
+                        {"nodeId": root, "selector": "#ne-font-check"})["nodeId"]
+    fonts = session.send("CSS.getPlatformFontsForNode", {"nodeId": node})["fonts"]
+    page.locator("#ne-font-check").evaluate("(node) => node.remove()")
+    session.detach()
+    families = [font["familyName"] for font in fonts if font["glyphCount"]]
+    supported = {"Nirmala UI", "Noto Sans Devanagari", "Mangal", "Arial Unicode MS"}
+    if not families or any(family not in supported for family in families):
+        raise RuntimeError(
+            "No verified Devanagari font coverage. Install Nirmala UI, Noto Sans Devanagari "
+            f"or Mangal before exporting. Chromium resolved: {families!r}")
+    return families
+
+
 def render(html_path: Path, pdf_path: Path, footer_label: str) -> None:
     from playwright.sync_api import sync_playwright
 
@@ -1011,6 +1101,8 @@ def render(html_path: Path, pdf_path: Path, footer_label: str) -> None:
         page = browser.new_page()
         page.goto(html_path.as_uri(), wait_until="load")
         page.emulate_media(media="print")
+        page.evaluate("document.fonts.ready")
+        check_devanagari_font(page)
         page.pdf(path=str(pdf_path), format="A4", print_background=True, prefer_css_page_size=True,
                  display_header_footer=True, header_template=header, footer_template=footer,
                  margin={"top": "20mm", "bottom": "18mm", "left": "18mm", "right": "18mm"})
@@ -1037,20 +1129,22 @@ def locate_headings(texts: list[str], toc: list[Heading],
     it: otherwise every entry resolves to the TOC page that happens to list it.
     """
     pages: dict[str, int] = {}
-    cursor = max(body_start - 1, 0)
+    keys = [_search_key(text) for text in texts]
+    offsets = [0]
+    for key in keys:
+        offsets.append(offsets[-1] + len(key))
+    body = "".join(keys)
+    cursor = offsets[max(body_start - 1, 0)]
     for heading in toc:
         if not heading.anchor or not heading.in_toc:
             continue
-        needles = [_search_key(part) for part in (heading.ja, heading.en, heading.ne) if part]
-        needles = [needle for needle in needles if len(needle) >= 4]
-        if not needles:
-            continue
-        for index in range(cursor, len(texts)):
-            page_key = _search_key(texts[index])
-            if any(needle in page_key for needle in needles):
-                pages[heading.anchor] = index + 1
-                cursor = index
-                break
+        signature = _search_key("".join(part for part in
+                                       (heading.ja, heading.en, heading.ne) if part))
+        position = body.find(signature, cursor)
+        if not signature or position < 0:
+            raise ValueError(f"PDF heading not found in body order: {heading.plain!r}")
+        pages[heading.anchor] = bisect.bisect_right(offsets, position)
+        cursor = position + len(signature)
     return pages
 
 
@@ -1059,7 +1153,7 @@ def body_start_page(texts: list[str]) -> int:
     for index, text in enumerate(texts):
         if BODY_SENTINEL in _search_key(text):
             return index + 1
-    return 1
+    raise ValueError("PDF body marker missing; refusing to assign TOC page numbers")
 
 
 def _search_key(text: str) -> str:
@@ -1112,8 +1206,10 @@ def build_pdf(out_path: Path, day_keys: list[str], footer_label: str) -> dict:
         render(html_path, out_path, footer_label)
 
     final_pages = page_texts(out_path)
-    add_bookmarks(out_path, document.toc,
-                  locate_headings(final_pages, document.toc, body_start_page(final_pages)))
+    final_map = locate_headings(final_pages, document.toc, body_start_page(final_pages))
+    if final_map != pages:
+        raise ValueError(f"TOC pagination changed between passes: {out_path.name}")
+    add_bookmarks(out_path, document.toc, final_map)
     return {"pages": len(final_pages), "toc_entries": len(pages)}
 
 
@@ -1160,8 +1256,10 @@ def general_pdf(out_path: Path, job: dict) -> dict:
         render(html_path, out_path, job["label"])
 
     final_pages = page_texts(out_path)
-    add_bookmarks(out_path, document.toc,
-                  locate_headings(final_pages, document.toc, body_start_page(final_pages)))
+    final_map = locate_headings(final_pages, document.toc, body_start_page(final_pages))
+    if final_map != pages:
+        raise ValueError(f"TOC pagination changed between passes: {out_path.name}")
+    add_bookmarks(out_path, document.toc, final_map)
     return {"pages": len(final_pages), "toc_entries": len(pages)}
 
 

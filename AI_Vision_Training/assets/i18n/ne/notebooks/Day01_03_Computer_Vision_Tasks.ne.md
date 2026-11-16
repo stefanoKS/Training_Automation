@@ -74,7 +74,8 @@ classification ले चित्रको जवाफ, detection ले स�
 ## Part 0 तयारी
 
 <!-- ne-cell: 4aa1c309 | after-heading -->
-#### चित्रमा प्रयोग हुने फन्ट मिलाउनुहोस्
+**चित्रमा प्रयोग हुने फन्ट मिलाउनुहोस्**
+<!-- ne-pair: Configure Japanese text in figures -->
 
 <!-- ne-cell: 4aa1c309 -->
 Matplotlib को पूर्वनिर्धारित फन्टले जापानी अक्षर देखाउन सक्दैन। त्यसैले चित्रको शीर्षक `□□□` जस्तो
@@ -87,7 +88,7 @@ Matplotlib को पूर्वनिर्धारित फन्टले 
 <!-- ne-cell: audit-teach_cv_tasks_outputs | after-heading -->
 ### कोड पढ्ने तरिका
 
-<!-- ne-cell: audit-teach_cv_tasks_outputs -->
+<!-- ne-cell: audit-teach_cv_tasks_outputs | after-image:../../assets/svg/teach_cv_tasks_outputs.svg -->
 चित्र: उही mask बाट चौकोण निकालिन्छ। (हिसाब गरिएको कृत्रिम उदाहरण/योजनाबद्ध। model को मापन गरिएको
 नतिजा होइन।)
 
@@ -109,7 +110,8 @@ segmentation मा semantic र instance गरी २ तरिका भए�
 वास्तविक अनुमान नतिजा होइन।
 
 <!-- ne-cell: ed68e4b2 | after-heading -->
-#### classification भनेको "एउटा चित्रमा एउटा जवाफ"
+**classification भनेको "एउटा चित्रमा एउटा जवाफ"**
+<!-- ne-pair: Classification gives one answer per image -->
 
 <!-- ne-cell: ed68e4b2 -->
 यो उदाहरणको image classification ले **एउटा चित्रका लागि एउटा लेबल** फर्काउने काम हो
@@ -132,7 +134,8 @@ segmentation मा semantic र instance गरी २ तरिका भए�
 ## Part 2 object detection (वस्तु पहिचान)
 
 <!-- ne-cell: 7390e751 | after-heading -->
-#### detection भनेको "कहाँ के कति"
+**detection भनेको "कहाँ के कति"**
+<!-- ne-pair: Detection answers where, what and how many -->
 
 <!-- ne-cell: 7390e751 -->
 object detection ले **दोषको स्थानलाई चारकोण ढाँचा (bounding box) ले घेरेर**
@@ -153,7 +156,8 @@ object detection ले **दोषको स्थानलाई चारक�
 ## Part 3 segmentation (क्षेत्र विभाजन)
 
 <!-- ne-cell: 02bee1e7 | after-heading -->
-#### semantic segmentation (pixel-पिच्छे classification)
+**semantic segmentation (pixel-पिच्छे classification)**
+<!-- ne-pair: Semantic segmentation (classifying each pixel) -->
 
 <!-- ne-cell: 02bee1e7 -->
 segmentation ले **pixel-पिच्छे** "यो दोष हो वा होइन" फर्काउँछ।
@@ -171,7 +175,7 @@ mask चित्र (सेतो = दोष, कालो = सामान�
 <!-- ne-cell: fig-teach_segmentation_modes | after-heading -->
 ### semantic र instance को फरक
 
-<!-- ne-cell: fig-teach_segmentation_modes -->
+<!-- ne-cell: fig-teach_segmentation_modes | after-image:../../assets/diagrams/teach_segmentation_modes.png -->
 चित्र: उही दुई दोषलाई semantic segmentation (एउटै class मा मिलाउने) र instance segmentation
 (एक-एकमा नम्बर लगाउने) मा देखाइएको (कृत्रिम चित्र)।
 
@@ -186,7 +190,8 @@ segmentation प्रयोग गरिन्छ।
 - नछोएका दुई कालो दाग semantic segmentation ले दुईवटा भनेर गन्न सकिन्छ?
 
 <!-- ne-cell: c5df01d0 | after-heading -->
-#### instance segmentation (वस्तुगत क्षेत्र विभाजन)
+**instance segmentation (वस्तुगत क्षेत्र विभाजन)**
+<!-- ne-pair: Instance segmentation -->
 
 <!-- ne-cell: c5df01d0 -->
 semantic segmentation ले "सबै मिलाएर दोष" भन्ने गर्छ, तर
@@ -209,7 +214,8 @@ semantic mask मा एउटै क्षेत्रमा मिलेर �
 ## Part 4 anomaly detection (असामान्यता पहिचान)
 
 <!-- ne-cell: 9e24e09a | after-heading -->
-#### anomaly detection ले "सधैंभन्दा फरक" खोज्छ
+**anomaly detection ले "सधैंभन्दा फरक" खोज्छ**
+<!-- ne-pair: Anomaly detection looks for 'not like usual' -->
 
 <!-- ne-cell: 9e24e09a -->
 यो तालिममा प्रयोग हुने PatchCore जस्तो anomaly detection ले **राम्रा उत्पादनको चित्र मात्र** बाट
@@ -251,7 +257,7 @@ heatmap ले **स्थानको सङ्केत** फर्काउ�
 <!-- ne-cell: fig-VisA_samples | after-heading -->
 ### वास्तविक औद्योगिक anomaly detection डेटासेटको उदाहरण
 
-<!-- ne-cell: fig-VisA_samples -->
+<!-- ne-cell: fig-VisA_samples | after-image:../../assets/external_samples/open_reference/VisA_samples.png -->
 चित्र: VisA डेटासेटको सारांश (Yang Zou आदि / Amazon Science, VisA डेटासेट CC BY 4.0)। सर्किट बोर्ड,
 पार्ट, क्याप्सुलजस्ता **औद्योगिक उत्पादनका वास्तविक तस्बिर** छन्। यो तालिमको PVC उत्पादन होइन, र यो
 तालिमका model को नतिजा पनि होइन।
@@ -277,7 +283,8 @@ heatmap ले **स्थानको सङ्केत** फर्काउ�
 ## Part 6 बनाइएको नमुना चित्रले जाँच्ने
 
 <!-- ne-cell: 05049adb | after-heading -->
-#### कृत्रिम सिटको दोष हेर्ने
+**कृत्रिम सिटको दोष हेर्ने**
+<!-- ne-pair: Look at the synthetic defects -->
 
 <!-- ne-cell: 05049adb -->
 तयार भइसकेको कृत्रिम चित्र हेरेर ४ कामले के फर्काउँछ भनेर सोच्नुहोस्।
@@ -293,7 +300,8 @@ heatmap ले **स्थानको सङ्केत** फर्काउ�
 एकाइमा चौकोण हुन्।
 
 <!-- ne-cell: c2fe0d8c | after-heading -->
-#### ४ कामको नतिजा (segmentation २ किसिम)
+**४ कामको नतिजा (segmentation २ किसिम)**
+<!-- ne-pair: What would each task return here -->
 
 <!-- ne-cell: c2fe0d8c -->
 माथिको चित्रका लागि ४ कामले तलको नतिजा फर्काउँछन्। segmentation मा मात्र semantic (class अनुसार) र
@@ -313,7 +321,8 @@ mm² मा बदल्न उही वस्तु सतहमा नाप�
 ## अभ्यास
 
 <!-- ne-cell: 16e4bbfc | after-heading -->
-#### अभ्यास १ (आधारभूत): ४ काम आफ्नै शब्दमा बुझाउने
+**अभ्यास १ (आधारभूत): ४ काम आफ्नै शब्दमा बुझाउने**
+<!-- ne-pair: Exercise 1 (basic): explain the four tasks in your own words -->
 
 <!-- ne-cell: 16e4bbfc -->
 तलको सेलमा ४ काम एक-एक पङ्क्तिमा बुझाउनुहोस्।
@@ -322,7 +331,8 @@ mm² मा बदल्न उही वस्तु सतहमा नाप�
 **सकिएको ठान्ने आधार:** ४ पङ्क्तिमध्ये प्रत्येकमा नतिजाको रूप र उत्पादनमा ठोस प्रयोग लेखिएको छ।
 
 <!-- ne-cell: 1cd0cf63 | after-heading -->
-#### अभ्यास २ (मध्यम): कार्यस्थलको प्रश्नको जवाफ दिने
+**अभ्यास २ (मध्यम): कार्यस्थलको प्रश्नको जवाफ दिने**
+<!-- ne-pair: Exercise 2 (intermediate): answer shop-floor questions -->
 
 <!-- ne-cell: 1cd0cf63 -->
 तलका ३ प्रश्नका लागि कुन काम छान्ने र किन, लेख्नुहोस्।
@@ -335,7 +345,8 @@ mm² मा बदल्न उही वस्तु सतहमा नाप�
 (3) त्यो छनोटमा बाँकी रहने सम्झौता (गर्न नसकिने कुरा, थपिने झन्झट वा झुटा चेतावनी) लेख्नुहोस्।
 
 <!-- ne-cell: b0601286 | after-heading -->
-#### अभ्यास ३ (विकास/ऐच्छिक): PVC निरीक्षणका लागि सुझाव
+**अभ्यास ३ (विकास/ऐच्छिक): PVC निरीक्षणका लागि सुझाव**
+<!-- ne-pair: Exercise 3 (optional challenge): propose an approach for PVC inspection -->
 
 <!-- ne-cell: b0601286 -->
 चौडाइ 1,300 mm, दोष 0.3 mm, उच्च गतिको निरन्तर उत्पादन भन्ने सर्तमा

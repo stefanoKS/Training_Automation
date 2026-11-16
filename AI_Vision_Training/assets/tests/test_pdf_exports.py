@@ -101,7 +101,8 @@ def test_installation_and_regeneration_commands_are_documented() -> None:
 
 
 @pytest.mark.parametrize("name", ["Day05", "Week1"])
-def test_learner_pdfs_exclude_archived_test_images_and_worked_answers(name) -> None:
+@pytest.mark.parametrize("languages", ["ja_en", "ja_en_ne"])
+def test_learner_pdfs_exclude_archived_test_images_and_worked_answers(name, languages) -> None:
     from PIL import Image
 
     forbidden_images = set()
@@ -110,7 +111,8 @@ def test_learner_pdfs_exclude_archived_test_images_and_worked_answers(name) -> N
             forbidden_images.add((image.size, hashlib.sha256(image.convert("RGB").tobytes()).digest()))
     with Image.open(COURSE_ROOT / "assets" / "reference_outputs" / "teach_numeric_map_toy.png") as image:
         expected_toy = (image.size, hashlib.sha256(image.convert("RGB").tobytes()).digest())
-    reader = _reader(name)
+    pypdf = pytest.importorskip("pypdf")
+    reader = pypdf.PdfReader(str(PDF_DIR / f"{name}_explanation_{languages}.pdf"))
     day5_started = name == "Day05"
     day5_text = []
     toy_seen = False

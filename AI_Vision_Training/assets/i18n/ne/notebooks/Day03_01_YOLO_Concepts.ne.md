@@ -39,7 +39,7 @@ notebooks/Day03_YOLO_Basics/Day03_01_YOLO_Concepts.ipynb
 <!-- ne-cell: fig-teach_score_vs_correctness | after-heading -->
 ### confidence र सही हुनु फरक कुरा हुन्
 
-<!-- ne-cell: fig-teach_score_vs_correctness -->
+<!-- ne-cell: fig-teach_score_vs_correctness | after-image:../../assets/diagrams/teach_score_vs_correctness.png -->
 चित्र: 5 वटा पहिचानको confidence र सही उत्तरसँग तुलना गर्दा कति सही भयो (मान उदाहरणका लागि मात्र)।
 
 **ध्यान दिनुपर्ने कुरा**
@@ -93,7 +93,7 @@ model हो। model को forward pass र postprocessing मिलेर न
 <!-- ne-cell: fig-teach_bbox_coords | after-heading -->
 ### तस्बिरमा आयत पढ्ने
 
-<!-- ne-cell: fig-teach_bbox_coords -->
+<!-- ne-cell: fig-teach_bbox_coords | after-image:../../assets/diagrams/teach_bbox_coords.png -->
 चित्र: एउटै दोषको आयतलाई बायाँ पिक्सेल सङ्ख्याले र दायाँ तस्बिरको आकारले भाग गरेको मानले देखाइएको छ।
 निर्देशाङ्क गणना गरेर चित्रमा राखिएका हुन्।
 
@@ -109,7 +109,8 @@ model हो। model को forward pass र postprocessing मिलेर न
 - तस्बिरको बायाँ आधा भाग मात्र काट्दा, पहिले cx = 0.6 भएको बक्स के हुन्छ?
 
 <!-- ne-cell: 9bff031a | after-heading -->
-#### आयतले घेर्ने, चार सङ्ख्या
+**आयतले घेर्ने, चार सङ्ख्या**
+<!-- ne-pair: A rectangle is four numbers -->
 
 <!-- ne-cell: 9bff031a -->
 बाउन्डिङ बक्सले दोषलाई आयतले घेर्छ। बक्स चार सङ्ख्याले लेखिन्छ, र ती सङ्ख्याको क्रम
@@ -130,7 +131,8 @@ YOLO label **केन्द्र-शैली** मा हुन्छ र **�
 बदलियो भने नयाँ फ्रेमको चौडाइ-उचाइले फेरि गणना गर्नुहोस्।
 
 <!-- ne-cell: aaf95ec6 | after-heading -->
-#### निर्देशाङ्क परिवर्तन आफैं गणना गर्ने
+**निर्देशाङ्क परिवर्तन आफैं गणना गर्ने**
+<!-- ne-pair: Do the conversion yourself -->
 
 <!-- ne-cell: aaf95ec6 -->
 पिक्सेल निर्देशाङ्क `(x1, y1, x2, y2)` बाट YOLO ढाँचामा बदल्न चार लाइन पुग्छ:
@@ -150,7 +152,7 @@ h  = (y2 - y1)     / तस्बिरको उचाइ
 <!-- ne-cell: audit-teach_bbox_one_example | after-heading -->
 ### कोड कसरी पढ्ने
 
-<!-- ne-cell: audit-teach_bbox_one_example -->
+<!-- ne-cell: audit-teach_bbox_one_example | after-image:../../assets/svg/teach_bbox_one_example.svg -->
 चित्र: class_id पूर्णाङ्क हो र सामान्यीकृत गरिँदैन। (गणना गरिएको संश्लेषित उदाहरण र योजनाबद्ध चित्र;
 model को वास्तविक नापिएको नतिजा होइन।)
 
@@ -180,7 +182,8 @@ class_id पूर्णाङ्क हो र सामान्यीकृ�
 ## Part 2 class र विश्वास स्कोर
 
 <!-- ne-cell: 2b02787b | after-heading -->
-#### class लेबल
+**class लेबल**
+<!-- ne-pair: Class label -->
 
 <!-- ne-cell: 2b02787b -->
 **class** भनेको "प्रकार" हो। YOLO ले पहिचान तालिम लिएका प्रकारमध्ये एउटामा राख्छ।
@@ -191,7 +194,8 @@ class_id पूर्णाङ्क हो र सामान्यीकृ�
 यसमा **`black_spot` (कालो थोप्लो) वा `scratch` (चिसो) छैनन्**। त्यसैले PVC को दोष भेट्न सक्दैन।
 
 <!-- ne-cell: 797f53b6 | after-heading -->
-#### विश्वास स्कोर (confidence)
+**विश्वास स्कोर (confidence)**
+<!-- ne-pair: Confidence -->
 
 <!-- ne-cell: 797f53b6 -->
 **confidence** model ले प्रत्येक उम्मेदवारलाई दिएको **स्कोर** हो। यो 0–1 बीचको मान हुन्छ।
@@ -213,7 +217,7 @@ class_id पूर्णाङ्क हो र सामान्यीकृ�
 <!-- ne-cell: d097f138 | after-heading -->
 ### प्रतिच्छेद, संयोग र IoU
 
-<!-- ne-cell: d097f138 -->
+<!-- ne-cell: d097f138 | after-image:../../assets/diagrams/teach_iou_rects.png -->
 चित्र: A (सही उत्तर) र B (अनुमान) का आयत साँच्चै मिलाएर प्रतिच्छेद (ओभरल्यापको क्षेत्रफल) र संयोग (दुई
 आयत मिलेर बन्ने क्षेत्र; ओभरल्याप एक पटक मात्र गनिन्छ) गणना गरिएको। यो चित्रमा 6,750 ÷ 15,150 ≒ 0.45 हो।
 
@@ -228,7 +232,8 @@ IoU ले "ओभरल्यापको मात्रा" एउटा स�
 - IoU 0.3 हुँदा प्रतिच्छेद "अनुमानको आयत" को 30% हो, "सही आयत" को 30% हो, कि अरू कुनै कुराको 30%?
 
 <!-- ne-cell: 4dd6c2de | after-heading -->
-#### IoU भनेको "दुई आयतको ओभरल्यापको मात्रा"
+**IoU भनेको "दुई आयतको ओभरल्यापको मात्रा"**
+<!-- ne-pair: IoU measures how much two boxes overlap -->
 
 <!-- ne-cell: 4dd6c2de -->
 **IoU** ले अनुमान गरिएको बक्स र सही बक्स **कति ओभरल्याप छन्** भन्ने कुरा 0–1 मा देखाउँछ।
@@ -253,7 +258,8 @@ IoU = प्रतिच्छेदको क्षेत्रफल ÷ दु
 ### नतिजाको उदाहरण
 
 <!-- ne-cell: 5cde7a67 | after-heading -->
-#### हातैले गणना गरेर जाँच्ने
+**हातैले गणना गरेर जाँच्ने**
+<!-- ne-pair: Verify by hand -->
 
 <!-- ne-cell: 5cde7a67 -->
 "अलि सरेको" अवस्था हातैले गणना गरौं।
@@ -265,7 +271,8 @@ IoU = प्रतिच्छेदको क्षेत्रफल ÷ दु
 - IoU = 8,100 ÷ 11,900 ≒ **0.681**
 
 <!-- ne-cell: 27c2070a | after-heading -->
-#### आयत सारेर प्रतिच्छेद, संयोग र IoU हेर्ने
+**आयत सारेर प्रतिच्छेद, संयोग र IoU हेर्ने**
+<!-- ne-pair: Move a box and watch the intersection, the union and IoU -->
 
 <!-- ne-cell: 27c2070a -->
 `offset_x` र `offset_y` मात्र सारिन्छन्। सर्ने **अनुमानको आयत** हो।
@@ -282,7 +289,8 @@ widget नभए पनि तलको parameter सेलले उही प�
 ## Part 4 पहिले नै तालिम भएको model र weight फाइल
 
 <!-- ne-cell: 112b5bfa | after-heading -->
-#### "तालिम भइसकेको" model ल्याउने
+**"तालिम भइसकेको" model ल्याउने**
+<!-- ne-pair: Starting from something already trained -->
 
 सुरुदेखि तालिम गर्न धेरै तस्बिर र लामो गणना समय चाहिन्छ। कति चाहिन्छ भन्ने कुरा model, डेटा र कम्प्युटरअनुसार
 धेरै फरक पर्छ। त्यसैले **पहिले नै धेरै तस्बिरमा तालिम भएको model** प्रयोग गरिन्छ। यसलाई
@@ -328,7 +336,8 @@ COCO pretrained model सँग यो सामग्रीका `black_spot` 
 ## अभ्यास
 
 <!-- ne-cell: 00ad41f6 | after-heading -->
-#### अभ्यास 1 (आधारभूत): YOLO ढाँचामा बदल्ने
+**अभ्यास 1 (आधारभूत): YOLO ढाँचामा बदल्ने**
+<!-- ne-pair: Exercise 1 (basic): convert to YOLO format -->
 
 <!-- ne-cell: 00ad41f6 -->
 तस्बिरको आकार 640 × 480 र बक्स `x1=320, y1=200, x2=400, y2=260` हुँदा YOLO ढाँचाका चार मान गणना गर्नुहोस्।
@@ -336,7 +345,8 @@ COCO pretrained model सँग यो सामग्रीका `black_spot` 
 पूरा भएको मापन: चारै मान 0–1 दायराभित्र छन् र 6 दशमलवसम्म देखाइएका छन्।
 
 <!-- ne-cell: cc2d6cd5 | after-heading -->
-#### अभ्यास 2 (मध्यम): IoU हातैले गणना गरेर जाँच्ने
+**अभ्यास 2 (मध्यम): IoU हातैले गणना गरेर जाँच्ने**
+<!-- ne-pair: Exercise 2 (intermediate): a hand calculation of IoU -->
 
 <!-- ne-cell: cc2d6cd5 -->
 सही `(50, 50, 150, 150)` र अनुमान `(100, 50, 200, 150)` को IoU **कागजमा** गणना गरेपछि तलको सेलले जाँच्नुहोस्।
@@ -345,7 +355,8 @@ COCO pretrained model सँग यो सामग्रीका `black_spot` 
 पूरा भएको मापन: कागजको मान र `iou(...)` को मान मिल्नुपर्छ (0.333)।
 
 <!-- ne-cell: 50f63c6d | after-heading -->
-#### अभ्यास 3 (वैकल्पिक): दिन ४ मा के सिकाउनुपर्छ भनेर योजना बनाउने
+**अभ्यास 3 (वैकल्पिक): दिन ४ मा के सिकाउनुपर्छ भनेर योजना बनाउने**
+<!-- ne-pair: Exercise 3 (optional challenge): plan what Day 4 must teach the model -->
 
 <!-- ne-cell: 50f63c6d -->
 pretrained model ले PVC को दोष किन भेट्न सक्दैन भन्ने चार कारणका आधारमा दिन ४ मा के तयार गर्नुपर्छ भनेर

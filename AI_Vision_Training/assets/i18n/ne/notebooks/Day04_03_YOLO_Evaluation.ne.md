@@ -63,7 +63,8 @@ notebooks/Day04_YOLO_Training/Day04_03_YOLO_Evaluation.ipynb
 ## Part 0 तयारी
 
 <!-- ne-cell: 264f61b9 | after-heading -->
-#### प्रशिक्षण भएको weight खोज्ने
+**प्रशिक्षण भएको weight खोज्ने**
+<!-- ne-pair: Find the trained weights -->
 
 <!-- ne-cell: 264f61b9 -->
 प्रशिक्षण भएको model `training_results/day04/.../weights/best.pt` मा छ। नभेटिए पहिले प्रशिक्षण
@@ -90,7 +91,8 @@ notebooks/Day04_YOLO_Training/Day04_03_YOLO_Evaluation.ipynb
 गनिँदैन। तलका सही चित्र एकाइअनुसार पढ्नुहोस्। सानो प्रयोग: उही तस्बिरमा अनुमान 0 बनाउँदा दुवै FN कति?
 
 <!-- ne-cell: 968ad99b | after-heading -->
-#### precision र recall
+**precision र recall**
+<!-- ne-pair: Precision and recall -->
 
 <!-- ne-cell: 968ad99b -->
 दुई मापनले **फरक कुरा नाप्छन्**।
@@ -113,7 +115,8 @@ precision सामान्यतया बढ्छ, तर **सधैं ब
 पनि सक्छन् (दिन ३ मा देखेको 3 → 1 → 1 उदाहरण)। वास्तविक परिवर्तन प्रमाणीकरण डेटामा जाँच्नुहोस्।
 
 <!-- ne-cell: c479853d | after-heading -->
-#### mAP के हो
+**mAP के हो**
+<!-- ne-pair: What mAP is -->
 
 <!-- ne-cell: c479853d -->
 **mAP** (mean Average Precision) ले precision र recall मिलेर बनेको मापन हो। परिभाषा यही क्रममा बन्छ।
@@ -154,7 +157,8 @@ Class-दर-class सही सङ्ख्या (`black_spot` 5, `scratch` 7,
 सम्बन्ध पढ्नुहोस्।
 
 <!-- ne-cell: cdbaa1cb | after-heading -->
-#### सङ्ख्या कसरी पढ्ने
+**सङ्ख्या कसरी पढ्ने**
+<!-- ne-pair: How to read these numbers -->
 
 <!-- ne-cell: cdbaa1cb -->
 64 प्रशिक्षण तस्बिरमा तालिम भएको model हो। सङ्ख्या **उच्च नहुन पनि सक्छ**। त्यो **सम्भव नतिजा** हो;
@@ -181,7 +185,7 @@ Class-दर-class सही सङ्ख्या (`black_spot` 5, `scratch` 7,
 <!-- ne-cell: audit-teach_detection_matching | after-heading -->
 ### कोड कसरी पढ्ने
 
-<!-- ne-cell: audit-teach_detection_matching -->
+<!-- ne-cell: audit-teach_detection_matching | after-image:../../assets/svg/teach_detection_matching.svg -->
 चित्र: एउटै class का आयत एक-एक गरेर मिलाइन्छ। (गणना गरिएको संश्लेषित उदाहरण र योजनाबद्ध चित्र; model को
 वास्तविक नापिएको नतिजा होइन।)
 
@@ -196,7 +200,7 @@ Class-दर-class सही सङ्ख्या (`black_spot` 5, `scratch` 7,
 <!-- ne-cell: 0c5dc209 | after-heading -->
 ### confusion matrix कसरी पढ्ने
 
-<!-- ne-cell: 0c5dc209 -->
+<!-- ne-cell: 0c5dc209 | after-image:../../assets/diagrams/teach_image_level_confusion_matrix.png -->
 चित्र: तस्बिर-स्तरको confusion matrix। लाइन "वास्तविक", स्तम्भ "अनुमान"। गन्ने एकाइ एक तस्बिर हो।
 (सङ्ख्या उदाहरणका लागि)
 
@@ -217,7 +221,7 @@ NG र अनुमान NG (TP) 28 तस्बिर, वास्तवि�
 <!-- ne-cell: 826acaec | after-heading -->
 ### तस्बिर-स्तरको TP, FP, FN र TN
 
-<!-- ne-cell: 826acaec -->
+<!-- ne-cell: 826acaec | after-image:../../assets/diagrams/teach_image_level_confusion.png -->
 चित्र: हरेक तस्बिरको चार नतिजा (संश्लेषित तस्बिर; वास्तविक model को नतिजा होइन)। एकाइ एक तस्बिर।
 
 **ध्यान दिनुपर्ने कुरा**
@@ -241,7 +245,7 @@ TP र TN दुवै "मिल्यो" हुन्, तर अर्थ �
 <!-- ne-cell: fig-teach_object_level_matching | after-heading -->
 ### वस्तु-स्तरमा एक-एक मिलाउने
 
-<!-- ne-cell: fig-teach_object_level_matching -->
+<!-- ne-cell: fig-teach_object_level_matching | after-image:../../assets/diagrams/teach_object_level_matching.png -->
 चित्र: वस्तु-स्तरको मिलान। सही आयत र अनुमानको आयत IoU ले एक-एक मिलाइन्छ; नमिलेको अनुमान FP गनिन्छ
 (निर्देशाङ्क उदाहरणका लागि)।
 
@@ -256,7 +260,8 @@ TP र TN दुवै "मिल्यो" हुन्, तर अर्थ �
 - एउटै आयत दुई पटक अनुमान गरियो भने वस्तु-स्तरमा कसरी गनिन्छ?
 
 <!-- ne-cell: bdd2037d | after-heading -->
-#### Ultralytics को confusion matrix कसरी पढ्ने
+**Ultralytics को confusion matrix कसरी पढ्ने**
+<!-- ne-pair: How to read the Ultralytics confusion matrix -->
 
 <!-- ne-cell: bdd2037d -->
 मूल्याङ्कनपछि Ultralytics ले लेख्ने `confusion_matrix.png` **वस्तु-स्तर** को तालिका हो। यो तालिममा
@@ -295,7 +300,8 @@ FN हो। पूरै पृष्ठभूमिलाई गन्न म�
 ## Part 4 सफल र असफल उदाहरण
 
 <!-- ne-cell: 1838c3de | after-heading -->
-#### आफ्नै आँखाले जाँच्ने
+**आफ्नै आँखाले जाँच्ने**
+<!-- ne-pair: Check with your own eyes -->
 
 <!-- ne-cell: 1838c3de -->
 सङ्ख्या मात्रले कार्यस्थलमा चल्छ कि चल्दैन भन्ने थाहा हुँदैन। **तस्बिर हेर्नुहोस्।**
@@ -306,7 +312,7 @@ FN हो। पूरै पृष्ठभूमिलाई गन्न म�
 <!-- ne-cell: fig-ref_detections_label_vs_pred | after-heading -->
 ### सही लेबल र अनुमान एउटै क्रममा हेर्ने
 
-<!-- ne-cell: fig-ref_detections_label_vs_pred -->
+<!-- ne-cell: fig-ref_detections_label_vs_pred | after-image:../../assets/reference_outputs/ref_detections_label_vs_pred.png -->
 चित्र: एउटै batch का 8 तस्बिर, सही लेबल (बायाँ) र अनुमान (दायाँ) मा राखिएको वास्तविक नतिजा। सही लेबल यो
 तालिमको बनाउने स्क्रिप्टले दोषको अभिलेखबाट बनाएका आयत हुन्, अनुमान तालिम भएको model का।
 
@@ -320,7 +326,8 @@ FN हो। पूरै पृष्ठभूमिलाई गन्न म�
 - कति तस्बिरमा छुट्नु (FN) छ? त्यो दोष अनुमानको स्तम्भमा कस्तो देखिन्छ?
 
 <!-- ne-cell: 17e80b20 | after-heading -->
-#### असफलताका प्रकार
+**असफलताका प्रकार**
+<!-- ne-pair: Types of failure -->
 
 <!-- ne-cell: 17e80b20 -->
 हेर्दा असफलताका प्रकार देखिन्छन्। तलको तालिकाको "सम्भावित कारण" **अनुमान** हो। तस्बिर र लेबल हेरेर
@@ -334,7 +341,8 @@ FN हो। पूरै पृष्ठभूमिलाई गन्न म�
 | Class गल्ती | चिसोलाई कालो थोप्लो ठान्नु | देखिने रूप मिल्नु, उदाहरणको असमानता | confusion matrix मा class-बीचको भ्रम जाँच्नुहोस् |
 
 <!-- ne-cell: 64c7855e | after-heading -->
-#### ओभरफिटिङ र नहुन सक्ने अवस्था
+**ओभरफिटिङ र नहुन सक्ने अवस्था**
+<!-- ne-pair: Overfitting, and what else can look like it -->
 
 <!-- ne-cell: 64c7855e -->
 प्रशिक्षण डेटामा क्षमता उच्च र नदेखिएको डेटामा क्षमता कम हुने अवस्थालाई **ओभरफिटिङ** भनिन्छ। तर
@@ -357,7 +365,8 @@ FN हो। पूरै पृष्ठभूमिलाई गन्न म�
 ## Part 5 दिन ५ सँग साझा तस्बिरमा अभिलेख
 
 <!-- ne-cell: 29056356 | after-heading -->
-#### अर्को तस्बिर सेटमा पनि किन अभिलेख गर्ने
+**अर्को तस्बिर सेटमा पनि किन अभिलेख गर्ने**
+<!-- ne-pair: Why record results on another image set -->
 
 दिन ५ मा **YOLO र PatchCore लाई एउटै तस्बिरमा तुलना** गरिन्छ।
 
@@ -370,7 +379,8 @@ FN हो। पूरै पृष्ठभूमिलाई गन्न म�
 ## अभ्यास
 
 <!-- ne-cell: 68c27e48 | after-heading -->
-#### अभ्यास 1 (आधारभूत): precision र recall अभिलेख गर्ने
+**अभ्यास 1 (आधारभूत): precision र recall अभिलेख गर्ने**
+<!-- ne-pair: Exercise 1 (basic): record precision and recall -->
 
 <!-- ne-cell: 68c27e48 -->
 Part 2 को नतिजा तलको तालिकामा लेख्नुहोस्।
@@ -384,7 +394,8 @@ Part 2 को नतिजा तलको तालिकामा लेख्
 - पूरा भएको मापन: तीन मान अभिलेख भएका छन् र precision र recall आफ्नै शब्दमा व्याख्या गर्न सकिन्छ
 
 <!-- ne-cell: 83c679ee | after-heading -->
-#### अभ्यास 2 (मध्यम): असफल उदाहरण सुरक्षित गर्ने
+**अभ्यास 2 (मध्यम): असफल उदाहरण सुरक्षित गर्ने**
+<!-- ne-pair: Exercise 2 (intermediate): save failure examples -->
 
 <!-- ne-cell: 83c679ee -->
 Part 4 का तस्बिरबाट **छुट्नु** र **झुटो पहिचान** खोजेर भेटिएका `submissions/day04/` मा सुरक्षित
@@ -400,7 +411,8 @@ Part 4 का तस्बिरबाट **छुट्नु** र **झुट
 - पूरा भएको मापन: भेटिएका हरेक असफलताको कारणबारे अनुमान लेखिएको छ
 
 <!-- ne-cell: cf0ad36e | after-heading -->
-#### अभ्यास 3 (वैकल्पिक): सुधारको योजना लेख्ने
+**अभ्यास 3 (वैकल्पिक): सुधारको योजना लेख्ने**
+<!-- ne-pair: Exercise 3 (optional challenge): write an improvement plan -->
 
 <!-- ne-cell: cf0ad36e -->
 असफलताका प्रकारका आधारमा **अब के गर्ने** भनेर प्राथमिकताको क्रममा तीन कुरा लेख्नुहोस्। प्रत्येकमा

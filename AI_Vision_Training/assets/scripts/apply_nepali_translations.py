@@ -11,9 +11,14 @@ One sidecar file per notebook. Each block starts with a directive line::
 
     <!-- ne-cell: 79dc91db -->                 # append at the end of the cell
     <!-- ne-cell: 79dc91db | after-heading --> # directly after the leading heading block
+    <!-- ne-cell: figure-id | after-image:../../assets/diagrams/example.png -->
 
 and runs until the next directive. ``after-heading`` keeps a Nepali heading next to the
 Japanese/English heading; ``end`` adds the Nepali explanation after the existing prose.
+``after-image:<exact Markdown target>`` puts a visual explanation after that image's original
+captions. The target must occur exactly once in the cell; multiple images use separate anchors.
+An after-heading block may use bold text (not a new subsection) and
+``<!-- ne-pair: Exact English heading -->`` to identify a separated corresponding heading.
 
 差し込みの仕組み / how insertion stays idempotent
 -------------------------------------------------
@@ -49,12 +54,40 @@ CATALOG_DIR = COURSE_ROOT / "assets" / "i18n" / "ne" / "notebooks"
 BEGIN = "<!-- ne:begin {anchor} -->"
 END = "<!-- ne:end -->"
 REGION_RE = re.compile(
-    r"\n<!--\s*ne:begin\s+(?P<anchor>[a-z\-]+)\s*-->\n"
+    r"\n<!--\s*ne:begin\s+(?P<anchor>[^\s]+)\s*-->\n"
     r"(?P<body>.*?)\n<!--\s*ne:end\s*-->\n", re.S)
-DIRECTIVE_RE = re.compile(r"^<!--\s*ne-cell:\s*([A-Za-z0-9_\-]+)\s*(?:\|\s*([a-z\-]+)\s*)?-->$")
+DIRECTIVE_RE = re.compile(r"^<!--\s*ne-cell:\s*([A-Za-z0-9_\-]+)\s*(?:\|\s*([^\s]+)\s*)?-->$")
 DEVANAGARI_RE = re.compile(r"[\u0900-\u097f]")
 FORBIDDEN_LABELS = ("日本語：", "日本語:", "English:", "English：")
 VALID_ANCHORS = ("end", "after-heading")
+IMAGE_RE = re.compile(r"!\[([^\]]*)\]\(([^)\s]+)\)")
+CAPTION_RE = re.compile(r"^(?:図[：:]|Figure[：:]|चित्र[：:]|चित्रमा|फोटो[：:]|写真[：:]|Photo[：:])")
+
+
+def valid_anchor(anchor: str) -> bool:
+    return anchor in VALID_ANCHORS or (
+        anchor.startswith("after-image:") and bool(anchor.partition(":")[2]))
+
+
+def image_captions(lines: list[str], start: int) -> tuple[list[str], int]:
+    """Read caption paragraphs, including wrapped lines, but never lesson prose."""
+    captions = []
+    index = start
+    while index < len(lines):
+        while index < len(lines) and not lines[index].strip():
+            index += 1
+        if index == len(lines) or not CAPTION_RE.match(lines[index].strip()):
+            break
+        paragraph = [lines[index].strip()]
+        index += 1
+        while index < len(lines) and lines[index].strip():
+            line = lines[index].strip()
+            if CAPTION_RE.match(line) or line.startswith(("<!--", "#", "**", "![", "|", "```")):
+                break
+            paragraph.append(line)
+            index += 1
+        captions.append(" ".join(paragraph))
+    return captions, index
 
 
 class CatalogError(SystemExit):
@@ -66,7 +99,7 @@ def parse_regions(source: str) -> dict[str, dict]:
     regions: dict[str, dict] = {}
     for match in REGION_RE.finditer(source):
         anchor = match.group("anchor")
-        if anchor not in VALID_ANCHORS:
+        if not valid_anchor(anchor):
             raise CatalogError(f"unknown anchor in notebook source: {anchor!r}")
         if anchor in regions:
             raise CatalogError(f"two Nepali regions with anchor {anchor!r} in one cell")
@@ -103,6 +136,17 @@ def _heading_insert_index(lines: list[str]) -> int:
 
 def _insert_region(text: str, anchor: str, body: str) -> str:
     marker = BEGIN.format(anchor=anchor)
+    if anchor.startswith("after-image:"):
+        target = anchor.partition(":")[2]
+        lines = text.split("\n")
+        matches = [(index, match) for index, line in enumerate(lines)
+                   for match in IMAGE_RE.finditer(line) if match.group(2) == target]
+        if len(matches) != 1:
+            raise CatalogError(f"image anchor {target!r}: expected one image, found {len(matches)}")
+        index, _ = matches[0]
+        _, end = image_captions(lines, index + 1)
+        head, tail = "\n".join(lines[:end]), "\n".join(lines[end:])
+        return head + f"\n{marker}\n{body}\n{END}\n\n" + tail
     if anchor == "after-heading":
         lines = text.split("\n")
         index = _heading_insert_index(lines)
@@ -117,6 +161,15 @@ def _insert_region(text: str, anchor: str, body: str) -> str:
 def apply_blocks(source: str, blocks: list[dict]) -> str:
     """1 つのセルのネパール語ブロックを、あれば中身だけ書き換える / insert or rewrite."""
     wanted = {block["at"]: block["text"] for block in blocks}
+    original = strip_regions(source)
+    for anchor in wanted:
+        if not valid_anchor(anchor):
+            raise CatalogError(f"unknown anchor: {anchor!r}")
+        if anchor.startswith("after-image:"):
+            target = anchor.partition(":")[2]
+            count = sum(match.group(2) == target for match in IMAGE_RE.finditer(original))
+            if count != 1:
+                raise CatalogError(f"image anchor {target!r}: expected one image, found {count}")
     existing = parse_regions(source)
 
     text = source
@@ -128,8 +181,9 @@ def apply_blocks(source: str, blocks: list[dict]) -> str:
         text = text[:start] + text[end:]
 
     for anchor, body in wanted.items():
-        if anchor in existing:
-            span_start, _span_end = existing[anchor]["span"]
+        current = parse_regions(text)
+        if anchor in current:
+            span_start, _span_end = current[anchor]["span"]
             match = REGION_RE.match(text, span_start)
             if match and match.group("anchor") == anchor:
                 text = text[:match.start("body")] + body + text[match.end("body"):]
@@ -165,7 +219,7 @@ def parse_catalog(path: Path) -> dict[str, list[dict]]:
         if match:
             flush()
             anchor = match.group(2) or "end"
-            if anchor not in VALID_ANCHORS:
+            if not valid_anchor(anchor):
                 raise CatalogError(f"{path.name}: bad anchor {anchor!r} for {match.group(1)}")
             state["current"] = (match.group(1), anchor)
             state["buffer"] = []

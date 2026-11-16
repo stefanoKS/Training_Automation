@@ -62,7 +62,8 @@ notebooks/Day04_YOLO_Training/Day04_01_YOLO_Dataset_Annotation.ipynb
 ## Part 0 तयारी
 
 <!-- ne-cell: 761c228b | after-heading -->
-#### यो डेटासेटबारे
+**यो डेटासेटबारे**
+<!-- ne-pair: About this dataset -->
 
 <!-- ne-cell: 761c228b -->
 यो तालिममा प्रयोग हुने डेटासेट **सबै संश्लेषित तस्बिर** हुन्। Python ले बनाएका "PVC सिटजस्तो"
@@ -88,7 +89,8 @@ notebooks/Day04_YOLO_Training/Day04_01_YOLO_Dataset_Annotation.ipynb
 `assets/yolo_dataset/dataset_summary.json` मा सुरक्षित छन्।
 
 <!-- ne-cell: b2fcf17e | after-heading -->
-#### "उत्तर भएका उदाहरण" बाट सिक्ने
+**"उत्तर भएका उदाहरण" बाट सिक्ने**
+<!-- ne-pair: Learning from examples with answers -->
 
 <!-- ne-cell: b2fcf17e -->
 **सुपरभाइज्ड लर्निङ** ले **इनपुट र सही उत्तरको जोडी** धेरै पटक देखाएर सिकाउँछ।
@@ -113,7 +115,8 @@ notebooks/Day04_YOLO_Training/Day04_01_YOLO_Dataset_Annotation.ipynb
 ## Part 2 डेटासेटको बनावट
 
 <!-- ne-cell: 111d802b | after-heading -->
-#### YOLO डेटासेटको रचना
+**YOLO डेटासेटको रचना**
+<!-- ne-pair: The YOLO dataset layout -->
 
 <!-- ne-cell: 111d802b -->
 YOLO डेटासेट तोकिएको रचनामा राखिन्छ: `images/` भित्र `train/`, `val/`, `test/`, र `labels/` भित्र पनि
@@ -123,7 +126,8 @@ YOLO डेटासेट तोकिएको रचनामा राखि
 सँग `train_0000.txt` जोडिन्छ। `data.yaml` मा class नाम र फोल्डरको स्थान लेखिन्छ।
 
 <!-- ne-cell: fe231231 | after-heading -->
-#### `data.yaml` को अर्थ
+**`data.yaml` को अर्थ**
+<!-- ne-pair: What `data.yaml` means -->
 
 <!-- ne-cell: fe231231 -->
 | लाइन | अर्थ |
@@ -141,7 +145,7 @@ YOLO डेटासेट तोकिएको रचनामा राखि
 <!-- ne-cell: ce6a81f7 | after-heading -->
 ### आयत र लेबलका पाँच मान
 
-<!-- ne-cell: ce6a81f7 -->
+<!-- ne-cell: ce6a81f7 | after-image:../../assets/diagrams/teach_yolo_label_fields.png -->
 चित्र: तालिम डेटासेटको वास्तविक फाइल `train_0002.png` र त्यसको एक लाइनको लेबलबाट बनाइएको आयत
 (संश्लेषित तस्बिर)। आयतले सन्को धर्कालाई घेरेको छ।
 
@@ -181,7 +185,8 @@ y2 = (y_center + height / 2) * तस्बिरको उचाइ       heigh
 निर्देशाङ्क कसरी बदलिन्छन्?
 
 <!-- ne-cell: c892d3b2 | after-heading -->
-#### एक लाइन = एक दोष
+**एक लाइन = एक दोष**
+<!-- ne-pair: One line per defect -->
 
 <!-- ne-cell: c892d3b2 -->
 लेबल फाइलको एक लाइनमा पाँच सङ्ख्या हुन्छन् (मान उदाहरणका लागि)।
@@ -204,7 +209,8 @@ sample) प्रयोग गर्नुअघि **तस्बिर हे�
 लेबल गरिँदैन। लेबल नभएको तस्बिरको अर्थ "लेबल गर्ने दोष छैन" मात्र हो, त्यसभन्दा बढी होइन।
 
 <!-- ne-cell: 400f5185 | after-heading -->
-#### सामान्यीकृत निर्देशाङ्क फर्काउने
+**सामान्यीकृत निर्देशाङ्क फर्काउने**
+<!-- ne-pair: Convert normalised coordinates back -->
 
 <!-- ne-cell: 400f5185 -->
 लेबलको 0–1 मानलाई तस्बिरको आकारले गुणन गर्दा पिक्सेलमा फर्किन्छ:
@@ -217,7 +223,8 @@ y2 = (yc + h/2) * तस्बिरको उचाइ
 ```
 
 <!-- ne-cell: 5dbe36b0 | after-heading -->
-#### लेबल तस्बिरमा बनाएर जाँच्ने
+**लेबल तस्बिरमा बनाएर जाँच्ने**
+<!-- ne-pair: Draw the labels to inspect them -->
 
 <!-- ne-cell: 5dbe36b0 -->
 लेबल सही छ कि छैन जाँच्ने सबैभन्दा सजिलो तरिका **तस्बिरमा बनाएर हेर्नु** हो।
@@ -238,7 +245,7 @@ y2 = (yc + h/2) * तस्बिरको उचाइ
 <!-- ne-cell: f937aad6 | after-heading -->
 ### तीन भागको भूमिका
 
-<!-- ne-cell: f937aad6 -->
+<!-- ne-cell: f937aad6 | after-image:../../assets/diagrams/teach_split_roles.png -->
 चित्र: तीनै भागको भूमिका र यो तालिमको डेटासेटको वास्तविक सङ्ख्या (train 64 / val 16 / test 16, करिब
 66.7 / 16.7 / 16.7 %)।
 
@@ -260,7 +267,8 @@ y2 = (yc + h/2) * तस्बिरको उचाइ
 - तपाईंको प्रक्रियामा कुन एकाइमा बाँड्नु सही हुन्छ (मिति, लट, क्यामेरा)?
 
 <!-- ne-cell: 108f920a | after-heading -->
-#### तीन भूमिका
+**तीन भूमिका**
+<!-- ne-pair: The three roles -->
 
 <!-- ne-cell: 108f920a -->
 | डेटा | भूमिका | कहिले प्रयोग |
@@ -279,7 +287,7 @@ y2 = (yc + h/2) * तस्बिरको उचाइ
 <!-- ne-cell: fig-teach_dataset_contact_sheet | after-heading -->
 ### डेटासेटभित्र के छ हेर्ने
 
-<!-- ne-cell: fig-teach_dataset_contact_sheet -->
+<!-- ne-cell: fig-teach_dataset_contact_sheet | after-image:../../assets/diagrams/teach_dataset_contact_sheet.png -->
 चित्र: यो तालिममा साँच्चै प्रयोग हुने डेटासेटको train / val / test बाट पहिलो 4-4 तस्बिर। आयत लेबल फाइलबाट
 बनाइएका छन्। सन्दर्भ नतिजा (वास्तविक फाइल)।
 
@@ -296,7 +304,8 @@ contact sheet ले "देखिने रूप र लेबल लगाउ
 ## Part 5 डेटा चुहावट
 
 <!-- ne-cell: 396d4a73 | after-heading -->
-#### एउटै तस्बिर धेरै भागमा परे के हुन्छ
+**एउटै तस्बिर धेरै भागमा परे के हुन्छ**
+<!-- ne-pair: What happens when one image appears in two splits -->
 
 <!-- ne-cell: 396d4a73 -->
 प्रशिक्षण र परीक्षण दुवैमा **एउटै तस्बिर** (वा लगभग उही) परे model ले त्यो तस्बिर **रटेरै** राम्रो
@@ -323,7 +332,7 @@ contact sheet ले "देखिने रूप र लेबल लगाउ
 <!-- ne-cell: fig-teach_leakage_split | after-heading -->
 ### फ्रेमअनुसार बाँड्ने कि खिचाइअनुसार
 
-<!-- ne-cell: fig-teach_leakage_split -->
+<!-- ne-cell: fig-teach_leakage_split | after-image:../../assets/diagrams/teach_leakage_split.png -->
 चित्र: वास्तविक संश्लेषित डेटासेटको एउटा तस्बिर र सानो पिक्सेल-मान आवाज थपिएको "लगभग उही तस्बिर"। स्थान
 सारिएको छैन। फ्रेमअनुसार बाँड्दा यी दुई train र test मा छुट्टिन्छन्।
 
@@ -340,7 +349,7 @@ contact sheet ले "देखिने रूप र लेबल लगाउ
 <!-- ne-cell: audit-teach_group_split_vs_frame_split | after-heading -->
 ### कोड कसरी पढ्ने
 
-<!-- ne-cell: audit-teach_group_split_vs_frame_split -->
+<!-- ne-cell: audit-teach_group_split_vs_frame_split | after-image:../../assets/svg/teach_group_split_vs_frame_split.svg -->
 चित्र: एउटै खिचाइ-समूहलाई बाँडफाँटको सीमामा नराख्नुहोस्। (गणना गरिएको संश्लेषित उदाहरण र योजनाबद्ध चित्र;
 model को वास्तविक नापिएको नतिजा होइन।)
 
@@ -356,7 +365,8 @@ model को वास्तविक नापिएको नतिजा ह�
 ## अभ्यास
 
 <!-- ne-cell: a9d7688a | after-heading -->
-#### अभ्यास 1 (आधारभूत): लेबल हातैले गणना गर्ने
+**अभ्यास 1 (आधारभूत): लेबल हातैले गणना गर्ने**
+<!-- ne-pair: Exercise 1 (basic): compute a label by hand -->
 
 <!-- ne-cell: a9d7688a -->
 तस्बिरको आकार 320 × 320, दोषको class black_spot (`class_id` = 0), आयत `x1=100, y1=140, x2=180, y2=200`
@@ -365,7 +375,8 @@ model को वास्तविक नापिएको नतिजा ह�
 - पूरा भएको मापन: `0 0.437500 0.531250 0.250000 0.187500` सँग मिल्नुपर्छ
 
 <!-- ne-cell: b82ec1c9 | after-heading -->
-#### अभ्यास 2 (मध्यम): खाली लेबल गन्ने
+**अभ्यास 2 (मध्यम): खाली लेबल गन्ने**
+<!-- ne-pair: Exercise 2 (intermediate): count the empty labels -->
 
 <!-- ne-cell: b82ec1c9 -->
 train / val / test प्रत्येकमा **खाली लेबल (पृष्ठभूमि तस्बिर) को अनुपात** गणना गर्नुहोस्।
@@ -373,7 +384,8 @@ train / val / test प्रत्येकमा **खाली लेबल (�
 पूरा भएको मापन: तीन प्रतिशत एक दशमलवसम्म देखाइएका छन्।
 
 <!-- ne-cell: 0fbbc7cb | after-heading -->
-#### अभ्यास 3 (वैकल्पिक): डेटा चुहावट भेट्ने
+**अभ्यास 3 (वैकल्पिक): डेटा चुहावट भेट्ने**
+<!-- ne-pair: Exercise 3 (optional challenge): introduce and detect leakage -->
 
 <!-- ne-cell: 0fbbc7cb -->
 जानाजान डेटा चुहावट बनाएर भेट्न सकिन्छ कि परीक्षण गर्नुहोस्। **अनिवार्य होइन।**

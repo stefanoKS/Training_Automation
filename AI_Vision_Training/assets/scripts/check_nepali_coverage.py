@@ -27,13 +27,12 @@ import sys
 from pathlib import Path
 
 from course_notebooks import course_notebooks
+from apply_nepali_translations import REGION_RE
 
 COURSE_ROOT = Path(__file__).resolve().parents[2]
 CATALOG_DIR = COURSE_ROOT / "assets" / "i18n" / "ne" / "notebooks"
 DOC_CATALOG_DIR = COURSE_ROOT / "assets" / "i18n" / "ne" / "docs"
 
-REGION_RE = re.compile(
-    r"\n<!--\s*ne:begin\s+(?P<anchor>[a-z\-]+)\s*-->\n(?P<body>.*?)\n<!--\s*ne:end\s*-->\n", re.S)
 DOC_REGION_RE = re.compile(
     r"\n<!--\s*ne:begin\s+doc:[0-9a-f]+\s*-->\n(?P<body>.*?)\n<!--\s*ne:end\s*-->\n", re.S)
 DEVANAGARI_RE = re.compile(r"[\u0900-\u097f]")

@@ -1,0 +1,104 @@
+{
+  "baseline": "8857204b2d9d0e34a5befbad73e00da98ff5fcd7",
+  "notebooks": {
+    "notebooks\\00_Setup\\00_Environment_Setup.ipynb": {
+      "cells": 85,
+      "code_cells": 20,
+      "modified_markdown_cells": 30
+    },
+    "notebooks\\Day01_AI_Fundamentals\\Day01_01_Introduction_to_AI.ipynb": {
+      "cells": 73,
+      "code_cells": 14,
+      "modified_markdown_cells": 22
+    },
+    "notebooks\\Day01_AI_Fundamentals\\Day01_02_Pixels_and_Images.ipynb": {
+      "cells": 89,
+      "code_cells": 26,
+      "modified_markdown_cells": 25
+    },
+    "notebooks\\Day01_AI_Fundamentals\\Day01_03_Computer_Vision_Tasks.ipynb": {
+      "cells": 57,
+      "code_cells": 13,
+      "modified_markdown_cells": 14
+    },
+    "notebooks\\Day02_Python_OpenCV\\Day02_01_Python_Basics.ipynb": {
+      "cells": 69,
+      "code_cells": 17,
+      "modified_markdown_cells": 16
+    },
+    "notebooks\\Day02_Python_OpenCV\\Day02_02_Conditions_Loops_Functions.ipynb": {
+      "cells": 85,
+      "code_cells": 21,
+      "modified_markdown_cells": 17
+    },
+    "notebooks\\Day02_Python_OpenCV\\Day02_03_OpenCV_Image_Processing.ipynb": {
+      "cells": 81,
+      "code_cells": 22,
+      "modified_markdown_cells": 27
+    },
+    "notebooks\\Day03_YOLO_Basics\\Day03_01_YOLO_Concepts.ipynb": {
+      "cells": 56,
+      "code_cells": 13,
+      "modified_markdown_cells": 15
+    },
+    "notebooks\\Day03_YOLO_Basics\\Day03_02_YOLO_Inference.ipynb": {
+      "cells": 57,
+      "code_cells": 16,
+      "modified_markdown_cells": 15
+    },
+    "notebooks\\Day03_YOLO_Basics\\Day03_03_YOLO_Experiments.ipynb": {
+      "cells": 61,
+      "code_cells": 17,
+      "modified_markdown_cells": 17
+    },
+    "notebooks\\Day04_YOLO_Training\\Day04_01_YOLO_Dataset_Annotation.ipynb": {
+      "cells": 58,
+      "code_cells": 15,
+      "modified_markdown_cells": 17
+    },
+    "notebooks\\Day04_YOLO_Training\\Day04_02_YOLO_Training.ipynb": {
+      "cells": 59,
+      "code_cells": 15,
+      "modified_markdown_cells": 19
+    },
+    "notebooks\\Day04_YOLO_Training\\Day04_03_YOLO_Evaluation.ipynb": {
+      "cells": 58,
+      "code_cells": 14,
+      "modified_markdown_cells": 17
+    },
+    "notebooks\\Day05_PatchCore\\Day05_01_Anomaly_Detection_Concepts.ipynb": {
+      "cells": 57,
+      "code_cells": 12,
+      "modified_markdown_cells": 19
+    },
+    "notebooks\\Day05_PatchCore\\Day05_02_PatchCore_Training.ipynb": {
+      "cells": 69,
+      "code_cells": 21,
+      "modified_markdown_cells": 22
+    },
+    "notebooks\\Day05_PatchCore\\Day05_03_YOLO_vs_PatchCore.ipynb": {
+      "cells": 62,
+      "code_cells": 20,
+      "modified_markdown_cells": 15
+    }
+  },
+  "protected_files": 513,
+  "mismatches": [],
+  "original_bilingual_pdf_sha256": {
+    "docs\\pdf\\Day01_explanation_ja_en.pdf": "466b2f674f57f0a4ece2f5f0de3e679bd74e6a7758cf2e3b7968c9a6e1062ed5",
+    "docs\\pdf\\Day02_explanation_ja_en.pdf": "0361bf7c5634a5067915f65f1c73bb30762372e01fcfe2da63534621b2d3eff9",
+    "docs\\pdf\\Day03_explanation_ja_en.pdf": "a2c3c85e93028d542c269d45f1155cc2ee2dac9eb3af592bbd3509fa6af11174",
+    "docs\\pdf\\Day04_explanation_ja_en.pdf": "d2a8614e0275cb7fe95a6b6a64c4180f0d7c34241f89638e964b73ff7677aa50",
+    "docs\\pdf\\Day05_explanation_ja_en.pdf": "1a302ff6aa122eb86afde9bce3d03f18b2520096c87d3a74ae6325ed396a2719",
+    "docs\\pdf\\Week1_explanation_ja_en.pdf": "ffbcc4a767b77aab83c034199e1044e1b21b8ac691fb56f9afda9ebcf4cc3971"
+  },
+  "learner_documents": [
+    "START_HERE.md",
+    "README.md",
+    "COURSE_SYLLABUS.md",
+    "docs\\troubleshooting\\installation.md",
+    "requirements\\tested_versions.md"
+  ],
+  "modified_markdown_cells": 307,
+  "preserved_code_cells": 276
+}

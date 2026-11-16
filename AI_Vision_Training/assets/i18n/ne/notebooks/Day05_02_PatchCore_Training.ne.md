@@ -68,7 +68,8 @@ backbone स्थिर फिचर निकाल्ने भाग हो�
 ## Part 0 तयारी
 
 <!-- ne-cell: 2fa75b5a | after-heading -->
-#### kernel जाँच्ने
+**kernel जाँच्ने**
+<!-- ne-pair: Confirm the kernel -->
 
 <!-- ne-cell: 2fa75b5a -->
 यो नोटबुक **`aivision-anomalib` kernel** मा चलाउनुहोस्। अर्को kernel भए
@@ -78,7 +79,8 @@ backbone स्थिर फिचर निकाल्ने भाग हो�
 **नोटबुक सुरुदेखि फेरि चलाउनुहोस्**।
 
 <!-- ne-cell: 8f419564 | after-heading -->
-#### प्रयोग हुने API (संस्करण स्थिर)
+**प्रयोग हुने API (संस्करण स्थिर)**
+<!-- ne-pair: The API used here (pinned version) -->
 
 <!-- ne-cell: 8f419564 -->
 Anomalib मा **2.x** मा API धेरै बदलियो। 1.x को नमुना कोड सार्दा चल्दैन।
@@ -95,7 +97,8 @@ Anomalib मा **2.x** मा API धेरै बदलियो। 1.x को
 ## Part 1 डेटाको बनावट
 
 <!-- ne-cell: bc41a079 | after-heading -->
-#### तालिममा सामान्य मात्र प्रयोग गर्ने
+**तालिममा सामान्य मात्र प्रयोग गर्ने**
+<!-- ne-pair: Only normal images are used for training -->
 
 <!-- ne-cell: bc41a079 -->
 प्रयोग हुने फोल्डर बनावट यस्तो छ: `assets/anomaly_dataset/pvc_sheet/` भित्र `train/good/` (तालिम,
@@ -106,7 +109,8 @@ Anomalib मा **2.x** मा API धेरै बदलियो। 1.x को
 **`train/` मा एउटा पनि असामान्य तस्बिर छैन।** यही PatchCore को पूर्वशर्त हो।
 
 <!-- ne-cell: afbdd116 | after-heading -->
-#### data module बनाउने
+**data module बनाउने**
+<!-- ne-pair: Building the datamodule -->
 
 <!-- ne-cell: afbdd116 -->
 `Folder` लाई कुन फोल्डर के हो भनेर बताइन्छ।
@@ -126,7 +130,8 @@ Anomalib मा **2.x** मा API धेरै बदलियो। 1.x को
 गर्ने र नतिजा परीक्षणमा नाप्ने**।
 
 <!-- ne-cell: c7f73514 | after-heading -->
-#### तालिम डेटामा असामान्य छैन भन्ने पुष्टि गर्ने
+**तालिम डेटामा असामान्य छैन भन्ने पुष्टि गर्ने**
+<!-- ne-pair: Verify training data contains no anomalies -->
 
 <!-- ne-cell: c7f73514 -->
 यहाँ **अवश्य जाँच्नुहोस्**। `train` मा असामान्य तस्बिर मिसियो भने त्यो असामान्यता "सामान्यको नमुना"
@@ -143,7 +148,8 @@ Anomalib मा **2.x** मा API धेरै बदलियो। 1.x को
 ## Part 2 model सुरु गर्ने
 
 <!-- ne-cell: f6b40399 | after-heading -->
-#### backbone कसरी छान्ने
+**backbone कसरी छान्ने**
+<!-- ne-pair: Choosing the backbone -->
 
 <!-- ne-cell: f6b40399 -->
 `Patchcore` का मुख्य argument:
@@ -168,7 +174,7 @@ Anomalib मा **2.x** मा API धेरै बदलियो। 1.x को
 <!-- ne-cell: audit-teach_patchcore_stages | after-heading -->
 ### कोड कसरी पढ्ने
 
-<!-- ne-cell: audit-teach_patchcore_stages -->
+<!-- ne-cell: audit-teach_patchcore_stages | after-image:../../assets/svg/teach_patchcore_stages.svg -->
 चित्र: तस्बिरको निर्देशाङ्क र फिचर स्पेस छुट्याउनुहोस्। (गणना गरिएको संश्लेषित उदाहरण र योजनाबद्ध चित्र;
 model को वास्तविक नापिएको नतिजा होइन।)
 
@@ -184,7 +190,8 @@ model को वास्तविक नापिएको नतिजा ह�
 ## Part 3 fit गर्ने
 
 <!-- ne-cell: bf3d12fb | after-heading -->
-#### PatchCore को "तालिम" एक पटकले पुग्छ
+**PatchCore को "तालिम" एक पटकले पुग्छ**
+<!-- ne-pair: One pass is enough for PatchCore's fit -->
 
 <!-- ne-cell: bf3d12fb -->
 PatchCore को तालिमले **neural network को weight अपडेट गर्दैन**। गरिने काम दुई मात्र हो:
@@ -203,7 +210,7 @@ PatchCore को तालिमले **neural network को weight अपड�
 <!-- ne-cell: fig-teach_backbone_vs_memory | after-heading -->
 ### बदलिने कुरा memory bank मात्र
 
-<!-- ne-cell: fig-teach_backbone_vs_memory -->
+<!-- ne-cell: fig-teach_backbone_vs_memory | after-image:../../assets/diagrams/teach_backbone_vs_memory.png -->
 चित्र: weight अपडेट नहुने backbone र डेटाले तय गर्ने memory bank (योजनाबद्ध चित्र)।
 
 **ध्यान दिनपर्ने कुरा**
@@ -217,7 +224,8 @@ ResNet-18 को weight अपडेट हुँदैन (frozen)। डेट
 सामान्य तस्बिर थप्दा के बदलिन्छ: backbone, memory bank कि थ्रेसहोल्ड?
 
 <!-- ne-cell: f5f00936 | after-heading -->
-#### प्रगति देखाउने सुविधा आफैं बन्द गर्ने कारण
+**प्रगति देखाउने सुविधा आफैं बन्द गर्ने कारण**
+<!-- ne-pair: Why the progress display is switched off -->
 
 <!-- ne-cell: f5f00936 -->
 Lightning को धेरै सजावट भएको प्रगति देखाउने सुविधाले Windows को Jupyter मा कहिलेकाहीँ
@@ -240,7 +248,8 @@ Lightning को धेरै सजावट भएको प्रगति �
 यो पटकको चलाइबाट छुट्याउनुहोस्।
 
 <!-- ne-cell: 29df63e7 | after-heading -->
-#### सुरक्षित भएको कुरा
+**सुरक्षित भएको कुरा**
+<!-- ne-pair: What was saved -->
 
 <!-- ne-cell: 29df63e7 -->
 `engine.fit()` ले model को अवस्था `training_results/day05/` मुनि सुरक्षित गर्छ।
@@ -250,7 +259,8 @@ Lightning को धेरै सजावट भएको प्रगति �
 ## Part 4 मूल्याङ्कन गर्ने
 
 <!-- ne-cell: c452bff7 | after-heading -->
-#### चार मापन
+**चार मापन**
+<!-- ne-pair: The four metrics -->
 
 <!-- ne-cell: c452bff7 -->
 Anomalib ले चार मापन फर्काउँछ। **यो भाग क्यालिब्रेसन (validation) डेटामा मात्र गणना गरिन्छ।**
@@ -282,7 +292,8 @@ Anomalib ले चार मापन फर्काउँछ। **यो भ�
 (ResNet-18, `image_size=256`, seed 2026); परीक्षणका सङ्ख्या नोटबुक ०३ मा मात्र आउँछन्।
 
 <!-- ne-cell: f4d5f377 | after-heading -->
-#### सङ्ख्या धेरै राम्रो देखिँदा शङ्का गर्ने कुरा
+**सङ्ख्या धेरै राम्रो देखिँदा शङ्का गर्ने कुरा**
+<!-- ne-pair: When the numbers look too good -->
 
 <!-- ne-cell: f4d5f377 -->
 संश्लेषित तस्बिर **वास्तविक कारखानाका तस्बिरभन्दा सजिलो** हुन्छ। दोष स्पष्ट हुन्छ र पृष्ठभूमिको भिन्नता
@@ -300,7 +311,7 @@ Anomalib ले चार मापन फर्काउँछ। **यो भ�
 <!-- ne-cell: 8cfeab62 | after-heading -->
 ### मूल तस्बिर, स्कोर नक्सा र मिलाएर देखाइएको चित्र
 
-<!-- ne-cell: 8cfeab62 -->
+<!-- ne-cell: 8cfeab62 | after-image:../../assets/diagrams/teach_score_map_overlay.png -->
 चित्र: **व्याख्याका लागि बनाइएको संश्लेषित योजनाबद्ध चित्र** (हल्का डाँडाजस्तो आकार) हो। यो वास्तविक
 PatchCore को नतिजा होइन। मिलाएर राख्ने तरिका देखाउन उही तस्बिरलाई उही रङ-मापन (0.0–0.4) मा तीन
 रूपमा राखिएको छ।
@@ -340,7 +351,7 @@ PatchCore को नतिजा होइन। मिलाएर राख्
 <!-- ne-cell: fig-ref_anomaly_panels | after-heading -->
 ### संश्लेषित खेलौनाको सङ्ख्यात्मक नक्सा
 
-<!-- ne-cell: fig-ref_anomaly_panels -->
+<!-- ne-cell: fig-ref_anomaly_panels | after-image:../../assets/reference_outputs/teach_numeric_map_toy.png -->
 चित्र: खेलौनाको इनपुट, 3×3 औसत नक्सा र उही मानको मिलाएर देखाइएको चित्र। यो
 `generate_reference_outputs.toy_numeric_map` को स्थिर array बाट गणना गरिन्छ। वास्तविक क्यालिब्रेसन/TEST
 डेटा वा अनुमानको नतिजा होइन।
@@ -356,7 +367,8 @@ PatchCore को नतिजा होइन। मिलाएर राख्
 - नक्साको अधिकतम मान र तस्बिर स्कोर किन मिल्दैन?
 
 <!-- ne-cell: cefba6c0 | after-heading -->
-#### एक-एक तस्बिरको नतिजा हेर्ने
+**एक-एक तस्बिरको नतिजा हेर्ने**
+<!-- ne-pair: Look at results image by image -->
 
 <!-- ne-cell: cefba6c0 -->
 `engine.predict()` ले तस्बिर-दर-तस्बिर नतिजा फर्काउँछ।
@@ -374,7 +386,8 @@ PatchCore को नतिजा होइन। मिलाएर राख्
 फर्काउँछ**, जुन 0–1 मा सीमित हुँदैन। "सधैं 0–1 मै फर्किन्छ" भनेर नठान्नुहोस्।
 
 <!-- ne-cell: 11a17ecf | after-heading -->
-#### सङ्ख्या हेर्दा ध्यान दिनुपर्ने कुरा
+**सङ्ख्या हेर्दा ध्यान दिनुपर्ने कुरा**
+<!-- ne-pair: Caution when reading the numbers -->
 
 <!-- ne-cell: 11a17ecf -->
 `pred_label` Anomalib ले **क्यालिब्रेसन डेटामा तय गरेको थ्रेसहोल्ड** अनुसारको निर्णय हो। थ्रेसहोल्ड
@@ -395,7 +408,8 @@ PatchCore को नतिजा होइन। मिलाएर राख्
 > **क्यालिब्रेसनमा तय गरिएको थ्रेसहोल्ड 0–1 मापनमा 0.5** मा पर्छ।
 
 <!-- ne-cell: 748dffdf | after-heading -->
-#### हिटम्याप र सङ्ख्यात्मक नक्सा सुरक्षित गर्ने
+**हिटम्याप र सङ्ख्यात्मक नक्सा सुरक्षित गर्ने**
+<!-- ne-pair: Save the heatmaps as images -->
 
 <!-- ne-cell: 748dffdf -->
 दिन ५ नोटबुक ०३ मा YOLO को नतिजासँगै देखाउन हिटम्यापलाई तस्बिर फाइलको रूपमा सुरक्षित गरिन्छ।
@@ -407,7 +421,8 @@ PatchCore को नतिजा होइन। मिलाएर राख्
   सामग्री देखाइँदैन।
 
 <!-- ne-cell: b8ec6f1a | after-heading -->
-#### हिटम्याप कसरी पढ्ने
+**हिटम्याप कसरी पढ्ने**
+<!-- ne-pair: How to read a heatmap -->
 
 <!-- ne-cell: b8ec6f1a -->
 रङ **देखाइने दायरा र colormap** ले तय गर्छ। यो भागका चित्र पछि-प्रशोधित मान हुनाले **0–1 को स्थिर
@@ -426,14 +441,16 @@ PatchCore को नतिजा होइन। मिलाएर राख्
 ## अभ्यास
 
 <!-- ne-cell: 09b10a38 | after-heading -->
-#### अभ्यास 1 (आधारभूत): मापन अभिलेख गर्ने
+**अभ्यास 1 (आधारभूत): मापन अभिलेख गर्ने**
+<!-- ne-pair: Exercise 1 (basic): record the metrics -->
 
 <!-- ne-cell: 09b10a38 -->
 Part 4 का चार मापन तालिकामा लेख्नुहोस्। `image_AUROC` र `pixel_AUROC` को फरक पनि एक लाइनमा
 व्याख्या गर्नुहोस्।
 
 <!-- ne-cell: 93a1ccd3 | after-heading -->
-#### अभ्यास 2 (मध्यम): सेटिङ बदलेर क्यालिब्रेसन डेटामा तुलना गर्ने
+**अभ्यास 2 (मध्यम): सेटिङ बदलेर क्यालिब्रेसन डेटामा तुलना गर्ने**
+<!-- ne-pair: Exercise 2 (intermediate): change a setting and compare on calibration -->
 
 <!-- ne-cell: 93a1ccd3 -->
 `backbone="wide_resnet50_2"` बदलेर **क्यालिब्रेसन (प्रमाणीकरण) डेटामा** मापन र लाग्ने समय नापेर
@@ -447,7 +464,8 @@ backbone प्रयोग गर्नु वैकल्पिक** हो।
 - अभिलेखमा **भाग (calibration), model (backbone) र चलाइको पहिचान** अनिवार्य लेख्नुहोस्।
 
 <!-- ne-cell: 1fd52dc9 | after-heading -->
-#### अभ्यास 3 (वैकल्पिक): सामान्य सामानको भिन्नता बढाउने
+**अभ्यास 3 (वैकल्पिक): सामान्य सामानको भिन्नता बढाउने**
+<!-- ne-pair: Exercise 3 (optional challenge): add normal variation -->
 
 <!-- ne-cell: 1fd52dc9 -->
 `assets/scripts/pvc_synth.py` प्रयोग गरेर **उज्यालोको असमानता बढाइएका सामान्य तस्बिर** 10 वटा थप

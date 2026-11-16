@@ -120,8 +120,12 @@ GPU अनिवार्य छैन। GPU wheel को संयोजन �
 
 | फाइल | सामग्री |
 |---|---|
-| `docs/pdf/Day01_explanation_ja_ne.pdf` … `Day05_…` | प्रत्येक दिनको व्याख्या (जापानी → अङ्ग्रेजी → नेपाली) |
-| `docs/pdf/Week1_explanation_ja_ne.pdf` | ५ दिनको एकै पुस्तिका |
+| `docs/pdf/Day01_explanation_ja_en_ne.pdf` … `Day05_…` | प्रत्येक दिनको व्याख्या (जापानी → अङ्ग्रेजी → नेपाली) |
+| `docs/pdf/Week1_explanation_ja_en_ne.pdf` | ५ दिनको एकै पुस्तिका |
+| `docs/pdf/Setup_ja_en_ne.pdf` | तयारी नोटबुक |
+| `docs/pdf/Installation_Guide_ja_en_ne.pdf` | स्थापना र समस्या समाधान |
+| `docs/pdf/Repository_Guide_ja_en_ne.pdf` | रिपोजिटरी र संस्करणको परिचय |
+| `docs/pdf/Course_Syllabus_ja_en_ne.pdf` | समयतालिका |
 | `docs/pdf/README.md` | बनाउने तरिका, के पर्छ, के पर्दैन, सीमा |
 
 अघिल्ला जापानी–अङ्ग्रेजी संस्करण (`*_ja_en.pdf`) पनि जस्ताको तस्तै राखिएका छन्, त्यसैले दुवै
@@ -131,9 +135,10 @@ GPU अनिवार्य छैन। GPU wheel को संयोजन �
 ```cmd
 REM PDF generation and inspection only; not needed by learners.
 ".\.venv\Scripts\python.exe" -m pip install -r requirements\pdf.txt
+".\.venv\Scripts\python.exe" -m playwright install chromium
 ".\.venv\Scripts\python.exe" assets\scripts\export_explanations_pdf.py
 ".\.venv\Scripts\python.exe" assets\scripts\export_trilingual_pdf.py
-".\.venv\Scripts\python.exe" assets\scripts\inspect_pdf_pages.py
+".\.venv\Scripts\python.exe" assets\scripts\inspect_pdf_pages.py --languages ja,ne
 ```
 
 * चलाइको log, stack trace, लामो तयारी कोड र प्रशिक्षकका जवाफ पर्दैनन्।
@@ -199,6 +204,27 @@ python assets\scripts\verify_environment.py --profile all
 
 REM Structural validation (fast).
 python assets\scripts\validate_notebooks.py
+```
+
+थप जाँच र मर्मतका आदेश तल छन्। सामान्य विद्यार्थीले संरचनात्मक जाँचपछि पाठमा जान सक्छन्।
+`--execute lightweight` र `check_widgets.py` ले नोटबुक चलाउँछन्; संरचनात्मक जाँच मात्र चाहिएको
+अवस्थामा यी नचलाउनुहोस्। `scaffold_notebooks.py` ले नोटबुक बदल्छ र मर्मतकर्ताका लागि मात्र हो।
+
+```cmd
+REM Execute the lightweight notebooks.
+python assets\scripts\validate_notebooks.py --execute lightweight
+
+REM Automated asset and dataset tests.
+python -m pytest assets\tests -v
+
+REM Check language labels without writing.
+python assets\scripts\normalize_language_labels.py --check
+
+REM Re-apply cell instruction banners (maintainers only; writes notebooks).
+python assets\scripts\scaffold_notebooks.py
+
+REM Check widget rendering.
+python assets\scripts\check_widgets.py
 ```
 
 `assets/scripts/validate_notebooks.py --execute all` मा **model download** र **सिकाइ** पर्ने हुनाले

@@ -64,7 +64,8 @@ notebooks/Day02_Python_OpenCV/Day02_03_OpenCV_Image_Processing.ipynb
 ## Part 0 तयारी
 
 <!-- ne-cell: e15c580c | after-heading -->
-#### OpenCV को रङको क्रममा ध्यान दिनुहोस्
+**OpenCV को रङको क्रममा ध्यान दिनुहोस्**
+<!-- ne-pair: Watch out for OpenCV's colour order -->
 
 <!-- ne-cell: e15c580c -->
 OpenCV ले रङ **BGR** (निलो, हरियो, रातो) क्रममा राख्छ। `cv2.imread()` ले पढेको array BGR हुन्छ।
@@ -99,7 +100,8 @@ BGR array त्यसै `plt.imshow()` मा दिँदा रातो र
 ## Part 1 तस्बिर पढ्ने र सुरक्षित गर्ने
 
 <!-- ne-cell: a2bfa0aa | after-heading -->
-#### तीन आधारभूत काम
+**तीन आधारभूत काम**
+<!-- ne-pair: The three basic operations -->
 
 <!-- ne-cell: a2bfa0aa -->
 | काम | function | फर्काउने मान |
@@ -121,7 +123,8 @@ BGR array त्यसै `plt.imshow()` मा दिँदा रातो र
 | बाटो गलत | नचल्ने अक्षर, अत्यधिक लामो बाटो |
 
 <!-- ne-cell: fcc102a2 | after-heading -->
-#### सुरक्षित गर्ने
+**सुरक्षित गर्ने**
+<!-- ne-pair: Saving -->
 
 <!-- ne-cell: fcc102a2 -->
 `cv2.imwrite` ले सुरक्षित गर्छ। सुरक्षित गर्ने फोल्डर **पहिले बनाइसक्नुपर्छ**।
@@ -137,7 +140,7 @@ BGR array त्यसै `plt.imshow()` मा दिँदा रातो र
 <!-- ne-cell: audit-teach_opencv_pixel_pipeline | after-heading -->
 ### कोड कसरी पढ्ने
 
-<!-- ne-cell: audit-teach_opencv_pixel_pipeline -->
+<!-- ne-cell: audit-teach_opencv_pixel_pipeline | after-image:../../assets/svg/teach_opencv_pixel_pipeline.svg -->
 चित्र: चमकको थ्रेसहोल्ड र क्षेत्रफलको सर्त फरक हुन्। (गणना गरिएको संश्लेषित उदाहरण र योजनाबद्ध चित्र;
 model को वास्तविक नापिएको नतिजा होइन।)
 
@@ -152,7 +155,7 @@ model को वास्तविक नापिएको नतिजा ह�
 <!-- ne-cell: be0db14f | after-heading -->
 ### मूल तस्बिर → मास्क (अग्रभाग) → कन्टुर
 
-<!-- ne-cell: be0db14f -->
+<!-- ne-cell: be0db14f | after-image:../../assets/diagrams/teach_opencv_pipeline.png -->
 चित्र: उही संश्लेषित तस्बिर प्रशोधन गरेको वास्तविक नतिजा (संश्लेषित तस्बिर, वास्तविक गणना)। प्यानल ②
 `THRESH_BINARY_INV` (T=150) को मास्क **आफैं** हो: 150 वा कम मान भएका पिक्सेल सेता (अग्रभाग), 150 भन्दा
 बढी भएका काला (पृष्ठभूमि)। प्यानल ③ ले त्यही मास्कबाट निकालेको कन्टुर मूल तस्बिरमा राखेको देखाउँछ।
@@ -195,7 +198,8 @@ model को वास्तविक नापिएको नतिजा ह�
 देखा पर्ने कुरा छुट्टाछुट्टै पढ्नुहोस्।
 
 <!-- ne-cell: fbc7ce1c | after-heading -->
-#### ग्रेस्केल बनाउने
+**ग्रेस्केल बनाउने**
+<!-- ne-pair: Converting to greyscale -->
 
 <!-- ne-cell: fbc7ce1c -->
 **यो अभ्यासजस्तै "गाढा दोषलाई चमकले भेट्ने" अवस्था** मा रङको जानकारी प्रायः प्रयोग हुँदैन। चमक मात्र
@@ -206,7 +210,8 @@ model को वास्तविक नापिएको नतिजा ह�
 नै एक च्यानल भएको ग्रेस्केल तस्बिर (वास्तविक सन्दर्भ फोटो जस्तै) त्यसै प्रयोग गर्न सकिन्छ, बदल्नु पर्दैन।
 
 <!-- ne-cell: eb10df2a | after-heading -->
-#### बाइनरीकरण (थ्रेसहोल्ड गर्ने)
+**बाइनरीकरण (थ्रेसहोल्ड गर्ने)**
+<!-- ne-pair: Thresholding -->
 
 <!-- ne-cell: eb10df2a -->
 बाइनरीकरणले **थ्रेसहोल्डसँग तुलना गरेर प्रत्येक पिक्सेललाई दुई मान (0 र 255) मा बदल्छ**। कुन पट्टि सेतो
@@ -232,7 +237,8 @@ model को वास्तविक नापिएको नतिजा ह�
 जाँच्ने काम सधैं बाँकी रहन्छ।
 
 <!-- ne-cell: fdc17f13 | after-heading -->
-#### थ्रेसहोल्ड बदल्दा के बदलिन्छ
+**थ्रेसहोल्ड बदल्दा के बदलिन्छ**
+<!-- ne-pair: What changes with the threshold -->
 
 <!-- ne-cell: fdc17f13 -->
 थ्रेसहोल्ड **मान्छेले तय गर्ने सङ्ख्या** हो। यही नै तस्बिर प्रशोधनको कठिनाई हो।
@@ -255,7 +261,7 @@ model को वास्तविक नापिएको नतिजा ह�
 <!-- ne-cell: fig-teach_threshold_sweep | after-heading -->
 ### थ्रेसहोल्ड घुमाएर गन्ने
 
-<!-- ne-cell: fig-teach_threshold_sweep -->
+<!-- ne-cell: fig-teach_threshold_sweep | after-image:../../assets/diagrams/teach_threshold_sweep.png -->
 चित्र: यो संश्लेषित तस्बिरमा थ्रेसहोल्ड बदल्दा अग्रभागका पिक्सेल सङ्ख्या र कन्टुर सङ्ख्या (नापिएका मान)।
 
 **ध्यान दिनुपर्ने कुरा**
@@ -270,7 +276,7 @@ model को वास्तविक नापिएको नतिजा ह�
 <!-- ne-cell: fig-camera | after-heading -->
 ### वास्तविक ग्रेस्केल फोटोमा प्रयास गर्ने
 
-<!-- ne-cell: fig-camera -->
+<!-- ne-cell: fig-camera | after-image:../../assets/external_samples/open_reference/camera.png -->
 फोटो: वास्तविक ग्रेस्केल तस्बिर (scikit-image `camera`, Lav Varshney, CC0 1.0)। 0–255 को एक च्यानल, यो
 तालिमका संश्लेषित तस्बिरभन्दा जटिल।
 
@@ -286,7 +292,7 @@ model को वास्तविक नापिएको नतिजा ह�
 <!-- ne-cell: fig-brick | after-heading -->
 ### बुट्टा भएको पृष्ठभूमिमा गन्ने तरिका बदलिन्छ
 
-<!-- ne-cell: fig-brick -->
+<!-- ne-cell: fig-brick | after-image:../../assets/external_samples/open_reference/brick.png -->
 फोटो: इँटाको पर्खाल (CC0Textures, scikit-image ले प्रशोधन गरेको, CC0 1.0)। बुट्टा दोहोरिने पृष्ठभूमिको
 उदाहरण। यो सामान्य बुट्टा हो, दोष होइन।
 
@@ -301,7 +307,8 @@ model को वास्तविक नापिएको नतिजा ह�
 - यो फोटोमा थ्रेसहोल्ड बढाउँदै जाँदा सेतो अग्रभागको क्षेत्रफल बढ्छ कि घट्छ?
 
 <!-- ne-cell: c342c62c | after-heading -->
-### वैकल्पिक अभ्यास: वास्तविक फोटोमा थ्रेसहोल्डको सीमा हेर्ने
+**वैकल्पिक अभ्यास: वास्तविक फोटोमा थ्रेसहोल्डको सीमा हेर्ने**
+<!-- ne-pair: Optional: the limits of one threshold on real photographs -->
 
 <!-- ne-cell: c342c62c -->
 माथिका दुई फोटो **सामान्य फोटो** हुन्, दोषको फोटो होइनन्। त्यसै पनि एउटा थ्रेसहोल्ड तय गर्दा "गाढा
@@ -344,7 +351,8 @@ widget नभए पनि तलको parameter सेलले उही प�
 ## Part 3 कन्टुर खोज्ने
 
 <!-- ne-cell: 77680506 | after-heading -->
-#### कन्टुर भनेको "सेतो भागको किनारा"
+**कन्टुर भनेको "सेतो भागको किनारा"**
+<!-- ne-pair: A contour is the boundary of a white region -->
 
 <!-- ne-cell: 77680506 -->
 `cv2.findContours` ले बाइनरी तस्बिरको **सेतो भागको किनारा (कन्टुर)** भेट्छ। फर्काउने कुरा किनारा पछ्याएर
@@ -370,7 +378,7 @@ widget नभए पनि तलको parameter सेलले उही प�
 <!-- ne-cell: fig-teach_contour_merge | after-heading -->
 ### जोडिँदा सङ्ख्या घट्छ
 
-<!-- ne-cell: fig-teach_contour_merge -->
+<!-- ne-cell: fig-teach_contour_merge | after-image:../../assets/diagrams/teach_contour_merge.png -->
 चित्र: नजिकका दुई दोष, थ्रेसहोल्ड बढाउँदा 2 क्षेत्र → 1 क्षेत्र → 18 क्षेत्र (पृष्ठभूमिको आवाज) हुने
 उदाहरण (संश्लेषित तस्बिर, वास्तविक गणना)।
 
@@ -388,7 +396,8 @@ widget नभए पनि तलको parameter सेलले उही प�
 ## Part 4 दुई बिन्दुबीचको दूरी
 
 <!-- ne-cell: 3340cb70 | after-heading -->
-#### पहिले चित्रमा सोचौं
+**पहिले चित्रमा सोचौं**
+<!-- ne-pair: Think with a picture first -->
 
 बिन्दु A र B बीचको दूरी निकाल्नु छ भनौं। तस्बिरमा A बाट B सम्म सिधा नाप्न गाह्रो हुन्छ।
 
@@ -403,7 +412,7 @@ widget नभए पनि तलको parameter सेलले उही प�
 <!-- ne-cell: fig-teach_distance_345 | after-heading -->
 ### दुई बिन्दुको दूरी कर्ण हो
 
-<!-- ne-cell: fig-teach_distance_345 -->
+<!-- ne-cell: fig-teach_distance_345 | after-image:../../assets/diagrams/teach_distance_345.png -->
 चित्र: dx=300, dy=400, दूरी=500 px भएको समकोण त्रिभुज (सबै गणना गरिएका मान)।
 
 **ध्यान दिनुपर्ने कुरा**
@@ -416,7 +425,8 @@ widget नभए पनि तलको parameter सेलले उही प�
 - dx = 6, dy = 8 हुँदा दूरी कति px हुन्छ?
 
 <!-- ne-cell: 1c601d07 | after-heading -->
-#### सूत्रको अर्थ
+**सूत्रको अर्थ**
+<!-- ne-pair: What the formula means -->
 
 <!-- ne-cell: 1c601d07 -->
 सूत्र एक लाइनको मात्र हो: `दूरी = √( dx² + dy² )`।
@@ -434,7 +444,8 @@ Python मा `** 0.5` वा `math.sqrt` प्रयोग गर्नुह�
 ### नतिजाको उदाहरण
 
 <!-- ne-cell: 6fa3f5d0 | after-heading -->
-#### 3-4-5 को जाँच
+**3-4-5 को जाँच**
+<!-- ne-pair: Verifying 3-4-5 -->
 
 <!-- ne-cell: 6fa3f5d0 -->
 `(0,0)` र `(3,4)` बीचको दूरी **5** हो: `3² + 4² = 9 + 16 = 25`, `√25 = 5`। गणना मिल्यो।
@@ -445,7 +456,7 @@ Python मा `** 0.5` वा `math.sqrt` प्रयोग गर्नुह�
 <!-- ne-cell: b78a5571 | after-heading -->
 ### पिक्सेललाई मिलिमिटर बनाउने
 
-<!-- ne-cell: b78a5571 -->
+<!-- ne-cell: b78a5571 | after-image:../../assets/diagrams/teach_pixel_to_mm.png -->
 चित्र: सन्दर्भ लम्बाइ 100 px = 50.0 mm बाट गुणक 2.00 px/mm निकालेर 200 px चौडाइलाई 100.0 mm मा बदलेको
 उदाहरण। किनाराको स्थानमा मानिएको अनिश्चितता (±0.5 px ÷ 2.00 px/mm = ±0.25 mm) पनि त्यही चित्रमा छ।
 
@@ -465,7 +476,8 @@ Python मा `** 0.5` वा `math.sqrt` प्रयोग गर्नुह�
   त्रुटि mm मा ठुलो हुन्छ कि सानो?
 
 <!-- ne-cell: b877b171 | after-heading -->
-#### क्यालिब्रेसन किन चाहिन्छ
+**क्यालिब्रेसन किन चाहिन्छ**
+<!-- ne-pair: Why calibration is necessary -->
 
 <!-- ne-cell: b877b171 -->
 तस्बिरको दूरी **पिक्सेल** मा नापिन्छ, तर कार्यस्थलमा **मिलिमिटर** चाहिन्छ।
@@ -480,7 +492,8 @@ Python मा `** 0.5` वा `math.sqrt` प्रयोग गर्नुह�
 `mm_per_px = सन्दर्भको वास्तविक लम्बाइ (mm) ÷ सन्दर्भको पिक्सेल लम्बाइ`।
 
 <!-- ne-cell: deffde3a | after-heading -->
-#### क्यालिब्रेसनको सोचाइ देखाउने चित्र
+**क्यालिब्रेसनको सोचाइ देखाउने चित्र**
+<!-- ne-pair: The idea of calibration -->
 
 <!-- ne-cell: deffde3a -->
 तलको चित्रले **उही 100 mm सन्दर्भ** क्यामेराको दूरीअनुसार कति पिक्सेलमा देखिन्छ देखाउँछ।
@@ -500,7 +513,8 @@ Python मा `** 0.5` वा `math.sqrt` प्रयोग गर्नुह�
 क्यालिब्रेसनले बदल्ने कुरा "एक px कति mm हो" भन्ने मात्र हो। कुन काम गरियो भनेर सधैं छुट्याउनुहोस्।
 
 <!-- ne-cell: e3c33e34 | after-heading -->
-#### नापेर हेर्ने
+**नापेर हेर्ने**
+<!-- ne-pair: Measure something -->
 
 <!-- ne-cell: e3c33e34 -->
 क्यालिब्रेसन मान प्रयोग गरेर दुई बिन्दुबीचको दूरी mm मा निकालिन्छ: `दूरी(mm) = दूरी(px) × mm_per_px`।
@@ -529,7 +543,8 @@ Python मा `** 0.5` वा `math.sqrt` प्रयोग गर्नुह�
 किनाराको स्थान अनुमान (subpixel) र लेन्स विकृतिले त्रुटि निम्त्याउँछन्।
 
 <!-- ne-cell: 87c3a290 | after-heading -->
-#### एउटै गुणक प्रयोग गर्न मिल्ने सर्त
+**एउटै गुणक प्रयोग गर्न मिल्ने सर्त**
+<!-- ne-pair: When one scale factor is valid -->
 
 <!-- ne-cell: 87c3a290 -->
 "एउटै px/mm ले पूरै नाप्ने" काम यी सर्त पूरा भए मात्र मिल्छ।
@@ -577,7 +592,7 @@ Python मा `** 0.5` वा `math.sqrt` प्रयोग गर्नुह�
 <!-- ne-cell: audit-teach_calibration_same_plane | after-heading -->
 ### कोड कसरी पढ्ने
 
-<!-- ne-cell: audit-teach_calibration_same_plane -->
+<!-- ne-cell: audit-teach_calibration_same_plane | after-image:../../assets/svg/teach_calibration_same_plane.svg -->
 चित्र: सन्दर्भ रेखा र लक्ष्य एउटै तस्बिर, एउटै समतलमा छन्। (गणना गरिएको संश्लेषित उदाहरण र योजनाबद्ध चित्र;
 model को वास्तविक नापिएको नतिजा होइन।)
 
@@ -590,7 +605,8 @@ model को वास्तविक नापिएको नतिजा ह�
 गुणक दोब्बर मानियो भने उही px² को mm² कति गुणा हुन्छ?
 
 <!-- ne-cell: 2e70399c | after-heading -->
-#### अभ्यास 1 (आधारभूत): एउटै तस्बिरको कन्टुर क्षेत्रफल mm² मा बदल्ने
+**अभ्यास 1 (आधारभूत): एउटै तस्बिरको कन्टुर क्षेत्रफल mm² मा बदल्ने**
+<!-- ne-pair: Exercise 1 (basic): convert areas from the same calibrated image -->
 
 <!-- ne-cell: 2e70399c -->
 तलको सेलमा Part 3 को `kept` होइन, माथिको क्यालिब्रेसन भएको तस्बिरको `calibrated_contours` प्रयोग हुन्छ।
@@ -602,14 +618,16 @@ Part 3 को `defect_multi.png` मा अर्को तस्बिरबा
 **सकिएको मानिने अवस्था:** दुवै कन्टुरको क्षेत्रफल px² र mm² दुवैमा देखाइएको छ।
 
 <!-- ne-cell: 73d9d23e | after-heading -->
-#### अभ्यास 2 (मध्यम): थ्रेसहोल्ड बदलेर कन्टुर सङ्ख्या तुलना गर्ने
+**अभ्यास 2 (मध्यम): थ्रेसहोल्ड बदलेर कन्टुर सङ्ख्या तुलना गर्ने**
+<!-- ne-pair: Exercise 2 (intermediate): compare contour counts for several thresholds -->
 
 <!-- ne-cell: 73d9d23e -->
 थ्रेसहोल्ड 100 / 150 / 180 / 200 बदलेर **भेटिएका कन्टुरको सङ्ख्या** र **सबैभन्दा ठुलो कन्टुरको क्षेत्रफल**
 तालिकामा राख्नुहोस्। कुन मानले "दोष मात्र" समात्छ? कारण पनि लेख्नुहोस्।
 
 <!-- ne-cell: e7f5ac65 | after-heading -->
-#### अभ्यास 3 (वैकल्पिक): नापको त्रुटिबारे सोच्ने
+**अभ्यास 3 (वैकल्पिक): नापको त्रुटिबारे सोच्ने**
+<!-- ne-pair: Exercise 3 (optional challenge): discuss measurement error -->
 
 <!-- ne-cell: e7f5ac65 -->
 0.3 mm को दोष 1 px/mm गुणकमा नाप्ने मानौं।

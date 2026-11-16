@@ -67,7 +67,8 @@ function ले इनपुट लिन्छ र `return` ले नतिज
 ## Part 1 सर्त अनुसार बाँड्ने
 
 <!-- ne-cell: 0c826365 | after-heading -->
-#### `if` ले "यदि यस्तो भए" लेख्ने
+**`if` ले "यदि यस्तो भए" लेख्ने**
+<!-- ne-pair: Writing 'if' with `if` -->
 
 <!-- ne-cell: 0c826365 -->
 `if` को अर्थ हो "यदि सर्त पूरा भयो भने यो काम गर्ने"।
@@ -92,7 +93,7 @@ function ले इनपुट लिन्छ र `return` ले नतिज
 <!-- ne-cell: fig-teach_tolerance_boundary | after-heading -->
 ### सीमा "भित्र" पर्छ कि पर्दैन
 
-<!-- ne-cell: fig-teach_tolerance_boundary -->
+<!-- ne-cell: fig-teach_tolerance_boundary | after-image:../../assets/diagrams/teach_tolerance_boundary.png -->
 चित्र: 12.0 ± 0.2 mm को सीमा र साँच्चै तुलना गरिएका 5 मानको निर्णय। 12.200 mm सीमा भित्र पर्छ, त्यसैले
 OK हो।
 
@@ -109,7 +110,7 @@ OK हो।
 <!-- ne-cell: fig-teach_condition_branch | after-heading -->
 ### सर्तले काम कसरी बाँड्छ
 
-<!-- ne-cell: fig-teach_condition_branch -->
+<!-- ne-cell: fig-teach_condition_branch | after-image:../../assets/diagrams/teach_condition_branch.png -->
 चित्र: नापिएको मान 12.14 mm लाई सर्त 11.8 ≤ x ≤ 12.2 मा पठाउँदा हुने क्रम, र 4 मान साँच्चै हालेर हेरेको
 नतिजा (योजनाबद्ध चित्र)।
 
@@ -138,7 +139,7 @@ OK हो।
 <!-- ne-cell: audit-teach_if_live_trace | after-heading -->
 ### कोड कसरी पढ्ने
 
-<!-- ne-cell: audit-teach_if_live_trace -->
+<!-- ne-cell: audit-teach_if_live_trace | after-image:../../assets/svg/teach_if_live_trace.svg -->
 चित्र: देखाउनका लागि गरिएको राउन्डिङलाई निर्णयको नियम बनाइँदैन। (गणना गरिएको संश्लेषित उदाहरण र
 योजनाबद्ध चित्र; model को वास्तविक नापिएको नतिजा होइन।)
 
@@ -161,7 +162,8 @@ OK हो।
 ### नतिजाको उदाहरण
 
 <!-- ne-cell: 9ca817a3 | after-heading -->
-#### `elif` ले तीन वा बढी भागमा बाँड्ने
+**`elif` ले तीन वा बढी भागमा बाँड्ने**
+<!-- ne-pair: Splitting into three or more with `elif` -->
 
 <!-- ne-cell: 9ca817a3 -->
 तीन वा बढी भाग चाहिए `elif` (else if) प्रयोग गर्नुहोस्। सर्त **माथिबाट क्रमैसँग** जाँचिन्छ र
@@ -190,7 +192,7 @@ A/B/C/D भनेको कति टाढा गएको भन्ने व�
 <!-- ne-cell: 7584722b | after-heading -->
 ### 5 वटा नाप क्रमैसँग जाँच्ने
 
-<!-- ne-cell: 7584722b -->
+<!-- ne-cell: 7584722b | after-image:../../assets/diagrams/teach_loop_trace.png -->
 चित्र: यही नोटबुकका 5 नाप (100.0, 100.3, 99.7, 100.6, 99.4) लाई उही मापदण्ड (100.0 mm ± 0.5 mm) मा
 क्रमैसँग जाँचेको अभिलेख। NG i=3 र i=4 हुन्।
 
@@ -208,7 +210,8 @@ Part 2 को पछिल्लो stepper ले **अर्को डेट�
 - ठीक तलको कोड चलाउँदा चित्रकै 5 लाइन आउँछ? पहिले अनुमान गर्नुहोस्।
 
 <!-- ne-cell: 7d26f19c | after-heading -->
-#### सूची भनेको मानहरूको शृङ्खला
+**सूची भनेको मानहरूको शृङ्खला**
+<!-- ne-pair: A list is a sequence of values -->
 
 <!-- ne-cell: 7d26f19c -->
 सूची (list) ले धेरै मान एउटै ठाउँमा राख्छ। `measurements = [100.0, 100.3, 99.7]` जस्तो लेखिन्छ।
@@ -229,7 +232,8 @@ Part 2 को पछिल्लो stepper ले **अर्को डेट�
 ### नतिजाको उदाहरण
 
 <!-- ne-cell: a0529062 | after-heading -->
-#### `for` ले सबै तत्त्वमा एउटै काम गर्ने
+**`for` ले सबै तत्त्वमा एउटै काम गर्ने**
+<!-- ne-pair: Processing every element with `for` -->
 
 <!-- ne-cell: a0529062 -->
 `for` को अर्थ हो "सूचीभित्रका तत्त्व एक-एक गरेर निकालेर उही काम गर्ने"।
@@ -300,7 +304,7 @@ widget चल्न नसके तलको parameter सेलले उह�
 <!-- ne-cell: c0809d54 | after-heading -->
 ### function भनेको "इनपुट → नियम → नतिजा"
 
-<!-- ne-cell: c0809d54 -->
+<!-- ne-cell: c0809d54 | after-image:../../assets/diagrams/teach_function_io.png -->
 चित्र: इनपुट (नापिएको मान, आधार मान, सह्यता) लिएर तोकिएको क्रममा गणना गरी एउटा मान फर्काउने बाकस।
 नाप 12.55, आधार 12.5, सह्यता 0.1 भए `|12.55 - 12.5| = 0.05 <= 0.10` हुनाले **OK**; 12.92 भए
 `0.42 > 0.10` हुनाले **NG** (सबै गणना गरिएका मान)।
@@ -330,7 +334,8 @@ function बनाएपछि एउटै नियम धेरै पटक 
 चलाउन `judge_width(12.55, nominal_mm=12.5, tolerance_mm=0.1)` जस्तै **आधार मान र सह्यता पनि** पठाउनुहोस्।
 
 <!-- ne-cell: abe05345 | after-heading -->
-#### function भनेको "नाम दिइएको काम"
+**function भनेको "नाम दिइएको काम"**
+<!-- ne-pair: A function is a named block of processing -->
 
 <!-- ne-cell: abe05345 -->
 function ले बारम्बार प्रयोग हुने कामलाई नाम दिन्छ।
@@ -355,7 +360,7 @@ function ले बारम्बार प्रयोग हुने का�
 <!-- ne-cell: fig-teach_definition_vs_call | after-heading -->
 ### परिभाषा र बोलाउने काम फरक
 
-<!-- ne-cell: fig-teach_definition_vs_call -->
+<!-- ne-cell: fig-teach_definition_vs_call | after-image:../../assets/diagrams/teach_definition_vs_call.png -->
 चित्र: `def` ले नियमको नाम मात्र राख्छ, बोलाएपछि मात्र भित्रको काम चल्छ (निर्णय गणना गरिएका मान)।
 
 **ध्यान दिनुपर्ने कुरा**
@@ -400,7 +405,8 @@ function परिभाषित गर्दैमा केही चल्�
 सानो प्रयोग: `"not-a-number"` को सट्टा `"100.6"` राख्दा इनपुट मान्य हुन्छ तर सामान NG पनि हुन सक्छ।
 
 <!-- ne-cell: 77f645e0 | after-heading -->
-#### `try` / `except` ले असामान्य अवस्था सँभाल्ने
+**`try` / `except` ले असामान्य अवस्था सँभाल्ने**
+<!-- ne-pair: Handling abnormal input with `try` / `except` -->
 
 <!-- ne-cell: 77f645e0 -->
 कार्यस्थलमा सधैं सही मान आउँदैन। खाली ठाउँ, अक्षर, `None`, अत्यधिक ठुलो मान आउन सक्छ।
@@ -419,7 +425,8 @@ function परिभाषित गर्दैमा केही चल्�
 सिकाइन्छ।
 
 <!-- ne-cell: 5eff1e70 | after-heading -->
-#### इनपुट जाँच भएको function
+**इनपुट जाँच भएको function**
+<!-- ne-pair: A function with validation -->
 
 <!-- ne-cell: 5eff1e70 -->
 व्यवहारमा function को प्रवेशद्वारमै मान जाँचिन्छ। यसलाई **इनपुट जाँच (validation)** भनिन्छ।
@@ -442,7 +449,8 @@ function परिभाषित गर्दैमा केही चल्�
 ## Part 5 साधारण परीक्षण
 
 <!-- ne-cell: 8f3eb327 | after-heading -->
-#### `assert` ले स्वतः जाँच्ने
+**`assert` ले स्वतः जाँच्ने**
+<!-- ne-pair: Automatic checks with `assert` -->
 
 <!-- ne-cell: 8f3eb327 -->
 `assert` ले "यो सर्त पूरा हुनुपर्छ" भनेर घोषणा गर्छ। पूरा भए केही हुँदैन, नभए त्रुटि आउँछ।
@@ -458,7 +466,8 @@ assert round(100.3 - 100.0, 6) <= 0.5
 ### नतिजाको उदाहरण
 
 <!-- ne-cell: 9d19737f | after-heading -->
-#### परीक्षण असफल हुँदा के हुन्छ
+**परीक्षण असफल हुँदा के हुन्छ**
+<!-- ne-pair: What a failing test looks like -->
 
 <!-- ne-cell: 9d19737f -->
 तलको सेलमा **जानाजान गलत अपेक्षा** लेखिएको छ। `AssertionError` आउनेछ। त्यो नै सही व्यवहार हो।
@@ -467,7 +476,8 @@ assert round(100.3 - 100.0, 6) <= 0.5
 ## Part 6 नाप जाँच्ने कार्यक्रम पूरा गर्ने
 
 <!-- ne-cell: 172094ac | after-heading -->
-#### आवश्यकता (मापदण्ड)
+**आवश्यकता (मापदण्ड)**
+<!-- ne-pair: Requirements -->
 
 <!-- ne-cell: 172094ac -->
 तलको मापदण्डअनुसार कार्यक्रम बनाउनुहोस्।
@@ -519,7 +529,8 @@ assert round(100.3 - 100.0, 6) <= 0.5
 **सकिएको मानिने अवस्था:** कुन दुई NG हुन् र किन, भनेर बताउन सक्ने (2.11 र 2.20)।
 
 <!-- ne-cell: fae217f5 | after-heading -->
-#### अभ्यास 2 (मध्यम): धेरै मापदण्ड सँभाल्ने
+**अभ्यास 2 (मध्यम): धेरै मापदण्ड सँभाल्ने**
+<!-- ne-pair: Exercise 2 (intermediate): support several specifications -->
 
 <!-- ne-cell: fae217f5 -->
 चौडाइ, मोटाइ र लम्बाइ — तीन मापदण्ड सँगै जाँच्न सक्ने बनाउनुहोस्। मापदण्डलाई dictionary (`dict`) मा

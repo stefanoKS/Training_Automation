@@ -72,7 +72,7 @@ epoch भनेको डेटा एक फेर घुम्नु हो, b
 इनपुट 64 प्रशिक्षण तस्बिर र batch=8 हो। नतिजा प्रत्येक batch को तस्बिर नम्बर हो। चलाउनुअघि एक फेरमा
 कति batch हुन्छन् अनुमान गर्नुहोस्। epoch भनेको सबै तस्बिर एक फेर घुम्नु हो।
 
-<!-- ne-cell: clarity-batch-static -->
+<!-- ne-cell: clarity-batch-static | after-image:../../assets/svg/teach_batch_first_pass.svg -->
 **ध्यान दिनुपर्ने कुरा**
 
 यो गणना गरिएको योजनाबद्ध चित्र हो। हरेक लाइन एक batch हो र आठ लाइनले एक epoch बन्छ। weight कति पटक
@@ -89,7 +89,7 @@ batch 4 बनाउँदा एक फेरमा कति हुन्छ �
 <!-- ne-cell: 16c0469f | after-heading -->
 ### दोस्रो चरण (पूरक): gradient जम्मा र अपडेट
 
-<!-- ne-cell: 16c0469f -->
+<!-- ne-cell: 16c0469f | after-image:../../assets/diagrams/teach_epoch_batch.png -->
 चित्र: 8-8 तस्बिर पढेर नाममात्र 8 batch को gradient जम्मा गरेर अपडेट गर्ने उदाहरण (`batch=8`, `nbs=64`)।
 warmup को बेला जम्मा हुने सङ्ख्या बदलिन सक्छ।
 
@@ -114,7 +114,8 @@ loss ले "अहिले कति गल्ती भइरहेको छ
   बन्छ भन्ने कुरा केले तय गर्छ?
 
 <!-- ne-cell: 34a994aa | after-heading -->
-#### प्रशिक्षणको दोहोरिने क्रम
+**प्रशिक्षणको दोहोरिने क्रम**
+<!-- ne-pair: The training loop -->
 
 <!-- ne-cell: 34a994aa -->
 प्रशिक्षण चार चरणको **दोहोरिने** काम हो।
@@ -133,7 +134,7 @@ loss घट्दै छ भने प्रशिक्षण अगाडि �
 <!-- ne-cell: fig-teach_training_update | after-heading -->
 ### एउटा batch मा के हुन्छ
 
-<!-- ne-cell: fig-teach_training_update -->
+<!-- ne-cell: fig-teach_training_update | after-image:../../assets/diagrams/teach_training_update.png -->
 चित्र: अनुमान → loss → gradient → अपडेट को एक चक्र, र batch, step, epoch गन्ने तरिका (weight को
 परिवर्तन उदाहरणका लागि)।
 
@@ -148,7 +149,8 @@ batch (डेटा एकै पटक पढ्ने एकाइ) र weight
 - 64 तस्बिर र batch=8 मा कति पटक loader घुम्छ, र वास्तविक अपडेट कुन सेटिङले तय गर्छ?
 
 <!-- ne-cell: d7c70ee3 | after-heading -->
-#### शब्दहरू एकै ठाउँमा
+**शब्दहरू एकै ठाउँमा**
+<!-- ne-pair: The terms, all at once -->
 
 <!-- ne-cell: d7c70ee3 -->
 | शब्द | अर्थ | यो तालिमको मान |
@@ -166,7 +168,8 @@ batch size ठुलो बनाउँदा एक पटकको काम �
 नपुगे सानो बनाउनुहोस् र स्थिर छ कि छैन **प्रमाणीकरणको मापन** ले जाँच्नुहोस्।
 
 <!-- ne-cell: baf19a2b | after-heading -->
-#### fine-tuning (थप तालिम)
+**fine-tuning (थप तालिम)**
+<!-- ne-pair: Fine-tuning -->
 
 <!-- ne-cell: baf19a2b -->
 सुरुदेखि प्रशिक्षण नगरी **COCO मा तालिम भएको `yolo26n.pt` बाट सुरु गरिन्छ**। यसलाई **fine-tuning**
@@ -183,7 +186,8 @@ batch size ठुलो बनाउँदा एक पटकको काम �
 ## Part 2 प्रशिक्षणको तयारी
 
 <!-- ne-cell: c2cd53b9 | after-heading -->
-#### `data.yaml` लाई अहिलेको स्थानअनुसार मिलाउने
+**`data.yaml` लाई अहिलेको स्थानअनुसार मिलाउने**
+<!-- ne-pair: Point `data.yaml` at the current location -->
 
 <!-- ne-cell: c2cd53b9 -->
 `data.yaml` को `path` डेटासेट बनाउँदाको पूरा बाटो हो। फोल्डर सारिएको भए **अहिलेको स्थानमा फेरि लेख्न**
@@ -191,7 +195,8 @@ batch size ठुलो बनाउँदा एक पटकको काम �
 जस्ताको तस्तै राख्छ।
 
 <!-- ne-cell: a7af3b66 | after-heading -->
-#### तस्बिर र लेबलको जोडी अन्तिम पटक जाँच्ने
+**तस्बिर र लेबलको जोडी अन्तिम पटक जाँच्ने**
+<!-- ne-pair: Final check that images and labels pair up -->
 
 <!-- ne-cell: a7af3b66 -->
 प्रशिक्षण सुरु गर्नुअघि **तस्बिर र लेबल एक-एक मिलेको छ** जाँच्नुहोस्। यहाँ गल्ती भयो भने प्रशिक्षण
@@ -201,7 +206,8 @@ batch size ठुलो बनाउँदा एक पटकको काम �
 ## Part 3 प्रशिक्षण चलाउने
 
 <!-- ne-cell: 3261727b | after-heading -->
-#### यो सेलको प्रशिक्षण सेटिङ
+**यो सेलको प्रशिक्षण सेटिङ**
+<!-- ne-pair: The configuration in this cell -->
 
 <!-- ne-cell: 3261727b -->
 CPU मा पनि व्यावहारिक समयमा सकिने **सानो सेटिङ** राखिएको छ।
@@ -232,7 +238,8 @@ CPU मा पनि व्यावहारिक समयमा सकिन
 प्रयोग तुलना गर्न कुन सुरक्षित फाइलहरू चाहिन्छन्?
 
 <!-- ne-cell: b271f05f | after-heading -->
-#### चलाउने स्विच
+**चलाउने स्विच**
+<!-- ne-pair: The run switch -->
 
 <!-- ne-cell: b271f05f -->
 तलको सेल चलाउँदा **प्रशिक्षण सुरु हुन्छ** (लाग्ने समय वातावरणअनुसार फरक पर्छ)। नचलाउन चाहे
@@ -243,7 +250,7 @@ CPU मा पनि व्यावहारिक समयमा सकिन
 <!-- ne-cell: audit-teach_epoch_batch_step | after-heading -->
 ### कोड कसरी पढ्ने
 
-<!-- ne-cell: audit-teach_epoch_batch_step -->
+<!-- ne-cell: audit-teach_epoch_batch_step | after-image:../../assets/svg/teach_epoch_batch_step.svg -->
 चित्र: batch सङ्ख्या र अपडेट सङ्ख्या सधैं उही हुँदैनन्। (गणना गरिएको संश्लेषित उदाहरण र योजनाबद्ध चित्र;
 model को वास्तविक नापिएको नतिजा होइन।)
 
@@ -256,7 +263,8 @@ batch सङ्ख्या र अपडेट सङ्ख्या सधै�
 64 तस्बिरमा batch=4 बनाउँदा एक epoch मा कति batch हुन्छन्?
 
 <!-- ne-cell: 388c5d1c | after-heading -->
-#### प्रशिक्षणका बेला स्क्रिन कसरी पढ्ने
+**प्रशिक्षणका बेला स्क्रिन कसरी पढ्ने**
+<!-- ne-pair: How to read the training output -->
 
 <!-- ne-cell: 388c5d1c -->
 `verbose=True` बनाउँदा प्रशिक्षणका बेला loss का लाइन देखिन्छन् (यो तालिममा शान्त राख्न `False` छ)।
@@ -295,7 +303,7 @@ loss घट्दै गयो भने प्रशिक्षण अगा�
 <!-- ne-cell: c0302cd9 | after-heading -->
 ### प्रशिक्षण loss र प्रमाणीकरण loss छुट्टाछुट्टै पढ्ने
 
-<!-- ne-cell: c0302cd9 -->
+<!-- ne-cell: c0302cd9 | after-image:../../assets/diagrams/teach_train_val_curves.png -->
 चित्र: वक्रको **आकारको उदाहरण** मात्र हो। तपाईंको प्रशिक्षणको नतिजा होइन।
 
 **ध्यान दिनुपर्ने कुरा**
@@ -316,7 +324,7 @@ loss घट्दै गयो भने प्रशिक्षण अगा�
 <!-- ne-cell: fig-ref_train_val_curves | after-heading -->
 ### प्रशिक्षण लगलाई दुई लाइनमा पढ्ने
 
-<!-- ne-cell: fig-ref_train_val_curves -->
+<!-- ne-cell: fig-ref_train_val_curves | after-image:../../assets/reference_outputs/ref_train_val_curves.png -->
 चित्र: यो तालिममा साँच्चै गरिएको छोटो प्रशिक्षण (15 epoch, CPU) को अभिलेख। बायाँ प्रशिक्षण र प्रमाणीकरणको
 cls loss, दायाँ mAP50 र precision। सुरक्षित गरिएको प्रशिक्षण लग नै हो।
 
@@ -331,7 +339,8 @@ cls loss, दायाँ mAP50 र precision। सुरक्षित गर
 - अन्तिम 3 epoch मा mAP50 बढ्दै छ कि स्थिर छ?
 
 <!-- ne-cell: 2a9855f8 | after-heading -->
-#### चार कुरा सुरक्षित गर्ने
+**चार कुरा सुरक्षित गर्ने**
+<!-- ne-pair: Save four things -->
 
 <!-- ne-cell: 2a9855f8 -->
 प्रशिक्षण सकिएपछि Ultralytics ले नतिजा फोल्डरमा धेरै फाइल बनाउँछ। बुझाउनुपर्ने कामका लागि यी चार
@@ -365,7 +374,8 @@ cls loss, दायाँ mAP50 र precision। सुरक्षित गर
 seed 2026, CPU)। सूक्ष्म समय र फाइल आकार वातावरणअनुसार फरक पर्छ, तर चार फाइल बनेको कुरा जाँच्नुहोस्।
 
 <!-- ne-cell: 845f2d52 | after-heading -->
-#### प्रशिक्षण सफल भयो भन्न मिल्छ?
+**प्रशिक्षण सफल भयो भन्न मिल्छ?**
+<!-- ne-pair: Can we call this training successful? -->
 
 <!-- ne-cell: 845f2d52 -->
 loss घट्नु मात्र पुग्दैन। **यो चरणमा क्षमता अझै जाँचिएको छैन।**
@@ -384,7 +394,8 @@ loss स्थिर भयो भने पनि त्यसैले ओभ�
 ## अभ्यास
 
 <!-- ne-cell: 4febd099 | after-heading -->
-#### अभ्यास 1 (आधारभूत): 5 epoch मा प्रशिक्षण चलाउने
+**अभ्यास 1 (आधारभूत): 5 epoch मा प्रशिक्षण चलाउने**
+<!-- ne-pair: Exercise 1 (basic): train for 5 epochs -->
 
 <!-- ne-cell: 4febd099 -->
 `EPOCHS` 5 बनाएर प्रशिक्षण चलाउनुहोस् र `box_loss` को पहिलो र अन्तिम मान अभिलेख गर्नुहोस्। साथै
@@ -400,7 +411,8 @@ loss स्थिर भयो भने पनि त्यसैले ओभ�
 - loss नघटे वा स्थिर रहे पनि त्यसैले असफल भन्न मिल्दैन
 
 <!-- ne-cell: 8273b533 | after-heading -->
-#### अभ्यास 2 (मध्यम): `imgsz` बदलेर तुलना गर्ने
+**अभ्यास 2 (मध्यम): `imgsz` बदलेर तुलना गर्ने**
+<!-- ne-pair: Exercise 2 (intermediate): compare `imgsz` -->
 
 <!-- ne-cell: 8273b533 -->
 `IMGSZ` 160 / 320 मा प्रशिक्षण गरेर **प्रशिक्षणको समय** र **उही प्रमाणीकरण मापन**
@@ -411,7 +423,8 @@ loss स्थिर भयो भने पनि त्यसैले ओभ�
 - पूरा भएको मापन: दुई पटकको समय र प्रमाणीकरण मापन अभिलेख भएका छन् र सन्तुलन (trade-off) व्याख्या भएको छ
 
 <!-- ne-cell: 75cf3328 | after-heading -->
-#### अभ्यास 3 (वैकल्पिक): प्रशिक्षण किन अगाडि नबढ्ने सोच्ने
+**अभ्यास 3 (वैकल्पिक): प्रशिक्षण किन अगाडि नबढ्ने सोच्ने**
+<!-- ne-pair: Exercise 3 (optional challenge): why training might not progress -->
 
 <!-- ne-cell: 75cf3328 -->
 loss नघट्ने वा NaN हुने चार कारण भन्नुहोस् र प्रत्येकमा "कसरी जाँच्ने" लेख्नुहोस्। **अनिवार्य होइन।**

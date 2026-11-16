@@ -103,14 +103,15 @@ notebooks, the documents and the PDFs stay consistent.
 
 ## Variants left for the native review
 
-Two orthographic variants remain in the delivered catalogs. Both are valid Nepali; they are listed
-here instead of being silently rewritten, so the reviewer can pick one and the applier can normalise
+Two terminology alternatives remain in the delivered catalogs. Their idiomatic suitability is
+pending native Nepali review; no equivalence or preference is assumed here. They are listed
+instead of being silently rewritten, so the reviewer can pick one and the applier can normalise
 every occurrence in a single pass afterwards.
 
-| approved in this glossary | occurrences | variant found | occurrences |
-| --- | --- | --- | --- |
-| ``निर्देशाङ्क`` (coordinate) | 30 | ``निर्देशांक`` | 5 |
-| ``सह्यता`` (tolerance) | 15 | ``सहनशीलता`` | 1 |
+| glossary form | alternative for review |
+| --- | --- |
+| ``निर्देशाङ्क`` (coordinate) | ``निर्देशांक`` |
+| ``सह्यता`` (tolerance) | ``सहनशीलता`` |
 
 ``छुट्नु`` (the verb, "to be missed") and ``छुट्ने`` (its participle, used in tables and headings) are
 both intended and both stay: a heading needs the participle.

@@ -65,7 +65,8 @@ variable भनेको मानको नाम हो। kernel भनेक
 त्रुटि र नसकिएका अभ्यासका लागि लेखिएको निर्देशन पछ्याउनुहोस्।
 
 <!-- ne-cell: 79328757 | after-heading -->
-#### यो नोटबुक कसरी प्रयोग गर्ने
+**यो नोटबुक कसरी प्रयोग गर्ने**
+<!-- ne-pair: How to use this notebook -->
 
 <!-- ne-cell: 79328757 -->
 यो नोटबुक **माथिबाट क्रमैसँग** चलाउनुहोस्। बीचको सेल छोड्यो भने पछिका सेल चल्दैनन्।
@@ -86,7 +87,8 @@ variable भनेको मानको नाम हो। kernel भनेक
 | `In [7]:` | चलिसक्यो (यो kernel मा सातौं पटक चलेको) |
 
 <!-- ne-cell: fb740ebf | after-heading -->
-#### पहिले जान्नुपर्ने कुरा: आदेश र Python कोड फरक हुन्
+**पहिले जान्नुपर्ने कुरा: आदेश र Python कोड फरक हुन्**
+<!-- ne-pair: First, know the difference: commands and Python code are not the same -->
 
 <!-- ne-cell: fb740ebf -->
 अबदेखि २ किसिमका "निर्देश" आउनेछन्। **मिसाए अनिवार्य रूपमा असफल हुन्छ।**
@@ -117,7 +119,7 @@ print("こんにちは")
 <!-- ne-cell: f98449a1 | after-heading -->
 ### स्क्रिनका भाग र तिनका नाम
 
-<!-- ne-cell: f98449a1 -->
+<!-- ne-cell: f98449a1 | after-image:../../assets/diagrams/teach_setup_jupyter_ui.png -->
 चित्र: notebook, सेल, kernel र output को स्थान-सम्बन्ध (योजनाबद्ध। वास्तविक स्क्रिनको फोटो होइन)।
 
 **ध्यान दिनुपर्ने कुरा**
@@ -133,7 +135,7 @@ print("こんにちは")
 <!-- ne-cell: fig-teach_setup_workflow | after-heading -->
 ### प्रक्रियाको समग्र चित्र
 
-<!-- ne-cell: fig-teach_setup_workflow -->
+<!-- ne-cell: fig-teach_setup_workflow | after-image:../../assets/diagrams/teach_setup_workflow.png -->
 चित्र: नोटबुक खोलेपछि त्रुटिबाट फर्किनेसम्मको प्रवाह (योजनाबद्ध)। ① सेल छान्ने → ② kernel छान्ने →
 ③ चलाउने → ④ output हेर्ने। त्रुटि आएको बेला मात्र ⑤ को पुनःस्थापनामा जान्छ।
 
@@ -147,7 +149,8 @@ output नपढी अर्को सेलमा नजानुहोस्�
 - ③ को चलाइमा त्रुटि आयो भने ④ र ⑤ मध्ये कता जानुहुन्छ?
 
 <!-- ne-cell: 198db0a3 | after-heading -->
-#### Python भनेको के हो
+**Python भनेको के हो**
+<!-- ne-pair: What is Python -->
 
 <!-- ne-cell: 198db0a3 -->
 Python "कम्प्युटरलाई काम लगाउने भाषा (प्रोग्रामिङ भाषा)" मध्ये एक हो।
@@ -169,7 +172,8 @@ width = 100.3
 **एक-एक लाइन माथिबाट क्रमैसँग** चल्छ।
 
 <!-- ne-cell: f4400f5e | after-heading -->
-#### Command Prompt (CMD) भनेको के हो
+**Command Prompt (CMD) भनेको के हो**
+<!-- ne-pair: What is Command Prompt (CMD) -->
 
 <!-- ne-cell: f4400f5e -->
 terminal भनेको "अक्षरले कम्प्युटरलाई आदेश दिने झ्याल" हो। यो तालिममा **Command Prompt (cmd.exe)**
@@ -189,7 +193,8 @@ C:\Users\Student>
 `>` अघिको भाग "अहिले भएको फोल्डर" हो। यो देखाउन मात्र हो, prompt आफैं टाइप गर्नु हुँदैन।
 
 <!-- ne-cell: d6b93483 | after-heading -->
-#### virtual environment भनेको के हो, किन चाहिन्छ
+**virtual environment भनेको के हो, किन चाहिन्छ**
+<!-- ne-pair: What a virtual environment is, and why it matters -->
 
 <!-- ne-cell: d6b93483 -->
 **virtual environment** भनेको "यो तालिमका लागि मात्र छुट्ट्याइएको Python औजार-बाकस" हो।
@@ -210,7 +215,8 @@ virtual environment बनाए **त्यही फोल्डरभित�
 > कारण दिन ५ को नोटबुकमा व्याख्या गरिन्छ।
 
 <!-- ne-cell: 8b3ad3d0 | after-heading -->
-#### Jupyter notebook, सेल, kernel
+**Jupyter notebook, सेल, kernel**
+<!-- ne-pair: Jupyter notebook, cell and kernel -->
 
 <!-- ne-cell: 8b3ad3d0 -->
 **Jupyter notebook** भनेको "व्याख्या", "चल्ने प्रोग्राम" र "नतिजा" एउटै फाइलमा राखिएको कागजात हो।
@@ -236,7 +242,8 @@ virtual environment बनाए **त्यही फोल्डरभित�
 तालिमको PC मा वातावरण पहिलै राखिएको छ भने Part 3 को जाँच मात्र गर्नुहोस्।
 
 <!-- ne-cell: 8065152f | after-heading -->
-#### चरण 1: Python राखिएको छ कि छैन जाँच्ने
+**चरण 1: Python राखिएको छ कि छैन जाँच्ने**
+<!-- ne-pair: Step 1: check whether Python is installed -->
 
 <!-- ne-cell: 8065152f -->
 Command Prompt खोलेर तलको आदेश चलाउनुहोस्।
@@ -268,7 +275,8 @@ python.org संस्करण राख्दा ध्यान दिने
 - "Install Now" ठीक छ।
 
 <!-- ne-cell: 3da79c65 | after-heading -->
-#### चरण 2: तालिम फोल्डरमा जाने
+**चरण 2: तालिम फोल्डरमा जाने**
+<!-- ne-pair: Step 2: move into the course folder -->
 
 <!-- ne-cell: 3da79c65 -->
 डाउनलोड गरिएको `AI_Vision_Training` फोल्डरमा जानुहोस्।
@@ -316,7 +324,8 @@ installation को आधिकारिक प्रक्रिया [START_
 virtual environment को python.exe सिधै प्रयोग गर्नुहोस्।
 
 <!-- ne-cell: b6c87f4f | after-heading -->
-#### चरण 6 (ऐच्छिक): NVIDIA GPU प्रयोग गर्ने भए
+**चरण 6 (ऐच्छिक): NVIDIA GPU प्रयोग गर्ने भए**
+<!-- ne-pair: Step 6 (optional): using an NVIDIA GPU -->
 
 <!-- ne-cell: b6c87f4f -->
 GPU अनिवार्य छैन। GPU wheel को URL, संस्करण र driver को संयोजन जाँचिएको छैन।
@@ -328,7 +337,8 @@ GPU अनिवार्य छैन। GPU wheel को URL, संस्क�
 ## Part 3 नोटबुकभित्रबाट राख्ने तरिका (%pip)
 
 <!-- ne-cell: c3d0cb90 | after-heading -->
-#### `%pip` भनेको के हो
+**`%pip` भनेको के हो**
+<!-- ne-pair: What `%pip` is -->
 
 <!-- ne-cell: c3d0cb90 -->
 `%` बाट सुरु हुने लाइनलाई **magic command** भनिन्छ, यो Jupyter का लागि मात्रको निर्देश हो।
@@ -363,7 +373,7 @@ GPU अनिवार्य छैन। GPU wheel को URL, संस्क�
 <!-- ne-cell: audit-teach_code_cell_lifecycle | after-heading -->
 ### कोड पढ्ने तरिका
 
-<!-- ne-cell: audit-teach_code_cell_lifecycle -->
+<!-- ne-cell: audit-teach_code_cell_lifecycle | after-image:../../assets/svg/teach_code_cell_lifecycle.svg -->
 चित्र: मान सेलमा होइन, kernel मा रहन्छ। (हिसाब गरिएको कृत्रिम उदाहरण/योजनाबद्ध। model को मापन गरिएको
 नतिजा होइन।)
 
@@ -376,7 +386,8 @@ GPU अनिवार्य छैन। GPU wheel को URL, संस्क�
 जोड्ने सेल मात्र फेरि चलाउँदा 4 कति हुन्छ?
 
 <!-- ne-cell: f839cd9f | after-heading -->
-#### कुन Python प्रयोग भइरहेको छ जाँच्ने
+**कुन Python प्रयोग भइरहेको छ जाँच्ने**
+<!-- ne-pair: Confirm which Python you are using -->
 
 <!-- ne-cell: f839cd9f -->
 अर्को सेल चलाउनुहोस्। `Executable` मा `.venv` छ भने वातावरण ठीक छ।
@@ -386,14 +397,16 @@ GPU अनिवार्य छैन। GPU wheel को URL, संस्क�
 त्यस्तो अवस्थामा मेनुको `Kernel` → `Change Kernel` → `Python 3 (AI Vision)` छान्नुहोस्।
 
 <!-- ne-cell: c5ebf004 | after-heading -->
-#### आवश्यक लाइब्रेरी जाँच्ने
+**आवश्यक लाइब्रेरी जाँच्ने**
+<!-- ne-pair: Check the required libraries -->
 
 <!-- ne-cell: c5ebf004 -->
 `[MISSING]` देखियो भने Part 2 को चरण 4 मा फर्केर install गर्नुहोस्।
 यो सेलले **install गर्दैन**। जाँच मात्र गर्छ।
 
 <!-- ne-cell: 9bcfaf3c | after-heading -->
-#### चित्रमा प्रयोग हुने फन्ट मिलाउनुहोस्
+**चित्रमा प्रयोग हुने फन्ट मिलाउनुहोस्**
+<!-- ne-pair: Configure Japanese text in figures -->
 
 <!-- ne-cell: 9bcfaf3c -->
 Matplotlib को पूर्वनिर्धारित फन्टले जापानी अक्षर देखाउन सक्दैन। त्यसैले चित्रको शीर्षक `□□□` जस्तो
@@ -401,7 +414,8 @@ Matplotlib को पूर्वनिर्धारित फन्टले 
 छानिन्छ।
 
 <!-- ne-cell: cd8a9512 | after-heading -->
-#### तालिम फोल्डर र सामग्रीको ठाउँ जाँच्ने
+**तालिम फोल्डर र सामग्रीको ठाउँ जाँच्ने**
+<!-- ne-pair: Confirm the course folder and the assets -->
 
 <!-- ne-cell: cd8a9512 -->
 यो नोटबुक तपाईंको प्रयोगकर्ता नाम वा install गरेको ठाउँमा निर्भर गर्दैन।
@@ -411,7 +425,8 @@ Matplotlib को पूर्वनिर्धारित फन्टले 
 (Part 2 चरण 5)।
 
 <!-- ne-cell: ea76d7d9 | after-heading -->
-#### सन्दर्भ चित्र एक पटक मात्र डाउनलोड गर्ने
+**सन्दर्भ चित्र एक पटक मात्र डाउनलोड गर्ने**
+<!-- ne-pair: Download the reference photographs once -->
 
 <!-- ne-cell: ea76d7d9 -->
 यो तालिमका केही पाठमा वास्तविक सन्दर्भ चित्र **स्थानीय फाइल** को रूपमा देखाइन्छ। हरेक पटक
@@ -449,7 +464,7 @@ python assets\scripts\download_reference_images.py --course-root . --offline
 <!-- ne-cell: fig-teach_execution_state | after-heading -->
 ### चलाउनुअघि, चल्दै र चलिसकेपछिको अवस्था
 
-<!-- ne-cell: fig-teach_execution_state -->
+<!-- ne-cell: fig-teach_execution_state | after-image:../../assets/diagrams/teach_execution_state.png -->
 चित्र: उही ३ लाइनको सेललाई चलाउनुअघि, चल्दै र चलिसकेपछि भनेर छुट्याएर मेमोरीभित्रको सामग्रीसँगै
 देखाइएको (योजनाबद्ध)।
 
@@ -465,7 +480,8 @@ output देखिन पनि सक्छ। सङ्ख्या भने
 - variable परिभाषा गर्ने सेल एक पटक पनि नचलाएको बेला त्यो variable प्रयोग गर्ने सेलमा के हुन्छ?
 
 <!-- ne-cell: 7246e348 | after-heading -->
-#### `print()` ले अक्षर देखाउने
+**`print()` ले अक्षर देखाउने**
+<!-- ne-pair: Displaying text with `print()` -->
 
 <!-- ne-cell: 7246e348 -->
 `print()` भनेको "कोष्ठकभित्रको सामग्री स्क्रिनमा देखाउने" आदेश हो।
@@ -473,7 +489,8 @@ output देखिन पनि सक्छ। सङ्ख्या भने
 `print` पछिको `( )` बिर्सिए त्रुटि हुन्छ। अक्षर लेख्दा `"` (double quote) भित्र राख्नुपर्छ।
 
 <!-- ne-cell: ee452a19 | after-heading -->
-#### हिसाब र variable
+**हिसाब र variable**
+<!-- ne-pair: Calculating and variables -->
 
 <!-- ne-cell: ee452a19 -->
 Python क्याल्कुलेटरका रूपमा पनि प्रयोग गर्न सकिन्छ। `=` भनेको "दायाँपट्टिको नतिजालाई नाम दिने" हो।
@@ -490,7 +507,8 @@ Python क्याल्कुलेटरका रूपमा पनि प�
 नोटबुक ०१ मा सम्हालिन्छ।
 
 <!-- ne-cell: d18c02fb | after-heading -->
-#### त्रुटि सन्देश पढ्ने अभ्यास
+**त्रुटि सन्देश पढ्ने अभ्यास**
+<!-- ne-pair: Practice reading an error message -->
 
 <!-- ne-cell: d18c02fb -->
 जानाजान त्रुटि बनाइहालौं। त्रुटि "असफलता" होइन "जानकारी" हो।
@@ -505,7 +523,7 @@ Python क्याल्कुलेटरका रूपमा पनि प�
 <!-- ne-cell: fig-teach_nameerror_recovery | after-heading -->
 ### NameError बाट फर्किने प्रक्रिया
 
-<!-- ne-cell: fig-teach_nameerror_recovery -->
+<!-- ne-cell: fig-teach_nameerror_recovery | after-image:../../assets/diagrams/teach_nameerror_recovery.png -->
 चित्र: `widht_mm` र `width_mm` गलत लेख्दा आउने त्रुटि र सुधार्ने क्रम (योजनाबद्ध)।
 
 **ध्यान दिनुपर्ने कुरा**
@@ -535,7 +553,8 @@ NameError: name 'sheet_width' is not defined
 ## Part 6 चित्र बनाएर देखाउने
 
 <!-- ne-cell: 824933ca | after-heading -->
-#### सङ्ख्याको समूह नै चित्र बन्छ
+**सङ्ख्याको समूह नै चित्र बन्छ**
+<!-- ne-pair: An image is just a grid of numbers -->
 
 <!-- ne-cell: 824933ca -->
 चित्र जादु होइन। **सङ्ख्याको तालिका** हो।
@@ -555,7 +574,8 @@ NameError: name 'sheet_width' is not defined
 `...` भनेको "बाँकी पनि उही मानले जारी छ" भन्ने हो। 8 पङ्क्ति × 8 स्तम्भका 64 वटै मान `230` छन्।
 
 <!-- ne-cell: 66eb3a87 | after-heading -->
-#### Matplotlib ले देखाउने
+**Matplotlib ले देखाउने**
+<!-- ne-pair: Displaying with Matplotlib -->
 
 <!-- ne-cell: 66eb3a87 -->
 Jupyter भित्र `cv2.imshow()` प्रयोग गर्दैनौं। `cv2.imshow()` ले
@@ -568,7 +588,8 @@ Jupyter भित्र `cv2.imshow()` प्रयोग गर्दैनौ�
 यहाँ देखाइएको 8 × 8 को **कृत्रिम** चित्र हो। कारखानाको वास्तविक फोटो होइन।
 
 <!-- ne-cell: 956099c4 | after-heading -->
-#### आफैं बदलेर हेर्ने (निर्देशित प्रयोग)
+**आफैं बदलेर हेर्ने (निर्देशित प्रयोग)**
+<!-- ne-pair: Change it yourself (guided experiment) -->
 
 <!-- ne-cell: 956099c4 -->
 तलको सेलका सङ्ख्या बदलेर नतिजा कसरी बदलिन्छ पहिले अनुमान गरेर चलाउनुहोस्।
@@ -581,7 +602,8 @@ Jupyter भित्र `cv2.imshow()` प्रयोग गर्दैनौ�
 ## Part 7 वातावरण तयारी रिपोर्ट
 
 <!-- ne-cell: 06c2fc5e | after-heading -->
-#### रिपोर्ट स्वतः बनाउने
+**रिपोर्ट स्वतः बनाउने**
+<!-- ne-pair: Generate the report automatically -->
 
 <!-- ne-cell: 06c2fc5e -->
 अन्तमा अहिलेको वातावरणलाई एउटा रिपोर्टमा जम्मा गर्छौं।
@@ -595,7 +617,8 @@ Jupyter भित्र `cv2.imshow()` प्रयोग गर्दैनौ�
 ## अभ्यास
 
 <!-- ne-cell: 6a2d7d09 | after-heading -->
-#### अभ्यास १ (आधारभूत): आफ्नो नाम देखाउने
+**अभ्यास १ (आधारभूत): आफ्नो नाम देखाउने**
+<!-- ne-pair: Exercise 1 (basic): print your name -->
 
 <!-- ne-cell: 6a2d7d09 -->
 तलको सेलमा जापानी र अङ्ग्रेजीमा आफ्नो नाम र विभाग देखाउने कोड लेख्नुहोस्।
@@ -604,7 +627,8 @@ Jupyter भित्र `cv2.imshow()` प्रयोग गर्दैनौ�
 सकिएको आधार: output मा **आफ्नै नाम** देखिनुपर्छ (नमुनाको वाक्य जस्ताको तस्तै भए सकिएको मानिँदैन)।
 
 <!-- ne-cell: d153c5f9 | after-heading -->
-#### अभ्यास २ (मध्यम): मापन मानको निर्णय
+**अभ्यास २ (मध्यम): मापन मानको निर्णय**
+<!-- ne-pair: Exercise 2 (intermediate): judge a measurement -->
 
 <!-- ne-cell: d153c5f9 -->
 `measured = 99.2` लाई `measured = 97.0` बनाउँदा अन्तिम लाइनमा `False` देखिन्छ।
@@ -615,7 +639,8 @@ Jupyter भित्र `cv2.imshow()` प्रयोग गर्दैनौ�
 सकिएको आधार: सेल त्रुटि बिना चल्छ र **कारण एक लाइनको comment मा लेखिएको** हुन्छ।
 
 <!-- ne-cell: 6affad1b | after-heading -->
-#### अभ्यास ३ (विकास/ऐच्छिक): चित्रको "उज्यालो" नाप्ने
+**अभ्यास ३ (विकास/ऐच्छिक): चित्रको "उज्यालो" नाप्ने**
+<!-- ne-pair: Exercise 3 (optional challenge): measure image brightness -->
 
 <!-- ne-cell: 6affad1b -->
 NumPy को `mean()` प्रयोग गरेर सम्पूर्ण चित्रको औसत उज्यालो हिसाब गर्नुहोस्।
