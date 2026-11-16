@@ -9,16 +9,27 @@
 #
 # 使い方（有効化済み CMD）/ usage (Command Prompt, course environment activated):
 #   python -m pip install -r requirements\pdf.txt
-#   python assets\scripts\export_explanations_pdf.py
-#   python assets\scripts\inspect_pdf_pages.py
+#   python -m playwright install chromium
+#   python assets\scripts\export_explanations_pdf.py      # 日本語＋英語 / Japanese + English
+#   python assets\scripts\export_trilingual_pdf.py        # 日本語＋英語＋ネパール語 / + Nepali
+#   python assets\scripts\inspect_pdf_pages.py --languages ja,ne
 #
 # 検証済み / verified on: Windows 11, CPython 3.11.4, 2026-11
 # ============================================================================
 
-# 組版 / typesetting
+# 組版（日本語＋英語）/ typesetting for the Japanese + English booklets
 reportlab==5.1.0
+
+# 組版（日本語＋英語＋ネパール語）/ typesetting for the tri-language booklets.
+# ReportLab cannot keep Devanagari searchable: shaping works visually but the text layer ends up in
+# private-use code points. Chromium shapes Devanagari correctly *and* keeps the text layer
+# searchable, so the tri-language booklets are printed through Chromium's PDF engine.
+# ReportLab はデーヴァナーガリーの本文を検索可能なまま出力できません。三言語版は Chromium で組んでいます。
+playwright==1.65.2
+uharfbuzz==0.57.0
 
 # 生成物の点検 / checking the generated files
 pypdf==7.0.1
 pypdfium2==5.15.2
 pillow==13.0.0
+pikepdf==10.18.2
