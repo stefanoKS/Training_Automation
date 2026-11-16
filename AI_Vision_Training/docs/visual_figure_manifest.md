@@ -6,6 +6,45 @@ SVG uses editable text/shapes; PNG is a PDF fallback from the same drawing opera
 写真・保存済みモデル出力は再生成していません。streak_0005 の元記録はないため新しい数値図は省略しました。
 Photos and saved model outputs were not regenerated. The new streak_0005 numeric figure is omitted: source records unavailable.
 
+## 2026-11-16 clarity additions / 明確化の追加図
+
+既存の正しいSVGと保存済み推論画像は変更していません。追加した静的図は3枚だけです。
+`python assets\scripts\generate_clarity_figures.py` でこの3組だけを再生成します。
+外部画像・配布フォント・ネットワークアクセスは使いません。PNGは同じ描画操作から作ります。
+
+Existing correct SVGs and saved inference images are unchanged. Only three static diagrams are new.
+Run `python assets\scripts\generate_clarity_figures.py` to regenerate these three pairs only.
+They use no external images, distributed fonts or network access; PNGs use the same drawing operations.
+
+| Asset / ID | Notebook / heading | Deterministic source | Provenance / limits | Preview | Learning question |
+|---|---|---|---|---|---|
+| `teach_fixed_fov_sampling` / V01 | Day01_02 / same field of view | `generate_clarity_figures.fixed_fov`, FIELD_MM/WIDTHS_PX/DEFECT_MM | Calculated synthetic; both full widths 1300 mm. Grid density/mark widths schematic, not to scale; no detection guarantee. | [SVG](../assets/svg/teach_fixed_fov_sampling.svg), [PNG](../assets/diagrams/teach_fixed_fov_sampling_svg.png) | 0.3 mmは何px？保存JPEGの拡大と再撮影は同じ？ / How many px span 0.3 mm? Is enlarging a JPEG recapture? |
+| `teach_batch_first_pass` / V11 | Day04_02 / Stage 1 | `generate_clarity_figures.batch_first_pass`, computed IDs 0–63 | Calculated schematic; eight rows of eight images. No optimizer-update count claimed. | [SVG](../assets/svg/teach_batch_first_pass.svg), [PNG](../assets/diagrams/teach_batch_first_pass_svg.png) | batch=4なら一周に何batch？ / How many batches per pass at batch=4? |
+| `teach_patch_overlap` / V13 | Day05_01 / analogy vs actual | `generate_clarity_figures.patch_overlap`, GRID_SIZE/REGIONS | Schematic overlapping supports; not actual resnet18 receptive-field dimensions or model output. | [SVG](../assets/svg/teach_patch_overlap.svg), [PNG](../assets/diagrams/teach_patch_overlap_svg.png) | 隣の特徴が同じ画素に依存する？ / Can adjacent features share input pixels? |
+
+### 再利用・実行時の図 / Reused and live visuals
+
+| Review IDs | Notebook / evidence | Source and disposition |
+|---|---|---|
+| V02 | Day01_02 / create→pixel→slice→6×6 | Existing pixel/slice SVGs remain unchanged; `clarity-slice-live` draws the executed 5×7 array and selected 3×3. |
+| V03 | Day01_02 / resizing | Existing downsample and local-profile PNGs retained; no redundant dynamic widget. Existing live resize uses the lesson's own defect image. |
+| V04 | Day02_02 / same five readings | Existing loop trace retained; live loop now prints signed difference, condition and verdict for each identical input. |
+| V05 | Day02_02 / guided second pass | Existing branch visual plus bilingual parse→reject/log or tolerance text flow. |
+| V06 | Day02_03 / BGR counterexample | `clarity-bgr-live`: calculated synthetic red/green/blue strip, wrong and corrected display, printed channel tuples. No external image. |
+| V07 | Day02_03 / pixels→mask→contour | `clarity-mask-live`: calculated synthetic 7×8 source, exact mask, contour on the same mask; 12 white pixels vs 6 px². Existing pipeline retained. |
+| V08 | Day03_01 / synchronized box forms | Existing correct bbox SVG; `clarity-bbox-live` computes both boxes: x2+24 gives centre (144,102), size (96,60). |
+| V09 | Day03_02 / returned object→row | Existing result-object SVG; new adjacent text schema documents (N,4)/(N,)/(N,) and zero-row case. |
+| V10 | Day03_03 / experiment sources | Table only: A toy, B archived52, C1 live640 cache, C2 live320 cache. Archived charts not regenerated. |
+| V12 | Day04_03 / choose counting unit | Worked image-vs-box table precedes metrics; correct matching/confusion figures retained with original axes. |
+| V14 | Day05_02 / score reading order | Adjacent bilingual annotation card for unchanged `ref_anomaly_panels.png`: historical raw21.439, mapMax21.762, normalized1.000, image threshold0.50. Not new inference. |
+| V15 | Day05_03 / primary comparison protocol | Existing frozen-pipeline SVG moved to primary position; other overlap reduced, calibration controls moved before freeze. Archived five-column TEST panel opt-in after assessment; subsequent gallery explicitly CALIBRATION. |
+
+The three new pairs passed deterministic generation, numeric/bounds tests and PNG inspection.
+Live output is labelled calculated synthetic; archived model values are never presented as current computation.
+New diagrams have no external licensing dependencies. Existing reference-image licenses/provenance remain unchanged.
+
+## Existing source-checked figures / 既存の検証済み図
+
 | Asset | Notebook section | Source code/data | Provenance | Preview | Learning question |
 |---|---|---|---|---|---|
 | `teach_code_cell_lifecycle.svg` | `00_Environment_Setup`: `Part 4` | `generate_svg_figures.build_figure` / `teaching_data.py` | computed synthetic / schematic | [SVG](../assets/svg/teach_code_cell_lifecycle.svg) / [PNG](../assets/diagrams/teach_code_cell_lifecycle_svg.png) | 加算セルだけをもう一度実行すると、4 は何になりますか。 What happens to 4 if only the increment cell runs again? |

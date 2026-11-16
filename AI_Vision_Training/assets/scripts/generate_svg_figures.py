@@ -476,13 +476,23 @@ def main() -> int:
                     f"`generate_svg_figures.build_figure` / `teaching_data.py` | computed synthetic / schematic | "
                     f"[SVG](../assets/svg/{name}.svg) / [PNG](../assets/diagrams/{name}_svg.png) | {question_jp} {question_en} |")
     manifest = args.root / "docs" / "visual_figure_manifest.md"
+    clarity_section = ""
+    if manifest.is_file():
+        existing = manifest.read_text(encoding="utf-8")
+        marker = "## 2026-11-16 clarity additions / 明確化の追加図"
+        if marker in existing:
+            clarity_section = marker + existing.partition(marker)[2].partition(
+                "## Existing source-checked figures / 既存の検証済み図"
+            )[0]
+            clarity_section += "## Existing source-checked figures / 既存の検証済み図\n\n"
     manifest.write_text(
         "# 図の出典と学習の問い / Visual figure manifest\n\n"
         "SVG は編集可能な文字・図形です。PNG は同じ描画操作から作る PDF 用の代替です。\n"
         "SVG uses editable text/shapes; PNG is a PDF fallback from the same drawing operations.\n\n"
         "写真・保存済みモデル出力は再生成していません。streak_0005 の元記録はないため新しい数値図は省略しました。\n"
         "Photos and saved model outputs were not regenerated. The new streak_0005 numeric figure is omitted: source records unavailable.\n\n"
-        "| Asset | Notebook section | Source code/data | Provenance | Preview | Learning question |\n"
+        + clarity_section
+        + "| Asset | Notebook section | Source code/data | Provenance | Preview | Learning question |\n"
         "|---|---|---|---|---|---|\n" + "\n".join(rows) + "\n\n"
         "Source-checked values: box (96,72,168,132), image 240×240 -> YOLO 0 0.550 0.425 0.300 0.250; "
         "spot radius 9 px at (84,110), bounding edges from mask; "

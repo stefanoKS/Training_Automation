@@ -119,8 +119,10 @@ def test_non_teaching_assets_stay_out_of_the_deliverable() -> None:
 def test_diagram_generator_covers_every_reference() -> None:
     import generate_teaching_diagrams as gtd
     import generate_svg_figures as gsf
+    import generate_clarity_figures as gcf
 
     registered = set(gtd.DIAGRAMS) | {f"{name}.svg" for name in gsf.FIGURES}
+    registered |= {f"{name}.svg" for name in gcf.BUILDERS}
     referenced = set()
     for path in course_notebooks(NOTEBOOK_DIR):
         for target in _markdown_images(path):
@@ -173,8 +175,8 @@ REQUIRED_VISUALS = {
                                     "teach_brightness_shift.png"],
     "Day01_02_Pixels_and_Images": ["diagram_pixel_grid.png", "teach_rgb_channels.png",
                                    "teach_downsample_defect.png", "teach_array_indexing.png",
-                                   "teach_resize_profile.png"],
-    "Day01_03_Computer_Vision_Tasks": ["teach_cv_tasks_outputs.png", "teach_segmentation_modes.png"],
+                                   "teach_resize_profile.png", "teach_fixed_fov_sampling.svg"],
+    "Day01_03_Computer_Vision_Tasks": ["teach_cv_tasks_outputs.svg", "teach_segmentation_modes.png"],
     "Day02_01_Python_Basics": ["teach_units_conversion.png", "teach_assign_vs_compare.png",
                                "teach_traceback_annotated.png"],
     "Day02_02_Conditions_Loops_Functions": ["teach_tolerance_boundary.png",
@@ -190,15 +192,17 @@ REQUIRED_VISUALS = {
     "Day04_01_YOLO_Dataset_Annotation": ["teach_yolo_label_fields.png", "teach_split_roles.png",
                                          "teach_dataset_contact_sheet.png", "teach_leakage_split.png"],
     "Day04_02_YOLO_Training": ["teach_training_update.png", "teach_epoch_batch.png",
-                               "teach_train_val_curves.png", "ref_train_val_curves.png"],
+                               "teach_train_val_curves.png", "ref_train_val_curves.png",
+                               "teach_batch_first_pass.svg"],
     "Day04_03_YOLO_Evaluation": ["teach_object_level_matching.png",
                                  "teach_image_level_confusion.png",
                                  "ref_detections_label_vs_pred.png"],
     "Day05_01_Anomaly_Detection_Concepts": ["teach_normal_variation.png", "teach_patch_neighbour.png",
-                                            "teach_memory_bank.png", "teach_score_levels.png"],
+                                            "teach_memory_bank.png", "teach_score_levels.png",
+                                            "teach_patch_overlap.svg"],
     "Day05_02_PatchCore_Training": ["teach_backbone_vs_memory.png", "ref_anomaly_panels.png"],
-    "Day05_03_YOLO_vs_PatchCore": ["teach_evaluation_sequence.png", "teach_threshold_freeze.png",
-                                   "ref_score_distribution.png", "ref_comparison_5col.png"],
+    "Day05_03_YOLO_vs_PatchCore": ["teach_frozen_threshold_pipeline.svg", "teach_threshold_freeze.png",
+                                   "ref_score_distribution.png"],
 }
 
 
@@ -323,12 +327,12 @@ def test_every_code_only_diagram_has_a_static_equivalent() -> None:
     # コードで表示する図は、同じノートブックか同じ日の静的図で代替できること
     coverage = {
         "Day01_02_Pixels_and_Images": "diagram_pixel_grid.png",
-        "Day01_03_Computer_Vision_Tasks": "teach_cv_tasks_outputs.png",
+        "Day01_03_Computer_Vision_Tasks": "teach_cv_tasks_outputs.svg",
         "Day02_03_OpenCV_Image_Processing": "teach_pixel_to_mm.png",
         "Day03_01_YOLO_Concepts": "teach_yolo_label_fields.png",
         "Day04_01_YOLO_Dataset_Annotation": "teach_split_roles.png",
         "Day05_01_Anomaly_Detection_Concepts": "teach_patch_neighbour.png",
-        "Day05_03_YOLO_vs_PatchCore": "ref_comparison_5col.png",
+        "Day05_03_YOLO_vs_PatchCore": "teach_score_map_overlay.png",
         "Day02_02_Conditions_Loops_Functions": "teach_condition_branch.png",
     }
     for stem in code_images:

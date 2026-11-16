@@ -214,20 +214,6 @@ FIGURES = [
         question_en="At a threshold of 0.60, how many misses appear on this calibration data?",
     ),
     dict(
-        notebook="Day05_03_YOLO_vs_PatchCore",
-        anchor="five aligned columns for the same image",
-        folder="reference_outputs",
-        image="ref_comparison_5col.png",
-        title_ja="実際の 5 列の比較",
-        title_en="the real five-column comparison",
-        caption_ja="図：同じ 3 枚（試験用）を 5 列で並べた実際の結果。元画像・YOLO の四角・PatchCore の数値マップ・正解マスク・画像単位の判定。しきい値は固定済みで、この図のために動かしていません。",
-        caption_en="Figure: three test images in five aligned columns — original, YOLO boxes, PatchCore's numeric map, ground-truth mask and the image-level decision. The thresholds were already frozen and were not moved for this figure.",
-        notice_ja="1 行目は 3 者が食い違っています（YOLO NG、PatchCore OK、正解 NG）。2・3 行目は一致です。列を増やす目的は「どちらが良いか」ではなく、**どこで食い違うか**を見ることです。比較の限界は 4 つあります：合成データと実データの差、少数（正常 6 枚・異常 20 枚）の不確かさ、学習・ラベルの予算の違い、解像度・前処理・しきい値への依存。",
-        notice_en="Row 1 is a three-way disagreement (YOLO NG, PatchCore OK, truth NG); rows 2 and 3 agree. The columns exist to show **where the methods disagree**, not which is better. Four limits apply: the synthetic-to-real gap, the small sample (6 normal, 20 abnormal), different training and labelling budgets, and dependence on resolution, preprocessing and the operating threshold.",
-        question_ja="1 行目の食い違いは、どちらの方法のどんな失敗ですか。",
-        question_en="In row 1, which method made which kind of mistake?",
-    ),
-    dict(
         notebook="00_Environment_Setup",
         anchor="Jupyter ノートブック・セル・カーネル",
         folder="diagrams",
@@ -608,20 +594,6 @@ FIGURES = [
     ),
     dict(
         notebook="Day05_03_YOLO_vs_PatchCore",
-        anchor="Part 2　保存された結果を読み込む",
-        folder="diagrams",
-        image="teach_evaluation_sequence.png",
-        title_ja="評価の順番",
-        title_en="the order of evaluation",
-        caption_ja="図：分割 → 学習 → 較正 → 固定 → 評価 → 報告 の順番（模式図）。較正から報告へ直接進む近道はありません。",
-        caption_en="Figure: the order split → fit → calibrate → freeze → evaluate → report (schematic). There is no shortcut from calibration straight to the report.",
-        notice_ja="④ で固定した後にしきい値を動かすと、⑤ の数字は「試験の成績」ではなくなります。同じ設定での再評価はできますが、試験結果を見て設定を変えたら、新しい未使用データが必要です。",
-        notice_en="Moving the threshold after the freeze in ④ turns the numbers in ⑤ into something other than a test result. You may repeat an unchanged evaluation; if you change settings after seeing the test results, you need a new untouched holdout.",
-        question_ja="固定するのは、モデル・前処理・しきい値のどれですか。",
-        question_en="What gets frozen: the model, the preprocessing, the threshold — or all three?",
-    ),
-    dict(
-        notebook="Day05_03_YOLO_vs_PatchCore",
         anchor="しきい値を動かしてよいのは、較正用データだけ",
         folder="diagrams",
         image="teach_threshold_freeze.png",
@@ -748,6 +720,8 @@ def _referenced_images(nb: dict) -> set[str]:
 
 def _owned(cell: dict, entry: dict) -> bool:
     """このスクリプトが書いたセルか / whether this script wrote the cell."""
+    if cell.get("metadata", {}).get("aivision_caption") == "clarity-review-2026-11-16":
+        return False
     if cell.get("id") == _cell_id(entry):
         return True
     source = "".join(cell["source"])
