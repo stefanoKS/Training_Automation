@@ -12,20 +12,20 @@ tri-language booklets that add Nepali. The earlier files are left **untouched**,
 readable.
 
 <!-- ne:begin doc:35ca32f23d -->
-### नेपालीमा
+### Nepali ma
 
-यो फोल्डरका PDF **नोटबुककै Markdown बाट स्वतः बनाइएका** पुस्तिका हुन्।
-छुट्टै लेखिएको पाण्डुलिपि होइन, त्यसैले नोटबुक सुधारेर तलको आदेश फेरि चलाउँदा दुवै मिल्छ।
+yo folderka PDF **notabukakai Markdown baat sbatah banaieka** pustika hun.
+chhuttai lekhieko pandulipi hoina, tyasaile notebook sudharer talako adesh feri chalaunda dubai milchha.
 
-दुई किसिमका पुस्तिका छन्।
+dui kisimaka pustika chhan.
 
-| किसिम | भाषा | बनाउने स्क्रिप्ट |
+| kisim | bhasha | banaune skript |
 |---|---|---|
-| `*_ja_en.pdf` | जापानी → अङ्ग्रेजी | `assets\scripts\export_explanations_pdf.py` |
-| `*_ja_en_ne.pdf` | जापानी → अङ्ग्रेजी → नेपाली | `assets\scripts\export_trilingual_pdf.py` |
+| `*_ja_en.pdf` | Japani → Angreji | `assets\scripts\export_explanations_pdf.py` |
+| `*_ja_en_ne.pdf` | Japani → Angreji → Nepali | `assets\scripts\export_trilingual_pdf.py` |
 
-अघिल्ला `*_ja_en.pdf` फाइल **जस्ताको तस्तै** राखिएका छन्; नयाँ त्रिभाषी संस्करणले तिनलाई
-प्रतिस्थापन गर्दैन।
+aghilla `*_ja_en.pdf` file **jastako tastai** rakhieka chhan; nayan tribhashi sanskaranale tinalai
+pratisthapan gardaina.
 <!-- ne:end -->
 
 ## ファイル / Files
@@ -43,21 +43,28 @@ readable.
 
 日本語＋英語＋ネパール語 / Japanese, English and Nepali:
 
+> 第 3 の言語は **ローマ字表記のネパール語**（Nepali written with Latin letters, BCP 47 `ne-Latn`）です。
+> デーヴァナーガリー文字ではありません。Day 1〜3 のノートブックはまだデーヴァナーガリーのままなので、
+> その冊子だけは両方の文字が入ります。詳しくは
+> [`assets/i18n/ne/romanization_style_guide.md`](../../assets/i18n/ne/romanization_style_guide.md)。
+> The third language is **Nepali written with Latin letters** (`ne-Latn`), not Devanagari.
+> Day 1–3 notebooks are still Devanagari during the migration, so only those booklets mix scripts.
+
 | ファイル / File | 内容 / Contents | ページ / Pages |
 |---|---|---|
-| `Day01_explanation_ja_en_ne.pdf` | 第 1 日（ノートブック 01〜03） | 101 |
-| `Day02_explanation_ja_en_ne.pdf` | 第 2 日（ノートブック 01〜03） | 116 |
-| `Day03_explanation_ja_en_ne.pdf` | 第 3 日（ノートブック 01〜03） | 79 |
+| `Day01_explanation_ja_en_ne.pdf` | 第 1 日（ノートブック 01〜03） | 95 |
+| `Day02_explanation_ja_en_ne.pdf` | 第 2 日（ノートブック 01〜03） | 112 |
+| `Day03_explanation_ja_en_ne.pdf` | 第 3 日（ノートブック 01〜03） | 75 |
 | `Day04_explanation_ja_en_ne.pdf` | 第 4 日（ノートブック 01〜03） | 88 |
-| `Day05_explanation_ja_en_ne.pdf` | 第 5 日（ノートブック 01〜03） | 88 |
-| `Week1_explanation_ja_en_ne.pdf` | 5 日分をまとめたもの / all five days | 460 |
-| `Setup_ja_en_ne.pdf` | 準備ノートブック `00_Environment_Setup.ipynb` | 41 |
+| `Day05_explanation_ja_en_ne.pdf` | 第 5 日（ノートブック 01〜03） | 86 |
+| `Week1_explanation_ja_en_ne.pdf` | 5 日分をまとめたもの / all five days | 445 |
+| `Setup_ja_en_ne.pdf` | 準備ノートブック `00_Environment_Setup.ipynb` | 39 |
 | `Installation_Guide_ja_en_ne.pdf` | `START_HERE.md` と `docs/troubleshooting/installation.md` | 23 |
 | `Repository_Guide_ja_en_ne.pdf` | `README.md` と `requirements/tested_versions.md` | 23 |
-| `Course_Syllabus_ja_en_ne.pdf` | `COURSE_SYLLABUS.md` | 17 |
+| `Course_Syllabus_ja_en_ne.pdf` | `COURSE_SYLLABUS.md` | 20 |
 
 ページ数は生成のたびにスクリプトが表示します。日本語＋英語版の表は 2026-11-15 の生成結果、
-三言語版は 2026-11-16 の生成結果です。
+三言語版は 2026-11-18（ローマ字ネパール語への移行後）の生成結果です。
 全679ページの描画検査と図の点検範囲は [今回の検証記録](../reviews/2026-11-15_cmd_migration.md) にあります。
 The page counts are printed by the exporter on every run. The Japanese + English table is from the
 2026-11-15 rebuild; the tri-language table from 2026-11-16. All 679 pages of the first generation were
@@ -71,18 +78,22 @@ Setup is not part of the six Japanese + English books; the tri-language generati
 own booklet, `Setup_ja_en_ne.pdf`.
 
 <!-- ne:begin doc:724f15e073 -->
-### नेपालीमा
+### Nepali ma
 
-| फाइल | सामग्री |
+| file | samagri |
 |---|---|
-| `Day01_explanation_ja_en_ne.pdf` … `Day05_explanation_ja_en_ne.pdf` | प्रत्येक दिनका ३ नोटबुक (दिन ५ मा ३) |
-| `Week1_explanation_ja_en_ne.pdf` | ५ दिनकै सामग्री एउटै पुस्तिकामा |
-| `Setup_ja_en_ne.pdf` | तयारी नोटबुक `00_Environment_Setup.ipynb` |
-| `Installation_Guide_ja_en_ne.pdf` | `START_HERE.md` र `docs/troubleshooting/installation.md` |
-| `Repository_Guide_ja_en_ne.pdf` | `README.md` र `requirements/tested_versions.md` |
+| `Day01_explanation_ja_en_ne.pdf` … `Day05_explanation_ja_en_ne.pdf` | pratyek dinka 3 notebook (din 5 ma 3) |
+| `Week1_explanation_ja_en_ne.pdf` | 5 dinakai samagri eutai pustikama |
+| `Setup_ja_en_ne.pdf` | tayari notebook `00_Environment_Setup.ipynb` |
+| `Installation_Guide_ja_en_ne.pdf` | `START_HERE.md` ra `docs/troubleshooting/installation.md` |
+| `Repository_Guide_ja_en_ne.pdf` | `README.md` ra `requirements/tested_versions.md` |
 | `Course_Syllabus_ja_en_ne.pdf` | `COURSE_SYLLABUS.md` |
 
-पाना सङ्ख्या हरेक पटक बनाउँदा स्क्रिप्टले आफैं देखाउँछ।
+pana sankhya harek patak banaunda skriptale aphain dekhaunchha.
+
+> tesro bhasha **roman lipima lekheko Nepali** (`ne-Latn`) ho, Devanagari hoina. din 1-3 ka notebook
+> ahile pani Devanagari ma chhan, tyasaile ti pustikama dui lipi bhetinchha. thap jankari:
+> `assets/i18n/ne/romanization_style_guide.md`.
 <!-- ne:end -->
 
 ## 作り直す方法 / Regenerating
@@ -135,47 +146,47 @@ python assets\scripts\inspect_pdf_pages.py --languages ja,ne
   Figure provenance is on the last page of every PDF.
 
 <!-- ne:begin doc:459440aadc -->
-### नेपालीमा
+### Nepali ma
 
-installation (सिकाइको वातावरणभन्दा छुट्टै):
+installation (sikai ko batabaranabhanda chhuttai):
 
 ```cmd
 python -m pip install -r requirements\pdf.txt
 python -m playwright install chromium
 ```
 
-`playwright install chromium` ले PDF छाप्ने Chromium खोज्छ। यो **PDF बनाउने र जाँच्ने मानिसका लागि
-मात्र** हो; प्रशिक्षार्थीले यो चाहिँदैन।
+`playwright install chromium` le PDF chhapne Chromium khojchha. yo **PDF banaune ra jaanchne manisaka lagi
+matra** ho; prashiksharthile yo chahindain.
 
-जापानी–अङ्ग्रेजी पुस्तिका:
+Japani–Angreji pustika:
 
 ```cmd
 python assets\scripts\export_explanations_pdf.py
 ```
 
-त्रिभाषी पुस्तिका (**यो एक आदेशले सबै**) :
+tribhashi pustika (**yo ek adeshale sabai**) :
 
 ```cmd
 python assets\scripts\export_trilingual_pdf.py
 ```
 
-एउटा मात्र बनाउन:
+euta matra banaun:
 
 ```cmd
 python assets\scripts\export_trilingual_pdf.py --only Day03
 ```
 
-जाँच (हरेक पाना चित्र बनाएर, नेपाली खोजिने अवस्थामा छ कि छैन पनि जाँच्दै):
+jaanch (harek pana chitra banaer, Nepali khojine abastha ma chha ki chhaina pani janchdai):
 
 ```cmd
 python assets\scripts\inspect_pdf_pages.py --languages ja,ne
 ```
 
-* model download, सिकाइ र नोटबुक **चलाइँदैन**। exporter ले Markdown, चित्र र छोटा कोड सेल मात्र
-  पढ्छ।
-* जापानी फन्ट OS को (Windows मा Noto Sans JP / Yu Gothic / Meiryo), नेपाली फन्ट Nirmala UI
-  PDF मा embed हुन्छ।
-* चित्रको स्रोत प्रत्येक PDF को अन्तिम पाना "स्रोत र सन्दर्भ" मा छ।
+* model download, sikai ra notebook **chalaindain**. exporter le Markdown, chitra ra chhota kod cell matra
+  padhchha.
+* Japani phant OS ko (Windows ma Noto Sans JP / Yu Gothic / Meiryo), Nepali phant Nirmala UI
+  PDF ma embed hunchha.
+* chitrako srot pratyek PDF ko antim pana "srot ra sandarbha" ma chha.
 <!-- ne:end -->
 
 ## 何が入り、何が入らないか / What is in, and what is out
@@ -196,23 +207,23 @@ python assets\scripts\inspect_pdf_pages.py --languages ja,ne
 * 実行していない学習・検証の結果。数字は保存された記録がある場合にだけ載せています。
 
 <!-- ne:begin doc:f63342958e -->
-### नेपालीमा
+### Nepali ma
 
-पर्छ:
+parchha:
 
-* सिकाइ लक्ष्य, पूर्वशर्त र व्याख्या (जापानी → अङ्ग्रेजी → नेपाली)
-* चलाउनुअघि नै देखिने स्थिर चित्र, captions, "ध्यान दिनुपर्ने कुरा", प्रश्नहरू
-* प्रशिक्षार्थीले बदल्ने छोटा कोड उदाहरण (20 लाइनसम्म)
-* अभ्यास, सङ्केत, बुझाइ जाँच
-* सन्दर्भ नतिजा (यो तालिममा सुरक्षित भएका नतिजाबाट बनेका चित्र)। योजनाबद्ध र कृत्रिम डेटाको फरक
-  चित्रभित्रै लेखिएको छ।
+* sikai lakshya, poorwashart ra byakhya (Japani → Angreji → Nepali)
+* chalaunuaghi nai dekhine sthir chitra, captions, "dhyan dinuparne kura", prashnaharu
+* prashiksharthile badalne chhota kod udaharan (20 line samma)
+* abhyas, sanket, bujhai jaanch
+* sandarbha natija (yo talim ma surakshit bhaeka natija baat baneka chitra). yojanabaddha ra kritrim datako farak
+  chitrabhitrai lekhieko chha.
 
-पर्दैन:
+pardaina:
 
-* सेलको output, stack trace, लामो तयारी कोड, काँचो JSON
-* प्रशिक्षकका जवाफ (`docs/instructor/` मा छुट्टै)
-* slider आफैं; त्यसको सट्टा स्थिर चित्र र "नोटबुकमा चलाउनुहोस्" भन्ने टिप्पणी
-* नचलाइएको सिकाइ वा जाँचको नतिजा
+* cellko output, stack trace, lamo tayari kod, kancho JSON
+* prashikshakaka jabaph (`docs/instructor/` ma chhuttai)
+* slider aphain; tyasko satta sthir chitra ra "notebook ma chalaunuhos" bhanne tippani
+* nachalaieko sikai wa jaanchko natija
 <!-- ne:end -->
 
 ## 既知の限界 / Known limitations
@@ -232,12 +243,12 @@ python assets\scripts\inspect_pdf_pages.py --languages ja,ne
   breaks in-PDF search; `inspect_pdf_pages.py --languages ja,ne` detects that regression.
 
 <!-- ne:begin doc:aa0695c08e -->
-### नेपालीमा
+### Nepali ma
 
-* फराकिलो चित्र पढ्न सजिलो होस् भनेर **A4 तेर्सो पाना** मा राखिएको छ; अघिल्लो-पछिल्लो पानामा खाली
-  ठाउँ देखिन्छ।
-* PDF भित्रका लिङ्क plain text हुन् (क्लिक गर्दा खुल्दैन)।
-* चित्रभित्रको अक्षर चित्रकै भाग हो, त्यसैले खोज्न वा छान्न मिल्दैन।
-* नेपाली अक्षर खोज्न मिल्नका लागि नेपाली मज्जन 1.5 pt को गुणनमा राखिएको छ (9, 10.5, 12, 13.5 pt)।
-  Chromium ले अन्य आकारमा शब्दको बीचमा खाली ठाउँ हालेर लेख्छ, जसले खोज बिगार्छ।
+* pharakilo chitra padhna sajilo hos bhanera **A4 terso pana** ma rakhieko chha; aghillo-pachhillo panama khali
+  thaun dekhinchha.
+* PDF bhitraka lingk plain text hun (klik garda khuldain).
+* chitrabhitrako akshar chitrakai bhaag ho, tyasaile khojn wa chhanna mildaina.
+* Nepali akshar khojn milnaka lagi Nepali majjan 1.5 pt ko gunanama rakhieko chha (9, 10.5, 12, 13.5 pt).
+  Chromium le any akarama shabdako bichama khali thaun haler lekhchha, jasale khoj bigarchha.
 <!-- ne:end -->

@@ -64,8 +64,82 @@ def test_thresholds_are_selected_on_the_calibration_partition(comparison_source:
 
 
 def test_test_partition_is_only_scored_once_and_by_name(comparison_source: str) -> None:
-    assert 'test_frame = combined[combined["partition"] == "test"]' in comparison_source
+    # The sealed predictions are produced by Notebook 02 after the freeze ...
+    training_source = _notebook_text("Day05_02_PatchCore_Training")
+    assert "patchcore_test_predictions.json" in training_source
+    assert "comparison_freeze_record.json" in training_source
+    # ... and read by Notebook 03 through the sealed file, never re-scored there.
+    assert "patchcore_test_predictions.json" in comparison_source
+    assert 'test_frame = pd.DataFrame({' in comparison_source
     assert "comparison_test_results.json" in comparison_source
+
+
+def test_day05_02_scores_the_test_partition_only_after_the_freeze() -> None:
+    """固定前のセルは較正用だけを採点する / no pre-freeze cell touches the test loader."""
+    path, = course_notebooks(NOTEBOOK_DIR, "Day05_02_PatchCore_Training.ipynb")
+    cells = json.loads(path.read_text(encoding="utf-8"))["cells"]
+    sealed_index = next(i for i, cell in enumerate(cells)
+                        if cell.get("id") == "clarity-sealed-test-scoring")
+    for position, cell in enumerate(cells):
+        if cell["cell_type"] != "code":
+            continue
+        source = "".join(cell["source"])
+        if "test_dataloader()" not in source:
+            continue
+        assert position == sealed_index, (
+            f"cell {cell.get('id')} touches the test loader before the sealed stage")
+        assert "comparison_freeze_record.json" in source
+        assert "raise RuntimeError" in source
+
+
+def test_day05_03_freezes_before_loading_the_sealed_test() -> None:
+    path, = course_notebooks(NOTEBOOK_DIR, "Day05_03_YOLO_vs_PatchCore.ipynb")
+    cells = json.loads(path.read_text(encoding="utf-8"))["cells"]
+    order = [{cell.get("id"): i for i, cell in enumerate(cells)}]
+    positions = order[0]
+    assert positions["clarity-freeze-record"] < positions["clarity-load-sealed-test"]
+    sealed = "".join(cells[positions["clarity-load-sealed-test"]]["source"])
+    for key in ("model", "score_convention", "patchcore_threshold", "manifest_test"):
+        assert key in sealed, f"the sealed loader does not verify {key}"
+    assert "engine.predict" not in sealed, "the comparison must not re-score test"
+
+
+def test_strict_comparison_rejects_duplicate_and_missing_calibration_ids() -> None:
+    source = next((text for text in _cell_sources("Day05_03_YOLO_vs_PatchCore")
+                   if "ALLOW_PARTIAL_COMPARISON" in text), None)
+    assert source is not None, "the strict coverage cell is missing"
+    manifest = {"partitions": {"calibration": ["test/good/a.png", "test/bad/b.png"],
+                               "test": ["test/bad/c.png"],
+                               "patchcore_train": ["train/good/d.png"]}}
+    base = {
+        "partition": "calibration",
+        "image": "good/a.png",
+        "truly_abnormal": False,
+        "yolo_max_conf": 0.9,
+        "score": 0.2,
+    }
+    def run(yolo_rows, patchcore_rows):
+        namespace = {"pd": pd, "Path": __import__("pathlib").Path,
+                     "manifest": manifest}
+        namespace["yolo_frame"] = pd.DataFrame(yolo_rows)
+        namespace["patchcore_frame"] = pd.DataFrame(patchcore_rows)
+        exec(compile(source, "<strict comparison>", "exec"), namespace)  # noqa: S102
+        return namespace
+
+    patchcore_ok = [dict(base, image="good/a.png"),
+                    dict(base, image="bad/b.png", truly_abnormal=True)]
+    yolo_ok = [dict(base, image="good/a.png"),
+               dict(base, image="bad/b.png", truly_abnormal=True)]
+    namespace = run(yolo_ok, patchcore_ok)
+    assert namespace["comparison_is_final"] is True
+    assert namespace["shared_images"] == {"good/a.png", "bad/b.png"}
+
+    duplicate = patchcore_ok + [dict(base, image="good/a.png")]
+    with pytest.raises(ValueError, match="duplicate image IDs"):
+        run(yolo_ok, duplicate)
+
+    with pytest.raises(ValueError, match="calibration partition is incomplete"):
+        run(yolo_ok, patchcore_ok[:1])
 
 
 def test_split_manifest_and_provenance_are_required(comparison_source: str) -> None:

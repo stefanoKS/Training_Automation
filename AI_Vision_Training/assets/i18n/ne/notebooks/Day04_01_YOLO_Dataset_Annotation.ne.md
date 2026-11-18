@@ -1,459 +1,467 @@
 <!--
-नेपाली अनुवाद / Nepali translation source for
+Nepali anuwad / Nepali translation source for
 notebooks/Day04_YOLO_Training/Day04_01_YOLO_Dataset_Annotation.ipynb
 -->
-# दिन ४ नोटबुक ०१ — नेपाली अनुवाद
+# din 4 notebook 01 — Nepali anuwad
 
 <!-- ne-cell: 36dbdec7 | after-heading -->
-# दिन ४ नोटबुक ०१: डेटासेट र लेबल (annotation)
+# din 4 notebook 01: dataset ra label (annotation)
 
 <!-- ne-cell: 36dbdec7 -->
-## सिकाइ लक्ष्यहरू
+## sikai lakshyaharu
 
-| नेपाली |
+| Nepali |
 | --- |
-| 1. सुपरभाइज्ड लर्निङमा के-के चाहिन्छ बताउन सक्ने। |
-| 2. YOLO ढाँचाको सही लेबल पढेर अर्थ बताउन सक्ने। |
-| 3. सामान्यीकृत निर्देशाङ्क आफैं गणना गर्न सक्ने। |
-| 4. प्रशिक्षण, प्रमाणीकरण र परीक्षणको भूमिका र छुट्याउनुको कारण बताउन सक्ने। |
-| 5. डेटा चुहावट (data leakage) किन समस्या हो बताउन सक्ने। |
+| 1. suparabhaijd larning ma ke-ke chahinchha bataun sakne. |
+| 2. YOLO dhanchako sahi label padher arth bataun sakne. |
+| 3. samanyikrit nirdeshangk aphain ganana garna sakne. |
+| 4. prashikshan, pramanikaran ra parikshanko bhoomika ra chhutyaunuko karan bataun sakne. |
+| 5. data chuhabat (data leakage) kina samasya ho bataun sakne. |
 
-## यो नोटबुकको आधारभूत जानकारी
+## yo notebookko adharabhut jankari
 
-| विषय | विवरण |
+| bishay | biwaran |
 | --- | --- |
-| सिकाइ समय (अनुमान) | 80 मिनेट |
-| कठिनाइ | सुरुवाती तह |
-| पूर्वशर्त | दिन ३ सकिएको हुनुपर्छ। |
-| आवश्यक लाइब्रेरी | numpy, matplotlib, opencv-python, pillow, pandas |
-| प्रयोग हुने kernel | aivision |
-| आजको समयतालिका | [`COURSE_SYLLABUS.md` दिन ४](../../COURSE_SYLLABUS.md#day4) |
+| sikai samay (anuman) | 80 minet |
+| kathinai | surubati tah |
+| poorwashart | din 3 sakieko hunuparchha. |
+| aawashyak laibreri | numpy, matplotlib, opencv-python, pillow, pandas |
+| prayog hune kernel | aivision |
+| ajako samayatalika | [`COURSE_SYLLABUS.md` din 4](../../COURSE_SYLLABUS.md#day4) |
 
-### बुझाउनुपर्ने काम
+### bujhaunuparne kaam
 
-| नेपाली |
+| Nepali |
 | --- |
-| आफ्नो डेटासेट जाँचेको नतिजा |
-| हातैले गणना गरेको YOLO ढाँचाको निर्देशाङ्क |
+| aphno dataset jancheko natija |
+| hataile ganana gareko YOLO dhanchako nirdeshangk |
 
 <!-- ne-cell: 94c76861 | after-heading -->
-## यो नोटबुक कहाँ पर्छ
+## yo notebook kahan parchha
 
 <!-- ne-cell: 94c76861 -->
-| विषय | विवरण |
+| bishay | biwaran |
 | --- | --- |
-| दिन | दिन ४ |
-| आजको क्रम | आजको नोटबुकमध्ये 1 / 3 |
-| लाग्ने समय | 80 मिनेट |
-| पूर्वशर्त | दिन ३ |
-| आजको समयतालिका | [`COURSE_SYLLABUS.md` दिन ४](../../COURSE_SYLLABUS.md#day4) |
+| din | din 4 |
+| ajako kram | ajako notabukamadhye 1 / 3 |
+| lagne samay | 80 minet |
+| poorwashart | din 3 |
+| ajako samayatalika | [`COURSE_SYLLABUS.md` din 4](../../COURSE_SYLLABUS.md#day4) |
 
-दिनको समयतालिका `COURSE_SYLLABUS.md` मा एउटै ठाउँमा छ। यो नोटबुक त्यसको एउटा भाग मात्र हो।
+dinko samayatalika `COURSE_SYLLABUS.md` ma eutai thaun ma chha. yo notebook tyasko euta bhaag matra ho.
 
 <!-- ne-cell: audit-learning-loop | after-heading -->
-### अनुमान गर्नुहोस्, चलाउनुहोस्, हेर्नुहोस्, व्याख्या गर्नुहोस्
+### anuman garnuhos, chalaunuhos, hernuhos, byakhya garnuhos
 
 <!-- ne-cell: audit-learning-loop -->
-प्रशिक्षण, प्रमाणीकरण र परीक्षणको भूमिका फरक छ, र खिचाइको समूह पनि छुट्याइन्छ। महत्त्वपूर्ण सेल
-चलाउनुअघि इनपुट, काम र नतिजा एक-एक वाक्यमा लेख्नुहोस्। पहिले अनुमान गरेर चलाउनुहोस् र मान वा चित्र
-हेर्नुहोस्। बाँडफाँटको एकाइ मात्र बदलेर फेरि अनुमान गरी चलाउनुहोस्।
+prashikshan, pramanikaran ra parikshanko bhoomika farak chha, ra khichaiko samuh pani chhutyainchha. mahattwapurna cell
+chalaunuaghi input, kaam ra natija ek-ek bakyama lekhnuhos. pahile anuman garera chalaunuhos ra maan wa chitra
+hernuhos. bandaphantako ekai matra badaler feri anuman gari chalaunuhos.
 
 <!-- ne-cell: 5c2e0f15 | after-heading -->
-## Part 0 तयारी
+## Part 0 tayari
 
 <!-- ne-cell: 761c228b | after-heading -->
-**यो डेटासेटबारे**
+**yo detasetabare**
 <!-- ne-pair: About this dataset -->
 
 <!-- ne-cell: 761c228b -->
-यो तालिममा प्रयोग हुने डेटासेट **सबै संश्लेषित तस्बिर** हुन्। Python ले बनाएका "PVC सिटजस्तो"
-तस्बिर हुन्, वास्तविक कारखानाका तस्बिर होइनन्।
+yo talim ma prayog hune dataset **sabai sansleshit tasbir** hun. Python le banaeka "PVC sitajasto"
+tasbir hun, bastabik karakhanaka tasbir hoinan.
 
-बनाउने कार्यक्रमलाई **चाहेको सही उत्तर (class र स्थान) पहिले नै थाहा हुन्छ**। तर त्यो सङ्ख्या तस्बिरमा
-त्यसै सही हुन्छ भन्ने छैन। चित्र बनाउने क्रम, तस्बिरको छेउमा काटिनु, निर्देशाङ्क परिवर्तन, तस्बिरको
-आकार बदल्नु, र कार्यक्रमकै बिग्रेको भागले लेबल देखिने कुराभन्दा सर्न सक्छ। त्यसैले **बनाइएको आयत
-तस्बिरमा हेरेर जाँच्ने** काम छोड्न मिल्दैन।
+banaune karyakramalai **chaheko sahi uttar (class ra sthan) pahile nai thaha hunchha**. tar tyo sankhya tasbir ma
+tyasai sahi hunchha bhanne chhaina. chitra banaune kram, tasbirko chheuma katinu, nirdeshangk paribartan, tasbirko
+akar badalnu, ra karyakramakai bigreko bhaagle label dekhine kurabhanda sarn sakchha. tyasaile **banaiyeko ayat
+tasbir ma herer jaanchne** kaam chhodn mildaina.
 
-वास्तविक बिग्रेको सामानमा "यो चिसो कहाँसम्म हो" भन्ने कुरा मान्छेले तय गर्नुपर्छ र विचार फरक पर्न सक्छ।
-लेबल **मान्छेले बनाउने, मान्छेको सहयोगमा बनाउने वा कार्यक्रमले बनाउने** जुनै भए पनि, **लेबलको गुणस्तर**
-तस्बिरको गुणस्तर, सङ्ख्या र model सँगै नतिजालाई असर गर्छ।
+bastabik bigreko samanama "yo chiso kahan samma ho" bhanne kura manchhele tay garnuparchha ra bichar farak parna sakchha.
+label **manchhele banaune, manchheko sahayogama banaune wa karyakramale banaune** junai bhae pani, **labelko gunastar**
+tasbirko gunastar, sankhya ra model sangai natija lai asar garchha.
 
 <!-- ne-cell: 8e303ba0 | after-heading -->
-## Part 1 सुपरभाइज्ड लर्निङ
+## Part 1 suparabhaijd larning
 
 <!-- ne-cell: ebd715a4 | after-heading -->
-### नतिजाको उदाहरण
+### natijako udaharan
 
 <!-- ne-cell: ebd715a4 -->
-यो नतिजा उही इनपुटमा उही आउँछ। तालिमको डेटासेट स्थिर छ र सङ्ख्या
-`assets/yolo_dataset/dataset_summary.json` मा सुरक्षित छन्।
+yo natija uhi input ma uhi aaunchha. talimko dataset sthir chha ra sankhya
+`assets/yolo_dataset/dataset_summary.json` ma surakshit chhan.
 
 <!-- ne-cell: b2fcf17e | after-heading -->
-**"उत्तर भएका उदाहरण" बाट सिक्ने**
+**"uttar bhaeka udaharan" baat sikne**
 <!-- ne-pair: Learning from examples with answers -->
 
 <!-- ne-cell: b2fcf17e -->
-**सुपरभाइज्ड लर्निङ** ले **इनपुट र सही उत्तरको जोडी** धेरै पटक देखाएर सिकाउँछ।
+**suparabhaijd larning** le **input ra sahi uttarko jodi** dherai patak dekhaer sikaunchha.
 
-`इनपुट: सिटको तस्बिर` र `सही उत्तर: यो स्थानमा कालो थोप्लो छ (आयत र class नाम)`।
+`input: sitako tasbir` ra `sahi uttar: yo sthanama kalo thoplo chha (ayat ra class naam)`.
 
-यो "सही उत्तर" लाई **लेबल (annotation)** भनिन्छ।
+yo "sahi uttar" lai **label (annotation)** bhaninchha.
 
-| शब्द | अर्थ |
+| shabd | arth |
 |---|---|
-| लेबल / annotation | तस्बिरको सही जानकारी |
-| बाउन्डिङ बक्स | दोष वरिपरि बनाइएको आयत |
-| class लेबल | दोषको प्रकार (कालो थोप्लो, चिसो, धर्का) |
-| सही लेबल फाइल | लेबललाई फाइलमा राखिएको रूप |
+| label / annotation | tasbirko sahi jankari |
+| baunding baks | dosh baripari banaiyeko ayat |
+| class label | doshko prakar (kalo thoplo, chiso, dharka) |
+| sahi label file | label lai file ma rakhieko rup |
 
-लेबल **मान्छेले, सहयोगसहित वा कार्यक्रमले** बनाउन सकिन्छ। यो तालिमको डेटासेटमा बनाउने कार्यक्रमकै
-लेबल प्रयोग भएको छ। जुनै तरिकाले बनाए पनि **गलत लेबल model कै गल्ती बन्छ**: मान्छेको काम समय लिन्छ,
-स्वतः बनाइएकोमा चित्र बनाउने वा निर्देशाङ्क परिवर्तनको गल्ती मिसिन सक्छ। **तस्बिरको गुणस्तर, सङ्ख्या
-र model सँगै लेबलको गुणस्तरले नतिजाको उच्चतम सीमा तय गर्छ।**
+label **manchhele, sahayogasahit wa karyakramale** banaun sakinchha. yo talimko dataset ma banaune karyakramakai
+label prayog bhaeko chha. junai tarikale banae pani **galat label model kai galti banchha**: manchheko kaam samay linchha,
+sbatah banaiyeko ma chitra banaune wa nirdeshangk paribartanako galti misin sakchha. **tasbirko gunastar, sankhya
+ra model sangai labelko gunastarale natijako uchchatam sima tay garchha.**
 
 <!-- ne-cell: e24b5fa4 | after-heading -->
-## Part 2 डेटासेटको बनावट
+## Part 2 datasetko banabat
 
 <!-- ne-cell: 111d802b | after-heading -->
-**YOLO डेटासेटको रचना**
+**YOLO datasetko rachana**
 <!-- ne-pair: The YOLO dataset layout -->
 
 <!-- ne-cell: 111d802b -->
-YOLO डेटासेट तोकिएको रचनामा राखिन्छ: `images/` भित्र `train/`, `val/`, `test/`, र `labels/` भित्र पनि
-त्यही तीन फोल्डर, साथै `data.yaml`।
+YOLO dataset tokieko rachana ma rakhinchha: `images/` bhitr `train/`, `val/`, `test/`, ra `labels/` bhitr pani
+tyahi tin folder, sathai `data.yaml`.
 
-महत्त्वपूर्ण कुरा **तस्बिर र लेबलको फाइल नाम उही** हुनुपर्छ (extension मात्र फरक)। `train_0000.png`
-सँग `train_0000.txt` जोडिन्छ। `data.yaml` मा class नाम र फोल्डरको स्थान लेखिन्छ।
+mahattwapurna kura **tasbir ra labelko file naam uhi** hunuparchha (extension matra farak). `train_0000.png`
+sang `train_0000.txt` jodinchha. `data.yaml` ma class naam ra folderko sthan lekhinchha.
 
 <!-- ne-cell: fe231231 | after-heading -->
-**`data.yaml` को अर्थ**
+**`data.yaml` ko arth**
 <!-- ne-pair: What `data.yaml` means -->
 
 <!-- ne-cell: fe231231 -->
-| लाइन | अर्थ |
+| line | arth |
 |---|---|
-| `path` | डेटासेटको मूल फोल्डर |
-| `train` / `val` / `test` | प्रत्येक तस्बिर फोल्डर (`path` बाट सापेक्ष) |
-| `names` | class क्रम सङ्ख्या → class नाम |
+| `path` | datasetko mul folder |
+| `train` / `val` / `test` | pratyek tasbir folder (`path` baat sapeksh) |
+| `names` | class kram sankhya → class naam |
 
-> `path` पूरा बाटो (absolute) मा लेखिएको छ। **फोल्डर सार्दा यो फाइल फेरि लेख्नुपर्छ।** त्यो क्रम
-> अर्को नोटबुक (04_02) मा देखाइएको छ।
+> `path` pura bato (absolute) ma lekhieko chha. **folder sarda yo file feri lekhnuparchha.** tyo kram
+> arko notebook (04_02) ma dekhaieko chha.
 
 <!-- ne-cell: dafe08ab | after-heading -->
-## Part 3 लेबल फाइल पढ्ने
+## Part 3 label file padhne
 
 <!-- ne-cell: ce6a81f7 | after-heading -->
-### आयत र लेबलका पाँच मान
+### ayat ra labelka paanch maan
 
 <!-- ne-cell: ce6a81f7 | after-image:../../assets/diagrams/teach_yolo_label_fields.png -->
-चित्र: तालिम डेटासेटको वास्तविक फाइल `train_0002.png` र त्यसको एक लाइनको लेबलबाट बनाइएको आयत
-(संश्लेषित तस्बिर)। आयतले सन्को धर्कालाई घेरेको छ।
+chitra: talim datasetko bastabik file `train_0002.png` ra tyasko ek lineko label baat banaiyeko ayat
+(sansleshit tasbir). ayatale sanko dharkalai ghereko chha.
 
-**ध्यान दिनुपर्ने कुरा**
+**dhyan dinuparne kura**
 
-एक लाइनमा क्रम `class_id x_center y_center width height` हुन्छ। **पहिलो `class_id` पूर्णाङ्क class
-सङ्ख्या** हो; यो तालिममा 0 = black_spot, 1 = scratch, 2 = streak। चित्रको पातलो धर्का streak हुनाले
-`class_id` 2 हुन्छ। **class सङ्ख्या सामान्यीकृत गरिँदैन।**
+ek line ma kram `class_id x_center y_center width height` hunchha. **pahilo `class_id` purnangk class
+sankhya** ho; yo talim ma 0 = black_spot, 1 = scratch, 2 = streak. chitrako patalo dharka streak hunale
+`class_id` 2 hunchha. **class sankhya samanyikrit garindain.**
 
-**बाँकी चार मान (केन्द्र x, केन्द्र y, चौडाइ, उचाइ) मात्र** 0–1 बीच हुन्छन्। ती पनि पिक्सेल होइनन्,
-**तस्बिरको चौडाइ-उचाइको अनुपात** हुन्। त्यसैले तस्बिर सानो गर्दा लेबल फेरि लेख्नु पर्दैन। पाँचै मान
-0–1 हुँदैनन्।
+**banki chaar maan (kendr x, kendr y, chaudai, uchai) matra** 0–1 bich hunchhan. ti pani piksel hoinan,
+**tasbirko chaudai-uchaiko anupaat** hun. tyasaile tasbir sano garda label feri lekhnu pardaina. panchai maan
+0–1 hundainan.
 
-चित्रमा देखाइएको आयत छापिएका सङ्ख्याबाट यही गणनाले बनाइएको हो।
+chitra ma dekhaieko ayat chhapieka sankhya baat yahi gananale banaiyeko ho.
 
 ```text
-x1 = (x_center - width / 2) * तस्बिरको चौडाइ       x_center = (x1 + x2) / 2 / तस्बिरको चौडाइ
-y1 = (y_center - height / 2) * तस्बिरको उचाइ       y_center = (y1 + y2) / 2 / तस्बिरको उचाइ
-x2 = (x_center + width / 2) * तस्बिरको चौडाइ       width    = (x2 - x1) / तस्बिरको चौडाइ
-y2 = (y_center + height / 2) * तस्बिरको उचाइ       height   = (y2 - y1) / तस्बिरको उचाइ
+x1 = (x_center - width / 2) * tasbirko chaudai       x_center = (x1 + x2) / 2 / tasbirko chaudai
+y1 = (y_center - height / 2) * tasbirko uchai       y_center = (y1 + y2) / 2 / tasbirko uchai
+x2 = (x_center + width / 2) * tasbirko chaudai       width    = (x2 - x1) / tasbirko chaudai
+y2 = (y_center + height / 2) * tasbirko uchai       height   = (y2 - y1) / tasbirko uchai
 ```
 
-**सोच्नुहोस्**
+**sochnuhos**
 
-- उही आयत 640 px र 1280 px को तस्बिरमा राख्दा लेबलको मान बदलिन्छ?
+- uhi ayat 640 px ra 1280 px ko tasbir ma rakhda labelko maan badlinchha?
 
 <!-- ne-cell: clarity-label-bridge-predict | after-heading -->
-#### वास्तविक फाइलहरू जोड्ने
+#### bastabik fileharu jodne
 
 <!-- ne-cell: clarity-label-bridge-predict -->
-पहिले नै भएको संश्लेषित `train_0002.png` → उही नामको लेबल → `data.yaml` को `2: streak` → मिलाएर
-देखाइएको चित्र जाँच्नुहोस्। अनुमान: पाँच मानमध्ये अनुपात नभएको कुन हो? पहिलो मात्र पूर्णाङ्क class ID हो।
+pahile nai bhaeko sansleshit `train_0002.png` → uhi naamko label → `data.yaml` ko `2: streak` → milaer
+dekhaieko chitra jaanchnuhos. anuman: paanch manamadhye anupaat nabhaeko kun ho? pahilo matra purnangk class ID ho.
 
 <!-- ne-cell: clarity-label-bridge-interpret -->
-पहिलो 2 class हो; बाँकी चार मान मात्र सामान्यीकृत निर्देशाङ्क हुन्। तल मिलाएर देखाइएको चित्रमा पातलो धर्का
-खोज्नुहोस्। सानो प्रयोग: तस्बिरको चौडाइ र उचाइ दुवै दोब्बर गर्दा पिक्सेल निर्देशाङ्क र सामान्यीकृत
-निर्देशाङ्क कसरी बदलिन्छन्?
+pahilo 2 class ho; banki chaar maan matra samanyikrit nirdeshangk hun. tal milaer dekhaieko chitra ma patalo dharka
+khojnuhos. sano prayog: tasbirko chaudai ra uchai dubai dobbar garda piksel nirdeshangk ra samanyikrit
+nirdeshangk kasari badalinchhan?
 
 <!-- ne-cell: c892d3b2 | after-heading -->
-**एक लाइन = एक दोष**
+**ek line = ek dosh**
 <!-- ne-pair: One line per defect -->
 
 <!-- ne-cell: c892d3b2 -->
-लेबल फाइलको एक लाइनमा पाँच सङ्ख्या हुन्छन् (मान उदाहरणका लागि)।
+label fileko ek line ma paanch sankhya hunchhan (maan udaharanka lagi).
 
 ```text
 2 0.550000 0.425000 0.300000 0.250000
 class_id  x_center  y_center  width  height
-(पूर्णाङ्क)   <- यी चार मात्र 0–1 मा सामान्यीकृत ->
+(purnangk)   <- yi chaar matra 0–1 ma samanyikrit ->
 ```
 
-- `class_id` … पूर्णाङ्क class सङ्ख्या। यो तालिममा 0 = black_spot, 1 = scratch, 2 = streak
-- बाँकी चार … तस्बिरको चौडाइ (x) र उचाइ (y) ले भाग गरेको केन्द्र र आकार। आयत तस्बिरभित्र भए 0–1
+- `class_id` … purnangk class sankhya. yo talim ma 0 = black_spot, 1 = scratch, 2 = streak
+- banki chaar … tasbirko chaudai (x) ra uchai (y) le bhaag gareko kendr ra akar. ayat tasbirabhitr bhae 0–1
 
-खाली फाइलको अर्थ **"यो तस्बिरमा लेबल गर्ने दोष छैन"** हो। तर त्यो **"यो तस्बिरमा दोष छैन भन्ने प्रमाण"
-होइन**। छुटेको वा लेख्न बिर्सिएको लेबल पनि उस्तै खाली देखिन्छ। त्यसैले पृष्ठभूमि तस्बिर (negative
-sample) प्रयोग गर्नुअघि **तस्बिर हेरेर जाँच्नुहोस्**। जाँचिएको पृष्ठभूमि तस्बिरले model लाई "यहाँ केही
-छैन" सिक्न मद्दत गर्छ।
+**Akar matra badalera (na kati) herda** samanyikrit nirdeshangk uhi anupatma rahanchha. **Katne (crop),
+spatial warp, wa tasbir matra badaler label na milaune** kaam gare chahi samanyikrit nirdeshangk tyasai
+sahi rahanchha bhanne chhaina.
 
-**यो तालिमको लेबल नीति**: लक्ष्य तीन class मात्र — black_spot, scratch, streak। अरू बुट्टा वा दाग
-लेबल गरिँदैन। लेबल नभएको तस्बिरको अर्थ "लेबल गर्ने दोष छैन" मात्र हो, त्यसभन्दा बढी होइन।
+khali fileko arth **"yo tasbir ma label garne dosh chhaina"** ho. tar tyo **"yo tasbir ma dosh chhaina bhanne praman"
+hoina**. chhuteko wa lekhna birsieko label pani ustai khali dekhinchha. tyasaile prishthabhumi tasbir (negative
+sample) prayog garnuaghi **tasbir herer jaanchnuhos**. janchieko prishthabhumi tasbirle model lai "yahan kehi
+chhaina" sikn maddat garchha.
+
+**yo talimko label niti**: lakshya tin class matra — black_spot, scratch, streak. aru butta wa dag
+label garindain. label nabhaeko tasbirko arth "label garne dosh chhaina" matra ho, tyasabhanda badhi hoina.
 
 <!-- ne-cell: 400f5185 | after-heading -->
-**सामान्यीकृत निर्देशाङ्क फर्काउने**
+**samanyikrit nirdeshangk pharkaune**
 <!-- ne-pair: Convert normalised coordinates back -->
 
 <!-- ne-cell: 400f5185 -->
-लेबलको 0–1 मानलाई तस्बिरको आकारले गुणन गर्दा पिक्सेलमा फर्किन्छ:
+labelko 0–1 maan lai tasbirko akarale gunan garda pikselama pharkinchha:
 
 ```text
-x1 = (xc - w/2) * तस्बिरको चौडाइ
-y1 = (yc - h/2) * तस्बिरको उचाइ
-x2 = (xc + w/2) * तस्बिरको चौडाइ
-y2 = (yc + h/2) * तस्बिरको उचाइ
+x1 = (xc - w/2) * tasbirko chaudai
+y1 = (yc - h/2) * tasbirko uchai
+x2 = (xc + w/2) * tasbirko chaudai
+y2 = (yc + h/2) * tasbirko uchai
 ```
 
 <!-- ne-cell: 5dbe36b0 | after-heading -->
-**लेबल तस्बिरमा बनाएर जाँच्ने**
+**label tasbir ma banaer jaanchne**
 <!-- ne-pair: Draw the labels to inspect them -->
 
 <!-- ne-cell: 5dbe36b0 -->
-लेबल सही छ कि छैन जाँच्ने सबैभन्दा सजिलो तरिका **तस्बिरमा बनाएर हेर्नु** हो।
+label sahi chha ki chhaina jaanchne sabaibhanda sajilo tarika **tasbir ma banaer hernu** ho.
 
-आयतले दोष घेरेको छैन भने कारण लेबल मात्र होइन। यही क्रममा जाँच्नुहोस्।
+ayatale dosh ghereko chhaina bhane karan label matra hoina. yahi kram ma jaanchnuhos.
 
-1. **लेबल** … त्यो दोष घेर्ने उद्देश्यले लगाइयो कि (लगाउन बिर्सनु, class फरक पार्नु)
-2. **निर्देशाङ्क परिवर्तन** … `label_to_boxes` को गणना, x र y साटिनु, `int()` को राउन्डिङ
-3. **तस्बिरको आकार** … लेबल बनाउँदाको र अहिलेको तस्बिरको चौडाइ-उचाइ उही छ कि
-4. **रूपान्तरण (transform)** … सानो-ठुलो, काटाइ, घुमाउने, खाली ठाउँ (letterbox) फर्काउन बिर्सनु
+1. **label** … tyo dosh gherne uddeshyale lagaiyo ki (lagaun birsanu, class farak parnu)
+2. **nirdeshangk paribartan** … `label_to_boxes` ko ganana, x ra y satinu, `int()` ko raunding
+3. **tasbirko akar** … label banaundako ra ahileko tasbirko chaudai-uchai uhi chha ki
+4. **rupantaran (transform)** … sano-thulo, katai, ghumaune, khali thaun (letterbox) pharkaun birsanu
 
-यी चार जाँचेपछि मात्र लेबल सुधार्नुहोस्। लेबल सुधार्नुअघि यही क्रममा शङ्का गर्ने बानी व्यवहारमा पनि
-काम लाग्छ। **AI तालिम गर्नुअघि डेटामाथि शङ्का गर्नु** नै मूल नियम हो।
+yi chaar janchepachhi matra label sudharnuhos. label sudharnuaghi yahi kram ma shangka garne bani byabaharama pani
+kaam lagchha. **AI talim garnuaghi detamathi shangka garnu** nai mul niyam ho.
 
 <!-- ne-cell: 7d972880 | after-heading -->
-## Part 4 प्रशिक्षण, प्रमाणीकरण र परीक्षण
+## Part 4 prashikshan, pramanikaran ra parikshan
 
 <!-- ne-cell: f937aad6 | after-heading -->
-### तीन भागको भूमिका
+### tin bhaagko bhoomika
 
 <!-- ne-cell: f937aad6 | after-image:../../assets/diagrams/teach_split_roles.png -->
-चित्र: तीनै भागको भूमिका र यो तालिमको डेटासेटको वास्तविक सङ्ख्या (train 64 / val 16 / test 16, करिब
-66.7 / 16.7 / 16.7 %)।
+chitra: tinai bhaagko bhoomika ra yo talimko datasetko bastabik sankhya (train 64 / val 16 / test 16, karib
+66.7 / 16.7 / 16.7 %).
 
-**ध्यान दिनुपर्ने कुरा**
+**dhyan dinuparne kura**
 
-भूमिका तीन छन्। **प्रशिक्षण (train)** ले weight तय गर्छ, **प्रमाणीकरण (val)** ले थ्रेसहोल्ड र model कसरी
-छान्ने तय गर्छ, र **परीक्षण (test)** स्थिर गरिएको सेटिङको अन्तिम मूल्याङ्कनका लागि एक पटक मात्र प्रयोग
-हुन्छ। चित्रको सङ्ख्या यो डेटासेटको वास्तविक मान हो।
+bhoomika tin chhan. **prashikshan (train)** le weight tay garchha, **pramanikaran (val)** le threshold ra model kasari
+chhanne tay garchha, ra **parikshan (test)** sthir garieko settingko antim mulyankanka lagi ek patak matra prayog
+hunchha. chitrako sankhya yo datasetko bastabik maan ho.
 
-थ्रेसहोल्ड वा model छान्न प्रयोग गरेको डेटामा मूल्याङ्कन गर्दा नतिजा राम्रो देखिन्छ। त्यसैले **परीक्षण
-अन्तमा एक पटक मात्र**। फाइल नाम र hash फरक भए पनि एउटै खिचाइ-सत्रमा खिचिएका लगभग उही तस्बिरले भागहरू
-बीच जानकारी चुहाउँछन्।
+threshold wa model chhanna prayog gareko data ma mulyankan garda natija ramro dekhinchha. tyasaile **parikshan
+antama ek patak matra**. file naam ra hash farak bhae pani eutai khichai-satrama khichieka lagabhag uhi tasbirle bhaagharu
+bich jankari chuhaunchhan.
 
-साथै **चित्र हेरेर कुन फाइल तालिममा प्रयोग भयो थाहा हुँदैन**। छुट्याइएको छ कि छैन भन्ने कुरा फाइल वा
-समूहको सूची (manifest) र तालिमको सेटिङबाट जाँचिन्छ।
+sathai **chitra herer kun file talim ma prayog bhayo thaha hundaina**. chhutyaieko chha ki chhaina bhanne kura file wa
+samuhako soochi (manifest) ra talimko setting baat janchinchha.
 
-**सोच्नुहोस्**
+**sochnuhos**
 
-- तपाईंको प्रक्रियामा कुन एकाइमा बाँड्नु सही हुन्छ (मिति, लट, क्यामेरा)?
+- tapainko prakriyama kun ekaima bandnu sahi hunchha (miti, lat, kyamera)?
 
 <!-- ne-cell: 108f920a | after-heading -->
-**तीन भूमिका**
+**tin bhoomika**
 <!-- ne-pair: The three roles -->
 
 <!-- ne-cell: 108f920a -->
-| डेटा | भूमिका | कहिले प्रयोग |
+| data | bhoomika | kahile prayog |
 |---|---|---|
-| प्रशिक्षण (train) | model का सङ्ख्या तय गर्छ | तालिममा |
-| प्रमाणीकरण (val) | तालिमको प्रगति हेरेर सेटिङ छान्छ | तालिमकै बेला |
-| परीक्षण (test) | अन्तिम क्षमता नाप्छ। **तालिममा कहिल्यै हेरिँदैन** | तालिमपछि, एक पटक मात्र |
+| prashikshan (train) | model ka sankhya tay garchha | talim ma |
+| pramanikaran (val) | talimko pragati herer setting chhanchha | talimakai bela |
+| parikshan (test) | antim kshamata napchha. **talim ma kahilyai herindain** | talimapachhi, ek patak matra |
 
-किन बाँड्ने? प्रशिक्षण डेटामा मात्र नापिएको सङ्ख्याले **नयाँ डेटामा कति सक्छ** भन्ने देखाउँदैन। model ले
-प्रशिक्षण तस्बिरका सूक्ष्म गुणसम्म कण्ठ गरेर नयाँ तस्बिरमा लागू नहुने अवस्थालाई **ओभरफिटिङ
-(overfitting)** भनिन्छ।
+kina bandne? prashikshan data ma matra napieko sankhyale **nayan data ma kati sakchha** bhanne dekhaundain. model le
+prashikshan tasbirka sukshm gunasamm kanth garera nayan tasbir ma lagu nahune abastha lai **obharaphiting
+(overfitting)** bhaninchha.
 
-प्रशिक्षण डेटामा राम्रो नतिजा आउनु मात्रले "रटेको" भनेर टुङ्गो लाग्दैन। प्रशिक्षणको सङ्ख्याले
-**नयाँ डेटामा चल्छ कि चल्दैन** भन्ने जाँच्दैन भन्ने मात्र हो।
+prashikshan data ma ramro natija aunu matrale "rateko" bhanera tunggo lagdain. prashikshanko sankhyale
+**nayan data ma chalchha ki chaldain** bhanne janchdain bhanne matra ho.
 
 <!-- ne-cell: fig-teach_dataset_contact_sheet | after-heading -->
-### डेटासेटभित्र के छ हेर्ने
+### detasetabhitr ke chha herne
 
 <!-- ne-cell: fig-teach_dataset_contact_sheet | after-image:../../assets/diagrams/teach_dataset_contact_sheet.png -->
-चित्र: यो तालिममा साँच्चै प्रयोग हुने डेटासेटको train / val / test बाट पहिलो 4-4 तस्बिर। आयत लेबल फाइलबाट
-बनाइएका छन्। सन्दर्भ नतिजा (वास्तविक फाइल)।
+chitra: yo talim ma sanchchai prayog hune datasetko train / val / test baat pahilo 4-4 tasbir. ayat label file baat
+banaieka chhan. sandarbha natija (bastabik file).
 
-**ध्यान दिनुपर्ने कुरा**
+**dhyan dinuparne kura**
 
-contact sheet ले "देखिने रूप र लेबल लगाउने तरिका" मात्र देखाउँछ। कुन फाइल तालिममा प्रयोग भयो भन्ने
-देखाउँदैन। त्यो बाँडफाँटको अभिलेख (फाइल सूची, समूह, तालिमको सेटिङ) बाट जाँच्नुपर्छ।
+contact sheet le "dekhine rup ra label lagaune tarika" matra dekhaunchha. kun file talim ma prayog bhayo bhanne
+dekhaundain. tyo bandaphantako abhilekh (file soochi, samuh, talimko setting) baat janchnuparchha.
 
-**सोच्नुहोस्**
+**sochnuhos**
 
-- यी 4 तस्बिर हेरेर "तालिममा प्रयोग भएको छैन" भन्न सकिन्छ?
+- yi 4 tasbir herer "talim ma prayog bhaeko chhaina" bhann sakinchha?
 
 <!-- ne-cell: 200e964b | after-heading -->
-## Part 5 डेटा चुहावट
+## Part 5 data chuhabat
 
 <!-- ne-cell: 396d4a73 | after-heading -->
-**एउटै तस्बिर धेरै भागमा परे के हुन्छ**
+**eutai tasbir dherai bhaag ma pare ke hunchha**
 <!-- ne-pair: What happens when one image appears in two splits -->
 
 <!-- ne-cell: 396d4a73 -->
-प्रशिक्षण र परीक्षण दुवैमा **एउटै तस्बिर** (वा लगभग उही) परे model ले त्यो तस्बिर **रटेरै** राम्रो
-नतिजा दिन्छ।
+prashikshan ra parikshan dubaima **eutai tasbir** (wa lagabhag uhi) pare model le tyo tasbir **raterai** ramro
+natija dinchha.
 
-यो **ठगी** जस्तै हो। वास्तविक कार्यस्थलमा त्यस्तो तस्बिर आउँदैन, त्यसैले **कार्यस्थलको क्षमताको कुनै
-ग्यारेन्टी हुँदैन**। यसलाई **डेटा चुहावट (data leakage)** भनिन्छ।
+yo **thagi** jastai ho. bastabik karyasthalama tyasto tasbir aundain, tyasaile **karyasthalako kshamatako kunai
+gyarenti hundaina**. yas lai **data chuhabat (data leakage)** bhaninchha.
 
-**चुहावट हुने सामान्य कारण**
+**chuhabat hune samanya karan**
 
-- लगातार भिडियोबाट फ्रेम निकालेर छेउछाउका फ्रेम **shuffle गरेपछि** फरक भागमा राख्नु
-- एउटै सामान फरक कोणबाट खिचेर फरक भागमा राख्नु
-- एउटै लट वा एउटै खिचाइ-सत्रका तस्बिर भागहरूमा बाँड्नु
+- lagatar bhidiyobat phrem nikaler chheuchhauka phrem **shuffle garepachhi** farak bhaag ma rakhnu
+- eutai saman farak konabat khicher farak bhaag ma rakhnu
+- eutai lat wa eutai khichai-satraka tasbir bhaagharuma bandnu
 
-**पूर्वाग्रह र चुहावट फरक कुरा हुन्।** Shuffle गर्नुअघि डेटा बाँड्दा फाइलको क्रममा नियमितता भए
-प्रत्येक भागको सामग्री पूर्वाग्रहीत हुन्छ (**साम्पलिङ पूर्वाग्रह**)। यो चुहावट होइन। उल्टो, छेउछाउका फ्रेम
-अनियमित रूपमा बाँड्दा लगभग उही तस्बिर train र test दुवैमा पर्छ, त्यो **चुहावट** हो। उपाय
-**उत्पादन, लट वा खिचाइ-सत्रलाई एकाइ मानेर सँगै बाँड्नु** हो।
+**purbagrah ra chuhabat farak kura hun.** Shuffle garnuaghi data bandda fileko kram ma niyamitata bhae
+pratyek bhaagko samagri purbagrahit hunchha (**sampaling purbagrah**). yo chuhabat hoina. ulto, chheuchhauka phrem
+aniyamit rupama bandda lagabhag uhi tasbir train ra test dubaima parchha, tyo **chuhabat** ho. upay
+**utpadan, lat wa khichai-satralai ekai maner sangai bandnu** ho.
 
-यो तालिमको डेटासेटले **तस्बिरको SHA-256 hash ले ठ्याक्कै दोहोरो** जाँच्छ। यो जाँचले **एक बाइट पनि नमिल्ने
-(byte-identical) दोहोरो मात्र** भेट्छ। पिक्सेल मान अलि फरक भएको "लगभग उही तस्बिर" वा समूह-स्तरको
-चुहावट भेट्दैन।
+yo talimko datasetle **tasbirko SHA-256 hash le thyakkai dohoro** janchchha. yo jaanchle **ek bait pani namilne
+(byte-identical) dohoro matra** bhetchha. piksel maan ali farak bhaeko "lagabhag uhi tasbir" wa samuh-starko
+chuhabat bhetdain.
+
+hash jaanchko natija **tin sankhya chhuttai** padhnuhos: **ganieko file sankhya** (sabai bhaagka tasbir),
+**bhinna tasbir sankhya** (dohoro hataeko SHA-256 prakar), ra **eutai samagriko jodi sankhya** (dohoro jodi).
+eutai jodi bhae file sankhya bhinna tasbir sankhyabhanda 1 le badhi hunchha.
 
 <!-- ne-cell: fig-teach_leakage_split | after-heading -->
-### फ्रेमअनुसार बाँड्ने कि खिचाइअनुसार
+### phremaanusar bandne ki khichaianusar
 
 <!-- ne-cell: fig-teach_leakage_split | after-image:../../assets/diagrams/teach_leakage_split.png -->
-चित्र: वास्तविक संश्लेषित डेटासेटको एउटा तस्बिर र सानो पिक्सेल-मान आवाज थपिएको "लगभग उही तस्बिर"। स्थान
-सारिएको छैन। फ्रेमअनुसार बाँड्दा यी दुई train र test मा छुट्टिन्छन्।
+chitra: bastabik sansleshit datasetko euta tasbir ra sano piksel-maan abaj thapieko "lagabhag uhi tasbir". sthan
+sarieko chhaina. phremaanusar bandda yi dui train ra test ma chhuttinchhan.
 
-**ध्यान दिनुपर्ने कुरा**
+**dhyan dinuparne kura**
 
-एउटै सामान, एउटै खिचाइका तस्बिर तालिम र परीक्षणमा छुट्टिए देखिने रूप धेरै नजिक हुन्छ र क्षमता वास्तविकभन्दा
-उच्च देखिन्छ (leakage)। बाँडफाँट **उत्पादन, खिचाइ-सत्र जस्ता समूहको एकाइ** मा गर्नुपर्छ। यो सामग्रीको आवाज
-पिक्सेल मानको सानो परिवर्तन हो, स्थान सार्ने होइन। Hash जाँचले एक बाइट पनि नमिल्ने दोहोरो मात्र भेट्छ।
+eutai saman, eutai khichaika tasbir talim ra parikshan ma chhuttie dekhine rup dherai najik hunchha ra kshamata bastabikabhanda
+uchcha dekhinchha (leakage). bandaphant **utpadan, khichai-satr jasta samuhako ekai** ma garnuparchha. yo samagriko abaj
+piksel maanko sano paribartan ho, sthan sarne hoina. Hash jaanchle ek bait pani namilne dohoro matra bhetchha.
 
-**सोच्नुहोस्**
+**sochnuhos**
 
-- क्रमैसँग लिएका फोटो अनियमित रूपमा बाँड्दा क्षमता किन उच्च देखिन्छ?
+- kramaisang lieka photo aniyamit rupama bandda kshamata kina uchcha dekhinchha?
 
 <!-- ne-cell: audit-teach_group_split_vs_frame_split | after-heading -->
-### कोड कसरी पढ्ने
+### kod kasari padhne
 
 <!-- ne-cell: audit-teach_group_split_vs_frame_split | after-image:../../assets/svg/teach_group_split_vs_frame_split.svg -->
-चित्र: एउटै खिचाइ-समूहलाई बाँडफाँटको सीमामा नराख्नुहोस्। (गणना गरिएको संश्लेषित उदाहरण र योजनाबद्ध चित्र;
-model को वास्तविक नापिएको नतिजा होइन।)
+chitra: eutai khichai-samuhalai bandaphantako sima ma narakhnuhos. (ganana garieko sansleshit udaharan ra yojanabaddha chitra;
+model ko bastabik napieko natija hoina.)
 
-**ध्यान दिनुपर्ने कुरा**
+**dhyan dinuparne kura**
 
-उदाहरण: खिचाइ A सबै train, B सबै val, C सबै test मा राख्नुहोस्।
+udaharan: khichai A sabai train, B sabai val, C sabai test ma rakhnuhos.
 
-**सोच्नुहोस्**
+**sochnuhos**
 
-फाइलको ढाँचा फेरेपछि SHA-256 फरक आयो भने ती स्वतन्त्र तस्बिर हुन्?
+fileko dhancha pherepachhi SHA-256 farak ayo bhane ti sbatantr tasbir hun?
 
 <!-- ne-cell: 585c7c08 | after-heading -->
-## अभ्यास
+## abhyas
 
 <!-- ne-cell: a9d7688a | after-heading -->
-**अभ्यास 1 (आधारभूत): लेबल हातैले गणना गर्ने**
+**abhyas 1 (adharabhut): label hataile ganana garne**
 <!-- ne-pair: Exercise 1 (basic): compute a label by hand -->
 
 <!-- ne-cell: a9d7688a -->
-तस्बिरको आकार 320 × 320, दोषको class black_spot (`class_id` = 0), आयत `x1=100, y1=140, x2=180, y2=200`
-हुँदा YOLO ढाँचाको एक लाइन गणना गर्नुहोस्। पहिलो class सङ्ख्या, बाँकी चार सामान्यीकृत स्थान र आकार।
+tasbirko akar 320 × 320, doshko class black_spot (`class_id` = 0), ayat `x1=100, y1=140, x2=180, y2=200`
+hunda YOLO dhanchako ek line ganana garnuhos. pahilo class sankhya, banki chaar samanyikrit sthan ra akar.
 
-- पूरा भएको मापन: `0 0.437500 0.531250 0.250000 0.187500` सँग मिल्नुपर्छ
+- pura bhaeko maapan: `0 0.437500 0.531250 0.250000 0.187500` sang milnuparchha
 
 <!-- ne-cell: b82ec1c9 | after-heading -->
-**अभ्यास 2 (मध्यम): खाली लेबल गन्ने**
+**abhyas 2 (madhyam): khali label ganne**
 <!-- ne-pair: Exercise 2 (intermediate): count the empty labels -->
 
 <!-- ne-cell: b82ec1c9 -->
-train / val / test प्रत्येकमा **खाली लेबल (पृष्ठभूमि तस्बिर) को अनुपात** गणना गर्नुहोस्।
+train / val / test pratyekama **khali label (prishthabhumi tasbir) ko anupaat** ganana garnuhos.
 
-पूरा भएको मापन: तीन प्रतिशत एक दशमलवसम्म देखाइएका छन्।
+pura bhaeko maapan: tin pratishat ek dashamalabasamm dekhaieka chhan.
 
 <!-- ne-cell: 0fbbc7cb | after-heading -->
-**अभ्यास 3 (वैकल्पिक): डेटा चुहावट भेट्ने**
+**abhyas 3 (baikalpik): data chuhabat bhetne**
 <!-- ne-pair: Exercise 3 (optional challenge): introduce and detect leakage -->
 
 <!-- ne-cell: 0fbbc7cb -->
-जानाजान डेटा चुहावट बनाएर भेट्न सकिन्छ कि परीक्षण गर्नुहोस्। **अनिवार्य होइन।**
+janajan data chuhabat banaer bhetn sakinchha ki parikshan garnuhos. **aniwarya hoina.**
 
-1. `images/test` बाट एउटा तस्बिर छानेर `images/train` मा **प्रतिलिपि** गर्नुहोस्
-2. माथिको hash जाँच सेल फेरि चलाउनुहोस्
-3. दोहोरो भेटिएको कुरा पुष्टि गर्नुहोस्
-4. प्रतिलिपि मेटाएर पहिलेको अवस्थामा फर्काउनुहोस्
+1. `images/test` baat euta tasbir chhaner `images/train` ma **pratilipi** garnuhos
+2. mathiko hash jaanch cell feri chalaunuhos
+3. dohoro bhetieko kura pushti garnuhos
+4. pratilipi metaer pahileko abastha ma pharkaunuhos
 
-पूरा भएको मापन: दोहोरो 1 वटा देखियो र प्रतिलिपि मेटाएर पहिलेको अवस्थामा फर्काइयो।
+pura bhaeko maapan: dohoro 1 bata dekhiyo ra pratilipi metaer pahileko abastha ma pharkaiyo.
 
 <!-- ne-cell: 27c8096a | after-heading -->
-#### बुझाइ जाँच्ने प्रश्न
+#### bujhai jaanchne prashna
 
 <!-- ne-cell: 27c8096a -->
-1. सुपरभाइज्ड लर्निङमा के-के चाहिन्छ? दुई कुरा भन्नुहोस्।
-2. लेबल फाइलको एक लाइनका पाँच मानले के-के जनाउँछन्? कुन-कुन सामान्यीकृत छन्?
-3. प्रमाणीकरण डेटा र परीक्षण डेटा किन छुट्याउने?
-4. डेटा चुहावट भए "नतिजा राम्रो देखिन्छ तर कार्यस्थलमा चल्दैन" किन हुन्छ?
-5. खाली लेबल (पृष्ठभूमि तस्बिर) किन चाहिन्छ? खाली लेबल भए "दोष छैन" भन्न मिल्छ?
+1. suparabhaijd larning ma ke-ke chahinchha? dui kura bhannuhos.
+2. label fileko ek lineka paanch maanle ke-ke janaunchhan? kun-kun samanyikrit chhan?
+3. pramanikaran data ra parikshan data kina chhutyaune?
+4. data chuhabat bhae "natija ramro dekhinchha tar karyasthalama chaldain" kina hunchha?
+5. khali label (prishthabhumi tasbir) kina chahinchha? khali label bhae "dosh chhaina" bhann milchha?
 
 <!-- ne-cell: ac9204c6 | after-heading -->
-## समस्या परेमा
+## samasya parema
 
 <!-- ne-cell: ac9204c6 -->
-त्रुटि आएपछि पहिले "कुन सेलमा", "कुन लाइनमा", "के सन्देश आयो" भनेर लेख्नुहोस्। बुझाउनुपर्ने काममा पनि
-त्यही अभिलेख राख्नुहोस्।
+truti aepachhi pahile "kun cell ma", "kun line ma", "ke sandesh ayo" bhanera lekhnuhos. bujhaunuparne kaam ma pani
+tyahi abhilekh rakhnuhos.
 
-| लक्षण | के गर्ने |
+| lakshan | ke garne |
 | --- | --- |
-| कुनै तस्बिरमा लेबल फाइल छैन | यसको अर्थ "लेबल गर्ने दोष छैन" हो। तर दोष छैन भन्ने प्रमाण होइन। तस्बिर हेरेर जाँच्नुहोस्। |
-| आयत दोषसँग मिलेन | ①लेबल ②निर्देशाङ्क परिवर्तन (`label_to_boxes`) ③तस्बिरको आकार ④सानो-ठुलो वा काटाइ जस्ता रूपान्तरण — यही क्रममा जाँचेपछि लेबल सुधार्नुहोस्। |
-| `FileNotFoundError: data.yaml` | डेटासेट बनाइएको छैन। `python assets\scripts\prepare_datasets.py` चलाउनुहोस्। |
-| `UnicodeDecodeError` ले लेबल पढिँदैन | लेबल ASCII हुनुपर्छ। एडिटरमा फेरि सुरक्षित गरेको भए character encoding जाँच्नुहोस्। |
+| kunai tasbir ma label file chhaina | yasko arth "label garne dosh chhaina" ho. tar dosh chhaina bhanne praman hoina. tasbir herer jaanchnuhos. |
+| ayat dosh sang milen | ①label ②nirdeshangk paribartan (`label_to_boxes`) ③tasbirko akar ④sano-thulo wa katai jasta rupantaran — yahi kram ma janchepachhi label sudharnuhos. |
+| `FileNotFoundError: data.yaml` | dataset banaiyeko chhaina. `python assets\scripts\prepare_datasets.py` chalaunuhos. |
+| `UnicodeDecodeError` le label padhindain | label ASCII hunuparchha. editarama feri surakshit gareko bhae character encoding jaanchnuhos. |
 
 <!-- ne-cell: 1058cec3 | after-heading -->
-## सम्पन्नता जाँचसूची
+## sampannata janchasuchi
 
 <!-- ne-cell: 1058cec3 -->
-**अनिवार्य बुँदा मात्र** दिइएका छन्। **अभ्यास 3 (वैकल्पिक) अनिवार्य होइन**; नगरे पनि पूरा मानिन्छ।
-समय बाँकी भएमा मात्र गर्नुहोस्।
+**aniwarya bunda matra** diieka chhan. **abhyas 3 (baikalpik) aniwarya hoina**; nagare pani pura maninchha.
+samay banki bhae ma matra garnuhos.
 
-सबैमा चिन्ह लागेपछि यो नोटबुक पूरा हुन्छ।
+sabai ma chinh lagepachhi yo notebook pura hunchha.
 
-**अनिवार्य**
+**aniwarya**
 
-- [ ] Part 1–Part 5 पढेर सबै code सेल चलाएँ
-- [ ] लेबल तस्बिरमा बनाएर जाँचें
-- [ ] hash ले दोहोरो जाँचें
-- [ ] अभ्यास 1–2 (अनिवार्य) गरें
-- [ ] बुझाइ जाँच्ने 5 प्रश्नको उत्तर दिएँ
-- [ ] नोटबुक सुरक्षित गरें
+- [ ] Part 1–Part 5 padher sabai code cell chalaen
+- [ ] label tasbir ma banaer janchen
+- [ ] hash le dohoro janchen
+- [ ] abhyas 1–2 (aniwarya) garen
+- [ ] bujhai jaanchne 5 prashnako uttar dien
+- [ ] notebook surakshit garen
 
-**वैकल्पिक**
+**baikalpik**
 
-- [ ] अभ्यास 3 (वैकल्पिक): डेटा चुहावट बनाएर भेटें
+- [ ] abhyas 3 (baikalpik): data chuhabat banaer bheten
 
 <!-- ne-cell: 16f8af21 | after-heading -->
-## थप अध्ययन (वैकल्पिक)
+## thap adhyayan (baikalpik)
 
 <!-- ne-cell: 16f8af21 -->
-### सन्दर्भ लिङ्क
+### sandarbha lingk
 
-- [Ultralytics: डेटासेट ढाँचा](https://docs.ultralytics.com/datasets/detect/)
-- [Ultralytics: डेटा सङ्कलन र लेबलिङ](https://docs.ultralytics.com/guides/)
-- [COCO लेबल ढाँचा](https://cocodataset.org/#format-data)
+- [Ultralytics: dataset dhancha](https://docs.ultralytics.com/datasets/detect/)
+- [Ultralytics: data sangkalan ra lebaling](https://docs.ultralytics.com/guides/)
+- [COCO label dhancha](https://cocodataset.org/#format-data)
 
-### थप चुनौती (अनिवार्य होइन)
+### thap chunauti (aniwarya hoina)
 
-खाली लेबल एउटा घटाएर (पृष्ठभूमि तस्बिर एउटा दोष तस्बिरमा बदलेर) तालिम गर्नुहोस् र झुटो पोजिटिभको
-सङ्ख्या बदलिन्छ कि हेर्नुहोस्।
+khali label euta ghataer (prishthabhumi tasbir euta dosh tasbir ma badaler) talim garnuhos ra jhuto pojitibhako
+sankhya badlinchha ki hernuhos.

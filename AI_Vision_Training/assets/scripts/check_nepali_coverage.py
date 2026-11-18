@@ -28,6 +28,7 @@ from pathlib import Path
 
 from course_notebooks import course_notebooks
 from apply_nepali_translations import REGION_RE
+from romanize_nepali import DEVANAGARI_RE, looks_like_nepali_latin
 
 COURSE_ROOT = Path(__file__).resolve().parents[2]
 CATALOG_DIR = COURSE_ROOT / "assets" / "i18n" / "ne" / "notebooks"
@@ -35,7 +36,6 @@ DOC_CATALOG_DIR = COURSE_ROOT / "assets" / "i18n" / "ne" / "docs"
 
 DOC_REGION_RE = re.compile(
     r"\n<!--\s*ne:begin\s+doc:[0-9a-f]+\s*-->\n(?P<body>.*?)\n<!--\s*ne:end\s*-->\n", re.S)
-DEVANAGARI_RE = re.compile(r"[\u0900-\u097f]")
 
 # Cells that deliberately stay untranslated: separators, empty scaffolding and the code placeholders
 # a learner is meant to fill in themselves.
@@ -48,6 +48,7 @@ FORBIDDEN_PATTERNS = {
     "hindi-करना": re.compile(r"करना"),
     "hindi-नहीं": re.compile(r"नहीं"),
     "hindi-होता": re.compile(r"होता"),
+    "hindi-latin": re.compile(r"(?i)\b(hai|hain|nahin|karna|hota)\b"),
     "placeholder": re.compile(r"(?i)\b(TODO|TBD|FIXME|XXX|लोरेम|ipsum)\b"),
     "todo-marker": re.compile(r"(?i)translat(e|ion) (needed|pending)"),
 }
@@ -71,6 +72,31 @@ DOCUMENTS = [
 def cell_text(cell: dict) -> str:
     source = cell.get("source", [])
     return "".join(source) if isinstance(source, list) else str(source)
+
+
+def script_of(body: str) -> str:
+    """ブロックの文字 / which script a Nepali region is written in."""
+    if DEVANAGARI_RE.search(body):
+        return "devanagari"
+    if looks_like_nepali_latin(body):
+        return "romanized"
+    return "unverified"
+
+
+DIRECTIVE_SPLIT_RE = re.compile(r"^<!--\s*ne-(?:cell|section):.*-->$", re.M)
+
+
+def catalog_script(path: Path) -> str:
+    """カタログ全体の文字 / the script of a whole catalog (all-or-nothing)."""
+    if not path.is_file():
+        return "missing"
+    text = path.read_text(encoding="utf-8")
+    chunks = [chunk for chunk in DIRECTIVE_SPLIT_RE.split(text)[1:] if chunk.strip()]
+    scripts = {script_of(chunk) for chunk in chunks}
+    scripts.discard("unverified")
+    if not scripts:
+        return "empty"
+    return scripts.pop() if len(scripts) == 1 else "mixed"
 
 
 def regions(text: str) -> list[str]:
@@ -103,7 +129,10 @@ def check_notebook(path: Path) -> dict:
         "missing": [],
         "forbidden": [],
         "stray_devanagari": [],
+        "unverified": [],
+        "scripts": [],
         "chars": 0,
+        "catalog": catalog_script(CATALOG_DIR / f"{path.stem}.ne.md"),
     }
     for cell in cells:
         if cell["cell_type"] != "markdown":
@@ -118,6 +147,11 @@ def check_notebook(path: Path) -> dict:
             report["translated"] += 1
             body = "\n".join(found)
             report["chars"] += len(body)
+            for region in found:
+                script = script_of(region)
+                report["scripts"].append(script)
+                if script == "unverified":
+                    report["unverified"].append(cell.get("id"))
             for name, pattern in FORBIDDEN_PATTERNS.items():
                 if pattern.search(body):
                     report["forbidden"].append(f"{cell.get('id')}:{name}")
@@ -135,8 +169,10 @@ def check_document(rel_path: str) -> dict:
         return {"path": rel_path, "exists": False, "regions": 0, "chars": 0, "forbidden": []}
     text = path.read_text(encoding="utf-8")
     found = doc_regions(text)
+    scripts = [script_of(body) for body in found]
     report = {"path": rel_path, "exists": True, "regions": len(found),
-              "chars": sum(len(body) for body in found), "forbidden": []}
+              "chars": sum(len(body) for body in found), "forbidden": [],
+              "scripts": scripts, "unverified": scripts.count("unverified")}
     body = "\n".join(found)
     for name, pattern in FORBIDDEN_PATTERNS.items():
         if pattern.search(body):
@@ -163,6 +199,9 @@ def run() -> dict:
             "translated": sum(item["translated"] for item in notebooks),
             "exempt": sum(item["exempt"] for item in notebooks),
             "missing": sum(len(item["missing"]) for item in notebooks),
+            "unverified": sum(len(item["unverified"]) for item in notebooks),
+            "romanized_blocks": sum(item["scripts"].count("romanized") for item in notebooks),
+            "devanagari_blocks": sum(item["scripts"].count("devanagari") for item in notebooks),
             "chars": sum(item["chars"] for item in notebooks),
             "documents_with_nepali": sum(1 for item in documents if item["regions"]),
         },
@@ -183,26 +222,32 @@ def main(argv=None) -> int:
         for item in report["notebooks"]:
             state = "ok" if not item["missing"] else f"missing {len(item['missing'])}"
             print(f"[nb]  {item['path']:<70} md={item['markdown_cells']:>3} "
-                  f"ne={item['translated']:>3} exempt={item['exempt']:>2} {state}")
+                  f"ne={item['translated']:>3} exempt={item['exempt']:>2} "
+                  f"({item['catalog']}) {state}")
             for problem in item["forbidden"][:5]:
                 print(f"        ! forbidden: {problem}")
             for problem in item["stray_devanagari"][:5]:
                 print(f"        ! Devanagari outside a region: {problem}")
+            for problem in item["unverified"][:5]:
+                print(f"        ! block is neither Devanagari nor Romanized Nepali: {problem}")
         for item in report["documents"]:
             print(f"[doc] {item['path']:<70} regions={item['regions']:>2} "
-                  f"chars={item['chars']:>6}")
+                  f"chars={item['chars']:>6} unverified={item['unverified']}")
         totals = report["totals"]
         share = 100 * totals["translated"] / max(totals["markdown_cells"], 1)
         print(f"[done] {totals['translated']}/{totals['markdown_cells']} markdown cells with Nepali "
               f"({share:.1f} %), {totals['exempt']} exempt, {totals['missing']} missing, "
               f"{totals['chars']:,} Nepali characters")
+        print(f"[done] {totals['romanized_blocks']} Romanized and "
+              f"{totals['devanagari_blocks']} Devanagari Nepali regions")
         print(f"[done] {totals['documents_with_nepali']}/{len(report['documents'])} documents "
               f"with Nepali regions")
 
     problems = report["totals"]["missing"] + len(report["orphan_catalogs"])
+    problems += report["totals"]["unverified"]
     problems += sum(len(item["forbidden"]) + len(item["stray_devanagari"])
                     for item in report["notebooks"])
-    problems += sum(len(item["forbidden"]) for item in report["documents"])
+    problems += sum(len(item["forbidden"]) + item["unverified"] for item in report["documents"])
     if args.strict:
         problems += sum(1 for item in report["documents"] if not item["regions"])
     return 1 if problems else 0

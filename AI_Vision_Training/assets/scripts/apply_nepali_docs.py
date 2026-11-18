@@ -34,6 +34,8 @@ import hashlib
 import re
 from pathlib import Path
 
+from romanize_nepali import looks_like_nepali_latin
+
 COURSE_ROOT = Path(__file__).resolve().parents[2]
 CATALOG_DIR = COURSE_ROOT / "assets" / "i18n" / "ne" / "docs"
 
@@ -71,8 +73,9 @@ def parse_catalog(path: Path) -> tuple[str, dict[str, list[str]]]:
         body = "\n".join(buffer).strip("\n")
         if not body.strip():
             raise CatalogError(f"{path.name}: empty Nepali block for {current!r}")
-        if not DEVANAGARI_RE.search(body):
-            raise CatalogError(f"{path.name}: block {current!r} has no Devanagari text")
+        if not DEVANAGARI_RE.search(body) and not looks_like_nepali_latin(body):
+            raise CatalogError(
+                f"{path.name}: block {current!r} is neither Devanagari Nepali nor Romanized Nepali")
         for label in FORBIDDEN_LABELS:
             if label in body:
                 raise CatalogError(f"{path.name}: block {current!r} has the forbidden label {label}")

@@ -9,10 +9,10 @@ guesses, no "should work".
 ---
 
 <!-- ne:begin doc:2289ef6651 -->
-### नेपालीमा
+### Nepali ma
 
-यो फाइलले "**वास्तवमा install गरेर, चलाएर जाँचिएका**" संस्करण मात्र अभिलेख गर्छ।
-अनुमान वा "चल्ला जस्तो छ" लेखिँदैन।
+yo filele "**bastabama install garera, chalaer janchieka**" sanskaran matra abhilekh garchha.
+anuman wa "challa jasto chha" lekhindain.
 <!-- ne:end -->
 
 ## 1. 検証した環境 / The verification environment
@@ -35,19 +35,19 @@ Python 3.12 probably works, but **these results are for 3.11.4**. On 3.12 note t
 ---
 
 <!-- ne:begin doc:bd9be6f545 -->
-### नेपालीमा
+### Nepali ma
 
-| विषय | मान |
+| bishay | maan |
 |---|---|
 | OS | Windows 11 (64-bit) |
-| CPU | यो तालिमको PC (GPU छैन) |
-| GPU | छैन — `torch.cuda.is_available()` ले `False` दिन्छ |
+| CPU | yo talimko PC (GPU chhaina) |
+| GPU | chhaina — `torch.cuda.is_available()` le `False` dinchha |
 | Python | **3.11.4** (CPython, 64-bit) |
-| virtual environment | `.venv` र `.venv-anomalib` गरी २ वटा |
-| जाँचिएको मिति | 2026 नोभेम्बर |
+| virtual environment | `.venv` ra `.venv-anomalib` gari 2 bata |
+| janchieko miti | 2026 nobhembar |
 
-Python 3.12 मा पनि चल्ने सम्भावना उच्च छ, तर **यो अभिलेख 3.11.4 को हो।**
-3.12 प्रयोग गर्दा `pandas`, `pillow`, `numpy` ले नयाँ संस्करण माग्ने कुरामा ध्यान दिनुहोस्।
+Python 3.12 ma pani chalne sambhabana uchcha chha, tar **yo abhilekh 3.11.4 ko ho.**
+3.12 prayog garda `pandas`, `pillow`, `numpy` le nayan sanskaran magne kura ma dhyan dinuhos.
 <!-- ne:end -->
 
 ## 2. `.venv`（第0〜4日）/ Base + YOLO environment (Days 0-4)
@@ -88,17 +88,17 @@ install from `https://download.pytorch.org/whl/cu126` instead.
 ---
 
 <!-- ne:begin doc:5a7721fc02 -->
-### नेपालीमा
+### Nepali ma
 
-माथिको तालिकामा दिन 0–4 मा प्रयोग हुने package र तिनको संस्करण छ। संस्करण जस्ताको तस्तै राखिएको छ,
-किनभने यही संस्करणमा नतिजा नापिएको हो।
+mathiko talika ma din 0–4 ma prayog hune package ra tinako sanskaran chha. sanskaran jastako tastai rakhieko chha,
+kinabhane yahi sanskaranama natija napieko ho.
 
-`ipywidgets` सँगै `jupyterlab_widgets 3.0.17` र `widgetsnbextension 4.0.16` पनि पर्छन्।
-**दुवै वातावरणमा उही संस्करण** प्रयोग हुन्छ। widget "भए राम्रो" मात्र हो; नभए पनि प्रत्येक
-नोटबुकको parameter सेलले उही प्रयोग गर्न दिन्छ।
+`ipywidgets` sangai `jupyterlab_widgets 3.0.17` ra `widgetsnbextension 4.0.16` pani parchhan.
+**dubai batabaran ma uhi sanskaran** prayog hunchha. widget "bhae ramro" matra ho; nabhae pani pratyek
+notebookko parameter cellle uhi prayog garna dinchha.
 
-`torch` र `torchvision` PyPI को Windows wheel (CPU संस्करण) हुन्।
-GPU प्रयोग गर्ने भए `https://download.pytorch.org/whl/cu126` बाट बदल्नुहोस्।
+`torch` ra `torchvision` PyPI ko Windows wheel (CPU sanskaran) hun.
+GPU prayog garne bhae `https://download.pytorch.org/whl/cu126` baat badalnuhos.
 <!-- ne:end -->
 
 ## 3. `.venv-anomalib`（第5日）/ Anomalib environment (Day 5)
@@ -120,18 +120,18 @@ GPU प्रयोग गर्ने भए `https://download.pytorch.org/whl/
 ---
 
 <!-- ne:begin doc:7dbe52e927 -->
-### नेपालीमा
+### Nepali ma
 
-दिन ५ मा प्रयोग हुने वातावरणको package र संस्करण माथिको तालिकामा छ। यहाँ OpenCV को
-**headless** संस्करण प्रयोग भएको छ; यही कारण वातावरण दुईवटा बनाइएको हो।
+din 5 ma prayog hune batabaranko package ra sanskaran mathiko talika ma chha. yahan OpenCV ko
+**headless** sanskaran prayog bhaeko chha; yahi karan batabaran duibata banaiyeko ho.
 <!-- ne:end -->
 
 ## 4. 重要な判断と、その理由 / Key decisions and why
 
 <!-- ne:begin doc:3fb8e163b8 -->
-### नेपालीमा
+### Nepali ma
 
-तलका निर्णय अनुमानले होइन, मापन वा आधिकारिक dependency जानकारीबाट गरिएका हुन्।
+talaka nirnaya anumanle hoina, maapan wa adhikarik dependency jankari baat garieka hun.
 <!-- ne:end -->
 
 ### 4.1 なぜ環境を 2 つに分けたか / Why two environments
@@ -151,17 +151,17 @@ environment overwrites one of them and breaks OpenCV. Separating the environment
 answer. The conflict is visible in the package metadata, not a guess.
 
 <!-- ne:begin doc:0f07feafa6 -->
-### नेपालीमा
+### Nepali ma
 
-आधिकारिक dependency जाँच्दा **छल्न नसकिने द्वन्द्व** भेटियो।
+adhikarik dependency janchda **chhaln nasakine dbandb** bhetiyo.
 
-| package | माग्ने OpenCV |
+| package | magne OpenCV |
 |---|---|
 | `anomalib==2.7.0` | `opencv-python-headless>=4.5.3.56` |
 | `ultralytics==8.4.211` | `opencv-python>=4.7.0` |
 
-दुवै छुट्टै package हुन् तर दुवैले `cv2` दिन्छन्। एउटै वातावरणमा राख्दा एउटाले अर्कोलाई ओभरराइट
-गरेर OpenCV बिग्रन्छ। त्यसैले **वातावरण छुट्याउनु** नै सही उत्तर हो।
+dubai chhuttai package hun tar dubaile `cv2` dinchhan. eutai batabaran ma rakhda eutale arkolai obhararait
+garera OpenCV bigranchha. tyasaile **batabaran chhutyaunu** nai sahi uttar ho.
 <!-- ne:end -->
 
 ### 4.2 OpenCV を 4.12.0.88 に固定した理由 / Why OpenCV is pinned to 4.12
@@ -175,11 +175,11 @@ version. A new major may change APIs, and the course code has not been verified 
 **4.12 worked reliably**, so it is pinned.
 
 <!-- ne:begin doc:e63c9200b5 -->
-### नेपालीमा
+### Nepali ma
 
-जाँच गर्दाको सबैभन्दा नयाँ संस्करण `opencv-python 5.0.0.93` (नयाँ major) थियो।
-नयाँ major ले API बदल्न सक्छ र तालिमको कोड त्यसमा जाँचिएको छैन। **4.12 ले स्थिर रूपमा काम गर्‍यो**,
-त्यसैले त्यही राखिएको हो।
+jaanch gardako sabaibhanda nayan sanskaran `opencv-python 5.0.0.93` (nayan major) thiyo.
+nayan major le API badalna sakchha ra talimko kod tyas ma janchieko chhaina. **4.12 le sthir rupama kaam gar‍yo**,
+tyasaile tyahi rakhieko ho.
 <!-- ne:end -->
 
 ### 4.3 torch 2.10.0 を使わなかった理由 / Why not torch 2.10.0
@@ -197,14 +197,14 @@ Windows wheel could not be imported on the verification machine** (`OSError` whi
 therefore use 2.15.0 and record the failure rather than hide it.
 
 <!-- ne:begin doc:50fa972cfc -->
-### नेपालीमा
+### Nepali ma
 
-`anomalib 2.7.0` को CPU extras ले `torch>=2.10.0` माग्छ।
-तर **`torch==2.10.0` को Windows wheel यो वातावरणमा
-`OSError: Error loading "...\torch\lib\c10.dll"` का कारण import हुन सकेन।**
+`anomalib 2.7.0` ko CPU extras le `torch>=2.10.0` magchha.
+tar **`torch==2.10.0` ko Windows wheel yo batabaran ma
+`OSError: Error loading "...\torch\lib\c10.dll"` ka karan import huna saken.**
 
-`torch==2.15.0` उही वातावरणमा ठीक चल्यो र anomalib को माग (`>=2.10`) पनि पूरा गर्छ।
-त्यसैले **2.15.0** राखियो। यो तथ्य लुकाइएको छैन, अभिलेख गरिएको छ।
+`torch==2.15.0` uhi batabaran ma thik chalyo ra anomalib ko mag (`>=2.10`) pani pura garchha.
+tyasaile **2.15.0** rakhiyo. yo tathy lukaieko chhaina, abhilekh garieko chha.
 <!-- ne:end -->
 
 ### 4.4 バックボーンを ResNet-18 にした理由 / Why ResNet-18
@@ -218,11 +218,11 @@ CPU. The course uses **`resnet18` with `layers=[layer2, layer3]`**: the **same a
 lower accuracy.
 
 <!-- ne:begin doc:de865f17a1 -->
-### नेपालीमा
+### Nepali ma
 
-PatchCore को कागजातको पूर्वनिर्धारित backbone `wide_resnet50_2` हो, तर CPU मा एक पटक fit गर्न
-धेरै लामो समय लाग्छ। तालिममा **`resnet18` + `layers=[layer2, layer3]`** प्रयोग गरियो।
-**एल्गोरिदम उही** हो, शुद्धता अलिकति कम हुन्छ।
+PatchCore ko kagajatako purbanirdharit backbone `wide_resnet50_2` ho, tar CPU ma ek patak fit garna
+dherai lamo samay lagchha. talim ma **`resnet18` + `layers=[layer2, layer3]`** prayog gariyo.
+**elgoridam uhi** ho, shuddhata alikati kam hunchha.
 <!-- ne:end -->
 
 ### 4.5 Lightning の経過表示を切った理由 / Why the Lightning progress display is off
@@ -239,12 +239,12 @@ start/finish messages. **The computation is unchanged.**
 ---
 
 <!-- ne:begin doc:b817e527e2 -->
-### नेपालीमा
+### Nepali ma
 
-Windows को Jupyter kernel भित्र `rich` मा आधारित प्रगति देखाइले कहिलेकाहीँ
-`RecursionError` दिन्थ्यो। `enable_progress_bar=False` र
-`enable_model_summary=False` राखेर सुरु र अन्त्य आफैं देखाइएको छ।
-**सिकाइको हिसाबमा कुनै परिवर्तन छैन।**
+Windows ko Jupyter kernel bhitr `rich` ma adharit pragati dekhaile kahilekahin
+`RecursionError` dinthyo. `enable_progress_bar=False` ra
+`enable_model_summary=False` rakher suru ra antya aphain dekhaieko chha.
+**sikai ko hisabama kunai paribartan chhaina.**
 <!-- ne:end -->
 
 ## 5. 実測した結果 / Measured results
@@ -256,10 +256,10 @@ The values below were **actually produced** in this environment on synthetic dat
 They are **not** product inspection accuracy.
 
 <!-- ne:begin doc:ac5a026591 -->
-### नेपालीमा
+### Nepali ma
 
-तलका सङ्ख्या यो वातावरणमा **वास्तवमा चलाएर पाइएका** हुन्।
-ती कृत्रिम डेटाका मान हुन् र **उत्पादन निरीक्षणको शुद्धता होइनन्**।
+talaka sankhya yo batabaran ma **bastabama chalaer paieka** hun.
+ti kritrim dataka maan hun ra **utpadan nirikshanko shuddhata hoinan**.
 <!-- ne:end -->
 
 ### 5.1 YOLO（第4日）/ YOLO (Day 4)
@@ -277,11 +277,11 @@ They are **not** product inspection accuracy.
 **学習時間 / Training time:** 数分（ハードウェア依存 / hardware dependent）。
 
 <!-- ne:begin doc:31b3e29b1a -->
-### नेपालीमा
+### Nepali ma
 
-`yolo26n.pt` लाई कृत्रिम डेटासेट (train 64 / val 16 / test 16) मा 15 epoch, `imgsz=320`,
-`batch=8`, CPU मा सिकाइएको। मापन माथिको तालिकामा छ (precision, recall, mAP50, mAP50-95)।
-**सिकाइ समय:** केही मिनेट (hardware मा निर्भर)।
+`yolo26n.pt` lai kritrim dataset (train 64 / val 16 / test 16) ma 15 epoch, `imgsz=320`,
+`batch=8`, CPU ma sikaieko. maapan mathiko talika ma chha (precision, recall, mAP50, mAP50-95).
+**sikai samay:** kehi minet (hardware ma nirbhar).
 <!-- ne:end -->
 
 ### 5.2 PatchCore（第5日）/ PatchCore (Day 5)
@@ -304,14 +304,14 @@ threshold in between separates them. **Synthetic images are easy**; real PVC wil
 cleanly.
 
 <!-- ne:begin doc:a14446100a -->
-### नेपालीमा
+### Nepali ma
 
-`resnet18`, `coreset_sampling_ratio=0.1`, `num_neighbors=9`, CPU मा चलाइयो।
-मापन माथिको तालिकामा छ (image_AUROC, image_F1Score, pixel_AUROC, pixel_F1Score)।
+`resnet18`, `coreset_sampling_ratio=0.1`, `num_neighbors=9`, CPU ma chalaiyo.
+maapan mathiko talika ma chha (image_AUROC, image_F1Score, pixel_AUROC, pixel_F1Score).
 
-सामान्य उत्पादनको अधिकतम score **0.356** र असामान्यको न्यूनतम **0.473** थियो; बीचमा threshold
-राख्दा छुट्याउन सकिन्थ्यो। **कृत्रिम चित्रमा छुट्याउन सजिलो** हुन्छ भन्ने यही हो।
-वास्तविक PVC मा यति सफा छुट्याउँदैन।
+samanya utpadanako adhikatam score **0.356** ra asamanyako nyoonatam **0.473** thiyo; bichama threshold
+rakhda chhutyaun sakinthyo. **kritrim chitra ma chhutyaun sajilo** hunchha bhanne yahi ho.
+bastabik PVC ma yati sapha chhutyaundain.
 <!-- ne:end -->
 
 ### 5.3 YOLO と PatchCore の共通画像での比較 / Shared-set comparison
@@ -334,13 +334,13 @@ Part 4 states this explicitly.
 ---
 
 <!-- ne:begin doc:59274e4625 -->
-### नेपालीमा
+### Nepali ma
 
-साझा 26 चित्र (256×256, YOLO को सिकाइमा नपरेका) मा तुलना गरियो; नतिजा माथिको तालिकामा छ।
+sajha 26 chitra (256×256, YOLO ko sikai ma napareka) ma tulna gariyo; natija mathiko talika ma chha.
 
-तर **PatchCore को threshold यही तुलना डेटाबाटै तय गरिएको** हुनाले PatchCore पक्ष
-**आशावादी** छ। यो तालिका मात्र हेरेर "PatchCore राम्रो" भन्ने निष्कर्ष निकाल्न मिल्दैन
-(दिन ५ नोटबुक ०३ को Part 4 मा स्पष्ट लेखिएको छ)।
+tar **PatchCore ko threshold yahi tulna detabatai tay garieko** hunale PatchCore paksh
+**ashabadi** chha. yo talika matra herer "PatchCore ramro" bhanne nishkarsh nikaln mildaina
+(din 5 notebook 03 ko Part 4 ma spasht lekhieko chha).
 <!-- ne:end -->
 
 ## 6. 既知の問題 / Known issues
@@ -354,13 +354,13 @@ Part 4 states this explicitly.
 | Anomalib の評価データが半分に分かれる / half of the eval data is used | 仕様 / by design | `val_split_mode="from_test"` |
 
 <!-- ne:begin doc:b08ee06b39 -->
-### नेपालीमा
+### Nepali ma
 
-| समस्या | अवस्था | बाटो |
+| samasya | abastha | bato |
 |---|---|---|
-| `torch==2.10.0` को Windows wheel import हुँदैन | दोहोरियो | `torch==2.15.0` प्रयोग गर्ने |
-| Lightning को प्रगति देखाइले कहिलेकाहीँ `RecursionError` दिन्छ | दोहोरियो | `enable_progress_bar=False` |
-| console मा जापानी अक्षर बिग्रन्छ (cp932) | OS मा निर्भर | स्क्रिप्टको console output अङ्ग्रेजीमा मात्र |
-| साझा चित्रमा YOLO को recall कम (0.55) | अपेक्षित | resolution र वितरणको फरक। दिन ४ नोटबुक ०३ मा छलफल |
-| Anomalib को मूल्याङ्कन डेटा आधा बाँडिन्छ | डिजाइनअनुसार | `val_split_mode="from_test"` |
+| `torch==2.10.0` ko Windows wheel import hundaina | dohoriyo | `torch==2.15.0` prayog garne |
+| Lightning ko pragati dekhaile kahilekahin `RecursionError` dinchha | dohoriyo | `enable_progress_bar=False` |
+| console ma Japani akshar bigranchha (cp932) | OS ma nirbhar | skriptako console output Angreji ma matra |
+| sajha chitra ma YOLO ko recall kam (0.55) | apekshit | resolution ra bitaranko farak. din 4 notebook 03 ma chhalaphal |
+| Anomalib ko mulyankan data adha bandinchha | dijainaanusar | `val_split_mode="from_test"` |
 <!-- ne:end -->

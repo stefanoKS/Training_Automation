@@ -5,6 +5,12 @@ re-application stay separate, repeatable steps. Nothing else in a notebook is to
 cell ids, outputs, execution counts and the original Japanese/English prose stay byte-for-byte the
 same.
 
+The third language is **Romanized Nepali** (BCP 47 ``ne-Latn``) — Nepali words and grammar written
+in Latin letters. Catalogs that have not been migrated yet still carry Devanagari; both forms are
+accepted, and a catalog must be entirely one or the other (``check_nepali_coverage.py`` enforces
+that). A Latin block is validated against the Romanized Nepali lexicon, never against "contains
+Latin letters", so copied English cannot pass as Nepali.
+
 カタログの書き方 / catalog format
 --------------------------------
 One sidecar file per notebook. Each block starts with a directive line::
@@ -47,6 +53,7 @@ import re
 from pathlib import Path
 
 from course_notebooks import course_notebooks
+from romanize_nepali import looks_like_nepali_latin
 
 COURSE_ROOT = Path(__file__).resolve().parents[2]
 CATALOG_DIR = COURSE_ROOT / "assets" / "i18n" / "ne" / "notebooks"
@@ -61,7 +68,9 @@ DEVANAGARI_RE = re.compile(r"[\u0900-\u097f]")
 FORBIDDEN_LABELS = ("日本語：", "日本語:", "English:", "English：")
 VALID_ANCHORS = ("end", "after-heading")
 IMAGE_RE = re.compile(r"!\[([^\]]*)\]\(([^)\s]+)\)")
-CAPTION_RE = re.compile(r"^(?:図[：:]|Figure[：:]|चित्र[：:]|चित्रमा|फोटो[：:]|写真[：:]|Photo[：:])")
+CAPTION_RE = re.compile(
+    r"^(?:図[：:]|Figure[：:]|चित्र[：:]|चित्रमा|फोटो[：:]|写真[：:]|Photo[：:]"
+    r"|[Cc]hitra[：:]|[Cc]hitrama|[Tt]asbir[：:]|[Pp]hoto[：:])")
 
 
 def valid_anchor(anchor: str) -> bool:
@@ -207,8 +216,9 @@ def parse_catalog(path: Path) -> dict[str, list[dict]]:
         body = "\n".join(state["buffer"]).strip("\n")
         if not body.strip():
             raise CatalogError(f"{path.name}: empty Nepali block for {cell_id}")
-        if not DEVANAGARI_RE.search(body):
-            raise CatalogError(f"{path.name}: block {cell_id} has no Devanagari text")
+        if not DEVANAGARI_RE.search(body) and not looks_like_nepali_latin(body):
+            raise CatalogError(
+                f"{path.name}: block {cell_id} is neither Devanagari Nepali nor Romanized Nepali")
         for label in FORBIDDEN_LABELS:
             if label in body:
                 raise CatalogError(f"{path.name}: block {cell_id} has the forbidden label {label}")

@@ -1,497 +1,502 @@
 <!--
-नेपाली अनुवाद / Nepali translation source for
+Nepali anuwad / Nepali translation source for
 notebooks/Day04_YOLO_Training/Day04_02_YOLO_Training.ipynb
 -->
-# दिन ४ नोटबुक ०२ — नेपाली अनुवाद
+# din 4 notebook 02 — Nepali anuwad
 
 <!-- ne-cell: 33aa7e73 | after-heading -->
-# दिन ४ नोटबुक ०२: YOLO model प्रशिक्षण
+# din 4 notebook 02: YOLO model prashikshan
 
 <!-- ne-cell: 33aa7e73 -->
-## सिकाइ लक्ष्यहरू
+## sikai lakshyaharu
 
-| नेपाली |
+| Nepali |
 | --- |
-| 1. प्रशिक्षणको क्रम (epoch, batch, loss) बताउन सक्ने। |
-| 2. fine-tuning को अर्थ बताउन सक्ने। |
-| 3. CPU मा व्यावहारिक समयभित्र प्रशिक्षण चलाउन सक्ने। |
-| 4. प्रशिक्षणको प्रगति पढ्न सक्ने। |
-| 5. प्रशिक्षणको नतिजा (weight, सेटिङ, मापन, लग) सुरक्षित गर्न सक्ने। |
+| 1. prashikshanko kram (epoch, batch, loss) bataun sakne. |
+| 2. fine-tuning ko arth bataun sakne. |
+| 3. CPU ma byabaharik samayabhitr prashikshan chalaun sakne. |
+| 4. prashikshanko pragati padhna sakne. |
+| 5. prashikshanko natija (weight, setting, maapan, lag) surakshit garna sakne. |
 
-## यो नोटबुकको आधारभूत जानकारी
+## yo notebookko adharabhut jankari
 
-| विषय | विवरण |
+| bishay | biwaran |
 | --- | --- |
-| सिकाइ समय (अनुमान) | 115 मिनेट |
-| कठिनाइ | सुरुवाती तह |
-| पूर्वशर्त | दिन ४ नोटबुक ०१ सकिएको र `assets/yolo_dataset` बनिसकेको हुनुपर्छ। |
-| आवश्यक लाइब्रेरी | torch, ultralytics, opencv-python, numpy, matplotlib, pandas |
-| प्रयोग हुने kernel | aivision |
-| आजको समयतालिका | [`COURSE_SYLLABUS.md` दिन ४](../../COURSE_SYLLABUS.md#day4) |
+| sikai samay (anuman) | 115 minet |
+| kathinai | surubati tah |
+| poorwashart | din 4 notebook 01 sakieko ra `assets/yolo_dataset` banisakeko hunuparchha. |
+| aawashyak laibreri | torch, ultralytics, opencv-python, numpy, matplotlib, pandas |
+| prayog hune kernel | aivision |
+| ajako samayatalika | [`COURSE_SYLLABUS.md` din 4](../../COURSE_SYLLABUS.md#day4) |
 
-### बुझाउनुपर्ने काम
+### bujhaunuparne kaam
 
-| नेपाली |
+| Nepali |
 | --- |
-| प्रशिक्षण भएको weight फाइल |
-| प्रशिक्षणको लग र मापन |
-| प्रशिक्षण सेटिङको अभिलेख |
+| prashikshan bhaeko weight file |
+| prashikshanko lag ra maapan |
+| prashikshan settingko abhilekh |
 
 <!-- ne-cell: 7f0f9a1b | after-heading -->
-## यो नोटबुक कहाँ पर्छ
+## yo notebook kahan parchha
 
 <!-- ne-cell: 7f0f9a1b -->
-| विषय | विवरण |
+| bishay | biwaran |
 | --- | --- |
-| दिन | दिन ४ |
-| आजको क्रम | आजको नोटबुकमध्ये 2 / 3 |
-| लाग्ने समय | 115 मिनेट |
-| पूर्वशर्त | `Day04_01_YOLO_Dataset_Annotation.ipynb`, `assets/yolo_dataset` बनिसकेको |
-| आजको समयतालिका | [`COURSE_SYLLABUS.md` दिन ४](../../COURSE_SYLLABUS.md#day4) |
+| din | din 4 |
+| ajako kram | ajako notabukamadhye 2 / 3 |
+| lagne samay | 115 minet |
+| poorwashart | `Day04_01_YOLO_Dataset_Annotation.ipynb`, `assets/yolo_dataset` banisakeko |
+| ajako samayatalika | [`COURSE_SYLLABUS.md` din 4](../../COURSE_SYLLABUS.md#day4) |
 
-दिनको समयतालिका `COURSE_SYLLABUS.md` मा एउटै ठाउँमा छ। यो नोटबुक त्यसको एउटा भाग मात्र हो।
+dinko samayatalika `COURSE_SYLLABUS.md` ma eutai thaun ma chha. yo notebook tyasko euta bhaag matra ho.
 
 <!-- ne-cell: audit-learning-loop | after-heading -->
-### अनुमान गर्नुहोस्, चलाउनुहोस्, हेर्नुहोस्, व्याख्या गर्नुहोस्
+### anuman garnuhos, chalaunuhos, hernuhos, byakhya garnuhos
 
 <!-- ne-cell: audit-learning-loop -->
-epoch भनेको डेटा एक फेर घुम्नु हो, batch भनेको एकै पटक दिइने तस्बिरको समूह हो। यसलाई weight अपडेट
-हुने सङ्ख्यासँग नमिसाउनुहोस्। महत्त्वपूर्ण सेल चलाउनुअघि इनपुट, काम र नतिजा एक-एक वाक्यमा लेख्नुहोस्।
-पहिले अनुमान लेखेर चलाउनुहोस्, अनि `batch` मात्र बदलेर फेरि अनुमान गरी चलाउनुहोस्।
+epoch bhaneko data ek pher ghumnu ho, batch bhaneko ekai patak diine tasbirko samuh ho. yas lai weight update
+hune sankhya sang namisaunuhos. mahattwapurna cell chalaunuaghi input, kaam ra natija ek-ek bakyama lekhnuhos.
+pahile anuman lekher chalaunuhos, ani `batch` matra badaler feri anuman gari chalaunuhos.
 
 <!-- ne-cell: d114d800 | after-heading -->
-## Part 0 तयारी
+## Part 0 tayari
 
 <!-- ne-cell: afa3760c | after-heading -->
-## Part 1 प्रशिक्षण भनेको के हो
+## Part 1 prashikshan bhaneko ke ho
 
 <!-- ne-cell: clarity-batch-predict | after-heading -->
-### पहिलो चरण: एक फेर र साना समूह
+### pahilo charan: ek pher ra sana samuh
 
 <!-- ne-cell: clarity-batch-predict -->
-इनपुट 64 प्रशिक्षण तस्बिर र batch=8 हो। नतिजा प्रत्येक batch को तस्बिर नम्बर हो। चलाउनुअघि एक फेरमा
-कति batch हुन्छन् अनुमान गर्नुहोस्। epoch भनेको सबै तस्बिर एक फेर घुम्नु हो।
+input 64 prashikshan tasbir ra batch=8 ho. natija pratyek batch ko tasbir number ho. chalaunuaghi ek pherama
+kati batch hunchhan anuman garnuhos. epoch bhaneko sabai tasbir ek pher ghumnu ho.
 
 <!-- ne-cell: clarity-batch-static | after-image:../../assets/svg/teach_batch_first_pass.svg -->
-**ध्यान दिनुपर्ने कुरा**
+**dhyan dinuparne kura**
 
-यो गणना गरिएको योजनाबद्ध चित्र हो। हरेक लाइन एक batch हो र आठ लाइनले एक epoch बन्छ। weight कति पटक
-अपडेट हुन्छ भन्ने कुरा यहाँ देखाइएको छैन।
+yo ganana garieko yojanabaddha chitra ho. harek line ek batch ho ra ath linele ek epoch banchha. weight kati patak
+update hunchha bhanne kura yahan dekhaieko chhaina.
 
-**सोच्नुहोस्**
+**sochnuhos**
 
-batch=4 भए एक फेरमा कति batch?
+batch=4 bhae ek pherama kati batch?
 
 <!-- ne-cell: clarity-batch-interpret -->
-8 batch ले एक फेर, 15 epoch भने 15 फेर (डेटा 120 पटक पढाइ) हो। यो weight अपडेट हुने सङ्ख्या होइन।
-batch 4 बनाउँदा एक फेरमा कति हुन्छ अनुमान गर्नुहोस्। तलको दोस्रो चरणले अपडेटको विस्तृत क्रम बताउँछ।
+8 batch le ek epoch banchha. 15 epoch hunda **data loader iteration 15 × 8 = 120 patak** hunchha.
+yo "dataset sabai 120 patak padhne" bhanne hoina (dataset sabai 15 patak matra padhinchha), ra
+weight 120 patak update hunchha bhanne pani hoina. batch 4 banaunda ek epoch ma kati iteration
+hunchha anuman garnuhos. talako dosro charanle updateko bistrit kram bataunchha.
 
 <!-- ne-cell: 16c0469f | after-heading -->
-### दोस्रो चरण (पूरक): gradient जम्मा र अपडेट
+### dosro charan (purak): gradient jamma ra update
 
 <!-- ne-cell: 16c0469f | after-image:../../assets/diagrams/teach_epoch_batch.png -->
-चित्र: 8-8 तस्बिर पढेर नाममात्र 8 batch को gradient जम्मा गरेर अपडेट गर्ने उदाहरण (`batch=8`, `nbs=64`)।
-warmup को बेला जम्मा हुने सङ्ख्या बदलिन सक्छ।
+chitra: 8-8 tasbir padher namamatr 8 batch ko gradient jamma garera update garne udaharan (`batch=8`, `nbs=64`).
+warmup ko bela jamma hune sankhya badalin sakchha.
 
-**ध्यान दिनुपर्ने कुरा**
+**dhyan dinuparne kura**
 
-- **batch** … data loader ले एकै पटक पढ्ने तस्बिर सङ्ख्या। यो तालिममा 8। gradient यहीँ गणना हुन्छ
-- **optimizer step (weight अपडेट)** … जम्मा भएको gradient ले weight एक पटक सार्ने। नाममात्र जम्मा 8
-  batch हो, तर warmup मा फरक पर्न सक्छ
-- **gradient जम्मा** … कति batch को gradient जम्मा गरेपछि एक पटक अपडेट गर्ने (`nbs` ÷ `batch`)
-- **epoch** … सबै प्रशिक्षण तस्बिर एक फेर घुम्नु। यो तालिममा 15 फेर
+- **batch** … data loader le ekai patak padhne tasbir sankhya. yo talim ma 8. gradient yahin ganana hunchha
+- **optimizer step (weight update)** … jamma bhaeko gradient le weight ek patak sarne. namamatr jamma 8
+  batch ho, tar warmup ma farak parna sakchha
+- **gradient jamma** … kati batch ko gradient jamma garepachhi ek patak update garne (`nbs` ÷ `batch`)
+- **epoch** … sabai prashikshan tasbir ek pher ghumnu. yo talim ma 15 pher (1 epoch ko data loader iteration 8 patak)
 
-64 ÷ 8 = 8 batch ले एक epoch बन्छ। नाममात्र 8 batch को gradient जम्मा गरेर अपडेट हुन्छ, त्यसैले
-**1 batch = 1 अपडेट होइन**। साथै प्रशिक्षणको सुरुमा **warmup** (learning rate र जम्मा गर्ने सङ्ख्या
-बिस्तारै लक्ष्यतिर लैजाने अवधि) हुन्छ, त्यसबेला सङ्ख्या 1 बाट क्रमैसँग बढ्छ। त्यसैले "64 ÷ 8 = 8
-अपडेट" भनेर गन्न मिल्दैन; अपडेट सङ्ख्या प्रशिक्षक (trainer) ले तय गर्छ।
+64 ÷ 8 = 8 batch le ek epoch banchha. namamatr 8 batch ko gradient jamma garera update hunchha, tyasaile
+**1 batch = 1 update hoina**. sathai prashikshanko suru ma **warmup** (learning rate ra jamma garne sankhya
+bistarai lakshyatir laijane abadhi) hunchha, tyasabela sankhya 1 baat kramaisang badhchha. tyasaile "64 ÷ 8 = 8
+update" bhanera gann mildaina; update sankhya prashikshak (trainer) le tay garchha.
 
-loss ले "अहिले कति गल्ती भइरहेको छ" जनाउँछ; घट्दै गयो भने प्रशिक्षण अगाडि बढेको हो।
+loss le "ahile kati galti bhairaheko chha" janaunchha. sadhai ghatdai janchha bhanne chhaina — badhna pani
+sakchha. prashikshan loss ghatnu matra naya tasbir ma kshamata badheko praman hoina; pramanikaran maapan ra
+anuman dekhaieka tasbir sangai padhnuhos.
 
-**सोच्नुहोस्**
+**sochnuhos**
 
-- 64 प्रशिक्षण तस्बिर र batch 8 हुँदा एक epoch मा data loader कति पटक घुम्छ? तीमध्ये कति weight अपडेट
-  बन्छ भन्ने कुरा केले तय गर्छ?
+- 64 prashikshan tasbir ra batch 8 hunda ek epoch ma data loader kati patak ghumchha? timadhye kati weight update
+  banchha bhanne kura kele tay garchha?
 
 <!-- ne-cell: 34a994aa | after-heading -->
-**प्रशिक्षणको दोहोरिने क्रम**
+**prashikshanko dohorine kram**
 <!-- ne-pair: The training loop -->
 
 <!-- ne-cell: 34a994aa -->
-प्रशिक्षण चार चरणको **दोहोरिने** काम हो।
+prashikshan chaar charanko **dohorine** kaam ho.
 
-1. **अनुमान गर्ने** — अहिलेको model ले प्रशिक्षण तस्बिरमा अनुमान चलाउँछ
-2. **गल्ती नाप्ने** — सही उत्तरसँग फरकलाई सङ्ख्यामा बदल्ने। यसलाई **loss** भनिन्छ
-3. **अलि सुधार्ने** — loss घट्ने दिशामा model का सङ्ख्या अलि सार्ने
-4. **दोहोर्याउने** — सबै प्रशिक्षण तस्बिर एक फेर सकिएपछि एक **epoch** हुन्छ
+1. **anuman garne** — ahileko model le prashikshan tasbir ma anuman chalaunchha
+2. **galti napne** — sahi uttar sang farak lai sankhya ma badalne. yas lai **loss** bhaninchha
+3. **ali sudharne** — loss ghatne disha ma model ka sankhya ali sarne
+4. **dohoryaune** — sabai prashikshan tasbir ek pher sakiepachhi ek **epoch** hunchha
 
-चरण 3 हरेक पटक हुँदैन। कति batch को gradient जम्मा गरेपछि एक पटक अपडेट गर्ने भन्ने सेटिङले तय गर्छ
-(`nbs=64`, `batch=8` को नाममात्र जम्मा 8 batch; warmup मा फरक पर्न सक्छ)।
+charan 3 harek patak hundaina. kati batch ko gradient jamma garepachhi ek patak update garne bhanne settingle tay garchha
+(`nbs=64`, `batch=8` ko namamatr jamma 8 batch; warmup ma farak parna sakchha).
 
-loss घट्दै छ भने प्रशिक्षण अगाडि बढेको हो। तर **प्रशिक्षणको loss घट्दै जाँदैमा वास्तविक क्षमता बढ्छ
-भन्ने छैन** (ओभरफिटिङ)।
+loss ghatdai chha bhane prashikshan agadi badheko ho. tar **prashikshanko loss ghatdai jandaima bastabik kshamata badhchha
+bhanne chhaina** (obharaphiting).
 
 <!-- ne-cell: fig-teach_training_update | after-heading -->
-### एउटा batch मा के हुन्छ
+### euta batch ma ke hunchha
 
 <!-- ne-cell: fig-teach_training_update | after-image:../../assets/diagrams/teach_training_update.png -->
-चित्र: अनुमान → loss → gradient → अपडेट को एक चक्र, र batch, step, epoch गन्ने तरिका (weight को
-परिवर्तन उदाहरणका लागि)।
+chitra: anuman → loss → gradient → update ko ek chakr, ra batch, step, epoch ganne tarika (weight ko
+paribartan udaharanka lagi).
 
-**ध्यान दिनुपर्ने कुरा**
+**dhyan dinuparne kura**
 
-batch (डेटा एकै पटक पढ्ने एकाइ) र weight अपडेट हुने सङ्ख्या फरक हुन्। `nbs=64`, `batch=8` को नाममात्र
-जम्मा 8 batch हो। 64 तस्बिरमा data loader 8 पटक घुम्छ, तर warmup मा जम्मा सङ्ख्या पनि बदलिन सक्छ।
-वास्तविक अपडेट सधैं एक पटक हो भनेर नठानी चलाइएको सेटिङ र लग जाँच्नुहोस्।
+batch (data ekai patak padhne ekai) ra weight update hune sankhya farak hun. `nbs=64`, `batch=8` ko namamatr
+jamma 8 batch ho. 64 tasbir ma data loader 8 patak ghumchha, tar warmup ma jamma sankhya pani badalin sakchha.
+bastabik update sadhain ek patak ho bhanera nathani chalaieko setting ra lag jaanchnuhos.
 
-**सोच्नुहोस्**
+**sochnuhos**
 
-- 64 तस्बिर र batch=8 मा कति पटक loader घुम्छ, र वास्तविक अपडेट कुन सेटिङले तय गर्छ?
+- 64 tasbir ra batch=8 ma kati patak loader ghumchha, ra bastabik update kun settingle tay garchha?
 
 <!-- ne-cell: d7c70ee3 | after-heading -->
-**शब्दहरू एकै ठाउँमा**
+**shabdaharu ekai thaun ma**
 <!-- ne-pair: The terms, all at once -->
 
 <!-- ne-cell: d7c70ee3 -->
-| शब्द | अर्थ | यो तालिमको मान |
+| shabd | arth | yo talimko maan |
 |---|---|---|
-| epoch | सबै प्रशिक्षण तस्बिर एक फेर घुम्नु | 15 |
-| batch size | data loader ले एकै पटक पढ्ने तस्बिर सङ्ख्या | 8 |
-| gradient जम्मा | कति batch को gradient जम्मा गरेपछि एक पटक अपडेट | नाममात्र 8 batch; warmup मा फरक |
-| warmup | प्रशिक्षणको सुरुमा learning rate र जम्मा सङ्ख्या लक्ष्यतिर लैजाने अवधि | 3 epoch जति |
-| learning rate | एक पटकको सुधारको आकार | 0.01 बाट बिस्तारै घटाइन्छ |
-| loss | सही उत्तरसँगको फरक। सानो भए राम्रो | प्रशिक्षणमा घट्छ |
-| प्रशिक्षण (train) | सङ्ख्या तय गर्ने काम | — |
-| प्रमाणीकरण (val) | प्रशिक्षणकै बेला क्षमता जाँच्ने | हरेक epoch पछि |
+| epoch | sabai prashikshan tasbir ek pher ghumnu | 15 |
+| batch size | data loader le ekai patak padhne tasbir sankhya | 8 |
+| gradient jamma | kati batch ko gradient jamma garepachhi ek patak update | namamatr 8 batch; warmup ma farak |
+| warmup | prashikshanko suru ma learning rate ra jamma sankhya lakshyatir laijane abadhi | 3 epoch jati |
+| learning rate | ek patakako sudharako akar | 0.01 baat bistarai ghatainchha |
+| loss | sahi uttarasangako farak. sano bhae ramro | prashikshan ma ghatchha |
+| prashikshan (train) | sankhya tay garne kaam | — |
+| pramanikaran (val) | prashikshanakai bela kshamata jaanchne | harek epoch pachhi |
 
-batch size ठुलो बनाउँदा एक पटकको काम भारी हुन्छ। तर "ठुलो भए सधैं स्थिर हुन्छ" भन्न मिल्दैन। मेमोरी
-नपुगे सानो बनाउनुहोस् र स्थिर छ कि छैन **प्रमाणीकरणको मापन** ले जाँच्नुहोस्।
+batch size thulo banaunda ek patakako kaam bhari hunchha. tar "thulo bhae sadhain sthir hunchha" bhann mildaina. memory
+napuge sano banaunuhos ra sthir chha ki chhaina **pramanikaranko maapan** le jaanchnuhos.
 
 <!-- ne-cell: baf19a2b | after-heading -->
-**fine-tuning (थप तालिम)**
+**fine-tuning (thap talim)**
 <!-- ne-pair: Fine-tuning -->
 
 <!-- ne-cell: baf19a2b -->
-सुरुदेखि प्रशिक्षण नगरी **COCO मा तालिम भएको `yolo26n.pt` बाट सुरु गरिन्छ**। यसलाई **fine-tuning**
-भनिन्छ।
+suru dekhi prashikshan nagari **COCO ma talim bhaeko `yolo26n.pt` baat suru garinchha**. yas lai **fine-tuning**
+bhaninchha.
 
-कारण: COCO मा सिकेको "वस्तुको आकार हेर्ने क्षमता" PVC को दोषमा पनि काम लाग्छ। थोरै तस्बिर (64) भए पनि
-आकार हेर्ने तरिका सुरुदेखि सिक्नु पर्दैन।
+karan: COCO ma sikeko "bastuko akar herne kshamata" PVC ko dosh ma pani kaam lagchha. thorai tasbir (64) bhae pani
+akar herne tarika suru dekhi siknu pardaina.
 
-तैपनि **64 तस्बिर धेरै थोरै** हो। कति चाहिन्छ भन्ने कुरा दोषको प्रकार, आकार, भिन्नता र उज्यालोको अवस्थाले
-तय गर्छ। "कति वटा भए पुग्छ" भनेर एउटै सङ्ख्या भन्न सकिँदैन। काम लाग्छ कि लाग्दैन भन्ने **प्रतिनिधित्व गर्ने
-वास्तविक डेटा** मा जाँचिन्छ।
+taipani **64 tasbir dherai thorai** ho. kati chahinchha bhanne kura doshko prakar, akar, bhinnata ra ujyaloko abasthale
+tay garchha. "kati bata bhae pugchha" bhanera eutai sankhya bhann sakindaina. kaam lagchha ki lagdain bhanne **pratinidhitb garne
+bastabik data** ma janchinchha.
 
 <!-- ne-cell: 16aa5ff6 | after-heading -->
-## Part 2 प्रशिक्षणको तयारी
+## Part 2 prashikshanko tayari
 
 <!-- ne-cell: c2cd53b9 | after-heading -->
-**`data.yaml` लाई अहिलेको स्थानअनुसार मिलाउने**
+**`data.yaml` lai ahileko sthanaanusar milaune**
 <!-- ne-pair: Point `data.yaml` at the current location -->
 
 <!-- ne-cell: c2cd53b9 -->
-`data.yaml` को `path` डेटासेट बनाउँदाको पूरा बाटो हो। फोल्डर सारिएको भए **अहिलेको स्थानमा फेरि लेख्न**
-पर्छ। तलको सेलले `data.yaml` **अहिलेको तालिम फोल्डरअनुसार फेरि लेख्छ** र अरू सेटिङ (class नाम आदि)
-जस्ताको तस्तै राख्छ।
+`data.yaml` ko `path` dataset banaundako pura bato ho. folder sarieko bhae **ahileko sthanama feri lekhna**
+parchha. talako cellle `data.yaml` **ahileko talim folder anusar feri lekhchha** ra aru setting (class naam adi)
+jastako tastai rakhchha.
 
 <!-- ne-cell: a7af3b66 | after-heading -->
-**तस्बिर र लेबलको जोडी अन्तिम पटक जाँच्ने**
+**tasbir ra labelko jodi antim patak jaanchne**
 <!-- ne-pair: Final check that images and labels pair up -->
 
 <!-- ne-cell: a7af3b66 -->
-प्रशिक्षण सुरु गर्नुअघि **तस्बिर र लेबल एक-एक मिलेको छ** जाँच्नुहोस्। यहाँ गल्ती भयो भने प्रशिक्षण
-सुरु भएपछि मात्र अनौठो नतिजा देखिन्छ।
+prashikshan suru garnuaghi **tasbir ra label ek-ek mileko chha** jaanchnuhos. yahan galti bhayo bhane prashikshan
+suru bhaepachhi matra anautho natija dekhinchha.
 
 <!-- ne-cell: bad3dfd6 | after-heading -->
-## Part 3 प्रशिक्षण चलाउने
+## Part 3 prashikshan chalaune
 
 <!-- ne-cell: 3261727b | after-heading -->
-**यो सेलको प्रशिक्षण सेटिङ**
+**yo cellko prashikshan setting**
 <!-- ne-pair: The configuration in this cell -->
 
 <!-- ne-cell: 3261727b -->
-CPU मा पनि व्यावहारिक समयमा सकिने **सानो सेटिङ** राखिएको छ।
+CPU ma pani byabaharik samayma sakine **sano setting** rakhieko chha.
 
-| सेटिङ | मान | कारण |
+| setting | maan | karan |
 |---|---|---|
-| `epochs` | 15 | धेरै थोरै पनि होइन, पर्खाइ पनि छोटो |
-| `imgsz` | 320 | मूल तस्बिर 320 px। CPU मा पनि सम्भव |
-| `batch` | 8 | मेमोरी र गतिको सन्तुलन |
-| `workers` | 0 | Windows नोटबुकमा सुरक्षित |
-| `device` | `cpu` | GPU नभए पनि चल्छ |
-| `seed` | 2026 | नतिजा दोहोर्याउन |
+| `epochs` | 15 | dherai thorai pani hoina, parkhai pani chhoto |
+| `imgsz` | 320 | mul tasbir 320 px. CPU ma pani sambhab |
+| `batch` | 8 | memory ra gatiko santulan |
+| `workers` | 0 | Windows notebook ma surakshit |
+| `device` | `cpu` | GPU nabhae pani chalchha |
+| `seed` | 2026 | natija dohoryaun |
 
-`nbs` (gradient जम्मा गर्ने एकाइ, पूर्वनिर्धारित 64) र `warmup_epochs` (पूर्वनिर्धारित 3.0) यो सेलमा
-तोकिएका छैनन्; मान सुरक्षित `args.yaml` मा अभिलेख छ। 8 batch नाममात्र जम्मा हो, warmup मा अपडेटको
-अन्तर फरक पर्न सक्छ।
+`nbs` (gradient jamma garne ekai, purbanirdharit 64) ra `warmup_epochs` (purbanirdharit 3.0) yo cell ma
+tokieka chhainan; maan surakshit `args.yaml` ma abhilekh chha. 8 batch namamatr jamma ho, warmup ma updateko
+antar farak parna sakchha.
 
-> **पर्खाइको समय हार्डवेयरअनुसार धेरै फरक पर्छ।** केही मिनेटमा सकिन पनि सक्छ, 15 मिनेटभन्दा बढी लाग्न
-> पनि सक्छ। **सकिने समयको ग्यारेन्टी छैन।** ढिलो भए `epochs` 5 बनाउनुहोस् (प्रशिक्षणको क्रम उही हो)।
+> **parkhaiko samay hardabeyaraanusar dherai farak parchha.** kehi minet ma sakin pani sakchha, 15 minetabhanda badhi lagn
+> pani sakchha. **sakine samayko gyarenti chhaina.** dhilo bhae `epochs` 5 banaunuhos (prashikshanko kram uhi ho).
 
 <!-- ne-cell: clarity-run-checklist | after-heading -->
-#### चलाउनुअघिको जाँच
+#### chalaunuaghiko jaanch
 
 <!-- ne-cell: clarity-run-checklist -->
-नतिजा `weights/best.pt`, `results.csv` र `args.yaml` हुन्। लाग्ने समय CPU, मेमोरी र सेटिङमा निर्भर छ;
-छोटो समयको ग्यारेन्टी छैन। नचलाउने अवस्था (skip) पहिलेजस्तै कायम छ। अर्को प्रयोगका लागि `RUN_NAME`
-फरक राख्नुहोस्, पहिलेको प्रयोग जोगाउन (उही नाम राखे पनि स्वतः नयाँ फोल्डर बन्छ)। अनुमान: epoch घटाएको
-प्रयोग तुलना गर्न कुन सुरक्षित फाइलहरू चाहिन्छन्?
+natija `weights/best.pt`, `results.csv` ra `args.yaml` hun. lagne samay CPU, memory ra setting ma nirbhar chha;
+chhoto samayko gyarenti chhaina. nachalaune abastha (skip) pahile jastai kayam chha. arko prayogka lagi `RUN_NAME`
+farak rakhnuhos, pahileko prayog jogaun (uhi naam rakhe pani sbatah nayan folder banchha). anuman: epoch ghataeko
+prayog tulna garna kun surakshit fileharu chahinchhan?
 
 <!-- ne-cell: b271f05f | after-heading -->
-**चलाउने स्विच**
+**chalaune sbich**
 <!-- ne-pair: The run switch -->
 
 <!-- ne-cell: b271f05f -->
-तलको सेल चलाउँदा **प्रशिक्षण सुरु हुन्छ** (लाग्ने समय वातावरणअनुसार फरक पर्छ)। नचलाउन चाहे
-`RUN_TRAINING = False` बनाउनुहोस्।
+talako cell chalaunda **prashikshan suru hunchha** (lagne samay batabaran anusar farak parchha). nachalaun chahe
+`RUN_TRAINING = False` banaunuhos.
 
-**लामो प्रशिक्षण (GPU का लागि 100 epoch) चलाइँदैन।** उदाहरणको रूपमा string मा मात्र सुरक्षित छ।
+**lamo prashikshan (GPU ka lagi 100 epoch) chalaindain.** udaharanko rupama string ma matra surakshit chha.
 
 <!-- ne-cell: audit-teach_epoch_batch_step | after-heading -->
-### कोड कसरी पढ्ने
+### kod kasari padhne
 
 <!-- ne-cell: audit-teach_epoch_batch_step | after-image:../../assets/svg/teach_epoch_batch_step.svg -->
-चित्र: batch सङ्ख्या र अपडेट सङ्ख्या सधैं उही हुँदैनन्। (गणना गरिएको संश्लेषित उदाहरण र योजनाबद्ध चित्र;
-model को वास्तविक नापिएको नतिजा होइन।)
+chitra: batch sankhya ra update sankhya sadhain uhi hundainan. (ganana garieko sansleshit udaharan ra yojanabaddha chitra;
+model ko bastabik napieko natija hoina.)
 
-**ध्यान दिनुपर्ने कुरा**
+**dhyan dinuparne kura**
 
-batch सङ्ख्या र अपडेट सङ्ख्या सधैं उही हुँदैनन्। इनपुट र परिवर्तन भएको मान औंलाले पछ्याउनुहोस्।
+batch sankhya ra update sankhya sadhain uhi hundainan. input ra paribartan bhaeko maan aunlale pachhyaunuhos.
 
-**सोच्नुहोस्**
+**sochnuhos**
 
-64 तस्बिरमा batch=4 बनाउँदा एक epoch मा कति batch हुन्छन्?
+64 tasbir ma batch=4 banaunda ek epoch ma kati batch hunchhan?
 
 <!-- ne-cell: 388c5d1c | after-heading -->
-**प्रशिक्षणका बेला स्क्रिन कसरी पढ्ने**
+**prashikshanka bela skrin kasari padhne**
 <!-- ne-pair: How to read the training output -->
 
 <!-- ne-cell: 388c5d1c -->
-`verbose=True` बनाउँदा प्रशिक्षणका बेला loss का लाइन देखिन्छन् (यो तालिममा शान्त राख्न `False` छ)।
-तलका स्तम्भ शीर्षक यो तालिममा प्रयोग हुने ultralytics 8.4.211 को trainer ले देखाउने हुन्।
+`verbose=True` banaunda prashikshanka bela loss ka line dekhinchhan (yo talim ma shant rakhna `False` chha).
+talaka stambha shirshak yo talim ma prayog hune ultralytics 8.4.211 ko trainer le dekhaune hun.
 
-| स्तम्भ | अर्थ |
+| stambha | arth |
 |---|---|
-| `Epoch` | कति औँ फेर |
-| `GPU_mem` | प्रयोग भएको मेमोरी (CPU मा 0 नजिक) |
-| `box_loss` | आयतको स्थानको त्रुटि। घटे स्थान मिल्दै गएको |
-| `cls_loss` | class वर्गीकरणको त्रुटि। घटे प्रकार छुट्याउन सक्दै गएको |
-| `l1_loss` | आयतको निर्देशाङ्क त्रुटि L1 (निरपेक्ष मानको औसत) मा नापिएको |
-| `Instances` | त्यो batch मा भएका instance (सही लेबल) सङ्ख्या |
-| `Size` | इनपुट तस्बिरको एक भुजाको पिक्सेल (यो तालिममा 320) |
+| `Epoch` | kati aun pher |
+| `GPU_mem` | prayog bhaeko memory (CPU ma 0 najik) |
+| `box_loss` | ayatako sthanako truti. ghate sthan mildai gaeko |
+| `cls_loss` | class bargikaranko truti. ghate prakar chhutyaun sakdai gaeko |
+| `l1_loss` | ayatko **samanyikrit duri** (grid ekai ma badaleko kinar samma ko duri) ko L1 truti. kachcha piksel nirdeshanko ausat nirapeksh truti hoina |
+| `Instances` | tyo batch ma bhaeka instance (sahi label) sankhya |
+| `Size` | input tasbirko ek bhujako piksel (yo talim ma 320) |
 
-प्रशिक्षणपछि सुरक्षित हुने `results.csv` मा उही सामग्री epoch-अनुसारका स्तम्भमा रहन्छ। सुरक्षित
-चलाइ (`pvc_defect_quick`) का स्तम्भ यी हुन्:
+prashikshanapachhi surakshit hune `results.csv` ma uhi samagri epoch-anusaraka stambha ma rahanchha. surakshit
+chalai (`pvc_defect_quick`) ka stambha yi hun:
 
 ```text
 epoch,time,train/box_loss,train/cls_loss,train/l1_loss,metrics/precision(B),metrics/recall(B),metrics/mAP50(B),metrics/mAP50-95(B),val/box_loss,val/cls_loss,val/l1_loss,lr/pg0,lr/pg1,lr/pg2
 ```
 
-`metrics/...` र `val/...` स्तम्भ हरेक epoch पछि **प्रमाणीकरण डेटा** मा गणना गरिएका मान हुन्।
-प्रशिक्षणको loss मात्र हेर्दा नदेखिने परिवर्तन यहीँ देखिन्छ।
+`metrics/...` ra `val/...` stambha harek epoch pachhi **pramanikaran data** ma ganana garieka maan hun.
+prashikshanko loss matra herda nadekhine paribartan yahin dekhinchha.
 
-> पुराना सामग्रीले `dfl_loss` (Distribution Focal Loss) लाई "किनाराको सूक्ष्मताको त्रुटि" भनेर व्याख्या
-> गर्छ। `dfl_loss` DFL प्रयोग गर्ने **अर्को बनावट** को स्तम्भ हो र यो तालिमको YOLO26 मा छैन
-> (`results.csv` मा पनि छैन)। साटेर नपढी `l1_loss` प्रयोग गर्नुहोस्।
+> purana samagrile `dfl_loss` (Distribution Focal Loss) lai "kinarako sukshmatako truti" bhanera byakhya
+> garchha. `dfl_loss` DFL prayog garne **arko banabat** ko stambha ho ra yo talimko YOLO26 ma chhaina
+> (`results.csv` ma pani chhaina). sater napadhi `l1_loss` prayog garnuhos.
 
-loss घट्दै गयो भने प्रशिक्षण अगाडि बढेको हो। तर **loss मात्रले राम्रो-नराम्रो तय गर्न सकिँदैन**;
-`metrics/mAP50-95` जस्ता प्रमाणीकरण मापनसँगै पढ्नुहोस्।
+prashikshan loss sadhai ghatdai janchha bhanne chhaina — badhna pani sakchha. **prashikshan loss ghatnu
+matra naya tasbir ma kshamata badheko praman hoina** (obharaphiting); `metrics/mAP50-95` jasta pramanikaran
+mapan ra anuman dekhaieka tasbir sangai padhnuhos.
 
 <!-- ne-cell: 90708cf6 | after-heading -->
-## Part 4 प्रशिक्षणको नतिजा सुरक्षित गर्ने
+## Part 4 prashikshanko natija surakshit garne
 
 <!-- ne-cell: c0302cd9 | after-heading -->
-### प्रशिक्षण loss र प्रमाणीकरण loss छुट्टाछुट्टै पढ्ने
+### prashikshan loss ra pramanikaran loss chhuttachhuttai padhne
 
 <!-- ne-cell: c0302cd9 | after-image:../../assets/diagrams/teach_train_val_curves.png -->
-चित्र: वक्रको **आकारको उदाहरण** मात्र हो। तपाईंको प्रशिक्षणको नतिजा होइन।
+chitra: bakrako **akarako udaharan** matra ho. tapainko prashikshanko natija hoina.
 
-**ध्यान दिनुपर्ने कुरा**
+**dhyan dinuparne kura**
 
-चित्रको **तेर्सो अक्ष epoch (कति औँ फेर)** र **ठाडो अक्ष loss** हो। दुई लाइन प्रशिक्षण र प्रमाणीकरणका
-हुन्, legend ले छुट्याउनुहोस्। प्रशिक्षण loss मात्र हेर्दा epoch बढाउँदै जाँदा राम्रो भएको जस्तो देखिन्छ।
-चित्रको डटेड रेखा ("यहाँबाट ओभरफिटिङ") आकार देखाउन बनाइएको उदाहरण हो; वास्तविक डेटामा त्यही ठाउँ
-तय हुन्छ भन्ने होइन। **छोटो अवधिको स्थिरता वा वृद्धिले मात्र ओभरफिटिङ भन्न मिल्दैन।**
+chitrako **terso aksh epoch (kati aun pher)** ra **thado aksh loss** ho. dui line prashikshan ra pramanikaranka
+hun, legend le chhutyaunuhos. prashikshan loss matra herda epoch badhaundai janda ramro bhaeko jasto dekhinchha.
+chitrako dated rekha ("yahan baat obharaphiting") akar dekhauna banaiyeko udaharan ho; bastabik data ma tyahi thaun
+tay hunchha bhanne hoina. **chhoto abadhiko sthirata wa briddhile matra obharaphiting bhann mildaina.**
 
-हेर्नुपर्ने: "प्रमाणीकरण पट्टि घट्न रोकियो कि", "प्रमाणीकरणको मापन (mAP50-95 आदि) अझ बढ्दै छ कि"।
-वास्तविक तस्बिरमा देखिएका असफलताको सामग्री पनि सँगै प्रयोग गर्नुहोस्। **प्रशिक्षण loss घट्नु आफैं
-"राम्रो भयो" भन्ने प्रमाण होइन।**
+hernuparne: "pramanikaran patti ghatn rokiyo ki", "pramanikaranko maapan (mAP50-95 adi) ajh badhdai chha ki".
+bastabik tasbir ma dekhieka asaphalatako samagri pani sangai prayog garnuhos. **prashikshan loss ghatnu aphain
+"ramro bhayo" bhanne praman hoina.**
 
-**सोच्नुहोस्**
+**sochnuhos**
 
-- प्रमाणीकरण loss केही epoch स्थिर रह्यो भने ओभरफिटिङ भन्न मिल्छ? अरू के हेर्नुहुन्छ?
+- pramanikaran loss kehi epoch sthir rahyo bhane obharaphiting bhann milchha? aru ke hernuhunchha?
 
 <!-- ne-cell: fig-ref_train_val_curves | after-heading -->
-### प्रशिक्षण लगलाई दुई लाइनमा पढ्ने
+### prashikshan lagalai dui line ma padhne
 
 <!-- ne-cell: fig-ref_train_val_curves | after-image:../../assets/reference_outputs/ref_train_val_curves.png -->
-चित्र: यो तालिममा साँच्चै गरिएको छोटो प्रशिक्षण (15 epoch, CPU) को अभिलेख। बायाँ प्रशिक्षण र प्रमाणीकरणको
-cls loss, दायाँ mAP50 र precision। सुरक्षित गरिएको प्रशिक्षण लग नै हो।
+chitra: yo talim ma sanchchai garieko chhoto prashikshan (15 epoch, CPU) ko abhilekh. bayan prashikshan ra pramanikaranko
+cls loss, dayan mAP50 ra precision. surakshit garieko prashikshan lag nai ho.
 
-**ध्यान दिनुपर्ने कुरा**
+**dhyan dinuparne kura**
 
-एउटा मानभन्दा "दुवै घट्दै छन् कि", "फरक बढ्दै छ कि" भन्ने कुरा पढ्नुहोस्। केही epoch स्थिर रहनु
-ओभरफिटिङको प्रमाण होइन। loss का स्तम्भ नाम YOLO26 को वास्तविक नतिजा हुन् (`train/l1_loss`,
-`val/l1_loss` छन्; `dfl_loss` छैन)।
+euta manabhanda "dubai ghatdai chhan ki", "farak badhdai chha ki" bhanne kura padhnuhos. kehi epoch sthir rahanu
+obharaphitingko praman hoina. loss ka stambha naam YOLO26 ko bastabik natija hun (`train/l1_loss`,
+`val/l1_loss` chhan; `dfl_loss` chhaina).
 
-**सोच्नुहोस्**
+**sochnuhos**
 
-- अन्तिम 3 epoch मा mAP50 बढ्दै छ कि स्थिर छ?
+- antim 3 epoch ma mAP50 badhdai chha ki sthir chha?
 
 <!-- ne-cell: 2a9855f8 | after-heading -->
-**चार कुरा सुरक्षित गर्ने**
+**chaar kura surakshit garne**
 <!-- ne-pair: Save four things -->
 
 <!-- ne-cell: 2a9855f8 -->
-प्रशिक्षण सकिएपछि Ultralytics ले नतिजा फोल्डरमा धेरै फाइल बनाउँछ। बुझाउनुपर्ने कामका लागि यी चार
-भए पुग्छ।
+prashikshan sakiepachhi Ultralytics le natija folder ma dherai file banaunchha. bujhaunuparne kaamka lagi yi chaar
+bhae pugchha.
 
-| प्रकार | फाइल | प्रयोग |
+| prakar | file | prayog |
 |---|---|---|
-| weight | `weights/best.pt` | अनुमानमा प्रयोग। **सबैभन्दा महत्त्वपूर्ण** |
-| सेटिङ | `args.yaml` | कुन सेटिङमा प्रशिक्षण गरियो भन्ने अभिलेख |
-| मापन | `results.csv` | epoch-अनुसार loss र शुद्धता |
-| लग | `results.csv` बाट बनाइएको सारांश | बुझाउनका लागि |
+| weight | `weights/best.pt` | anuman ma prayog. **sabaibhanda mahattwapurna** |
+| setting | `args.yaml` | kun setting ma prashikshan gariyo bhanne abhilekh |
+| maapan | `results.csv` | epoch-anusar loss ra shuddhata |
+| lag | `results.csv` baat banaiyeko saransh | bujhaunaka lagi |
 
-`best.pt` **प्रमाणीकरण डेटा (val)** मा सबैभन्दा राम्रो भएको क्षणको weight हो, `last.pt` अन्तिम epoch
-को। **सामान्यतया `best.pt` प्रयोग गरिन्छ।**
+`best.pt` **pramanikaran data (val)** ma sabaibhanda ramro bhaeko kshanako weight ho, `last.pt` antim epoch
+ko. **samanyataya `best.pt` prayog garinchha.**
 
-"सबैभन्दा राम्रो" को आधार Ultralytics को **fitness** हो। यो तालिममा प्रयोग हुने ultralytics 8.4.211
-को वस्तु पहिचानमा weight `[0, 0, 0, 1]` (precision, recall, mAP50, mAP50-95 को क्रम) हुन्छ। अर्थात्
-**fitness = mAP50-95** र `best.pt` **प्रमाणीकरणको mAP50-95 सबैभन्दा उच्च भएको epoch** को weight हो।
+"sabaibhanda ramro" ko adhar Ultralytics ko **fitness** ho. yo talim ma prayog hune ultralytics 8.4.211
+ko bastu pahichan ma weight `[0, 0, 0, 1]` (precision, recall, mAP50, mAP50-95 ko kram) hunchha. arthat
+**fitness = mAP50-95** ra `best.pt` **pramanikaranko mAP50-95 sabaibhanda uchcha bhaeko epoch** ko weight ho.
 
-`best.pt` छान्दा पनि **परीक्षण डेटा हेरिएको छैन**। त्यसैले `best.pt` छानिसकेपछि पनि परीक्षणमा मूल्याङ्कन
-एक पटक मात्र गर्न सकिन्छ।
+`best.pt` chhanda pani **parikshan data herieko chhaina**. tyasaile `best.pt` chhanisakepachhi pani parikshan ma mulyankan
+ek patak matra garna sakinchha.
 
-`last.pt` अन्तिम epoch को weight हो। प्रशिक्षणको अन्तिम अवस्था राख्न, `results.csv` हेरेर अर्को epoch
-आफैं छान्न, वा `resume` गरेर प्रशिक्षण जारी राख्न प्रयोग हुन्छ।
+`last.pt` antim epoch ko weight ho. prashikshanko antim abastha rakhna, `results.csv` herer arko epoch
+aphain chhanna, wa `resume` garera prashikshan jari rakhna prayog hunchha.
 
 <!-- ne-cell: f800c794 | after-heading -->
-### नतिजाको उदाहरण
+### natijako udaharan
 
 <!-- ne-cell: f800c794 -->
-यो नतिजा यो तालिममा सुरक्षित गरिएको अभिलेख हो (`yolo26n.pt`, 15 epoch, `imgsz=320`, `batch=8`,
-seed 2026, CPU)। सूक्ष्म समय र फाइल आकार वातावरणअनुसार फरक पर्छ, तर चार फाइल बनेको कुरा जाँच्नुहोस्।
+yo natija yo talim ma surakshit garieko abhilekh ho (`yolo26n.pt`, 15 epoch, `imgsz=320`, `batch=8`,
+seed 2026, CPU). sukshm samay ra file akar batabaran anusar farak parchha, tar chaar file baneko kura jaanchnuhos.
 
 <!-- ne-cell: 845f2d52 | after-heading -->
-**प्रशिक्षण सफल भयो भन्न मिल्छ?**
+**prashikshan saphal bhayo bhann milchha?**
 <!-- ne-pair: Can we call this training successful? -->
 
 <!-- ne-cell: 845f2d52 -->
-loss घट्नु मात्र पुग्दैन। **यो चरणमा क्षमता अझै जाँचिएको छैन।**
+loss ghatnu matra pugdain. **yo charan ma kshamata ajhai janchieko chhaina.**
 
-अर्को नोटबुक (04_03) मा **प्रशिक्षणमा प्रयोग नभएका तस्बिर** मा क्षमता नापिन्छ। त्यहाँ मात्र
-"काम लाग्छ / लाग्दैन" थाहा हुन्छ।
+arko notebook (04_03) ma **prashikshan ma prayog nabhaeka tasbir** ma kshamata napinchha. tyahan matra
+"kaam lagchha / lagdain" thaha hunchha.
 
-loss स्थिर भयो भने पनि त्यसैले ओभरफिटिङ भन्न मिल्दैन। निर्णयका लागि **प्रमाणीकरण मापनको प्रवृत्ति**
-(`metrics/mAP50-95` आदि) र वास्तविक तस्बिरमा देखिएका असफलता सँगै प्रयोग गर्नुहोस्। साथै काम लाग्छ कि
-लाग्दैन भन्ने **प्रतिनिधित्व गर्ने वास्तविक डेटा** मा जाँचिएपछि मात्र थाहा हुन्छ।
+loss sthir bhayo bhane pani tyasaile obharaphiting bhann mildaina. nirnayaka lagi **pramanikaran maapan ko prabritti**
+(`metrics/mAP50-95` adi) ra bastabik tasbir ma dekhieka asaphalata sangai prayog garnuhos. sathai kaam lagchha ki
+lagdain bhanne **pratinidhitb garne bastabik data** ma janchiepachhi matra thaha hunchha.
 
-यो चरणमा "शुद्धता 95%" जस्तो सङ्ख्या **दिइँदैन**; प्रशिक्षण डेटामा नापिएको सङ्ख्याले वास्तविक क्षमता
-देखाउँदैन।
+yo charan ma "shuddhata 95%" jasto sankhya **diindain**; prashikshan data ma napieko sankhyale bastabik kshamata
+dekhaundain.
 
 <!-- ne-cell: f412c790 | after-heading -->
-## अभ्यास
+## abhyas
 
 <!-- ne-cell: 4febd099 | after-heading -->
-**अभ्यास 1 (आधारभूत): 5 epoch मा प्रशिक्षण चलाउने**
+**abhyas 1 (adharabhut): 5 epoch ma prashikshan chalaune**
 <!-- ne-pair: Exercise 1 (basic): train for 5 epochs -->
 
 <!-- ne-cell: 4febd099 -->
-`EPOCHS` 5 बनाएर प्रशिक्षण चलाउनुहोस् र `box_loss` को पहिलो र अन्तिम मान अभिलेख गर्नुहोस्। साथै
-`metrics/mAP50-95` को पहिलो र अन्तिम पनि अभिलेख गर्नुहोस्। loss मात्रले निर्णय गर्न नमिल्ने कुरा
-पुष्टि गर्नुहोस्।
+`EPOCHS` 5 banaer prashikshan chalaunuhos ra `box_loss` ko pahilo ra antim maan abhilekh garnuhos. sathai
+`metrics/mAP50-95` ko pahilo ra antim pani abhilekh garnuhos. loss matrale nirnaya garna namilne kura
+pushti garnuhos.
 
 | epoch | box_loss | mAP50-95 (val) |
 |---|---|---|
 | 1 | | |
 | 5 | | |
 
-- पूरा भएको मापन: दुवै मान अभिलेख भएका छन् र loss घट्यो कि घटेन भन्न सकिन्छ
-- loss नघटे वा स्थिर रहे पनि त्यसैले असफल भन्न मिल्दैन
+- pura bhaeko maapan: dubai maan abhilekh bhaeka chhan ra loss ghatyo ki ghaten bhann sakinchha
+- loss naghate wa sthir rahe pani tyasaile asaphal bhann mildaina
 
 <!-- ne-cell: 8273b533 | after-heading -->
-**अभ्यास 2 (मध्यम): `imgsz` बदलेर तुलना गर्ने**
+**abhyas 2 (madhyam): `imgsz` badaler tulna garne**
 <!-- ne-pair: Exercise 2 (intermediate): compare `imgsz` -->
 
 <!-- ne-cell: 8273b533 -->
-`IMGSZ` 160 / 320 मा प्रशिक्षण गरेर **प्रशिक्षणको समय** र **उही प्रमाणीकरण मापन**
-(`metrics/mAP50-95` वा precision, recall) तुलना गर्नुहोस्। प्रशिक्षण loss को अन्तिम मान इनपुट आकार
-फेरिँदा अर्थ पनि फेरिने हुनाले शुद्धताको तुलनामा प्रयोग गर्न मिल्दैन। गति र शुद्धता मध्ये कुन रोज्ने
-भन्ने कुरा आफ्नै शब्दमा लेख्नुहोस्।
+`IMGSZ` 160 / 320 ma prashikshan garera **prashikshanko samay** ra **uhi pramanikaran maapan**
+(`metrics/mAP50-95` wa precision, recall) tulna garnuhos. prashikshan loss ko antim maan input akar
+pherinda arth pani pherine hunale shuddhatako tulna ma prayog garna mildaina. gati ra shuddhata madhye kun rojne
+bhanne kura aphnai shabdama lekhnuhos.
 
-- पूरा भएको मापन: दुई पटकको समय र प्रमाणीकरण मापन अभिलेख भएका छन् र सन्तुलन (trade-off) व्याख्या भएको छ
+- pura bhaeko maapan: dui patakako samay ra pramanikaran maapan abhilekh bhaeka chhan ra santulan (trade-off) byakhya bhaeko chha
 
 <!-- ne-cell: 75cf3328 | after-heading -->
-**अभ्यास 3 (वैकल्पिक): प्रशिक्षण किन अगाडि नबढ्ने सोच्ने**
+**abhyas 3 (baikalpik): prashikshan kina agadi nabadhne sochne**
 <!-- ne-pair: Exercise 3 (optional challenge): why training might not progress -->
 
 <!-- ne-cell: 75cf3328 -->
-loss नघट्ने वा NaN हुने चार कारण भन्नुहोस् र प्रत्येकमा "कसरी जाँच्ने" लेख्नुहोस्। **अनिवार्य होइन।**
+loss naghatne wa NaN hune chaar karan bhannuhos ra pratyekama "kasari jaanchne" lekhnuhos. **aniwarya hoina.**
 
-पूरा भएको मापन: चार कारण र चार जाँच्ने तरिका लेखिएका छन्।
+pura bhaeko maapan: chaar karan ra chaar jaanchne tarika lekhieka chhan.
 
 <!-- ne-cell: 8574a7d8 | after-heading -->
-#### बुझाइ जाँच्ने प्रश्न
+#### bujhai jaanchne prashna
 
 <!-- ne-cell: 8574a7d8 -->
-1. epoch, batch size र optimizer step मा के-के फरक छ?
-2. loss घट्नु भनेको के हो? त्यसले मात्र क्षमता तय गर्न मिल्छ?
-3. fine-tuning गर्नुका दुई फाइदा भन्नुहोस्।
-4. `best.pt` कुन आधारमा छानिन्छ? `last.pt` सँग के फरक छ?
-5. प्रशिक्षण सकिएलगत्तै "शुद्धता 95%" भन्न किन मिल्दैन?
+1. epoch, batch size ra optimizer step ma ke-ke farak chha?
+2. loss ghatnu bhaneko ke ho? tyasle matra kshamata tay garna milchha?
+3. fine-tuning garnuka dui phaida bhannuhos.
+4. `best.pt` kun adharama chhaninchha? `last.pt` sang ke farak chha?
+5. prashikshan sakielagattai "shuddhata 95%" bhann kina mildaina?
 
 <!-- ne-cell: a4a1e4b0 | after-heading -->
-## समस्या परेमा
+## samasya parema
 
 <!-- ne-cell: a4a1e4b0 -->
-त्रुटि आएपछि पहिले "कुन सेलमा", "कुन लाइनमा", "के सन्देश आयो" भनेर लेख्नुहोस्। बुझाउनुपर्ने काममा पनि
-त्यही अभिलेख राख्नुहोस्।
+truti aepachhi pahile "kun cell ma", "kun line ma", "ke sandesh ayo" bhanera lekhnuhos. bujhaunuparne kaam ma pani
+tyahi abhilekh rakhnuhos.
 
-| लक्षण | के गर्ने |
+| lakshan | ke garne |
 | --- | --- |
-| प्रशिक्षण सुरु हुँदैन | `RUN_TRAINING = False` छ। प्रशिक्षण गर्न `True` बनाउनुहोस्। |
-| `RuntimeError: Dataset ... not found` | `data.yaml` को `path` पुरानो हुन सक्छ। Part 2 को सेलले फेरि लेख्नुहोस्। |
-| `CUDA out of memory` / `OutOfMemoryError` | `BATCH` 4 र `IMGSZ` 224 बनाउनुहोस्। CPU मा यो कम हुन्छ। |
-| प्रशिक्षण धेरै ढिलो | CPU मा केही मिनेटदेखि दर्जनौं मिनेट लाग्छ। `EPOCHS` 5 र `IMGSZ` 160 बनाउनुहोस्। |
-| `FileNotFoundError: yolo26n.pt` | model लिइएको छैन। `assets/models/` मा फाइल छ कि जाँच्नुहोस्। |
-| loss घट्दैन | लेबलको गल्ती, तस्बिर र लेबल नमिल्नु, learning rate को समस्या हुन सक्छ। दिन ४ नोटबुक ०१ को जाँचमा फर्कनुहोस्। |
-| प्रशिक्षण लगमा `dfl_loss` छैन | `dfl_loss` DFL प्रयोग गर्ने अर्को बनावटको स्तम्भ हो। YOLO26 ले `l1_loss` लेख्छ। |
-| एक epoch को अपडेट सङ्ख्या मिलेन | 1 batch = 1 अपडेट नहुन सक्छ। `nbs` र `batch` को gradient जम्मा तथा warmup ले तय गर्छ। |
+| prashikshan suru hundaina | `RUN_TRAINING = False` chha. prashikshan garna `True` banaunuhos. |
+| `RuntimeError: Dataset ... not found` | `data.yaml` ko `path` purano huna sakchha. Part 2 ko cellle feri lekhnuhos. |
+| `CUDA out of memory` / `OutOfMemoryError` | `BATCH` 4 ra `IMGSZ` 224 banaunuhos. CPU ma yo kam hunchha. |
+| prashikshan dherai dhilo | CPU ma kehi minet dekhi darjanaun minet lagchha. `EPOCHS` 5 ra `IMGSZ` 160 banaunuhos. |
+| `FileNotFoundError: yolo26n.pt` | model liieko chhaina. `assets/models/` ma file chha ki jaanchnuhos. |
+| loss ghatdain | labelko galti, tasbir ra label namilnu, learning rate ko samasya huna sakchha. din 4 notebook 01 ko jaanch ma pharkanuhos. |
+| prashikshan lagama `dfl_loss` chhaina | `dfl_loss` DFL prayog garne arko banabatko stambha ho. YOLO26 le `l1_loss` lekhchha. |
+| ek epoch ko update sankhya milen | 1 batch = 1 update nahun sakchha. `nbs` ra `batch` ko gradient jamma tatha warmup le tay garchha. |
 
 <!-- ne-cell: 26b4b3d5 | after-heading -->
-## सम्पन्नता जाँचसूची
+## sampannata janchasuchi
 
 <!-- ne-cell: 26b4b3d5 -->
-**अनिवार्य बुँदा मात्र** दिइएका छन्। **अभ्यास 3 (वैकल्पिक) अनिवार्य होइन**; नगरे पनि पूरा मानिन्छ।
-समय बाँकी भएमा मात्र गर्नुहोस्। सबैमा चिन्ह लागेपछि यो नोटबुक पूरा हुन्छ।
+**aniwarya bunda matra** diieka chhan. **abhyas 3 (baikalpik) aniwarya hoina**; nagare pani pura maninchha.
+samay banki bhae ma matra garnuhos. sabai ma chinh lagepachhi yo notebook pura hunchha.
 
-**अनिवार्य**
+**aniwarya**
 
-- [ ] Part 1–Part 4 पढेर सबै code सेल चलाएँ
-- [ ] `data.yaml` अहिलेको स्थानअनुसार फेरि लेखें
-- [ ] तस्बिर र लेबलको जोडी जाँचें
-- [ ] प्रशिक्षण चलाएँ (`RUN_TRAINING = True`)
-- [ ] `best.pt` र `results.csv` बने
-- [ ] प्रशिक्षण लगको सारांश सुरक्षित गरें
-- [ ] अभ्यास 1–2 (अनिवार्य) गरें
-- [ ] बुझाइ जाँच्ने 5 प्रश्नको उत्तर दिएँ
-- [ ] नोटबुक सुरक्षित गरें
+- [ ] Part 1–Part 4 padher sabai code cell chalaen
+- [ ] `data.yaml` ahileko sthanaanusar feri lekhen
+- [ ] tasbir ra labelko jodi janchen
+- [ ] prashikshan chalaen (`RUN_TRAINING = True`)
+- [ ] `best.pt` ra `results.csv` bane
+- [ ] prashikshan lagako saransh surakshit garen
+- [ ] abhyas 1–2 (aniwarya) garen
+- [ ] bujhai jaanchne 5 prashnako uttar dien
+- [ ] notebook surakshit garen
 
-**वैकल्पिक**
+**baikalpik**
 
-- [ ] अभ्यास 3 (वैकल्पिक): प्रशिक्षण नबढ्ने चार कारण भनें
+- [ ] abhyas 3 (baikalpik): prashikshan nabadhne chaar karan bhanen
 
 <!-- ne-cell: a1c69bf9 | after-heading -->
-## थप अध्ययन (वैकल्पिक)
+## thap adhyayan (baikalpik)
 
 <!-- ne-cell: a1c69bf9 -->
-### सन्दर्भ लिङ्क
+### sandarbha lingk
 
-- [Ultralytics Train मोड](https://docs.ultralytics.com/modes/train/)
+- [Ultralytics Train mod](https://docs.ultralytics.com/modes/train/)
 - [Ultralytics hyperparameter](https://docs.ultralytics.com/guides/hyperparameter-tuning/)
-- [PyTorch प्रशिक्षणको आधार](https://pytorch.org/tutorials/beginner/basics/optimization_tutorial.html)
+- [PyTorch prashikshanko adhar](https://pytorch.org/tutorials/beginner/basics/optimization_tutorial.html)
 
-### थप चुनौती (अनिवार्य होइन)
+### thap chunauti (aniwarya hoina)
 
-`BATCH` 4 र 16 मा प्रशिक्षण गरेर loss घट्ने "सहजता" (smoothness) तुलना गर्नुहोस्।
+`BATCH` 4 ra 16 ma prashikshan garera loss ghatne "sahajata" (smoothness) tulna garnuhos.

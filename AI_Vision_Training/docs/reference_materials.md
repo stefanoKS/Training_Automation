@@ -9,10 +9,10 @@ Official documentation used by this course, plus material for further study.
 ---
 
 <!-- ne:begin doc:2312673778 -->
-### नेपालीमा
+### Nepali ma
 
-यो तालिममा हेरिएका आधिकारिक कागजात र थप सिकाइका सामग्री हुन्।
-**सधैं आधिकारिक कागजातलाई प्राथमिकता दिनुहोस्।** blog लेख पुरानो हुन सक्छ।
+yo talim ma herieka adhikarik kagajat ra thap sikaika samagri hun.
+**sadhain adhikarik kagajatalai prathamikata dinuhos.** blog lekh purano huna sakchha.
 <!-- ne:end -->
 
 ## 0. この研修の解説資料 / This course's own explanations
@@ -31,17 +31,17 @@ export keeps both in step. The export never executes the notebooks and never dow
 ---
 
 <!-- ne:begin doc:d4294fae95 -->
-### नेपालीमा
+### Nepali ma
 
-| विषय | ठाउँ | कसरी प्रयोग गर्ने |
+| bishay | thaun | kasari prayog garne |
 |---|---|---|
-| दिन 1–5 को व्याख्या PDF | `docs/pdf/Day0N_explanation_ja_ne.pdf` (वा पहिलेको `*_ja_en.pdf`) | नोटबुकको व्याख्या जस्ताको तस्तै बनाइएको पुस्तिका। अफलाइन पढ्न |
-| हप्ता १ को सारांश PDF | `docs/pdf/Week1_explanation_ja_ne.pdf` | दोहोर्याउन र छाप्न |
-| PDF फेरि बनाउने तरिका | `docs/pdf/README.md` | `python assets\scripts\export_trilingual_pdf.py` |
-| चित्रको स्रोत | `assets/reference_outputs/README.md` | मापन गरिएका चित्र र योजनाबद्ध चित्रको फरक |
+| din 1–5 ko byakhya PDF | `docs/pdf/Day0N_explanation_ja_ne.pdf` (wa pahileko `*_ja_en.pdf`) | notebookko byakhya jastako tastai banaiyeko pustika. aphalain padhna |
+| hapta 1 ko saransh PDF | `docs/pdf/Week1_explanation_ja_ne.pdf` | dohoryaun ra chhapn |
+| PDF feri banaune tarika | `docs/pdf/README.md` | `python assets\scripts\export_trilingual_pdf.py` |
+| chitrako srot | `assets/reference_outputs/README.md` | maapan garieka chitra ra yojanabaddha chitrako farak |
 
-PDF नोटबुकको Markdown बाट स्वतः बन्छ, त्यसैले नोटबुक सुधारेपछि उही आदेशले दुवै मिलाउन सकिन्छ।
-export ले नोटबुक चलाउँदैन र model डाउनलोड गर्दैन।
+PDF notebookko Markdown baat sbatah banchha, tyasaile notebook sudharepachhi uhi adeshale dubai milauna sakinchha.
+export le notebook chalaundain ra model daunalod gardaina.
 <!-- ne:end -->
 
 ## 1. コア（必須）/ Core (required reading)
@@ -61,10 +61,10 @@ export ले नोटबुक चलाउँदैन र model डाउन
 ---
 
 <!-- ne:begin doc:02dde07497 -->
-### नेपालीमा
+### Nepali ma
 
-पहिले यही तालिकाका लिङ्क पढ्नुहोस्। Python, Jupyter, NumPy, Matplotlib, Pillow र pandas का
-आधिकारिक कागजात हुन्। जापानी अनुवाद भएका पृष्ठ पनि छन्; अङ्ग्रेजी मूलसँग मिलाएर हेर्दा राम्रो हुन्छ।
+pahile yahi talikaka lingk padhnuhos. Python, Jupyter, NumPy, Matplotlib, Pillow ra pandas ka
+adhikarik kagajat hun. Japani anuwad bhaeka prishth pani chhan; Angreji mulasang milaer herda ramro hunchha.
 <!-- ne:end -->
 
 ## 2. OpenCV
@@ -88,11 +88,11 @@ values in OpenCV 4 (contours, hierarchy); articles written for OpenCV 3 return t
 ---
 
 <!-- ne:begin doc:d6ee1135a2 -->
-### नेपालीमा
+### Nepali ma
 
-दिन २ मा सम्हालिने कुरा माथिका ५ लिङ्कले लगभग सबै ढाक्छन्।
-`cv2.findContours` ले **OpenCV 4 मा दुई** मान (contours, hierarchy) फर्काउँछ।
-OpenCV 3 का लेख (तीन मान फर्काउने) सँग नमिसाउनुहोस्।
+din 2 ma samhaline kura mathika 5 lingkale lagabhag sabai dhakchhan.
+`cv2.findContours` le **OpenCV 4 ma dui** maan (contours, hierarchy) pharkaunchha.
+OpenCV 3 ka lekh (tin maan pharkaune) sang namisaunuhos.
 <!-- ne:end -->
 
 ## 3. PyTorch
@@ -113,10 +113,10 @@ compute platform. This course's commands are Windows + pip + CPU.
 ---
 
 <!-- ne:begin doc:6fe4a10cdc -->
-### नेपालीमा
+### Nepali ma
 
-दिन 4–5 मा model भित्र के हुन्छ बुझ्न यी लिङ्क उपयोगी छन्। तर यो तालिममा PyTorch को कोड
-आफैं लेख्नु पर्दैन; ultralytics र anomalib ले सम्हाल्छन्।
+din 4–5 ma model bhitr ke hunchha bujhn yi lingk upayogi chhan. tar yo talim ma PyTorch ko kod
+aphain lekhnu pardaina; ultralytics ra anomalib le samhalchhan.
 <!-- ne:end -->
 
 ## 4. Ultralytics YOLO
@@ -143,11 +143,11 @@ articles without checking.
 ---
 
 <!-- ne:begin doc:2db47eeb35 -->
-### नेपालीमा
+### Nepali ma
 
-दिन 3–4 मा प्रयोग हुने YOLO का आधिकारिक पृष्ठ हुन्। predict, train, val का विकल्प र
-नतिजाको अर्थ यहीँबाट जाँच्नुहोस्। **Ultralytics का model र कोड AGPL-3.0** हुन्;
-उत्पादनमा राख्नुअघि लाइसेन्स जाँच्नुहोस्।
+din 3–4 ma prayog hune YOLO ka adhikarik prishth hun. predict, train, val ka bikalp ra
+natijako arth yahinbat jaanchnuhos. **Ultralytics ka model ra kod AGPL-3.0** hun;
+utpadanama rakhnuaghi laisens jaanchnuhos.
 <!-- ne:end -->
 
 ## 5. Anomalib
@@ -169,10 +169,10 @@ Verified with **Anomalib 2.7.0**. **1.x sample code does not run**: the API chan
 ---
 
 <!-- ne:begin doc:7d17b05ff9 -->
-### नेपालीमा
+### Nepali ma
 
-दिन ५ को PatchCore का आधिकारिक कागजात हुन्। संस्करण 2.7.0 प्रयोग भएको छ; पुरानो संस्करणको
-लेख हेर्दा API फरक हुन सक्छ भन्ने ध्यान दिनुहोस्।
+din 5 ko PatchCore ka adhikarik kagajat hun. sanskaran 2.7.0 prayog bhaeko chha; purano sanskaranako
+lekh herda API farak huna sakchha bhanne dhyan dinuhos.
 <!-- ne:end -->
 
 ## 6. データセットと評価の考え方 / Datasets and evaluation
@@ -195,10 +195,10 @@ industrial images and a clearly stated licence. It is a useful reference for Wee
 ---
 
 <!-- ne:begin doc:a7ce198326 -->
-### नेपालीमा
+### Nepali ma
 
-डेटासेटको बनावट, train/val/test को बाँडफाँट र मापन (precision, recall, AUROC) को अर्थ बुझ्न
-यी लिङ्क हेर्नुहोस्। मापनको नाम जस्ताको तस्तै राख्नुहोस्; नेपाली अनुवाद गर्दा अर्थ नबिग्रियोस्।
+datasetko banabat, train/val/test ko bandaphant ra maapan (precision, recall, AUROC) ko arth bujhn
+yi lingk hernuhos. maapan ko naam jastako tastai rakhnuhos; Nepali anuwad garda arth nabigriyos.
 <!-- ne:end -->
 
 ## 7. ライセンスの確認 / Licence checks
@@ -227,11 +227,11 @@ this course's scope (learning and evaluation) there is no issue.
 ---
 
 <!-- ne:begin doc:b85373a910 -->
-### नेपालीमा
+### Nepali ma
 
-सामग्री प्रयोग गर्नुअघि लाइसेन्स जाँच्नुहोस्। सिकाइमा प्रयोग गर्नु र उत्पादनमा राख्नु फरक कुरा हो।
-यो तालिममा प्रयोग भएका बाह्य सामग्रीको स्रोत
-[`assets/external_samples/PROVENANCE.md`](../assets/external_samples/PROVENANCE.md) मा अभिलेख छ।
+samagri prayog garnuaghi laisens jaanchnuhos. sikai ma prayog garnu ra utpadanama rakhnu farak kura ho.
+yo talim ma prayog bhaeka bahy samagriko srot
+[`assets/external_samples/PROVENANCE.md`](../assets/external_samples/PROVENANCE.md) ma abhilekh chha.
 <!-- ne:end -->
 
 ## 8. 実写の参考画像 / Reference photographs
@@ -265,9 +265,9 @@ used for training, calibration or test data. The VisA overview shows real indust
 neither a photograph of this factory's PVC products nor an output of this course's models.
 
 <!-- ne:begin doc:1aebfb55c3 -->
-### नेपालीमा
+### Nepali ma
 
-सन्दर्भ फोटो लाइसेन्स भएका मूल फाइल हुन्, कारखानाको मापन नतिजा होइनन्। ती **सिकाइ, क्यालिब्रेसन वा
-परीक्षणको डेटामा प्रयोग हुँदैनन्**। लिने र जाँच्ने तरिका
-[START_HERE.md](../START_HERE.md) को स्टेप 7 मा छ।
+sandarbha photo laisens bhaeka mul file hun, karakhanako maapan natija hoinan. ti **sikai, calibration wa
+parikshanko data ma prayog hundainan**. line ra jaanchne tarika
+[START_HERE.md](../START_HERE.md) ko step 7 ma chha.
 <!-- ne:end -->

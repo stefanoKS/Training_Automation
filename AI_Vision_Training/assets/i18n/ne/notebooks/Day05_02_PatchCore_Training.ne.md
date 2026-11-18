@@ -1,532 +1,542 @@
 <!--
-नेपाली अनुवाद / Nepali translation source for
+Nepali anuwad / Nepali translation source for
 notebooks/Day05_PatchCore/Day05_02_PatchCore_Training.ipynb
 -->
-# दिन ५ नोटबुक ०२ — नेपाली अनुवाद
+# din 5 notebook 02 — Nepali anuwad
 
 <!-- ne-cell: 43cbc7ba | after-heading -->
-# दिन ५ नोटबुक ०२: PatchCore को तालिम
+# din 5 notebook 02: PatchCore ko talim
 
 <!-- ne-cell: 43cbc7ba -->
-## सिकाइ लक्ष्यहरू
+## sikai lakshyaharu
 
-| नेपाली |
+| Nepali |
 | --- |
-| 1. Anomalib को API प्रयोग गरेर PatchCore सुरु गर्न सक्ने। |
-| 2. असामान्यता पहिचानको डेटा बनावट बताउन सक्ने। |
-| 3. सामान्य तस्बिर मात्र प्रयोग गरेर fit गर्न सक्ने। |
-| 4. स्कोर र हिटम्याप निकाल्न सक्ने। |
-| 5. नतिजा सुरक्षित गरेर थ्रेसहोल्डबारे सोच्न सक्ने। |
+| 1. Anomalib ko API prayog garera PatchCore suru garna sakne. |
+| 2. asamanyata pahichanko data banabat bataun sakne. |
+| 3. samanya tasbir matra prayog garera fit garna sakne. |
+| 4. score ra heatmap nikaln sakne. |
+| 5. natija surakshit garera thresaholdabare sochn sakne. |
 
-## यो नोटबुकको आधारभूत जानकारी
+## yo notebookko adharabhut jankari
 
-| विषय | विवरण |
+| bishay | biwaran |
 | --- | --- |
-| सिकाइ समय (अनुमान) | 130 मिनेट |
-| कठिनाइ | सुरुवाती तह |
-| पूर्वशर्त | दिन ५ नोटबुक ०१ सकिएको र `aivision-anomalib` kernel छानिएको हुनुपर्छ। |
-| आवश्यक लाइब्रेरी | anomalib 2.7.0, torch, torchvision, opencv-python-headless, numpy, matplotlib, pandas |
-| प्रयोग हुने kernel | `aivision-anomalib` (**यही kernel प्रयोग गर्नैपर्छ**) |
-| आजको समयतालिका | [`COURSE_SYLLABUS.md` दिन ५](../../COURSE_SYLLABUS.md#day5) |
+| sikai samay (anuman) | 130 minet |
+| kathinai | surubati tah |
+| poorwashart | din 5 notebook 01 sakieko ra `aivision-anomalib` kernel chhanieko hunuparchha. |
+| aawashyak laibreri | anomalib 2.7.0, torch, torchvision, opencv-python-headless, numpy, matplotlib, pandas |
+| prayog hune kernel | `aivision-anomalib` (**yahi kernel prayog garnaiparchha**) |
+| ajako samayatalika | [`COURSE_SYLLABUS.md` din 5](../../COURSE_SYLLABUS.md#day5) |
 
-### बुझाउनुपर्ने काम
+### bujhaunuparne kaam
 
-| नेपाली |
+| Nepali |
 | --- |
-| तालिमको नतिजा (मापन) |
-| हिटम्याप तस्बिर |
-| तस्बिर-दर-तस्बिर स्कोरको तालिका |
-| तस्बिर-दर-तस्बिर सङ्ख्यात्मक नक्सा (maps/*.npz) |
+| talimko natija (maapan) |
+| heatmap tasbir |
+| tasbir-dar-tasbir score ko talika |
+| tasbir-dar-tasbir sangkhyatmak naksa (maps/*.npz) |
 
-> यो नोटबुकलाई **`aivision-anomalib` kernel आवश्यक** पर्छ। हप्ता १ मा दुई अलग वातावरण राखिएका छन् किनभने
-> Anomalib लाई `opencv-python-headless` चाहिन्छ र Ultralytics लाई `opencv-python`; दुवै एउटै वातावरणमा राख्दा
-> OpenCV बिग्रन्छ।
+> yo notebook lai **`aivision-anomalib` kernel aawashyak** parchha. hapta 1 ma dui alag batabaran rakhieka chhan kinabhane
+> Anomalib lai `opencv-python-headless` chahinchha ra Ultralytics lai `opencv-python`; dubai eutai batabaran ma rakhda
+> OpenCV bigranchha.
 
 <!-- ne-cell: 01bf2bc9 | after-heading -->
-## यो नोटबुक कहाँ पर्छ
+## yo notebook kahan parchha
 
 <!-- ne-cell: 01bf2bc9 -->
-| विषय | विवरण |
+| bishay | biwaran |
 | --- | --- |
-| दिन | दिन ५ |
-| आजको क्रम | आजको नोटबुकमध्ये 2 / 3 |
-| लाग्ने समय | 130 मिनेट |
-| पूर्वशर्त | `Day05_01_Anomaly_Detection_Concepts.ipynb`, `aivision-anomalib` kernel |
-| आजको समयतालिका | [`COURSE_SYLLABUS.md` दिन ५](../../COURSE_SYLLABUS.md#day5) |
+| din | din 5 |
+| ajako kram | ajako notabukamadhye 2 / 3 |
+| lagne samay | 130 minet |
+| poorwashart | `Day05_01_Anomaly_Detection_Concepts.ipynb`, `aivision-anomalib` kernel |
+| ajako samayatalika | [`COURSE_SYLLABUS.md` din 5](../../COURSE_SYLLABUS.md#day5) |
 
-दिनको समयतालिका `COURSE_SYLLABUS.md` मा एउटै ठाउँमा छ। यो नोटबुक त्यसको एउटा भाग मात्र हो।
+dinko samayatalika `COURSE_SYLLABUS.md` ma eutai thaun ma chha. yo notebook tyasko euta bhaag matra ho.
 
 <!-- ne-cell: audit-learning-loop | after-heading -->
-### अनुमान गर्नुहोस्, चलाउनुहोस्, हेर्नुहोस्, व्याख्या गर्नुहोस्
+### anuman garnuhos, chalaunuhos, hernuhos, byakhya garnuhos
 
 <!-- ne-cell: audit-learning-loop -->
-backbone स्थिर फिचर निकाल्ने भाग हो। सामान्य मेमोरी र क्यालिब्रेसन मान डेटाबाट बन्छ। महत्त्वपूर्ण सेल
-चलाउनुअघि इनपुट, काम र नतिजा एक-एक वाक्यमा लेख्नुहोस्। पहिले अनुमान गरेर चलाउनुहोस्। क्यालिब्रेसनको
-सर्त मात्र बदलेर (परीक्षण डेटा समायोजनमा प्रयोग नगर्नुहोस्) फेरि अनुमान गरी चलाउनुहोस्।
+backbone sthir feature nikalne bhaag ho. samanya memory ra calibration maan data baat banchha. mahattwapurna cell
+chalaunuaghi input, kaam ra natija ek-ek bakyama lekhnuhos. pahile anuman garera chalaunuhos. calibrationko
+sart matra badaler (parikshan data samayojanama prayog nagarnuhos) feri anuman gari chalaunuhos.
 
 <!-- ne-cell: 75d078b0 | after-heading -->
-## Part 0 तयारी
+## Part 0 tayari
 
 <!-- ne-cell: 2fa75b5a | after-heading -->
-**kernel जाँच्ने**
+**kernel jaanchne**
 <!-- ne-pair: Confirm the kernel -->
 
 <!-- ne-cell: 2fa75b5a -->
-यो नोटबुक **`aivision-anomalib` kernel** मा चलाउनुहोस्। अर्को kernel भए
-`ModuleNotFoundError: No module named 'anomalib'` आउँछ।
+yo notebook **`aivision-anomalib` kernel** ma chalaunuhos. arko kernel bhae
+`ModuleNotFoundError: No module named 'anomalib'` aaunchha.
 
-त्यस्तो भए मेनुबाट `Kernel` → `Change Kernel` → `Python 3 (AI Vision Anomalib)` छानेर
-**नोटबुक सुरुदेखि फेरि चलाउनुहोस्**।
+tyasto bhae menubat `Kernel` → `Change Kernel` → `Python 3 (AI Vision Anomalib)` chhaner
+**notebook suru dekhi feri chalaunuhos**.
 
 <!-- ne-cell: 8f419564 | after-heading -->
-**प्रयोग हुने API (संस्करण स्थिर)**
+**prayog hune API (sanskaran sthir)**
 <!-- ne-pair: The API used here (pinned version) -->
 
 <!-- ne-cell: 8f419564 -->
-Anomalib मा **2.x** मा API धेरै बदलियो। 1.x को नमुना कोड सार्दा चल्दैन।
+Anomalib ma **2.x** ma API dherai badaliyo. 1.x ko namuna kod sarda chaldain.
 
-यो तालिममा **Anomalib 2.7.0** मा जाँचिएको छ। प्रयोग हुने तीन class मात्र हुन्।
+yo talim ma **Anomalib 2.7.0** ma janchieko chha. prayog hune tin class matra hun.
 
-| class | भूमिका |
+| class | bhoomika |
 |---|---|
-| `anomalib.data.Folder` | फोल्डर बनावटबाट डेटा पढ्ने |
-| `anomalib.models.Patchcore` | PatchCore model आफैं |
-| `anomalib.engine.Engine` | तालिम, मूल्याङ्कन र अनुमान चलाउने |
+| `anomalib.data.Folder` | folder banabat baat data padhne |
+| `anomalib.models.Patchcore` | PatchCore model aphain |
+| `anomalib.engine.Engine` | talim, mulyankan ra anuman chalaune |
 
 <!-- ne-cell: 08e2ac7d | after-heading -->
-## Part 1 डेटाको बनावट
+## Part 1 datako banabat
 
 <!-- ne-cell: bc41a079 | after-heading -->
-**तालिममा सामान्य मात्र प्रयोग गर्ने**
+**talim ma samanya matra prayog garne**
 <!-- ne-pair: Only normal images are used for training -->
 
 <!-- ne-cell: bc41a079 -->
-प्रयोग हुने फोल्डर बनावट यस्तो छ: `assets/anomaly_dataset/pvc_sheet/` भित्र `train/good/` (तालिम,
-सामान्य मात्र), `test/good/` (मूल्याङ्कन, सामान्य), `test/black_spot/`, `test/scratch/`,
-`test/streak/`, `test/irregular_mark/` (मूल्याङ्कन, असामान्य), र
-`ground_truth/<प्रकार>/xxx_mask.png` (सही मास्क, मूल्याङ्कनका लागि)।
+prayog hune folder banabat yasto chha: `assets/anomaly_dataset/pvc_sheet/` bhitr `train/good/` (talim,
+samanya matra), `test/good/` (mulyankan, samanya), `test/black_spot/`, `test/scratch/`,
+`test/streak/`, `test/irregular_mark/` (mulyankan, asamanya), ra
+`ground_truth/<prakar>/xxx_mask.png` (sahi mask, mulyankanka lagi).
 
-**`train/` मा एउटा पनि असामान्य तस्बिर छैन।** यही PatchCore को पूर्वशर्त हो।
+**`train/` ma euta pani asamanya tasbir chhaina.** yahi PatchCore ko poorwashart ho.
 
 <!-- ne-cell: afbdd116 | after-heading -->
-**data module बनाउने**
+**data module banaune**
 <!-- ne-pair: Building the datamodule -->
 
 <!-- ne-cell: afbdd116 -->
-`Folder` लाई कुन फोल्डर के हो भनेर बताइन्छ।
+`Folder` lai kun folder ke ho bhanera batainchha.
 
-| argument | अर्थ |
+| argument | arth |
 |---|---|
-| `normal_dir` | तालिममा प्रयोग हुने सामान्य तस्बिरको फोल्डर |
-| `normal_test_dir` | मूल्याङ्कनमा प्रयोग हुने सामान्य तस्बिरको फोल्डर |
-| `abnormal_dir` | मूल्याङ्कनमा प्रयोग हुने असामान्य तस्बिरको फोल्डर (सूची) |
-| `mask_dir` | सही मास्कको फोल्डर (सूची) |
-| `val_split_mode` / `val_split_ratio` | मूल्याङ्कन डेटा प्रमाणीकरण र परीक्षणमा बाँड्ने तरिका र अनुपात |
-| `num_workers` | Windows मा 0 सुरक्षित |
+| `normal_dir` | talim ma prayog hune samanya tasbirko folder |
+| `normal_test_dir` | mulyankan ma prayog hune samanya tasbirko folder |
+| `abnormal_dir` | mulyankan ma prayog hune asamanya tasbirko folder (soochi) |
+| `mask_dir` | sahi maskako folder (soochi) |
+| `val_split_mode` / `val_split_ratio` | mulyankan data pramanikaran ra parikshan ma bandne tarika ra anupaat |
+| `num_workers` | Windows ma 0 surakshit |
 
-`val_split_mode="from_test"` ले **मूल्याङ्कन फोल्डरलाई "प्रमाणीकरण (क्यालिब्रेसन)" र "परीक्षण" मा
-बाँड्ने तरिका** मात्र बताउँछ। **आधा-आधा हुनु `val_split_ratio=0.5` तोकिएको हुनाले** हो; `from_test`
-मात्रले अनुपात तय गर्दैन। उद्देश्य: **थ्रेसहोल्ड प्रमाणीकरण (यो तालिममा क्यालिब्रेसन भनिन्छ) मा तय
-गर्ने र नतिजा परीक्षणमा नाप्ने**।
+`val_split_mode="from_test"` le **mulyankan folder lai "pramanikaran (calibration)" ra "parikshan" ma
+bandne tarika** matra bataunchha. **adha-adha hunu `val_split_ratio=0.5` tokieko hunale** ho; `from_test`
+matrale anupaat tay gardaina. uddeshya: **threshold pramanikaran (yo talim ma calibration bhaninchha) ma tay
+garne ra natija parikshan ma napne**.
 
 <!-- ne-cell: c7f73514 | after-heading -->
-**तालिम डेटामा असामान्य छैन भन्ने पुष्टि गर्ने**
+**talim data ma asamanya chhaina bhanne pushti garne**
 <!-- ne-pair: Verify training data contains no anomalies -->
 
 <!-- ne-cell: c7f73514 -->
-यहाँ **अवश्य जाँच्नुहोस्**। `train` मा असामान्य तस्बिर मिसियो भने त्यो असामान्यता "सामान्यको नमुना"
-बनेर memory bank मा पर्छ। फलस्वरूप **उस्तै देखिने असामान्यताको स्कोर घट्छ र छुट्ने बढ्छ**।
+yahan **abashy jaanchnuhos**. `train` ma asamanya tasbir misiyo bhane tyo asamanyata "samanyako namuna"
+baner memory bank ma parchha. phalasbarup **ustai dekhine asamanyatako score ghatchha ra chhutne badhchha**.
 
-तर "मिसिएपछि त्यो दोष कहिल्यै भेटिँदैन" भनेर टुङ्गो लाग्दैन। coreset कसरी छानियो, फिचरको छिमेक,
-स्थान र वरपरको देखिने रूप, र थ्रेसहोल्डले नतिजा बदल्छ। **भन्न सकिने कुरा "छुट्ने जोखिम बढ्छ" सम्म**
-हो।
+tar "misiepachhi tyo dosh kahilyai bhetindain" bhanera tunggo lagdain. coreset kasari chhaniyo, featureko chhimek,
+sthan ra baraparako dekhine rup, ra thresholdle natija badalchha. **bhann sakine kura "chhutne jokhim badhchha" samm**
+ho.
 
-सबैभन्दा भरपर्दो उपाय: **मिसिएको तस्बिर हटाएर memory bank फेरि बनाउने, र छुट्याएर राखिएका
-क्यालिब्रेसन र मूल्याङ्कन तस्बिरमा जाँच्ने**।
+sabaibhanda bharapardo upay: **misieko tasbir hataer memory bank feri banaune, ra chhutyaer rakhieka
+calibration ra mulyankan tasbir ma jaanchne**.
 
 <!-- ne-cell: 9e971153 | after-heading -->
-## Part 2 model सुरु गर्ने
+## Part 2 model suru garne
 
 <!-- ne-cell: f6b40399 | after-heading -->
-**backbone कसरी छान्ने**
+**backbone kasari chhanne**
 <!-- ne-pair: Choosing the backbone -->
 
 <!-- ne-cell: f6b40399 -->
-`Patchcore` का मुख्य argument:
+`Patchcore` ka mukhy argument:
 
-| argument | अर्थ | यो तालिमको मान |
+| argument | arth | yo talimko maan |
 |---|---|---|
-| `backbone` | फिचर गणना गर्ने नेटवर्क | `resnet18` (CPU का लागि हल्का) |
-| `layers` | कुन तहको फिचर प्रयोग गर्ने | `["layer2", "layer3"]` |
-| `pre_trained` | तालिम भएको weight प्रयोग गर्ने कि | `True` |
-| `coreset_sampling_ratio` | memory bank मा राखिने अनुपात | `0.1` (10 %) |
-| `num_neighbors` | दूरी गणनामा प्रयोग हुने छिमेकी सङ्ख्या | `9` |
+| `backbone` | feature ganana garne netabark | `resnet18` (CPU ka lagi halka) |
+| `layers` | kun tahako feature prayog garne | `["layer2", "layer3"]` |
+| `pre_trained` | talim bhaeko weight prayog garne ki | `True` |
+| `coreset_sampling_ratio` | memory bank ma rakhine anupaat | `0.1` (10 %) |
+| `num_neighbors` | duri ganana ma prayog hune chhimeki sankhya | `9` |
 
-पत्रको पूर्वनिर्धारित `wide_resnet50_2` हो, तर यो तालिमको CPU वातावरणमा गणना लामो लाग्ने हुनाले
-पूर्वनिर्धारित रूपमा `resnet18` प्रयोग गरिन्छ। **कुन राम्रो हुन्छ भन्ने कुरा डेटा र समयले तय गर्छ।**
-निर्णय गर्दा **उही क्यालिब्रेसन (प्रमाणीकरण) डेटामा मापन र समय नापेर** तुलना गर्नुहोस् (अभ्यास 2)।
-"resnet18 सधैं अलि नराम्रो" वा "wide_resnet50_2 सधैं धेरै ढिलो" भनेर नठान्नुहोस्।
+patrako purbanirdharit `wide_resnet50_2` ho, tar yo talimko CPU batabaran ma ganana lamo lagne hunale
+purbanirdharit rupama `resnet18` prayog garinchha. **kun ramro hunchha bhanne kura data ra samayle tay garchha.**
+nirnaya garda **uhi calibration (pramanikaran) data ma maapan ra samay naper** tulna garnuhos (abhyas 2).
+"resnet18 sadhain ali naramro" wa "wide_resnet50_2 sadhain dherai dhilo" bhanera nathaannuhos.
 
-> ImageNet को weight कक्षाअघि `preload_models.py --profile anomalib` ले लिइन्छ। तयारी सेलको
-> `TIMM_USE_OLD_CACHE=1` ले URL cache लाई प्राथमिकता दिन्छ। cache छैन भने यो पाठको सेल त्रुटिसहित
-> रोकिन्छ र आफैं डाउनलोड गर्दैन।
+> ImageNet ko weight kakshaaghi `preload_models.py --profile anomalib` le liinchha. tayari cellko
+> `TIMM_USE_OLD_CACHE=1` le URL cache lai prathamikata dinchha. cache chhaina bhane yo paathko cell trutisahit
+> rokinchha ra aphain daunalod gardaina.
 
 <!-- ne-cell: audit-teach_patchcore_stages | after-heading -->
-### कोड कसरी पढ्ने
+### kod kasari padhne
 
 <!-- ne-cell: audit-teach_patchcore_stages | after-image:../../assets/svg/teach_patchcore_stages.svg -->
-चित्र: तस्बिरको निर्देशाङ्क र फिचर स्पेस छुट्याउनुहोस्। (गणना गरिएको संश्लेषित उदाहरण र योजनाबद्ध चित्र;
-model को वास्तविक नापिएको नतिजा होइन।)
+chitra: tasbirko nirdeshangk ra feature spes chhutyaunuhos. (ganana garieko sansleshit udaharan ra yojanabaddha chitra;
+model ko bastabik napieko natija hoina.)
 
-**ध्यान दिनुपर्ने कुरा**
+**dhyan dinuparne kura**
 
-तस्बिरको निर्देशाङ्क र फिचर स्पेस छुट्याउनुहोस्। इनपुट र परिवर्तन भएको मान औंलाले पछ्याउनुहोस्।
+tasbirko nirdeshangk ra feature spes chhutyaunuhos. input ra paribartan bhaeko maan aunlale pachhyaunuhos.
 
-**सोच्नुहोस्**
+**sochnuhos**
 
-सामान्य मेमोरीमा असामान्यता हाल्दा दूरीको निर्णय कसरी बदलिन सक्छ?
+samanya memory ma asamanyata halda duriko nirnaya kasari badalin sakchha?
 
 <!-- ne-cell: 90a03498 | after-heading -->
-## Part 3 fit गर्ने
+## Part 3 fit garne
 
 <!-- ne-cell: bf3d12fb | after-heading -->
-**PatchCore को "तालिम" एक पटकले पुग्छ**
+**PatchCore ko "talim" ek patakale pugchha**
 <!-- ne-pair: One pass is enough for PatchCore's fit -->
 
 <!-- ne-cell: bf3d12fb -->
-PatchCore को तालिमले **neural network को weight अपडेट गर्दैन**। गरिने काम दुई मात्र हो:
+PatchCore ko talimle **neural network ko weight update gardaina**. garine kaam dui matra ho:
 
-1. सामान्य तस्बिर backbone मा हालेर **फिचर गणना गर्ने**
-2. ती फिचर **memory bank मा सुरक्षित गर्ने** (coreset ले छोट्याएर)
+1. samanya tasbir backbone ma haler **feature ganana garne**
+2. ti feature **memory bank ma surakshit garne** (coreset le chhotyaer)
 
-**CNN को weight स्थिर (frozen)** रहन्छ; डेटाले तय गर्ने कुरा **memory bank** हो। साथै त्यसपछिको
-**क्यालिब्रेसन (थ्रेसहोल्ड र सामान्यीकरणको तथ्याङ्क)** पनि डेटाले तय गर्छ। सुरक्षित हुने अवस्था यही
-"memory bank + क्यालिब्रेसन तथ्याङ्क" हो।
+**CNN ko weight sthir (frozen)** rahanchha; datale tay garne kura **memory bank** ho. sathai tyaspachhiko
+**calibration (threshold ra samanyikaranako tathyangk)** pani datale tay garchha. surakshit hune abastha yahi
+"memory bank + calibration tathyangk" ho.
 
-उही तस्बिरबाट उही फिचर आउने हुनाले **यो fit तरिकामा एक पटक (`max_epochs=1`) पुग्छ**। "जति पटक
-दोहोर्याए पनि सधैं अर्थहीन" भन्ने होइन; **डेटा बदलियो भने फेरि fit गर्ने र क्यालिब्रेसन पनि फेरि गर्ने।**
-यो दिन ४ को YOLO सँगको ठुलो फरक हो।
+uhi tasbir baat uhi feature aune hunale **yo fit tarikama ek patak (`max_epochs=1`) pugchha**. "jati patak
+dohoryae pani sadhain arthahin" bhanne hoina; **data badaliyo bhane feri fit garne ra calibration pani feri garne.**
+yo din 4 ko YOLO sangko thulo farak ho.
 
 <!-- ne-cell: fig-teach_backbone_vs_memory | after-heading -->
-### बदलिने कुरा memory bank मात्र
+### badaline kura memory bank matra
 
 <!-- ne-cell: fig-teach_backbone_vs_memory | after-image:../../assets/diagrams/teach_backbone_vs_memory.png -->
-चित्र: weight अपडेट नहुने backbone र डेटाले तय गर्ने memory bank (योजनाबद्ध चित्र)।
+chitra: weight update nahune backbone ra datale tay garne memory bank (yojanabaddha chitra).
 
-**ध्यान दिनपर्ने कुरा**
+**dhyan dinaparne kura**
 
-ResNet-18 को weight अपडेट हुँदैन (frozen)। डेटाले तय गर्ने कुरा memory bank हो, र पछि क्यालिब्रेसनले
-तय गर्ने पछि-प्रशोधन (सामान्यीकरणको तथ्याङ्क र थ्रेसहोल्ड) पनि सुरक्षित अवस्थाको भाग हो। `max_epochs=1`
-पुग्नुको कारण यो क्रम एक फेरमै सकिने बनावट हो।
+ResNet-18 ko weight update hundaina (frozen). datale tay garne kura memory bank ho, ra pachhi calibrationle
+tay garne pachhi-prashodhan (samanyikaranako tathyangk ra threshold) pani surakshit abasthako bhaag ho. `max_epochs=1`
+pugnuko karan yo kram ek pheramai sakine banabat ho.
 
-**सोच्नुहोस्**
+**sochnuhos**
 
-सामान्य तस्बिर थप्दा के बदलिन्छ: backbone, memory bank कि थ्रेसहोल्ड?
+samanya tasbir thapda ke badlinchha: backbone, memory bank ki threshold?
 
 <!-- ne-cell: f5f00936 | after-heading -->
-**प्रगति देखाउने सुविधा आफैं बन्द गर्ने कारण**
+**pragati dekhaune subidha aphain banda garne karan**
 <!-- ne-pair: Why the progress display is switched off -->
 
 <!-- ne-cell: f5f00936 -->
-Lightning को धेरै सजावट भएको प्रगति देखाउने सुविधाले Windows को Jupyter मा कहिलेकाहीँ
-`RecursionError` दिन सक्छ। यो तालिममा **त्यो देखाउने सुविधा बन्द गरेर** आफैं सुरु-अन्त्यको सन्देश
-देखाइन्छ। तालिम आफैंमा कुनै परिवर्तन हुँदैन।
+Lightning ko dherai sajabat bhaeko pragati dekhaune subidhale Windows ko Jupyter ma kahilekahin
+`RecursionError` din sakchha. yo talim ma **tyo dekhaune subidha banda garera** aphain suru-antyako sandesh
+dekhainchha. talim aphainma kunai paribartan hundaina.
 
 <!-- ne-cell: clarity-fit-state | after-heading -->
-### कुन अवस्था बदलियो
+### kun abastha badaliyo
 
 <!-- ne-cell: clarity-fit-state -->
-| चरण | वस्तु र परिवर्तन |
+| charan | bastu ra paribartan |
 |---|---|
-| फिचर निकाल्ने | backbone weight: स्थिर |
-| fit | सामान्य मेमोरी: बनाइन्छ |
-| क्यालिब्रेसन | सामान्यीकरण तथ्याङ्क र तस्बिर थ्रेसहोल्ड: छानेर स्थिर गरिन्छ |
-| अनुमान | नयाँ तस्बिर: निर्णय मात्र; fit मा थपिँदैन |
+| feature nikalne | backbone weight: sthir |
+| fit | samanya memory: banainchha |
+| calibration | samanyikaran tathyangk ra tasbir threshold: chhaner sthir garinchha |
+| anuman | nayan tasbir: nirnaya matra; fit ma thapindain |
 
-दिन ४ को 15 epoch को weight अनुकूलनभन्दा यो फरक हो। अनुमान: सामान्य तस्बिर थप्दा के फेरि बनाउनुपर्छ?
-तलको सुरक्षित गर्ने ठाउँमा memory model को अवस्थाभित्र पर्ने कुरा जाँच्नुहोस् र सुरक्षित सङ्ख्यालाई
-यो पटकको चलाइबाट छुट्याउनुहोस्।
+din 4 ko 15 epoch ko weight anukulanabhanda yo farak ho. anuman: samanya tasbir thapda ke feri banaunuparchha?
+talako surakshit garne thaun ma memory model ko abasthabhitr parne kura jaanchnuhos ra surakshit sankhya lai
+yo patakako chalaibat chhutyaunuhos.
 
 <!-- ne-cell: 29df63e7 | after-heading -->
-**सुरक्षित भएको कुरा**
+**surakshit bhaeko kura**
 <!-- ne-pair: What was saved -->
 
 <!-- ne-cell: 29df63e7 -->
-`engine.fit()` ले model को अवस्था `training_results/day05/` मुनि सुरक्षित गर्छ।
-**memory bank को सामग्री त्यही सुरक्षित फाइलभित्र हुन्छ।**
+`engine.fit()` le model ko abastha `training_results/day05/` muni surakshit garchha.
+**memory bank ko samagri tyahi surakshit phailabhitr hunchha.**
 
 <!-- ne-cell: 9aac8b7e | after-heading -->
-## Part 4 मूल्याङ्कन गर्ने
+## Part 4 mulyankan garne
 
 <!-- ne-cell: c452bff7 | after-heading -->
-**चार मापन**
+**chaar maapan**
 <!-- ne-pair: The four metrics -->
 
 <!-- ne-cell: c452bff7 -->
-Anomalib ले चार मापन फर्काउँछ। **यो भाग क्यालिब्रेसन (validation) डेटामा मात्र गणना गरिन्छ।**
-परीक्षण डेटाको मापन थ्रेसहोल्ड स्थिर गरेपछि दिन ५ नोटबुक ०३ मा एक पटक मात्र निकालिन्छ।
+Anomalib le chaar maapan pharkaunchha. **yo bhaag calibration (validation) data ma matra ganana garinchha.**
+parikshan datako maapan threshold sthir garepachhi din 5 notebook 03 ma ek patak matra nikalinchha.
 
-| मापन | अर्थ |
+| maapan | arth |
 |---|---|
-| `image_AUROC` | तस्बिर-स्तरमा OK/NG छुट्याउने क्षमता (1.0 सर्वोत्तम) |
-| `image_F1Score` | तस्बिर-स्तरको precision र recall को सन्तुलित औसत |
-| `pixel_AUROC` | पिक्सेल-स्तरमा असामान्य क्षेत्र भेट्ने क्षमता |
-| `pixel_F1Score` | पिक्सेल-स्तरको सन्तुलित औसत |
+| `image_AUROC` | tasbir-star ma OK/NG chhutyaune kshamata (1.0 sarbottam) |
+| `image_F1Score` | tasbir-starko precision ra recall ko santulit ausat |
+| `pixel_AUROC` | piksel-star ma asamanya kshetr bhetne kshamata |
+| `pixel_F1Score` | piksel-starko santulit ausat |
 
-**AUROC** ले "थ्रेसहोल्ड नतोकी सामान्य र असामान्यलाई कति राम्रो क्रममा राख्न सकियो" देखाउँछ। 0.5
-अनियमित, 1.0 पूर्ण क्रम। तर **AUROC 1.0 भए "जुनसुकै थ्रेसहोल्डमा पूर्ण" भन्ने होइन**; **यो
-क्यालिब्रेसन डेटामा क्रम पूर्ण थियो** भन्ने मात्र हो। वास्तविक निर्णय छानिएको एउटा थ्रेसहोल्डले गर्छ,
-त्यसैले **छुट्ने र झुटो अलार्मको सङ्ख्या छुट्टै गनिन्छ**।
+**AUROC** le "threshold natoki samanya ra asamanya lai kati ramro kram ma rakhna sakiyo" dekhaunchha. 0.5
+aniyamit, 1.0 purn kram. tar **AUROC 1.0 bhae "junasukai threshold ma purn" bhanne hoina**; **yo
+calibration data ma kram purn thiyo** bhanne matra ho. bastabik nirnaya chhanieko euta thresholdle garchha,
+tyasaile **chhutne ra jhuto alarmko sankhya chhuttai ganinchha**.
 
-क्यालिब्रेसन डेटामा सामान्य 6 र असामान्य 20 तस्बिर छन्। **यो सङ्ख्याले नाप्न सक्ने शुद्धताको सीमा छ।**
+calibration data ma samanya 6 ra asamanya 20 tasbir chhan. **yo sankhyale napn sakne shuddhatako sima chha.**
 
-यहाँ `engine.test()` पुस्तकालयको method नाम हो। दिइएको `datamodule.val_dataloader()` ले कुन तस्बिर
-मूल्याङ्कन हुने तय गर्ने हुनाले यो CALIBRATION हो, प्रयोग नभएको अन्तिम TEST मूल्याङ्कन होइन।
+yahan `engine.test()` pustakalayako method naam ho. diieko `datamodule.val_dataloader()` le kun tasbir
+mulyankan hune tay garne hunale yo CALIBRATION ho, prayog nabhaeko antim TEST mulyankan hoina.
 
 <!-- ne-cell: ba5da1ef | after-heading -->
-### नतिजाको उदाहरण
+### natijako udaharan
 
 <!-- ne-cell: ba5da1ef -->
-यो नतिजा यो तालिममा सुरक्षित गरिएको अभिलेख हो (model, डेटा बाँडफाँट र seed लेखामा छ)। सूक्ष्म सङ्ख्या
-वातावरणअनुसार फरक पर्छ; प्रवृत्ति र ठुलो-सानोको सम्बन्ध पढ्नुहोस्। यी **क्यालिब्रेसन** का सङ्ख्या हुन्
-(ResNet-18, `image_size=256`, seed 2026); परीक्षणका सङ्ख्या नोटबुक ०३ मा मात्र आउँछन्।
+yo natija yo talim ma surakshit garieko abhilekh ho (model, data bandaphant ra seed lekhama chha). sukshm sankhya
+batabaran anusar farak parchha; prabritti ra thulo-sanoko sambandh padhnuhos. yi **calibration** ka sankhya hun
+(ResNet-18, `image_size=256`, seed 2026); parikshanka sankhya notebook 03 ma matra aunchhan.
 
 <!-- ne-cell: f4d5f377 | after-heading -->
-**सङ्ख्या धेरै राम्रो देखिँदा शङ्का गर्ने कुरा**
+**sankhya dherai ramro dekhinda shangka garne kura**
 <!-- ne-pair: When the numbers look too good -->
 
 <!-- ne-cell: f4d5f377 -->
-संश्लेषित तस्बिर **वास्तविक कारखानाका तस्बिरभन्दा सजिलो** हुन्छ। दोष स्पष्ट हुन्छ र पृष्ठभूमिको भिन्नता
-पनि सानो हुन्छ, त्यसैले `image_AUROC` 1.0 नजिक पुग्छ।
+sansleshit tasbir **bastabik karakhanaka tasbirabhanda sajilo** hunchha. dosh spasht hunchha ra prishthabhumiko bhinnata
+pani sano hunchha, tyasaile `image_AUROC` 1.0 najik pugchha.
 
-**यो "वास्तविक क्षमता" होइन।** वास्तविक PVC मा रङको असमानता, उज्यालोको असमानता र परावर्तन थपिन्छन्
-र उही सङ्ख्या आउँदैन। साथै क्यालिब्रेसनमा सामान्य 6 र असामान्य 20 तस्बिर मात्र छन्, त्यसैले
-**यो सङ्ख्यामा नापिएको मान उत्पादनको क्षमता हुँदैन**।
+**yo "bastabik kshamata" hoina.** bastabik PVC ma rangako asamanata, ujyaloko asamanata ra parabartan thapinchhan
+ra uhi sankhya aundain. sathai calibration ma samanya 6 ra asamanya 20 tasbir matra chhan, tyasaile
+**yo sankhya ma napieko maan utpadanako kshamata hundaina**.
 
-यो तालिमको सङ्ख्यालाई **उत्पादनको निरीक्षण शुद्धता भनेर उद्धृत गर्नु हुँदैन।**
+yo talimko sankhya lai **utpadanako nirikshan shuddhata bhanera uddhrit garnu hundaina.**
 
 <!-- ne-cell: 28cb22c6 | after-heading -->
-## Part 5 स्कोर र हिटम्याप
+## Part 5 score ra heatmap
 
 <!-- ne-cell: 8cfeab62 | after-heading -->
-### मूल तस्बिर, स्कोर नक्सा र मिलाएर देखाइएको चित्र
+### mul tasbir, score naksa ra milaer dekhaieko chitra
 
 <!-- ne-cell: 8cfeab62 | after-image:../../assets/diagrams/teach_score_map_overlay.png -->
-चित्र: **व्याख्याका लागि बनाइएको संश्लेषित योजनाबद्ध चित्र** (हल्का डाँडाजस्तो आकार) हो। यो वास्तविक
-PatchCore को नतिजा होइन। मिलाएर राख्ने तरिका देखाउन उही तस्बिरलाई उही रङ-मापन (0.0–0.4) मा तीन
-रूपमा राखिएको छ।
+chitra: **byakhyaka lagi banaiyeko sansleshit yojanabaddha chitra** (halka dandajasto akar) ho. yo bastabik
+PatchCore ko natija hoina. milaer rakhne tarika dekhauna uhi tasbir lai uhi rang-maapan (0.0–0.4) ma tin
+rupama rakhieko chha.
 
-**ध्यान दिनुपर्ने कुरा**
+**dhyan dinuparne kura**
 
-तुलना गर्दा **देखाइने दायरा (vmin र vmax) स्थिर** राख्नुहोस्। हरेक तस्बिरले आफ्नै दायरा छान्दा
-सामान्य सामानमा पनि अधिकतम मान सबैभन्दा चम्किलो रङमा देखिन्छ र तुलना अर्थहीन हुन्छ। यो नोटबुकको
-हिटम्यापले **सबै तस्बिरमा उही 0–1 दायरा** प्रयोग गर्छ र **रङ-पट्टी (colourbar)** राख्छ
-(`MAP_VMIN`, `MAP_VMAX`)। रङ **colormap र देखाइने दायराले** तय गर्ने हुनाले **रङ-पट्टी हेरेर अर्थ
-बुझ्नुहोस्** र चम्किलो भाग मात्र देखेर NG नठान्नुहोस्। दायराबाहिरका मान किनारको रङमा काटिन्छन्
-(**clipping**)।
+tulna garda **dekhaine dayara (vmin ra vmax) sthir** rakhnuhos. harek tasbirle aphnai dayara chhanda
+samanya samanama pani adhikatam maan sabaibhanda chamkilo rangama dekhinchha ra tulna arthahin hunchha. yo notebookko
+heatmaple **sabai tasbir ma uhi 0–1 dayara** prayog garchha ra **rang-patti (colourbar)** rakhchha
+(`MAP_VMIN`, `MAP_VMAX`). rang **colormap ra dekhaine dayarale** tay garne hunale **rang-patti herer arth
+bujhnuhos** ra chamkilo bhaag matra dekher NG nathaannuhos. dayarabahiraka maan kinarako rangama katinchhan
+(**clipping**).
 
-**सोच्नुहोस्**
+**sochnuhos**
 
-- देखाइने दायरा तस्बिर-दर-तस्बिर बदल्दा दुई नक्सा तुलना गर्न किन मिल्दैन?
+- dekhaine dayara tasbir-dar-tasbir badalda dui naksa tulna garna kina mildaina?
 
 <!-- ne-cell: clarity-score-card | after-heading -->
-### सङ्ख्या पढ्ने क्रम
+### sankhya padhne kram
 
 <!-- ne-cell: clarity-score-card -->
-तलको चित्र गणना गरिएको संश्लेषित खेलौना हो। क्यालिब्रेसन/परीक्षण तस्बिर वा model को नतिजा
-प्रयोग भएको छैन। अनुमान: खेलौनाको पास/फेल कुन लाइनले तय गर्छ?
+talako chitra ganana garieko sansleshit khelauna ho. calibration/parikshan tasbir wa model ko natija
+prayog bhaeko chhaina. anuman: khelaunako pas/phel kun linele tay garchha?
 
-| इनपुट → काम → मान | प्रयोग |
+| input → kaam → maan | prayog |
 |---|---|
-| दूरीको अधिकतम 6 × मानिएको weight 0.8 = 4.800 | खेलौनाको कच्चा तस्बिर स्कोर |
-| दूरीको grid → 3×3 औसत → नक्साको अधिकतम 2.000 | स्थान देखाउने सङ्केत |
-| clip((4.8 − 4) / 8 + 0.5, 0, 1) = 0.600 | मानिएको तस्बिर थ्रेसहोल्ड 0.50 सँग तुलना: NG |
+| duriko adhikatam 6 × manieko weight 0.8 = 4.800 | khelaunako kachcha tasbir score |
+| duriko grid → 3×3 ausat → naksako adhikatam 2.000 | sthan dekhaune sanket |
+| clip((4.8 − 4) / 8 + 0.5, 0, 1) = 0.600 | manieko tasbir threshold 0.50 sang tulna: NG |
 
-5×5 दूरी grid मा सबै 1, केन्द्रमा 6 र माथि-तल-बायाँ-दायाँ 2 छन्। किनारा दोहोर्याएर 3×3 औसत गणना
-गरिन्छ। weight 0.8, केन्द्र 4, दायरा 8 र थ्रेसहोल्ड 0.50 व्याख्याका लागि छानिएका मान हुन्, क्यालिब्रेसनले
-निकालेका तथ्याङ्क होइनन्। यो वास्तविक PatchCore गणनाको पुनरुत्पादन होइन, फरक सङ्ख्याका भूमिकाको
-व्याख्या मात्र हो। 0.600 सम्भावना होइन। कच्चा मानलाई 0.50 सँग तुलना गर्नु हुँदैन। देखाइने vmax मात्र
-बदल्दा निर्णय बदलिन्छ?
+5×5 duri grid ma sabai 1, kendrama 6 ra mathi-tal-bayan-dayan 2 chhan. kinara dohoryaer 3×3 ausat ganana
+garinchha. weight 0.8, kendr 4, dayara 8 ra threshold 0.50 byakhyaka lagi chhanieka maan hun, calibrationle
+nikaleka tathyangk hoinan. yo bastabik PatchCore gananako punarutpadan hoina, farak sankhyaka bhoomikako
+byakhya matra ho. 0.600 sambhabana hoina. kachcha maan lai 0.50 sang tulna garnu hundaina. dekhaine vmax matra
+badalda nirnaya badlinchha?
 
 <!-- ne-cell: fig-ref_anomaly_panels | after-heading -->
-### संश्लेषित खेलौनाको सङ्ख्यात्मक नक्सा
+### sansleshit khelaunako sangkhyatmak naksa
 
 <!-- ne-cell: fig-ref_anomaly_panels | after-image:../../assets/reference_outputs/teach_numeric_map_toy.png -->
-चित्र: खेलौनाको इनपुट, 3×3 औसत नक्सा र उही मानको मिलाएर देखाइएको चित्र। यो
-`generate_reference_outputs.toy_numeric_map` को स्थिर array बाट गणना गरिन्छ। वास्तविक क्यालिब्रेसन/TEST
-डेटा वा अनुमानको नतिजा होइन।
+chitra: khelaunako input, 3×3 ausat naksa ra uhi maanko milaer dekhaieko chitra. yo
+`generate_reference_outputs.toy_numeric_map` ko sthir array baat ganana garinchha. bastabik calibration/TEST
+data wa anumanko natija hoina.
 
-**ध्यान दिनुपर्ने कुरा**
+**dhyan dinuparne kura**
 
-कच्चा तस्बिर स्कोर 4.800, मसिनो बनाइएको नक्साको अधिकतम 2.000 र बदलेपछिको तस्बिर स्कोर 0.600 फरक कुरा
-हुन्। उही मापनको तस्बिर थ्रेसहोल्डसँग तुलना गरिने कुरा अन्तिम मान मात्र हो। वास्तविक गणना पछिको कोड
-र क्यालिब्रेसन तथ्याङ्कले गर्छ।
+kachcha tasbir score 4.800, masino banaiyeko naksako adhikatam 2.000 ra badalepachhiko tasbir score 0.600 farak kura
+hun. uhi maapan ko tasbir threshold sang tulna garine kura antim maan matra ho. bastabik ganana pachhiko kod
+ra calibration tathyangkale garchha.
 
-**सोच्नुहोस्**
+**sochnuhos**
 
-- नक्साको अधिकतम मान र तस्बिर स्कोर किन मिल्दैन?
+- naksako adhikatam maan ra tasbir score kina mildaina?
 
 <!-- ne-cell: cefba6c0 | after-heading -->
-**एक-एक तस्बिरको नतिजा हेर्ने**
+**ek-ek tasbirko natija herne**
 <!-- ne-pair: Look at results image by image -->
 
 <!-- ne-cell: cefba6c0 -->
-`engine.predict()` ले तस्बिर-दर-तस्बिर नतिजा फर्काउँछ।
+`engine.predict()` le tasbir-dar-tasbir natija pharkaunchha.
 
-| गुण | सामग्री |
+| gun | samagri |
 |---|---|
-| `pred_score` | स्कोर। **पछि-प्रशोधन सक्रिय र तथ्याङ्क fit भएको अवस्थामा मात्र 0–1** |
-| `pred_label` | थ्रेसहोल्डले तय गरेको OK/NG |
-| `anomaly_map` | पिक्सेल-दर-पिक्सेल असामान्यताको मात्रा (पछि-प्रशोधनले 0–1 मा बदलेको) |
-| `gt_label` | सही उत्तर (असामान्य हो कि होइन) |
-| `image_path` | तस्बिरको बाटो |
+| `pred_score` | score. **pachhi-prashodhan sakriya ra tathyangk fit bhaeko abastha ma matra 0–1** |
+| `pred_label` | thresholdle tay gareko OK/NG |
+| `anomaly_map` | piksel-dar-piksel asamanyatako matra (pachhi-prashodhanale 0–1 ma badaleko) |
+| `gt_label` | sahi uttar (asamanya ho ki hoina) |
+| `image_path` | tasbirko bato |
 
-`pred_score` 0–1 हुनुको सर्त: **सामान्यीकरण (`enable_normalization=True`) सक्रिय छ र क्यालिब्रेसन
-डेटाबाट न्यूनतम/अधिकतम तथ्याङ्क भरिएको छ**। तथ्याङ्क छैन (NaN) भने Anomalib ले **कच्चा दूरी त्यसै
-फर्काउँछ**, जुन 0–1 मा सीमित हुँदैन। "सधैं 0–1 मै फर्किन्छ" भनेर नठान्नुहोस्।
+`pred_score` 0–1 hunuko sart: **samanyikaran (`enable_normalization=True`) sakriya chha ra calibration
+data baat nyoonatam/adhikatam tathyangk bharieko chha**. tathyangk chhaina (NaN) bhane Anomalib le **kachcha duri tyasai
+pharkaunchha**, jun 0–1 ma simit hundaina. "sadhain 0–1 mai pharkinchha" bhanera nathaannuhos.
 
 <!-- ne-cell: 11a17ecf | after-heading -->
-**सङ्ख्या हेर्दा ध्यान दिनुपर्ने कुरा**
+**sankhya herda dhyan dinuparne kura**
 <!-- ne-pair: Caution when reading the numbers -->
 
 <!-- ne-cell: 11a17ecf -->
-`pred_label` Anomalib ले **क्यालिब्रेसन डेटामा तय गरेको थ्रेसहोल्ड** अनुसारको निर्णय हो। थ्रेसहोल्ड
-`post_processor` मा रहन्छ र `model.post_processor` बाट हेर्न सकिन्छ। तस्बिर स्कोर र पिक्सेल नक्साका
-थ्रेसहोल्ड **छुट्टाछुट्टै** तय हुन्छन्।
+`pred_label` Anomalib le **calibration data ma tay gareko threshold** anusarako nirnaya ho. threshold
+`post_processor` ma rahanchha ra `model.post_processor` baat herna sakinchha. tasbir score ra piksel naksaka
+threshold **chhuttachhuttai** tay hunchhan.
 
-यो थ्रेसहोल्ड **संश्लेषित डेटाका लागि** हो। वास्तविक सञ्चालनमा **राम्रो भनेर थाहा भएका सामान मात्र
-चलाएर स्कोरको वितरण नाप्ने र थ्रेसहोल्ड फेरि तय गर्ने** आवश्यक हुन्छ। तर **सामान्य सामान मात्र भए
-"छुट्ने (recall)" नाप्न सकिँदैन**; सामान्य सामानले नापिने कुरा **झुटो अलार्म (सामान्य सामानलाई NG भन्ने
-दर)** सम्म हो। छुट्ने पनि नाप्न **असामान्य लेबल भएको क्यालिब्रेसन डेटा** चाहिन्छ (दिन ५ नोटबुक ०३
-ले त्यही गर्छ)।
+yo threshold **sansleshit dataka lagi** ho. bastabik sanchalanama **ramro bhanera thaha bhaeka saman matra
+chalaer score ko bitaran napne ra threshold feri tay garne** aawashyak hunchha. tar **samanya saman matra bhae
+"chhutne (recall)" napn sakindaina**; samanya samanale napine kura **jhuto alarm (samanya samanalai NG bhanne
+dar)** samm ho. chhutne pani napn **asamanya label bhaeko calibration data** chahinchha (din 5 notebook 03
+le tyahi garchha).
 
-> **वैकल्पिक विवरण: स्कोर सामान्यीकरणको सूत्र (anomalib 2.7.0)**
-> तस्बिर स्कोर र पिक्सेल नक्सा छुट्टाछुट्टै तथ्याङ्कले
-> `clip((raw - threshold) / (max - min) + 0.5, 0, 1)` मा बदलिन्छन्। `min`, `max` र `threshold`
-> **क्यालिब्रेसन (validation) भाग** बाट निकालिएका हुन्। `max - min = 0` हुँदा थ्रेसहोल्डसँग तुलना
-> गरेर `1 / 0.5 / 0` मा झारिन्छ। तथ्याङ्क छैन (NaN) भने नबदली कच्चा मान फर्काइन्छ। यही सूत्रका कारण
-> **क्यालिब्रेसनमा तय गरिएको थ्रेसहोल्ड 0–1 मापनमा 0.5** मा पर्छ।
+> **baikalpik biwaran: score samanyikaranako sutr (anomalib 2.7.0)**
+> tasbir score ra piksel naksa chhuttachhuttai tathyangkale
+> `clip((raw - threshold) / (max - min) + 0.5, 0, 1)` ma badalinchhan. `min`, `max` ra `threshold`
+> **calibration (validation) bhaag** baat nikalieka hun. `max - min = 0` hunda threshold sang tulna
+> garera `1 / 0.5 / 0` ma jharinchha. tathyangk chhaina (NaN) bhane nabadali kachcha maan pharkainchha. yahi sutraka karan
+> **calibration ma tay garieko threshold 0–1 maapan ma 0.5** ma parchha.
 
 <!-- ne-cell: 748dffdf | after-heading -->
-**हिटम्याप र सङ्ख्यात्मक नक्सा सुरक्षित गर्ने**
+**heatmap ra sangkhyatmak naksa surakshit garne**
 <!-- ne-pair: Save the heatmaps as images -->
 
 <!-- ne-cell: 748dffdf -->
-दिन ५ नोटबुक ०३ मा YOLO को नतिजासँगै देखाउन हिटम्यापलाई तस्बिर फाइलको रूपमा सुरक्षित गरिन्छ।
+din 5 notebook 03 ma YOLO ko natijasangai dekhauna heatmap lai tasbir fileko rupama surakshit garinchha.
 
-- **मिलाएर देखाइएको तस्बिर (`heatmaps/`)** **क्यालिब्रेसन डेटा** बाट बन्छ। थ्रेसहोल्ड स्थिर गर्नुअघि
-  आँखाले हेर्न मिल्ने क्यालिब्रेसन मात्र हो।
-- **सङ्ख्यात्मक नक्सा (`maps/*.npz`)** पछि सामग्रीका चित्र फेरि बनाउन सकिने गरी मूल्याङ्कन तस्बिरका
-  सङ्ख्या पनि त्यसै सुरक्षित गर्छ। **सुरक्षित गर्नु** र **हेरेर निर्णय गर्नु** फरक कुरा हुन्; यो भागमा
-  सामग्री देखाइँदैन।
+- **milaer dekhaieko tasbir (`heatmaps/`)** **calibration data** baat banchha. threshold sthir garnuaghi
+  ankhale herna milne calibration matra ho.
+- **sangkhyatmak naksa (`maps/*.npz`)** calibration tasbirka lagi matra, pachhi samagrika chitra feri banaun
+  sakine gari surakshit garinchha. mulyankan (test) tasbirka sangkhyatmak naksa sthir garepachhi antim
+  "sealed" cell le ek patak matra banauchha.
 
 <!-- ne-cell: b8ec6f1a | after-heading -->
-**हिटम्याप कसरी पढ्ने**
+**heatmap kasari padhne**
 <!-- ne-pair: How to read a heatmap -->
 
 <!-- ne-cell: b8ec6f1a -->
-रङ **देखाइने दायरा र colormap** ले तय गर्छ। यो भागका चित्र पछि-प्रशोधित मान हुनाले **0–1 को स्थिर
-दायरा** मा देखाइन्छ, जहाँ 0.5 क्यालिब्रेसनमा तय गरिएको पिक्सेल थ्रेसहोल्ड हो। दायराभन्दा बाहिरका मान
-किनारको रङमा काटिन्छन् (clipping)। **रङ-पट्टीबाट सङ्ख्या जाँच्नुहोस्**।
+rang **dekhaine dayara ra colormap** le tay garchha. yo bhaagka chitra pachhi-prashodhit maan hunale **0–1 ko sthir
+dayara** ma dekhainchha, jahan 0.5 calibration ma tay garieko piksel threshold ho. dayarabhanda bahiraka maan
+kinarako rangama katinchhan (clipping). **rang-pattibat sankhya jaanchnuhos**.
 
-- **NG तस्बिरमा** पनि दोष चम्किलो बिन्दुको रूपमा नदेखिन सक्छ; फराकिलो र हल्का देखिन पनि सक्छ, वा नक्सा
-  गाढै रहन सक्छ।
-- **OK तस्बिरमा** पनि असमान भाग अलि चम्किलो देखिन सक्छ।
+- **NG tasbir ma** pani dosh chamkilo binduko rupama nadekhin sakchha; pharakilo ra halka dekhin pani sakchha, wa naksa
+  gadhai rahan sakchha.
+- **OK tasbir ma** pani asaman bhaag ali chamkilo dekhin sakchha.
 
-त्यसैले **चम्किलो बिन्दु छ कि छैन भनेर निर्णय नगर्नुहोस्**। निर्णय तस्बिर स्कोर र थ्रेसहोल्डले गर्छ;
-हिटम्याप "कहाँ हेरिरहेको छ" जाँच्न प्रयोग हुन्छ। OK तस्बिरमा चम्किलो क्षेत्र देखियो भने त्यो
-**"सामान्य भिन्नतालाई असामान्य ठानिएको"** हुन सक्छ; त्यो भिन्नता तालिम डेटामा थप्नुपर्छ।
+tyasaile **chamkilo bindu chha ki chhaina bhanera nirnaya nagarnuhos**. nirnaya tasbir score ra thresholdle garchha;
+heatmap "kahan heriraheko chha" jaanchna prayog hunchha. OK tasbir ma chamkilo kshetr dekhiyo bhane tyo
+**"samanya bhinnatalai asamanya thanieko"** huna sakchha; tyo bhinnata talim data ma thapnuparchha.
 
 <!-- ne-cell: d5e2bc6d | after-heading -->
-## अभ्यास
+## abhyas
+
+<!-- ne-cell: clarity-sealed-test | after-heading -->
+**Part 5: sthir garepachhi sealed testko mulyankan**
+
+<!-- ne-cell: clarity-sealed-test -->
+**yo kram palna garnuhos.** din 5 notebook 02 (yo notebook) ma calibration matra mulyankan garincha.
+din 5 notebook 03 ma threshold ra model sthir garincha, ra **tyaspachhi matra yo notebookko antim cell ek
+patak** chalaunuhos. test data mulyankan hune tyahi ek patak matra ho. sthir abhilekh
+(`comparison_freeze_record.json`) chhaina, wa yo notebookko model ra bhaag sang milena bhane cell
+**chalna rokinchha**.
 
 <!-- ne-cell: 09b10a38 | after-heading -->
-**अभ्यास 1 (आधारभूत): मापन अभिलेख गर्ने**
+**abhyas 1 (adharabhut): maapan abhilekh garne**
 <!-- ne-pair: Exercise 1 (basic): record the metrics -->
 
 <!-- ne-cell: 09b10a38 -->
-Part 4 का चार मापन तालिकामा लेख्नुहोस्। `image_AUROC` र `pixel_AUROC` को फरक पनि एक लाइनमा
-व्याख्या गर्नुहोस्।
+Part 4 ka chaar maapan talika ma lekhnuhos. `image_AUROC` ra `pixel_AUROC` ko farak pani ek line ma
+byakhya garnuhos.
 
 <!-- ne-cell: 93a1ccd3 | after-heading -->
-**अभ्यास 2 (मध्यम): सेटिङ बदलेर क्यालिब्रेसन डेटामा तुलना गर्ने**
+**abhyas 2 (madhyam): setting badaler calibration data ma tulna garne**
 <!-- ne-pair: Exercise 2 (intermediate): change a setting and compare on calibration -->
 
 <!-- ne-cell: 93a1ccd3 -->
-`backbone="wide_resnet50_2"` बदलेर **क्यालिब्रेसन (प्रमाणीकरण) डेटामा** मापन र लाग्ने समय नापेर
-`resnet18` सँग तुलना गर्नुहोस्। CPU मात्र भएको वातावरणमा `wide_resnet50_2` धेरै ढिलो भए **अर्को सेटिङ**
-(जस्तै `layers=["layer3"]`, वा `coreset_sampling_ratio` बदलेर) मा उही तुलना गर्न सक्नुहुन्छ। **भारी
-backbone प्रयोग गर्नु वैकल्पिक** हो। यो अभ्यासको उद्देश्य "उही क्यालिब्रेसन डेटामा मापन र समय नापेर
-तुलना गरी अभिलेख गर्नु" हो।
+`backbone="wide_resnet50_2"` badaler **calibration (pramanikaran) data ma** maapan ra lagne samay naper
+`resnet18` sang tulna garnuhos. CPU matra bhaeko batabaran ma `wide_resnet50_2` dherai dhilo bhae **arko setting**
+(jastai `layers=["layer3"]`, wa `coreset_sampling_ratio` badaler) ma uhi tulna garna saknuhunchha. **bhari
+backbone prayog garnu baikalpik** ho. yo abhyasko uddeshya "uhi calibration data ma maapan ra samay naper
+tulna gari abhilekh garnu" ho.
 
-- तुलना **उही क्यालिब्रेसन डेटा** मा `image_AUROC` जस्ता मापन र **नापिएको समय** बाट गर्नुहोस्।
-- अन्तिममा छानिएको एउटै सेटिङ मूल्याङ्कन गर्न परीक्षण भाग जोगाएर राख्नुहोस्।
-- अभिलेखमा **भाग (calibration), model (backbone) र चलाइको पहिचान** अनिवार्य लेख्नुहोस्।
+- tulna **uhi calibration data** ma `image_AUROC` jasta maapan ra **napieko samay** baat garnuhos.
+- antim ma chhanieko eutai setting mulyankan garna parikshan bhaag jogaer rakhnuhos.
+- abhilekhama **bhaag (calibration), model (backbone) ra chalaiko pahichan** aniwarya lekhnuhos.
 
 <!-- ne-cell: 1fd52dc9 | after-heading -->
-**अभ्यास 3 (वैकल्पिक): सामान्य सामानको भिन्नता बढाउने**
+**abhyas 3 (baikalpik): samanya samanako bhinnata badhaune**
 <!-- ne-pair: Exercise 3 (optional challenge): add normal variation -->
 
 <!-- ne-cell: 1fd52dc9 -->
-`assets/scripts/pvc_synth.py` प्रयोग गरेर **उज्यालोको असमानता बढाइएका सामान्य तस्बिर** 10 वटा थप
-बनाएर `train/good/` मा राख्नुहोस्। त्यसपछि फेरि fit गरेर **क्यालिब्रेसन डेटा (उही स्थिर सेट) मा
-सामान्य स्कोरको अधिकतम मान** घट्यो कि जाँच्नुहोस्।
+`assets/scripts/pvc_synth.py` prayog garera **ujyaloko asamanata badhaieka samanya tasbir** 10 bata thap
+banaer `train/good/` ma rakhnuhos. tyaspachhi feri fit garera **calibration data (uhi sthir set) ma
+samanya score ko adhikatam maan** ghatyo ki jaanchnuhos.
 
 <!-- ne-cell: c81c8cac | after-heading -->
-#### बुझाइ जाँच्ने प्रश्न
+#### bujhai jaanchne prashna
 
 <!-- ne-cell: c81c8cac -->
-1. `train` मा असामान्य तस्बिर किन राख्नु हुँदैन?
-2. PatchCore को "तालिम" ले के गर्छ? weight अपडेट हुन्छ?
-3. `image_AUROC` र `pixel_AUROC` ले के नाप्छन्?
-4. `val_split_mode="from_test"` किन प्रयोग गरियो?
-5. `image_AUROC` 1.0 भए पनि उत्पादनको निरीक्षण शुद्धता भनेर किन उद्धृत गर्न हुँदैन?
+1. `train` ma asamanya tasbir kina rakhnu hundaina?
+2. PatchCore ko "talim" le ke garchha? weight update hunchha?
+3. `image_AUROC` ra `pixel_AUROC` le ke napchhan?
+4. `val_split_mode="from_test"` kina prayog gariyo?
+5. `image_AUROC` 1.0 bhae pani utpadanako nirikshan shuddhata bhanera kina uddhrit garna hundaina?
 
 <!-- ne-cell: 2da75241 | after-heading -->
-## समस्या परेमा
+## samasya parema
 
 <!-- ne-cell: 2da75241 -->
-त्रुटि आएपछि पहिले "कुन सेलमा", "कुन लाइनमा", "के सन्देश आयो" भनेर लेख्नुहोस्।
+truti aepachhi pahile "kun cell ma", "kun line ma", "ke sandesh ayo" bhanera lekhnuhos.
 
-| लक्षण | के गर्ने |
+| lakshan | ke garne |
 | --- | --- |
-| `ModuleNotFoundError: No module named 'anomalib'` | kernel गलत छ। `Kernel` → `Change Kernel` → `Python 3 (AI Vision Anomalib)` छान्नुहोस्। |
-| `AttributeError: 'Folder' object has no attribute 'val_data'` | `val_split_mode="none"` राख्दा आउँछ। `from_test` वा `from_train` तोक्नुहोस्। |
-| `MisMatchError` आउँछ | असामान्य तस्बिर र मास्कको जोडी मिलेन। `ground_truth/<प्रकार>/` का फाइल नाम जाँच्नुहोस्। |
-| backbone डाउनलोड असफल | कक्षाअघि `preload_models.py --profile anomalib` ले लिएर जाँचिन्छ। कमी भए प्रशिक्षकसँग सोध्नुहोस्। |
-| तालिम अनौठो रूपमा ढिलो | `wide_resnet50_2` CPU मा धेरै ढिलो हुन्छ। `resnet18` प्रयोग गर्नुहोस्। |
-| मेमोरी अपुग हुन्छ | `train_batch_size` र `eval_batch_size` 4 बनाउनुहोस्। |
+| `ModuleNotFoundError: No module named 'anomalib'` | kernel galat chha. `Kernel` → `Change Kernel` → `Python 3 (AI Vision Anomalib)` chhannuhos. |
+| `AttributeError: 'Folder' object has no attribute 'val_data'` | `val_split_mode="none"` rakhda aaunchha. `from_test` wa `from_train` toknuhos. |
+| `MisMatchError` aaunchha | asamanya tasbir ra maskako jodi milen. `ground_truth/<prakar>/` ka file naam jaanchnuhos. |
+| backbone daunalod asaphal | kakshaaghi `preload_models.py --profile anomalib` le lier janchinchha. kami bhae prashikshakasang sodhnuhos. |
+| talim anautho rupama dhilo | `wide_resnet50_2` CPU ma dherai dhilo hunchha. `resnet18` prayog garnuhos. |
+| memory apug hunchha | `train_batch_size` ra `eval_batch_size` 4 banaunuhos. |
 
 <!-- ne-cell: 483ecbb0 | after-heading -->
-## सम्पन्नता जाँचसूची
+## sampannata janchasuchi
 
 <!-- ne-cell: 483ecbb0 -->
-**अनिवार्य बुँदा मात्र** दिइएका छन्। **अभ्यास 3 (वैकल्पिक) अनिवार्य होइन**; नगरे पनि पूरा मानिन्छ।
-सबैमा चिन्ह लागेपछि यो नोटबुक पूरा हुन्छ।
+**aniwarya bunda matra** diieka chhan. **abhyas 3 (baikalpik) aniwarya hoina**; nagare pani pura maninchha.
+sabai ma chinh lagepachhi yo notebook pura hunchha.
 
-**अनिवार्य**
+**aniwarya**
 
-- [ ] `aivision-anomalib` kernel मा चलाएँ
-- [ ] `train` मा सामान्य मात्र छ भनेर जाँचें
-- [ ] PatchCore को fit चलाएँ
-- [ ] चार मापन अभिलेख गरें
-- [ ] हिटम्याप हेरें
-- [ ] स्कोर सूची र अनुमान JSON सुरक्षित गरें
-- [ ] अभ्यास 1–2 (अनिवार्य) गरें
-- [ ] बुझाइ जाँच्ने 5 प्रश्नको उत्तर दिएँ
-- [ ] नोटबुक सुरक्षित गरें
+- [ ] `aivision-anomalib` kernel ma chalaen
+- [ ] `train` ma samanya matra chha bhanera janchen
+- [ ] PatchCore ko fit chalaen
+- [ ] chaar maapan abhilekh garen
+- [ ] heatmap heren
+- [ ] score soochi ra anuman JSON surakshit garen
+- [ ] abhyas 1–2 (aniwarya) garen
+- [ ] bujhai jaanchne 5 prashnako uttar dien
+- [ ] notebook surakshit garen
 
 <!-- ne-cell: d02d8a44 | after-heading -->
-## थप अध्ययन (वैकल्पिक)
+## thap adhyayan (baikalpik)
 
 <!-- ne-cell: d02d8a44 -->
-### सन्दर्भ लिङ्क
+### sandarbha lingk
 
-- [Anomalib कागजात](https://anomalib.readthedocs.io/)
+- [Anomalib kagajat](https://anomalib.readthedocs.io/)
 - [Anomalib: Folder data module](https://anomalib.readthedocs.io/en/latest/markdown/guides/reference/data/image/folder.html)
-- [PatchCore पत्र](https://arxiv.org/abs/2106.08265)
-- [torchvision को model सूची](https://pytorch.org/vision/stable/models.html)
+- [PatchCore patr](https://arxiv.org/abs/2106.08265)
+- [torchvision ko model soochi](https://pytorch.org/vision/stable/models.html)
 
-### थप चुनौती (अनिवार्य होइन)
+### thap chunauti (aniwarya hoina)
 
-`coreset_sampling_ratio` 0.01 र 0.5 मा प्रयास गरेर मेमोरी प्रयोग र मापनको परिवर्तन तुलना गर्नुहोस्।
+`coreset_sampling_ratio` 0.01 ra 0.5 ma prayas garera memory prayog ra maapan ko paribartan tulna garnuhos.

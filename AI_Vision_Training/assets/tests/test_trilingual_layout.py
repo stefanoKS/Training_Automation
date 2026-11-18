@@ -175,7 +175,7 @@ def test_all_visual_explanations_fit_with_their_existing_images(tmp_path):
                 document.add(ET.tostring(figure, encoding="unicode", method="html"))
                 notes = "".join(figure.find("div[@class='visual-notes']").itertext())
                 caption = figure.find("div[@class='cap ne']")
-                first = "".join(caption.itertext()) if caption is not None else notes[:60]
+                first = "".join(caption.itertext())[:60] if caption is not None else notes[:60]
                 expected.append((cell["id"], first, notes[-60:]))
     html_path = tmp_path / "all-figures.html"
     html_path.write_text(exporter.html_document(document), encoding="utf-8")
@@ -234,6 +234,41 @@ def test_body_sentinel_does_not_leak_onto_the_preceding_toc_page(tmp_path):
     assert exporter.locate_headings(texts, [heading], start) == {"body": 2}
 
 
+def test_romanized_nepali_is_tagged_by_provenance_not_by_glyphs():
+    text = ("### 見出し / Heading\n\n"
+            "日本語の本文です。\n\n"
+            "English body with the value and the model.\n\n"
+            "<!-- ne:begin end -->\n"
+            "Yo natija ho. Tasbir ra data ma chha. Garnuhos.\n"
+            "<!-- ne:end -->\n")
+    document = exporter.Document("", "", "")
+    markup = exporter.markdown_cell_html(text, ROOT, "lang", document)
+    assert '<p class="ne" lang="ne-Latn">Yo natija ho.' in markup
+    assert 'class="ne">' not in markup, "every Nepali element must carry lang=ne-Latn"
+    assert '<p class="en" lang="en">English body' in markup
+    assert '<p class="ja" lang="ja">日本語の本文です。</p>' in markup
+
+
+def test_english_paragraph_is_not_mistaken_for_nepali():
+    markup = exporter.markdown_cell_html(
+        "English body with the value and the model.\n", ROOT, "en", exporter.Document("", "", ""))
+    assert 'class="ne"' not in markup
+    assert 'lang="ne-Latn"' not in markup
+
+
+def test_romanized_figure_caption_is_grouped_with_its_image():
+    body = ("![](../../assets/diagrams/teach_threshold_freeze.png)\n\n"
+            "Figure: an English caption.\n\n"
+            "<!-- ne:begin after-image:../../assets/diagrams/teach_threshold_freeze.png -->\n"
+            "Chitra: yo caption ho. **Dhyan dinuparne kura**\n\n"
+            "Yo natija ho.\n"
+            "<!-- ne:end -->\n")
+    path, _ = lesson("Day05_03_YOLO_vs_PatchCore")
+    markup = exporter.markdown_cell_html(body, path.parent, "fig", exporter.Document("", "", ""))
+    assert '<div class="cap ne" lang="ne-Latn">Chitra: yo caption ho.' in markup
+    assert 'lang="ne-Latn">Yo natija ho.' in markup
+
+
 def test_font_preflight_fails_instead_of_accepting_generic_fallback():
     class Session:
         def send(self, name, args=None):
@@ -249,8 +284,10 @@ def test_font_preflight_fails_instead_of_accepting_generic_fallback():
         evaluate=lambda *args: None,
         locator=lambda *args: SimpleNamespace(evaluate=lambda *args: None),
         context=SimpleNamespace(new_cdp_session=lambda *args: Session()))
-    with pytest.raises(RuntimeError, match="Devanagari font coverage"):
-        exporter.check_devanagari_font(page)
+    with pytest.raises(RuntimeError, match="font coverage"):
+        exporter.check_fonts(page, needs_devanagari=False)
+    with pytest.raises(RuntimeError, match="font coverage"):
+        exporter.check_fonts(page, needs_devanagari=True)
 
 
 @pytest.mark.parametrize("key", exporter.DAY_ORDER + ["Week1"])
@@ -284,14 +321,17 @@ def test_cited_caption_and_question_share_the_rendered_figure_page(
     exporter.render(html_path, pdf_path, "caption regression")
     pdf = pdfium.PdfDocument(str(pdf_path))
     pages = [pdf[index] for index in range(len(pdf))]
-    matches = [p for p in pages if "चित्र:" in p.get_textpage().get_text_range()]
+    body = cells[figure_id]
+    caption_mark = "चित्र:" if "चित्र:" in body else "chitra:"
+    question_mark = "सोच्नुहोस्" if "सोच्नुहोस्" in body else "sochnuhos"
+    matches = [p for p in pages if caption_mark in p.get_textpage().get_text_range()]
     assert len(matches) == 1
     page = matches[0]
     textpage = page.get_textpage()
-    assert "सोच्नुहोस्" in textpage.get_text_range()
+    assert question_mark in textpage.get_text_range()
     images = [obj for obj in page.get_objects() if obj.type == pdfium.raw.FPDF_PAGEOBJ_IMAGE]
     assert images
-    start, count = textpage.search("चित्र:").get_next()
+    start, count = textpage.search(caption_mark).get_next()
     caption_top = max(textpage.get_charbox(index)[3] for index in range(start, start + count))
     image_bottom = min(obj.get_bounds()[1] for obj in images)
     assert 0 <= image_bottom - caption_top < 100, "Nepali caption must be beneath its image"

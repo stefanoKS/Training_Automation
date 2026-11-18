@@ -219,7 +219,7 @@ def test_model_selection_uses_mtime_not_lexical_order(tmp_path: Path) -> None:
 
 def test_hash_output_does_not_claim_absence_of_leakage(tmp_path: Path, capsys) -> None:
     stem = "Day04_01_YOLO_Dataset_Annotation"
-    source = next(s for s in sources(stem) if "def digest(" in s)
+    source = next(s for s in sources(stem) if "def digest(" in s and "scan_for_duplicates" in s)
     for split in ("train", "val", "test"):
         directory = tmp_path / "images" / split
         directory.mkdir(parents=True)
@@ -229,6 +229,87 @@ def test_hash_output_does_not_claim_absence_of_leakage(tmp_path: Path, capsys) -
     assert "No byte-identical duplicate files detected" in output
     assert "session/lot leakage are not excluded" in output
     assert "no leakage detected" not in output
+
+
+def test_hash_check_counts_files_separately_from_distinct_contents(tmp_path: Path, capsys) -> None:
+    stem = "Day04_01_YOLO_Dataset_Annotation"
+    source = next(s for s in sources(stem) if "scan_for_duplicates" in s and "def digest(" in s)
+    for split in ("train", "val", "test"):
+        (tmp_path / "images" / split).mkdir(parents=True)
+    (tmp_path / "images" / "train" / "a.png").write_bytes(b"same bytes")
+    (tmp_path / "images" / "val" / "b.png").write_bytes(b"same bytes")
+    (tmp_path / "images" / "test" / "c.png").write_bytes(b"other bytes")
+    namespace: dict = {"dataset_dir": tmp_path}
+    exec(compile(source, "<hash lesson>", "exec"), namespace)
+    report = namespace["report"]
+    assert report["files_scanned"] == 3
+    assert report["unique_hashes"] == 2
+    assert len(report["duplicate_pairs"]) == 1
+    output = capsys.readouterr().out
+    assert "files scanned" in output and "distinct images" in output
+    assert "duplicate pairs" in output
+
+
+def _leakage_cell_source() -> str:
+    stem = "Day04_01_YOLO_Dataset_Annotation"
+    return next(s for s in sources(stem) if "def demonstrate_leakage(" in s)
+
+
+def _tiny_dataset(root: Path) -> None:
+    for split in ("train", "val", "test"):
+        directory = root / "images" / split
+        directory.mkdir(parents=True)
+        for index in range(2):
+            (directory / f"{split}_{index}.png").write_bytes(f"{split}-{index}".encode())
+
+
+def test_leakage_exercise_leaves_the_live_dataset_untouched(tmp_path: Path) -> None:
+    dataset = tmp_path / "dataset"
+    _tiny_dataset(dataset)
+    before = {path.relative_to(dataset).as_posix(): path.read_bytes()
+              for path in sorted(dataset.rglob("*.png"))}
+    namespace: dict = {"dataset_dir": dataset}
+    exec(compile(_leakage_cell_source(), "<leakage exercise>", "exec"), namespace)
+    after = {path.relative_to(dataset).as_posix(): path.read_bytes()
+             for path in sorted(dataset.rglob("*.png"))}
+    assert after == before, "the live course dataset must not be modified"
+    assert not list(dataset.rglob("leak_test.png"))
+
+
+def test_leakage_fixture_cleans_up_even_when_the_exercise_is_interrupted(tmp_path: Path) -> None:
+    dataset = tmp_path / "dataset"
+    _tiny_dataset(dataset)
+    namespace: dict = {"dataset_dir": dataset}
+    exec(compile(_leakage_cell_source(), "<leakage exercise>", "exec"), namespace)
+    demonstrate = namespace["demonstrate_leakage"]
+
+    work = tmp_path / "work"
+    work.mkdir()
+
+    def boom(target):
+        raise RuntimeError("injected failure after the copy")
+
+    with pytest.raises(RuntimeError, match="injected failure"):
+        demonstrate(dataset / "images", work, on_copied=boom)
+    assert not list((work / "images" / "train").glob("leak_test.png"))
+
+    # A pre-existing target must stop the exercise instead of overwriting a learner file.
+    (work / "images" / "train").mkdir(parents=True, exist_ok=True)
+    (work / "images" / "train" / "leak_test.png").write_bytes(b"learner file")
+    with pytest.raises(FileExistsError, match="refusing to overwrite"):
+        demonstrate(dataset / "images", work)
+    assert (work / "images" / "train" / "leak_test.png").read_bytes() == b"learner file"
+
+
+def test_day04_test_gate_stops_without_a_freeze_declaration(tmp_path: Path) -> None:
+    stem = "Day04_03_YOLO_Evaluation"
+    source = next(s for s in sources(stem) if "FREEZE_DECLARATION" in s)
+    namespace: dict = {"COURSE_ROOT": tmp_path, "best_weights": tmp_path / "best.pt"}
+    with pytest.raises(ValueError, match="record the freeze declaration"):
+        exec(compile(source, "<test gate>", "exec"), namespace)
+    assert "TEST_ALREADY_SEEN" in source
+    assert "illustrative_reused_data" in source
+    assert "declared_untouched_test" in source
 
 
 def test_setup_sequence_and_historical_results_are_unambiguous() -> None:

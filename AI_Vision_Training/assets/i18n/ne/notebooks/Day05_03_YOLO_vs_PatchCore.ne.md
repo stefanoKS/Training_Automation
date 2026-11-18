@@ -1,449 +1,459 @@
 <!--
-नेपाली अनुवाद / Nepali translation source for
+Nepali anuwad / Nepali translation source for
 notebooks/Day05_PatchCore/Day05_03_YOLO_vs_PatchCore.ipynb
 -->
-# दिन ५ नोटबुक ०३ — नेपाली अनुवाद
+# din 5 notebook 03 — Nepali anuwad
 
 <!-- ne-cell: ba87b991 | after-heading -->
-# दिन ५ नोटबुक ०३: YOLO र PatchCore को तुलना
+# din 5 notebook 03: YOLO ra PatchCore ko tulna
 
 <!-- ne-cell: ba87b991 -->
-## सिकाइ लक्ष्यहरू
+## sikai lakshyaharu
 
-| नेपाली |
+| Nepali |
 | --- |
-| 1. दुई विधिको नतिजाको फरक व्यवस्थित गर्न सक्ने। |
-| 2. एउटै तस्बिर सेटमा दुवैको नतिजा सँगै राख्न सक्ने। |
-| 3. एउटै आधारमा OK/NG तुलना गर्दा ध्यान दिनुपर्ने कुरा बताउन सक्ने। |
-| 4. दुवैको फाइदा र कमजोरी उत्पादनको दृष्टिले बताउन सक्ने। |
-| 5. PVC निरीक्षणमा कुन, कुन क्रममा प्रयोग गर्ने सुझाव दिन सक्ने। |
+| 1. dui bidhiko natijako farak byabasthit garna sakne. |
+| 2. eutai tasbir setama dubaiko natija sangai rakhna sakne. |
+| 3. eutai adharama OK/NG tulna garda dhyan dinuparne kura bataun sakne. |
+| 4. dubaiko phaida ra kamajori utpadanako drishtile bataun sakne. |
+| 5. PVC nirikshan ma kun, kun kram ma prayog garne sujhab din sakne. |
 
-## यो नोटबुकको आधारभूत जानकारी
+## yo notebookko adharabhut jankari
 
-| विषय | विवरण |
+| bishay | biwaran |
 | --- | --- |
-| सिकाइ समय (अनुमान) | 100 मिनेट |
-| कठिनाइ | सुरुवाती तह |
-| पूर्वशर्त | दिन ४ नोटबुक ०३ र दिन ५ नोटबुक ०२ चलाइसकेको र नतिजा `submissions` मा सुरक्षित भएको हुनुपर्छ। |
-| आवश्यक लाइब्रेरी | pandas, numpy, matplotlib, pillow |
-| प्रयोग हुने kernel | `aivision-anomalib` (YOLO को नतिजा फाइलबाट पढिन्छ) |
-| आजको समयतालिका | [`COURSE_SYLLABUS.md` दिन ५](../../COURSE_SYLLABUS.md#day5) |
+| sikai samay (anuman) | 100 minet |
+| kathinai | surubati tah |
+| poorwashart | din 4 notebook 03 ra din 5 notebook 02 chalaisakeko ra natija `submissions` ma surakshit bhaeko hunuparchha. |
+| aawashyak laibreri | pandas, numpy, matplotlib, pillow |
+| prayog hune kernel | `aivision-anomalib` (YOLO ko natija file baat padhinchha) |
+| ajako samayatalika | [`COURSE_SYLLABUS.md` din 5](../../COURSE_SYLLABUS.md#day5) |
 
-### बुझाउनुपर्ने काम
+### bujhaunuparne kaam
 
-| नेपाली |
+| Nepali |
 | --- |
-| तुलनाको तालिका |
-| सँगै राखिएका नतिजा तस्बिर |
-| PVC निरीक्षणका लागि सिफारिस (निर्णय र कारण) |
+| tulnako talika |
+| sangai rakhieka natija tasbir |
+| PVC nirikshanka lagi sipharis (nirnaya ra karan) |
 
-> YOLO र PatchCore दुई फरक वातावरणमा छन्, त्यसैले यो नोटबुकले दुवै model लोड नगरी **सुरक्षित नतिजा**
-> तुलना गर्छ। यो जानाजान गरिएको डिजाइन हो र `requirements/tested_versions.md` मा लेखिएको छ।
+> YOLO ra PatchCore dui farak batabaran ma chhan, tyasaile yo notebookle dubai model lod nagari **surakshit natija**
+> tulna garchha. yo janajan garieko dijain ho ra `requirements/tested_versions.md` ma lekhieko chha.
 
 <!-- ne-cell: 1e496b72 | after-heading -->
-## यो नोटबुक कहाँ पर्छ
+## yo notebook kahan parchha
 
 <!-- ne-cell: 1e496b72 -->
-| विषय | विवरण |
+| bishay | biwaran |
 | --- | --- |
-| दिन | दिन ५ |
-| आजको क्रम | आजको नोटबुकमध्ये 3 / 3 |
-| लाग्ने समय | 100 मिनेट |
-| पूर्वशर्त | `Day04_03` र `Day05_02` का सुरक्षित नतिजा |
-| आजको समयतालिका | [`COURSE_SYLLABUS.md` दिन ५](../../COURSE_SYLLABUS.md#day5) |
+| din | din 5 |
+| ajako kram | ajako notabukamadhye 3 / 3 |
+| lagne samay | 100 minet |
+| poorwashart | `Day04_03` ra `Day05_02` ka surakshit natija |
+| ajako samayatalika | [`COURSE_SYLLABUS.md` din 5](../../COURSE_SYLLABUS.md#day5) |
 
-दिनको समयतालिका `COURSE_SYLLABUS.md` मा एउटै ठाउँमा छ। यो नोटबुक त्यसको एउटा भाग मात्र हो।
+dinko samayatalika `COURSE_SYLLABUS.md` ma eutai thaun ma chha. yo notebook tyasko euta bhaag matra ho.
 
 <!-- ne-cell: audit-learning-loop | after-heading -->
-### अनुमान गर्नुहोस्, चलाउनुहोस्, हेर्नुहोस्, व्याख्या गर्नुहोस्
+### anuman garnuhos, chalaunuhos, hernuhos, byakhya garnuhos
 
 <!-- ne-cell: audit-learning-loop -->
-क्यालिब्रेसनले निर्णयको नियम तय गर्ने चरण हो। परीक्षणले स्थिर गरेपछि अर्को डेटामा जाँच्ने चरण हो।
-महत्त्वपूर्ण सेल चलाउनुअघि इनपुट, काम र नतिजा एक-एक वाक्यमा लेख्नुहोस्। पहिले अनुमान गरेर चलाउनुहोस्;
-क्यालिब्रेसनको slider मात्र बदलेर फेरि अनुमान गरी चलाउनुहोस्।
+calibrationle nirnayako niyam tay garne charan ho. parikshanle sthir garepachhi arko data ma jaanchne charan ho.
+mahattwapurna cell chalaunuaghi input, kaam ra natija ek-ek bakyama lekhnuhos. pahile anuman garera chalaunuhos;
+calibrationko slider matra badaler feri anuman gari chalaunuhos.
 
 <!-- ne-cell: b1dbfcbd | after-heading -->
-## Part 0 तयारी
+## Part 0 tayari
 
 <!-- ne-cell: c92bae7e | after-heading -->
-## Part 1 नतिजाको फरक सम्झने
+## Part 1 natijako farak samjhane
 
 <!-- ne-cell: 404278ad | after-heading -->
-**जो मिलाउन सकिँदैन, त्यसलाई उही ढाँचामा नराख्ने**
+**jo milauna sakindaina, tyas lai uhi dhanchama narakhne**
 <!-- ne-pair: Do not pretend different things are the same -->
 
 <!-- ne-cell: 404278ad -->
-दुई विधिले **फरक कुरा फर्काउँछन्**।
+dui bidhile **farak kura pharkaunchhan**.
 
 | | YOLO | PatchCore |
 |---|---|---|
-| मुख्य नतिजा | आयत + class + confidence | स्कोर + हिटम्याप |
-| "कुन दोष" | **थाहा हुन्छ** | थाहा हुँदैन |
-| "कहाँ" | आयतको स्थान | हिटम्यापको चम्किलो ठाउँ |
-| तालिममा चाहिने | दोषको लेबल | सामान्य भनेर पुष्टि भएका तस्बिर |
+| mukhy natija | ayat + class + confidence | score + heatmap |
+| "kun dosh" | **thaha hunchha** | thaha hundaina |
+| "kahan" | ayatako sthan | heatmap ko chamkilo thaun |
+| talim ma chahine | doshko label | samanya bhanera pushti bhaeka tasbir |
 
-त्यसैले **mAP र AUROC सिधै तुलना गर्नु हुँदैन**; ती फरक कुरा नाप्छन्।
+tyasaile **mAP ra AUROC sidhai tulna garnu hundaina**; ti farak kura napchhan.
 
-तुलना गर्न मिल्ने कुरा **उही सही लेबलका आधारमा दुवै विधिले तस्बिर-स्तरमा दिएको OK/NG निर्णय** हो।
-त्यसका लागि **हरेक विधिको निर्णय नियम (थ्रेसहोल्ड) घोषणा गरेर दुवैलाई उही सही उत्तरसँग भिडाउनुपर्छ**।
-दुई विधि आपसमा मिल्छन् कि मिल्दैनन् मात्र हेर्दा **दुवै उही तरिकाले गलत भएको अवस्था** छुट्छ।
+tulna garna milne kura **uhi sahi labelka adharama dubai bidhile tasbir-star ma dieko OK/NG nirnaya** ho.
+tyaska lagi **harek bidhiko nirnaya niyam (threshold) ghoshana garera dubailai uhi sahi uttar sang bhidaunuparchha**.
+dui bidhi apasama milchhan ki mildainan matra herda **dubai uhi tarikale galat bhaeko abastha** chhutchha.
 
 <!-- ne-cell: c1bfc258 | after-heading -->
-## Part 2 सुरक्षित नतिजा पढ्ने
+## Part 2 surakshit natija padhne
 
 <!-- ne-cell: fig-teach_evaluation_sequence | after-heading -->
-### तुलनाको मुख्य क्रम
+### tulnako mukhy kram
 
 <!-- ne-cell: fig-teach_evaluation_sequence | after-image:../../assets/svg/teach_frozen_threshold_pipeline.svg -->
-चित्र: स्थिर गर्नुअघिको क्यालिब्रेसन र स्थिर गरेपछिको परीक्षण छुट्याउने योजनाबद्ध चित्र। यो पाठमा यसलाई
-छ चरणमा मिलाइन्छ।
+chitra: sthir garnuaghiko calibration ra sthir garepachhiko parikshan chhutyaune yojanabaddha chitra. yo paath ma yas lai
+chha charan ma milainchha.
 
-1. विभाजन manifest र उही तस्बिर ID जाँच्ने
-2. दुवै model को अनुमान ID ले मिलाउने
-3. क्यालिब्रेसनमा मात्र YOLO को C र PatchCore को T छान्ने
-4. model, पूर्व-प्रशोधन, सामान्य मेमोरी, पछि-प्रशोधन र थ्रेसहोल्ड अभिलेख गरी स्थिर गर्ने
-5. प्रयोग नभएको test एक पटक मूल्याङ्कन गर्ने
-6. उही तस्बिर-एकाइमा TP/FP/FN/TN तुलना गर्ने
+1. bibhajan manifest ra uhi tasbir ID jaanchne
+2. dubai model ko anuman ID le milaune
+3. calibration ma matra YOLO ko C ra PatchCore ko T chhanne
+4. model, purb-prashodhan, samanya memory, pachhi-prashodhan ra threshold abhilekh gari sthir garne
+5. prayog nabhaeko test ek patak mulyankan garne
+6. uhi tasbir-ekaima TP/FP/FN/TN tulna garne
 
-| भाग | अनुमति हुने काम |
+| bhaag | anumati hune kaam |
 |---|---|
-| fit | YOLO को weight र PatchCore को सामान्य मेमोरी बनाउने |
-| क्यालिब्रेसन | सेटिङ र थ्रेसहोल्ड छान्ने |
-| परीक्षण | स्थिर गरेपछिको मूल्याङ्कन मात्र; समायोजन निषेध |
+| fit | YOLO ko weight ra PatchCore ko samanya memory banaune |
+| calibration | setting ra threshold chhanne |
+| parikshan | sthir garepachhiko mulyankan matra; samayojan nishedh |
 
-क्यालिब्रेसन सुरक्षित उदाहरणमा सामान्य n=6 र असामान्य n=20 छन्।
+calibration surakshit udaharan ma samanya n=6 ra asamanya n=20 chhan.
 
-अनुमान: झुटो अलार्म दरको सीमा 10% भए सामान्य 6 तस्बिरमा कति वटासम्म? `floor(6×0.10)=0` हो। यो
-उत्पादनमा 10% भन्दा कम हुन्छ भन्ने ग्यारेन्टी होइन। सँगै आउने चित्रका 0.06/0.50 सुरक्षित उदाहरण हुन्;
-यो पटकको थ्रेसहोल्ड क्यालिब्रेसन कोडले गणना गरेको मानबाट आउँछ।
+anuman: jhuto alarm darko sima 10% bhae samanya 6 tasbir ma kati batasamm? `floor(6×0.10)=0` ho. yo
+utpadanama 10% bhanda kam hunchha bhanne gyarenti hoina. sangai aune chitraka 0.06/0.50 surakshit udaharan hun;
+yo patakako threshold calibration kodale ganana gareko maan baat aaunchha.
 
 <!-- ne-cell: be4aa133 | after-heading -->
-**तीन फाइल पढ्ने**
+**tin file padhne**
 <!-- ne-pair: Read the three files -->
 
 <!-- ne-cell: be4aa133 -->
-| फाइल | बनाएको ठाउँ | भित्र के छ |
+| file | banaeko thaun | bhitr ke chha |
 |---|---|---|
-| `submissions/day05/split_manifest.json` | दिन ५ नोटबुक ०२ | **विभाजनको अभिलेख**: कुन तस्बिर तालिम, क्यालिब्रेसन वा परीक्षण हो |
-| `submissions/day04/yolo_predictions_on_shared_set.json` | दिन ४ नोटबुक ०३ | सबै तस्बिरको YOLO पहिचान (confidence सहित) |
-| `submissions/day05/patchcore_predictions.json` | दिन ५ नोटबुक ०२ | सबै तस्बिरको PatchCore स्कोर |
+| `submissions/day05/split_manifest.json` | din 5 notebook 02 | **bibhajanako abhilekh**: kun tasbir talim, calibration wa parikshan ho |
+| `submissions/day04/yolo_predictions_on_shared_set.json` | din 4 notebook 03 | sabai tasbirko YOLO pahichan (confidence sahit) |
+| `submissions/day05/patchcore_predictions.json` | din 5 notebook 02 | **calibration matra** ko PatchCore score (test hoina) |
+| `submissions/day05/patchcore_test_predictions.json` | din 5 notebook 02 ko antim "sealed" cell | **sthir garepachhi ek patak** matra baneko test score |
 
-**विभाजनको अभिलेख नभएको नतिजा प्रयोग गरिँदैन।** कुन डेटामा थ्रेसहोल्ड तय गरियो थाहा नभएको सङ्ख्या
-तुलनाको आधार बन्न सक्दैन। पुरानो ढाँचाको फाइल भए कारण देखाएर रोकिन्छ।
+**bibhajanako abhilekh nabhaeko natija prayog garindain.** kun data ma threshold tay gariyo thaha nabhaeko sankhya
+tulnako adhar bann sakdain. purano dhanchako file bhae karan dekhaer rokinchha.
 
 <!-- ne-cell: 415b6d88 | after-heading -->
-**frame बनाउने**
+**frame banaune**
 <!-- ne-pair: Turn them into frames -->
 
 <!-- ne-cell: 415b6d88 -->
-`image` स्तम्भ दुवै विधिमा एउटै तरिकाले (`प्रकार/फाइलनाम.png`) मिलाइन्छ। नमिलाए एउटै तस्बिरलाई दुई
-विधिसँग जोड्न सकिँदैन।
+`image` stambha dubai bidhi ma eutai tarikale (`prakar/phailanam.png`) milainchha. namilae eutai tasbir lai dui
+bidhi sang jodn sakindaina.
 
 <!-- ne-cell: ff4aa9d1 | after-heading -->
-## Part 3 एउटै तस्बिरमा सँगै राख्ने
+## Part 3 eutai tasbir ma sangai rakhne
 
 <!-- ne-cell: a0a1bf15 | after-heading -->
-**दुवै विधिको नतिजा भएका तस्बिर मात्र प्रयोग गर्ने**
+**dubai bidhiko natija bhaeka tasbir matra prayog garne**
 <!-- ne-pair: Use only images where both methods produced a result -->
 
 <!-- ne-cell: a0a1bf15 -->
-एक विधिको मात्र नतिजा भएको तस्बिर **तुलना गर्न सकिँदैन**। चुपचाप फाल्दा "अनुकूल तस्बिर मात्रको
-तुलना" बन्छ। त्यसैले पहिले **कति तस्बिर मिले र कति छुटे** गनेर देखाइन्छ।
+ek bidhiko matra natija bhaeko tasbir **tulna garna sakindaina**. chupachap phalda "anukul tasbir matrako
+tulna" banchha. tyasaile pahile **kati tasbir mile ra kati chhute** ganer dekhainchha.
 
 <!-- ne-cell: 38cb927e | after-heading -->
-**भागअनुसार छुट्याउने**
+**bhaag anusar chhutyaune**
 <!-- ne-pair: Split the images into their roles -->
 
 <!-- ne-cell: 38cb927e -->
-| भाग | के का लागि | कहिले हेर्न मिल्छ |
+| bhaag | ke ka lagi | kahile herna milchha |
 |---|---|---|
-| `patchcore_train` | PatchCore को तालिम (सामान्य मात्र) | तालिमकै बेला मात्र |
-| `calibration` | **थ्रेसहोल्ड र निर्णय नियम तय गर्ने** | जति पटक पनि हेर्न मिल्छ |
-| `test` | अन्तमा एक पटक नतिजा निकाल्ने | **model, पूर्व-प्रशोधन र थ्रेसहोल्ड स्थिर गरेपछि** |
+| `patchcore_train` | PatchCore ko talim (samanya matra) | talimakai bela matra |
+| `calibration` | **threshold ra nirnaya niyam tay garne** | jati patak pani herna milchha |
+| `test` | antama ek patak natija nikalne | **model, purb-prashodhan ra threshold sthir garepachhi** |
 
-हेर्न मिल्छ कि मिल्दैन भन्ने कुरा **"जानकारी कसरी प्रयोग भयो"** ले तय गर्छ। परीक्षण डेटा हेरेर
-थ्रेसहोल्ड वा पूर्व-प्रशोधन बदलियो भने त्यो डेटा "अझै नदेखिएको डेटा" रहँदैन। स्थिर गरेको सेटिङमा
-उही मूल्याङ्कन फेरि चलाउन हुन्छ (त्यो पुनरुत्पादनको जाँच हो)।
+herna milchha ki mildaina bhanne kura **"jankari kasari prayog bhayo"** le tay garchha. parikshan data herer
+threshold wa purb-prashodhan badaliyo bhane tyo data "ajhai nadekhieko data" rahandain. sthir gareko setting ma
+uhi mulyankan feri chalaun hunchha (tyo punarutpadanako jaanch ho).
 
-यो तालिमका सन्दर्भ चित्र **सुरक्षित गरिएको एक पटकको चलाइबाट बनेका प्रकाशित नतिजा** हुन्। ती चित्रमा
-परीक्षणका उदाहरण हेरेपछि सेटिङ बदलियो भने तपाईंको परीक्षण डेटा अब प्रयोग नभएको भन्न मिल्दैन।
-नयाँ अन्तिम नतिजाका लागि **नयाँ प्रयोग नभएको डेटा** चाहिन्छ।
+yo talimka sandarbha chitra **surakshit garieko ek patakako chalaibat baneka prakashit natija** hun. ti chitra ma
+parikshanka udaharan herepachhi setting badaliyo bhane tapainko parikshan data aba prayog nabhaeko bhann mildaina.
+nayan antim natijaka lagi **nayan prayog nabhaeko data** chahinchha.
 
 <!-- ne-cell: 904252da | after-heading -->
-## Part 4 एउटै आधारमा OK/NG निकाल्ने
+## Part 4 eutai adharama OK/NG nikalne
 
 <!-- ne-cell: d8230d25 | after-heading -->
-**थ्रेसहोल्ड "क्यालिब्रेसन" मा तय गर्ने**
+**threshold "calibration" ma tay garne**
 <!-- ne-pair: Choose the thresholds on the calibration partition -->
 
 <!-- ne-cell: d8230d25 -->
-अघिल्लो संस्करणमा सामान्य स्कोरको अधिकतम र असामान्य स्कोरको न्यूनतमबाट थ्रेसहोल्ड तय गरेर
-**उही डेटामा नतिजा निकालिएको** थियो। त्यो "उत्तर हेरेपछि अङ्क दिनु" जस्तै हो र सङ्ख्या राम्रो देखिन्छ।
-त्यो हटाइयो।
+aghillo sanskaranama samanya score ko adhikatam ra asamanya score ko nyoonatam baat threshold tay garera
+**uhi data ma natija nikalieko** thiyo. tyo "uttar herepachhi angk dinu" jastai ho ra sankhya ramro dekhinchha.
+tyo hataiyo.
 
-अहिले दुई चरण छन्।
+ahile dui charan chhan.
 
-1. **क्यालिब्रेसन** मा दुई थ्रेसहोल्ड तय गर्ने। उद्देश्य एउटै: **सामान्य सामानको झुटो रिजेक्ट दर
-   (false reject rate) 10% वा कम राखेर recall अधिकतम बनाउने।** यो 10% **यो तालिमको लक्ष्य** हो।
-   क्यालिब्रेसनमा सामान्य सामान 6 मात्र भएको हुनाले 10% को अर्थ "झुटो अलार्म 0" हो।
-   **उत्पादनको झुटो अलार्म दरको ग्यारेन्टी गर्ने सङ्ख्या होइन।**
-2. तय गरेको मान **स्थिर** गरेर **परीक्षण** मा एक पटक मात्र नतिजा निकाल्ने।
+1. **calibration** ma dui threshold tay garne. uddeshya eutai: **samanya samanako jhuto rijekt dar
+   (false reject rate) 10% wa kam rakher recall adhikatam banaune.** yo 10% **yo talimko lakshya** ho.
+   calibration ma samanya saman 6 matra bhaeko hunale 10% ko arth "jhuto alarm 0" ho.
+   **utpadanako jhuto alarm darko gyarenti garne sankhya hoina.**
+2. tay gareko maan **sthir** garera **parikshan** ma ek patak matra natija nikalne.
 
-| विधि | निर्णय नियम | तय गर्ने मान |
+| bidhi | nirnaya niyam | tay garne maan |
 |---|---|---|
-| YOLO | `confidence ≥ C` भएको पहिचान एक वा बढी भए NG | `C` |
-| PatchCore | `score ≥ T` भए NG | `T` |
+| YOLO | `confidence ≥ C` bhaeko pahichan ek wa badhi bhae NG | `C` |
+| PatchCore | `score ≥ T` bhae NG | `T` |
 
-दुई थ्रेसहोल्ड **त्यसै तुलना गर्न मिल्दैन**; नापिने कुरा फरक छ (YOLO मा confidence, PatchCore मा
-क्यालिब्रेसनले सामान्यीकृत स्कोर)। संयोगले उही सङ्ख्या आउन सक्छ, तर त्यसको अर्थ "उही कुरा" होइन।
-तुलना गरिने कुरा सङ्ख्या होइन, **उही सही उत्तरका आधारमा तस्बिर-स्तरको OK/NG निर्णय** हो।
+dui threshold **tyasai tulna garna mildaina**; napine kura farak chha (YOLO ma confidence, PatchCore ma
+calibrationle samanyikrit score). sanyogale uhi sankhya aun sakchha, tar tyasko arth "uhi kura" hoina.
+tulna garine kura sankhya hoina, **uhi sahi uttarka adharama tasbir-starko OK/NG nirnaya** ho.
 
 <!-- ne-cell: fig-ref_score_distribution | after-heading -->
-### क्यालिब्रेसन डेटाको वितरण
+### calibration datako bitaran
 
 <!-- ne-cell: fig-ref_score_distribution | after-image:../../assets/reference_outputs/ref_score_distribution.png -->
-चित्र: क्यालिब्रेसन (validation) डेटाको मात्र स्कोर वितरण र त्यसैबाट तय गरिएको थ्रेसहोल्ड 0.50
-(सुरक्षित 0–1 मापनमा)। परीक्षण डेटा समावेश छैन।
+chitra: calibration (validation) datako matra score bitaran ra tyasaibat tay garieko threshold 0.50
+(surakshit 0–1 maapan ma). parikshan data samabesh chhaina.
 
-**ध्यान दिनपर्ने कुरा**
+**dhyan dinaparne kura**
 
-स्कोर anomalib 2.7.0 को पछि-प्रशोधनले
-`clip((कच्चा मान − थ्रेसहोल्ड) ÷ (क्यालिब्रेसनको अधिकतम − न्यूनतम) + 0.5, 0, 1)` मा बदलेको छ,
-त्यसैले **तालिम भएको थ्रेसहोल्ड 0.5** हुन्छ। क्यालिब्रेसनमा सामान्य 6 र असामान्य 20 तस्बिर छन्;
-6 मा झुटो अलार्म 0 हुनु "उत्पादनमा पनि 0" को ग्यारेन्टी होइन।
+score anomalib 2.7.0 ko pachhi-prashodhanale
+`clip((kachcha maan − threshold) ÷ (calibrationko adhikatam − nyoonatam) + 0.5, 0, 1)` ma badaleko chha,
+tyasaile **talim bhaeko threshold 0.5** hunchha. calibration ma samanya 6 ra asamanya 20 tasbir chhan;
+6 ma jhuto alarm 0 hunu "utpadanama pani 0" ko gyarenti hoina.
 
-**सोच्नुहोस्**
+**sochnuhos**
 
-- थ्रेसहोल्ड 0.60 बनाउँदा यो क्यालिब्रेसन डेटामा कति तस्बिर छुट्ने बढ्छ?
+- threshold 0.60 banaunda yo calibration data ma kati tasbir chhutne badhchha?
 
 <!-- ne-cell: audit-teach_frozen_threshold_pipeline | after-heading -->
-### स्थिर गर्नुअघिको अन्तिम जाँच
+### sthir garnuaghiko antim jaanch
 
 <!-- ne-cell: audit-teach_frozen_threshold_pipeline -->
-सुरुको मुख्य क्रममा फर्केर क्यालिब्रेसनमा मात्र छानिएका दुई मान र model manifest मिलाउनुहोस्।
-परीक्षण हेरेर सेटिङ बदलियो भने नयाँ अन्तिम मूल्याङ्कनका लागि नयाँ प्रयोग नभएको डेटा चाहिन्छ।
+suruko mukhy kram ma pharker calibration ma matra chhanieka dui maan ra model manifest milaunuhos.
+parikshan herer setting badaliyo bhane nayan antim mulyankanka lagi nayan prayog nabhaeko data chahinchha.
 
 <!-- ne-cell: c818bf0a | after-heading -->
-**थ्रेसहोल्ड सार्न मिल्ने क्यालिब्रेसन डेटामा मात्र**
+**threshold sarn milne calibration data ma matra**
 <!-- ne-pair: You may move thresholds on the calibration data only -->
 
 <!-- ne-cell: c818bf0a -->
-तलको slider ले **क्यालिब्रेसन डेटा** को स्कोर वितरण मात्र प्रयोग गर्छ। परीक्षणको स्कोर लोड गरिएको छैन।
-**क्यालिब्रेसनमा जति पटक प्रयास गरे पनि पछिको परीक्षण तालिका बदलिँदैन।**
+talako slider le **calibration data** ko score bitaran matra prayog garchha. parikshanko score lod garieko chhaina.
+**calibration ma jati patak prayas gare pani pachhiko parikshan talika badalindain.**
 
-तर **परीक्षणको नतिजा हेरिसकेपछि** क्यालिब्रेसनको slider सारेर फेरि छान्दा पनि त्यो निर्णय
-"परीक्षणको नतिजा थाहा भएको मान्छेले" गरेको हुन्छ। **नयाँ अन्तिम नतिजाका लागि नयाँ प्रयोग नभएको
-डेटा चाहिन्छ।**
+tar **parikshanko natija herisakepachhi** calibrationko slider sarer feri chhanda pani tyo nirnaya
+"parikshanko natija thaha bhaeko manchhele" gareko hunchha. **nayan antim natijaka lagi nayan prayog nabhaeko
+data chahinchha.**
 
-झुटो अलार्म (FP) र छुट्नु (FN) **सधैं उही दिशामा सर्दैनन्**। थ्रेसहोल्ड बढाउँदा छुट्ने बढ्छ र झुटो
-अलार्म घट्छ। **दुवै एकैचोटि 0 हुन पनि सक्छन्** — सामान्य सामानको अधिकतम स्कोरभन्दा असामान्य सामानको
-न्यूनतम स्कोर बढी भए (वितरणमा खाली ठाउँ भए)। यो तालिममा सुरक्षित चलाइमा क्यालिब्रेसन डेटामा त्यो
-खाली ठाउँ भएको हुनाले PatchCore 0.50 मा **क्यालिब्रेसनका 26 तस्बिर (सामान्य 6, असामान्य 20) मा**
-छुट्नु 0 र झुटो अलार्म 0 भयो। **यो एक पटकको अभिलेखित चलाइको मान** हो, जुनसुकै वातावरणमा उही हुँदैन।
-साथै **थ्रेसहोल्ड सार्दा सङ्ख्या नबदलिने खण्ड** पनि हुन्छ (त्यो बीचमा पर्ने तस्बिर नभएकोले)। खाली
-ठाउँ नभएको डेटामा एउटा पट्टि त्याग्नैपर्छ।
+jhuto alarm (FP) ra chhutnu (FN) **sadhain uhi disha ma sardainan**. threshold badhaunda chhutne badhchha ra jhuto
+alarm ghatchha. **dubai ekaichoti 0 huna pani sakchhan** — samanya samanako adhikatam skorabhanda asamanya samanako
+nyoonatam score badhi bhae (bitaran ma khali thaun bhae). yo talim ma surakshit chalaima calibration data ma tyo
+khali thaun bhaeko hunale PatchCore 0.50 ma **calibrationka 26 tasbir (samanya 6, asamanya 20) ma**
+chhutnu 0 ra jhuto alarm 0 bhayo. **yo ek patakako abhilekhit chalaiko maan** ho, junasukai batabaran ma uhi hundaina.
+sathai **threshold sarda sankhya nabadaline khand** pani hunchha (tyo bichama parne tasbir nabhaekole). khali
+thaun nabhaeko data ma euta patti tyagnaiparchha.
 
 <!-- ne-cell: fig-teach_threshold_freeze | after-heading -->
-### क्यालिब्रेसनमा तय गरेर स्थिर गर्ने
+### calibration ma tay garera sthir garne
 
 <!-- ne-cell: fig-teach_threshold_freeze | after-image:../../assets/diagrams/teach_threshold_freeze.png -->
-चित्र: क्यालिब्रेसन डेटामा थ्रेसहोल्ड तय गरेर स्थिर गर्ने क्रम (योजनाबद्ध चित्र)। चित्रको YOLO 0.06 र
-PatchCore 0.50 सुरक्षित पुराना उदाहरण हुन्; यो पटकको मान क्यालिब्रेसन कोडले तय गर्छ।
+chitra: calibration data ma threshold tay garera sthir garne kram (yojanabaddha chitra). chitrako YOLO 0.06 ra
+PatchCore 0.50 surakshit purana udaharan hun; yo patakako maan calibration kodale tay garchha.
 
-**ध्यान दिनुपर्ने कुरा**
+**dhyan dinuparne kura**
 
-स्थिर गरेपछि परीक्षण डेटा हेरेर सार्दा त्यो सङ्ख्या अब "प्रयोग नभएको डेटाको नतिजा" रहँदैन।
-क्यालिब्रेसनमा सामान्य 6 र असामान्य 20 तस्बिर भएको हुनाले अनुपात 1/6 को पाइलामा मात्र सर्छ।
+sthir garepachhi parikshan data herer sarda tyo sankhya aba "prayog nabhaeko datako natija" rahandain.
+calibration ma samanya 6 ra asamanya 20 tasbir bhaeko hunale anupaat 1/6 ko pailama matra sarchha.
 
-**सोच्नुहोस्**
+**sochnuhos**
 
-- क्यालिब्रेसनमा सामान्य 6 तस्बिर हुँदा झुटो अलार्म दर 10% वा कम राख्न झुटो अलार्म कति वटासम्म
-  हुन मिल्छ?
+- calibration ma samanya 6 tasbir hunda jhuto alarm dar 10% wa kam rakhna jhuto alarm kati batasamm
+  huna milchha?
 
 <!-- ne-cell: clarity-freeze-prompt | after-heading -->
-#### अनिवार्य: स्थिर गरेको र प्रयोग नभएको कुरा अभिलेख गर्ने
+#### aniwarya: sthir gareko ra prayog nabhaeko kura abhilekh garne
 
 <!-- ne-cell: clarity-freeze-prompt -->
-क्यालिब्रेसनका प्रयोग सकेपछि तलको घोषणा आफ्नै शब्दमा भर्नुहोस्:
-"परीक्षण हेर्नुअघि सेटिङ स्थिर गरें र परीक्षण हेरेपछि समायोजन गर्ने छैन।" model, पूर्व-प्रशोधन र
-थ्रेसहोल्डको अभिलेख जाँच्नुहोस्। परीक्षण तस्बिर वा नतिजा पहिले हेरिसक्नुभएको छ भने
-`TEST_ALREADY_SEEN=True` नै राख्नुहोस्; त्यो नतिजा **पुनः प्रयोग गरिएको डेटाको उदाहरण मूल्याङ्कन**
-हो। नहेरेको अवस्थामा मात्र False बनाउनुहोस्। खाली छोडे परीक्षण मूल्याङ्कन चल्न सक्दैन।
+calibrationka prayog sakepachhi talako ghoshana aphnai shabdama bharnuhos:
+"parikshan hernuaghi setting sthir garen ra parikshan herepachhi samayojan garne chhaina." model, purb-prashodhan ra
+thresholdko abhilekh jaanchnuhos. parikshan tasbir wa natija pahile herisaknubhaeko chha bhane
+`TEST_ALREADY_SEEN=True` nai rakhnuhos; tyo natija **punah prayog garieko datako udaharan mulyankan**
+ho. nahereko abastha ma matra False banaunuhos. khali chhode parikshan mulyankan chaln sakdain.
 
 <!-- ne-cell: clarity-slider-before-freeze -->
-क्यालिब्रेसन slider हेर्नका लागि मात्र हो, अपनाइने दुई मान बदल्दैन। उद्देश्यअनुसारको मान क्यालिब्रेसन
-छनोट गर्ने सेल फेरि चलाएर जाँच्नुहोस्। यो अवलोकनपछि स्थिर गर्नुहोस् र स्थिर अभिलेखको
-`assessment_role` बुझाउनुपर्ने काममा समावेश गर्नुहोस्।
+calibration slider hernaka lagi matra ho, apanaine dui maan badaldain. uddeshyaanusarako maan calibration
+chhanot garne cell feri chalaer jaanchnuhos. yo abalokanapachhi sthir garnuhos ra sthir abhilekhako
+`assessment_role` bujhaunuparne kaam ma samabesh garnuhos.
+
+<!-- ne-cell: clarity-sealed-test-read | after-heading -->
+**sealed test prediction padhne**
+
+<!-- ne-cell: clarity-sealed-test-read -->
+test score sthir abhilekh gariepachhi din 5 notebook 02 ko antim cell le ek patak matra mulyankan garera
+`submissions/day05/patchcore_test_predictions.json` ma sealed garera rakheko hun. yo cell tyo sealed file
+padhchha ra **bibhajan abhilekh, model ra threshold milchha ki** jaanchera matra talika banaunchha.
+namilyo bhane rokinchha. yahan feri mulyankan garindaina.
 
 <!-- ne-cell: 3d343aab | after-heading -->
-**स्थिर गरिएको थ्रेसहोल्डले परीक्षण एक पटक मात्र मूल्याङ्कन गर्ने**
+**sthir garieko thresholdle parikshan ek patak matra mulyankan garne**
 <!-- ne-pair: Score the test partition once, with the frozen thresholds -->
 
 <!-- ne-cell: 3d343aab -->
-थ्रेसहोल्ड क्यालिब्रेसन डेटामा तय गरेर **यहाँ स्थिर** गरियो। अब परीक्षणको सङ्ख्या हेरेर थ्रेसहोल्ड
-सार्नुभयो भने त्यो तालिका "उत्तर हेरेर अङ्क दिएको तालिका" बन्छ। सार्न मन लागे अघिल्लो क्यालिब्रेसन
-slider **क्यालिब्रेसन डेटा** मा प्रयोग गर्नुहोस्। परीक्षण पहिले नै हेरिसक्नुभएको भए बदलिएको सेटिङका
-लागि **अर्को प्रयोग नभएको डेटा** चाहिन्छ; उही परीक्षणमा फेरि गरिएको मूल्याङ्कनलाई मूल अन्तिम परीक्षण
-नतिजाको रूपमा देखाउनु हुँदैन।
+threshold calibration data ma tay garera **yahan sthir** gariyo. aba parikshanko sankhya herer threshold
+sarnubhayo bhane tyo talika "uttar herer angk dieko talika" banchha. sarn man lage aghillo calibration
+slider **calibration data** ma prayog garnuhos. parikshan pahile nai herisaknubhaeko bhae badalieko settingka
+lagi **arko prayog nabhaeko data** chahinchha; uhi parikshan ma feri garieko mulyankan lai mul antim parikshan
+natijako rupama dekhaunu hundaina.
 
-**weight, पूर्व-प्रशोधन, सामान्य मेमोरी र पछि-प्रशोधन पनि स्थिर** गरिन्छ। परीक्षण हेरेर यी बदल्नु
-हुँदैन। सँगै आउने चित्रका 0.06 / 0.50 सुरक्षित सन्दर्भ चलाइका उदाहरण हुन्, यो पटकको चलाइको अपेक्षित
-मान होइन।
+**weight, purb-prashodhan, samanya memory ra pachhi-prashodhan pani sthir** garinchha. parikshan herer yi badalnu
+hundaina. sangai aune chitraka 0.06 / 0.50 surakshit sandarbha chalaika udaharan hun, yo patakako chalaiko apekshit
+maan hoina.
 
 <!-- ne-cell: ec601269 | after-heading -->
-### नतिजाको उदाहरण
+### natijako udaharan
 
 <!-- ne-cell: ec601269 -->
-यो नतिजा यो तालिममा सुरक्षित गरिएको अभिलेख हो (model, डेटा विभाजन र seed लेखामा छ)। सूक्ष्म सङ्ख्या
-वातावरणअनुसार फरक पर्छ; प्रवृत्ति र ठुलो-सानोको सम्बन्ध पढ्नुहोस्। `x` रहेको ठाउँ तपाईंको वातावरणले
-तय गर्ने मान हो।
+yo natija yo talim ma surakshit garieko abhilekh ho (model, data bibhajan ra seed lekhama chha). sukshm sankhya
+batabaran anusar farak parchha; prabritti ra thulo-sanoko sambandh padhnuhos. `x` raheko thaun tapainko batabaranle
+tay garne maan ho.
 
-सुरक्षित चलाइले तलका दुई थ्रेसहोल्ड स्थिर गर्‍यो। पहिलो खण्डलाई **क्यालिब्रेसन** (थ्रेसहोल्ड छानिएको
-ठाउँ) र दोस्रोलाई **एक पटकको परीक्षण मूल्याङ्कन** पढ्नुहोस्।
+surakshit chalaile talaka dui threshold sthir gar‍yo. pahilo khandalai **calibration** (threshold chhanieko
+thaun) ra dosrolai **ek patakako parikshan mulyankan** padhnuhos.
 
 <!-- ne-cell: aa3a7737 | after-heading -->
-## Part 5 नतिजा सँगै हेर्ने
+## Part 5 natija sangai herne
 
 <!-- ne-cell: bf9157ac | after-heading -->
-### तुलना गर्नुअघि: तीन प्यानल कसरी पढ्ने
+### tulna garnuaghi: tin pyanal kasari padhne
 
 <!-- ne-cell: bf9157ac | after-image:../../assets/diagrams/teach_score_map_overlay.png -->
-यो योजनाबद्ध चित्र **तीन प्यानल** को छ: मूल तस्बिर, असामान्यता नक्सा र मिलाएर देखाइएको चित्र।
-यो वास्तविक model को नतिजा पनि होइन र पाँच-स्तम्भ तुलना पनि होइन।
+yo yojanabaddha chitra **tin pyanal** ko chha: mul tasbir, asamanyata naksa ra milaer dekhaieko chitra.
+yo bastabik model ko natija pani hoina ra paanch-stambha tulna pani hoina.
 
-अनुमान: रङको दायरा मात्र बदलियो भने स्कोर बदलिन्छ? स्थानको सङ्केत पढ्न रङ-पट्टी हेर्नुहोस्।
+anuman: rangako dayara matra badaliyo bhane score badlinchha? sthanako sanket padhna rang-patti hernuhos.
 
 <!-- ne-cell: fig-ref_comparison_5col | after-heading -->
-### स्थिर गरेपछिको परिशिष्ट: सुरक्षित TEST का पाँच स्तम्भ
+### sthir garepachhiko parishisht: surakshit TEST ka paanch stambha
 
 <!-- ne-cell: fig-ref_comparison_5col -->
-तलको वैकल्पिक सेलले मात्र सुरक्षित TEST को चित्र देखाउँछ। पहिलो प्रयोग नभएको परीक्षण सकुन्जेल
-False राख्नुहोस्। देखाइसकेपछि यो डेटामा फेरि छानिएको सेटिङलाई "प्रयोग नभएको परीक्षणको नतिजा"
-भन्न मिल्दैन।
+talako baikalpik cellle matra surakshit TEST ko chitra dekhaunchha. pahilo prayog nabhaeko parikshan sakunjel
+False rakhnuhos. dekhaisakepachhi yo data ma feri chhanieko setting lai "prayog nabhaeko parikshanko natija"
+bhann mildaina.
 
 <!-- ne-cell: clarity-calibration-boundary | after-heading -->
-### यहाँबाट CALIBRATION
+### yahan baat CALIBRATION
 
 <!-- ne-cell: clarity-calibration-boundary -->
-तलको gallery क्यालिब्रेसन तस्बिरको हो, माथिको सुरक्षित TEST का तीन तस्बिरभन्दा फरक। डिस्कको फोल्डर
-नाम `test/` ले होइन, विभाजन manifest ले भूमिका तय गर्छ।
+talako gallery calibration tasbirko ho, mathiko surakshit TEST ka tin tasbirabhanda farak. diskako folder
+naam `test/` le hoina, bibhajan manifest le bhoomika tay garchha.
 
 <!-- ne-cell: 29824f9c | after-heading -->
-#### तुलनाको व्याख्या
+#### tulnako byakhya
 
 <!-- ne-cell: 29824f9c -->
-हिटम्यापले स्थान देखाउँछ, YOLO ले तालिम लिएका class को सङ्केत दिन्छ। मिलाएर प्रयोग गर्दा फाइदा हुन्छ
-भन्ने ग्यारेन्टी छैन; गति र गल्ती नापेर निर्णय गर्नुहोस्। सुरक्षित TEST का ठोस असफल उदाहरण स्थिर
-गरेपछिको वैकल्पिक परिशिष्टमा मात्र छन्। संश्लेषित र वास्तविकको फरक, थोरै डेटा, लेबलको बजेट, र
-रिजोल्युसन, पूर्व-प्रशोधन तथा थ्रेसहोल्डमा निर्भरता रिपोर्ट गर्नुहोस्।
+heatmaple sthan dekhaunchha, YOLO le talim lieka class ko sanket dinchha. milaer prayog garda phaida hunchha
+bhanne gyarenti chhaina; gati ra galti naper nirnaya garnuhos. surakshit TEST ka thos asaphal udaharan sthir
+garepachhiko baikalpik parishishtama matra chhan. sansleshit ra bastabikko farak, thorai data, labelko bajet, ra
+rijolyusan, purb-prashodhan tatha threshold ma nirbharata riport garnuhos.
 
 <!-- ne-cell: bb4b29d3 | after-heading -->
-## अभ्यास
+## abhyas
 
 <!-- ne-cell: 38937c33 | after-heading -->
-**अभ्यास 1 (आधारभूत): तुलनाको तालिका पूरा गर्ने**
+**abhyas 1 (adharabhut): tulnako talika pura garne**
 <!-- ne-pair: Exercise 1 (basic): complete the comparison table -->
 
 <!-- ne-cell: 38937c33 -->
-तलको तालिका आफ्नै नतिजाले भर्नुहोस्।
+talako talika aphnai natijale bharnuhos.
 
-| विषय | YOLO | PatchCore |
+| bishay | YOLO | PatchCore |
 |---|---|---|
-| तालिममा चाहिने तस्बिर | | |
-| तालिममा चाहिने लेबल | | |
-| नतिजा | | |
-| दोषको प्रकार थाहा हुन्छ? | | |
-| स्थान थाहा हुन्छ? | | |
-| छुट्ने (FN) सङ्ख्या | | |
-| झुटो अलार्म (FP) सङ्ख्या | | |
+| talim ma chahine tasbir | | |
+| talim ma chahine label | | |
+| natija | | |
+| doshko prakar thaha hunchha? | | |
+| sthan thaha hunchha? | | |
+| chhutne (FN) sankhya | | |
+| jhuto alarm (FP) sankhya | | |
 
 <!-- ne-cell: b9498efe | after-heading -->
-**अभ्यास 2 (मध्यम): क्यालिब्रेसन डेटामा थ्रेसहोल्ड सार्ने**
+**abhyas 2 (madhyam): calibration data ma threshold sarne**
 <!-- ne-pair: Exercise 2 (intermediate): move the threshold on the calibration data -->
 
 <!-- ne-cell: b9498efe -->
-PatchCore को थ्रेसहोल्ड 0.30 / 0.50 / 0.80 बदलेर **छुट्नु (FN) र झुटो अलार्म (FP)** कसरी बदलिन्छ
-**तीन लाइनको तालिका** मा राख्नुहोस्। **थ्रेसहोल्ड बदल्न क्यालिब्रेसन डेटा मात्र प्रयोग गर्नुहोस्।**
-परीक्षण डेटामा त्यही गर्दा त्यो तालिका "उत्तर हेरेर अङ्क दिएको" बन्छ।
+PatchCore ko threshold 0.30 / 0.50 / 0.80 badaler **chhutnu (FN) ra jhuto alarm (FP)** kasari badlinchha
+**tin lineko talika** ma rakhnuhos. **threshold badalna calibration data matra prayog garnuhos.**
+parikshan data ma tyahi garda tyo talika "uttar herer angk dieko" banchha.
 
-| थ्रेसहोल्ड | छुट्नु FN (हर: असामान्य 20) | झुटो अलार्म FP (हर: सामान्य 6) |
+| threshold | chhutnu FN (har: asamanya 20) | jhuto alarm FP (har: samanya 6) |
 |---|---|---|
 | 0.30 | | |
 | 0.50 | | |
 | 0.80 | | |
 
-**सकिएको मानिने अवस्था:** तीन लाइनको तालिका बन्यो र FN र FP विपरीत दिशामा सर्छन् (कहिलेकाहीँ
-एकैचोटि नसर्न पनि सक्छन्) भनेर एक वाक्यमा लेखियो। सङ्ख्या नबदलिने लाइन भए कारण पनि लेख्नुहोस्।
+**sakieko manine abastha:** tin lineko talika banyo ra FN ra FP biparit disha ma sarchhan (kahilekahin
+ekaichoti nasarn pani sakchhan) bhanera ek bakyama lekhiyo. sankhya nabadaline line bhae karan pani lekhnuhos.
 
 <!-- ne-cell: 09fc3b55 | after-heading -->
-**अभ्यास 3 (वैकल्पिक): PVC निरीक्षणका लागि सिफारिस बनाउने**
+**abhyas 3 (baikalpik): PVC nirikshanka lagi sipharis banaune**
 <!-- ne-pair: Exercise 3 (optional challenge): build a recommendation for PVC -->
 
 <!-- ne-cell: 09fc3b55 -->
-तलको ढाँचामा **तपाईंको सिफारिस** लेख्नुहोस्। आधारका रूपमा यी ५ दिनमा पाएका सङ्ख्या वा अवलोकन
-अनिवार्य उद्धृत गर्नुहोस्।
+talako dhanchama **tapainko sipharis** lekhnuhos. adharaka rupama yi 5 din ma paeka sankhya wa abalokan
+aniwarya uddhrit garnuhos.
 
-| विषय | तपाईंको सिफारिस |
+| bishay | tapainko sipharis |
 |---|---|
-| पहिलो चरणमा प्रयोग गर्ने विधि | |
-| त्यसको कारण | |
-| दोस्रो चरणमा थप्ने विधि | |
-| छुट्ने घटाउन के गर्ने | |
-| झुटो अलार्म घटाउन के गर्ने | |
-| हप्ता २ मा जाँच्नुपर्ने कुरा | |
+| pahilo charan ma prayog garne bidhi | |
+| tyasko karan | |
+| dosro charan ma thapne bidhi | |
+| chhutne ghataun ke garne | |
+| jhuto alarm ghataun ke garne | |
+| hapta 2 ma janchnuparne kura | |
 
 <!-- ne-cell: 9a48e17c | after-heading -->
-#### बुझाइ जाँच्ने प्रश्न
+#### bujhai jaanchne prashna
 
 <!-- ne-cell: 9a48e17c -->
-1. YOLO को mAP र PatchCore को AUROC सिधै तुलना गर्न किन मिल्दैन?
-2. तस्बिर-स्तरमा तुलना गर्न दुवैलाई के चाहिन्छ?
-3. PatchCore ले कस्तो दोष छुटाउन सक्छ?
-4. YOLO ले कस्तो दोष छुटाउन सक्छ?
-5. तपाईंको कार्यस्थलमा कुन पहिले प्रयास गर्नुहुन्छ? कारण पनि लेख्नुहोस्।
+1. YOLO ko mAP ra PatchCore ko AUROC sidhai tulna garna kina mildaina?
+2. tasbir-star ma tulna garna dubailai ke chahinchha?
+3. PatchCore le kasto dosh chhutaun sakchha?
+4. YOLO le kasto dosh chhutaun sakchha?
+5. tapainko karyasthalama kun pahile prayas garnuhunchha? karan pani lekhnuhos.
 
 <!-- ne-cell: 30e783b7 | after-heading -->
-## समस्या परेमा
+## samasya parema
 
 <!-- ne-cell: 30e783b7 -->
-त्रुटि आएपछि पहिले "कुन सेलमा", "कुन लाइनमा", "के सन्देश आयो" भनेर लेख्नुहोस्।
+truti aepachhi pahile "kun cell ma", "kun line ma", "ke sandesh ayo" bhanera lekhnuhos.
 
-| लक्षण | के गर्ने |
+| lakshan | ke garne |
 | --- | --- |
-| `yolo_predictions_on_shared_set.json` छैन | दिन ४ नोटबुक ०३ को Part 5 चलाउनुहोस्। |
-| `patchcore_predictions.json` छैन | दिन ५ नोटबुक ०२ को Part 5 चलाउनुहोस्। |
-| साझा तस्बिर 0 हुन्छ | बाटोको ढाँचा फरक हुन सक्छ। `image` स्तम्भको सुरुको `test/` हटाइएको छ कि जाँच्नुहोस्। |
-| precision वा recall `nan` हुन्छ | TP + FP वा TP + FN शून्य छ। असामान्य तस्बिर एक पनि छैन, वा एक पनि पहिचान भएको छैन। |
+| `yolo_predictions_on_shared_set.json` chhaina | din 4 notebook 03 ko Part 5 chalaunuhos. |
+| `patchcore_predictions.json` chhaina | din 5 notebook 02 ko Part 5 chalaunuhos. |
+| sajha tasbir 0 hunchha | batoko dhancha farak huna sakchha. `image` stambhako suruko `test/` hataieko chha ki jaanchnuhos. |
+| precision wa recall `nan` hunchha | TP + FP wa TP + FN shuny chha. asamanya tasbir ek pani chhaina, wa ek pani pahichan bhaeko chhaina. |
 
 <!-- ne-cell: dca7b3f3 | after-heading -->
-## सम्पन्नता जाँचसूची
+## sampannata janchasuchi
 
 <!-- ne-cell: dca7b3f3 -->
-**अनिवार्य बुँदा मात्र** दिइएका छन्। **अभ्यास 3 (वैकल्पिक) अनिवार्य होइन**; नगरे पनि पूरा मानिन्छ।
-सबैमा चिन्ह लागेपछि यो नोटबुक पूरा हुन्छ।
+**aniwarya bunda matra** diieka chhan. **abhyas 3 (baikalpik) aniwarya hoina**; nagare pani pura maninchha.
+sabai ma chinh lagepachhi yo notebook pura hunchha.
 
-**अनिवार्य**
+**aniwarya**
 
-- [ ] Part 1–Part 5 पढेर सबै code सेल चलाएँ
-- [ ] दुई नतिजा फाइल पढ्न सकें
-- [ ] साझा तस्बिरमा तुलनाको तालिका बनाएँ
-- [ ] थ्रेसहोल्ड सारेर FN / FP को परिवर्तन हेरें
-- [ ] तुलनाका चार सीमा व्याख्या गर्न सक्छु
-- [ ] अभ्यास 1–2 (अनिवार्य) गरें
-- [ ] बुझाइ जाँच्ने 5 प्रश्नको उत्तर दिएँ
-- [ ] नोटबुक सुरक्षित गरें
+- [ ] Part 1–Part 5 padher sabai code cell chalaen
+- [ ] dui natija file padhna saken
+- [ ] sajha tasbir ma tulnako talika banaen
+- [ ] threshold sarer FN / FP ko paribartan heren
+- [ ] tulnaka chaar sima byakhya garna sakchhu
+- [ ] abhyas 1–2 (aniwarya) garen
+- [ ] bujhai jaanchne 5 prashnako uttar dien
+- [ ] notebook surakshit garen
 
 <!-- ne-cell: e39fff93 | after-heading -->
-## थप अध्ययन (वैकल्पिक)
+## thap adhyayan (baikalpik)
 
 <!-- ne-cell: e39fff93 -->
-### सन्दर्भ लिङ्क
+### sandarbha lingk
 
-- [Anomalib कागजात](https://anomalib.readthedocs.io/)
-- [Ultralytics मूल्याङ्कन मोड](https://docs.ultralytics.com/modes/val/)
-- [MVTec AD बेन्चमार्क](https://paperswithcode.com/sota/anomaly-detection-on-mvtec-ad)
+- [Anomalib kagajat](https://anomalib.readthedocs.io/)
+- [Ultralytics mulyankan mod](https://docs.ultralytics.com/modes/val/)
+- [MVTec AD benchamark](https://paperswithcode.com/sota/anomaly-detection-on-mvtec-ad)
 
-### थप चुनौती (अनिवार्य होइन)
+### thap chunauti (aniwarya hoina)
 
-उही तस्बिरमा YOLO ले पहिचान गरेको स्थान र PatchCore को हिटम्यापको सबैभन्दा चम्किलो बिन्दुबीच कति
-दूरी छ, तीन तस्बिरमा नाप्नुहोस्।
+uhi tasbir ma YOLO le pahichan gareko sthan ra PatchCore ko heatmap ko sabaibhanda chamkilo bindubich kati
+duri chha, tin tasbir ma napnuhos.

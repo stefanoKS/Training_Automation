@@ -1,497 +1,502 @@
 <!--
-नेपाली अनुवाद / Nepali translation source for
+Nepali anuwad / Nepali translation source for
 notebooks/Day05_PatchCore/Day05_01_Anomaly_Detection_Concepts.ipynb
 -->
-# दिन ५ नोटबुक ०१ — नेपाली अनुवाद
+# din 5 notebook 01 — Nepali anuwad
 
 <!-- ne-cell: a62c030b | after-heading -->
-# दिन ५ नोटबुक ०१: असामान्यता पहिचानको सोचाइ
+# din 5 notebook 01: asamanyata pahichanko sochai
 
 <!-- ne-cell: a62c030b -->
-## सिकाइ लक्ष्यहरू
+## sikai lakshyaharu
 
-| नेपाली |
+| Nepali |
 | --- |
-| 1. असामान्यता पहिचानले के गर्छ बताउन सक्ने। |
-| 2. सामान्य र असामान्य नमुना छुट्याउन सक्ने। |
-| 3. सुपरभाइज्ड लर्निङसँगको फरक बताउन सक्ने। |
-| 4. प्याच, फिचर र स्कोरको सम्बन्ध बताउन सक्ने। |
-| 5. PatchCore को सोचाइ दृष्टान्त प्रयोग गरेर बताउन सक्ने। |
+| 1. asamanyata pahichanle ke garchha bataun sakne. |
+| 2. samanya ra asamanya namuna chhutyaun sakne. |
+| 3. suparabhaijd larningasangako farak bataun sakne. |
+| 4. pyach, feature ra score ko sambandh bataun sakne. |
+| 5. PatchCore ko sochai drishtant prayog garera bataun sakne. |
 
-## यो नोटबुकको आधारभूत जानकारी
+## yo notebookko adharabhut jankari
 
-| विषय | विवरण |
+| bishay | biwaran |
 | --- | --- |
-| सिकाइ समय (अनुमान) | 70 मिनेट |
-| कठिनाइ | सुरुवाती तह |
-| पूर्वशर्त | दिन ४ सकिएको हुनुपर्छ। |
-| आवश्यक लाइब्रेरी | numpy, matplotlib, pillow, opencv-python |
-| प्रयोग हुने kernel | aivision |
-| आजको समयतालिका | [`COURSE_SYLLABUS.md` दिन ५](../../COURSE_SYLLABUS.md#day5) |
+| sikai samay (anuman) | 70 minet |
+| kathinai | surubati tah |
+| poorwashart | din 4 sakieko hunuparchha. |
+| aawashyak laibreri | numpy, matplotlib, pillow, opencv-python |
+| prayog hune kernel | aivision |
+| ajako samayatalika | [`COURSE_SYLLABUS.md` din 5](../../COURSE_SYLLABUS.md#day5) |
 
-### बुझाउनुपर्ने काम
+### bujhaunuparne kaam
 
-| नेपाली |
+| Nepali |
 | --- |
-| असामान्यता पहिचान र वस्तु पहिचानको फरकको व्याख्या |
-| स्कोर कसरी पढ्ने भन्ने अभिलेख |
+| asamanyata pahichan ra bastu pahichanko farakko byakhya |
+| score kasari padhne bhanne abhilekh |
 
 <!-- ne-cell: b071950f | after-heading -->
-## यो नोटबुक कहाँ पर्छ
+## yo notebook kahan parchha
 
 <!-- ne-cell: b071950f -->
-| विषय | विवरण |
+| bishay | biwaran |
 | --- | --- |
-| दिन | दिन ५ |
-| आजको क्रम | आजको नोटबुकमध्ये 1 / 3 |
-| लाग्ने समय | 70 मिनेट |
-| पूर्वशर्त | दिन ४ |
-| आजको समयतालिका | [`COURSE_SYLLABUS.md` दिन ५](../../COURSE_SYLLABUS.md#day5) |
+| din | din 5 |
+| ajako kram | ajako notabukamadhye 1 / 3 |
+| lagne samay | 70 minet |
+| poorwashart | din 4 |
+| ajako samayatalika | [`COURSE_SYLLABUS.md` din 5](../../COURSE_SYLLABUS.md#day5) |
 
-दिनको समयतालिका `COURSE_SYLLABUS.md` मा एउटै ठाउँमा छ। यो नोटबुक त्यसको एउटा भाग मात्र हो।
+dinko samayatalika `COURSE_SYLLABUS.md` ma eutai thaun ma chha. yo notebook tyasko euta bhaag matra ho.
 
 <!-- ne-cell: audit-learning-loop | after-heading -->
-### अनुमान गर्नुहोस्, चलाउनुहोस्, हेर्नुहोस्, व्याख्या गर्नुहोस्
+### anuman garnuhos, chalaunuhos, hernuhos, byakhya garnuhos
 
 <!-- ne-cell: audit-learning-loop -->
-फिचर भनेको तस्बिरबाट गणना गरिने सङ्ख्या हो। सामान्य मेमोरी (memory bank) फिचरका नमुना राख्ने ठाउँ
-हो। महत्त्वपूर्ण सेल चलाउनुअघि इनपुट, काम र नतिजा एक-एक वाक्यमा लेख्नुहोस्। पहिले अनुमान गरेर चलाउनुहोस्
-र मान वा चित्र हेर्नुहोस्। उदाहरण चित्रको नयाँ फिचर मात्र बदलेर फेरि अनुमान गरी चलाउनुहोस्।
+feature bhaneko tasbir baat ganana garine sankhya ho. samanya memory (memory bank) featureka namuna rakhne thaun
+ho. mahattwapurna cell chalaunuaghi input, kaam ra natija ek-ek bakyama lekhnuhos. pahile anuman garera chalaunuhos
+ra maan wa chitra hernuhos. udaharan chitrako nayan feature matra badaler feri anuman gari chalaunuhos.
 
 <!-- ne-cell: 73b2d2a4 | after-heading -->
-## Part 0 तयारी
+## Part 0 tayari
 
 <!-- ne-cell: 68ece906 | after-heading -->
-## Part 1 असामान्यता पहिचान के हो
+## Part 1 asamanyata pahichan ke ho
 
 <!-- ne-cell: 154bde87 | after-heading -->
-**"रोजभन्दा फरक" भेट्ने**
+**"rojabhanda farak" bhetne**
 <!-- ne-pair: Finding 'not like usual' -->
 
 <!-- ne-cell: 154bde87 -->
-**असामान्यता पहिचान** ले **सामान्य भनेको के हो** सिक्छ र त्यसबाट **नमिल्ने भाग** भेट्छ। यो तालिममा
-यसलाई **सामान्य तस्बिर मात्र प्रयोग गरेर तालिम गरिने असामान्यता पहिचान** भनिन्छ।
+**asamanyata pahichan** le **samanya bhaneko ke ho** sikchha ra tyas baat **namilne bhaag** bhetchha. yo talim ma
+yas lai **samanya tasbir matra prayog garera talim garine asamanyata pahichan** bhaninchha.
 
 ```text
-fit (तालिम): सामान्य भनेर पुष्टि भएका तस्बिर मात्र देखाउने (दोषको लेबल प्रयोग हुँदैन)
-अनुमान: नयाँ तस्बिर राखिएका सामान्य फिचरबाट कति टाढा छ भन्ने सङ्ख्या फर्काउने
-क्यालिब्रेसन: सामान्य/असामान्य लेबल भएका अर्को तस्बिर सेटमा थ्रेसहोल्ड तय गर्ने
-मूल्याङ्कन: अझ अर्को सेटमा छुट्ने र झुटो अलार्म गन्ने
+fit (talim): samanya bhanera pushti bhaeka tasbir matra dekhaune (doshko label prayog hundaina)
+anuman: nayan tasbir rakhieka samanya feature baat kati tadha chha bhanne sankhya pharkaune
+calibration: samanya/asamanya label bhaeka arko tasbir setama threshold tay garne
+mulyankan: ajh arko setama chhutne ra jhuto alarm ganne
 ```
 
-दिन ३ र दिन ४ को YOLO सँगको फरक यही हो।
+din 3 ra din 4 ko YOLO sangko farak yahi ho.
 
-| | YOLO (वस्तु पहिचान) | PatchCore (असामान्यता पहिचान) |
+| | YOLO (bastu pahichan) | PatchCore (asamanyata pahichan) |
 |---|---|---|
-| तालिममा चाहिने | दोषको स्थान र प्रकारको लेबल | **सामान्य भनेर पुष्टि भएका तस्बिर मात्र** |
-| नतिजा | आयत + class + confidence | **स्कोर + हिटम्याप** |
-| कमजोरी | तालिम नलिएको प्रकार | कुन दोष हो भन्ने पहिचान |
+| talim ma chahine | doshko sthan ra prakarko label | **samanya bhanera pushti bhaeka tasbir matra** |
+| natija | ayat + class + confidence | **score + heatmap** |
+| kamajori | talim nalieko prakar | kun dosh ho bhanne pahichan |
 
-साहित्यमा यो तरिकालाई one-class, semi-supervised, normal-only आदि धेरै नामले भनिन्छ। नाम पत्रअनुसार
-फरक भए पनि **यो तालिममा गरिने क्रम एउटै** हो: सामान्य तस्बिरमा मात्र model fit गर्ने, लेबल भएका
-क्यालिब्रेसन तस्बिरमा थ्रेसहोल्ड तय गर्ने, र अर्को मूल्याङ्कन सेटमा गल्ती नाप्ने। "लेबल कत्ति पनि
-चाहिँदैन" भन्ने होइन; **fit चरणमा मात्र चाहिँदैन**।
+sahityama yo tarikalai one-class, semi-supervised, normal-only adi dherai naamle bhaninchha. naam patraanusar
+farak bhae pani **yo talim ma garine kram eutai** ho: samanya tasbir ma matra model fit garne, label bhaeka
+calibration tasbir ma threshold tay garne, ra arko mulyankan setama galti napne. "label katti pani
+chahindain" bhanne hoina; **fit charan ma matra chahindain**.
 
 <!-- ne-cell: fig-teach_normal_variation | after-heading -->
-### सामान्य भिन्नता र दोष
+### samanya bhinnata ra dosh
 
 <!-- ne-cell: fig-teach_normal_variation | after-image:../../assets/diagrams/teach_normal_variation.png -->
-चित्र: सामान्य 4 तस्बिर (उज्यालोको असमानता र आवाजले अलि-अलि फरक) र दोष भएको 1 तस्बिरको औसत मानको
-तुलना (संश्लेषित तस्बिर, गणना गरिएका मान)।
+chitra: samanya 4 tasbir (ujyaloko asamanata ra abajale ali-ali farak) ra dosh bhaeko 1 tasbirko ausat maanko
+tulna (sansleshit tasbir, ganana garieka maan).
 
-**ध्यान दिनपर्ने कुरा**
+**dhyan dinaparne kura**
 
-उज्यालोको असमानता, बुट्टा, स्थानको सराइ जस्ता कुराले सामान्य तस्बिरमा पनि भिन्नता आउँछ। एउटा
-समग्र चमकले त्यो भिन्नता व्याख्या गर्न सक्दैन भन्ने कुरा पहिले थाहा पाए असामान्यता नक्सा पढ्ने तरिका
-नै बदलिन्छ।
+ujyaloko asamanata, butta, sthanako sarai jasta kurale samanya tasbir ma pani bhinnata aaunchha. euta
+samagr chamakale tyo bhinnata byakhya garna sakdain bhanne kura pahile thaha pae asamanyata naksa padhne tarika
+nai badlinchha.
 
-**सोच्नुहोस्**
+**sochnuhos**
 
-- समग्र चमक उही भएका दुई तस्बिर पनि असामान्य भनिएको नतिजा फरक किन हुन सक्छ?
+- samagr chamak uhi bhaeka dui tasbir pani asamanya bhanieko natija farak kina huna sakchha?
 
 <!-- ne-cell: ef2014d3 | after-heading -->
-**सामान्य र असामान्य नमुना**
+**samanya ra asamanya namuna**
 <!-- ne-pair: Normal and abnormal samples -->
 
 <!-- ne-cell: ef2014d3 -->
-- **सामान्य नमुना** … समस्या नभएको सामानको तस्बिर
-- **असामान्य नमुना** … दोष भएको सामानको तस्बिर
+- **samanya namuna** … samasya nabhaeko samanako tasbir
+- **asamanya namuna** … dosh bhaeko samanako tasbir
 
-कार्यस्थलमा **सामान्य सामान धेरै हुन्छ र जम्मा गर्न सजिलो हुन्छ**, किनभने बिग्रेको सामान "कहिलेकाहीँ
-मात्र" आउँछ। असामान्यता पहिचानले यही गुण प्रयोग गर्छ।
+karyasthalama **samanya saman dherai hunchha ra jamma garna sajilo hunchha**, kinabhane bigreko saman "kahilekahin
+matra" aaunchha. asamanyata pahichanle yahi gun prayog garchha.
+
+**talako cell le ke dekhaunchha.** samanya prashikshan tasbir ra `assets/defect_samples/` ka sansleshit
+(shikshan) dosh namuna matra. mulyankan folder (`test/`) ma pachhiko notebook le calibration ra test ma
+chhutyaune tasbir milieka hunchhan, tyasaile tyasko sankhya ra bhitri bibaran threshold sthir garnuaghi
+dekhaindain. yahan pahile dekhaune ho bhane pachhiko mulyankan "punar prayog garieko data" banchha.
 
 <!-- ne-cell: d5d90ce4 | after-heading -->
-## Part 2 सुपरभाइज्ड र अनसुपरभाइज्ड
+## Part 2 suparabhaijd ra anasuparabhaijd
 
 <!-- ne-cell: fig-VisA_samples | after-heading -->
-### सामान्य मात्र जम्मा गर्न गाह्रो किन
+### samanya matra jamma garna gahro kina
 
 <!-- ne-cell: fig-VisA_samples | after-image:../../assets/external_samples/open_reference/VisA_samples.png -->
-चित्र: VisA डेटासेटको सारांश (Yang Zou आदि / Amazon Science; VisA डेटासेट CC BY 4.0)। सामान्य र असामान्य
-दुवै मान्छेले छुट्याएर जम्मा गरेको वास्तविक औद्योगिक डेटा। यो तालिमको PVC सामान होइन।
+chitra: VisA datasetko saransh (Yang Zou adi / Amazon Science; VisA dataset CC BY 4.0). samanya ra asamanya
+dubai manchhele chhutyaer jamma gareko bastabik audyogik data. yo talimko PVC saman hoina.
 
-**ध्यान दिनपर्ने कुरा**
+**dhyan dinaparne kura**
 
-असामान्यता पहिचान सामान्य तस्बिरमा मात्र fit गर्न सकिन्छ, तर **थ्रेसहोल्ड तय गर्ने क्यालिब्रेसन** र
-**क्षमता नाप्ने मूल्याङ्कन** का लागि सामान्य र असामान्य लेबल भएका अर्का तस्बिर चाहिन्छ। यो तालिममा पनि
-क्यालिब्रेसनका लागि 26 र मूल्याङ्कनका लागि 26 तस्बिर छुट्याइएका छन्।
+asamanyata pahichan samanya tasbir ma matra fit garna sakinchha, tar **threshold tay garne calibration** ra
+**kshamata napne mulyankan** ka lagi samanya ra asamanya label bhaeka arka tasbir chahinchha. yo talim ma pani
+calibrationka lagi 26 ra mulyankanka lagi 26 tasbir chhutyaieka chhan.
 
-**सोच्नुहोस्**
+**sochnuhos**
 
-- सामान्य तस्बिर मात्र भए कुन कुरा नाप्न सकिँदैन: छुट्ने दर कि झुटो अलार्म दर?
+- samanya tasbir matra bhae kun kura napn sakindaina: chhutne dar ki jhuto alarm dar?
 
 <!-- ne-cell: clarity-patch-data-roles | after-heading -->
-### शब्दावलीभन्दा पहिले डेटाको भूमिका पढ्ने
+### shabdabalibhanda pahile datako bhoomika padhne
 
 <!-- ne-cell: clarity-patch-data-roles -->
-| fit / तयारी | क्यालिब्रेसन | परीक्षण | अनुमान (सञ्चालन) |
+| fit / tayari | calibration | parikshan | anuman (sanchalan) |
 |---|---|---|---|
-| सामान्य तस्बिर मात्र | सामान्य + असामान्य सही लेबलले समायोजन | स्थिर गरेपछि मात्र प्रयोग हुने छुट्टै लेबल सेट | नयाँ तस्बिर जाँच्ने |
+| samanya tasbir matra | samanya + asamanya sahi labelle samayojan | sthir garepachhi matra prayog hune chhuttai label set | nayan tasbir jaanchne |
 
-अनुमान: थ्रेसहोल्ड छान्ने तस्बिर कुन स्तम्भमा पर्छ? तलको साहित्यिक शब्दावली वैकल्पिक पूरक हो।
+anuman: threshold chhanne tasbir kun stambha ma parchha? talako sahityik shabdabali baikalpik purak ho.
 
 <!-- ne-cell: 5e60e191 | after-heading -->
-**वैकल्पिक: साहित्यमा प्रयोग हुने शब्द**
+**baikalpik: sahityama prayog hune shabd**
 <!-- ne-pair: Sorting out the terms -->
 
 <!-- ne-cell: 5e60e191 -->
-| तालिमको प्रकार | डेटा | उदाहरण |
+| talimko prakar | data | udaharan |
 |---|---|---|
-| सुपरभाइज्ड | इनपुट + सही उत्तर | YOLO (दिन ४) |
-| अनसुपरभाइज्ड | इनपुट मात्र | clustering |
-| सामान्य तस्बिर मात्र | सामान्य भनेर पुष्टि भएका तस्बिर मात्र | **PatchCore** |
+| suparabhaijd | input + sahi uttar | YOLO (din 4) |
+| anasuparabhaijd | input matra | clustering |
+| samanya tasbir matra | samanya bhanera pushti bhaeka tasbir matra | **PatchCore** |
 
-PatchCore **सामान्य तस्बिर मात्र प्रयोग गरेर तालिम गरिने असामान्यता पहिचान** हो। साहित्यमा one-class वा
-semi-supervised भनिए पनि **यो तालिममा "सामान्य तस्बिर मात्र" भनेर एकै शब्द प्रयोग** गरिन्छ।
+PatchCore **samanya tasbir matra prayog garera talim garine asamanyata pahichan** ho. sahityama one-class wa
+semi-supervised bhanie pani **yo talim ma "samanya tasbir matra" bhanera ekai shabd prayog** garinchha.
 
-कार्यस्थलको फाइदा स्पष्ट छ: **"दोषलाई नाम दिएर आयतले घेर्ने" काम चाहिँदैन**। त्यो काममा प्रति तस्बिर
-दर्जनौं सेकेन्डदेखि केही मिनेट लाग्छ र मान्छेअनुसार निर्णय फरक पर्छ। तर थ्रेसहोल्ड तय गर्ने क्यालिब्रेसन
-र क्षमता नाप्ने मूल्याङ्कनका लागि सामान्य-असामान्य लेबल भएका तस्बिर चाहिन्छ।
+karyasthalako phaida spasht chha: **"dosh lai naam dier ayatale gherne" kaam chahindain**. tyo kaam ma prati tasbir
+darjanaun sekendadekhi kehi minet lagchha ra manchheanusar nirnaya farak parchha. tar threshold tay garne calibration
+ra kshamata napne mulyankanka lagi samanya-asamanya label bhaeka tasbir chahinchha.
 
 <!-- ne-cell: cf09f7d8 | after-heading -->
-## Part 3 प्याच र फिचर
+## Part 3 pyach ra feature
 
 <!-- ne-cell: clarity-patch-overlap | after-heading -->
-### दृष्टान्त र वास्तविक काम सँगै तुलना गर्ने
+### drishtant ra bastabik kaam sangai tulna garne
 
 <!-- ne-cell: clarity-patch-overlap | after-image:../../assets/svg/teach_patch_overlap.svg -->
-पहिले सम्झनुपर्ने परिभाषा: प्याच डिस्क्रिप्टर भनेको ओभरल्याप हुने तस्बिरको भागलाई सारांशित गर्ने
-**CNN फिचर नक्साको एउटा स्थानको सङ्ख्या-शृङ्खला** हो।
+pahile samjhanuparne paribhasha: pyach diskriptar bhaneko obharalyap hune tasbirko bhaag lai saranshit garne
+**CNN feature naksako euta sthanako sankhya-shringkhala** ho.
 
-अनुमान: छेउछाउका फिचर स्थानहरूले उही मूल पिक्सेलको असर पाउन सक्छन्?
+anuman: chheuchhauka feature sthanaharule uhi mul pikselako asar paun sakchhan?
 
-**ध्यान दिनुपर्ने कुरा**
+**dhyan dinuparne kura**
 
-यो योजनाबद्ध चित्र हो। दायाँको भागको आकार र फिचर सङ्ख्या व्याख्याका लागि मात्र हुन्, resnet18 को
-वास्तविक receptive field को नाप होइन। बायाँको RGB काटिएको टुक्रा memory bank मा त्यसै राखिँदैन।
-तलको grid कोड पनि दृष्टान्त मात्र हो। सानो प्रयोग: grid 8→4 बनाउँदा देखाइने टाइल बदलिन्छ, तर model
-को सेटिङ बदलिन्छ?
+yo yojanabaddha chitra ho. dayanko bhaagko akar ra feature sankhya byakhyaka lagi matra hun, resnet18 ko
+bastabik receptive field ko nap hoina. bayanko RGB katieko tukra memory bank ma tyasai rakhindain.
+talako grid kod pani drishtant matra ho. sano prayog: grid 8→4 banaunda dekhaine tail badlinchha, tar model
+ko setting badlinchha?
 
 <!-- ne-cell: 429f99e1 | after-heading -->
-**प्याच = तस्बिरको सानो टुक्रा**
+**pyach = tasbirko sano tukra**
 <!-- ne-pair: A patch is a small piece of the image -->
 
 <!-- ne-cell: 429f99e1 -->
-PatchCore ले तस्बिरलाई **साना भाग (प्याच)** मा बाँडेर सोच्छ। तलको चित्र त्यो सोचाइको
-**सरलीकृत दृष्टान्त** हो।
+PatchCore le tasbir lai **sana bhaag (pyach)** ma bander sochchha. talako chitra tyo sochaiko
+**saralikrit drishtant** ho.
 
 ```text
-(दृष्टान्त) 256 × 256 तस्बिर → 16 × 16 grid → एउटा भाग = 16 × 16 पिक्सेल
+(drishtant) 256 × 256 tasbir → 16 × 16 grid → euta bhaag = 16 × 16 piksel
 ```
 
-**वास्तविक model यसरी चल्दैन।** यो तालिमको model ले तालिम भएको CNN (resnet18) को बीचको तह
-(`layer2`, `layer3`) का **फिचर नक्सा** प्रयोग गर्छ। फिचर नक्साको एउटा स्थानले इनपुट तस्बिरको
-**ओभरल्याप हुने फराकिलो क्षेत्र** सारांश गर्छ। त्यसैले:
+**bastabik model yasari chaldain.** yo talimko model le talim bhaeko CNN (resnet18) ko bichako tah
+(`layer2`, `layer3`) ka **feature naksa** prayog garchha. feature naksako euta sthanale input tasbirko
+**obharalyap hune pharakilo kshetr** saransh garchha. tyasaile:
 
-- एउटा "प्याच" पिक्सेललाई 16 × 16 मा काटिएको टुक्रा होइन
-- grid कति सूक्ष्म हुन्छ भन्ने कुरा backbone, प्रयोग हुने तह र पूर्व-प्रशोधन (इनपुट आकार) ले तय गर्छ
-- एउटा स्थानले सम्हाल्ने क्षेत्र ओभरल्याप हुने हुनाले स्थान सङ्ख्या र पिक्सेल सङ्ख्याको सम्बन्ध सिधा छैन
+- euta "pyach" pikselalai 16 × 16 ma katieko tukra hoina
+- grid kati sukshm hunchha bhanne kura backbone, prayog hune tah ra purb-prashodhan (input akar) le tay garchha
+- euta sthanale samhalne kshetr obharalyap hune hunale sthan sankhya ra piksel sankhyako sambandh sidha chhaina
 
-बाँडेर हेर्नुको कारण उही हो: **धेरै असामान्यता स्थानीय रूपमा हुन्छन्**, त्यसैले स्थानीय भागलाई सामान्यसँग
-तुलना गर्दा भेट्न सजिलो हुन्छ। तर **तस्बिरभरिको चमक परिवर्तन, बुट्टाको सराइ, आकार बिग्रनु** जस्ता
-फराकिलो दायराका असामान्यता (ग्लोबल वा संरचनागत) स्थानीय तुलनाले मात्र ठम्याउन गाह्रो हुन सक्छ।
+bander hernuko karan uhi ho: **dherai asamanyata sthaniy rupama hunchhan**, tyasaile sthaniy bhaag lai samanya sang
+tulna garda bhetn sajilo hunchha. tar **tasbirabhariko chamak paribartan, buttako sarai, akar bigranu** jasta
+pharakilo dayaraka asamanyata (global wa sanrachanagat) sthaniy tulnale matra thamyaun gahro huna sakchha.
 
 <!-- ne-cell: f6726637 | after-heading -->
-**फिचर के हो**
+**feature ke ho**
 <!-- ne-pair: What a feature is -->
 
 <!-- ne-cell: f6726637 -->
-**फिचर** भनेको तस्बिरको एउटा भागलाई **सङ्ख्याको शृङ्खला** मा बदलेको कुरा हो।
+**feature** bhaneko tasbirko euta bhaag lai **sankhyako shringkhala** ma badaleko kura ho.
 
 ```text
-तस्बिरको एउटा स्थान → [0.14, 0.73, 0.08, ...] (सयौंदेखि हजारौं सङ्ख्या)
+tasbirko euta sthan → [0.14, 0.73, 0.08, ...] (sayaundekhi hajaraun sankhya)
 ```
 
-देखिने रूप उही भए सङ्ख्याको शृङ्खला पनि मिल्दो हुन्छ। **"देखिने रूप" लाई "सङ्ख्याको ठेगाना" मा
-बदलेको** भनेर सोच्दा बुझ्न सजिलो हुन्छ।
+dekhine rup uhi bhae sankhyako shringkhala pani mildo hunchha. **"dekhine rup" lai "sankhyako thegana" ma
+badaleko** bhanera sochda bujhn sajilo hunchha.
 
-फिचर गणना गर्ने भाग (**backbone**) धेरै तस्बिरमा पहिले नै तालिम भएको model बाट लिइन्छ (जस्तै ImageNet
-मा तालिम भएको ResNet)। **यो तालिममा backbone को weight तालिम गरिँदैन (स्थिर राखिन्छ)।**
+feature ganana garne bhaag (**backbone**) dherai tasbir ma pahile nai talim bhaeko model baat liinchha (jastai ImageNet
+ma talim bhaeko ResNet). **yo talim ma backbone ko weight talim garindain (sthir rakhinchha).**
 
 <!-- ne-cell: 33f893ee | after-heading -->
-**नजिकको छिमेकीसँगको दूरी**
+**najikako chhimekisangako duri**
 <!-- ne-pair: Distance to the nearest neighbour -->
 
 <!-- ne-cell: 33f893ee -->
-नयाँ स्थानको फिचर **सामान्य फिचरको समूह (memory bank)** बाट कति टाढा छ नापिन्छ।
+nayan sthanako feature **samanya featureko samuh (memory bank)** baat kati tadha chha napinchha.
 
 ```text
-नयाँ फिचर → memory bank भित्र सबैभन्दा नजिकको सामान्य फिचर खोज्ने
-          → त्यो दूरी "सामान्यभन्दा कति फरक छ" भन्ने सङ्ख्या बन्छ
+nayan feature → memory bank bhitr sabaibhanda najikako samanya feature khojne
+          → tyo duri "samanyabhanda kati farak chha" bhanne sankhya banchha
 ```
 
-- दूरी **सानो** … राखिएका सामान्य फिचरसँग **नजिक** (देखिने रूप मिल्छ)
-- दूरी **ठुलो** … राखिएका सामान्य फिचरबाट **टाढा** (देखिने रूप मिल्दैन)
+- duri **sano** … rakhieka samanya feature sang **najik** (dekhine rup milchha)
+- duri **thulo** … rakhieka samanya feature baat **tadha** (dekhine rup mildaina)
 
-**दूरी "प्रमाण" हो, "उत्तर" होइन।** दूरी सानो हुँदा सामान्यसँग मिल्ने सम्बन्ध मात्र हुन्छ; दूरी आफैं
-"सामान्य" भन्ने लेबल होइन। OK/NG निकाल्न **थ्रेसहोल्ड** चाहिन्छ र थ्रेसहोल्डले गरेको निर्णय **गलत हुन
-सक्छ**।
+**duri "praman" ho, "uttar" hoina.** duri sano hunda samanya sang milne sambandh matra hunchha; duri aphain
+"samanya" bhanne label hoina. OK/NG nikaln **threshold** chahinchha ra thresholdle gareko nirnaya **galat huna
+sakchha**.
 
-साथै **कच्चा दूरी 0–1 दायरामा सीमित हुँदैन**। यो तालिममा सुरक्षित कच्चा दूरी करिब 9–21 दायरामा थियो।
-0–1 हुने कुरा पछि क्यालिब्रेसन डेटाको तथ्याङ्कले बदलेको **स्कोर** हो। दुई कुरा छुट्याएर पढ्नुहोस्
-(Part 5 मा विस्तृत)।
+sathai **kachcha duri 0–1 dayarama simit hundaina**. yo talim ma surakshit kachcha duri karib 9–21 dayarama thiyo.
+0–1 hune kura pachhi calibration datako tathyangkale badaleko **score** ho. dui kura chhutyaer padhnuhos
+(Part 5 ma bistrit).
 
 <!-- ne-cell: a85f80ca | after-heading -->
-### नतिजाको उदाहरण
+### natijako udaharan
 
 <!-- ne-cell: a85f80ca -->
-यो उदाहरणमा नतिजा यस्तो आउँछ (random seed 3 मा स्थिर गरिएको हुनाले उही इनपुटमा उही नतिजा आउँछ)।
-जापानी अक्षरको चौडाइले स्तम्भको स्थान बदलिन सक्छ, सङ्ख्या भने उही रहन्छ।
+yo udaharan ma natija yasto aaunchha (random seed 3 ma sthir garieko hunale uhi input ma uhi natija aaunchha).
+Japani aksharako chaudaile stambhako sthan badalin sakchha, sankhya bhane uhi rahanchha.
 
 <!-- ne-cell: c4d6ab80 | after-heading -->
-**ग्राफ कसरी पढ्ने**
+**graph kasari padhne**
 <!-- ne-pair: How to read the plot -->
 
 <!-- ne-cell: c4d6ab80 -->
-निलो बिन्दु **सामान्य प्याच**, × चिन्ह **नयाँ प्याच** हो।
+nilo bindu **samanya pyach**, × chinh **nayan pyach** ho.
 
-- सामान्य प्याचको **समूहभित्र** भएको × को दूरी सानो हुन्छ, त्यो **राखिएका सामान्य फिचरसँग नजिक** छ
-- समूहबाट **टाढा** भएको × को दूरी ठुलो हुन्छ, **सामान्यभन्दा फरक हुन सक्ने शङ्का** हुन्छ
+- samanya pyachko **samuhabhitr** bhaeko × ko duri sano hunchha, tyo **rakhieka samanya feature sang najik** chha
+- samuhabat **tadha** bhaeko × ko duri thulo hunchha, **samanyabhanda farak huna sakne shangka** hunchha
 
-दूरी **प्रमाण** हो, त्यसैले मात्र OK/NG तय हुँदैन। **थ्रेसहोल्ड** भएपछि मात्र निर्णय बन्छ। वास्तविक
-PatchCore मा यो 2 आयाम **सयौंदेखि हजारौं आयाम** हुन्छ। **आयाम बढे पनि सोचाइ उही** रहन्छ।
+duri **praman** ho, tyasaile matra OK/NG tay hundaina. **threshold** bhaepachhi matra nirnaya banchha. bastabik
+PatchCore ma yo 2 ayam **sayaundekhi hajaraun ayam** hunchha. **ayam badhe pani sochai uhi** rahanchha.
 
 <!-- ne-cell: 47e11e57 | after-heading -->
-## Part 4 PatchCore को सोचाइ
+## Part 4 PatchCore ko sochai
 
 <!-- ne-cell: e9df232d | after-heading -->
-### प्याच → फिचर स्थान → नजिकको छिमेकी → स्कोर
+### pyach → feature sthan → najikako chhimeki → score
 
 <!-- ne-cell: e9df232d | after-image:../../assets/diagrams/teach_patch_neighbour.png -->
-चित्र: एउटा स्थानको फिचर निकालेर सबैभन्दा नजिकको सामान्य फिचरसँगको दूरीलाई स्कोर बनाउने क्रम। ③ को
-2-आयाम बिन्दु **फिचर स्पेसको दृष्टान्त** हो।
+chitra: euta sthanako feature nikaler sabaibhanda najikako samanya phicharasangako duri lai score banaune kram. ③ ko
+2-ayam bindu **feature spesako drishtant** ho.
 
-**ध्यान दिनपर्ने कुरा**
+**dhyan dinaparne kura**
 
-③ **व्याख्याका लागि बनाइएको 2-आयाम योजनाबद्ध चित्र** हो। बिन्दुहरू **फिचर स्पेस** को दृष्टान्त हुन्,
-पिक्सेल त्यसै मिलाएर राखिएको होइन। वास्तविक "प्याच" पिक्सेलबाट नओभरल्याप हुने टाइलमा काटिएको होइन;
-**CNN फिचर नक्साको एउटा स्थान** ले इनपुट तस्बिरको **ओभरल्याप हुने क्षेत्र** सारांश गर्छ। वास्तविक
-model ले सयौं आयामको भित्री प्रतिनिधित्व प्रयोग गर्छ। सम्झनुपर्ने कुरा एउटै सम्बन्ध हो: राखिएका सामान्य
-फिचरबाट जति टाढा, त्यो देखिने रूप सामान्यभन्दा त्यति फरक। **"ठुलो = असामान्य" थ्रेसहोल्ड तय गरेपछि
-मात्र** लागू हुन्छ; दूरी ठुलो भए पनि थ्रेसहोल्डभन्दा कम भए निर्णय OK नै हुन्छ।
+③ **byakhyaka lagi banaiyeko 2-ayam yojanabaddha chitra** ho. binduharu **feature spes** ko drishtant hun,
+piksel tyasai milaer rakhieko hoina. bastabik "pyach" pikselabat naobharalyap hune tailama katieko hoina;
+**CNN feature naksako euta sthan** le input tasbirko **obharalyap hune kshetr** saransh garchha. bastabik
+model le sayaun ayamako bhitri pratinidhitb prayog garchha. samjhanuparne kura eutai sambandh ho: rakhieka samanya
+feature baat jati tadha, tyo dekhine rup samanyabhanda tyati farak. **"thulo = asamanya" threshold tay garepachhi
+matra** lagu hunchha; duri thulo bhae pani thresaholdabhanda kam bhae nirnaya OK nai hunchha.
 
-**सोच्नुहोस्**
+**sochnuhos**
 
-- सामान्य बिन्दुको समूहको ठीक छेउमा क्वेरी (×) राख्दा दूरी कति जति हुन्छ?
+- samanya binduko samuhako thik chheuma kberi (×) rakhda duri kati jati hunchha?
 
 <!-- ne-cell: c474e947 | after-heading -->
-**किन "मेमोरी" भनिन्छ**
+**kina "memory" bhaninchha**
 <!-- ne-pair: Why a memory bank -->
 
 <!-- ne-cell: c474e947 -->
-PatchCore ले सामान्य प्याचका फिचर **त्यसै सुरक्षित (सम्झना)** गर्छ र हरेक पटक "सबैभन्दा नजिकको सामान्य
-प्याचसँगको दूरी" गणना गर्छ।
+PatchCore le samanya pyachka feature **tyasai surakshit (samjhana)** garchha ra harek patak "sabaibhanda najikako samanya
+pyachasangako duri" ganana garchha.
 
-यो **दक्ष निरीक्षकको तरिकासँग नजिक** छ: "यो बुट्टा पहिले देखेको छु। त्यो चाहिँ देखेको छैन।"
+yo **daksh nirikshakako tarikasang najik** chha: "yo butta pahile dekheko chhu. tyo chahin dekheko chhaina."
 
-दक्ष निरीक्षकले "राम्रो सामान कस्तो हुन्छ" दिमागमा राख्छन् र नयाँ कुरा भेट्छन्। PatchCore ले त्यही कुरा
-सङ्ख्याको समूहबाट गर्छ।
+daksh nirikshakale "ramro saman kasto hunchha" dimagama rakhchhan ra nayan kura bhetchhan. PatchCore le tyahi kura
+sankhyako samuhabat garchha.
 
-ध्यान दिनुपर्ने कुरा: सामान्य प्याचको सङ्ख्या धेरै हुने हुनाले **प्रतिनिधित्व गर्ने केही मात्र राख्ने
-(coreset)** उपाय छ। `coreset_sampling_ratio` ले त्यो अनुपात तय गर्छ।
+dhyan dinuparne kura: samanya pyachko sankhya dherai hune hunale **pratinidhitb garne kehi matra rakhne
+(coreset)** upay chha. `coreset_sampling_ratio` le tyo anupaat tay garchha.
 
 <!-- ne-cell: fig-teach_memory_bank | after-heading -->
-### memory bank र नजिकको छिमेकी
+### memory bank ra najikako chhimeki
 
 <!-- ne-cell: fig-teach_memory_bank | after-image:../../assets/diagrams/teach_memory_bank.png -->
-चित्र: सामान्य प्याचका फिचर जम्मा गरिएको memory bank र दुई क्वेरीबाटको दूरी (2-आयाम योजनाबद्ध चित्र)।
+chitra: samanya pyachka feature jamma garieko memory bank ra dui kberibatako duri (2-ayam yojanabaddha chitra).
 
-**ध्यान दिनपर्ने कुरा**
+**dhyan dinaparne kura**
 
-memory bank मा सामान्य तस्बिरका फिचर सुरक्षित हुन्छन्। सामान्य नभएको तस्बिर मिसियो भने स्कोर घटेर
-छुट्ने बढ्न **सक्छ** (सधैंभरि पहिचानै हुँदैन भन्ने ग्यारेन्टी होइन)। मिसिएको भेटिए हटाएर फेरि बनाउनुहोस्
-र अर्को तस्बिरमा जाँच्नुहोस्।
+memory bank ma samanya tasbirka feature surakshit hunchhan. samanya nabhaeko tasbir misiyo bhane score ghater
+chhutne badhn **sakchha** (sadhainbhari pahichanai hundaina bhanne gyarenti hoina). misieko bhetie hataer feri banaunuhos
+ra arko tasbir ma jaanchnuhos.
 
-**सोच्नुहोस्**
+**sochnuhos**
 
-- एउटा असामान्य तस्बिर मिसियो भने पहिले के जाँच्नुपर्छ?
+- euta asamanya tasbir misiyo bhane pahile ke janchnuparchha?
 
 <!-- ne-cell: 1aba9655 | after-heading -->
-## Part 5 स्कोर र हिटम्याप
+## Part 5 score ra heatmap
 
 <!-- ne-cell: 5c642a4a | after-heading -->
-#### दुई प्रकारको नतिजा, तीन चरणमा पढ्ने
+#### dui prakarko natija, tin charan ma padhne
 
 <!-- ne-cell: 5c642a4a -->
-नतिजाका प्रकार दुई हुन्: **तस्बिरभरिको एउटा स्कोर** र **एउटा स्थानिक नक्सा**। प्याच दूरी बीचको मान
-हो, अलग तेस्रो API नतिजा होइन।
+natijaka prakar dui hun: **tasbirabhariko euta score** ra **euta sthanik naksa**. pyach duri bichako maan
+ho, alag tesro API natija hoina.
 
-| चरण | तस्बिर स्कोर | स्थानिक नक्सा |
+| charan | tasbir score | sthanik naksa |
 |---|---|---|
-| 1 कच्चा रूप | सबैभन्दा ठुलो प्याच दूरीमा छिमेकीको weight | बीचको मान भरेर मसिनो बनाइएको दूरी |
-| 2 क्यालिब्रेसनपछि | क्यालिब्रेसन तथ्याङ्कले सामान्यीकृत | अर्को तथ्याङ्कले सामान्यीकृत |
-| 3 निर्णय | घोषित तस्बिर स्कोर ≥ उही मापनको तस्बिर थ्रेसहोल्ड | स्थान देखाउने सङ्केत मात्र; तस्बिर निर्णयको विकल्प होइन |
+| 1 kachcha rup | sabaibhanda thulo pyach duri ma chhimekiko weight | bichako maan bharer masino banaiyeko duri |
+| 2 kyalibresanapachhi | calibration tathyangkale samanyikrit | arko tathyangkale samanyikrit |
+| 3 nirnaya | ghoshit tasbir score ≥ uhi maapan ko tasbir threshold | sthan dekhaune sanket matra; tasbir nirnayako bikalp hoina |
 
-यो तालिकाले प्रशोधनको भूमिका देखाउँछ, कुनै तस्बिरको नतिजा होइन। पछि-प्रशोधन सक्रिय र क्यालिब्रेसन
-तथ्याङ्क fit भएको अवस्थामा मात्र 0–1 मापन प्रयोग गर्न मिल्छ। कच्चा मान 0–1 मा सीमित हुँदैन र तस्बिर
-स्कोर र नक्साको अधिकतम मान पनि मिल्दैन। 0–1 भए पनि त्यो सम्भावना होइन। तस्बिर स्कोरको गणना र नक्साको
-भर्ने/मसिनो बनाउने काम फरक प्रशोधन हुन्।
+yo talikale prashodhanako bhoomika dekhaunchha, kunai tasbirko natija hoina. pachhi-prashodhan sakriya ra calibration
+tathyangk fit bhaeko abastha ma matra 0–1 maapan prayog garna milchha. kachcha maan 0–1 ma simit hundaina ra tasbir
+score ra naksako adhikatam maan pani mildaina. 0–1 bhae pani tyo sambhabana hoina. tasbir score ko ganana ra naksako
+bharne/masino banaune kaam farak prashodhan hun.
 
-अनुमान: तस्बिर स्कोर उही मापनको तस्बिर थ्रेसहोल्ड वा बढी भयो भने? नक्साको रङ मात्र बदल्दा पास/फेल
-बदलिन्छ?
+anuman: tasbir score uhi maapan ko tasbir threshold wa badhi bhayo bhane? naksako rang matra badalda pas/phel
+badlinchha?
 
 <!-- ne-cell: fig-teach_score_levels | after-heading -->
-### बीचको दूरी र दुई प्रकारको नतिजा
+### bichako duri ra dui prakarko natija
 
 <!-- ne-cell: fig-teach_score_levels | after-image:../../assets/diagrams/teach_score_levels.png -->
-चित्र: प्याच-दर-प्याच स्कोर → तस्बिरको एउटा स्कोर → स्थानिक नक्सा। बीचको मान र नतिजा छुट्याउने
-(मान उदाहरणका लागि)।
+chitra: pyach-dar-pyach score → tasbirko euta score → sthanik naksa. bichako maan ra natija chhutyaune
+(maan udaharanka lagi).
 
-**ध्यान दिनपर्ने कुरा**
+**dhyan dinaparne kura**
 
-यो चित्रको "अधिकतम" र "औसत" **व्याख्याका लागि बनाइएको खेलौना संक्षेप** हो। यो तालिमको सेटिङमा सबैभन्दा
-ठुलो प्याच दूरीमा छेउछाउका सामान्य फिचर (9 बिन्दु) को weight गुणन गरेर तस्बिर स्कोर बनाइन्छ, र देखाइने
-नक्सा भर्ने र मसिनो बनाउने प्रक्रियाबाट जान्छ। त्यसैले तस्बिर स्कोर र नक्साको अधिकतम मान मिल्दैन।
+yo chitrako "adhikatam" ra "ausat" **byakhyaka lagi banaiyeko khelauna sankshep** ho. yo talimko setting ma sabaibhanda
+thulo pyach duri ma chheuchhauka samanya feature (9 bindu) ko weight gunan garera tasbir score banainchha, ra dekhaine
+naksa bharne ra masino banaune prakriyabat janchha. tyasaile tasbir score ra naksako adhikatam maan mildaina.
 
-**सोच्नुहोस्**
+**sochnuhos**
 
-- तस्बिर स्कोर तय गर्न नक्साभरिको औसत प्रयोग भएको छ?
+- tasbir score tay garna naksabhariko ausat prayog bhaeko chha?
 
 <!-- ne-cell: 1f601e75 | after-heading -->
-**थ्रेसहोल्डले OK/NG तय गर्ने**
+**thresholdle OK/NG tay garne**
 <!-- ne-pair: Turning a score into OK/NG with a threshold -->
 
 <!-- ne-cell: 1f601e75 -->
-स्कोर **सङ्ख्या** हो। OK/NG बनाउन **थ्रेसहोल्ड** चाहिन्छ।
+score **sankhya** ho. OK/NG banaun **threshold** chahinchha.
 
 ```text
-स्कोर < थ्रेसहोल्ड  →  OK
-स्कोर >= थ्रेसहोल्ड →  NG
+score < threshold  →  OK
+score >= threshold →  NG
 ```
 
-थ्रेसहोल्ड **घटाउँदा** NG बढ्छ (छुट्ने घट्छ, झुटो अलार्म बढ्छ)। **बढाउँदा** OK बढ्छ (झुटो अलार्म घट्छ,
-छुट्ने बढ्छ)। यो दिन ३ मा देखेको confidence थ्रेसहोल्डकै उही ढाँचा हो।
+threshold **ghataunda** NG badhchha (chhutne ghatchha, jhuto alarm badhchha). **badhaunda** OK badhchha (jhuto alarm ghatchha,
+chhutne badhchha). yo din 3 ma dekheko confidence thresaholdakai uhi dhancha ho.
 
-थ्रेसहोल्डसँग तुलना गरिने कुरा **क्यालिब्रेसनले 0–1 मा बदलेपछिको स्कोर** हो, कच्चा दूरी होइन। साथै
-**थ्रेसहोल्डबाट निस्केको नतिजा "अनुमान"** हो; सही उत्तरसँग तुलना नगरेसम्म त्यो सही छ कि छैन थाहा हुँदैन।
-थ्रेसहोल्ड क्यालिब्रेसन डेटामा तय गर्नुहोस् र परीक्षण डेटामा नसार्नुहोस् (दिन ५ नोटबुक ०३)।
+threshold sang tulna garine kura **calibrationle 0–1 ma badalepachhiko score** ho, kachcha duri hoina. sathai
+**threshold baat niskeko natija "anuman"** ho; sahi uttar sang tulna nagaresamm tyo sahi chha ki chhaina thaha hundaina.
+threshold calibration data ma tay garnuhos ra parikshan data ma nasarnuhos (din 5 notebook 03).
 
 <!-- ne-cell: 1784ecb1 | after-heading -->
-**PatchCore ले गर्न नसक्ने काम**
+**PatchCore le garna nasakne kaam**
 <!-- ne-pair: What PatchCore cannot do -->
 
 <!-- ne-cell: 1784ecb1 -->
-बढी विश्वास नगर्नुहोस्। यी कुराको ग्यारेन्टी छैन।
+badhi bishbas nagarnuhos. yi kurako gyarenti chhaina.
 
-1. **सबै दोष भेट्ने** — "सामान्यसँग मिल्ने दोष" छुट्छ
-2. **दोषको प्रकार भन्ने** — "कालो थोप्लो" कि "चिसो" भन्न सक्दैन
-3. **सामान्य भिन्नतालाई असामान्य नभन्ने** — रङको असमानता, बुट्टा र उज्यालोको असमानता असामान्य ठान्ने
-   सम्भावना धेरै हुन्छ
+1. **sabai dosh bhetne** — "samanya sang milne dosh" chhutchha
+2. **doshko prakar bhanne** — "kalo thoplo" ki "chiso" bhann sakdain
+3. **samanya bhinnatalai asamanya nabhanne** — rangako asamanata, butta ra ujyaloko asamanata asamanya thanne
+   sambhabana dherai hunchha
 
-तेस्रो कुरा विशेष महत्त्वपूर्ण छ। **सामान्य सामानको भिन्नता तालिम डेटामा कति समेट्ने** भन्ने कुराले
-व्यवहारमा काम लाग्छ कि लाग्दैन तय गर्छ।
+tesro kura bishesh mahattwapurna chha. **samanya samanako bhinnata talim data ma kati sametne** bhanne kurale
+byabaharama kaam lagchha ki lagdain tay garchha.
 
 <!-- ne-cell: 2b8faacc | after-heading -->
-## अभ्यास
+## abhyas
 
 <!-- ne-cell: 074c9203 | after-heading -->
-**अभ्यास 1 (आधारभूत): आफ्नै शब्दमा व्याख्या गर्ने**
+**abhyas 1 (adharabhut): aphnai shabdama byakhya garne**
 <!-- ne-pair: Exercise 1 (basic): explain it in your own words -->
 
 <!-- ne-cell: 074c9203 -->
-तलका तीन कुरा प्रत्येक दुई लाइनभित्र व्याख्या गर्नुहोस्।
+talaka tin kura pratyek dui lainabhitr byakhya garnuhos.
 
-1. असामान्यता पहिचान र वस्तु पहिचानको फरक
-2. memory bank के हो
-3. स्कोर के हो
+1. asamanyata pahichan ra bastu pahichanko farak
+2. memory bank ke ho
+3. score ke ho
 
 <!-- ne-cell: 0cf76dd2 | after-heading -->
-**अभ्यास 2 (मध्यम): थ्रेसहोल्ड सार्ने**
+**abhyas 2 (madhyam): threshold sarne**
 <!-- ne-pair: Exercise 2 (intermediate): move the threshold -->
 
 <!-- ne-cell: 0cf76dd2 -->
-तलको तालिका भर्नुहोस् (अन्दाजले भए पनि हुन्छ)।
+talako talika bharnuhos (andajale bhae pani hunchha).
 
-| थ्रेसहोल्ड | NG सङ्ख्या | छुट्ने | झुटो अलार्म |
+| threshold | NG sankhya | chhutne | jhuto alarm |
 |---|---|---|---|
-| कम (0.2) | | | |
-| मध्यम (0.5) | | | |
-| उच्च (0.8) | | | |
+| kam (0.2) | | | |
+| madhyam (0.5) | | | |
+| uchcha (0.8) | | | |
 
 <!-- ne-cell: 3c808d08 | after-heading -->
-**अभ्यास 3 (वैकल्पिक): PVC निरीक्षणमा कसरी प्रयोग गर्ने**
+**abhyas 3 (baikalpik): PVC nirikshan ma kasari prayog garne**
 <!-- ne-pair: Exercise 3 (optional challenge): how would you use this for PVC -->
 
 <!-- ne-cell: 3c808d08 -->
-चौडाइ 1,300 mm, 0.3 mm दोष र उच्च गति भन्ने अवस्थामा असामान्यता पहिचान **कुन चरणमा, कुन उद्देश्यले**
-राख्ने सुझाव दिनुहोस्।
+chaudai 1,300 mm, 0.3 mm dosh ra uchcha gati bhanne abastha ma asamanyata pahichan **kun charan ma, kun uddeshyale**
+rakhne sujhab dinuhos.
 
-- YOLO र असामान्यता पहिचान **दुवै** प्रयोग गर्ने भए क्रम के हुन्छ?
-- असामान्यता पहिचान मात्र किन पुग्दैन?
-- पहिले कुन डेटा जम्मा गर्नुपर्छ?
+- YOLO ra asamanyata pahichan **dubai** prayog garne bhae kram ke hunchha?
+- asamanyata pahichan matra kina pugdain?
+- pahile kun data jamma garnuparchha?
 
 <!-- ne-cell: 93412cb6 | after-heading -->
-#### बुझाइ जाँच्ने प्रश्न
+#### bujhai jaanchne prashna
 
 <!-- ne-cell: 93412cb6 -->
-1. असामान्यता पहिचानको तालिममा दोषको लेबल चाहिन्छ? कारण पनि लेख्नुहोस्।
-2. तस्बिरलाई प्याचमा किन बाँड्ने?
-3. "memory bank" ले के सुरक्षित गर्छ?
-4. स्कोर उच्च = सधैं बिग्रेको सामान, भन्न किन मिल्दैन?
-5. सामान्य सामानको भिन्नता (रङको असमानता आदि) तालिम डेटामा नराख्दा कस्तो समस्या आउँछ?
+1. asamanyata pahichanko talim ma doshko label chahinchha? karan pani lekhnuhos.
+2. tasbir lai pyach ma kina bandne?
+3. "memory bank" le ke surakshit garchha?
+4. score uchcha = sadhain bigreko saman, bhann kina mildaina?
+5. samanya samanako bhinnata (rangako asamanata adi) talim data ma narakhda kasto samasya aaunchha?
 
 <!-- ne-cell: 2fb637f4 | after-heading -->
-## समस्या परेमा
+## samasya parema
 
 <!-- ne-cell: 2fb637f4 -->
-त्रुटि आएपछि पहिले "कुन सेलमा", "कुन लाइनमा", "के सन्देश आयो" भनेर लेख्नुहोस्। बुझाउनुपर्ने काममा पनि
-त्यही अभिलेख राख्नुहोस्।
+truti aepachhi pahile "kun cell ma", "kun line ma", "ke sandesh ayo" bhanera lekhnuhos. bujhaunuparne kaam ma pani
+tyahi abhilekh rakhnuhos.
 
-| लक्षण | के गर्ने |
+| lakshan | ke garne |
 | --- | --- |
-| सामान्य तस्बिर देखिँदैन | `python assets\scripts\prepare_datasets.py --only anomaly` ले डेटा बनाउनुहोस्। |
-| ग्राफका बिन्दु ओभरल्याप भएर देखिँदैन | सामान्य प्याच 120 वटा छन्। `alpha` घटाउनुहोस् वा `s` सानो बनाउनुहोस्। |
-| "दूरी" को अर्थ बुझिएन | यसले बहु-आयामी सङ्ख्याको फरकलाई एउटा सङ्ख्यामा बदल्छ। 2-आयाम उदाहरणमा जाँच्नुहोस्। |
-| थ्रेसहोल्ड कसरी तय गर्ने थाहा भएन | सामान्य तस्बिर मात्र भए झुटो अलार्म नाप्न सकिन्छ, छुट्ने होइन। सामान्य-असामान्य लेबल भएको क्यालिब्रेसन डेटामा झुटो रिजेक्ट दरको सीमा तय गरेर recall अधिकतम बनाउनुहोस्। दिन ५ नोटबुक ०२ मा गरिन्छ। |
-| स्कोर 0–1 मा आउँदैन | सामान्यीकरणको तथ्याङ्क छैन (NaN) भने Anomalib ले कच्चा दूरी फर्काउँछ। क्यालिब्रेसन डेटामा पछि-प्रशोधन fit भएको छ कि जाँच्नुहोस्। |
+| samanya tasbir dekhindain | `python assets\scripts\prepare_datasets.py --only anomaly` le data banaunuhos. |
+| graphaka bindu obharalyap bhaer dekhindain | samanya pyach 120 bata chhan. `alpha` ghataunuhos wa `s` sano banaunuhos. |
+| "duri" ko arth bujhien | yasle bahu-ayami sankhyako farak lai euta sankhya ma badalchha. 2-ayam udaharan ma jaanchnuhos. |
+| threshold kasari tay garne thaha bhaen | samanya tasbir matra bhae jhuto alarm napn sakinchha, chhutne hoina. samanya-asamanya label bhaeko calibration data ma jhuto rijekt darko sima tay garera recall adhikatam banaunuhos. din 5 notebook 02 ma garinchha. |
+| score 0–1 ma aundain | samanyikaranako tathyangk chhaina (NaN) bhane Anomalib le kachcha duri pharkaunchha. calibration data ma pachhi-prashodhan fit bhaeko chha ki jaanchnuhos. |
 
 <!-- ne-cell: f1c0d7cd | after-heading -->
-## सम्पन्नता जाँचसूची
+## sampannata janchasuchi
 
 <!-- ne-cell: f1c0d7cd -->
-**अनिवार्य बुँदा मात्र** दिइएका छन्। **अभ्यास 3 (वैकल्पिक) अनिवार्य होइन**; नगरे पनि पूरा मानिन्छ।
-सबैमा चिन्ह लागेपछि यो नोटबुक पूरा हुन्छ।
+**aniwarya bunda matra** diieka chhan. **abhyas 3 (baikalpik) aniwarya hoina**; nagare pani pura maninchha.
+sabai ma chinh lagepachhi yo notebook pura hunchha.
 
-**अनिवार्य**
+**aniwarya**
 
-- [ ] Part 1–Part 5 पढेर सबै code सेल चलाएँ
-- [ ] सामान्य र असामान्य तस्बिरको सङ्ख्या जाँचें
-- [ ] प्याच बाँडफाँटको चित्र हेरें
-- [ ] नजिकको छिमेकी दूरीको ग्राफ हेरें
-- [ ] अभ्यास 1–2 (अनिवार्य) गरें
-- [ ] बुझाइ जाँच्ने 5 प्रश्नको उत्तर दिएँ
-- [ ] नोटबुक सुरक्षित गरें
+- [ ] Part 1–Part 5 padher sabai code cell chalaen
+- [ ] samanya ra asamanya tasbirko sankhya janchen
+- [ ] pyach bandaphantako chitra heren
+- [ ] najikako chhimeki duriko graph heren
+- [ ] abhyas 1–2 (aniwarya) garen
+- [ ] bujhai jaanchne 5 prashnako uttar dien
+- [ ] notebook surakshit garen
 
 <!-- ne-cell: ea343d35 | after-heading -->
-## थप अध्ययन (वैकल्पिक)
+## thap adhyayan (baikalpik)
 
 <!-- ne-cell: ea343d35 -->
-### सन्दर्भ लिङ्क
+### sandarbha lingk
 
-- [Anomalib कागजात](https://anomalib.readthedocs.io/)
-- [PatchCore पत्र (Roth et al., 2022)](https://arxiv.org/abs/2106.08265)
-- [MVTec AD डेटासेट](https://www.mvtec.com/company/research/datasets/mvtec-ad)
+- [Anomalib kagajat](https://anomalib.readthedocs.io/)
+- [PatchCore patr (Roth et al., 2022)](https://arxiv.org/abs/2106.08265)
+- [MVTec AD dataset](https://www.mvtec.com/company/research/datasets/mvtec-ad)
 
-### थप चुनौती (अनिवार्य होइन)
+### thap chunauti (aniwarya hoina)
 
-PatchCore पत्रको चित्र 1 हेरेर memory bank कहाँ छ खोज्नुहोस्।
+PatchCore patrako chitra 1 herer memory bank kahan chha khojnuhos.

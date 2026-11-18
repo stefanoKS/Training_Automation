@@ -41,6 +41,17 @@ TRILINGUAL_PDFS = [
     "Course_Syllabus_ja_en_ne.pdf",
 ]
 
+# Booklets whose Nepali has been migrated to `ne-Latn`; the rest still carry Devanagari during the
+# pilot, so one test cannot demand a single script from all ten.
+ROMANIZED_PDFS = {
+    "Day04_explanation_ja_en_ne.pdf",
+    "Day05_explanation_ja_en_ne.pdf",
+    "Installation_Guide_ja_en_ne.pdf",
+    "Repository_Guide_ja_en_ne.pdf",
+    "Course_Syllabus_ja_en_ne.pdf",
+}
+ROMANIZED_MARKERS = ("chhannuhos", "natija", "tasbir", "garnuhos", "chha", "chhaina")
+
 if str(SCRIPTS) not in sys.path:
     sys.path.insert(0, str(SCRIPTS))
 
@@ -182,7 +193,7 @@ def test_trilingual_pdf_exists(name: str) -> None:
 
 @pytest.mark.parametrize("name", TRILINGUAL_PDFS)
 def test_trilingual_pdf_text_layer_is_searchable(name: str) -> None:
-    """Devanagari must extract without spurious spaces, or the PDF cannot be searched."""
+    """A Devanagari booklet must extract without spurious spaces; a Romanized one must carry prose."""
     pdfium = pytest.importorskip("pypdfium2",
                                  reason="PDF tooling is optional (requirements/pdf.txt)")
     path = PDF_DIR / name
@@ -191,9 +202,29 @@ def test_trilingual_pdf_text_layer_is_searchable(name: str) -> None:
     document = pdfium.PdfDocument(str(path))
     text = "\n".join(document[index].get_textpage().get_text_range()
                      for index in range(len(document)))
-    assert DEVANAGARI_RE.search(text), f"{name}: no Devanagari in the text layer"
-    split = NE_SPLIT_RE.findall(text)
-    assert not split, f"{name}: {len(split)} Devanagari word(s) split by a space"
+    if DEVANAGARI_RE.search(text):
+        split = NE_SPLIT_RE.findall(text)
+        assert not split, f"{name}: {len(split)} Devanagari word(s) split by a space"
+        return
+    lowered = text.lower()
+    assert any(marker in lowered for marker in ROMANIZED_MARKERS), (
+        f"{name}: no Romanized Nepali marker in the text layer")
+
+
+@pytest.mark.parametrize("name", sorted(ROMANIZED_PDFS))
+def test_migrated_pdfs_carry_romanized_nepali_only(name: str) -> None:
+    pdfium = pytest.importorskip("pypdfium2",
+                                 reason="PDF tooling is optional (requirements/pdf.txt)")
+    path = PDF_DIR / name
+    if not path.is_file():
+        pytest.skip(f"{name} has not been built yet")
+    document = pdfium.PdfDocument(str(path))
+    text = "\n".join(document[index].get_textpage().get_text_range()
+                     for index in range(len(document)))
+    assert not DEVANAGARI_RE.search(text), f"{name}: Devanagari survived the migration"
+    lowered = text.lower()
+    hits = [marker for marker in ROMANIZED_MARKERS if marker in lowered]
+    assert len(hits) >= 2, f"{name}: expected Romanized Nepali prose, found {hits}"
 
 
 def test_original_japanese_english_pdfs_are_untouched() -> None:

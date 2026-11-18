@@ -16,10 +16,10 @@ answers: writing in your own words is the purpose of this course.
 ---
 
 <!-- ne:begin doc:2786d02dea -->
-### नेपालीमा
+### Nepali ma
 
-सबै खाली ठाउँ भर्नुहोस्। "छैन" पनि राम्रो अभिलेख हो।
-**अरूको जवाफ नक्कल नगर्नुहोस्।** आफ्नै शब्दमा लेख्नु नै यो तालिमको उद्देश्य हो।
+sabai khali thaun bharnuhos. "chhaina" pani ramro abhilekh ho.
+**aruko jabaph nakkal nagarnuhos.** aphnai shabdama lekhnu nai yo talimko uddeshya ho.
 <!-- ne:end -->
 
 ## 1. 本日の学習内容 / Today's learning
@@ -36,9 +36,9 @@ Summarise what you learned today in 3-5 lines.
 ---
 
 <!-- ne:begin doc:f232ffa42e -->
-### नेपालीमा
+### Nepali ma
 
-आज सिकेको कुरा ३–५ पङ्क्तिमा जम्मा गर्नुहोस्।
+aj sikeko kura 3–5 pangktima jamma garnuhos.
 <!-- ne:end -->
 
 ## 2. 実施した作業 / Completed activities
@@ -66,23 +66,23 @@ Tick the exercises you did.
 ---
 
 <!-- ne:begin doc:4713166a3d -->
-### नेपालीमा
+### Nepali ma
 
-चलाएको नोटबुक र सकिएको Part मा चिन्ह लगाउनुहोस्।
+chalaeko notebook ra sakieko Part ma chinh lagaunuhos.
 
-| नोटबुक | चलाएँ | सकिएको Part | लागेको समय |
+| notebook | chalaen | sakieko Part | lageko samay |
 |---|---|---|---|
-|  | [ ] | | ____ मिनेट |
-|  | [ ] | | ____ मिनेट |
-|  | [ ] | | ____ मिनेट |
+|  | [ ] | | ____ minet |
+|  | [ ] | | ____ minet |
+|  | [ ] | | ____ minet |
 
-गरेका अभ्यासमा चिन्ह लगाउनुहोस्।
+gareka abhyas ma chinh lagaunuhos.
 
-- [ ] अभ्यास 1 (आधारभूत)
-- [ ] अभ्यास 2 (मध्यम)
-- [ ] अभ्यास 3 (विकास)
-- [ ] निर्देशित प्रयोग
-- [ ] बुझाइ जाँचका ५ प्रश्न
+- [ ] abhyas 1 (adharabhut)
+- [ ] abhyas 2 (madhyam)
+- [ ] abhyas 3 (bikas)
+- [ ] nirdeshit prayog
+- [ ] bujhai jaanchka 5 prashna
 <!-- ne:end -->
 
 ## 3. 実行結果 / Results
@@ -118,33 +118,33 @@ Write the numbers and results **exactly as they appeared**. Do not make them loo
 ---
 
 <!-- ne:begin doc:34dc34065f -->
-### नेपालीमा
+### Nepali ma
 
-सङ्ख्या र नतिजा **जस्ताको तस्तै** लेख्नुहोस्। राम्रो देखाउन खोज्नु हुँदैन।
+sankhya ra natija **jastako tastai** lekhnuhos. ramro dekhauna khojnu hundaina.
 
-| विषय | मान |
+| bishay | maan |
 |---|---|
-| चित्र बदलेको नतिजा (पहिले → पछि) | |
-| resolution घटाउँदा दोष कस्तो देखियो | |
-| ४ कामको फरक जम्मा गरेको तालिका | तल लेख्नुहोस् |
+| chitra badaleko natija (pahile → pachhi) | |
+| resolution ghataunda dosh kasto dekhiyo | |
+| 4 kaamko farak jamma gareko talika | tal lekhnuhos |
 
-**४ कामको सारांश**
+**4 kaamko saransh**
 
-| काम | नतिजा | फाइदा | कमी |
+| kaam | natija | phaida | kami |
 |---|---|---|---|
 | classification | | | |
 | detection | | | |
 | segmentation | | | |
 | anomaly detection | | | |
 
-**PVC निरीक्षणका लागि सुझाव**
+**PVC nirikshanka lagi sujhab**
 
-| विषय | विवरण |
+| bishay | biwaran |
 |---|---|
-| पहिले प्रयास गर्ने काम | |
-| कारण | |
-| चाहिने डेटा | |
-| चासोको विषय | |
+| pahile prayas garne kaam | |
+| karan | |
+| chahine data | |
+| chasoko bishay | |
 <!-- ne:end -->
 
 ## 4. 発生した問題 / Problems encountered
@@ -167,17 +167,17 @@ Write "none" if you had no problems.
 ---
 
 <!-- ne:begin doc:f7b0c320c8 -->
-### नेपालीमा
+### Nepali ma
 
-त्रुटि आए **कुन नोटबुकको, कुन सेलमा, के सन्देश आयो** लेख्नुहोस्। screenshot भए पनि हुन्छ।
+truti ae **kun notebookko, kun cell ma, ke sandesh ayo** lekhnuhos. screenshot bhae pani hunchha.
 
-| # | नोटबुक | सेल | त्रुटि सन्देश |
+| # | notebook | cell | truti sandesh |
 |---|---|---|---|
 | 1 | | | |
 | 2 | | | |
 | 3 | | | |
 
-समस्या नभए "छैन" लेख्नुहोस्।
+samasya nabhae "chhaina" lekhnuhos.
 <!-- ne:end -->
 
 ## 5. 試した解決方法 / Troubleshooting attempts
@@ -197,11 +197,11 @@ did not work.
 ---
 
 <!-- ne:begin doc:73f662540c -->
-### नेपालीमा
+### Nepali ma
 
-माथिका समस्याका लागि **के प्रयास गरें र के भयो** लेख्नुहोस्। नमिलेका प्रयास पनि लेख्नुहोस्।
+mathika samasyaka lagi **ke prayas garen ra ke bhayo** lekhnuhos. namileka prayas pani lekhnuhos.
 
-| # | प्रयास | नतिजा |
+| # | prayas | natija |
 |---|---|---|
 | 1 | | |
 | 2 | | |
@@ -223,10 +223,10 @@ X and Y" gets a much better answer than "I don't get it".
 ---
 
 <!-- ne:begin doc:1775cfdc3c -->
-### नेपालीमा
+### Nepali ma
 
-नबुझेको कुरा **प्रश्नको रूपमा** लेख्नुहोस्।
-"केही बुझिएन" भन्दा "〇〇 र 〇〇 को फरक बुझिएन" भन्दा राम्रो जवाफ पाइन्छ।
+nabujheko kura **prashnako rupama** lekhnuhos.
+"kehi bujhien" bhanda "〇〇 ra 〇〇 ko farak bujhien" bhanda ramro jabaph painchha.
 
 1.
 2.
@@ -249,10 +249,10 @@ not work.
 ---
 
 <!-- ne:begin doc:23769afbb0 -->
-### नेपालीमा
+### Nepali ma
 
-आज सिकेको कुरा **तपाईंको प्रक्रियाको कुन ठाउँमा प्रयोग गर्न सकिन्छ** लेख्नुहोस्।
-राम्रो नहुने लागेको बुँदा पनि लेख्नुहोस्।
+aj sikeko kura **tapainko prakriyako kun thaun ma prayog garna sakinchha** lekhnuhos.
+ramro nahune lageko bunda pani lekhnuhos.
 <!-- ne:end -->
 
 ## 8. 自己評価 / Self-assessment
@@ -282,20 +282,20 @@ Level 3 means "**can explain the result to someone else**". "It ran" is not leve
 ---
 
 <!-- ne:begin doc:963898c2dd -->
-### नेपालीमा
+### Nepali ma
 
-तलको ४ तहले आफैं मूल्याङ्कन गर्नुहोस्। **लक्ष्य तह 2 वा माथि** हो।
+talako 4 tahale aphain mulyankan garnuhos. **lakshya tah 2 wa mathi** ho.
 
-| तह | अवस्था | चिन्ह |
+| tah | abastha | chinh |
 |---|---|---|
-| 0 | नसकिएको | [ ] |
-| 1 | ठुलो सहयोगमा सकिएको | [ ] |
-| 2 | अलिकति सहयोगमा सकिएको | [ ] |
-| 3 | एक्लै सकेर नतिजा बुझाउन सक्ने | [ ] |
+| 0 | nasakieko | [ ] |
+| 1 | thulo sahayogama sakieko | [ ] |
+| 2 | alikati sahayogama sakieko | [ ] |
+| 3 | eklai saker natija bujhaun sakne | [ ] |
 
-तह 3 को सर्त "**नतिजा अरूलाई बुझाउन सक्ने**" हो। "चल्यो" मात्र भए 3 होइन।
+tah 3 ko sart "**natija arulai bujhaun sakne**" ho. "chalyo" matra bhae 3 hoina.
 
-**यो तह छान्नुको कारण:**
+**yo tah chhannuko karan:**
 <!-- ne:end -->
 
 ## 提出物チェック / Submission checklist
@@ -308,12 +308,12 @@ Level 3 means "**can explain the result to someone else**". "It ran" is not leve
 **提出先 / Submit to:** 講師（submissions/day01/ フォルダごと）
 
 <!-- ne:begin doc:3a26b58eff -->
-### नेपालीमा
+### Nepali ma
 
-- [ ] चलाइएको नोटबुक (सुरक्षित)
-- [ ] यो रिपोर्ट (भरिएको)
-- [ ] सुरक्षित गरिएका चित्र, CSV, JSON (`submissions/day01/` भित्र)
-- [ ] त्रुटिको अभिलेख (नभए "छैन" भनेर स्पष्ट लेखिएको)
+- [ ] chalaieko notebook (surakshit)
+- [ ] yo riport (bharieko)
+- [ ] surakshit garieka chitra, CSV, JSON (`submissions/day01/` bhitr)
+- [ ] trutiko abhilekh (nabhae "chhaina" bhanera spasht lekhieko)
 
-**बुझाउने ठाउँ:** प्रशिक्षक (`submissions/day01/` फोल्डर सहित)
+**bujhaune thaun:** prashikshak (`submissions/day01/` folder sahit)
 <!-- ne:end -->

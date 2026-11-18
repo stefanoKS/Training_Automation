@@ -1,493 +1,504 @@
 <!--
-नेपाली अनुवाद / Nepali translation source for
+Nepali anuwad / Nepali translation source for
 notebooks/Day04_YOLO_Training/Day04_03_YOLO_Evaluation.ipynb
 -->
-# दिन ४ नोटबुक ०३ — नेपाली अनुवाद
+# din 4 notebook 03 — Nepali anuwad
 
 <!-- ne-cell: 7bb5e95c | after-heading -->
-# दिन ४ नोटबुक ०३: प्रशिक्षण भएको model को मूल्याङ्कन
+# din 4 notebook 03: prashikshan bhaeko model ko mulyankan
 
 <!-- ne-cell: 7bb5e95c -->
-## सिकाइ लक्ष्यहरू
+## sikai lakshyaharu
 
-| नेपाली |
+| Nepali |
 | --- |
-| 1. प्रशिक्षणमा प्रयोग नभएका तस्बिरमा क्षमता नाप्न सक्ने। |
-| 2. precision र recall को अर्थ बताउन सक्ने। |
-| 3. confusion matrix पढ्न सक्ने। |
-| 4. सफल र असफल पहिचानका उदाहरण अभिलेख गर्न सक्ने। |
-| 5. डेटासेट सुधार्ने सुझाव दिन सक्ने। |
+| 1. prashikshan ma prayog nabhaeka tasbir ma kshamata napn sakne. |
+| 2. precision ra recall ko arth bataun sakne. |
+| 3. confusion matrix padhna sakne. |
+| 4. saphal ra asaphal pahichanka udaharan abhilekh garna sakne. |
+| 5. dataset sudharne sujhab din sakne. |
 
-## यो नोटबुकको आधारभूत जानकारी
+## yo notebookko adharabhut jankari
 
-| विषय | विवरण |
+| bishay | biwaran |
 | --- | --- |
-| सिकाइ समय (अनुमान) | 95 मिनेट |
-| कठिनाइ | सुरुवाती तह |
-| पूर्वशर्त | दिन ४ नोटबुक ०२ को प्रशिक्षण सकिएको र `weights/best.pt` भएको हुनुपर्छ। |
-| आवश्यक लाइब्रेरी | torch, ultralytics, opencv-python, numpy, matplotlib, pandas |
-| प्रयोग हुने kernel | aivision |
-| आजको समयतालिका | [`COURSE_SYLLABUS.md` दिन ४](../../COURSE_SYLLABUS.md#day4) |
+| sikai samay (anuman) | 95 minet |
+| kathinai | surubati tah |
+| poorwashart | din 4 notebook 02 ko prashikshan sakieko ra `weights/best.pt` bhaeko hunuparchha. |
+| aawashyak laibreri | torch, ultralytics, opencv-python, numpy, matplotlib, pandas |
+| prayog hune kernel | aivision |
+| ajako samayatalika | [`COURSE_SYLLABUS.md` din 4](../../COURSE_SYLLABUS.md#day4) |
 
-### बुझाउनुपर्ने काम
+### bujhaunuparne kaam
 
-| नेपाली |
+| Nepali |
 | --- |
-| मूल्याङ्कन मापन (precision / recall / mAP) |
-| असफल उदाहरणका तस्बिर |
-| सुधारका सुझाव |
+| mulyankan maapan (precision / recall / mAP) |
+| asaphal udaharanka tasbir |
+| sudharaka sujhab |
 
 <!-- ne-cell: 09eb408e | after-heading -->
-## यो नोटबुक कहाँ पर्छ
+## yo notebook kahan parchha
 
 <!-- ne-cell: 09eb408e -->
-| विषय | विवरण |
+| bishay | biwaran |
 | --- | --- |
-| दिन | दिन ४ |
-| आजको क्रम | आजको नोटबुकमध्ये 3 / 3 |
-| लाग्ने समय | 95 मिनेट |
-| पूर्वशर्त | `Day04_02_YOLO_Training.ipynb` को प्रशिक्षण भएको model |
-| आजको समयतालिका | [`COURSE_SYLLABUS.md` दिन ४](../../COURSE_SYLLABUS.md#day4) |
+| din | din 4 |
+| ajako kram | ajako notabukamadhye 3 / 3 |
+| lagne samay | 95 minet |
+| poorwashart | `Day04_02_YOLO_Training.ipynb` ko prashikshan bhaeko model |
+| ajako samayatalika | [`COURSE_SYLLABUS.md` din 4](../../COURSE_SYLLABUS.md#day4) |
 
-दिनको समयतालिका `COURSE_SYLLABUS.md` मा एउटै ठाउँमा छ। यो नोटबुक त्यसको एउटा भाग मात्र हो।
+dinko samayatalika `COURSE_SYLLABUS.md` ma eutai thaun ma chha. yo notebook tyasko euta bhaag matra ho.
 
 <!-- ne-cell: audit-learning-loop | after-heading -->
-### अनुमान गर्नुहोस्, चलाउनुहोस्, हेर्नुहोस्, व्याख्या गर्नुहोस्
+### anuman garnuhos, chalaunuhos, hernuhos, byakhya garnuhos
 
 <!-- ne-cell: audit-learning-loop -->
-मूल्याङ्कनले स्थिर गरिएको model र निर्णय नियमलाई नदेखिएका तस्बिरमा जाँच्छ। महत्त्वपूर्ण सेल चलाउनुअघि
-इनपुट, काम र नतिजा एक-एक वाक्यमा लेख्नुहोस्। पहिले अनुमान गरेर चलाउनुहोस् र मान वा चित्र हेर्नुहोस्।
-उदाहरण चित्रको IoU सर्त मात्र बदलेर फेरि अनुमान गरी चलाउनुहोस्।
+mulyankanle sthir garieko model ra nirnaya niyam lai nadekhieka tasbir ma janchchha. mahattwapurna cell chalaunuaghi
+input, kaam ra natija ek-ek bakyama lekhnuhos. pahile anuman garera chalaunuhos ra maan wa chitra hernuhos.
+udaharan chitrako IoU sart matra badaler feri anuman gari chalaunuhos.
 
 <!-- ne-cell: a79775e7 | after-heading -->
-## Part 0 तयारी
+## Part 0 tayari
 
 <!-- ne-cell: 264f61b9 | after-heading -->
-**प्रशिक्षण भएको weight खोज्ने**
+**prashikshan bhaeko weight khojne**
 <!-- ne-pair: Find the trained weights -->
 
 <!-- ne-cell: 264f61b9 -->
-प्रशिक्षण भएको model `training_results/day04/.../weights/best.pt` मा छ। नभेटिए पहिले प्रशिक्षण
-(04_02) चलाउनुहोस्।
+prashikshan bhaeko model `training_results/day04/.../weights/best.pt` ma chha. nabhetie pahile prashikshan
+(04_02) chalaunuhos.
 
-**प्रशिक्षण नगरेको model को मूल्याङ्कन गर्न सकिँदैन।** सङ्ख्या बनाएर राख्नु हुँदैन।
+**prashikshan nagareko model ko mulyankan garna sakindaina.** sankhya banaer rakhnu hundaina.
 
 <!-- ne-cell: b264ae84 | after-heading -->
-## Part 1 मूल्याङ्कनका मापन
+## Part 1 mulyankanka maapan
 
 <!-- ne-cell: clarity-evaluation-units | after-heading -->
-### पहिले गन्ने एकाइ तय गर्ने
+### pahile ganne ekai tay garne
 
 <!-- ne-cell: clarity-evaluation-units -->
-उही संश्लेषित उदाहरण: एक असामान्य तस्बिरमा सही आयत 2 वटा, अनुमान 1 वटा र एक-एक मिल्ने जोडी 1 हो।
-अनुमान: तस्बिर सही रूपमा NG भनियो भने पनि दोष छुट्न सक्छ?
+uhi sansleshit udaharan: ek asamanya tasbir ma sahi ayat 2 bata, anuman 1 bata ra ek-ek milne jodi 1 ho.
+anuman: tasbir sahi rupama NG bhaniyo bhane pani dosh chhutn sakchha?
 
-| दृष्टि | यहाँ गनिएको | recall को हर | चित्रको अक्ष |
+| drishti | yahan ganieko | recall ko har | chitrako aksh |
 |---|---|---|---|
-| तस्बिर | TP=1, FN=0 | असामान्य तस्बिर 1 | तस्बिर 2×2: लाइन=सही, स्तम्भ=अनुमान |
-| आयत | TP=1, FN=1, FP=0 | सही आयत 2 | Ultralytics: लाइन=अनुमान, स्तम्भ=सही |
+| tasbir | TP=1, FN=0 | asamanya tasbir 1 | tasbir 2×2: line=sahi, stambha=anuman |
+| ayat | TP=1, FN=1, FP=0 | sahi ayat 2 | Ultralytics: line=anuman, stambha=sahi |
 
-तस्बिर recall = 1/1, वस्तु recall = 1/2 हो। पृष्ठभूमिको लाइन-स्तम्भ भएको वस्तु म्याट्रिक्समा TN तस्बिर
-गनिँदैन। तलका सही चित्र एकाइअनुसार पढ्नुहोस्। सानो प्रयोग: उही तस्बिरमा अनुमान 0 बनाउँदा दुवै FN कति?
+tasbir recall = 1/1, bastu recall = 1/2 ho. prishthabhumiko line-stambha bhaeko bastu myatriksama TN tasbir
+ganindain. talaka sahi chitra ekaianusar padhnuhos. sano prayog: uhi tasbir ma anuman 0 banaunda dubai FN kati?
 
 <!-- ne-cell: 968ad99b | after-heading -->
-**precision र recall**
+**precision ra recall**
 <!-- ne-pair: Precision and recall -->
 
 <!-- ne-cell: 968ad99b -->
-दुई मापनले **फरक कुरा नाप्छन्**।
+dui maapanle **farak kura napchhan**.
 
 ```text
-precision = सही पहिचानको सङ्ख्या ÷ पहिचान गरिएको कुल सङ्ख्या
-          -> "पहिचान गरेका मध्ये कति वास्तविक?"
+precision = sahi pahichanko sankhya ÷ pahichan garieko kul sankhya
+          -> "pahichan gareka madhye kati bastabik?"
 
-recall    = सही पहिचानको सङ्ख्या ÷ वास्तविक दोषको कुल सङ्ख्या
-          -> "वास्तविक दोषमध्ये कति समात्यौं?"
+recall    = sahi pahichanko sankhya ÷ bastabik doshko kul sankhya
+          -> "bastabik doshamadhye kati samatyaun?"
 ```
 
-| मापन | कम भए के हुन्छ |
+| maapan | kam bhae ke hunchha |
 |---|---|
-| precision कम | **झुटो अलार्म धेरै**। कामदार थाक्छन्, लाइन रोकिन्छ |
-| recall कम | **छुट्ने धेरै**। बिग्रेको सामान पठाइन्छ |
+| precision kam | **jhuto alarm dherai**. kamadar thakchhan, line rokinchha |
+| recall kam | **chhutne dherai**. bigreko saman pathainchha |
 
-**थ्रेसहोल्ड बढाउँदा** निश्चयका साथ भन्न सकिने कुरा **recall बढ्दैन** (उही रहन्छ वा घट्छ) भन्ने मात्र हो।
-precision सामान्यतया बढ्छ, तर **सधैं बढ्छ भन्ने छैन**; स्कोरको क्रमअनुसार घट्न पनि सक्छ र दुवै नबदलिन
-पनि सक्छन् (दिन ३ मा देखेको 3 → 1 → 1 उदाहरण)। वास्तविक परिवर्तन प्रमाणीकरण डेटामा जाँच्नुहोस्।
+**uthi pahichanko suchi, uthi sahi uttar, uthi milaune niyam (IoU adi) ra uthi pachhi-prashodhan** prayog garda
+matra threshold badhaunda **recall badhdain** (uhi rahanchha wa ghatchha) bhanne kura nishchayaka sath bhann sakinchha.
+threshold badalda anuman feri chaldain bhane pahichan aphai badalina sakne hunale yo nishchayata lagu hundaina.
+precision samanyataya badhchha, tar **sadhain badhchha bhanne chhaina**; score ko kram anusar ghatn pani sakchha ra dubai nabadalin
+pani sakchhan (din 3 ma dekheko 3 → 1 → 1 udaharan). bastabik paribartan pramanikaran data ma jaanchnuhos.
 
 <!-- ne-cell: c479853d | after-heading -->
-**mAP के हो**
+**mAP ke ho**
 <!-- ne-pair: What mAP is -->
 
 <!-- ne-cell: c479853d -->
-**mAP** (mean Average Precision) ले precision र recall मिलेर बनेको मापन हो। परिभाषा यही क्रममा बन्छ।
+**mAP** (mean Average Precision) le precision ra recall miler baneko maapan ho. paribhasha yahi kram ma banchha.
 
-1. पहिचानलाई confidence को उच्चबाट निम्न क्रममा राखेर एक-एक गर्दै precision र recall गणना गरी
-   **precision–recall वक्र** बनाइन्छ।
-2. त्यो वक्रमुनिको क्षेत्रफल **AP** (Average Precision) हो (एक class को)।
-3. Class-दर-class AP को औसत **mAP** हो।
-4. IoU को आधार बदलेर उही गणना फेरि गरिन्छ।
+1. pahichan lai confidence ko uchcha baat nimn kram ma rakher ek-ek gardai precision ra recall ganana gari
+   **precision–recall bakr** banainchha.
+2. tyo bakramuniko kshetraphal **AP** (Average Precision) ho (ek class ko).
+3. Class-dar-class AP ko ausat **mAP** ho.
+4. IoU ko adhar badaler uhi ganana feri garinchha.
 
-YOLO को प्रशिक्षण लगमा `mAP50` र `mAP50-95` देखिन्छन्।
+( karyakramma precision–recall bakr lai interpolate garera kshetraphal nikalchha. ahile "precision ra recall
+lai ek sankhya ma mileko maapan" bhanne bujhai pugchha. )
 
-- `mAP50` … IoU 0.50 वा बढीलाई "मिल्यो" मान्दा को mAP
-- `mAP50-95` … IoU 0.50, 0.55, …, 0.95 गरी 10 थरमा mAP गणना गरेर औसत
+YOLO ko prashikshan lagama `mAP50` ra `mAP50-95` dekhinchhan.
 
-उत्पादनको कार्यस्थलमा **mAP भन्दा precision / recall बुझ्न सजिलो** हुन्छ। "कति प्रतिशत छुट्छ" भन्ने कुराको
-कार्यस्थलमा अर्थ हुन्छ।
+- `mAP50` … IoU 0.50 wa badhi lai "milyo" manda ko mAP
+- `mAP50-95` … IoU 0.50, 0.55, …, 0.95 gari 10 tharama mAP ganana garera ausat
+
+utpadanako karyasthalama **mAP bhanda precision / recall bujhn sajilo** hunchha. "kati pratishat chhutchha" bhanne kurako
+karyasthalama arth hunchha.
 
 <!-- ne-cell: 6bcff7a5 | after-heading -->
-## Part 2 परीक्षण डेटामा मूल्याङ्कन
+## Part 2 parikshan data ma mulyankan
 
 <!-- ne-cell: 612e7d6a | after-heading -->
-#### प्रमाणीकरणमा छानेर स्थिर गरेपछि परीक्षण
+#### pramanikaran ma chhaner sthir garepachhi parikshan
 
 <!-- ne-cell: 612e7d6a -->
-सुधार तथा model र थ्रेसहोल्ड छनोट `split="val"` मा गरिन्छ। model, पूर्व-प्रशोधन र थ्रेसहोल्ड स्थिर
-गरेपछि मात्र प्रयोग नभएको `split="test"` मा अन्तिम मूल्याङ्कन गरिन्छ। परीक्षण हेरेर सेटिङ बदलियो भने
-नयाँ अन्तिम मूल्याङ्कनका लागि अर्को प्रयोग नभएको डेटा चाहिन्छ। तलको सेल त्यो अन्तिम चरणको उदाहरण हो;
-अझै छनोट गर्दै हुनुहुन्छ भने नचलाई val मा फर्कनुहोस्। प्रशिक्षण `train` को अङ्क अन्तिम मूल्याङ्कन हुँदैन।
+sudhar tatha model ra threshold chhanot `split="val"` ma garinchha. model, purb-prashodhan ra threshold sthir
+garepachhi matra prayog nabhaeko `split="test"` ma antim mulyankan garinchha. parikshan herer setting badaliyo bhane
+nayan antim mulyankanka lagi arko prayog nabhaeko data chahinchha.
+
+talako cell tyo antim charanko udaharan ho. **chalepachhi pahile ghoshana magchha, ra khali chhodepachhi
+rokinchha.** "parikshan hernuaghi setting sthir garen" bhanne kura aphnai shabda ma lekhnuhos ra
+`TEST_ALREADY_SEEN` jaanchnuhos. parikshan tasbir wa natija pahile nai herisaknu bhaeko chha bhane `True` nai
+rakhnuhos; tyo natija **punar prayog garieko datako udaharan mulyankan** ho, swatantra antim natija hoina.
+nahereko awastha ma matra `False` banaunuhos. ajhai chhanot gardai hunuhunchha bhane nachalai val ma
+pharkanuhos. prashikshan `train` ko angk antim mulyankan hundaina.
 
 <!-- ne-cell: 0fe77594 | after-heading -->
-### नतिजाको उदाहरण
+### natijako udaharan
 
 <!-- ne-cell: 0fe77594 -->
-Class-दर-class सही सङ्ख्या (`black_spot` 5, `scratch` 7, `streak` 6) यो तालिमको परीक्षण डेटाले तय गर्ने
-मान हुन्। precision पछिका सङ्ख्या यो तालिममा सुरक्षित गरिएको अभिलेखका हुन् (`best.pt`,
-`split="test"`, `imgsz=320`, seed 2026)। सूक्ष्म सङ्ख्या वातावरणअनुसार फरक पर्छ; प्रवृत्ति र ठुलो-सानोको
-सम्बन्ध पढ्नुहोस्।
+Class-dar-class sahi sankhya (`black_spot` 5, `scratch` 7, `streak` 6) yo talimko parikshan datale tay garne
+maan hun. precision pachhika sankhya yo talim ma surakshit garieko abhilekhaka hun (`best.pt`,
+`split="test"`, `imgsz=320`, seed 2026). sukshm sankhya batabaran anusar farak parchha; prabritti ra thulo-sanoko
+sambandh padhnuhos.
 
 <!-- ne-cell: cdbaa1cb | after-heading -->
-**सङ्ख्या कसरी पढ्ने**
+**sankhya kasari padhne**
 <!-- ne-pair: How to read these numbers -->
 
 <!-- ne-cell: cdbaa1cb -->
-64 प्रशिक्षण तस्बिरमा तालिम भएको model हो। सङ्ख्या **उच्च नहुन पनि सक्छ**। त्यो **सम्भव नतिजा** हो;
-थोरै डेटामा वास्तविक क्षमता सीमित हुन्छ।
+64 prashikshan tasbir ma talim bhaeko model ho. sankhya **uchcha nahun pani sakchha**. tyo **sambhab natija** ho;
+thorai data ma bastabik kshamata simit hunchha.
 
-| हेर्ने तरिका | सम्भावित कारण (अनुमान) | जाँच्ने तरिका |
+| herne tarika | sambhabit karan (anuman) | jaanchne tarika |
 |---|---|---|
-| recall कम | दोष हल्का वा सानो, प्रशिक्षण उदाहरण थोरै, थ्रेसहोल्ड धेरै उच्च | छुटेका तस्बिर हेर्नुहोस्। थ्रेसहोल्ड **प्रमाणीकरण डेटा** मा मात्र सार्नुहोस् |
-| precision कम | पृष्ठभूमिको भिन्नता प्रशिक्षणमा कम, बुट्टालाई दोष ठान्नु | झुटो अलार्मका तस्बिर हेर्नुहोस्। पृष्ठभूमि तस्बिर बढाउने कुरा सोच्नुहोस् |
-| दुवै कम | कम प्रशिक्षण, लेबलको गल्ती, प्रशिक्षण र परीक्षण तस्बिरको देखिने रूपको फरक (domain shift) | लेबल, खिचाइको अवस्था र प्रमाणीकरणको प्रवृत्ति जाँच्नुहोस् |
+| recall kam | dosh halka wa sano, prashikshan udaharan thorai, threshold dherai uchcha | chhuteka tasbir hernuhos. threshold **pramanikaran data** ma matra sarnuhos |
+| precision kam | prishthabhumiko bhinnata prashikshan ma kam, buttalai dosh thannu | jhuto alarmka tasbir hernuhos. prishthabhumi tasbir badhaune kura sochnuhos |
+| dubai kam | kam prashikshan, labelko galti, prashikshan ra parikshan tasbirko dekhine rupako farak (domain shift) | label, khichaiko abastha ra pramanikaranko prabritti jaanchnuhos |
 
-**थ्रेसहोल्ड समायोजन प्रमाणीकरण डेटामा गरिन्छ।** परीक्षण डेटाको नतिजा हेरेपछि त्यही परीक्षण डेटामा
-समायोजन गर्दा त्यो डेटा अब "प्रयोग नभएको" रहँदैन।
+**threshold samayojan pramanikaran data ma garinchha.** parikshan datako natija herepachhi tyahi parikshan data ma
+samayojan garda tyo data aba "prayog nabhaeko" rahandain.
 
-**"राम्रो सङ्ख्या नआउन्जेल प्रशिक्षण दोहोर्याउने" तरिका गलत** हो। सङ्ख्या नराम्रो हुनुको कारण डेटा,
-लेबल र खिचाइको अवस्थामा खोज्नुहोस्। कारण एउटै नहुन पनि सक्छ।
+**"ramro sankhya naaunjel prashikshan dohoryaune" tarika galat** ho. sankhya naramro hunuko karan data,
+label ra khichaiko abastha ma khojnuhos. karan eutai nahun pani sakchha.
 
 <!-- ne-cell: b116fb65 | after-heading -->
-## Part 3 confusion matrix (मिलान तालिका)
+## Part 3 confusion matrix (milan talika)
 
 <!-- ne-cell: b116fb65 -->
-तस्बिर छुट्ने सङ्ख्या र नमिलेका सही आयतको सङ्ख्या फरक हुन्। चित्रको हरेक लाइनमा एकाइ जाँच्नुहोस्।
+tasbir chhutne sankhya ra namileka sahi ayatako sankhya farak hun. chitrako harek line ma ekai jaanchnuhos.
 
 <!-- ne-cell: audit-teach_detection_matching | after-heading -->
-### कोड कसरी पढ्ने
+### kod kasari padhne
 
 <!-- ne-cell: audit-teach_detection_matching | after-image:../../assets/svg/teach_detection_matching.svg -->
-चित्र: एउटै class का आयत एक-एक गरेर मिलाइन्छ। (गणना गरिएको संश्लेषित उदाहरण र योजनाबद्ध चित्र; model को
-वास्तविक नापिएको नतिजा होइन।)
+chitra: eutai class ka ayat ek-ek garera milainchha. (ganana garieko sansleshit udaharan ra yojanabaddha chitra; model ko
+bastabik napieko natija hoina.)
 
-**ध्यान दिनुपर्ने कुरा**
+**dhyan dinuparne kura**
 
-एउटै class का आयत एक-एक गरेर मिलाइन्छ। इनपुट र परिवर्तन भएको मान औंलाले पछ्याउनुहोस्।
+eutai class ka ayat ek-ek garera milainchha. input ra paribartan bhaeko maan aunlale pachhyaunuhos.
 
-**सोच्नुहोस्**
+**sochnuhos**
 
-एउटा सही आयतमा दुई अनुमान ओभरल्याप भए दुवै TP हुन्?
+euta sahi ayatama dui anuman obharalyap bhae dubai TP hun?
 
 <!-- ne-cell: 0c5dc209 | after-heading -->
-### confusion matrix कसरी पढ्ने
+### confusion matrix kasari padhne
 
 <!-- ne-cell: 0c5dc209 | after-image:../../assets/diagrams/teach_image_level_confusion_matrix.png -->
-चित्र: तस्बिर-स्तरको confusion matrix। लाइन "वास्तविक", स्तम्भ "अनुमान"। गन्ने एकाइ एक तस्बिर हो।
-(सङ्ख्या उदाहरणका लागि)
+chitra: tasbir-starko confusion matrix. line "bastabik", stambha "anuman". ganne ekai ek tasbir ho.
+(sankhya udaharanka lagi)
 
-**ध्यान दिनुपर्ने कुरा**
+**dhyan dinuparne kura**
 
-यो **तस्बिर-स्तर** को गणना हो। एउटा तस्बिरमा धेरै दोष भए पनि एक पटक मात्र गनिन्छ। यो चित्रमा वास्तविक
-NG र अनुमान NG (TP) 28 तस्बिर, वास्तविक NG र अनुमान OK (FN, छुट्नु) 9 तस्बिर, वास्तविक OK र अनुमान NG
-(FP, झुटो अलार्म) 6 तस्बिर, वास्तविक OK र अनुमान OK (TN) 57 तस्बिर छन्।
+yo **tasbir-star** ko ganana ho. euta tasbir ma dherai dosh bhae pani ek patak matra ganinchha. yo chitra ma bastabik
+NG ra anuman NG (TP) 28 tasbir, bastabik NG ra anuman OK (FN, chhutnu) 9 tasbir, bastabik OK ra anuman NG
+(FP, jhuto alarm) 6 tasbir, bastabik OK ra anuman OK (TN) 57 tasbir chhan.
 
-वस्तु-स्तरको precision/recall (mAP आदि) भन्दा यो फरक सङ्ख्या हो, त्यसैले मिसाएर तुलना गर्नु हुँदैन।
-यो चित्रको अक्षको दिशा (लाइन=वास्तविक, स्तम्भ=अनुमान) लाई तल आउने Ultralytics को वस्तु-स्तर चित्रमा
-लागू नगर्नुहोस्; त्यहाँ दिशा उल्टो छ। हरेक चित्रको अक्ष लेबल जाँच्नुहोस्।
+bastu-starko precision/recall (mAP adi) bhanda yo farak sankhya ho, tyasaile misaer tulna garnu hundaina.
+yo chitrako akshako disha (line=bastabik, stambha=anuman) lai tal aune Ultralytics ko bastu-star chitra ma
+lagu nagarnuhos; tyahan disha ulto chha. harek chitrako aksh label jaanchnuhos.
 
-**सोच्नुहोस्**
+**sochnuhos**
 
-- एउटा तस्बिरमा दुई दोष भए वस्तु-स्तरमा कति पटक गनिन्छ?
+- euta tasbir ma dui dosh bhae bastu-star ma kati patak ganinchha?
 
 <!-- ne-cell: 826acaec | after-heading -->
-### तस्बिर-स्तरको TP, FP, FN र TN
+### tasbir-starko TP, FP, FN ra TN
 
 <!-- ne-cell: 826acaec | after-image:../../assets/diagrams/teach_image_level_confusion.png -->
-चित्र: हरेक तस्बिरको चार नतिजा (संश्लेषित तस्बिर; वास्तविक model को नतिजा होइन)। एकाइ एक तस्बिर।
+chitra: harek tasbirko chaar natija (sansleshit tasbir; bastabik model ko natija hoina). ekai ek tasbir.
 
-**ध्यान दिनुपर्ने कुरा**
+**dhyan dinuparne kura**
 
-तस्बिरको निर्णय "लक्ष्य class को पहिचान कम्तीमा एक वटा तोकिएको आधार पूरा गर्छ कि" भन्नेले NG वा OK
-तय गर्छ। यो चित्रको उदाहरणमा "confidence थ्रेसहोल्ड वा बढी भएको पहिचान एक भए पनि NG" हो। **त्यो निर्णय
-र तस्बिरमा भएको सही लेबल छुट्टाछुट्टै तयार गरेर** मात्र TP, FP, FN, TN गन्नुहोस्। अनुमानको बेला सही
-लेबल प्रयोग गर्न मिल्दैन, त्यसैले निर्णयको नियम पहिले नै तय गरिन्छ।
+tasbirko nirnaya "lakshya class ko pahichan kamtima ek bata tokieko adhar pura garchha ki" bhannele NG wa OK
+tay garchha. yo chitrako udaharan ma "confidence threshold wa badhi bhaeko pahichan ek bhae pani NG" ho. **tyo nirnaya
+ra tasbir ma bhaeko sahi label chhuttachhuttai tayar garera** matra TP, FP, FN, TN gannuhos. anumanko bela sahi
+label prayog garna mildaina, tyasaile nirnayako niyam pahile nai tay garinchha.
 
-छुट्नु (FN) भनेको "वास्तवमा NG हुँदाहुँदै OK भनिएको" तस्बिर सङ्ख्या हो। उत्पादनमा पहिले यही हेरिन्छ।
-झुटो अलार्म (FP) भनेको "वास्तवमा OK हुँदाहुँदै NG भनिएको" सङ्ख्या हो। **रङ मात्र हेरेर निर्णय नगर्नुहोस्।**
-TP र TN दुवै "मिल्यो" हुन्, तर अर्थ उल्टो छ।
+chhutnu (FN) bhaneko "bastabama NG hundahundai OK bhanieko" tasbir sankhya ho. utpadanama pahile yahi herinchha.
+jhuto alarm (FP) bhaneko "bastabama OK hundahundai NG bhanieko" sankhya ho. **rang matra herer nirnaya nagarnuhos.**
+TP ra TN dubai "milyo" hun, tar arth ulto chha.
 
-वस्तु पहिचानमा पृष्ठभूमिलाई गन्न मिल्ने **TN** मान्न सकिँदैन। यी चार गन्ने तरिका **तस्बिर-स्तर** को
-मूल्याङ्कनमा मात्र प्रयोग हुन्छ।
+bastu pahichan ma prishthabhumilai gann milne **TN** mann sakindaina. yi chaar ganne tarika **tasbir-star** ko
+mulyankan ma matra prayog hunchha.
 
-**सोच्नुहोस्**
+**sochnuhos**
 
-- यो confusion matrix बाट recall र precision गणना गर्नुहोस्।
+- yo confusion matrix baat recall ra precision ganana garnuhos.
 
 <!-- ne-cell: fig-teach_object_level_matching | after-heading -->
-### वस्तु-स्तरमा एक-एक मिलाउने
+### bastu-star ma ek-ek milaune
 
 <!-- ne-cell: fig-teach_object_level_matching | after-image:../../assets/diagrams/teach_object_level_matching.png -->
-चित्र: वस्तु-स्तरको मिलान। सही आयत र अनुमानको आयत IoU ले एक-एक मिलाइन्छ; नमिलेको अनुमान FP गनिन्छ
-(निर्देशाङ्क उदाहरणका लागि)।
+chitra: bastu-starko milan. sahi ayat ra anumanko ayat IoU le ek-ek milainchha; namileko anuman FP ganinchha
+(nirdeshangk udaharanka lagi).
 
-**ध्यान दिनुपर्ने कुरा**
+**dhyan dinuparne kura**
 
-वस्तु-स्तरमा लक्ष्य class, IoU (यो तालिममा 0.5 वा बढी), confidence र एक-एक मिलाउने नियम पहिले तय
-गरिन्छ। नमिलेको अनुमान FP, नमिलेको सही आयत FN हो। तस्बिर-स्तरको OK/NG अर्कै गणना हो, जस्तै "लक्ष्य class
-को पहिचान एक वा बढी भए NG"।
+bastu-star ma lakshya class, IoU (yo talim ma 0.5 wa badhi), confidence ra ek-ek milaune niyam pahile tay
+garinchha. namileko anuman FP, namileko sahi ayat FN ho. tasbir-starko OK/NG arkai ganana ho, jastai "lakshya class
+ko pahichan ek wa badhi bhae NG".
 
-**सोच्नुहोस्**
+**sochnuhos**
 
-- एउटै आयत दुई पटक अनुमान गरियो भने वस्तु-स्तरमा कसरी गनिन्छ?
+- eutai ayat dui patak anuman gariyo bhane bastu-star ma kasari ganinchha?
 
 <!-- ne-cell: bdd2037d | after-heading -->
-**Ultralytics को confusion matrix कसरी पढ्ने**
+**Ultralytics ko confusion matrix kasari padhne**
 <!-- ne-pair: How to read the Ultralytics confusion matrix -->
 
 <!-- ne-cell: bdd2037d -->
-मूल्याङ्कनपछि Ultralytics ले लेख्ने `confusion_matrix.png` **वस्तु-स्तर** को तालिका हो। यो तालिममा
-प्रयोग हुने ultralytics 8.4.211 को चित्रमा **तेर्सो अक्ष सही (True)** र **ठाडो अक्ष अनुमान (Predicted)**
-हुन्छ (सधैं चित्रको अक्ष लेबल पढ्नुहोस्)। एउटा खण्डले "सही class यो थियो र अनुमान यो class भयो" भन्ने
-सङ्ख्या देखाउँछ।
+mulyangkanapachhi Ultralytics le lekhne `confusion_matrix.png` **bastu-star** ko talika ho. yo talim ma
+prayog hune ultralytics 8.4.211 ko chitra ma **terso aksh sahi (True)** ra **thado aksh anuman (Predicted)**
+hunchha (sadhain chitrako aksh label padhnuhos). euta khandale "sahi class yo thiyo ra anuman yo class bhayo" bhanne
+sankhya dekhaunchha.
 
-|  | सही: black_spot | सही: scratch | सही: पृष्ठभूमि |
+|  | sahi: black_spot | sahi: scratch | sahi: prishthabhumi |
 |---|---|---|---|
-| अनुमान: black_spot | सही पहिचान | class फरक | **झुटो पहिचान (FP)** |
-| अनुमान: scratch | class फरक | सही पहिचान | **झुटो पहिचान (FP)** |
-| अनुमान: पृष्ठभूमि | **छुट्नु (FN)** | **छुट्नु (FN)** | (गनिँदैन) |
+| anuman: black_spot | sahi pahichan | class farak | **jhuto pahichan (FP)** |
+| anuman: scratch | class farak | sahi pahichan | **jhuto pahichan (FP)** |
+| anuman: prishthabhumi | **chhutnu (FN)** | **chhutnu (FN)** | (ganindain) |
 
-- **पृष्ठभूमिको स्तम्भ** … मिल्ने सही आयत नभएको अनुमान। अर्थात् **FP**
-- **पृष्ठभूमिको लाइन** … मिल्ने अनुमान नभएको सही आयत। अर्थात् **FN**
-- तल-दायाँको खण्ड (पृष्ठभूमि र पृष्ठभूमि) वस्तु पहिचानमा **गन्न मिल्ने TN हुँदैन**; केही नभएको क्षेत्र पनि
-  गन्नुपर्ने हुन्छ। त्यसैले यो तालिकामा TN छैन।
+- **prishthabhumiko stambha** … milne sahi ayat nabhaeko anuman. arthat **FP**
+- **prishthabhumiko line** … milne anuman nabhaeko sahi ayat. arthat **FN**
+- tal-dayanko khand (prishthabhumi ra prishthabhumi) bastu pahichan ma **gann milne TN hundaina**; kehi nabhaeko kshetr pani
+  gannuparne hunchha. tyasaile yo talika ma TN chhaina.
 
-अघिल्लो चित्रको तस्बिर-स्तर TP/FP/FN/TN सँग **गन्ने एकाइ र अक्षको दिशा दुवै फरक छन्**। मिसाउनु हुँदैन।
-यो तालिमको model सँग तीन class छन्, त्यसैले मूल्याङ्कन चित्रमा `streak` का लाइन र स्तम्भ पनि देखिन्छन्।
+aghillo chitrako tasbir-star TP/FP/FN/TN sang **ganne ekai ra akshako disha dubai farak chhan**. misaunu hundaina.
+yo talimko model sang tin class chhan, tyasaile mulyankan chitra ma `streak` ka line ra stambha pani dekhinchhan.
 
 <!-- ne-cell: 8a71da19 | after-heading -->
-### दुई confusion matrix छुट्याएर पढ्ने
+### dui confusion matrix chhutyaer padhne
 
 <!-- ne-cell: 8a71da19 -->
-तस्बिर-स्तरको मूल्याङ्कनमा हरेक तस्बिरलाई OK वा NG मा वर्गीकरण गरेर TP, FP, FN, TN गनिन्छ। NG निर्णय
-"लक्ष्य class को पहिचान कम्तीमा एक वटा तोकिएको आधार (जस्तै confidence थ्रेसहोल्ड) पूरा गर्नु" ले गरिन्छ
-र तस्बिरमा भएको सही लेबलसँग **छुट्टै** तुलना गरिन्छ।
+tasbir-starko mulyankan ma harek tasbir lai OK wa NG ma bargikaran garera TP, FP, FN, TN ganinchha. NG nirnaya
+"lakshya class ko pahichan kamtima ek bata tokieko adhar (jastai confidence threshold) pura garnu" le garinchha
+ra tasbir ma bhaeko sahi label sang **chhuttai** tulna garinchha.
 
-वस्तु पहिचानको मूल्याङ्कनमा अनुमानको आयत र सही आयत मिलाइन्छ। मिलाउने काम **class मिल्नु, IoU,
-confidence को व्यवहार र एक-एक मिलाउने** नियमले गरिन्छ। त्यसबेला नमिलेको अनुमान FP, नमिलेको सही आयत
-FN हो। पूरै पृष्ठभूमिलाई गन्न मिल्ने TN मान्न सकिँदैन। लाइन-स्तम्भको दिशा चित्रअनुसार फरक पर्छ, त्यसैले
-**अक्ष लेबल जाँचेर** पढ्नुहोस्।
+bastu pahichanko mulyankan ma anumanko ayat ra sahi ayat milainchha. milaune kaam **class milnu, IoU,
+confidence ko byabahar ra ek-ek milaune** niyamle garinchha. tyasabela namileko anuman FP, namileko sahi ayat
+FN ho. purai prishthabhumilai gann milne TN mann sakindaina. line-stambhako disha chitra anusar farak parchha, tyasaile
+**aksh label jancher** padhnuhos.
 
 <!-- ne-cell: 4607c1f7 | after-heading -->
-## Part 4 सफल र असफल उदाहरण
+## Part 4 saphal ra asaphal udaharan
 
 <!-- ne-cell: 1838c3de | after-heading -->
-**आफ्नै आँखाले जाँच्ने**
+**aphnai ankhale jaanchne**
 <!-- ne-pair: Check with your own eyes -->
 
 <!-- ne-cell: 1838c3de -->
-सङ्ख्या मात्रले कार्यस्थलमा चल्छ कि चल्दैन भन्ने थाहा हुँदैन। **तस्बिर हेर्नुहोस्।**
+sankhya matrale karyasthalama chalchha ki chaldain bhanne thaha hundaina. **tasbir hernuhos.**
 
-तलको सेलले परीक्षण डेटाका तस्बिरमा अनुमान बनाउँछ। **हरियो** अनुमान, **रातो** सही लेबल (लेबल) हो।
-नमिलेका तस्बिर खोज्नुहोस्।
+talako cellle parikshan dataka tasbir ma anuman banaunchha. **hariyo** anuman, **rato** sahi label (label) ho.
+namileka tasbir khojnuhos.
 
 <!-- ne-cell: fig-ref_detections_label_vs_pred | after-heading -->
-### सही लेबल र अनुमान एउटै क्रममा हेर्ने
+### sahi label ra anuman eutai kram ma herne
 
 <!-- ne-cell: fig-ref_detections_label_vs_pred | after-image:../../assets/reference_outputs/ref_detections_label_vs_pred.png -->
-चित्र: एउटै batch का 8 तस्बिर, सही लेबल (बायाँ) र अनुमान (दायाँ) मा राखिएको वास्तविक नतिजा। सही लेबल यो
-तालिमको बनाउने स्क्रिप्टले दोषको अभिलेखबाट बनाएका आयत हुन्, अनुमान तालिम भएको model का।
+chitra: eutai batch ka 8 tasbir, sahi label (bayan) ra anuman (dayan) ma rakhieko bastabik natija. sahi label yo
+talimko banaune skriptale doshko abhilekhabat banaeka ayat hun, anuman talim bhaeko model ka.
 
-**ध्यान दिनुपर्ने कुरा**
+**dhyan dinuparne kura**
 
-दायाँ नभई बायाँ मात्र भएको तस्बिर छुट्ने (FN) को उम्मेदवार हो। उल्टो, दायाँ मात्र थपिएको आयत FP हो कि
-होइन मिलाउने नियम (class, IoU, confidence) ले तय गर्छ। देखिने रूप मात्रले टुङ्गो लाग्दैन।
+dayan nabhai bayan matra bhaeko tasbir chhutne (FN) ko ummedabar ho. ulto, dayan matra thapieko ayat FP ho ki
+hoina milaune niyam (class, IoU, confidence) le tay garchha. dekhine rup matrale tunggo lagdain.
 
-**सोच्नुहोस्**
+**sochnuhos**
 
-- कति तस्बिरमा छुट्नु (FN) छ? त्यो दोष अनुमानको स्तम्भमा कस्तो देखिन्छ?
+- kati tasbir ma chhutnu (FN) chha? tyo dosh anumanko stambha ma kasto dekhinchha?
 
 <!-- ne-cell: 17e80b20 | after-heading -->
-**असफलताका प्रकार**
+**asaphalataka prakar**
 <!-- ne-pair: Types of failure -->
 
 <!-- ne-cell: 17e80b20 -->
-हेर्दा असफलताका प्रकार देखिन्छन्। तलको तालिकाको "सम्भावित कारण" **अनुमान** हो। तस्बिर र लेबल हेरेर
-एक-एक गरेर जाँच्नुहोस्।
+herda asaphalataka prakar dekhinchhan. talako talikako "sambhabit karan" **anuman** ho. tasbir ra label herer
+ek-ek garera jaanchnuhos.
 
-| प्रकार | लक्षण | सम्भावित कारण (अनुमान) | जाँच्ने तरिका |
+| prakar | lakshan | sambhabit karan (anuman) | jaanchne tarika |
 |---|---|---|---|
-| छुट्नु | रातो आयत मात्र छ (मिल्ने अनुमान छैन) | दोष हल्का, धेरै सानो, प्रशिक्षण उदाहरण थोरै, थ्रेसहोल्ड उच्च | त्यो तस्बिरको लेबल र देखिने रूप जाँच्नुहोस्; थ्रेसहोल्ड प्रमाणीकरण डेटामा सार्नुहोस् |
-| झुटो पहिचान | हरियो आयत मात्र छ (मिल्ने सही लेबल छैन) | पृष्ठभूमिको भिन्नता कम, बुट्टालाई दोष ठान्नु | मिलाउने नियम (class, IoU, confidence) लगाएपछि मात्र निर्णय गर्नुहोस् |
-| स्थान नमिल्नु | आयत आधा मात्र मिल्छ (IoU कम) | लेबल लगाउने तरिका अस्थिर, मिल्दो आकारको भ्रम | लेबल र निर्देशाङ्क परिवर्तन जाँच्नुहोस्। **थ्रेसहोल्ड सार्दा आयतको स्थान सर्दैन** |
-| Class गल्ती | चिसोलाई कालो थोप्लो ठान्नु | देखिने रूप मिल्नु, उदाहरणको असमानता | confusion matrix मा class-बीचको भ्रम जाँच्नुहोस् |
+| chhutnu | rato ayat matra chha (milne anuman chhaina) | dosh halka, dherai sano, prashikshan udaharan thorai, threshold uchcha | tyo tasbirko label ra dekhine rup jaanchnuhos; threshold pramanikaran data ma sarnuhos |
+| jhuto pahichan | hariyo ayat matra chha (milne sahi label chhaina) | prishthabhumiko bhinnata kam, buttalai dosh thannu | milaune niyam (class, IoU, confidence) lagaepachhi matra nirnaya garnuhos |
+| sthan namilnu | ayat adha matra milchha (IoU kam) | label lagaune tarika asthir, mildo akarako bhram | label ra nirdeshangk paribartan jaanchnuhos. **threshold sarda ayatako sthan sardain** |
+| Class galti | chisolai kalo thoplo thannu | dekhine rup milnu, udaharanko asamanata | confusion matrix ma class-bichako bhram jaanchnuhos |
 
 <!-- ne-cell: 64c7855e | after-heading -->
-**ओभरफिटिङ र नहुन सक्ने अवस्था**
+**obharaphiting ra nahun sakne abastha**
 <!-- ne-pair: Overfitting, and what else can look like it -->
 
 <!-- ne-cell: 64c7855e -->
-प्रशिक्षण डेटामा क्षमता उच्च र नदेखिएको डेटामा क्षमता कम हुने अवस्थालाई **ओभरफिटिङ** भनिन्छ। तर
-परीक्षण डेटाको क्षमता कम हुनुको कारण ओभरफिटिङ मात्र होइन।
+prashikshan data ma kshamata uchcha ra nadekhieko data ma kshamata kam hune abastha lai **obharaphiting** bhaninchha. tar
+parikshan datako kshamata kam hunuko karan obharaphiting matra hoina.
 
-| सम्भावना | जाँच्ने तरिका |
+| sambhabana | jaanchne tarika |
 |---|---|
-| ओभरफिटिङ | प्रमाणीकरणको loss र मापनको प्रवृत्ति हेर्नुहोस् (प्रशिक्षण घट्दै जान्छ, प्रमाणीकरण घट्न रोकिन्छ) |
-| कम प्रशिक्षण (underfitting) | प्रशिक्षण डेटामा पनि क्षमता कम छ कि हेर्नुहोस् |
-| लेबलको गल्ती | असफल तस्बिरको लेबल तस्बिरमा बनाएर जाँच्नुहोस् |
-| खिचाइको अवस्था फरक | प्रशिक्षण र परीक्षण तस्बिरको उज्यालो, पृष्ठभूमि र कोण सँगै राखेर हेर्नुहोस् |
-| प्रशिक्षण र परीक्षण तस्बिरको देखिने रूप फरक (domain shift) | प्रतिनिधित्व गर्ने वास्तविक डेटामा मूल्याङ्कन गर्नुहोस् |
+| obharaphiting | pramanikaranko loss ra maapan ko prabritti hernuhos (prashikshan ghatdai janchha, pramanikaran ghatn rokinchha) |
+| kam prashikshan (underfitting) | prashikshan data ma pani kshamata kam chha ki hernuhos |
+| labelko galti | asaphal tasbirko label tasbir ma banaer jaanchnuhos |
+| khichaiko abastha farak | prashikshan ra parikshan tasbirko ujyalo, prishthabhumi ra kon sangai rakher hernuhos |
+| prashikshan ra parikshan tasbirko dekhine rup farak (domain shift) | pratinidhitb garne bastabik data ma mulyankan garnuhos |
 
-उपाय एउटा मात्र होइन। डेटा बढाउनु उपयोगी हुन्छ, तर **सधैं सबैभन्दा प्रभावकारी हुन्छ भन्ने छैन**।
-लेबलको गल्ती सुधार्नु बढी काम लाग्न सक्छ।
+upay euta matra hoina. data badhaunu upayogi hunchha, tar **sadhain sabaibhanda prabhabakari hunchha bhanne chhaina**.
+labelko galti sudharnu badhi kaam lagn sakchha.
 
-यो तालिमको 64 तस्बिर ओभरफिटिङ सजिलै हुने अवस्थामध्ये एक हो। **राम्रो सङ्ख्या नआउनु गल्ती होइन।**
+yo talimko 64 tasbir obharaphiting sajilai hune abasthamadhye ek ho. **ramro sankhya naaunu galti hoina.**
 
 <!-- ne-cell: f152c1d1 | after-heading -->
-## Part 5 दिन ५ सँग साझा तस्बिरमा अभिलेख
+## Part 5 din 5 sang sajha tasbir ma abhilekh
 
 <!-- ne-cell: 29056356 | after-heading -->
-**अर्को तस्बिर सेटमा पनि किन अभिलेख गर्ने**
+**arko tasbir setama pani kina abhilekh garne**
 <!-- ne-pair: Why record results on another image set -->
 
-दिन ५ मा **YOLO र PatchCore लाई एउटै तस्बिरमा तुलना** गरिन्छ।
+din 5 ma **YOLO ra PatchCore lai eutai tasbir ma tulna** garinchha.
 
-त्यसका लागि यहाँ **तुलनाका लागि बनाइएको तस्बिर सेट** मा YOLO को नतिजा सुरक्षित गरिन्छ। लक्ष्य
-`assets/anomaly_dataset/pvc_sheet/test/` हो। यी तस्बिर **प्रशिक्षणमा प्रयोग भएका छैनन्**।
+tyaska lagi yahan **tulnaka lagi banaiyeko tasbir set** ma YOLO ko natija surakshit garinchha. lakshya
+`assets/anomaly_dataset/pvc_sheet/test/` ho. yi tasbir **prashikshan ma prayog bhaeka chhainan**.
 
-सुरक्षित गरिएको JSON दिन ५ नोटबुक ०३ ले पढ्छ।
+surakshit garieko JSON din 5 notebook 03 le padhchha.
 
 <!-- ne-cell: ba368ee2 | after-heading -->
-## अभ्यास
+## abhyas
 
 <!-- ne-cell: 68c27e48 | after-heading -->
-**अभ्यास 1 (आधारभूत): precision र recall अभिलेख गर्ने**
+**abhyas 1 (adharabhut): precision ra recall abhilekh garne**
 <!-- ne-pair: Exercise 1 (basic): record precision and recall -->
 
 <!-- ne-cell: 68c27e48 -->
-Part 2 को नतिजा तलको तालिकामा लेख्नुहोस्।
+Part 2 ko natija talako talika ma lekhnuhos.
 
-| मापन | मान | कार्यस्थलमा अर्थ |
+| maapan | maan | karyasthalama arth |
 |---|---|---|
 | precision | | |
 | recall | | |
 | mAP50 | | |
 
-- पूरा भएको मापन: तीन मान अभिलेख भएका छन् र precision र recall आफ्नै शब्दमा व्याख्या गर्न सकिन्छ
+- pura bhaeko maapan: tin maan abhilekh bhaeka chhan ra precision ra recall aphnai shabdama byakhya garna sakinchha
 
 <!-- ne-cell: 83c679ee | after-heading -->
-**अभ्यास 2 (मध्यम): असफल उदाहरण सुरक्षित गर्ने**
+**abhyas 2 (madhyam): asaphal udaharan surakshit garne**
 <!-- ne-pair: Exercise 2 (intermediate): save failure examples -->
 
 <!-- ne-cell: 83c679ee -->
-Part 4 का तस्बिरबाट **छुट्नु** र **झुटो पहिचान** खोजेर भेटिएका `submissions/day04/` मा सुरक्षित
-गर्नुहोस्। फाइल नाममा `miss_` / `false_alarm_` राख्नुहोस्।
+Part 4 ka tasbir baat **chhutnu** ra **jhuto pahichan** khojer bhetieka `submissions/day04/` ma surakshit
+garnuhos. file naam ma `miss_` / `false_alarm_` rakhnuhos.
 
-यो चलाइमा कुनै एक (वा दुवै) प्रकारको **एक पनि नहुन** सक्छ। त्यस्तो अवस्थामा **खोजेको दायरा र सङ्ख्या**
-लेखेर "भेटिएन" अभिलेख गर्नुहोस्। नभएको असफलता बनाउनु हुँदैन।
+yo chalaima kunai ek (wa dubai) prakarko **ek pani nahun** sakchha. tyasto abastha ma **khojeko dayara ra sankhya**
+lekher "bhetien" abhilekh garnuhos. nabhaeko asaphalata banaunu hundaina.
 
-- खोजेको दायरा: परीक्षणका 16 तस्बिरमध्ये Part 4 मा देखाइएका 6 (seed 1)
-- गनिएको सङ्ख्या: छुट्नु 0, झुटो पहिचान 0 (लागू हुने अवस्थामा)
+- khojeko dayara: parikshanka 16 tasbiramadhye Part 4 ma dekhaieka 6 (seed 1)
+- ganieko sankhya: chhutnu 0, jhuto pahichan 0 (lagu hune abastha ma)
 
-- पूरा भएको मापन: दुई फाइल छन्, वा "भेटिएन" दायरा र सङ्ख्यासहित अभिलेख भएको छ
-- पूरा भएको मापन: भेटिएका हरेक असफलताको कारणबारे अनुमान लेखिएको छ
+- pura bhaeko maapan: dui file chhan, wa "bhetien" dayara ra sangkhyasahit abhilekh bhaeko chha
+- pura bhaeko maapan: bhetieka harek asaphalatako karanabare anuman lekhieko chha
 
 <!-- ne-cell: cf0ad36e | after-heading -->
-**अभ्यास 3 (वैकल्पिक): सुधारको योजना लेख्ने**
+**abhyas 3 (baikalpik): sudharako yojana lekhne**
 <!-- ne-pair: Exercise 3 (optional challenge): write an improvement plan -->
 
 <!-- ne-cell: cf0ad36e -->
-असफलताका प्रकारका आधारमा **अब के गर्ने** भनेर प्राथमिकताको क्रममा तीन कुरा लेख्नुहोस्। प्रत्येकमा
-"किन यसले काम गर्छ" र "कसरी जाँच्ने" पनि लेख्नुहोस्।
+asaphalataka prakarka adharama **aba ke garne** bhanera prathamikatako kram ma tin kura lekhnuhos. pratyekama
+"kina yasle kaam garchha" ra "kasari jaanchne" pani lekhnuhos.
 
-डेटा बढाउनु विकल्पमध्ये एक हो, तर **सधैं पहिलो प्राथमिकता हुँदैन**। लेबलको गल्ती सुधार्नु बढी काम
-लाग्न सक्छ। **अनिवार्य होइन।**
+data badhaunu bikalpamadhye ek ho, tar **sadhain pahilo prathamikata hundaina**. labelko galti sudharnu badhi kaam
+lagn sakchha. **aniwarya hoina.**
 
-| प्राथमिकता | गर्नुपर्ने काम | किन काम गर्छ | कसरी जाँच्ने |
+| prathamikata | garnuparne kaam | kina kaam garchha | kasari jaanchne |
 |---|---|---|---|
 | 1 | | | |
 | 2 | | | |
 | 3 | | | |
 
-पूरा भएको मापन: तीन काम, कारण र जाँच्ने तरिका लेखिएका छन्।
+pura bhaeko maapan: tin kaam, karan ra jaanchne tarika lekhieka chhan.
 
 <!-- ne-cell: e1f991d3 | after-heading -->
-#### बुझाइ जाँच्ने प्रश्न
+#### bujhai jaanchne prashna
 
 <!-- ne-cell: e1f991d3 -->
-1. precision र recall ले क्रमैसँग के नाप्छन्?
-2. recall कम भए कार्यस्थलमा कस्तो समस्या हुन्छ?
-3. तस्बिर-स्तरको confusion matrix र Ultralytics को वस्तु-स्तरको matrix मा लाइन र स्तम्भले के जनाउँछन्?
-   `background` को स्तम्भ र लाइनले क्रमैसँग के गन्छन्?
-4. परीक्षण डेटाको क्षमता कम हुँदा ओभरफिटिङबाहेक अरू के कारण हुन सक्छ? कसरी जाँच्ने?
-5. `split="test"` मा किन मूल्याङ्कन गर्ने? `split="train"` किन नमिल्ने हो?
+1. precision ra recall le kramaisang ke napchhan?
+2. recall kam bhae karyasthalama kasto samasya hunchha?
+3. tasbir-starko confusion matrix ra Ultralytics ko bastu-starko matrix ma line ra stambhale ke janaunchhan?
+   `background` ko stambha ra linele kramaisang ke ganchhan?
+4. parikshan datako kshamata kam hunda obharaphitingabahek aru ke karan huna sakchha? kasari jaanchne?
+5. `split="test"` ma kina mulyankan garne? `split="train"` kina namilne ho?
 
 <!-- ne-cell: 440278a7 | after-heading -->
-## समस्या परेमा
+## samasya parema
 
 <!-- ne-cell: 440278a7 -->
-त्रुटि आएपछि पहिले "कुन सेलमा", "कुन लाइनमा", "के सन्देश आयो" भनेर लेख्नुहोस्। बुझाउनुपर्ने काममा पनि
-त्यही अभिलेख राख्नुहोस्।
+truti aepachhi pahile "kun cell ma", "kun line ma", "ke sandesh ayo" bhanera lekhnuhos. bujhaunuparne kaam ma pani
+tyahi abhilekh rakhnuhos.
 
-| लक्षण | के गर्ने |
+| lakshan | ke garne |
 | --- | --- |
-| `FileNotFoundError` प्रशिक्षण भएको weight भेटिएन | पहिले 04_02 को प्रशिक्षण चलाउनुहोस्। `training_results/day04/` जाँच्नुहोस्। |
-| `model.val()` ले त्रुटि दिन्छ | `data.yaml` को `path` पुरानो हुन सक्छ। 04_02 को Part 2 फेरि चलाउनुहोस्। |
-| सबै मापन 0 हुन्छ | परीक्षण लेबल खाली वा class सङ्ख्या नमिलेको हुन सक्छ। 04_01 को जाँचमा फर्कनुहोस्। |
-| confusion matrix को चित्र छैन | मूल्याङ्कन `plots=True` राखेर फेरि चलाउनुहोस्। प्रशिक्षण दोहोर्याउनु पर्दैन। |
-| matrix को तेर्सो-ठाडो थाहा भएन | चित्रको अक्ष लेबल पढ्नुहोस्। यो संस्करणको Ultralytics चित्रमा तेर्सो सही (True), ठाडो अनुमान (Predicted) हो। |
-| साझा तस्बिर सेट छैन | `python assets\scripts\prepare_datasets.py --only anomaly` चलाउनुहोस्। |
+| `FileNotFoundError` prashikshan bhaeko weight bhetien | pahile 04_02 ko prashikshan chalaunuhos. `training_results/day04/` jaanchnuhos. |
+| `model.val()` le truti dinchha | `data.yaml` ko `path` purano huna sakchha. 04_02 ko Part 2 feri chalaunuhos. |
+| sabai maapan 0 hunchha | parikshan label khali wa class sankhya namileko huna sakchha. 04_01 ko jaanch ma pharkanuhos. |
+| confusion matrix ko chitra chhaina | mulyankan `plots=True` rakher feri chalaunuhos. prashikshan dohoryaunu pardaina. |
+| matrix ko terso-thado thaha bhaen | chitrako aksh label padhnuhos. yo sanskaranako Ultralytics chitra ma terso sahi (True), thado anuman (Predicted) ho. |
+| sajha tasbir set chhaina | `python assets\scripts\prepare_datasets.py --only anomaly` chalaunuhos. |
 
 <!-- ne-cell: 9b6959aa | after-heading -->
-## सम्पन्नता जाँचसूची
+## sampannata janchasuchi
 
 <!-- ne-cell: 9b6959aa -->
-**अनिवार्य बुँदा मात्र** दिइएका छन्। **अभ्यास 3 (वैकल्पिक) अनिवार्य होइन**; नगरे पनि पूरा मानिन्छ।
-सबैमा चिन्ह लागेपछि यो नोटबुक पूरा हुन्छ।
+**aniwarya bunda matra** diieka chhan. **abhyas 3 (baikalpik) aniwarya hoina**; nagare pani pura maninchha.
+sabai ma chinh lagepachhi yo notebook pura hunchha.
 
-**अनिवार्य**
+**aniwarya**
 
-- [ ] Part 1–Part 5 पढेर सबै code सेल चलाएँ
-- [ ] `split="test"` मा मूल्याङ्कन गरें
-- [ ] confusion matrix जाँचें
-- [ ] सफल र असफल उदाहरण तस्बिरमा हेरें
-- [ ] `yolo_predictions_on_shared_set.json` सुरक्षित गरें
-- [ ] अभ्यास 1–2 (अनिवार्य) गरें
-- [ ] बुझाइ जाँच्ने 5 प्रश्नको उत्तर दिएँ
-- [ ] नोटबुक सुरक्षित गरें
+- [ ] Part 1–Part 5 padher sabai code cell chalaen
+- [ ] `split="test"` ma mulyankan garen
+- [ ] confusion matrix janchen
+- [ ] saphal ra asaphal udaharan tasbir ma heren
+- [ ] `yolo_predictions_on_shared_set.json` surakshit garen
+- [ ] abhyas 1–2 (aniwarya) garen
+- [ ] bujhai jaanchne 5 prashnako uttar dien
+- [ ] notebook surakshit garen
 
-**वैकल्पिक**
+**baikalpik**
 
-- [ ] अभ्यास 3 (वैकल्पिक): सुधारका तीन काम प्राथमिकतासहित लेखें
+- [ ] abhyas 3 (baikalpik): sudharaka tin kaam prathamikatasahit lekhen
 
 <!-- ne-cell: 24754a39 | after-heading -->
-## थप अध्ययन (वैकल्पिक)
+## thap adhyayan (baikalpik)
 
 <!-- ne-cell: 24754a39 -->
-### सन्दर्भ लिङ्क
+### sandarbha lingk
 
-- [Ultralytics Val मोड](https://docs.ultralytics.com/modes/val/)
-- [confusion matrix कसरी पढ्ने](https://scikit-learn.org/stable/modules/model_evaluation.html#confusion-matrix)
-- [precision र recall](https://scikit-learn.org/stable/modules/model_evaluation.html#precision-recall-f-measure-metrics)
+- [Ultralytics Val mod](https://docs.ultralytics.com/modes/val/)
+- [confusion matrix kasari padhne](https://scikit-learn.org/stable/modules/model_evaluation.html#confusion-matrix)
+- [precision ra recall](https://scikit-learn.org/stable/modules/model_evaluation.html#precision-recall-f-measure-metrics)
 
-### थप चुनौती (अनिवार्य होइन)
+### thap chunauti (aniwarya hoina)
 
-`conf` 0.1 र 0.6 राखेर `model.val()` चलाउनुहोस् र precision र recall को परिवर्तन तुलना गर्नुहोस्।
+`conf` 0.1 ra 0.6 rakher `model.val()` chalaunuhos ra precision ra recall ko paribartan tulna garnuhos.

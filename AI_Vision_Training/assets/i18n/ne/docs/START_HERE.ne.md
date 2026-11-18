@@ -1,24 +1,24 @@
 <!--
-नेपाली अनुवाद / Nepali translation source for
+Nepali anuwad / Nepali translation source for
 START_HERE.md
 
 Each block is keyed on the exact heading line it belongs to; the Nepali text is appended at the end
 of that section. Commands, paths and file names stay byte-identical.
 -->
-# START_HERE — नेपाली अनुवाद
+# START_HERE — Nepali anuwad
 
 <!-- ne-doc: START_HERE.md -->
 
 <!-- ne-section: ## ステップ 1　取得してフォルダを開く / Download and open the folder -->
-### नेपालीमा
+### Nepali ma
 
-यो Windows 11 / Command Prompt (cmd.exe) को **आधिकारिक तयारी प्रक्रिया** हो। दिन १ भन्दा अघि, पाठ
-समयबाहिर माथिबाट क्रमैसँग पूरा गर्नुहोस्। installation सकिएपछि तयारी नोटबुक खोल्नुहोस्।
+yo Windows 11 / Command Prompt (cmd.exe) ko **adhikarik tayari prakriya** ho. din 1 bhanda aghi, paath
+samayabahir mathibat kramaisang pura garnuhos. installation sakiepachhi tayari notebook kholnuhos.
 
-Windows को खोजमा "Command Prompt" वा `cmd` खोलेर सुरु गर्नुहोस्। File Explorer मा फोल्डर खोलेर
-ठेगाना बारमा `cmd` लेखेर Enter थिच्दा पनि खुल्छ। प्रशासक (Administrator) बन्नु आवश्यक छैन।
+Windows ko khojama "Command Prompt" wa `cmd` kholer suru garnuhos. File Explorer ma folder kholer
+thegana barama `cmd` lekher Enter thichda pani khulchha. prashasak (Administrator) bannu aawashyak chhaina.
 
-GitHub को Code → Download ZIP निकाल्नुहोस्, वा Git छ भने तलको आदेश चलाउनुहोस्।
+GitHub ko Code → Download ZIP nikalnuhos, wa Git chha bhane talako adesh chalaunuhos.
 
 ```cmd
 cd /d "%USERPROFILE%\Documents"
@@ -27,12 +27,12 @@ cd /d "%USERPROFILE%\Documents\Training_Automation\AI_Vision_Training"
 dir
 ```
 
-ZIP भए निकालेको `AI_Vision_Training` फोल्डरमा जानुहोस्। अबका सबै आदेश `README.md` र `requirements`
-भएको यही फोल्डरमा चलाउनुहोस्।
+ZIP bhae nikaleko `AI_Vision_Training` folder ma januhos. abaka sabai adesh `README.md` ra `requirements`
+bhaeko yahi folder ma chalaunuhos.
 
-Documents OneDrive जस्तो अन्य ठाउँमा सारिएको छ भने वास्तविक निकालेको ठाउँ प्रयोग गर्नुहोस्।
-`cd /d "<actual extracted AI_Vision_Training path>"` मा <> भित्रको भाग उदाहरण मात्र हो; जस्ताको
-तस्तै नचलाई वास्तविक path ले बदल्नुहोस्। उदाहरण:
+Documents OneDrive jasto any thaun ma sarieko chha bhane bastabik nikaleko thaun prayog garnuhos.
+`cd /d "<actual extracted AI_Vision_Training path>"` ma <> bhitrako bhaag udaharan matra ho; jastako
+tastai nachalai bastabik path le badalnuhos. udaharan:
 
 ```cmd
 cd /d "D:\Training Materials\Training_Automation\AI_Vision_Training"
@@ -40,25 +40,25 @@ dir
 cd
 ```
 
-`dir` ले भित्री सामग्री देखाउँछ, argument नभएको `cd` ले अहिलेको ठाउँ देखाउँछ। खाली ठाउँ भएको path पनि
-quote भित्र राख्नुहोस्।
+`dir` le bhitri samagri dekhaunchha, argument nabhaeko `cd` le ahileko thaun dekhaunchha. khali thaun bhaeko path pani
+quote bhitr rakhnuhos.
 
 <!-- ne-section: ## ステップ 2　Python 3.11 を確認する / Check Python 3.11 -->
-### नेपालीमा
+### Nepali ma
 
 ```cmd
 py -3.11 --version
 ```
 
-जाँचिएको series **Python 3.11** हो। 3.12 जस्ता अन्य series जाँचिएका छैनन्।
-विस्तृत कुरा [tested_versions.md](requirements/tested_versions.md) मा छ।
-`py` छैन भने python.org बाट Python 3.11 राखेर Add python.exe to PATH छान्नुहोस् र Command Prompt फेरि
-खोल्नुहोस्। `python --version` ले 3.11 देखायो भने अबका `py -3.11` लाई `python` ले बदल्न सकिन्छ।
+janchieko series **Python 3.11** ho. 3.12 jasta any series janchieka chhainan.
+bistrit kura [tested_versions.md](requirements/tested_versions.md) ma chha.
+`py` chhaina bhane python.org baat Python 3.11 rakher Add python.exe to PATH chhannuhos ra Command Prompt feri
+kholnuhos. `python --version` le 3.11 dekhayo bhane abaka `py -3.11` lai `python` le badalna sakinchha.
 
 <!-- ne-section: ## ステップ 3　基本環境を作る / Create the base environment -->
-### नेपालीमा
+### Nepali ma
 
-virtual environment भनेको तालिमका लागि छुट्ट्याइएको औजार-बाकस हो। अर्को कामको Python सँग मिसिँदैन।
+virtual environment bhaneko talimka lagi chhuttyaieko aujar-bakas ho. arko kaamko Python sang misindain.
 
 ```cmd
 py -3.11 -m venv .venv
@@ -70,15 +70,15 @@ python -m pip install -r requirements\base.txt
 python -m pip install -r requirements\yolo.txt
 ```
 
-देखिएको Python को पहिलो ठेगाना यही फोल्डरको `.venv\Scripts\python.exe` हो कि जाँच्नुहोस्।
-सक्रिय (activate) गर्न नसकिए `python` को सट्टा `".\.venv\Scripts\python.exe"` प्रयोग गर्नुहोस्।
-उदाहरण: `".\.venv\Scripts\python.exe" -m pip install -r requirements\base.txt`।
-CMD सक्रिय गर्न execution policy परिवर्तन आवश्यक छैन। संस्थाको बन्देज छ भने प्रशिक्षक/IT सँग सोध्नुहोस्।
+dekhieko Python ko pahilo thegana yahi folderko `.venv\Scripts\python.exe` ho ki jaanchnuhos.
+sakriya (activate) garna nasakie `python` ko satta `".\.venv\Scripts\python.exe"` prayog garnuhos.
+udaharan: `".\.venv\Scripts\python.exe" -m pip install -r requirements\base.txt`.
+CMD sakriya garna execution policy paribartan aawashyak chhaina. sansthako bandej chha bhane prashikshak/IT sang sodhnuhos.
 
 <!-- ne-section: ## ステップ 4　Anomalib 環境を作る / Create the Anomalib environment -->
-### नेपालीमा
+### Nepali ma
 
-दिन ५ मा अर्को औजार-बाकस प्रयोग गरिन्छ। **मानक प्रक्रियामा दिन १ भन्दा अघि दुवै तयार गरिन्छ।**
+din 5 ma arko aujar-bakas prayog garinchha. **manak prakriyama din 1 bhanda aghi dubai tayar garinchha.**
 
 ```cmd
 deactivate
@@ -91,13 +91,13 @@ python -m pip install -r requirements\anomalib.txt
 deactivate
 ```
 
-सक्रिय नगरी सिधै Python प्रयोग गरिरहेको छ भने `deactivate` आवश्यक छैन। दिन ५ का लागि `python` को सट्टा
-`".\.venv-anomalib\Scripts\python.exe"` प्रयोग गर्नुहोस्।
+sakriya nagari sidhai Python prayog gariraheko chha bhane `deactivate` aawashyak chhaina. din 5 ka lagi `python` ko satta
+`".\.venv-anomalib\Scripts\python.exe"` prayog garnuhos.
 
 <!-- ne-section: ## ステップ 5　両方のカーネルを登録する / Register both kernels -->
-### नेपालीमा
+### Nepali ma
 
-kernel भनेको नोटबुकको कोड चलाउने Python हो।
+kernel bhaneko notebookko kod chalaune Python ho.
 
 ```cmd
 ".\.venv\Scripts\python.exe" -m ipykernel install --user --name aivision --display-name "Python 3 (AI Vision)"
@@ -105,10 +105,10 @@ kernel भनेको नोटबुकको कोड चलाउने Pyt
 ```
 
 <!-- ne-section: ## ステップ 6　教材とデータを作る / Generate teaching assets and datasets -->
-### नेपालीमा
+### Nepali ma
 
-यहाँबाट सक्रिय नगरी **आधारभूत वातावरण `.venv` को Python सिधै** दिनुहोस्। `--force` वा `--clean`
-आवश्यक छैन। बुझाइसकेका काम वा सुरक्षित model नतिजा फेरि बनाइँदैन।
+yahan baat sakriya nagari **adharabhut batabaran `.venv` ko Python sidhai** dinuhos. `--force` wa `--clean`
+aawashyak chhaina. bujhaisakeka kaam wa surakshit model natija feri banaindain.
 
 ```cmd
 ".\.venv\Scripts\python.exe" assets\scripts\generate_training_assets.py
@@ -118,10 +118,10 @@ kernel भनेको नोटबुकको कोड चलाउने Pyt
 ```
 
 <!-- ne-section: ## ステップ 7　オフライン授業の素材を先に取得する / Preload offline lesson inputs -->
-### नेपालीमा
+### Nepali ma
 
-सन्दर्भ फोटो लाइसेन्स भएका मूल फाइल हुन्। कृत्रिम चित्र वा कारखानाको मापन नतिजा होइनन्।
-model को weight पनि पाठ अघि ल्याइन्छ। पहिलो पटक network चाहिन्छ।
+sandarbha photo laisens bhaeka mul file hun. kritrim chitra wa karakhanako maapan natija hoinan.
+model ko weight pani paath aghi lyainchha. pahilo patak network chahinchha.
 
 ```cmd
 ".\.venv\Scripts\python.exe" assets\scripts\download_reference_images.py --course-root .
@@ -132,14 +132,14 @@ model को weight पनि पाठ अघि ल्याइन्छ। �
 ".\.venv-anomalib\Scripts\python.exe" assets\scripts\preload_models.py --profile anomalib --offline
 ```
 
-weight को वितरण र प्रयोगका सर्त दिने निकाय (Ultralytics / timm / torchvision) बाट जाँच्नुहोस्।
-लिन असफल भए पाठ अघि प्रशिक्षकलाई खबर गर्नुहोस्। दिइएका सन्दर्भ नतिजा `assets/reference_outputs/`
-मा छन्; प्रशिक्षार्थीले चलाएर सुरक्षित गर्ने नतिजा `submissions/` मा जान्छ।
+weight ko bitaran ra prayogka sart dine nikay (Ultralytics / timm / torchvision) baat jaanchnuhos.
+lina asaphal bhae paath aghi prashikshakalai khabar garnuhos. diieka sandarbha natija `assets/reference_outputs/`
+ma chhan; prashiksharthile chalaer surakshit garne natija `submissions/` ma janchha.
 
 <!-- ne-section: ## ステップ 8　環境と教材を確認する / Verify environments and assets -->
-### नेपालीमा
+### Nepali ma
 
-`--profile all` ले **चलाइएको वातावरण मात्र** जाँच्छ। दुवैमा चलाउनुहोस्।
+`--profile all` le **chalaieko batabaran matra** janchchha. dubaima chalaunuhos.
 
 ```cmd
 ".\.venv\Scripts\python.exe" assets\scripts\verify_environment.py --profile all
@@ -148,68 +148,68 @@ weight को वितरण र प्रयोगका सर्त दि�
 ".\.venv\Scripts\python.exe" -m jupyter kernelspec list
 ```
 
-exit code 0 सँगै देखाइएको सामग्रीको सूचीमा कुनै नपुग भाग नभएको पनि जाँच्नुहोस्।
+exit code 0 sangai dekhaieko samagriko soochi ma kunai napug bhaag nabhaeko pani jaanchnuhos.
 
 <!-- ne-section: ## ステップ 9　JupyterLab を起動する / Launch JupyterLab -->
-### नेपालीमा
+### Nepali ma
 
-आधारभूत वातावरण सक्रिय गरेपछि मात्र सुरु गर्नुहोस्। अर्को Python को `jupyter-lab` छानिनबाट जोगाउँछ।
-परिवर्तन यो CMD झ्यालमा मात्र लागू हुन्छ।
+adharabhut batabaran sakriya garepachhi matra suru garnuhos. arko Python ko `jupyter-lab` chhaninabat jogaunchha.
+paribartan yo CMD jhyalama matra lagu hunchha.
 
 ```cmd
 .\.venv\Scripts\activate.bat
 ".\.venv\Scripts\python.exe" -m jupyter lab
 ```
 
-दैनिक सुरु गर्न यही फोल्डरको `start_training.cmd` डबल-क्लिक गरे पनि उही हुन्छ।
-यो सुरु गर्ने फाइलले तयार भइसकेको वातावरण प्रयोग गर्छ मात्र; install, सामग्री लिने वा train गर्ने काम
-गर्दैन।
+dainik suru garna yahi folderko `start_training.cmd` dabal-klik gare pani uhi hunchha.
+yo suru garne filele tayar bhaisakeko batabaran prayog garchha matra; install, samagri line wa train garne kaam
+gardaina.
 
-ब्राउजर नखुले देखाइएको localhost URL खोल्नुहोस्। `notebooks` → `00_Setup` →
-`00_Environment_Setup.ipynb` खोलेर `Python 3 (AI Vision)` छान्नुहोस्। दिन ५ मा मात्र
-`Python 3 (AI Vision Anomalib)` छानिन्छ।
+braujar nakhule dekhaieko localhost URL kholnuhos. `notebooks` → `00_Setup` →
+`00_Environment_Setup.ipynb` kholer `Python 3 (AI Vision)` chhannuhos. din 5 ma matra
+`Python 3 (AI Vision Anomalib)` chhaninchha.
 
 <!-- ne-section: ## ステップ 10　準備完了を確認する / Complete preflight -->
-### नेपालीमा
+### Nepali ma
 
-दिन १ भन्दा अघि तयारी नोटबुक माथिबाट क्रमैसँग चलाउनुहोस्। जानाजान राखिएको त्रुटिको अभ्यास व्याख्याअनुसार
-सुधार्नुहोस्। दिन १ को 09:00–09:10 तयार भइसकेको अवस्था पुनः जाँच्ने समय हो, installation को समय होइन।
+din 1 bhanda aghi tayari notebook mathibat kramaisang chalaunuhos. janajan rakhieko trutiko abhyas byakhya anusar
+sudharnuhos. din 1 ko 09:00–09:10 tayar bhaisakeko abastha punah jaanchne samay ho, installation ko samay hoina.
 
-- [ ] दुवै kernel छान्न सकिन्छ
-- [ ] दुवै वातावरणको जाँच सफल भयो, सामग्रीमा कुनै नपुग छैन
-- [ ] अफलाइन फोटो र weight को जाँच सफल भयो
-- [ ] Day01_02 Part 1 मा चित्र देखिन्छ
-- [ ] चित्रको जापानी अक्षर वर्गमा परिणत भएको छैन
-- [ ] `submissions/day00/` मा तयारी रिपोर्ट सुरक्षित गरियो
+- [ ] dubai kernel chhanna sakinchha
+- [ ] dubai batabaranko jaanch saphal bhayo, samagri ma kunai napug chhaina
+- [ ] aphalain photo ra weight ko jaanch saphal bhayo
+- [ ] Day01_02 Part 1 ma chitra dekhinchha
+- [ ] chitrako Japani akshar bargama parinat bhaeko chhaina
+- [ ] `submissions/day00/` ma tayari riport surakshit gariyo
 
-समयमै नभ्याए [COURSE_SYLLABUS.md](COURSE_SYLLABUS.md) को पुनःस्थापन प्रक्रिया प्रयोग गर्नुहोस्।
+samayamai nabhyae [COURSE_SYLLABUS.md](COURSE_SYLLABUS.md) ko punahsthapan prakriya prayog garnuhos.
 
 <!-- ne-section: ## ステップ 11　授業を始める / Start lessons -->
-### नेपालीमा
+### Nepali ma
 
-सेल छानेर Shift+Enter, सुरक्षित गर्न Ctrl+S। सेल माथिबाट क्रमैसँग चलाउनुहोस्।
-मान kernel मा रहन्छ। क्रम बिर्सियो भने Kernel → Restart Kernel and Run All Cells प्रयोग गर्नुहोस्।
-भोलिको दिन स्टेप 1 को फोल्डरमा गएर स्टेप 9 बाट सुरु गर्नुहोस्। वातावरण फेरि बनाइँदैन।
-सक्दा सुरक्षित गरेर ब्राउजर बन्द गर्नुहोस्, र Command Prompt मा Ctrl+C थिचेर रोकिएको पुष्टि गर्नुहोस्।
+cell chhaner Shift+Enter, surakshit garna Ctrl+S. cell mathibat kramaisang chalaunuhos.
+maan kernel ma rahanchha. kram birsiyo bhane Kernel → Restart Kernel and Run All Cells prayog garnuhos.
+bholiko din step 1 ko folder ma gaer step 9 baat suru garnuhos. batabaran feri banaindain.
+sakda surakshit garera braujar banda garnuhos, ra Command Prompt ma Ctrl+C thicher rokieko pushti garnuhos.
 
 <!-- ne-section: ### 例外：第4日後の Anomalib 準備 / Alternative: Anomalib setup after Day 4 -->
-### नेपालीमा
+### Nepali ma
 
-प्रशिक्षकले स्पष्ट अनुमति दिएको अवस्थामा मात्र स्टेप 4 र Anomalib को दर्ता, weight लिने र जाँच दिन ४
-पछि सार्न सकिन्छ। त्यस अवस्थामा दिन १ को जाँच आधारभूत वातावरणमा मात्र हुन्छ र **पूरै तालिम तयार छ**
-भन्न मिल्दैन। दिन ५ अघि बाँकी काम पूरा गर्नुहोस्। यो मानक दुवै-वातावरण जाँचसूचीभन्दा छुट्टै अपवाद हो।
+prashikshakale spasht anumati dieko abastha ma matra step 4 ra Anomalib ko darta, weight line ra jaanch din 4
+pachhi sarn sakinchha. tyas abastha ma din 1 ko jaanch adharabhut batabaran ma matra hunchha ra **purai talim tayar chha**
+bhann mildaina. din 5 aghi banki kaam pura garnuhos. yo manak dubai-batabaran janchasuchibhanda chhuttai apabad ho.
 
 <!-- ne-section: ### 困ったとき / Troubleshooting -->
-### नेपालीमा
+### Nepali ma
 
-| लक्षण | के गर्ने |
+| lakshan | ke garne |
 |---|---|
-| `python` / `py` छैन | स्टेप 2। PATH र app execution aliases जाँच्नुहोस् |
-| package नपुग | सही वातावरणमा requirements राख्नुहोस् |
-| kernel फरक छ | Python सेलमा `import sys; print(sys.executable)` जाँच्नुहोस् |
-| सक्रिय गर्न मनाही छ | स्टेप 3 को सिधै चलाउने तरिका प्रयोग गर्नुहोस् |
-| weight छैन | स्टेप 7 फेरि चलाएर असफलता अभिलेख गर्नुहोस् |
+| `python` / `py` chhaina | step 2. PATH ra app execution aliases jaanchnuhos |
+| package napug | sahi batabaran ma requirements rakhnuhos |
+| kernel farak chha | Python cell ma `import sys; print(sys.executable)` jaanchnuhos |
+| sakriya garna manahi chha | step 3 ko sidhai chalaune tarika prayog garnuhos |
+| weight chhaina | step 7 feri chalaer asaphalata abhilekh garnuhos |
 
-Command Prompt को `python -m pip` र नोटबुकका लागि मात्रको Jupyter `%pip` फरक कुरा हुन्।
-पाठ चलिरहँदा स्वतः install गरिँदैन। विस्तृत कुरा
-[installation.md](docs/troubleshooting/installation.md) मा छ।
+Command Prompt ko `python -m pip` ra notebookka lagi matrako Jupyter `%pip` farak kura hun.
+paath chalirahanda sbatah install garindain. bistrit kura
+[installation.md](docs/troubleshooting/installation.md) ma chha.

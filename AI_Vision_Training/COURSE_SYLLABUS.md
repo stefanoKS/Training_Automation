@@ -15,14 +15,14 @@ position in the day; no notebook keeps its own copy of the full-day schedule.
 ---
 
 <!-- ne:begin doc:1b2ed98aa9 -->
-### नेपालीमा
+### Nepali ma
 
-**हिरोसिमा कासेइ, कासेइहिन विभाग — हप्ता १ AI र मेसिन भिजन तालिम**
+**hirosima kasei, kaseihin bibhag — hapta 1 AI ra mesin bhijan talim**
 
-**अवधि:** 2026 नोभेम्बर 16 (सोमबार) – नोभेम्बर 20 (शुक्रबार) · **काम गर्ने समय:** 08:00–16:50
+**abadhi:** 2026 nobhembar 16 (somabar) – nobhembar 20 (shukrabar) · **kaam garne samay:** 08:00–16:50
 
-यो फाइल **समयतालिकाको एक मात्र आधिकारिक स्रोत** हो। प्रत्येक नोटबुकले "आजको कति नम्बरको
-नोटबुक" मात्र बताउँछ; कुनै नोटबुकले दिनभरिको समयतालिका आफैं राख्दैन।
+yo file **samayatalikako ek matra adhikarik srot** ho. pratyek notebookle "ajako kati numberko
+notebook" matra bataunchha; kunai notebookle dinabhariko samayatalika aphain rakhdain.
 <!-- ne:end -->
 
 ## 1. 1 日のリズム / The daily rhythm
@@ -53,27 +53,27 @@ The required and buffer rows must always add up to 360 minutes. After editing a 
 total — `python -m pytest assets/tests/test_schedule.py` does this automatically.
 
 <!-- ne:begin doc:ac7b9f269a -->
-### नेपालीमा
+### Nepali ma
 
-| समय | मिनेट | काम | कसले |
+| samay | minet | kaam | kasale |
 |---|---|---|---|
-| 08:00–09:00 | 60 | प्रशिक्षकको व्याख्या र प्रदर्शन | प्रशिक्षक |
-| 09:00–12:00 | 180 | **स्वअध्ययन 1** (तलको तालिका हेर्नुहोस्) | प्रशिक्षार्थी |
-| 12:00–12:50 | 50 | दिउँसोको खाना | — |
-| 12:50–13:50 | 60 | बिहानको पुनरावलोकन र दिउँसोको व्याख्या | प्रशिक्षक |
-| 13:50–16:50 | 180 | **स्वअध्ययन 2** (तलको तालिका हेर्नुहोस्) | प्रशिक्षार्थी |
+| 08:00–09:00 | 60 | prashikshakako byakhya ra pradarshan | prashikshak |
+| 09:00–12:00 | 180 | **sbaadhyayan 1** (talako talika hernuhos) | prashiksharthi |
+| 12:00–12:50 | 50 | diunsoko khana | — |
+| 12:50–13:50 | 60 | bihanako punarabalokan ra diunsoko byakhya | prashikshak |
+| 13:50–16:50 | 180 | **sbaadhyayan 2** (talako talika hernuhos) | prashiksharthi |
 
-यी समय स्थिर हुन्, सारिँदैनन्।
+yi samay sthir hun, sarindainan.
 
-स्वअध्ययन दिनको **360 मिनेट** (180 + 180) हो। त्यो 360 मिनेट यसरी बाँडिन्छ।
+sbaadhyayan dinko **360 minet** (180 + 180) ho. tyo 360 minet yasari bandinchha.
 
-| भाग | अनुमान | के का लागि |
+| bhaag | anuman | ke ka lagi |
 |---|---|---|
-| अनिवार्य सिकाइ र अभ्यास | **270–300 मिनेट** | तालिकाका `必須` पङ्क्तिको जोड |
-| विश्राम, समस्या समाधान, बुझाउने | **60–90 मिनेट** | तालिकाका `休憩` `予備` `提出` पङ्क्तिको जोड |
+| aniwarya sikai ra abhyas | **270–300 minet** | talikaka `必須` pangktiko jod |
+| bishram, samasya samadhan, bujhaune | **60–90 minet** | talikaka `休憩` `予備` `提出` pangktiko jod |
 
-अनिवार्य र बचत भागको जोड सधैं 360 मिनेट हुनुपर्छ। दिनको तालिका बदलेपछि जोड 360 मिनेट भएको
-जाँच्नुहोस् (`python -m pytest assets/tests/test_schedule.py` ले स्वतः जाँच्छ)।
+aniwarya ra bachat bhaagko jod sadhain 360 minet hunuparchha. dinko talika badalepachhi jod 360 minet bhaeko
+jaanchnuhos (`python -m pytest assets/tests/test_schedule.py` le sbatah janchchha).
 <!-- ne:end -->
 
 ### 時間割の記号 / Reading the timetable
@@ -93,18 +93,18 @@ total — `python -m pytest assets/tests/test_schedule.py` does this automatical
 ---
 
 <!-- ne:begin doc:8eb529ab6f -->
-### नेपालीमा
+### Nepali ma
 
-| किसिम | अर्थ |
+| kisim | arth |
 |---|---|
-| `必須` अनिवार्य | सबैले गर्नुपर्ने। सकिएको जाँचसूचीमा पर्छ |
-| `任意` ऐच्छिक | समय बाँकी भए मात्र। जाँचसूचीमा पर्दैन |
-| `休憩` विश्राम | स्क्रिनबाट अलग हुने |
-| `予備` बचत | ढिलाइ भर्ताउने, समस्या समाधान, पुनःस्थापना |
-| `提出` बुझाउने | बुझाउनुपर्ने काम बनाएर सुरक्षित गर्ने |
+| `必須` aniwarya | sabaile garnuparne. sakieko janchasuchi ma parchha |
+| `任意` aichchhik | samay banki bhae matra. janchasuchi ma pardaina |
+| `休憩` bishram | skrinabat alag hune |
+| `予備` bachat | dhilai bhartaune, samasya samadhan, punahsthapana |
+| `提出` bujhaune | bujhaunuparne kaam banaer surakshit garne |
 
-> लाग्ने समय **प्रारम्भिक अनुमान** हो। एक जना सुरुवाती प्रशिक्षार्थीसँगको pilot मा नापेपछि मात्र
-> निश्चित हुन्छ।
+> lagne samay **prarambhik anuman** ho. ek jana surubati prashiksharthisangako pilot ma napepachhi matra
+> nishchit hunchha.
 <!-- ne:end -->
 
 ## 2. 研修前の準備（第1日より前）/ Preflight, before Day 1
@@ -133,25 +133,25 @@ before Day 1. The table below estimates time; it is not a second installation se
 `00_Environment_Setup.ipynb` is a **preparatory** notebook and is not part of any day's 360 minutes.
 
 <!-- ne:begin doc:0047574468 -->
-### नेपालीमा
+### Nepali ma
 
-तयारी पाठ समयबाहिर सक्नुपर्छ। **पाठ समयभित्र तयारीको समय लुकाइएको छैन।**
+tayari paath samayabahir saknuparchha. **paath samayabhitr tayariko samay lukaieko chhaina.**
 
-क्रमांकित आधिकारिक प्रक्रिया [START_HERE.md](START_HERE.md) हो। Python 3.11, दुवै वातावरण,
-सामग्री बनाउने, फोटो र weight अघि लिने, र दुवै वातावरणको जाँच दिन १ भन्दा अघि सक्नुपर्छ। तलको
-तालिका समयको अनुमान मात्र हो; दोस्रो installation प्रक्रिया होइन।
+kramankit adhikarik prakriya [START_HERE.md](START_HERE.md) ho. Python 3.11, dubai batabaran,
+samagri banaune, photo ra weight aghi line, ra dubai batabaranko jaanch din 1 bhanda aghi saknuparchha. talako
+talika samayko anuman matra ho; dosro installation prakriya hoina.
 
-`00_Environment_Setup.ipynb` **तयारीका लागि** बनाइएको नोटबुक हो। ५ दिनको 360 मिनेटभित्र पर्दैन।
+`00_Environment_Setup.ipynb` **tayarika lagi** banaiyeko notebook ho. 5 dinko 360 minetabhitr pardaina.
 
-| क्रम | काम | अनुमान | जाँच |
+| kram | kaam | anuman | jaanch |
 |---|---|---|---|
-| 1 | विद्यार्थीको फोल्डर छान्ने | 5 मिनेट | वास्तविक ठाउँ टिप्ने |
-| 2 | Python वातावरण बनाउने | 20 मिनेट | `python assets\scripts\verify_environment.py --profile base` |
-| 3 | दुवै kernel दर्ता गर्ने | 10 मिनेट | `jupyter kernelspec list` मा `aivision` र `aivision-anomalib` |
-| 4 | डेटासेट बनाउने | 10 मिनेट | `python assets\scripts\prepare_datasets.py` |
-| 5 | फोटो र weight पहिले ल्याउने | 10 मिनेट | `START_HERE.md` स्टेप 7 का अफलाइन जाँच |
-| 6 | `00_Environment_Setup.ipynb` पूरा गर्ने | 60 मिनेट | Part 7 को रिपोर्ट `submissions/day00/` मा |
-| 7 | दिन १ को तयारी जाँच | 10 मिनेट | तलका चारै सर्त पूरा |
+| 1 | bidyarthiko folder chhanne | 5 minet | bastabik thaun tipne |
+| 2 | Python batabaran banaune | 20 minet | `python assets\scripts\verify_environment.py --profile base` |
+| 3 | dubai kernel darta garne | 10 minet | `jupyter kernelspec list` ma `aivision` ra `aivision-anomalib` |
+| 4 | dataset banaune | 10 minet | `python assets\scripts\prepare_datasets.py` |
+| 5 | photo ra weight pahile lyaune | 10 minet | `START_HERE.md` step 7 ka aphalain jaanch |
+| 6 | `00_Environment_Setup.ipynb` pura garne | 60 minet | Part 7 ko riport `submissions/day00/` ma |
+| 7 | din 1 ko tayari jaanch | 10 minet | talaka charai sart pura |
 <!-- ne:end -->
 
 ### 第1日の準備確認 / Day 1 readiness check
@@ -164,14 +164,14 @@ before Day 1. The table below estimates time; it is not a second installation se
 | フォント / font | 図のタイトルに `□` が出ない |
 
 <!-- ne:begin doc:9eb26820c4 -->
-### नेपालीमा
+### Nepali ma
 
-| जाँच | पास हुने सर्त |
+| jaanch | pas hune sart |
 |---|---|
-| kernel | "Python 3 (AI Vision)" र "Python 3 (AI Vision Anomalib)" दुवै सूचीमा देखिन्छन् |
-| लाइब्रेरी | दुवै वातावरणमा `verify_environment.py --profile all` को exit code 0, सामग्रीमा नपुग छैन |
-| चित्र | `Day01_02` को Part 1 ले एउटा चित्र देखाउन सक्छ |
-| फन्ट | चित्रको शीर्षकमा `□` देखिँदैन |
+| kernel | "Python 3 (AI Vision)" ra "Python 3 (AI Vision Anomalib)" dubai soochi ma dekhinchhan |
+| laibreri | dubai batabaran ma `verify_environment.py --profile all` ko exit code 0, samagri ma napug chhaina |
+| chitra | `Day01_02` ko Part 1 le euta chitra dekhauna sakchha |
+| phant | chitrako shirshakama `□` dekhindain |
 <!-- ne:end -->
 
 ### 準備が終わらなかった場合 / If preflight is not finished
@@ -194,18 +194,18 @@ Reference results are **not** measurements taken on your machine. Never submit t
 <a id="day1"></a>
 
 <!-- ne:begin doc:9915c807fc -->
-### नेपालीमा
+### Nepali ma
 
-लुकाउनु हुँदैन; तलको एउटा छान्नुहोस्। **तयारी पाठ समयभित्र सार्दा त्यो दिनको अनिवार्य सिकाइ
-अटाउँदैन।**
+lukaunu hundaina; talako euta chhannuhos. **tayari paath samayabhitr sarda tyo dinko aniwarya sikai
+ataundain.**
 
-| अवस्था | योजना |
+| abastha | yojana |
 |---|---|
-| कुनै पनि PC मा वातावरण चल्दैन | प्रशिक्षकको PC मा वातावरण देखाउने; प्रशिक्षार्थीले कागजमा अवलोकन र अनुमानमा ध्यान दिने। चलाउनै पर्ने अनिवार्य भाग भोलिपल्ट 08:00–09:00 मा सार्ने। |
-| केही जनाको मात्र चल्छ | चल्ने र नचल्ने मिलाएर २ जनाको समूह बनाउने। नचल्नेले "अनुमान → छेउको मानिसको नतिजा हेर्ने → एक वाक्यमा व्याख्या" गर्ने। |
-| model download मात्र असफल | दिन ३ पछि `assets/reference_outputs/` को **सन्दर्भ नतिजा** पढेर अगाडि बढ्ने। प्रशिक्षार्थीको आफ्नै नतिजा (`submissions/`) सँग छुट्याएर राख्ने। |
+| kunai pani PC ma batabaran chaldain | prashikshakako PC ma batabaran dekhaune; prashiksharthile kagajama abalokan ra anuman ma dhyan dine. chalaunai parne aniwarya bhaag bholipalt 08:00–09:00 ma sarne. |
+| kehi janako matra chalchha | chalne ra nachalne milaer 2 janako samuh banaune. nachalnele "anuman → chheuko manisako natija herne → ek bakyama byakhya" garne. |
+| model download matra asaphal | din 3 pachhi `assets/reference_outputs/` ko **sandarbha natija** padher agadi badhne. prashiksharthiko aphnai natija (`submissions/`) sang chhutyaer rakhne. |
 
-सन्दर्भ नतिजा **तपाईंको PC मा नापिएको नतिजा होइन**। ती सङ्ख्या आफ्नो नतिजाका रूपमा बुझाउनु हुँदैन।
+sandarbha natija **tapainko PC ma napieko natija hoina**. ti sankhya aphno natijaka rupama bujhaunu hundaina.
 <!-- ne:end -->
 
 ## 3. 第1日（11/16）AI の基礎 / Day 1 — AI fundamentals
@@ -214,39 +214,39 @@ Reference results are **not** measurements taken on your machine. Never submit t
 **required 300 min / buffer 60 min** (30 min breaks, 30 min recovery)
 
 <!-- ne:begin doc:d06c6f1658 -->
-### नेपालीमा
+### Nepali ma
 
-**अनिवार्य 300 मिनेट / बचत 60 मिनेट** (विश्राम 30 मिनेट, पुनःस्थापना 30 मिनेट)
+**aniwarya 300 minet / bachat 60 minet** (bishram 30 minet, punahsthapana 30 minet)
 
-बिहान र दिउँसोको तालिका माथि दिइएको छ। यस दिनका नोटबुक:
+bihan ra diunsoko talika mathi diieko chha. yas dinka notebook:
 
-| क्रम | नोटबुक | लाग्ने समय | पूर्वशर्त |
+| kram | notebook | lagne samay | poorwashart |
 |---|---|---|---|
-| 1 | `Day01_01_Introduction_to_AI.ipynb` | 115 मिनेट | `00_Environment_Setup.ipynb` |
-| 2 | `Day01_02_Pixels_and_Images.ipynb` | 110 मिनेट | `Day01_01` |
-| 3 | `Day01_03_Computer_Vision_Tasks.ipynb` | 65 मिनेट | `Day01_02` |
+| 1 | `Day01_01_Introduction_to_AI.ipynb` | 115 minet | `00_Environment_Setup.ipynb` |
+| 2 | `Day01_02_Pixels_and_Images.ipynb` | 110 minet | `Day01_01` |
+| 3 | `Day01_03_Computer_Vision_Tasks.ipynb` | 65 minet | `Day01_02` |
 
-**ऐच्छिक:** `Day01_01` को "थप सिकाइ" मा भएका उज्यालोबाहेकका लक्षण (रङ, क्षेत्रफल) का प्रयोग।
+**aichchhik:** `Day01_01` ko "thap sikai" ma bhaeka ujyalobahekaka lakshan (rang, kshetraphal) ka prayog.
 
-**कार्य:** AI र चित्र पहिचानको व्याख्या, Python ले प्रशोधन गरेको चित्रको नतिजा, र PVC निरीक्षणमा
-काम लाग्न सक्ने तरिकाको सुझाव।
+**kary:** AI ra chitra pahichanko byakhya, Python le prashodhan gareko chitrako natija, ra PVC nirikshan ma
+kaam lagn sakne tarikako sujhab.
 
-**दिन १ को समयतालिका** (`必須` = अनिवार्य, `休憩` = विश्राम, `提出` = बुझाउने):
+**din 1 ko samayatalika** (`必須` = aniwarya, `休憩` = bishram, `提出` = bujhaune):
 
-| समय | मिनेट | किसिम | काम |
+| samay | minet | kisim | kaam |
 |---|---|---|---|
-| 09:00–09:10 | 10 | अनिवार्य | तयारी जाँच |
-| 09:10–09:50 | 40 | अनिवार्य | `Day01_01` Part 0–2 |
-| 09:50–10:30 | 40 | अनिवार्य | `Day01_01` Part 3–4 |
-| 10:30–10:45 | 15 | विश्राम | स्क्रिनबाट अलग हुने |
-| 10:45–11:20 | 35 | अनिवार्य | `Day01_01` Part 5–6 + अभ्यास 1 |
-| 11:20–12:00 | 40 | अनिवार्य | `Day01_02` Part 0–2 |
-| 13:50–14:30 | 40 | अनिवार्य | `Day01_02` Part 3–5 |
-| 14:30–15:00 | 30 | अनिवार्य | `Day01_02` Part 6–7 + अभ्यास |
-| 15:00–15:15 | 15 | विश्राम | स्क्रिनबाट अलग हुने |
-| 15:15–15:50 | 35 | अनिवार्य | `Day01_03` Part 0–3 |
-| 15:50–16:20 | 30 | अनिवार्य | `Day01_03` Part 4–6 + अभ्यास |
-| 16:20–16:50 | 30 | बुझाउने | बुझाइ जाँच, बुझाउने काम र पुनःस्थापना |
+| 09:00–09:10 | 10 | aniwarya | tayari jaanch |
+| 09:10–09:50 | 40 | aniwarya | `Day01_01` Part 0–2 |
+| 09:50–10:30 | 40 | aniwarya | `Day01_01` Part 3–4 |
+| 10:30–10:45 | 15 | bishram | skrinabat alag hune |
+| 10:45–11:20 | 35 | aniwarya | `Day01_01` Part 5–6 + abhyas 1 |
+| 11:20–12:00 | 40 | aniwarya | `Day01_02` Part 0–2 |
+| 13:50–14:30 | 40 | aniwarya | `Day01_02` Part 3–5 |
+| 14:30–15:00 | 30 | aniwarya | `Day01_02` Part 6–7 + abhyas |
+| 15:00–15:15 | 15 | bishram | skrinabat alag hune |
+| 15:15–15:50 | 35 | aniwarya | `Day01_03` Part 0–3 |
+| 15:50–16:20 | 30 | aniwarya | `Day01_03` Part 4–6 + abhyas |
+| 16:20–16:50 | 30 | bujhaune | bujhai jaanch, bujhaune kaam ra punahsthapana |
 <!-- ne:end -->
 
 ### 午前の自習 / Morning self-study（09:00–12:00）
@@ -296,36 +296,36 @@ could work for PVC inspection.
 **required 300 min / buffer 60 min** (30 min breaks, 30 min recovery)
 
 <!-- ne:begin doc:057d807a5c -->
-### नेपालीमा
+### Nepali ma
 
-**अनिवार्य 300 मिनेट / बचत 60 मिनेट** (विश्राम 30 मिनेट, पुनःस्थापना 30 मिनेट)
+**aniwarya 300 minet / bachat 60 minet** (bishram 30 minet, punahsthapana 30 minet)
 
-| क्रम | नोटबुक | लाग्ने समय | पूर्वशर्त |
+| kram | notebook | lagne samay | poorwashart |
 |---|---|---|---|
-| 1 | `Day02_01_Python_Basics.ipynb` | 125 मिनेट | दिन १ |
-| 2 | `Day02_02_Conditions_Loops_Functions.ipynb` | 115 मिनेट | `Day02_01` |
-| 3 | `Day02_03_OpenCV_Image_Processing.ipynb` | 60 मिनेट | `Day02_02` |
+| 1 | `Day02_01_Python_Basics.ipynb` | 125 minet | din 1 |
+| 2 | `Day02_02_Conditions_Loops_Functions.ipynb` | 115 minet | `Day02_01` |
+| 3 | `Day02_03_OpenCV_Image_Processing.ipynb` | 60 minet | `Day02_02` |
 
-**दिन २ को समयतालिका:**
+**din 2 ko samayatalika:**
 
-| समय | मिनेट | किसिम | काम |
+| samay | minet | kisim | kaam |
 |---|---|---|---|
-| 09:00–09:10 | 10 | अनिवार्य | `Day02_01` Part 1, दिन १ दोहोर्‍याउने |
-| 09:10–09:50 | 40 | अनिवार्य | `Day02_01` Part 2–3 |
-| 09:50–10:30 | 40 | अनिवार्य | `Day02_01` Part 4–5 |
-| 10:30–10:45 | 15 | विश्राम | स्क्रिनबाट अलग हुने |
-| 10:45–11:20 | 35 | अनिवार्य | `Day02_01` Part 6 + अभ्यास |
-| 11:20–12:00 | 40 | अनिवार्य | `Day02_02` Part 0–2 |
-| 13:50–14:35 | 45 | अनिवार्य | `Day02_02` Part 3–4, पहिलो function लेख्ने |
-| 14:35–15:05 | 30 | अनिवार्य | `Day02_02` Part 5–6 + अभ्यास |
-| 15:05–15:20 | 15 | विश्राम | स्क्रिनबाट अलग हुने |
-| 15:20–16:00 | 40 | अनिवार्य | `Day02_03` Part 0–2 |
-| 16:00–16:20 | 20 | अनिवार्य | `Day02_03` Part 3–5 |
-| 16:20–16:50 | 30 | बुझाउने | बुझाइ जाँच, बुझाउने काम र पुनःस्थापना |
+| 09:00–09:10 | 10 | aniwarya | `Day02_01` Part 1, din 1 dohor‍yaune |
+| 09:10–09:50 | 40 | aniwarya | `Day02_01` Part 2–3 |
+| 09:50–10:30 | 40 | aniwarya | `Day02_01` Part 4–5 |
+| 10:30–10:45 | 15 | bishram | skrinabat alag hune |
+| 10:45–11:20 | 35 | aniwarya | `Day02_01` Part 6 + abhyas |
+| 11:20–12:00 | 40 | aniwarya | `Day02_02` Part 0–2 |
+| 13:50–14:35 | 45 | aniwarya | `Day02_02` Part 3–4, pahilo function lekhne |
+| 14:35–15:05 | 30 | aniwarya | `Day02_02` Part 5–6 + abhyas |
+| 15:05–15:20 | 15 | bishram | skrinabat alag hune |
+| 15:20–16:00 | 40 | aniwarya | `Day02_03` Part 0–2 |
+| 16:00–16:20 | 20 | aniwarya | `Day02_03` Part 3–5 |
+| 16:20–16:50 | 30 | bujhaune | bujhai jaanch, bujhaune kaam ra punahsthapana |
 
-**ऐच्छिक:** `Day02_03` को थप सिकाइमा morphology को प्रयोग।
-**कार्य:** कम्तीमा 5 मापनमा OK/NG छुट्याउने प्रोग्राम, OpenCV को नतिजा, pixel बाट mm मा रूपान्तरण
-र त्रुटिबारे विचार बुझाउनुहोस्।
+**aichchhik:** `Day02_03` ko thap sikai ma morphology ko prayog.
+**kary:** kamtima 5 maapan ma OK/NG chhutyaune program, OpenCV ko natija, pixel baat mm ma rupantaran
+ra trutibare bichar bujhaunuhos.
 <!-- ne:end -->
 
 ### 午前の自習 / Morning self-study（09:00–12:00）
@@ -375,34 +375,34 @@ pixel-to-mm conversion with its error.
 **required 275 min / buffer 85 min** (30 min breaks, 30 min recovery, 25 min submission)
 
 <!-- ne:begin doc:37d4961a9f -->
-### नेपालीमा
+### Nepali ma
 
-**अनिवार्य 275 मिनेट / बचत 85 मिनेट** (विश्राम 30 मिनेट, पुनःस्थापना 30 मिनेट, बुझाउने 25 मिनेट)
+**aniwarya 275 minet / bachat 85 minet** (bishram 30 minet, punahsthapana 30 minet, bujhaune 25 minet)
 
-| क्रम | नोटबुक | लाग्ने समय | पूर्वशर्त |
+| kram | notebook | lagne samay | poorwashart |
 |---|---|---|---|
-| 1 | `Day03_01_YOLO_Concepts.ipynb` | 80 मिनेट | दिन २ |
-| 2 | `Day03_02_YOLO_Inference.ipynb` | 85 मिनेट | `Day03_01`, `yolo26n.pt` डाउनलोड भइसकेको |
-| 3 | `Day03_03_YOLO_Experiments.ipynb` | 110 मिनेट | `Day03_02` |
+| 1 | `Day03_01_YOLO_Concepts.ipynb` | 80 minet | din 2 |
+| 2 | `Day03_02_YOLO_Inference.ipynb` | 85 minet | `Day03_01`, `yolo26n.pt` daunalod bhaisakeko |
+| 3 | `Day03_03_YOLO_Experiments.ipynb` | 110 minet | `Day03_02` |
 
-**दिन ३ को समयतालिका:**
+**din 3 ko samayatalika:**
 
-| समय | मिनेट | किसिम | काम |
+| samay | minet | kisim | kaam |
 |---|---|---|---|
-| 09:00–09:40 | 40 | अनिवार्य | `Day03_01` Part 0–2 |
-| 09:40–10:20 | 40 | अनिवार्य | `Day03_01` Part 3–4 + अभ्यास |
-| 10:20–10:35 | 15 | विश्राम | स्क्रिनबाट अलग हुने |
-| 10:35–11:20 | 45 | अनिवार्य | `Day03_02` Part 0–3, model खोल्ने समयसहित |
-| 11:20–12:00 | 40 | अनिवार्य | `Day03_02` Part 4–5 + अभ्यास |
-| 13:50–14:30 | 40 | अनिवार्य | `Day03_03` Part 0–2 |
-| 14:30–15:10 | 40 | अनिवार्य | `Day03_03` Part 3–4 |
-| 15:10–15:25 | 15 | विश्राम | स्क्रिनबाट अलग हुने |
-| 15:25–15:55 | 30 | अनिवार्य | `Day03_03` Part 5 + अभ्यास |
-| 15:55–16:25 | 30 | बचत | download असफल वा ढिलो PC को पुनःस्थापना |
-| 16:25–16:50 | 25 | बुझाउने | बुझाउने काम सुरक्षित गर्ने |
+| 09:00–09:40 | 40 | aniwarya | `Day03_01` Part 0–2 |
+| 09:40–10:20 | 40 | aniwarya | `Day03_01` Part 3–4 + abhyas |
+| 10:20–10:35 | 15 | bishram | skrinabat alag hune |
+| 10:35–11:20 | 45 | aniwarya | `Day03_02` Part 0–3, model kholne samayasahit |
+| 11:20–12:00 | 40 | aniwarya | `Day03_02` Part 4–5 + abhyas |
+| 13:50–14:30 | 40 | aniwarya | `Day03_03` Part 0–2 |
+| 14:30–15:10 | 40 | aniwarya | `Day03_03` Part 3–4 |
+| 15:10–15:25 | 15 | bishram | skrinabat alag hune |
+| 15:25–15:55 | 30 | aniwarya | `Day03_03` Part 5 + abhyas |
+| 15:55–16:25 | 30 | bachat | download asaphal wa dhilo PC ko punahsthapana |
+| 16:25–16:50 | 25 | bujhaune | bujhaune kaam surakshit garne |
 
-**ऐच्छिक:** `Day03_03` को थप सिकाइमा `imgsz=1280` भन्दा ठूलो मानको प्रयोग।
-**कार्य:** अनुमानको नतिजा, बाउन्डिङ बक्सको चित्र, थ्रेसहोल्ड प्रयोगको तालिका र एउटा असफलताको विश्लेषण।
+**aichchhik:** `Day03_03` ko thap sikai ma `imgsz=1280` bhanda thulo maanko prayog.
+**kary:** anumanko natija, baunding baksako chitra, threshold prayogko talika ra euta asaphalatako bishleshan.
 <!-- ne:end -->
 
 ### 午前の自習 / Morning self-study（09:00–12:00）
@@ -455,35 +455,35 @@ Training takes several minutes on CPU. The waiting time sits inside the 11:15–
 learner keeps working during it.
 
 <!-- ne:begin doc:cf458e5d3d -->
-### नेपालीमा
+### Nepali ma
 
-**अनिवार्य 290 मिनेट / बचत 70 मिनेट** (विश्राम 35 मिनेट, बुझाउने 35 मिनेट)
+**aniwarya 290 minet / bachat 70 minet** (bishram 35 minet, bujhaune 35 minet)
 
-| क्रम | नोटबुक | लाग्ने समय | पूर्वशर्त |
+| kram | notebook | lagne samay | poorwashart |
 |---|---|---|---|
-| 1 | `Day04_01_YOLO_Dataset_Annotation.ipynb` | 80 मिनेट | दिन ३ |
-| 2 | `Day04_02_YOLO_Training.ipynb` | 115 मिनेट | `Day04_01`, `assets/yolo_dataset` बनिसकेको |
-| 3 | `Day04_03_YOLO_Evaluation.ipynb` | 95 मिनेट | `Day04_02` को सिकिएको model |
+| 1 | `Day04_01_YOLO_Dataset_Annotation.ipynb` | 80 minet | din 3 |
+| 2 | `Day04_02_YOLO_Training.ipynb` | 115 minet | `Day04_01`, `assets/yolo_dataset` banisakeko |
+| 3 | `Day04_03_YOLO_Evaluation.ipynb` | 95 minet | `Day04_02` ko sikieko model |
 
-**दिन ४ को समयतालिका:** CPU मा सिकाइलाई केही मिनेट लाग्छ। 11:15–12:00 को समयमै पर्खाइ
-समावेश छ; त्यसबेला Part 4 पढ्नुहोस्।
+**din 4 ko samayatalika:** CPU ma sikai lai kehi minet lagchha. 11:15–12:00 ko samayamai parkhai
+samabesh chha; tyasabela Part 4 padhnuhos.
 
-| समय | मिनेट | किसिम | काम |
+| samay | minet | kisim | kaam |
 |---|---|---|---|
-| 09:00–09:40 | 40 | अनिवार्य | `Day04_01` Part 0–2 |
-| 09:40–10:20 | 40 | अनिवार्य | `Day04_01` Part 3–5 + अभ्यास |
-| 10:20–10:35 | 15 | विश्राम | स्क्रिनबाट अलग हुने |
-| 10:35–11:15 | 40 | अनिवार्य | `Day04_02` Part 0–2 |
-| 11:15–12:00 | 45 | अनिवार्य | `Day04_02` Part 3, सिकाइ सुरु गरेर Part 4 पढ्ने |
-| 13:50–14:20 | 30 | अनिवार्य | `Day04_02` Part 4 + अभ्यास |
-| 14:20–14:55 | 35 | अनिवार्य | `Day04_03` Part 0–2 |
-| 14:55–15:15 | 20 | विश्राम | स्क्रिनबाट अलग हुने |
-| 15:15–15:50 | 35 | अनिवार्य | `Day04_03` Part 3–4 |
-| 15:50–16:15 | 25 | अनिवार्य | `Day04_03` Part 5 + अभ्यास |
-| 16:15–16:50 | 35 | बुझाउने | बुझाउने काम सुरक्षित गर्ने |
+| 09:00–09:40 | 40 | aniwarya | `Day04_01` Part 0–2 |
+| 09:40–10:20 | 40 | aniwarya | `Day04_01` Part 3–5 + abhyas |
+| 10:20–10:35 | 15 | bishram | skrinabat alag hune |
+| 10:35–11:15 | 40 | aniwarya | `Day04_02` Part 0–2 |
+| 11:15–12:00 | 45 | aniwarya | `Day04_02` Part 3, sikai suru garera Part 4 padhne |
+| 13:50–14:20 | 30 | aniwarya | `Day04_02` Part 4 + abhyas |
+| 14:20–14:55 | 35 | aniwarya | `Day04_03` Part 0–2 |
+| 14:55–15:15 | 20 | bishram | skrinabat alag hune |
+| 15:15–15:50 | 35 | aniwarya | `Day04_03` Part 3–4 |
+| 15:50–16:15 | 25 | aniwarya | `Day04_03` Part 5 + abhyas |
+| 16:15–16:50 | 35 | bujhaune | bujhaune kaam surakshit garne |
 
-**ऐच्छिक:** `Day04_02` को थप सिकाइमा `epochs=20` को प्रयोग।
-**कार्य:** डेटासेट जाँच, सिकाइ र मूल्याङ्कनको नतिजा, एउटा सफल र एउटा असफल उदाहरण तथा अर्को सुधार।
+**aichchhik:** `Day04_02` ko thap sikai ma `epochs=20` ko prayog.
+**kary:** dataset jaanch, sikai ra mulyankanko natija, euta saphal ra euta asaphal udaharan tatha arko sudhar.
 <!-- ne:end -->
 
 ### 午前の自習 / Morning self-study（09:00–12:00）
@@ -535,36 +535,36 @@ PatchCore の `fit` は CPU で数分かかります。11:10–12:00 の枠に�
 PatchCore's `fit` takes several minutes on CPU; the 11:10–12:00 slot includes that wait.
 
 <!-- ne:begin doc:afdc331300 -->
-### नेपालीमा
+### Nepali ma
 
-**अनिवार्य 300 मिनेट / बचत 60 मिनेट** (विश्राम 35 मिनेट, बुझाउने 25 मिनेट)
+**aniwarya 300 minet / bachat 60 minet** (bishram 35 minet, bujhaune 25 minet)
 
-| क्रम | नोटबुक | लाग्ने समय | पूर्वशर्त |
+| kram | notebook | lagne samay | poorwashart |
 |---|---|---|---|
-| 1 | `Day05_01_Anomaly_Detection_Concepts.ipynb` | 70 मिनेट | दिन ४ |
-| 2 | `Day05_02_PatchCore_Training.ipynb` | 130 मिनेट | `Day05_01`, `aivision-anomalib` kernel |
-| 3 | `Day05_03_YOLO_vs_PatchCore.ipynb` | 100 मिनेट | `Day04_03` र `Day05_02` का सुरक्षित नतिजा |
+| 1 | `Day05_01_Anomaly_Detection_Concepts.ipynb` | 70 minet | din 4 |
+| 2 | `Day05_02_PatchCore_Training.ipynb` | 130 minet | `Day05_01`, `aivision-anomalib` kernel |
+| 3 | `Day05_03_YOLO_vs_PatchCore.ipynb` | 100 minet | `Day04_03` ra `Day05_02` ka surakshit natija |
 
-क्यालिब्रेसन र परीक्षण छुट्याएर राख्नुहोस्। परीक्षण डेटा हेरेर threshold मिलाउनु हुँदैन।
+calibration ra parikshan chhutyaer rakhnuhos. parikshan data herer threshold milaunu hundaina.
 
-**दिन ५ को समयतालिका:** CPU मा PatchCore `fit` को पर्खाइ 11:10–12:00 भित्रै समावेश छ।
+**din 5 ko samayatalika:** CPU ma PatchCore `fit` ko parkhai 11:10–12:00 bhitrai samabesh chha.
 
-| समय | मिनेट | किसिम | काम |
+| samay | minet | kisim | kaam |
 |---|---|---|---|
-| 09:00–09:35 | 35 | अनिवार्य | `Day05_01` Part 0–2 |
-| 09:35–10:10 | 35 | अनिवार्य | `Day05_01` Part 3–5 + अभ्यास |
-| 10:10–10:30 | 20 | विश्राम | स्क्रिनबाट अलग हुने |
-| 10:30–11:10 | 40 | अनिवार्य | `Day05_02` Part 0–2 |
-| 11:10–12:00 | 50 | अनिवार्य | `Day05_02` Part 3–4, fit र मूल्याङ्कन |
-| 13:50–14:30 | 40 | अनिवार्य | `Day05_02` Part 5 + अभ्यास |
-| 14:30–15:15 | 45 | अनिवार्य | `Day05_03` Part 0–3 |
-| 15:15–15:30 | 15 | विश्राम | स्क्रिनबाट अलग हुने |
-| 15:30–16:00 | 30 | अनिवार्य | `Day05_03` Part 4–5 + अभ्यास |
-| 16:00–16:25 | 25 | अनिवार्य | पाँच दिनको प्रशिक्षकसँग पुनरावलोकन |
-| 16:25–16:50 | 25 | बुझाउने | बुझाउने काम सुरक्षित गर्ने |
+| 09:00–09:35 | 35 | aniwarya | `Day05_01` Part 0–2 |
+| 09:35–10:10 | 35 | aniwarya | `Day05_01` Part 3–5 + abhyas |
+| 10:10–10:30 | 20 | bishram | skrinabat alag hune |
+| 10:30–11:10 | 40 | aniwarya | `Day05_02` Part 0–2 |
+| 11:10–12:00 | 50 | aniwarya | `Day05_02` Part 3–4, fit ra mulyankan |
+| 13:50–14:30 | 40 | aniwarya | `Day05_02` Part 5 + abhyas |
+| 14:30–15:15 | 45 | aniwarya | `Day05_03` Part 0–3 |
+| 15:15–15:30 | 15 | bishram | skrinabat alag hune |
+| 15:30–16:00 | 30 | aniwarya | `Day05_03` Part 4–5 + abhyas |
+| 16:00–16:25 | 25 | aniwarya | paanch dinko prashikshakasang punarabalokan |
+| 16:25–16:50 | 25 | bujhaune | bujhaune kaam surakshit garne |
 
-**ऐच्छिक:** `Day05_03` को थप सिकाइमा validation डेटामा थ्रेसहोल्डका 3 मान जाँच्ने काम।
-**कार्य:** PatchCore को नतिजा, heatmap, तुलना तालिका र कारणसहित PVC का लागि सिफारिस।
+**aichchhik:** `Day05_03` ko thap sikai ma validation data ma thresholdka 3 maan jaanchne kaam.
+**kary:** PatchCore ko natija, heatmap, tulna talika ra karanasahit PVC ka lagi sipharis.
 <!-- ne:end -->
 
 ### 午前の自習 / Morning self-study（09:00–12:00）
@@ -624,22 +624,22 @@ All 16 notebooks share one structure.
 | さらに学ぶ / Further learning | 任意の発展 / optional only |
 
 <!-- ne:begin doc:ed66093516 -->
-### नेपालीमा
+### Nepali ma
 
-16 वटै नोटबुकको बनावट उही छ। अलमलिए यही क्रम सम्झनुहोस्।
+16 batai notebookko banabat uhi chha. alamalie yahi kram samjhanuhos.
 
-| भाग | सामग्री |
+| bhaag | samagri |
 |---|---|
-| शीर्षक | सिकाइ लक्ष्य, लाग्ने समय, पूर्वशर्त, आजको क्रम, बुझाउनुपर्ने काम |
-| तयारी | तालिम फोल्डर पत्ता लगाउने, लाइब्रेरी जाँच, जापानी फन्ट मिलाउने (एकै पटक चलाउने) |
-| अवधारणा | जापानी → अङ्ग्रेजी क्रममा व्याख्या। **पहिले चित्र** देखाइन्छ |
-| प्रदर्शन | उदाहरण हेर्ने → एउटा बदलेर अनुमान → चलाउने → तुलना → एक वाक्यमा व्याख्या → कोड पढ्ने |
-| निर्देशित प्रयोग | सङ्ख्या बदलेर नतिजा अनुमान गर्ने (ऐच्छिक slider सहित) |
-| अभ्यास | आधारभूत (अनिवार्य), मध्यम (अनिवार्य), विकास (ऐच्छिक) |
-| बुझाइ जाँच | ३–५ प्रश्न |
-| समस्या | सामान्य गल्ती र समाधान, पुनःस्थापनाको क्रम |
-| सकिएको जाँचसूची | **अनिवार्य** वस्तु मात्र। ऐच्छिक काम सूचीमा पर्दैन |
-| थप सिकाइ | ऐच्छिक विकास मात्र |
+| shirshak | sikai lakshya, lagne samay, poorwashart, ajako kram, bujhaunuparne kaam |
+| tayari | talim folder patta lagaune, laibreri jaanch, Japani phant milaune (ekai patak chalaune) |
+| abadharana | Japani → Angreji kram ma byakhya. **pahile chitra** dekhainchha |
+| pradarshan | udaharan herne → euta badaler anuman → chalaune → tulna → ek bakyama byakhya → kod padhne |
+| nirdeshit prayog | sankhya badaler natija anuman garne (aichchhik slider sahit) |
+| abhyas | adharabhut (aniwarya), madhyam (aniwarya), bikas (aichchhik) |
+| bujhai jaanch | 3–5 prashna |
+| samasya | samanya galti ra samadhan, punahsthapanako kram |
+| sakieko janchasuchi | **aniwarya** bastu matra. aichchhik kaam soochi ma pardaina |
+| thap sikai | aichchhik bikas matra |
 <!-- ne:end -->
 
 ### セルの指示 / Cell instructions
@@ -661,18 +661,18 @@ do not need to understand them; run them as one block.
 ---
 
 <!-- ne:begin doc:7f8c36deaf -->
-### नेपालीमा
+### Nepali ma
 
-हरेक कोड सेलको सुरुमा तलको एउटा चिन्ह अनिवार्य हुन्छ।
+harek kod cellko suru ma talako euta chinh aniwarya hunchha.
 
-| देखिने | अर्थ |
+| dekhine | arth |
 |---|---|
-| `実行のみ / Run only` | छानेर **Shift + Enter**। नबदल्नुहोस् |
-| `この値を変更 / Change this value` | मान बदलेर नतिजाको परिवर्तन अनुमान गरेपछि चलाउनुहोस् |
-| `自分でコードを書く / Write your code` | खाली ठाउँ आफैं भर्नुहोस् |
+| `実行のみ / Run only` | chhaner **Shift + Enter**. nabadalnuhos |
+| `この値を変更 / Change this value` | maan badaler natijako paribartan anuman garepachhi chalaunuhos |
+| `自分でコードを書く / Write your code` | khali thaun aphain bharnuhos |
 
-**उच्च तहको तयारी:** Part 0 का सेलमा फोल्डर पत्ता लगाउने, फन्ट मिलाउने र देखाउने function मात्र
-छन्। भित्री कुरा बुझ्नु आवश्यक छैन। एकै पटक चलाउनुहोस्।
+**uchcha tahako tayari:** Part 0 ka cell ma folder patta lagaune, phant milaune ra dekhaune function matra
+chhan. bhitri kura bujhnu aawashyak chhaina. ekai patak chalaunuhos.
 <!-- ne:end -->
 
 ## 9. 評価 / Assessment
@@ -696,20 +696,20 @@ Assessment uses **required** items only. An unfinished optional extension is not
 ---
 
 <!-- ne:begin doc:d555cca298 -->
-### नेपालीमा
+### Nepali ma
 
-हरेक दिन ४ तहमा आफैं मूल्याङ्कन गर्नुहोस्। **लक्ष्य तह 2 वा माथि** हो।
+harek din 4 tahama aphain mulyankan garnuhos. **lakshya tah 2 wa mathi** ho.
 
-| तह | अवस्था |
+| tah | abastha |
 |---|---|
-| 0 | नसकिएको |
-| 1 | ठुलो सहयोग भएमा सकिएको |
-| 2 | अलिकति सहयोगमा सकिएको |
-| 3 | एक्लै सकेर नतिजा बुझाउन सक्ने |
+| 0 | nasakieko |
+| 1 | thulo sahayog bhae ma sakieko |
+| 2 | alikati sahayogama sakieko |
+| 3 | eklai saker natija bujhaun sakne |
 
-तह 3 मा "चल्यो" मात्र पुग्दैन। **"किन त्यस्तो हुन्छ" अरूलाई बुझाउन सक्ने** हुनुपर्छ।
+tah 3 ma "chalyo" matra pugdain. **"kina tyasto hunchha" arulai bujhaun sakne** hunuparchha.
 
-मूल्याङ्कन **अनिवार्य** वस्तुमा मात्र गरिन्छ। ऐच्छिक विकास काम नगरे पनि अङ्क घटाइँदैन।
+mulyankan **aniwarya** bastuma matra garinchha. aichchhik bikas kaam nagare pani angk ghataindain.
 <!-- ne:end -->
 
 ## 10. 第 2 週へのつながり / What Week 2 covers
@@ -732,19 +732,19 @@ Week 1 repeatedly states that synthetic accuracy is not product accuracy, precis
 can confront real data honestly.
 
 <!-- ne:begin doc:e64da46436 -->
-### नेपालीमा
+### Nepali ma
 
-हप्ता १ **आधार** हो। वास्तविक निरीक्षण प्रणाली हप्ता २ मा सम्हालिन्छ।
+hapta 1 **adhar** ho. bastabik nirikshan pranali hapta 2 ma samhalinchha.
 
-| हप्ता २ को सामग्री |
+| hapta 2 ko samagri |
 |---|
-| PVC का वास्तविक निरीक्षण आवश्यकताको व्यवस्थापन |
-| क्यामेरा, लेन्स र उज्यालोको छनोट (0.3 mm देखाउन कति pixel चाहिन्छ) |
-| खिचाइको सर्त डिजाइन र क्यालिब्रेसन |
-| वास्तविक चित्रको डेटा संकलन र लेबलिङ |
-| प्रणालीको बनावट र उच्च गतिको प्रशोधन |
-| निरीक्षण prototype बनाउने र मूल्याङ्कन गर्ने |
+| PVC ka bastabik nirikshan abashyakatako byabasthapan |
+| kyamera, lens ra ujyaloko chhanot (0.3 mm dekhauna kati pixel chahinchha) |
+| khichaiko sart dijain ra calibration |
+| bastabik chitrako data sankalan ra lebaling |
+| pranaliko banabat ra uchcha gatiko prashodhan |
+| nirikshan prototype banaune ra mulyankan garne |
 
-हप्ता १ मा "कृत्रिम डेटाको शुद्धता उत्पादनको शुद्धता होइन" भनेर दोहोर्याइएको कारण हप्ता २ मा
-वास्तविक डेटासँग इमानदारीसाथ सामना गर्नु हो।
+hapta 1 ma "kritrim datako shuddhata utpadanako shuddhata hoina" bhanera dohoryaieko karan hapta 2 ma
+bastabik data sang imanadarisath samana garnu ho.
 <!-- ne:end -->
