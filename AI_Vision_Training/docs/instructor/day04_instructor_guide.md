@@ -90,6 +90,18 @@ Notebook 01: all Parts plus **exercises 1-2 (required)**. Exercise 3 (leakage de
 | 02 Training | **学習が完走**し、`best.pt` と `results.csv` が生成される |
 | 03 Evaluation | `split="test"` の評価、混同行列、失敗例、共通画像の JSON |
 
+**Day 4 の Part 5 は較正用だけです。** 比較用セット（`assets/anomaly_dataset/pvc_sheet/test/`）の
+分割をここで先に確定し、**較正用 26 枚だけ** を採点して保存します。Part 5 の最後のセル
+`shared-sealed-test` は、第 5 日で固定を記録するまで **止まります**。これは仕様です。
+第 4 日のうちに `split="test"` の評価（Part 2）と混同させないでください。Part 2 は
+`assets/yolo_dataset` の試験分割で、比較用セットとは別のデータです。
+
+**Day 4 Part 5 is calibration-only.** It fixes the split of the shared comparison set
+(`assets/anomaly_dataset/pvc_sheet/test/`) before any inference and scores **only the 26 calibration
+images**. The last cell of Part 5, `shared-sealed-test`, **stops** until Day 5 records the freeze;
+that is intended. Do not let learners merge it with the Part 2 `split="test"` evaluation: Part 2 uses
+the test split of `assets/yolo_dataset`, which is different data.
+
 **学習時間はハードウェアで大きく変わります。** 「終了時間は保証できない」と
 最初に明言してください。遅い受講者には `EPOCHS=5`、`IMGSZ=160` を案内します。
 

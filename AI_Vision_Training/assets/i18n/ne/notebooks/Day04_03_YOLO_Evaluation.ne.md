@@ -379,12 +379,49 @@ yo talimko 64 tasbir obharaphiting sajilai hune abasthamadhye ek ho. **ramro san
 **arko tasbir setama pani kina abhilekh garne**
 <!-- ne-pair: Why record results on another image set -->
 
-din 5 ma **YOLO ra PatchCore lai eutai tasbir ma tulna** garinchha.
-
-tyaska lagi yahan **tulnaka lagi banaiyeko tasbir set** ma YOLO ko natija surakshit garinchha. lakshya
+din 5 ma **YOLO ra PatchCore lai eutai tasbir ma tulna** garinchha. tyaska lagi yahan **tulnaka lagi
+banaiyeko tasbir set** ma YOLO ko natija abhilekh garinchha. lakshya
 `assets/anomaly_dataset/pvc_sheet/test/` ho. yi tasbir **prashikshan ma prayog bhaeka chhainan**.
 
-surakshit garieko JSON din 5 notebook 03 le padhchha.
+tulnaka lagi banaiyeko set ma 52 tasbir chhan. din 5 notebook 02 le yaslai **calibration** ra **test**
+gari 26/26 ma bandaphant garchha. niyam sthir chha (`val_split_mode="from_test"`, anupat 0.5,
+`seed=2026`), ra **yo Part le pahile nai tay garera `submissions/day04/shared_set_split.json` ma
+surakshit garchha**. din 5 le haatama bhaeko anomalib ko bandaphant yo abhilekh sang milchha ki
+jaanchera matra agadi badhchha.
+
+kram mahatwapurna chha. **sthir garnuaghi testko score banaunu hudaina** — yo bhaagko uddeshya tyahi ho.
+
+| kahile / when | ke garne / what |
+|---|---|
+| sthir garnuaghi / before the freeze | calibration ka 26 tasbir matra mulyankan garera `yolo_predictions_on_shared_set.json` ma surakshit garne |
+| sthir garepachhi / after the freeze | Part 5 ko `shared-sealed-test` cell le test ka 26 tasbir **ek patak matra** mulyankan garera chhuttai file ma sealed garne |
+
+threshold tay garna paune calibration ko score le matra ho. **test ko score sthir nagare samma
+hundaina.** nahereko kuralai threshold ma prayog garna sakindaina.
+
+> Part 2 ko `split="test"` mulyankan sang **yo data farak ho**. Part 2 `assets/yolo_dataset` ko test
+> bandaphant ho; yahan `assets/anomaly_dataset/pvc_sheet/test` ko tulnaka lagi set ho. duilai milaera
+> nishkarsh nikaalnu hundaina.
+
+<!-- ne-cell: shared-sealed-test-intro | after-heading -->
+**sthir garepachhi ek patak matra**
+<!-- ne-pair: Once, after the freeze -->
+
+din 5 notebook 03 ma dui threshold sthir garepachhi, talako cell **ek patak matra** chalaunuhos.
+test ka 26 tasbir yahin pahilo patak mulyankan bhaera
+`submissions/day04/yolo_predictions_sealed_test.json` ma sealed hunchhan.
+
+talako kura madhye kunai chhaina bhane yo cell **mulyankan nagari rokinchha**. bhaeko sealed file pani
+badaldaina.
+
+- sthir abhilekh `submissions/day05/comparison_freeze_record.json` ra tyasko ghoshana
+- sthir abhilekh ma lekheko bandaphant ra yo Part ma tay gareko bandaphant ko milan
+- sthir abhilekh ma lekheko YOLO weight ra yahan load bhaeko weight ko milan
+
+**kernel YOLO batabaran mai** rakhera chalaunuhos. anomalib batabaran ma `ultralytics` chhaina,
+tyasaile yo cell chaldaina. kernel feri suru gareko bhane Part 5 ko bandaphant cell baat feri
+chalaunuhos. model feri prashikshan gareko bhane **yo arko experiment** ho; sealed garnuaghi din 5 ko
+sthir charan baat feri garnuhos.
 
 <!-- ne-cell: ba368ee2 | after-heading -->
 ## abhyas
@@ -476,11 +513,12 @@ sabai ma chinh lagepachhi yo notebook pura hunchha.
 
 **aniwarya**
 
-- [ ] Part 1–Part 5 padher sabai code cell chalaen
+- [ ] Part 1–Part 5 padher sthir garnuaghi ka sabai code cell chalaen
 - [ ] `split="test"` ma mulyankan garen
 - [ ] confusion matrix janchen
 - [ ] saphal ra asaphal udaharan tasbir ma heren
-- [ ] `yolo_predictions_on_shared_set.json` surakshit garen
+- [ ] `yolo_predictions_on_shared_set.json` surakshit garen (calibration matra)
+- [ ] sthir garepachhi `shared-sealed-test` ek patak matra chalaen
 - [ ] abhyas 1–2 (aniwarya) garen
 - [ ] bujhai jaanchne 5 prashnako uttar dien
 - [ ] notebook surakshit garen

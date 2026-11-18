@@ -108,7 +108,11 @@ def freeze_namespace(tmp_path: Path) -> dict:
     manifest["experiment"] = experiment
     (day05 / "patchcore_fitted_state.json").write_text(
         json.dumps({"schema_version": 1, "experiment": experiment}), encoding="utf-8")
+    (day05 / "patchcore_calibrated_state.json").write_text(
+        json.dumps({"schema_version": 1, "experiment": experiment,
+                    "postprocessor": {"available": False}}), encoding="utf-8")
     return {"COURSE_ROOT": tmp_path, "json": json, "YOLO_THRESHOLD": .06,
+            "comparison_is_final": True,
             "PATCHCORE_THRESHOLD": .5,
             "manifest": manifest,
             "yolo_data": {"weights": "fixture.pt"},

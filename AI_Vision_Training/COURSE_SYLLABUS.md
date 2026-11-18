@@ -479,8 +479,10 @@ samabesh chha; tyasabela Part 4 padhnuhos.
 | 14:20–14:55 | 35 | aniwarya | `Day04_03` Part 0–2 |
 | 14:55–15:15 | 20 | bishram | skrinabat alag hune |
 | 15:15–15:50 | 35 | aniwarya | `Day04_03` Part 3–4 |
-| 15:50–16:15 | 25 | aniwarya | `Day04_03` Part 5 + abhyas |
+| 15:50–16:15 | 25 | aniwarya | `Day04_03` Part 5 + abhyas (**calibration matra** mulyankan; `shared-sealed-test` rokinchha) |
 | 16:15–16:50 | 35 | bujhaune | bujhaune kaam surakshit garne |
+
+**shared-sealed-test din 5 ma chalinchha.** tulnaka lagi setko bandaphant Part 5 ma pahile tay hunchha ra sthir garnuaghi testko score banaindaina. baaki kram din 5 ko 15:30 ko samayama hunchha.
 
 **aichchhik:** `Day04_02` ko thap sikai ma `epochs=20` ko prayog.
 **kary:** dataset jaanch, sikai ra mulyankanko natija, euta saphal ra euta asaphal udaharan tatha arko sudhar.
@@ -504,7 +506,7 @@ samabesh chha; tyasabela Part 4 padhnuhos.
 | 14:20–14:55 | 35 | 必須 | `Day04_03` Part 0–2 |
 | 14:55–15:15 | 20 | 休憩 | 休憩 / break |
 | 15:15–15:50 | 35 | 必須 | `Day04_03` Part 3–4 |
-| 15:50–16:15 | 25 | 必須 | `Day04_03` Part 5 + 演習 |
+| 15:50–16:15 | 25 | 必須 | `Day04_03` Part 5 + 演習（**較正用だけ** を採点。`shared-sealed-test` は止まります） |
 | 16:15–16:50 | 35 | 提出 | 提出物 / submission |
 
 **この日のノートブック / Notebooks today**
@@ -517,6 +519,11 @@ samabesh chha; tyasabela Part 4 padhnuhos.
 
 **任意 / Optional:** `Day04_02` の「さらに学ぶ」にある `epochs` を 20 に増やす実験。
 **任意 / Optional:** the `epochs=20` experiment under "さらに学ぶ" in `Day04_02`.
+
+**`shared-sealed-test` は第5日で実行します。** 比較用セットの分割は Part 5 で先に決まり、
+固定より前には試験用のスコアを作りません。続きは第5日の 15:30 枠です。
+**`shared-sealed-test` runs on Day 5.** Part 5 fixes the shared split first and produces no
+test score before the freeze; the rest of the sequence happens in Day 5's 15:30 slot.
 
 **課題 / Assignment:** データセットの点検、学習結果、評価結果、成功例と失敗例、
 次に改善する点。
@@ -556,12 +563,14 @@ calibration ra parikshan chhutyaer rakhnuhos. parikshan data herer threshold mil
 | 10:10–10:30 | 20 | bishram | skrinabat alag hune |
 | 10:30–11:10 | 40 | aniwarya | `Day05_02` Part 0–2 |
 | 11:10–12:00 | 50 | aniwarya | `Day05_02` Part 3–4, fit ra mulyankan |
-| 13:50–14:30 | 40 | aniwarya | `Day05_02` Part 5 + abhyas |
-| 14:30–15:15 | 45 | aniwarya | `Day05_03` Part 0–3 |
+| 13:50–14:30 | 40 | aniwarya | `Day05_02` Part 5 (calibrationko heatmap; `clarity-sealed-test-scoring` sthir nagare samma rokinchha) + abhyas |
+| 14:30–15:15 | 45 | aniwarya | `Day05_03` Part 0–3 (calibration ma tulna garera dui threshold sthir) |
 | 15:15–15:30 | 15 | bishram | skrinabat alag hune |
-| 15:30–16:00 | 30 | aniwarya | `Day05_03` Part 4–5 + abhyas |
+| 15:30–16:00 | 30 | aniwarya | sealed cell dui (din 4 notebook 03 → notebook 02) chalaera `Day05_03` Part 4–5 |
 | 16:00–16:25 | 25 | aniwarya | paanch dinko prashikshakasang punarabalokan |
 | 16:25–16:50 | 25 | bujhaune | bujhaune kaam surakshit garne |
+
+**chalne kram chha charan ko ho.** `Day05_02` dui patak kholinchha (charan 2 ko calibration mulyankan ra charan 5 ko sthir garepachhi ko sealed mulyankan). `Day04_03` pani sthir garepachhi `shared-sealed-test` ka lagi ek patak feri kholinchha. charan ko talika `Day05_02` ko Part 5 ma chha.
 
 **aichchhik:** `Day05_03` ko thap sikai ma validation data ma thresholdka 3 maan jaanchne kaam.
 **kary:** PatchCore ko natija, heatmap, tulna talika ra karanasahit PVC ka lagi sipharis.
@@ -581,10 +590,10 @@ calibration ra parikshan chhutyaer rakhnuhos. parikshan data herer threshold mil
 
 | 時刻 / Time | 分 / min | 種別 / Type | 内容 / Content |
 |---|---|---|---|
-| 13:50–14:30 | 40 | 必須 | `Day05_02` Part 5 + 演習 |
-| 14:30–15:15 | 45 | 必須 | `Day05_03` Part 0–3 |
+| 13:50–14:30 | 40 | 必須 | `Day05_02` Part 5（較正用のヒートマップ。`clarity-sealed-test-scoring` は固定まで止まります）+ 演習 |
+| 14:30–15:15 | 45 | 必須 | `Day05_03` Part 0–3（較正用で比較して、2 つのしきい値を固定） |
 | 15:15–15:30 | 15 | 休憩 | 休憩 / break |
-| 15:30–16:00 | 30 | 必須 | `Day05_03` Part 4–5 + 演習 |
+| 15:30–16:00 | 30 | 必須 | 封印セル 2 つ（第4日 Notebook 03 → Notebook 02）を実行してから `Day05_03` Part 4–5 |
 | 16:00–16:25 | 25 | 必須 | 5 日間の振り返り（講師のまとめ / instructor wrap-up） |
 | 16:25–16:50 | 25 | 提出 | 提出物 / submission |
 
@@ -598,6 +607,13 @@ calibration ra parikshan chhutyaer rakhnuhos. parikshan data herer threshold mil
 
 **任意 / Optional:** `Day05_03` の「さらに学ぶ」にある、検証データでしきい値を 3 通り試す作業。
 **任意 / Optional:** the three-way validation threshold sweep under "さらに学ぶ" in `Day05_03`.
+
+**実行順は 6 ステップです。** `Day05_02` は 2 回開きます（ステップ 2 の較正用の採点と、
+ステップ 5 の固定後の封印採点）。`Day04_03` も固定後にもう一度開いて `shared-sealed-test` を
+実行します。手順の表は `Day05_02` の Part 5 にあります。
+**The order has six steps.** `Day05_02` is opened twice (calibration scoring in step 2, sealed
+scoring after the freeze in step 5), and `Day04_03` is opened once more after the freeze for
+`shared-sealed-test`. The step table is in Part 5 of `Day05_02`.
 
 **課題 / Assignment:** PatchCore の学習結果、ヒートマップ、比較表、
 塩ビ検査への推薦（判断と理由）。

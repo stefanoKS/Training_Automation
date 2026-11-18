@@ -118,19 +118,20 @@ utpadanama 10% bhanda kam hunchha bhanne gyarenti hoina. sangai aune chitraka 0.
 yo patakako threshold calibration kodale ganana gareko maan baat aaunchha.
 
 <!-- ne-cell: be4aa133 | after-heading -->
-**tin file padhne**
-<!-- ne-pair: Read the three files -->
+**calibration ka tin file padhne**
 
 <!-- ne-cell: be4aa133 -->
 | file | banaeko thaun | bhitra ke chha |
 |---|---|---|
-| `submissions/day05/split_manifest.json` | din 5 notebook 02 | **bibhajanako abhilekh**: kun tasbir talim, calibration wa parikshan ho |
-| `submissions/day04/yolo_predictions_on_shared_set.json` | din 4 notebook 03 | sabai tasbirko YOLO pahichan (confidence sahit) |
-| `submissions/day05/patchcore_predictions.json` | din 5 notebook 02 | **calibration matra** ko PatchCore score (test hoina) |
-| `submissions/day05/patchcore_test_predictions.json` | din 5 notebook 02 ko antim "sealed" cell | **sthir garepachhi ek patak** matra baneko test score |
+| `submissions/day05/split_manifest.json` | din 5 notebook 02 | **bibhajanako abhilekh**, din 4 le tay gareko bibhajan sang milchha bhanne chinh sahit |
+| `submissions/day04/yolo_predictions_on_shared_set.json` | din 4 notebook 03 | **calibration matra** ko YOLO pahichan (confidence sahit) |
+| `submissions/day05/patchcore_predictions.json` | din 5 notebook 02 | **calibration matra** ko PatchCore score |
 
-**bibhajanako abhilekh nabhaeko natija prayog garindain.** kun data ma threshold tay gariyo thaha nabhaeko sankhya
-tulnako adhar bann sakdain. purano dhanchako file bhae karan dekhaer rokinchha.
+**bibhajanako abhilekh nabhaeko natija prayog garindain.** kun data ma threshold tay gariyo thaha nabhaeko
+sankhya tulnako adhar bann sakdain. purano dhanchako file bhae karan dekhaer rokinchha.
+
+test ko score yo Part ma padindaina. **sthir abhilekh garepachhi** matra
+`yolo_predictions_sealed_test.json` ra `patchcore_test_predictions.json` padhinchha.
 
 <!-- ne-cell: 415b6d88 | after-heading -->
 **frame banaune**
@@ -280,12 +281,18 @@ chhanot garne cell feri chalaera jaanchnuhos. yo abalokanapachhi sthir garnuhos 
 **sealed test prediction padhne**
 
 <!-- ne-cell: clarity-sealed-test-read -->
-test score sthir abhilekh gariepachhi `Day05_02_PatchCore_Training.ipynb` ko
-`clarity-sealed-test-scoring` cell le ek patak matra mulyankan garera
-`submissions/day05/patchcore_test_predictions.json` ma sealed garera rakheko hunchha. yo cell tyo seal
-padhchha ra **experiment ko fingerprint, bibhajan, model ra threshold milchha ki** jaanchera matra talika
-banaunchha. namilera bhane rokinchha ra sealed file tyasai rahanchha. yahan feri mulyankan garindaina.
-chalne kram chaar charan ko ho. 1 ra 3 `Day05_02` ma, 2 ra 4 yo notebook ma.
+test score **sthir abhilekh gariepachhi** dui notebook le ek-ek patak mulyankan garera sealed garera
+rakheka chhan.
+
+- `Day04_03_YOLO_Evaluation.ipynb` ko `shared-sealed-test`
+  → `submissions/day04/yolo_predictions_sealed_test.json`
+- `Day05_02_PatchCore_Training.ipynb` ko `clarity-sealed-test-scoring`
+  → `submissions/day05/patchcore_test_predictions.json`
+
+yo cell dui seal padhchha ra **experiment ko fingerprint, bibhajan, model, threshold ra mulyankanako bhumika
+sthir abhilekh sang milchha ki** jaanchera matra talika banaunchha. euta pani na milae rokinchha ra sealed
+file tyasai rahanchha. yahan feri mulyankan garindaina. test ka 26 tasbir dui tarikama eutai hunuparchha,
+natra tulna garna sakidaina.
 
 <!-- ne-cell: 3d343aab | after-heading -->
 **sthir garieko thresholdle parikshan ek patak matra mulyankan garne**

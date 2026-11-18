@@ -21,6 +21,8 @@ sys.path.insert(0, str(ROOT / "assets" / "helpers"))
 
 import experiment_identity as identity  # noqa: E402
 
+ROLE = "declared_untouched_test"
+
 
 # ---------------------------------------------------------------------------
 # fixtures
@@ -183,7 +185,8 @@ def test_a_different_split_is_a_different_experiment() -> None:
 def test_case1_a_new_experiment_with_a_valid_seal_validates() -> None:
     frozen = _frozen()
     rows = identity.validate_sealed(_payload(frozen), schema_version=identity.SEALED_SCHEMA,
-                                    expected=frozen, manifest=_manifest())
+                                    expected=frozen, manifest=_manifest(),
+                                 expected_role=ROLE)
     assert [row["image"] for row in rows] == ["test/good/a.png", "test/bad/b.png"]
 
 
@@ -191,7 +194,8 @@ def test_case2_the_same_frozen_experiment_reuses_the_same_seal() -> None:
     frozen = _frozen()
     payload = _payload(frozen)
     assert identity.validate_sealed(payload, schema_version=identity.SEALED_SCHEMA,
-                                    expected=frozen, manifest=_manifest()) == payload["images"]
+                                    expected=frozen, manifest=_manifest(),
+                                 expected_role=ROLE) == payload["images"]
 
 
 def test_case3_another_fitted_model_is_rejected() -> None:
@@ -199,7 +203,8 @@ def test_case3_another_fitted_model_is_rejected() -> None:
     other = _frozen(fitted=_fitted(fill=2.0))
     with pytest.raises(identity.ProvenanceError, match="different fitted model"):
         identity.validate_sealed(_payload(other), schema_version=identity.SEALED_SCHEMA,
-                                 expected=frozen, manifest=_manifest())
+                                 expected=frozen, manifest=_manifest(),
+                                 expected_role=ROLE)
 
 
 def test_case4_another_split_is_rejected() -> None:
@@ -209,7 +214,8 @@ def test_case4_another_split_is_rejected() -> None:
     other = _frozen(manifest=other_manifest)
     with pytest.raises(identity.ProvenanceError, match="different dataset split"):
         identity.validate_sealed(_payload(other), schema_version=identity.SEALED_SCHEMA,
-                                 expected=frozen, manifest=_manifest())
+                                 expected=frozen, manifest=_manifest(),
+                                 expected_role=ROLE)
 
 
 def test_case5_other_thresholds_are_rejected() -> None:
@@ -217,7 +223,8 @@ def test_case5_other_thresholds_are_rejected() -> None:
     other = _frozen(patchcore=0.7)
     with pytest.raises(identity.ProvenanceError, match="different thresholds"):
         identity.validate_sealed(_payload(other), schema_version=identity.SEALED_SCHEMA,
-                                 expected=frozen, manifest=_manifest())
+                                 expected=frozen, manifest=_manifest(),
+                                 expected_role=ROLE)
 
 
 def test_case6_missing_test_images_are_rejected() -> None:
@@ -225,7 +232,8 @@ def test_case6_missing_test_images_are_rejected() -> None:
     with pytest.raises(identity.ProvenanceError, match="do not cover the test partition"):
         identity.validate_sealed(_payload(frozen, rows=_rows()[:1]),
                                  schema_version=identity.SEALED_SCHEMA,
-                                 expected=frozen, manifest=_manifest())
+                                 expected=frozen, manifest=_manifest(),
+                                 expected_role=ROLE)
 
 
 def test_case7_duplicate_image_ids_are_rejected() -> None:
@@ -234,7 +242,8 @@ def test_case7_duplicate_image_ids_are_rejected() -> None:
     with pytest.raises(identity.ProvenanceError, match="duplicate image IDs"):
         identity.validate_sealed(_payload(frozen, rows=rows),
                                  schema_version=identity.SEALED_SCHEMA,
-                                 expected=frozen, manifest=_manifest())
+                                 expected=frozen, manifest=_manifest(),
+                                 expected_role=ROLE)
 
 
 @pytest.mark.parametrize("field, value, message", [
@@ -249,7 +258,8 @@ def test_sealed_rows_are_type_and_partition_checked(field, value, message) -> No
     with pytest.raises(identity.ProvenanceError, match=message):
         identity.validate_sealed(_payload(frozen, rows=rows),
                                  schema_version=identity.SEALED_SCHEMA,
-                                 expected=frozen, manifest=_manifest())
+                                 expected=frozen, manifest=_manifest(),
+                                 expected_role=ROLE)
 
 
 def test_a_missing_field_is_named() -> None:
@@ -259,7 +269,8 @@ def test_a_missing_field_is_named() -> None:
     with pytest.raises(identity.ProvenanceError, match="no 'score'"):
         identity.validate_sealed(_payload(frozen, rows=rows),
                                  schema_version=identity.SEALED_SCHEMA,
-                                 expected=frozen, manifest=_manifest())
+                                 expected=frozen, manifest=_manifest(),
+                                 expected_role=ROLE)
 
 
 def test_an_older_schema_is_rejected_before_anything_else() -> None:
@@ -267,14 +278,16 @@ def test_an_older_schema_is_rejected_before_anything_else() -> None:
     with pytest.raises(identity.ProvenanceError, match="stale sealed predictions"):
         identity.validate_sealed(_payload(frozen, schema=2),
                                  schema_version=identity.SEALED_SCHEMA,
-                                 expected=frozen, manifest=_manifest())
+                                 expected=frozen, manifest=_manifest(),
+                                 expected_role=ROLE)
 
 
 def test_case11_the_reused_data_designation_survives_validation() -> None:
     frozen = _frozen()
     payload = _payload(frozen, role="illustrative_reused_data")
     identity.validate_sealed(payload, schema_version=identity.SEALED_SCHEMA,
-                             expected=frozen, manifest=_manifest())
+                             expected=frozen, manifest=_manifest(),
+                             expected_role="illustrative_reused_data")
     assert payload["frozen"]["assessment_role"] == "illustrative_reused_data"
 
 
@@ -284,12 +297,91 @@ def test_an_unknown_assessment_role_is_rejected() -> None:
     payload["frozen"]["assessment_role"] = "untouched"
     with pytest.raises(identity.ProvenanceError, match="assessment role"):
         identity.validate_sealed(payload, schema_version=identity.SEALED_SCHEMA,
-                                 expected=frozen, manifest=_manifest())
+                                 expected=frozen, manifest=_manifest(),
+                                 expected_role=ROLE)
+
+
+def test_a_mismatched_assessment_role_is_rejected() -> None:
+    frozen = _frozen()
+    payload = _payload(frozen, role="illustrative_reused_data")
+    with pytest.raises(identity.ProvenanceError, match="assessment role differs"):
+        identity.validate_sealed(payload, schema_version=identity.SEALED_SCHEMA,
+                                 expected=frozen, manifest=_manifest(),
+                                 expected_role="declared_untouched_test")
+
+
+def test_reused_data_cannot_become_untouched() -> None:
+    """Editing the role field of an existing seal must never upgrade it."""
+    frozen = _frozen()
+    payload = _payload(frozen, role="declared_untouched_test")
+    with pytest.raises(identity.ProvenanceError, match="assessment role differs"):
+        identity.validate_sealed(payload, schema_version=identity.SEALED_SCHEMA,
+                                 expected=frozen, manifest=_manifest(),
+                                 expected_role="illustrative_reused_data")
+
+
+def test_a_freeze_record_without_a_role_is_rejected() -> None:
+    frozen = _frozen()
+    with pytest.raises(identity.ProvenanceError, match="assessment role"):
+        identity.validate_sealed(_payload(frozen), schema_version=identity.SEALED_SCHEMA,
+                                 expected=frozen, manifest=_manifest(),
+                                 expected_role=None)
+
+
+def test_a_yolo_seal_validates_and_checks_the_same_contracts() -> None:
+    frozen = _frozen()
+    payload = {
+        "schema_version": 1,
+        "scored_partitions": ["test"],
+        "experiment": frozen,
+        "frozen": {"yolo_threshold": frozen["thresholds"]["yolo"],
+                   "patchcore_threshold": frozen["thresholds"]["patchcore"],
+                   "assessment_role": ROLE},
+        "images": [
+            {"partition": "test", "image": "test/good/a.png", "yolo_max_conf": 0.0,
+             "truly_abnormal": False},
+            {"partition": "test", "image": "test/bad/b.png", "yolo_max_conf": 0.93,
+             "truly_abnormal": True},
+        ],
+    }
+    rows = identity.validate_yolo_sealed(payload, schema_version=1, expected=frozen,
+                                         manifest=_manifest(), expected_role=ROLE)
+    assert [row["image"] for row in rows] == ["test/good/a.png", "test/bad/b.png"]
+
+    payload["frozen"]["yolo_threshold"] = 0.99
+    with pytest.raises(identity.ProvenanceError, match="another threshold"):
+        identity.validate_yolo_sealed(payload, schema_version=1, expected=frozen,
+                                      manifest=_manifest(), expected_role=ROLE)
 
 
 # ---------------------------------------------------------------------------
 # writing (CASE 10)
 # ---------------------------------------------------------------------------
+
+
+def test_postprocessor_state_reads_the_anomalib_2_axis_names() -> None:
+    """anomalib 2.x exposes ``_image_threshold`` and NaN buffers before fitting."""
+    import types
+
+    class Tensor:
+        def __init__(self, value):
+            self.value = value
+
+        def item(self):
+            return self.value
+
+    post_processor = types.SimpleNamespace(
+        enable_normalization=True, image_min=Tensor(0.25), image_max=Tensor(0.75),
+        pixel_min=Tensor(float("nan")), pixel_max=Tensor(0.5), _image_threshold=Tensor(0.4))
+    model = types.SimpleNamespace(post_processor=post_processor)
+    state = identity.postprocessor_state(model)
+
+    assert state["available"] is True
+    assert state["adaptive_threshold"] == 0.4
+    assert state["image_min"] == 0.25 and state["image_max"] == 0.75
+    # an unfitted statistic becomes None, never NaN, so the record stays valid JSON
+    assert state["pixel_min"] is None
+    assert "NaN" not in identity.canonical_json(state)
 
 
 def test_case10_a_failed_write_publishes_nothing(tmp_path, monkeypatch) -> None:

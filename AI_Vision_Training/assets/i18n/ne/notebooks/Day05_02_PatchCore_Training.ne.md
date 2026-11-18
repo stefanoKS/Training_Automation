@@ -444,31 +444,33 @@ heatmap "kahan heriraheko chha" jaanchna prayog hunchha. OK tasbir ma chamkilo k
 **Part 5: sthir garepachhi sealed testko mulyankan**
 
 <!-- ne-cell: clarity-sealed-test -->
-**chalne kram chaar charan ko ho.** test data mulyankan hune tyahi charan 3 ma ek patak matra ho.
+**chalne kram chha charan ko ho.** test data mulyankan hune charan 4 ra 5 ma, eka-eka patak matra ho.
 
-| charan | notebook | garnuparne kaam |
+| charan / step | notebook (batabaran) / notebook (env) | garnuparne kaam / what to do |
 |---|---|---|
-| 1 | `Day05_02_PatchCore_Training.ipynb` (yo notebook) | PatchCore fit garnuhos, **calibration matra** mulyankan garnuhos, ra tyo anuman surakshit garnuhos. test ahile nasaadhhnuhos. |
-| 2 | `Day05_03_YOLO_vs_PatchCore.ipynb` | calibration ma tulna garnuhos, YOLO ra PatchCore ko threshold chhannuhos, ra sthir gareko ghoshana abhilekh garnuhos. |
-| 3 | `Day05_02_PatchCore_Training.ipynb` (yo notebook) | **`clarity-sealed-test-scoring` cell matra** chalaunuhos. yo cell le sthir abhilekh jaanchera matra test ek patak mulyankan garchha. |
-| 4 | `Day05_03_YOLO_vs_PatchCore.ipynb` | sealed test anuman padhnuhos, tyasko parichay jaanchnuhos, ra antim tulna pura garnuhos. |
+| 1 | `Day04_03_YOLO_Evaluation.ipynb` (YOLO) | tulnaka lagi setko bandaphant tay garera **calibration ka 26 tasbir matra** mulyankan garne ra surakshit garne |
+| 2 | `Day05_02_PatchCore_Training.ipynb` (anomalib, yo notebook) | PatchCore fit garne, bandaphant din 4 sang milchha ki jaanchne, ani **calibration matra** mulyankan garera surakshit garne |
+| 3 | `Day05_03_YOLO_vs_PatchCore.ipynb` (anomalib) | calibration ma tulna garne, dui threshold chhannne, ra sthir gareko ghoshana abhilekh garne |
+| 4 | `Day04_03_YOLO_Evaluation.ipynb` (YOLO) | **`shared-sealed-test` cell matra** chalaune: test ka 26 tasbir ek patak mulyankan garera sealed garne |
+| 5 | `Day05_02_PatchCore_Training.ipynb` (anomalib, yo notebook) | **`clarity-sealed-test-scoring` cell matra** chalaune: test ka 26 tasbir ek patak mulyankan garera sealed garne |
+| 6 | `Day05_03_YOLO_vs_PatchCore.ipynb` (anomalib) | dui seal padhne, parichay jaanchne, ra antim tulna pura garne |
 
 ```text
-Day05_02  fit → calibration mulyankan → surakshit   (charan 1)
-      ↓
-Day05_03  calibration ma tulna → threshold → sthir  (charan 2)
-      ↓
-Day05_02  clarity-sealed-test-scoring matra chalaune (charan 3)
-      ↓
-Day05_03  sealed padhne → parichay jaanchne → antim tulna (charan 4)
+1  Day04_03 (YOLO)     bandaphant → calibration mulyankan → surakshit
+2  Day05_02 (anomalib) fit → bandaphant jaanch → calibration mulyankan → surakshit
+3  Day05_03 (anomalib) calibration ma tulna → dui threshold sthir
+4  Day04_03 (YOLO)     shared-sealed-test matra → sealed
+5  Day05_02 (anomalib) clarity-sealed-test-scoring matra → sealed
+6  Day05_03 (anomalib) dui seal → antim tulna
 ```
 
-| abastha | ke hunchha | ke garnu |
+| abastha / situation | ke hunchha / what happens | ke garnu / what to do |
 |---|---|---|
-| sthir garnuaghi test mulyankan garyo bhane | threshold test ko natijama milauna sakinchha, ra "nahereko data ko natija" rahndaina. tyasaile talako cell sthir abhilekh nabhae **chalna rokinchha**. | charan 1 ma pharkera `Day05_03` ma sthir pura garnuhos, ani charan 3 chalaunuhos. |
-| "sabai chalaunuhos / Run All" bichma rokiyo | janajan rokieko ho. charan 2 ma sthir nagare samma test mulyankan garna mildaina. | rokieko karan padhera mathiko chaar charan ek-ek garnuhos. |
-| `comparison_freeze_record.json` chhaina | sthir gareko ghoshana ahile abhilekh bhaeko chhaina. | `Day05_03_YOLO_vs_PatchCore.ipynb` ko `clarity-freeze-record` cell chalaunuhos. |
-| kernel feri suru gariyo | talim gareko model haraeko chha, tyasaile mulyankan garna mildaina. | mulyankan garnuaghi kernel feri suru nagarnuhos. suru gareko bhane `Day05_02` ko Part 3 ko fit cell baat kramaisang feri chalaunuhos. |
+| sthir garnuaghi test mulyankan garyo bhane | threshold test ko natijama milauna sakinchha, ra "nahereko data ko natija" rahndaina. tyasaile talako sealed cell sthir abhilekh nabhae **chalna rokinchha.** | charan 1–3 pura garera matra charan 5 chalaunuhos. |
+| "sabai chalaunuhos / Run All" bichma rokiyo | janajan rokieko ho. yo notebook charan 2 ra 5 ma gari dui patak kholinchha. pahilo "Run All" `clarity-sealed-test-scoring` ma rokinu nai sahi ho. | rokieko karan padhera mathiko 6 charan ek-ek garnuhos. |
+| `comparison_freeze_record.json` chhaina | sthir gareko ghoshana ahile abhilekh bhaeko chhaina. | charan 3 (`Day05_03` ko `clarity-freeze-record`) chalaunuhos. |
+| calibration ka tasbir pura chhainan | dui tarika eutai tasbir ma tulna sakidaina, tyasaile sthir nai huna sakdaina. | charan 1 ra 2 feri chalaera calibration ka anuman pura garnuhos. |
+| kernel feri suru gariyo | talim gareko model haraeko chha, tyasaile mulyankan garna mildaina. feri fit garda memory bank badlinchha ra **tyo uhi experiment ko nirantarta hoina** (fingerprint badlinchha). | mulyankan garnuaghi kernel feri suru nagarnuhos. badhyata bhayera feri fit garne bhae `training_results/day05/.../*.ckpt` ko surakshit checkpoint padhera fingerprint milchha ki jaanchnuhos. na milae **naya experiment** ho. charan 3 ko sthir baat feri garnuhos ra parikshan ek patak herisakeko hunale `TEST_ALREADY_SEEN=True` nai rakhnuhos. |
 
 **sthir abhilekh (`submissions/day05/comparison_freeze_record.json`) bhaneko** test hernuaghi "yo setting le
 mulyankan garne" bhanera tay gareko praman ho. tyasma model, purb-prashodhan, threshold ra experiment ko

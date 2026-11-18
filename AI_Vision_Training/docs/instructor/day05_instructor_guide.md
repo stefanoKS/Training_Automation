@@ -97,6 +97,33 @@ it appears in the kernel list.
 
 ---
 
+## 教室での実行順 / The classroom order (six steps)
+
+`Day05_02` は **2 回** 開きます。`Day04_03` も **固定後にもう一度** 開きます。試験用のスコアは、
+しきい値を固定するまで 1 つも作りません。
+
+`Day05_02` is opened **twice**, and `Day04_03` is reopened **once after the freeze**. No test score
+exists before the thresholds are frozen.
+
+| # | ノートブック（環境）/ Notebook (env) | すること / What happens |
+|---|---|---|
+| 1 | `Day04_03`（YOLO） | 比較用セットの分割を決め、較正用 26 枚だけを採点する / decide the shared split, score the 26 calibration images only |
+| 2 | `Day05_02`（anomalib） | fit し、分割が第 4 日と一致することを確かめ、較正用を採点する / fit, verify the split against Day 4, score calibration |
+| 3 | `Day05_03`（anomalib） | 較正用で 2 つのしきい値を決め、固定を記録する / choose both thresholds on calibration, record the freeze |
+| 4 | `Day04_03`（YOLO） | `shared-sealed-test` だけを実行し、試験用 26 枚を 1 回採点して封印する / run only `shared-sealed-test` and seal the 26 test images once |
+| 5 | `Day05_02`（anomalib） | `clarity-sealed-test-scoring` だけを実行し、試験用 26 枚を 1 回採点して封印する / run only `clarity-sealed-test-scoring` and seal them once |
+| 6 | `Day05_03`（anomalib） | 2 つの封印を読み、身元を確かめて最終比較を出す / load both seals, verify provenance, produce the comparison |
+
+**「すべて実行 / Run All」は封印セルで止まります。** これは故障ではなく、固定を飛ばせないための仕様です。
+各封印は固定記録と照合されます（学習した状態の指紋・分割・しきい値・評価の役割）。役割を書き換えた
+記録や、fit し直したモデルは拒否されます。分割は第 4 日が推論より前に決め、第 5 日が anomalib の
+実際の分割と照合します。食い違えば止まります。
+
+"Run All" stops at the sealing cell **by design**: the freeze cannot be skipped. Each seal is checked
+against the freeze record — the fitted fingerprint, the split, the thresholds and the assessment role.
+A relabelled role or a refitted model is rejected. The split is decided by Day 4 before any
+inference and verified against the installed anomalib by Day 5; a mismatch stops the notebook.
+
 ## 比較の較正（重要） / How the comparison is calibrated (important)
 
 > **受講者向けの説明はノートブックにあります。この節は講師用です。**

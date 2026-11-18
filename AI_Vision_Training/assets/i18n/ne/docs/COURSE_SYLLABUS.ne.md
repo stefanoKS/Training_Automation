@@ -222,8 +222,10 @@ samabesh chha; tyasabela Part 4 padhnuhos.
 | 14:20–14:55 | 35 | aniwarya | `Day04_03` Part 0–2 |
 | 14:55–15:15 | 20 | bishram | skrinabat alag hune |
 | 15:15–15:50 | 35 | aniwarya | `Day04_03` Part 3–4 |
-| 15:50–16:15 | 25 | aniwarya | `Day04_03` Part 5 + abhyas |
+| 15:50–16:15 | 25 | aniwarya | `Day04_03` Part 5 + abhyas (**calibration matra** mulyankan; `shared-sealed-test` rokinchha) |
 | 16:15–16:50 | 35 | bujhaune | bujhaune kaam surakshit garne |
+
+**shared-sealed-test din 5 ma chalinchha.** tulnaka lagi setko bandaphant Part 5 ma pahile tay hunchha ra sthir garnuaghi testko score banaindaina. baaki kram din 5 ko 15:30 ko samayama hunchha.
 
 **aichchhik:** `Day04_02` ko thap sikai ma `epochs=20` ko prayog.
 **kary:** dataset jaanch, sikai ra mulyankanko natija, euta saphal ra euta asaphal udaharan tatha arko sudhar.
@@ -250,12 +252,14 @@ calibration ra parikshan chhutyaer rakhnuhos. parikshan data herer threshold mil
 | 10:10–10:30 | 20 | bishram | skrinabat alag hune |
 | 10:30–11:10 | 40 | aniwarya | `Day05_02` Part 0–2 |
 | 11:10–12:00 | 50 | aniwarya | `Day05_02` Part 3–4, fit ra mulyankan |
-| 13:50–14:30 | 40 | aniwarya | `Day05_02` Part 5 + abhyas |
-| 14:30–15:15 | 45 | aniwarya | `Day05_03` Part 0–3 |
+| 13:50–14:30 | 40 | aniwarya | `Day05_02` Part 5 (calibrationko heatmap; `clarity-sealed-test-scoring` sthir nagare samma rokinchha) + abhyas |
+| 14:30–15:15 | 45 | aniwarya | `Day05_03` Part 0–3 (calibration ma tulna garera dui threshold sthir) |
 | 15:15–15:30 | 15 | bishram | skrinabat alag hune |
-| 15:30–16:00 | 30 | aniwarya | `Day05_03` Part 4–5 + abhyas |
+| 15:30–16:00 | 30 | aniwarya | sealed cell dui (din 4 notebook 03 → notebook 02) chalaera `Day05_03` Part 4–5 |
 | 16:00–16:25 | 25 | aniwarya | paanch dinko prashikshakasang punarabalokan |
 | 16:25–16:50 | 25 | bujhaune | bujhaune kaam surakshit garne |
+
+**chalne kram chha charan ko ho.** `Day05_02` dui patak kholinchha (charan 2 ko calibration mulyankan ra charan 5 ko sthir garepachhi ko sealed mulyankan). `Day04_03` pani sthir garepachhi `shared-sealed-test` ka lagi ek patak feri kholinchha. charan ko talika `Day05_02` ko Part 5 ma chha.
 
 **aichchhik:** `Day05_03` ko thap sikai ma validation data ma thresholdka 3 maan jaanchne kaam.
 **kary:** PatchCore ko natija, heatmap, tulna talika ra karanasahit PVC ka lagi sipharis.

@@ -1258,13 +1258,23 @@ def locate_headings(texts: list[str], toc: list[Heading],
     for heading in toc:
         if not heading.anchor or not heading.in_toc:
             continue
-        signature = _search_key("".join(part for part in
-                                       (heading.ja, heading.en, heading.ne) if part))
-        position = body.find(signature, cursor)
-        if not signature or position < 0:
-            raise ValueError(f"PDF heading not found in body order: {heading.plain!r}")
-        pages[heading.anchor] = bisect.bisect_right(offsets, position)
-        cursor = position + len(signature)
+        # 言語ごとに分けて探します。長い見出しがページ境界にまたがると、抽出した文字列の間に
+        # ヘッダ・フッタが入り、連結した 1 つの文字列では見つからなくなるためです。
+        # Search one language at a time: a long heading that crosses a page boundary has the running
+        # header and footer interleaved in the text layer, so the concatenated form is not found.
+        parts = [part for part in (_search_key(piece) for piece
+                                   in (heading.ja, heading.en, heading.ne) if piece) if part]
+        if not parts:
+            raise ValueError(f"PDF heading has no searchable text: {heading.plain!r}")
+        start = None
+        for part in parts:
+            position = body.find(part, cursor)
+            if position < 0:
+                raise ValueError(f"PDF heading not found in body order: {heading.plain!r}")
+            if start is None:
+                start = position
+            cursor = position + len(part)
+        pages[heading.anchor] = bisect.bisect_right(offsets, start)
     return pages
 
 

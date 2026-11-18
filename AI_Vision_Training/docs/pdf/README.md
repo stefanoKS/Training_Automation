@@ -37,14 +37,16 @@ pratisthapan gardaina.
 | `Day01_explanation_ja_en.pdf` | 第 1 日（ノートブック 01〜03） | 72 |
 | `Day02_explanation_ja_en.pdf` | 第 2 日（ノートブック 01〜03） | 88 |
 | `Day03_explanation_ja_en.pdf` | 第 3 日（ノートブック 01〜03） | 56 |
-| `Day04_explanation_ja_en.pdf` | 第 4 日（ノートブック 01〜03） | 68 |
-| `Day05_explanation_ja_en.pdf` | 第 5 日（ノートブック 01〜03） | 64 |
-| `Week1_explanation_ja_en.pdf` | 5 日分をまとめたもの / all five days | 338 |
+| `Day04_explanation_ja_en.pdf` | 第 4 日（ノートブック 01〜03） | 70 |
+| `Day05_explanation_ja_en.pdf` | 第 5 日（ノートブック 01〜03） | 65 |
+| `Week1_explanation_ja_en.pdf` | 5 日分をまとめたもの / all five days | 340 |
 
-日本語＋英語版のうち作り直したのは `Day02`・`Day05`・`Week1` だけです（図と案内文が変わったため）。
-`Day01`・`Day03`・`Day04` は 2026-11-16 の版をそのまま残しています。
-Of the Japanese + English booklets only `Day02`, `Day05` and `Week1` were rebuilt (the figure and the
-navigation changed); `Day01`, `Day03` and `Day04` still ship the 2026-11-16 files unchanged.
+日本語＋英語版のうち、2026-11-19 に作り直したのは `Day02`・`Day04`・`Day05`・`Week1` です
+（Day 2 の図、Day 4・Day 5 の手順の説明が変わったため）。`Day01`・`Day03` は 2026-11-16 の版を
+そのまま残しています。
+Of the Japanese + English booklets, `Day02`, `Day04`, `Day05` and `Week1` were rebuilt on 2026-11-19
+(the Day 2 figure and the Day 4/5 workflow text changed); `Day01` and `Day03` still ship the
+2026-11-16 files unchanged.
 
 日本語＋英語＋ネパール語 / Japanese, English and Nepali:
 
@@ -60,13 +62,13 @@ navigation changed); `Day01`, `Day03` and `Day04` still ship the 2026-11-16 file
 | `Day01_explanation_ja_en_ne.pdf` | 第 1 日（ノートブック 01〜03） | 98 |
 | `Day02_explanation_ja_en_ne.pdf` | 第 2 日（ノートブック 01〜03） | 115 |
 | `Day03_explanation_ja_en_ne.pdf` | 第 3 日（ノートブック 01〜03） | 77 |
-| `Day04_explanation_ja_en_ne.pdf` | 第 4 日（ノートブック 01〜03） | 88 |
-| `Day05_explanation_ja_en_ne.pdf` | 第 5 日（ノートブック 01〜03） | 88 |
-| `Week1_explanation_ja_en_ne.pdf` | 5 日分をまとめたもの / all five days | 455 |
+| `Day04_explanation_ja_en_ne.pdf` | 第 4 日（ノートブック 01〜03） | 90 |
+| `Day05_explanation_ja_en_ne.pdf` | 第 5 日（ノートブック 01〜03） | 89 |
+| `Week1_explanation_ja_en_ne.pdf` | 5 日分をまとめたもの / all five days | 458 |
 | `Setup_ja_en_ne.pdf` | 準備ノートブック `00_Environment_Setup.ipynb` | 41 |
 | `Installation_Guide_ja_en_ne.pdf` | `START_HERE.md` と `docs/troubleshooting/installation.md` | 23 |
 | `Repository_Guide_ja_en_ne.pdf` | `README.md` と `requirements/tested_versions.md` | 23 |
-| `Course_Syllabus_ja_en_ne.pdf` | `COURSE_SYLLABUS.md` | 20 |
+| `Course_Syllabus_ja_en_ne.pdf` | `COURSE_SYLLABUS.md` | 21 |
 
 ページ数は生成のたびにスクリプトが表示します。下の表は 2026-11-19（ローマ字ネパール語への移行と
 Day 2・Day 5 の修正の後）の生成結果です。

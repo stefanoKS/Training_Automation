@@ -23,6 +23,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import math
 import os
 import tempfile
 from pathlib import Path
@@ -32,16 +33,43 @@ SCHEMA = 1
 # 封印予測ファイルの形式 / the schema of ``patchcore_test_predictions.json``.
 SEALED_SCHEMA = 3
 
+# ``patchcore_test_predictions.json`` の 1 行 / one row of the sealed PatchCore predictions.
+IMAGE_FIELDS = {
+    "partition": str,
+    "image": str,
+    "score": (int, float),
+    "anomalib_predicted_ng": bool,
+    "truly_abnormal": bool,
+}
+
+# ``yolo_predictions_sealed_test.json`` の 1 行 / one row of the sealed YOLO predictions.
+YOLO_IMAGE_FIELDS = {
+    "partition": str,
+    "image": str,
+    "yolo_max_conf": (int, float),
+    "truly_abnormal": bool,
+}
+
+# 記録してよい評価の役割 / the only two assessment roles that may be claimed.
+ASSESSMENT_ROLES = ("declared_untouched_test", "illustrative_reused_data")
+
 # PostProcessor の統計（正規化に使う値）。これも学習データで決まるので指紋に入れます。
 # The PostProcessor statistics are fitted too, so they belong in the fingerprint.
-POSTPROCESSOR_KEYS = (
-    "enable_normalization",
-    "image_min",
-    "image_max",
-    "pixel_min",
-    "pixel_max",
-    "adaptive_threshold",
-)
+#
+# anomalib 2.x の ``PostProcessor`` は ``image_min`` / ``image_max`` / ``pixel_min`` / ``pixel_max`` を
+# バッファとして持ち、しきい値は ``_image_threshold`` / ``_pixel_threshold`` に置きます。名前は
+# バージョンで変わってきたので、候補を順に探します。見つからない項目は None になります。
+# anomalib 2.x keeps image_min / image_max / pixel_min / pixel_max as buffers and the threshold in
+# ``_image_threshold``. The names have moved between versions, so each key lists its candidates; a
+# key that matches nothing is recorded as None instead of silently borrowing another value.
+POSTPROCESSOR_KEYS = {
+    "enable_normalization": ("enable_normalization",),
+    "image_min": ("image_min",),
+    "image_max": ("image_max",),
+    "pixel_min": ("pixel_min",),
+    "pixel_max": ("pixel_max",),
+    "adaptive_threshold": ("adaptive_threshold", "image_threshold", "_image_threshold"),
+}
 
 
 class ProvenanceError(RuntimeError):
@@ -68,7 +96,15 @@ def _scalar(value):
                 break
             except (TypeError, ValueError):
                 continue
-    if isinstance(value, (bool, int, float, str)) or value is None:
+    if isinstance(value, bool) or value is None:
+        return value
+    if isinstance(value, int):
+        return value
+    if isinstance(value, float):
+        # 未学習の PostProcessor は NaN を持ちます。NaN は JSON に書けないので None にします。
+        # An unfitted PostProcessor holds NaN; NaN is not valid JSON, so record None instead.
+        return value if math.isfinite(value) else None
+    if isinstance(value, str):
         return value
     return str(value)
 
@@ -135,8 +171,15 @@ def postprocessor_state(model) -> dict:
     """後処理の設定と統計 / the postprocessing configuration and its fitted statistics."""
     postprocessor = getattr(model, "post_processor", None)
     state = {"available": postprocessor is not None}
-    for key in POSTPROCESSOR_KEYS:
-        state[key] = _scalar(getattr(postprocessor, key, None))
+    for key, candidates in POSTPROCESSOR_KEYS.items():
+        value = None
+        if postprocessor is not None:
+            for name in candidates:
+                if hasattr(postprocessor, name):
+                    value = _scalar(getattr(postprocessor, name))
+                    if value is not None:
+                        break
+        state[key] = value
     return state
 
 
@@ -217,15 +260,6 @@ def calibration_partition(manifest: dict) -> set[str]:
     return {normalise_image_id(name) for name in manifest["partitions"]["calibration"]}
 
 
-IMAGE_FIELDS = {
-    "partition": str,
-    "image": str,
-    "score": (int, float),
-    "anomalib_predicted_ng": bool,
-    "truly_abnormal": bool,
-}
-
-
 def _check_experiment(sealed_experiment: dict, expected: dict) -> None:
     """身元のどこが違うかを名指しする / name exactly which part of the identity differs."""
     if not isinstance(sealed_experiment, dict):
@@ -263,37 +297,69 @@ def _check_experiment(sealed_experiment: dict, expected: dict) -> None:
 
 
 def validate_sealed(payload: dict, *, schema_version: int, expected: dict,
-                    manifest: dict) -> list[dict]:
+                    manifest: dict, expected_role: str) -> list[dict]:
     """封印予測を検証して、そのまま使える行を返す / verify, then hand back the rows.
+
+    ``expected_role`` は固定記録が宣言した評価の役割です。封印ファイルが別の役割を名乗っていたら
+    失敗します。事後に役割だけを書き換えても、封印は通りません。
+
+    ``expected_role`` is the assessment role the freeze record declared. A sealed file that claims a
+    different role fails, so relabelling the role after the fact cannot make a seal valid.
 
     失敗したときは ``ProvenanceError`` を送出し、ファイルには一切書き込みません。
     Raises ``ProvenanceError`` and never writes: the caller keeps the existing file untouched.
     """
-    if payload.get("schema_version") != schema_version:
-        raise ProvenanceError(
-            "封印予測の形式が古いです / stale sealed predictions: "
-            f"schema_version={payload.get('schema_version')!r} (required {schema_version})")
-    _check_experiment(payload.get("experiment", {}), expected)
-    if payload.get("scored_partitions") != ["test"]:
-        raise ProvenanceError(
-            "封印予測には試験用だけを記録します / the sealed payload must score the test partition only")
-    frozen = payload.get("frozen", {})
-    expected_thresholds = expected.get("thresholds", {})
-    if frozen.get("patchcore_threshold") != expected_thresholds.get("patchcore"):
-        raise ProvenanceError(
-            "封印予測と固定記録のしきい値が違います / the sealed predictions used another threshold")
-    if frozen.get("assessment_role") not in {"declared_untouched_test", "illustrative_reused_data"}:
-        raise ProvenanceError(
-            "評価の役割が記録されていません / the assessment role is missing or unknown")
+    return _validate(
+        payload,
+        schema_version=schema_version,
+        expected=expected,
+        manifest=manifest,
+        expected_role=expected_role,
+        fields=IMAGE_FIELDS,
+        threshold_key="patchcore_threshold",
+        threshold_value=expected.get("thresholds", {}).get("patchcore"),
+    )
 
-    rows = payload.get("images")
-    if not isinstance(rows, list) or not rows:
+
+def validate_yolo_sealed(payload: dict, *, schema_version: int, expected: dict,
+                         manifest: dict, expected_role: str) -> list[dict]:
+    """Day 4 が封印した YOLO の試験予測を検証する / verify the YOLO seal Day 4 published."""
+    return _validate(
+        payload,
+        schema_version=schema_version,
+        expected=expected,
+        manifest=manifest,
+        expected_role=expected_role,
+        fields=YOLO_IMAGE_FIELDS,
+        threshold_key="yolo_threshold",
+        threshold_value=expected.get("thresholds", {}).get("yolo"),
+    )
+
+
+def _check_assessment_role(sealed_frozen: dict, expected_role: str) -> None:
+    """封印と固定記録が同じ役割を名乗っているか / the seal and the freeze record must agree."""
+    role = sealed_frozen.get("assessment_role")
+    if role not in ASSESSMENT_ROLES:
         raise ProvenanceError(
-            "封印予測に画像の記録がありません / the sealed predictions contain no image rows")
-    seen = set()
+            "評価の役割が記録されていません / the assessment role is missing or unknown: "
+            f"{role!r}")
+    if expected_role not in ASSESSMENT_ROLES:
+        raise ProvenanceError(
+            "固定記録の評価の役割が不明です / the freeze record has no valid assessment role: "
+            f"{expected_role!r}")
+    if role != expected_role:
+        raise ProvenanceError(
+            "評価の役割が固定記録と違います / the sealed assessment role differs from the freeze "
+            f"record: sealed={role!r} frozen={expected_role!r}. Relabel the role only by starting a "
+            "new experiment; never by editing a sealed file")
+
+
+def _check_row_types(rows: list, fields: dict) -> set[str]:
+    """行の型・分割・重複を確かめる / check each row's type, partition and uniqueness."""
+    seen: set[str] = set()
     duplicates = []
     for row in rows:
-        for field, kind in IMAGE_FIELDS.items():
+        for field, kind in fields.items():
             if field not in row:
                 raise ProvenanceError(
                     f"封印予測に {field} がありません / a sealed row has no {field!r}")
@@ -320,6 +386,32 @@ def validate_sealed(payload: dict, *, schema_version: int, expected: dict,
         raise ProvenanceError(
             "封印予測に同じ画像が複数行あります / duplicate image IDs in the sealed predictions: "
             f"{sorted(duplicates)[:5]}")
+    return seen
+
+
+def _validate(payload: dict, *, schema_version: int, expected: dict, manifest: dict,
+              expected_role: str, fields: dict, threshold_key: str,
+              threshold_value) -> list[dict]:
+    if payload.get("schema_version") != schema_version:
+        raise ProvenanceError(
+            "封印予測の形式が古いです / stale sealed predictions: "
+            f"schema_version={payload.get('schema_version')!r} (required {schema_version})")
+    _check_experiment(payload.get("experiment", {}), expected)
+    if payload.get("scored_partitions") != ["test"]:
+        raise ProvenanceError(
+            "封印予測には試験用だけを記録します / the sealed payload must score the test partition only")
+    frozen = payload.get("frozen", {})
+    if frozen.get(threshold_key) != threshold_value:
+        raise ProvenanceError(
+            "封印予測と固定記録のしきい値が違います / the sealed predictions used another threshold: "
+            f"sealed={frozen.get(threshold_key)!r} frozen={threshold_value!r}")
+    _check_assessment_role(frozen, expected_role)
+
+    rows = payload.get("images")
+    if not isinstance(rows, list) or not rows:
+        raise ProvenanceError(
+            "封印予測に画像の記録がありません / the sealed predictions contain no image rows")
+    seen = _check_row_types(rows, fields)
 
     expected_images = test_partition(manifest)
     missing = sorted(expected_images - seen)
