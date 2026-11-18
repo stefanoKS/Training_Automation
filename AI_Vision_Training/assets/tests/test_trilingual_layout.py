@@ -175,8 +175,12 @@ def test_all_visual_explanations_fit_with_their_existing_images(tmp_path):
                 document.add(ET.tostring(figure, encoding="unicode", method="html"))
                 notes = "".join(figure.find("div[@class='visual-notes']").itertext())
                 caption = figure.find("div[@class='cap ne']")
-                first = "".join(caption.itertext())[:60] if caption is not None else notes[:60]
-                expected.append((cell["id"], first, notes[-60:]))
+                text = "".join(caption.itertext()) if caption is not None else notes
+                # 先頭 60 文字だけで探すと、同じ図を 2 つの授業で使ったときの共通の書き出しで衝突
+                # します。同じページにある説明の末尾も条件に入れて、その図だけに絞ります。
+                # The first 60 characters alone collide when one figure is reused in two lessons with
+                # the same opening sentence, so the tail of its own notes identifies the page.
+                expected.append((cell["id"], text[:60], notes[-60:]))
     html_path = tmp_path / "all-figures.html"
     html_path.write_text(exporter.html_document(document), encoding="utf-8")
     pdf_path = tmp_path / "all-figures.pdf"
@@ -184,9 +188,10 @@ def test_all_visual_explanations_fit_with_their_existing_images(tmp_path):
     pdf = pdfium.PdfDocument(str(pdf_path))
     texts = [exporter._search_key(page.get_textpage().get_text_range()) for page in pdf]
     for cell_id, first, last in expected:
-        hits = [i for i, text in enumerate(texts) if exporter._search_key(first) in text]
+        tail = exporter._search_key(last)
+        hits = [i for i, text in enumerate(texts)
+                if exporter._search_key(first) in text and tail in text]
         assert len(hits) == 1, cell_id
-        assert exporter._search_key(last) in texts[hits[0]], cell_id
         assert any(obj.type == pdfium.raw.FPDF_PAGEOBJ_IMAGE
                    for obj in pdf[hits[0]].get_objects()), cell_id
 

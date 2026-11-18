@@ -1,648 +1,648 @@
 <!--
-नेपाली अनुवाद / Nepali translation source for
+Nepali anuwad / Nepali translation source for
 notebooks/Day01_AI_Fundamentals/Day01_02_Pixels_and_Images.ipynb
 
 Each block starts with an ne-cell directive naming the notebook cell id.
 Do not translate code, file names, URLs or kernel names.
 -->
-# दिन १ नोटबुक ०२ — नेपाली अनुवाद
+# din 1 notebook 02 — Nepali anuwad
 
 <!-- ne-cell: 324ebd08 | after-heading -->
-# दिन १ नोटबुक ०२: डिजिटल चित्र बुझ्ने
+# din 1 notebook 02: dijital chitra bujhne
 
 <!-- ne-cell: 324ebd08 -->
-## सिकाइ लक्ष्यहरू
+## sikai lakshyaharu
 
-| नेपाली |
+| Nepali |
 | --- |
-| 1. डिजिटल चित्र "सङ्ख्याको तालिका" हो भनेर बुझाउन सक्ने। |
-| 2. pixel सङ्ख्या, resolution, चौडाइ र उचाइको सम्बन्ध बताउन सक्ने। |
-| 3. RGB र greyscale को फरक बताउन सक्ने। |
-| 4. NumPy array ले चित्र बनाएर बदल्न सक्ने। |
-| 5. resolution घटाउँदा जानकारी हराउँछ भन्ने कुरा आफैं जाँचेर देखाउन सक्ने। |
+| 1. dijital chitra "sankhyako talika" ho bhanera bujhaun sakne. |
+| 2. pixel sankhya, resolution, chaudai ra uchaiko sambandh bataun sakne. |
+| 3. RGB ra greyscale ko farak bataun sakne. |
+| 4. NumPy array le chitra banaera badalna sakne. |
+| 5. resolution ghataunda jankari haraunchha bhanne kura aphain jancher dekhauna sakne. |
 
-## यो नोटबुकको आधारभूत जानकारी
+## yo notebookko adharabhut jankari
 
-| विषय | विवरण |
+| bishay | biwaran |
 | --- | --- |
-| सिकाइ समय (अनुमान) | 110 मिनेट |
-| कठिनाइ | सुरुवाती तह |
-| पूर्वशर्त | दिन १ नोटबुक ०१ सकिएको हुनुपर्छ। |
-| आवश्यक लाइब्रेरी | numpy, matplotlib, pillow |
-| प्रयोग हुने kernel | aivision |
-| आजको समयतालिका | [`COURSE_SYLLABUS.md` दिन १](../../COURSE_SYLLABUS.md#day1) |
+| sikai samay (anuman) | 110 minet |
+| kathinai | surubati tah |
+| poorwashart | din 1 notebook 01 sakieko hunuparchha. |
+| aawashyak laibreri | numpy, matplotlib, pillow |
+| prayog hune kernel | aivision |
+| ajako samayatalika | [`COURSE_SYLLABUS.md` din 1](../../COURSE_SYLLABUS.md#day1) |
 
-### बुझाउनुपर्ने काम
+### bujhaunuparne kaam
 
-| नेपाली |
+| Nepali |
 | --- |
-| चित्र बनाउने/बदल्ने अभ्यासको नतिजा |
-| resolution घटाउँदा हराउने जानकारीबारे आफ्नो विचार |
+| chitra banaune/badalne abhyasko natija |
+| resolution ghataunda haraune janakaribare aphno bichar |
 
 <!-- ne-cell: efc6b5ea | after-heading -->
-## यो नोटबुक कहाँ पर्छ
+## yo notebook kahan parchha
 
 <!-- ne-cell: efc6b5ea -->
-| विषय | विवरण |
+| bishay | biwaran |
 | --- | --- |
-| दिन | दिन १ |
-| आजको क्रम | आजको नोटबुकमध्ये 2 / 3 |
-| लाग्ने समय | 110 मिनेट |
-| पूर्वशर्त | `Day01_01_Introduction_to_AI.ipynb` |
-| आजको समयतालिका | [`COURSE_SYLLABUS.md` दिन १](../../COURSE_SYLLABUS.md#day1) |
+| din | din 1 |
+| ajako kram | ajako notabukamadhye 2 / 3 |
+| lagne samay | 110 minet |
+| poorwashart | `Day01_01_Introduction_to_AI.ipynb` |
+| ajako samayatalika | [`COURSE_SYLLABUS.md` din 1](../../COURSE_SYLLABUS.md#day1) |
 
-दिनको समयतालिका `COURSE_SYLLABUS.md` मा एउटै ठाउँमा छ। यो नोटबुक त्यसको एउटा भाग मात्र हो, आफ्नो
-छुट्टै समयतालिका राख्दैन। समय थाहा नभए पहिले त्यही फाइल हेर्नुहोस्।
+dinko samayatalika `COURSE_SYLLABUS.md` ma eutai thaun ma chha. yo notebook tyasko euta bhaag matra ho, aphno
+chhuttai samayatalika rakhdain. samay thaha nabhae pahile tyahi file hernuhos.
 
 <!-- ne-cell: audit-learning-loop | after-heading -->
-### अनुमान गर्नुहोस्, चलाउनुहोस्, हेर्नुहोस्, व्याख्या गर्नुहोस्
+### anuman garnuhos, chalaunuhos, hernuhos, byakhya garnuhos
 
 <!-- ne-cell: audit-learning-loop -->
-array भनेको सङ्ख्या मिलाएर राखिएको तालिका हो। channel भनेको रङअनुसारको छुट्टै तालिका हो। महत्त्वपूर्ण सेल
-चलाउनुअघि इनपुट, काम र नतिजा एक-एक वाक्यमा लेख्नुहोस्।
-पहिले अनुमान लेख्नुहोस्, त्यसपछि सेल चलाएर मान वा चित्र हेर्नुहोस्। canvas को एउटा pixel बदलेर फेरि
-अनुमान गरेर चलाउनुहोस्। जानाजान राखिएका त्रुटि र नसकिएका अभ्यासका लागि लेखिएको निर्देशन पछ्याउनुहोस्।
+array bhaneko sankhya milaera rakhieko talika ho. channel bhaneko rangaanusarako chhuttai talika ho. mahattwapurna cell
+chalaunuaghi input, kaam ra natija ek-ek bakyama lekhnuhos.
+pahile anuman lekhnuhos, tyaspachhi cell chalaera maan wa chitra hernuhos. canvas ko euta pixel badaler feri
+anuman garera chalaunuhos. janajan rakhieka truti ra nasakieka abhyaska lagi lekhieko nirdeshan pachhyaunuhos.
 
 <!-- ne-cell: ed9b3d3c | after-heading -->
-## Part 0 तयारी
+## Part 0 tayari
 
 <!-- ne-cell: 328beddc | after-heading -->
-**चित्रमा प्रयोग हुने फन्ट मिलाउनुहोस्**
+**chitra ma prayog hune phant milaunuhos**
 <!-- ne-pair: Configure Japanese text in figures -->
 
 <!-- ne-cell: 328beddc -->
-Matplotlib को पूर्वनिर्धारित फन्टले जापानी अक्षर देखाउन सक्दैन। त्यसैले चित्रको शीर्षक `□□□` जस्तो
-देखिन्छ। अर्को सेलले जापानी अक्षर देखाउन सक्ने फन्ट खोजेर मिलाउँछ। macOS वा Linux मा स्वतः अर्को फन्ट
-छानिन्छ।
+Matplotlib ko purbanirdharit phantale Japani akshar dekhauna sakdain. tyasaile chitrako shirshak `□□□` jasto
+dekhinchha. arko cellle Japani akshar dekhauna sakne phant khojer milaunchha. macOS wa Linux ma sbatah arko phant
+chhaninchha.
 
 <!-- ne-cell: 6bf89cef | after-heading -->
-## Part 1 pixel भनेको के हो
+## Part 1 pixel bhaneko ke ho
 
 <!-- ne-cell: e4ad5e50 | after-heading -->
-### pixel र निर्देशांक
+### pixel ra nirdeshank
 
 <!-- ne-cell: e4ad5e50 | after-image:../../assets/diagrams/diagram_pixel_grid.png -->
-चित्र: 8×8 pixel को उदाहरण (8-bit, १ channel)। एउटा खण्ड एउटा pixel हो, र प्रत्येकमा 0–255 को एउटा
-मान हुन्छ।
+chitra: 8×8 pixel ko udaharan (8-bit, 1 channel). euta khand euta pixel ho, ra pratyekama 0–255 ko euta
+maan hunchha.
 
-**ध्यान दिनुपर्ने कुरा**
+**dhyan dinuparne kura**
 
-यो चित्र **8-bit, १ channel (greyscale)** को उदाहरण हो। एउटा खण्डमा सङ्ख्या **एउटा** मात्र हुन्छ, र
-ठुलो भए त्यो बढी उज्यालो देखिन्छ। पढ्ने तरिका माथि-बायाँबाट दायाँतिर, पङ्क्ति-पङ्क्ति हो। स्थान
-"पङ्क्ति y, स्तम्भ x" क्रममा दिइन्छ, `image[y, x]` भनेर लेखिन्छ। x दायाँतिर, y तलतिर बढ्छ, त्यसैले
-गणितको ग्राफभन्दा माथि-तल उल्टो हुन्छ। **RGB रङको चित्रमा उही खण्डमा R, G, B तीनवटा मान हुन्छन्**
-(यो चित्रको तीन गुणा सङ्ख्या)।
+yo chitra **8-bit, 1 channel (greyscale)** ko udaharan ho. euta khandama sankhya **euta** matra hunchha, ra
+thulo bhae tyo badhi ujyalo dekhinchha. padhne tarika mathi-bayanbat dayantir, pangkti-pangkti ho. sthan
+"pangkti y, stambha x" kram ma diinchha, `image[y, x]` bhanera lekhinchha. x dayantir, y talatir badhchha, tyasaile
+ganitako graphabhanda mathi-tal ulto hunchha. **RGB rangako chitra ma uhi khandama R, G, B tinabata maan hunchhan**
+(yo chitrako tin guna sankhya).
 
-**सोच्नुहोस्**
+**sochnuhos**
 
-- यो चित्रको माथि-बायाँको pixel लाई पङ्क्ति र स्तम्भ नम्बरले कसरी लेख्नुहुन्छ? RGB रङको चित्र भए त्यो
-  खण्डमा कतिवटा सङ्ख्या हुन्छन्?
+- yo chitrako mathi-bayanko pixel lai pangkti ra stambha numberle kasari lekhnuhunchha? RGB rangako chitra bhae tyo
+  khandama katibata sankhya hunchhan?
 
 <!-- ne-cell: 610c3045 | after-heading -->
-**pixel (चित्रबिन्दु)**
+**pixel (chitrabindu)**
 <!-- ne-pair: Pixel -->
 
 <!-- ne-cell: 610c3045 -->
-डिजिटल चित्र साना चौकोण **तलमाथि र छेउछाउ मिलाएर राखिएको** हुन्छ।
-यो एउटा चौकोणलाई **pixel (चित्रबिन्दु)** भनिन्छ।
+dijital chitra sana chaukon **talamathi ra chheuchhau milaera rakhieko** hunchha.
+yo euta chaukonalai **pixel (chitrabindu)** bhaninchha.
 
-यो नोटबुकमा **8-bit चित्र** प्रयोग गर्छौं। 8-bit greyscale चित्रमा प्रत्येक pixel मा
-**एउटा सङ्ख्या** हुन्छ।
+yo notebook ma **8-bit chitra** prayog garchhaun. 8-bit greyscale chitra ma pratyek pixel ma
+**euta sankhya** hunchha.
 
-- `0` = कालो
-- `255` = सेतो
-- बीचको मान = खैरो
+- `0` = kalo
+- `255` = seto
+- bichako maan = khairo
 
-0–255 किन भने एक pixel लाई 8 bit (2 को 8 घात = 256 तरिका) ले देखाइन्छ।
-**0 देखि 255 सम्म 256 तह मात्र** हुन्छ भन्ने सम्झनुहोस्। 16-bit चित्रजस्ता अझ सूक्ष्म तह भएका
-ढाँचा पनि हुन्छन्।
+0–255 kina bhane ek pixel lai 8 bit (2 ko 8 ghat = 256 tarika) le dekhainchha.
+**0 dekhi 255 samm 256 tah matra** hunchha bhanne samjhanuhos. 16-bit chitrajasta ajh sukshma tah bhaeka
+dhancha pani hunchhan.
 
-भण्डारण हुने सङ्ख्याको सङ्ख्या चित्रको किसिमअनुसार फरक पर्छ।
+bhandaran hune sankhyako sankhya chitrako kisimaanusar farak parchha.
 
-| किसिम | प्रति pixel सङ्ख्या | सङ्ख्याको जम्मा |
+| kisim | prati pixel sankhya | sankhyako jamma |
 |---|---|---|
-| 8-bit greyscale | 1 | उचाइ × चौडाइ |
-| 8-bit RGB रङ | 3 | उचाइ × चौडाइ × 3 |
+| 8-bit greyscale | 1 | uchai × chaudai |
+| 8-bit RGB rang | 3 | uchai × chaudai × 3 |
 
-तलको चित्र हेर्नुहोस्। बायाँ 8×8 pixel को चित्र, दायाँ त्यसलाई ठुलो बनाएर सङ्ख्या देखाइएको छ।
+talako chitra hernuhos. bayan 8×8 pixel ko chitra, dayan tyas lai thulo banaera sankhya dekhaieko chha.
 
 <!-- ne-cell: c69e86d8 | after-heading -->
-**सङ्ख्या र उज्यालोको सम्बन्ध**
+**sankhya ra ujyaloko sambandh**
 <!-- ne-pair: The relationship between numbers and brightness -->
 
 <!-- ne-cell: c69e86d8 -->
-तलको चित्रले 0–255 को मान वास्तवमा कति उज्यालो देखिन्छ भनेर देखाउँछ।
-सङ्ख्या ठुलो हुँदा सेतोतिर नजिक हुन्छ।
+talako chitrale 0–255 ko maan bastabama kati ujyalo dekhinchha bhanera dekhaunchha.
+sankhya thulo hunda setotir najik hunchha.
 
 <!-- ne-cell: 0f48e9a7 | after-heading -->
-## Part 2 चौडाइ, उचाइ र resolution
+## Part 2 chaudai, uchai ra resolution
 
 <!-- ne-cell: efef174f | after-heading -->
-#### चित्रको आकार र वास्तविक नापको सम्बन्ध
+#### chitrako akar ra bastabik napako sambandh
 
 <!-- ne-cell: efef174f -->
-| मात्रा | अर्थ | उदाहरण |
+| matra | arth | udaharan |
 |---|---|---|
-| चित्रको आयाम | चौडाइ×उचाइ (px) | 640×480 px |
-| जम्मा pixel सङ्ख्या | चौडाइ × उचाइ | 307,200 pixels |
-| नापिने सतहको मापन | एउटा pixel ले ढाक्ने लम्बाइ | mm/px |
-| intensity | pixel को उज्यालो | 8-bit: 0–255 |
+| chitrako ayam | chaudai×uchai (px) | 640×480 px |
+| jamma pixel sankhya | chaudai × uchai | 307,200 pixels |
+| napine satahako maapan | euta pixel le dhakne lambai | mm/px |
+| intensity | pixel ko ujyalo | 8-bit: 0–255 |
 
-"resolution" मात्र भन्दा के बुझिने अस्पष्ट हुन्छ। जम्मा pixel सङ्ख्या र mm/px छुट्याउनुहोस्।
-वास्तवमा सूक्ष्म विवरण छुट्याउन सकिन्छ कि सकिँदैन भन्ने कुरा प्रकाशिकी, contrast, noise र
-sampling मा पनि भर पर्छ।
+"resolution" matra bhanda ke bujhine aspasht hunchha. jamma pixel sankhya ra mm/px chhutyaunuhos.
+bastabama sukshma biwaran chhutyaun sakinchha ki sakindaina bhanne kura prakashiki, contrast, noise ra
+sampling ma pani bhar parchha.
 
 <!-- ne-cell: clarity-fixed-fov | after-heading -->
-### उही दृश्यक्षेत्रमा pixel सङ्ख्या बदल्ने
+### uhi drishyakshetra ma pixel sankhya badalne
 
 <!-- ne-cell: clarity-fixed-fov | after-image:../../assets/svg/teach_fixed_fov_sampling.svg -->
-**सोच्नुहोस्**
+**sochnuhos**
 
-अनुमान: 1300 mm चौडाइ 13000 pixel ले खिच्दा 0.3 mm कति pixel मा पर्छ?
+anuman: 1300 mm chaudai 13000 pixel le khichda 0.3 mm kati pixel ma parchha?
 
-**ध्यान दिनुपर्ने कुरा**
+**dhyan dinuparne kura**
 
-यो हिसाब गरिएको कृत्रिम उदाहरण हो। `1300/1300=1 mm/px`, `1300/13000=0.1 mm/px`।
-करिब ३ pixel मा पनि पत्ता लगाउने र नाप्ने विश्वसनीयता ग्यारेन्टी हुँदैन। सुरक्षित JPEG लाई ठुलो
-बनाउँदा खिचाइको जानकारी थपिँदैन। दृश्यक्षेत्र आधा बनाएर फेरि खिच्ने काम सुरक्षित चित्र सानो बनाउने
-कामभन्दा छुट्टै हो।
+yo hisab garieko kritrim udaharan ho. `1300/1300=1 mm/px`, `1300/13000=0.1 mm/px`.
+karib 3 pixel ma pani patta lagaune ra napne bishbasaniyata gyarenti hundaina. surakshit JPEG lai thulo
+banaunda khichaiko jankari thapindain. drishyakshetra adha banaera feri khichne kaam surakshit chitra sano banaune
+kamabhanda chhuttai ho.
 
 <!-- ne-cell: f984e55f | after-heading -->
-### नतिजाको उदाहरण
+### natijako udaharan
 
 <!-- ne-cell: f984e55f -->
-यो उदाहरणमा तलको नतिजा आउँछ (उही इनपुट दिइयो भने उही नतिजा आउँछ)। लेबल कोडले छाप्ने
-जापानी अक्षरमै देखिन्छ।
+yo udaharan ma talako natija aaunchha (uhi input diiyo bhane uhi natija aaunchha). label kodale chhapne
+Japani aksharamai dekhinchha.
 
-यो greyscale चित्रका लागि 64 भनेको उचाइ × चौडाइ हो; 307,200 र 2,073,600 ती दुई क्यामेरा आकारका
-लागि उही गुणनफल हुन्। उही आकारको रङ चित्रमा तीन गुणा बढी मान भण्डारण हुन्छ।
+yo greyscale chitraka lagi 64 bhaneko uchai × chaudai ho; 307,200 ra 2,073,600 ti dui kyamera akaraka
+lagi uhi gunanaphal hun. uhi akarako rang chitra ma tin guna badhi maan bhandaran hunchha.
 
 <!-- ne-cell: 6d88b3b1 | after-heading -->
-**resolution र देखिने दोषको आकार**
+**resolution ra dekhine doshko akar**
 <!-- ne-pair: Resolution and the smallest visible defect -->
 
 <!-- ne-cell: 6d88b3b1 -->
-यो उत्पादन निरीक्षणमा निर्णायक कुरा हो।
+yo utpadan nirikshan ma nirnayak kura ho.
 
-सिटको चौडाइ 1,300 mm लाई चौडाइ 1,300 pixel को क्यामेराले खिच्यौं भनौं। तब **१ pixel = 1 mm** हुन्छ।
-0.3 mm को दोष **एक pixel भन्दा सानो** हुन्छ, त्यसैले आकार र स्थान स्थिर रूपमा निर्णय गर्न सकिँदैन।
-तैपनि वरपरको भन्दा उज्यालो धेरै फरक भए त्यो pixel को मान बदलिन्छ। "नदेखिने" होइन "आकारको रूपमा
-resolved नहुने" भनेर बुझ्नु ठीक हुन्छ।
+sitako chaudai 1,300 mm lai chaudai 1,300 pixel ko kyamerale khichyaun bhanaun. tab **1 pixel = 1 mm** hunchha.
+0.3 mm ko dosh **ek pixel bhanda sano** hunchha, tyasaile akar ra sthan sthir rupama nirnaya garna sakindaina.
+taipani baraparako bhanda ujyalo dherai farak bhae tyo pixel ko maan badlinchha. "nadekhine" hoina "akarako rupama
+resolved nahune" bhanera bujhnu thik hunchha.
 
-चौडाइ 13,000 pixel ले खिच्दा १ pixel = 0.1 mm हुन्छ, र 0.3 mm को दोष **३ pixel** मा पर्छ।
+chaudai 13,000 pixel le khichda 1 pixel = 0.1 mm hunchha, ra 0.3 mm ko dosh **3 pixel** ma parchha.
 
-चाहिने pixel घनत्व तलको सूत्रले अनुमान गरिन्छ।
+chahine pixel ghanatb talako sutrale anuman garinchha.
 
 ```text
-प्रति mm चाहिने pixel = दोषका लागि चाहिने pixel ÷ दोषको आकार [mm]
+prati mm chahine pixel = doshka lagi chahine pixel ÷ doshko akar [mm]
 ```
 
-0.3 mm को दोष ३ pixel मा देखाउन चाहनुभयो भने प्रति mm 3 ÷ 0.3 = **10 pixel** चाहिन्छ।
-चौडाइ 1,300 mm भए 1,300 × 10 = **13,000 pixel** हुन्छ।
+0.3 mm ko dosh 3 pixel ma dekhauna chahanubhayo bhane prati mm 3 ÷ 0.3 = **10 pixel** chahinchha.
+chaudai 1,300 mm bhae 1,300 × 10 = **13,000 pixel** hunchha.
 
-यहाँ "३ pixel" **यो तालिमका लागि छानिएको लक्ष्य मान** हो। कति pixel भए पक्का भेटिन्छ भन्ने कुरा
-लेन्सको क्षमता, contrast, धमिलोपन, noise र निर्णय गर्ने तरिकामा निर्भर गर्छ।
-"३ pixel भए सधैं भेटिन्छ" भन्ने ग्यारेन्टी होइन।
+yahan "3 pixel" **yo talimka lagi chhanieko lakshya maan** ho. kati pixel bhae pakka bhetinchha bhanne kura
+lensako kshamata, contrast, dhamilopan, noise ra nirnaya garne tarikama nirbhar garchha.
+"3 pixel bhae sadhain bhetinchha" bhanne gyarenti hoina.
 
-> "AI को शुद्धता कम छ" भन्नुअघि **त्यो दोष चित्रमै देखिन्छ कि देखिँदैन** भनेर
-> जाँच्नु आवश्यक छ।
+> "AI ko shuddhata kam chha" bhannuaghi **tyo dosh chitramai dekhinchha ki dekhindain** bhanera
+> janchnu aawashyak chha.
 
 <!-- ne-cell: 389b5529 | after-heading -->
-## Part 3 RGB र greyscale
+## Part 3 RGB ra greyscale
 
 <!-- ne-cell: 77008bda | after-heading -->
-### एउटा चित्र भनेको तीनवटा तालिका
+### euta chitra bhaneko tinabata talika
 
 <!-- ne-cell: 77008bda | after-image:../../assets/diagrams/teach_rgb_channels.png -->
-चित्र: उही चित्रलाई R, G, B channel मा छुट्याइएको। तीनवटा तालिकाले उही pixel स्थानलाई फरक-फरक
-सङ्ख्याले देखाउँछन्।
+chitra: uhi chitra lai R, G, B channel ma chhutyaieko. tinabata talikale uhi pixel sthanalai farak-farak
+sankhyale dekhaunchhan.
 
-**ध्यान दिनुपर्ने कुरा**
+**dhyan dinuparne kura**
 
-रङ चित्र (उचाइ, चौडाइ, 3) आकारको array हो। 3 भनेको R, G, B का तीनवटा तालिका, प्रत्येकमा 0–255 को
-मान। **उही एउटा pixel** R तालिकामा रातोको तीव्रता, G तालिकामा हरियोको तीव्रता, B तालिकामा निलोको
-तीव्रता भएर बस्छ। एउटा channel मात्र देखाउँदा त्यो तीव्रता उज्यालोको रूपमा देखिन्छ (रङ देखिँदैन)।
-तीनवटा मिलाएपछि मात्र मूल रङ बन्छ। तीनवटै उही भए खैरो हुन्छ। ठिक तलको वास्तविक फोटोको सेल पनि उही
-क्रम (उचाइ × चौडाइ × 3) मा सुरक्षित छ।
+rang chitra (uchai, chaudai, 3) akarako array ho. 3 bhaneko R, G, B ka tinabata talika, pratyekama 0–255 ko
+maan. **uhi euta pixel** R talika ma ratoko tibrata, G talika ma hariyoko tibrata, B talika ma niloko
+tibrata bhaera baschha. euta channel matra dekhaunda tyo tibrata ujyaloko rupama dekhinchha (rang dekhindain).
+tinabata milaepachhi matra mul rang banchha. tinabatai uhi bhae khairo hunchha. thik talako bastabik photoko cell pani uhi
+kram (uchai × chaudai × 3) ma surakshit chha.
 
-**सोच्नुहोस्**
+**sochnuhos**
 
-- R=200, G=60, B=60 भएको pixel कस्तो रङ देखिन्छ? R तालिका मात्र देखाउँदा त्यो pixel उज्यालो देखिन्छ
-  कि अँध्यारो?
+- R=200, G=60, B=60 bhaeko pixel kasto rang dekhinchha? R talika matra dekhaunda tyo pixel ujyalo dekhinchha
+  ki andhyaro?
 
 <!-- ne-cell: fig-chelsea | after-heading -->
-### वास्तविक फोटोमा पनि १ pixel = ३ सङ्ख्या
+### bastabik photoma pani 1 pixel = 3 sankhya
 
 <!-- ne-cell: fig-chelsea | after-image:../../assets/external_samples/open_reference/chelsea.png -->
-फोटो: स्क्यान गरिएको वास्तविक तस्बिर (scikit-image `chelsea`, Stefan van der Walt, CC0 1.0)। तलको
-व्याख्यामा भएका RGB तालिकासँग **उही क्रम** (उचाइ × चौडाइ × 3) मा सुरक्षित छ। कारखानाको PVC चित्र
-होइन, रङको बनावट हेर्नका लागि मात्र उदाहरण हो।
+photo: skyan garieko bastabik tasbir (scikit-image `chelsea`, Stefan van der Walt, CC0 1.0). talako
+byakhya ma bhaeka RGB talika sang **uhi kram** (uchai × chaudai × 3) ma surakshit chha. karakhanako PVC chitra
+hoina, rangako banabat hernaka lagi matra udaharan ho.
 
-**ध्यान दिनुपर्ने कुरा**
+**dhyan dinuparne kura**
 
-यो फोटोमा पनि प्रति pixel R, G, B का तीनवटा पूर्णाङ्क (0–255) मात्र हुन्छन्। "फोटो भएकोले विशेष
-संयन्त्र" भन्ने कुरा छैन। देखाउँदा ती तीन सङ्ख्यालाई प्रकाशका तीन आधारभूत रङ मिलाएर देखाइएको मात्र हो।
+yo photoma pani prati pixel R, G, B ka tinabata purnank (0–255) matra hunchhan. "photo bhaekole bishesh
+sanyantra" bhanne kura chhaina. dekhaunda ti tin sankhya lai prakashaka tin adharabhut rang milaera dekhaieko matra ho.
 
-**सोच्नुहोस्**
+**sochnuhos**
 
-- यो फोटोको एउटा pixel को मान (34, 139, 34) थियो भने देखिने रङमा रातो, हरियो, निलोमध्ये कुन बलियो हुन्छ?
+- yo photoko euta pixel ko maan (34, 139, 34) thiyo bhane dekhine rangama rato, hariyo, nilomadhye kun baliyo hunchha?
 
 <!-- ne-cell: a067440a | after-heading -->
-**रङ चित्र भनेको तीनवटा तालिका**
+**rang chitra bhaneko tinabata talika**
 <!-- ne-pair: A colour image is three tables -->
 
 <!-- ne-cell: a067440a -->
-रङ चित्रमा **रातो, हरियो, निलो** तीन सङ्ख्याले एउटा pixel देखाइन्छ।
-अर्थात् प्रति pixel तीन सङ्ख्या।
+rang chitra ma **rato, hariyo, nilo** tin sankhyale euta pixel dekhainchha.
+arthat prati pixel tin sankhya.
 
 ```text
-pixel (पङ्क्ति y=2, स्तम्भ x=3) = रातो 210, हरियो 205, निलो 190
+pixel (pangkti y=2, stambha x=3) = rato 210, hariyo 205, nilo 190
 ```
 
-तीनवटै उही भए खैरो हुन्छ। त्यसैले **greyscale (कालो-सेतो)** मा प्रति pixel १ सङ्ख्या मात्र पुग्छ।
+tinabatai uhi bhae khairo hunchha. tyasaile **greyscale (kalo-seto)** ma prati pixel 1 sankhya matra pugchha.
 
-| किसिम | प्रति pixel सङ्ख्या | array को आकार |
+| kisim | prati pixel sankhya | array ko akar |
 |---|---|---|
-| greyscale | 1 | (उचाइ, चौडाइ) |
-| RGB रङ | 3 | (उचाइ, चौडाइ, 3) |
+| greyscale | 1 | (uchai, chaudai) |
+| RGB rang | 3 | (uchai, chaudai, 3) |
 
-NumPy मा रङ चित्र `shape = (उचाइ, चौडाइ, 3)` भएको array हुन्छ।
-`3` भनेको "रातो, हरियो, निलो" हो। **यो क्रम (RGB) सम्झनुहोस्।**
-OpenCV मा **BGR** (निलो, हरियो, रातो) क्रम हुन्छ, त्यसैले ध्यान दिनुहोस् (दिन २ मा सम्हालिनेछ)।
+NumPy ma rang chitra `shape = (uchai, chaudai, 3)` bhaeko array hunchha.
+`3` bhaneko "rato, hariyo, nilo" ho. **yo kram (RGB) samjhanuhos.**
+OpenCV ma **BGR** (nilo, hariyo, rato) kram hunchha, tyasaile dhyan dinuhos (din 2 ma samhalinechha).
 
 <!-- ne-cell: c0f7ec40 | after-heading -->
-### नतिजाको उदाहरण
+### natijako udaharan
 
 <!-- ne-cell: c0f7ec40 -->
-यो उदाहरणमा तलको नतिजा आउँछ (उही इनपुट दिइयो भने उही नतिजा आउँछ)। लेबल कोडले छाप्ने
-जापानी अक्षरमै देखिन्छ।
+yo udaharan ma talako natija aaunchha (uhi input diiyo bhane uhi natija aaunchha). label kodale chhapne
+Japani aksharamai dekhinchha.
 
-`(3, 4, 3)` भनेको उचाइ 3, चौडाइ 4 र प्रति pixel तीन रङ मान। `画素 (0,0)` भनेको पङ्क्ति 0, स्तम्भ 0 —
-Part 4 मा व्याख्या गरिएको `image[y, x]` क्रम।
+`(3, 4, 3)` bhaneko uchai 3, chaudai 4 ra prati pixel tin rang maan. `画素 (0,0)` bhaneko pangkti 0, stambha 0 —
+Part 4 ma byakhya garieko `image[y, x]` kram.
 
 <!-- ne-cell: 710f8ada | after-heading -->
-**greyscale मा बदल्ने**
+**greyscale ma badalne**
 <!-- ne-pair: Converting to greyscale -->
 
 <!-- ne-cell: 710f8ada -->
-RGB बाट greyscale मा बदल्नु भनेको तीन मानको **भारित औसत** हो।
-मानिसको आँखा हरियोप्रति संवेदनशील हुन्छ, त्यसैले हरियोको भार ठुलो छ।
+RGB baat greyscale ma badalnu bhaneko tin maanko **bharit ausat** ho.
+manisako ankha hariyoprati sanbedanashil hunchha, tyasaile hariyoko bhar thulo chha.
 
 ```text
-खैरो = 0.299 × रातो + 0.587 × हरियो + 0.114 × निलो
+khairo = 0.299 × rato + 0.587 × hariyo + 0.114 × nilo
 ```
 
-यो सूत्र कण्ठ गर्नु आवश्यक छैन। "तीन सङ्ख्यालाई एउटैमा मिलाइएको छ" भनेर बुझे पुग्छ।
+yo sutra kanth garnu aawashyak chhaina. "tin sankhya lai eutai ma milaieko chha" bhanera bujhe pugchha.
 
 <!-- ne-cell: fed2a6d9 | after-heading -->
-### नतिजाको उदाहरण
+### natijako udaharan
 
 <!-- ne-cell: fed2a6d9 -->
-यो उदाहरणमा तलको नतिजा आउँछ (उही इनपुट दिइयो भने उही नतिजा आउँछ)। लेबल कोडले छाप्ने
-जापानी अक्षरमै देखिन्छ।
+yo udaharan ma talako natija aaunchha (uhi input diiyo bhane uhi natija aaunchha). label kodale chhapne
+Japani aksharamai dekhinchha.
 
-लम्बाइ 3 भएको अन्तिम अक्ष हराएको छ: प्रति pixel तीन रङ मान एउटा उज्यालो मान बन्यो। शुद्ध रातो, हरियो
-र निलो pixel को उज्यालो फरक पर्छ, किनभने भार फरक छ।
+lambai 3 bhaeko antim aksh haraeko chha: prati pixel tin rang maan euta ujyalo maan banyo. shuddh rato, hariyo
+ra nilo pixel ko ujyalo farak parchha, kinabhane bhar farak chha.
 
 <!-- ne-cell: dda7bd81 | after-heading -->
-#### आफैं रङ बनाएर हेर्नुहोस्
+#### aphain rang banaera hernuhos
 
 <!-- ne-cell: dda7bd81 -->
-`R`, `G`, `B` तीन सङ्ख्या सार्दा रङ बदलिन्छ। **सार्नुअघि कस्तो रङ बन्छ अनुमान गर्नुहोस्।**
+`R`, `G`, `B` tin sankhya sarda rang badlinchha. **sarnuaghi kasto rang banchha anuman garnuhos.**
 
-| अनुमान | जाँच्ने मान |
+| anuman | jaanchne maan |
 |---|---|
-| कहिले खैरो हुन्छ? | तीनवटै उही सङ्ख्या |
-| कहिले पहेंलो हुन्छ? | R र G ठुलो, B = 0 |
-| कहिले कालो हुन्छ? | तीनवटै 0 |
+| kahile khairo hunchha? | tinabatai uhi sankhya |
+| kahile pahenlo hunchha? | R ra G thulo, B = 0 |
+| kahile kalo hunchha? | tinabatai 0 |
 
-तलको "parameter सेल" ले widget नभए पनि उही प्रयोग गर्न सकिन्छ।
+talako "parameter cell" le widget nabhae pani uhi prayog garna sakinchha.
 
-अनुमान: RGB=(255,0,0) भने रातो हो। भारित खैरो
-`0.299×255 + 0.587×0 + 0.114×0 = 76.245` (8-bit देखाइमा करिब 76) हुन्छ।
-तलको parameter सेलमा R मात्र 255→0 बनाएर अनुमानसँग तुलना गर्नुहोस्।
+anuman: RGB=(255,0,0) bhane rato ho. bharit khairo
+`0.299×255 + 0.587×0 + 0.114×0 = 76.245` (8-bit dekhaima karib 76) hunchha.
+talako parameter cell ma R matra 255→0 banaera anuman sang tulna garnuhos.
 
 <!-- ne-cell: 11c4e389 | after-heading -->
-## Part 4 चित्रको निर्देशांक
+## Part 4 chitrako nirdeshank
 
 <!-- ne-cell: a54f4513 | after-heading -->
-**मूलबिन्दु माथि-बायाँ, y तलतिर**
+**mulabindu mathi-bayan, y talatir**
 <!-- ne-pair: The origin is top-left, and y increases downward -->
 
 <!-- ne-cell: a54f4513 -->
-गणितको ग्राफभन्दा **उल्टो** हुन्छ। ध्यान दिनुहोस्।
+ganitako graphabhanda **ulto** hunchha. dhyan dinuhos.
 
-- मूलबिन्दु `(0, 0)` **माथि-बायाँ** को pixel
-- `x` **दायाँ** तिर बढ्छ
-- `y` **तल** तिर बढ्छ
+- mulabindu `(0, 0)` **mathi-bayan** ko pixel
+- `x` **dayan** tir badhchha
+- `y` **tal** tir badhchha
 
-NumPy array पनि उही हो। `image[y, x]` क्रममा लेखिन्छ। **`x` र `y` को क्रम उल्टो** हुन्छ,
-त्यसैले सुरुमा अवश्य गल्ती हुन्छ। शान्त भएर जाँच्नुहोस्।
+NumPy array pani uhi ho. `image[y, x]` kram ma lekhinchha. **`x` ra `y` ko kram ulto** hunchha,
+tyasaile suru ma abashy galti hunchha. shant bhaera jaanchnuhos.
 
 <!-- ne-cell: fig-teach_array_indexing | after-heading -->
-### array को index र slice
+### array ko index ra slice
 
 <!-- ne-cell: fig-teach_array_indexing | after-image:../../assets/diagrams/teach_array_indexing.png -->
-चित्र: `image[1:4]` ले छान्ने पङ्क्ति। पङ्क्ति index 1, 2, 3 भनेको माथिबाट दोस्रोदेखि चौथो पङ्क्ति
-सम्म (योजनाबद्ध)।
+chitra: `image[1:4]` le chhanne pangkti. pangkti index 1, 2, 3 bhaneko mathibat dosrodekhi chautho pangkti
+samm (yojanabaddha).
 
-**ध्यान दिनुपर्ने कुरा**
+**dhyan dinuparne kura**
 
-चित्रको index 0 बाट सुरु हुन्छ। `image[1:4]` भनेको "पहिलोदेखि तेस्रो पङ्क्ति" होइन, "पङ्क्ति index
-1, 2, 3", अर्थात् माथिबाट दोस्रोदेखि चौथो पङ्क्ति। `image[1:4, 2:5]` जस्तै पङ्क्ति र स्तम्भ सँगै
-लेखिन्छ।
+chitrako index 0 baat suru hunchha. `image[1:4]` bhaneko "pahilodekhi tesro pangkti" hoina, "pangkti index
+1, 2, 3", arthat mathibat dosrodekhi chautho pangkti. `image[1:4, 2:5]` jastai pangkti ra stambha sangai
+lekhinchha.
 
-**सोच्नुहोस्**
+**sochnuhos**
 
-- माथिबाट पहिलो पङ्क्ति मात्र छान्न कसरी लेख्नुहुन्छ?
+- mathibat pahilo pangkti matra chhanna kasari lekhnuhunchha?
 
 <!-- ne-cell: clarity-pixel-predict | after-heading -->
-#### एउटा pixel अनुमान गर्ने
+#### euta pixel anuman garne
 
 <!-- ne-cell: clarity-pixel-predict -->
-इनपुट माथिको 5×7 array हो, काम `canvas[2,3]`, नतिजा एउटा मान। क्रम `image[y,x]` हो।
-चलाउनुअघि `canvas[3,2]` सँग उही हो कि होइन अनुमान गर्नुहोस्। चलाएपछि तलको चित्रमा ठेगाना जाँच्नुहोस्।
+input mathiko 5×7 array ho, kaam `canvas[2,3]`, natija euta maan. kram `image[y,x]` ho.
+chalaunuaghi `canvas[3,2]` sang uhi ho ki hoina anuman garnuhos. chalaepachhi talako chitra ma thegana jaanchnuhos.
 
 <!-- ne-cell: audit-teach_pixel_inspector | after-heading -->
-### कोड पढ्ने तरिका
+### kod padhne tarika
 
 <!-- ne-cell: audit-teach_pixel_inspector | after-image:../../assets/svg/teach_pixel_inspector.svg -->
-चित्र: 5 पङ्क्ति 7 स्तम्भको canvas[2,3] को मान 100 हो। पहिलो index पङ्क्ति y, दोस्रो स्तम्भ x हो।
-(हिसाब गरिएको कृत्रिम उदाहरण/योजनाबद्ध। model को मापन गरिएको नतिजा होइन।)
+chitra: 5 pangkti 7 stambhako canvas[2,3] ko maan 100 ho. pahilo index pangkti y, dosro stambha x ho.
+(hisab garieko kritrim udaharan/yojanabaddha. model ko maapan garieko natija hoina.)
 
-**ध्यान दिनुपर्ने कुरा**
+**dhyan dinuparne kura**
 
-5 पङ्क्ति 7 स्तम्भको canvas[2,3] को मान 100 हो। पहिलो index पङ्क्ति y, दोस्रो स्तम्भ x हो। निलो घेराको
-एउटा pixel र index उल्ट्याएर लेखिएको मान तुलना गर्नुहोस्।
+5 pangkti 7 stambhako canvas[2,3] ko maan 100 ho. pahilo index pangkti y, dosro stambha x ho. nilo gherako
+euta pixel ra index ultyaera lekhieko maan tulna garnuhos.
 
-**सोच्नुहोस्**
+**sochnuhos**
 
-canvas[2, 3] र canvas[3, 2] उही हुन्?
+canvas[2, 3] ra canvas[3, 2] uhi hun?
 
 <!-- ne-cell: clarity-slice-predict | after-heading -->
-#### slice अनुमान गर्ने
+#### slice anuman garne
 
 <!-- ne-cell: clarity-slice-predict -->
-इनपुट उही `canvas` हो। `canvas[1:4,2:5]` ले पङ्क्ति 1, 2, 3 र स्तम्भ 2, 3, 4 छान्छ।
-सुरु समावेश हुन्छ, अन्त्य 4 र 5 समावेश हुँदैन। चलाउनुअघि नतिजाको `shape` अनुमान गर्नुहोस्।
+input uhi `canvas` ho. `canvas[1:4,2:5]` le pangkti 1, 2, 3 ra stambha 2, 3, 4 chhanchha.
+suru samabesh hunchha, antya 4 ra 5 samabesh hundaina. chalaunuaghi natijako `shape` anuman garnuhos.
 
 <!-- ne-cell: audit-teach_slice_walkthrough | after-heading -->
-### कोड पढ्ने तरिका
+### kod padhne tarika
 
 <!-- ne-cell: audit-teach_slice_walkthrough | after-image:../../assets/svg/teach_slice_walkthrough.svg -->
-चित्र: canvas[1:4,2:5] ले 3 पङ्क्ति 3 स्तम्भ निकाल्छ। अन्त्य 4 र 5 समावेश हुँदैन।
-(हिसाब गरिएको कृत्रिम उदाहरण/योजनाबद्ध। model को मापन गरिएको नतिजा होइन।)
+chitra: canvas[1:4,2:5] le 3 pangkti 3 stambha nikalchha. antya 4 ra 5 samabesh hundaina.
+(hisab garieko kritrim udaharan/yojanabaddha. model ko maapan garieko natija hoina.)
 
-**ध्यान दिनुपर्ने कुरा**
+**dhyan dinuparne kura**
 
-पङ्क्ति 1–3 र स्तम्भ 2–4 लाई दायाँको array मा पछ्याउनुहोस्। बीचको मात्र 100 छ, र shape (3,3) हो।
+pangkti 1–3 ra stambha 2–4 lai dayanko array ma pachhyaunuhos. bichako matra 100 chha, ra shape (3,3) ho.
 
-**सोच्नुहोस्**
+**sochnuhos**
 
-[1:4, 2:5] को स्तम्भको अन्त्य 6 बनाउँदा shape कस्तो हुन्छ?
+[1:4, 2:5] ko stambhako antya 6 banaunda shape kasto hunchha?
 
 <!-- ne-cell: clarity-slice-followup -->
-नतिजा 3×3 हो र बीचको मात्र 100 छ। स्तम्भको अन्त्य 5 बाट 6 बनाउँदा कति स्तम्भ हुन्छन्?
-तलको चित्रको मूल 3×3 सँग तुलना गरेर अन्त्य फेरि पहिलेको बनाएपछि अगाडि बढ्नुहोस्।
+natija 3×3 ho ra bichako matra 100 chha. stambhako antya 5 baat 6 banaunda kati stambha hunchhan?
+talako chitrako mul 3×3 sang tulna garera antya feri pahileko banaepachhi agadi badhnuhos.
 
 <!-- ne-cell: 0ef08f98 | after-heading -->
-### नतिजाको उदाहरण
+### natijako udaharan
 
-पङ्क्ति र स्तम्भ हेडर भएको 5×7 तालिकाले ठेगाना जाँच्छौं। मूल चार कुनाको मान जस्ताको तस्तै छ।
-`canvas[2,3]=100`, `canvas[3,2]=0`, slice `[[0,0,0],[0,100,0],[0,0,0]]` हो।
-अब यही नियम 6×6 को अँध्यारो क्षेत्रमा सार्नुहोस्। ६ पङ्क्ति किन हुन्छ पहिले व्याख्या गर्नुहोस्।
+pangkti ra stambha hedar bhaeko 5×7 talikale thegana janchchhaun. mul chaar kunako maan jastako tastai chha.
+`canvas[2,3]=100`, `canvas[3,2]=0`, slice `[[0,0,0],[0,100,0],[0,0,0]]` ho.
+aba yahi niyam 6×6 ko andhyaro kshetra ma sarnuhos. 6 pangkti kina hunchha pahile byakhya garnuhos.
 
 <!-- ne-cell: fef0e737 | after-heading -->
-## Part 5 चित्र बनाएर बदल्ने
+## Part 5 chitra banaera badalne
 
 <!-- ne-cell: e313b7d9 | after-heading -->
-**सिटजस्तो देखिने चित्र बनाउने**
+**sitajasto dekhine chitra banaune**
 <!-- ne-pair: Build a sheet-like image -->
 
 <!-- ne-cell: e313b7d9 -->
-अब वास्तवमा "PVC सिटजस्तो" चित्र बनाएर काम गर्छौं।
-वास्तविक कारखानाको चित्र होइन, तर उज्यालोको असमानता र noise को सोच अभ्यास गर्न सकिन्छ।
+aba bastabama "PVC sitajasto" chitra banaera kaam garchhaun.
+bastabik karakhanako chitra hoina, tar ujyaloko asamanata ra noise ko soch abhyas garna sakinchha.
 
-चरण ३ वटा छन्।
+charan 3 bata chhan.
 
-1. सबै ठाउँ उज्यालो खैरो (`210`) ले भर्ने
-2. बिस्तारै बदलिने असमानता थप्ने
-3. सूक्ष्म noise थप्ने
+1. sabai thaun ujyalo khairo (`210`) le bharne
+2. bistarai badaline asamanata thapne
+3. sukshma noise thapne
 
 <!-- ne-cell: d6f4780d | after-heading -->
-### नतिजाको उदाहरण
+### natijako udaharan
 
-यो उदाहरणमा तलको नतिजा आउँछ (seed स्थिर छ। अन्तिम अङ्क NumPy को संस्करणअनुसार फरक पर्न सक्छ)।
+yo udaharan ma talako natija aaunchha (seed sthir chha. antim angk NumPy ko sanskaranaanusar farak parna sakchha).
 
-मानहरू 210 वरपरै रहन्छन्, किनभने आधार खैरोमा shading र noise जोडिँदा त्यही दायरामा पर्छ; `uint8`
-भनेको प्रत्येक मान 0 देखि 255 सम्मको पूर्णाङ्कको रूपमा भण्डारण हुन्छ।
+maanharu 210 baraparai rahanchhan, kinabhane adhar khairoma shading ra noise jodinda tyahi dayarama parchha; `uint8`
+bhaneko pratyek maan 0 dekhi 255 sammako purnankko rupama bhandaran hunchha.
 
 <!-- ne-cell: 159783f0 | after-heading -->
-**pixel बदलेर दोष बनाउने**
+**pixel badaler dosh banaune**
 <!-- ne-pair: Modify pixels to create a defect -->
 
 <!-- ne-cell: 159783f0 -->
-pixel को मान बदल्दा त्यो भागको देखिने रूप बदलिन्छ। यो उदाहरणमा मूल मान (210 आसपास) भन्दा सानो `40`
-राखिएकोले त्यो भाग **अँध्यारो** हुन्छ। यो "दोष" को सबैभन्दा सानो उदाहरण हो।
+pixel ko maan badalda tyo bhaagko dekhine rup badlinchha. yo udaharan ma mul maan (210 asapas) bhanda sano `40`
+rakhiekole tyo bhaag **andhyaro** hunchha. yo "dosh" ko sabaibhanda sano udaharan ho.
 
-तलको सेलले 6×6 pixel को अँध्यारो चौकोण बनाउँछ। `sheet[60:66, 100:106]` भनेको
-"पङ्क्ति y 60–65, स्तम्भ x 100–105" भन्ने हो। **पहिले पङ्क्ति (y), त्यसपछि स्तम्भ (x)** लेखिन्छ।
-Part 4 को चित्र "array को index र slice" को उही नियम हो। त्यो चित्रमा `canvas[1:4, 2:5]` प्रयोग भएको
-थियो। यो सेलले `sheet[60:66, 100:106]` प्रयोग गर्छ। सुरु र अन्त्य मात्र फरक हो, नियम उही हो। अन्त्यको
-मान **समावेश हुँदैन**, त्यसैले 6 पङ्क्ति × 6 स्तम्भ हुन्छ (7 होइन)।
+talako cellle 6×6 pixel ko andhyaro chaukon banaunchha. `sheet[60:66, 100:106]` bhaneko
+"pangkti y 60–65, stambha x 100–105" bhanne ho. **pahile pangkti (y), tyaspachhi stambha (x)** lekhinchha.
+Part 4 ko chitra "array ko index ra slice" ko uhi niyam ho. tyo chitra ma `canvas[1:4, 2:5]` prayog bhaeko
+thiyo. yo cellle `sheet[60:66, 100:106]` prayog garchha. suru ra antya matra farak ho, niyam uhi ho. antyako
+maan **samabesh hundaina**, tyasaile 6 pangkti × 6 stambha hunchha (7 hoina).
 
 <!-- ne-cell: 4b00fec6 | after-heading -->
-## Part 6 ठुलो/सानो बनाउँदा हराउने जानकारी
+## Part 6 thulo/sano banaunda haraune jankari
 
 <!-- ne-cell: eff2d8cf | after-heading -->
-### सानो बनाउँदा सूक्ष्म विवरण र contrast हराउँछ
+### sano banaunda sukshma biwaran ra contrast haraunchha
 
 <!-- ne-cell: eff2d8cf | after-image:../../assets/diagrams/teach_downsample_defect.png -->
-चित्र: उही कृत्रिम चित्रलाई 480 px, 120 px र 30 px मा सानो बनाएको नतिजा (Pillow को BILINEAR
-interpolation ले वास्तवमै हिसाब गरेको चित्र)।
+chitra: uhi kritrim chitra lai 480 px, 120 px ra 30 px ma sano banaeko natija (Pillow ko BILINEAR
+interpolation le bastabamai hisab gareko chitra).
 
-**ध्यान दिनुपर्ने कुरा**
+**dhyan dinuparne kura**
 
-30 px सम्म सानो बनाउँदा पातलो चोट १ pixel भन्दा सानो हुन्छ। **चोट हराउँदैन।** चित्रमा तिर्छो रेखा
-अझै देखिन्छ। तर रेखाको सूक्ष्म विवरण हराउँछ र वरपरसँगको उज्यालोको फरक पनि सानो हुन्छ, त्यसैले
-आकार र स्थान ठ्याक्कै पढ्न गाह्रो हुन्छ। सम्पूर्ण चित्रको standard deviation जस्तो एउटा statistic ले
-होइन, **चोटको स्थान र पछाडिको फरक** हेरेर निर्णय गर्नुहोस्।
+30 px samm sano banaunda patalo chot 1 pixel bhanda sano hunchha. **chot haraundain.** chitra ma tirchho rekha
+ajhai dekhinchha. tar rekhako sukshma biwaran haraunchha ra baraparasangako ujyaloko farak pani sano hunchha, tyasaile
+akar ra sthan thyakkai padhna gahro hunchha. sampurna chitrako standard deviation jasto euta statistic le
+hoina, **chotako sthan ra pachhadiko farak** herer nirnaya garnuhos.
 
-**सोच्नुहोस्**
+**sochnuhos**
 
-- 0.3 mm को चोट ३ pixel मा देखाउन प्रति mm कति pixel चाहिन्छ?
+- 0.3 mm ko chot 3 pixel ma dekhauna prati mm kati pixel chahinchha?
 
 <!-- ne-cell: be892bb2 | after-heading -->
-**सानो बनाउँदा के हुन्छ**
+**sano banaunda ke hunchha**
 <!-- ne-pair: What happens when you shrink an image -->
 
 <!-- ne-cell: be892bb2 -->
-चित्र सानो बनाउँदा **pixel घट्छ**, त्यसैले जानकारी हराउँछ।
-विस्तृत रूपमा भन्ने हो भने छेउछाउका pixel मिलाएर एउटा बनाइन्छ (यो नोटबुकमा BILINEAR interpolation)।
+chitra sano banaunda **pixel ghatchha**, tyasaile jankari haraunchha.
+bistrit rupama bhanne ho bhane chheuchhauka pixel milaera euta banainchha (yo notebook ma BILINEAR interpolation).
 
-सानो दोष सानो बनाउँदा आकारको सूक्ष्म विवरण हराउँछ र वरपरसँगको उज्यालोको फरक पनि सानो हुन्छ।
-त्यसको नतिजा भेट्टाउन र नाप्न गाह्रो हुन्छ। हराउँछ भन्ने चाहिँ पक्का होइन।
-यो उत्पादन निरीक्षणमा धेरै महत्त्वपूर्ण हुन्छ।
+sano dosh sano banaunda akarako sukshma biwaran haraunchha ra baraparasangako ujyaloko farak pani sano hunchha.
+tyasko natija bhettaun ra napna gahro hunchha. haraunchha bhanne chahin pakka hoina.
+yo utpadan nirikshan ma dherai mahattwapurna hunchha.
 
-यहाँ सुरक्षित गरिएको उही चित्र सानो बनाइन्छ। प्रकाशिकी बदलेर अर्को दृश्यक्षेत्र खिच्ने काम होइन।
-सानो दोष १ pixel भन्दा कम भए पनि pixel को उज्यालोमा असर गर्न सक्छ।
+yahan surakshit garieko uhi chitra sano banainchha. prakashiki badaler arko drishyakshetra khichne kaam hoina.
+sano dosh 1 pixel bhanda kam bhae pani pixel ko ujyaloma asar garna sakchha.
 
 <!-- ne-cell: fig-teach_resize_profile | after-heading -->
-### उही क्षेत्रलाई ३ resolution मा तुलना गर्ने
+### uhi kshetra lai 3 resolution ma tulna garne
 
 <!-- ne-cell: fig-teach_resize_profile | after-image:../../assets/diagrams/teach_resize_profile.png -->
-चित्र: यो उदाहरणको कृत्रिम चित्र सानो बनाउँदा दोषबाट जाने काट्छेदको उज्यालो (मापन गरिएको मान)।
-तेर्सो अक्ष स्थान, ठाडो अक्ष 0–255 को pixel मान हो।
+chitra: yo udaharanko kritrim chitra sano banaunda dosh baat jane katchhedako ujyalo (maapan garieko maan).
+terso aksh sthan, thado aksh 0–255 ko pixel maan ho.
 
-**ध्यान दिनुपर्ने कुरा**
+**dhyan dinuparne kura**
 
-यो चित्रले **यो उदाहरणमा नापिएको मान** देखाउँछ। "सानो बनाउँदा सधैं कम गहिरो र फराकिलो हुन्छ"
-भन्ने नियम होइन। interpolation को तरिका, दोषको आकार र पछाडिसँगको फरकले बदल्छ। ठाडो अक्षको इकाइ र
-काट्छेद कहाँबाट लिइयो जाँच्नुहोस्।
+yo chitrale **yo udaharan ma napieko maan** dekhaunchha. "sano banaunda sadhain kam gahiro ra pharakilo hunchha"
+bhanne niyam hoina. interpolation ko tarika, doshko akar ra pachhadisangako farakle badalchha. thado akshako ikai ra
+katchhed kahan baat liiyo jaanchnuhos.
 
-**सोच्नुहोस्**
+**sochnuhos**
 
-- सानो बनाए पनि अँध्यारोपनको न्यूनतम मान खासै नबदलिने अवस्था कस्तो होला?
+- sano banae pani andhyaropanako nyoonatam maan khasai nabadaline abastha kasto hola?
 
 <!-- ne-cell: 28884f36 | after-heading -->
-**सानो बनाउँदा दोष कहाँसम्म रहन्छ**
+**sano banaunda dosh kahan samma rahanchha**
 <!-- ne-pair: How much of the defect survives? -->
 
 <!-- ne-cell: 28884f36 -->
-तलको सेलले हरेक resolution मा "सबैभन्दा अँध्यारो pixel" जाँच्छ।
-यो उदाहरणमा सानो बनाउँदै जाँदा सबैभन्दा अँध्यारो pixel को मान पछाडिको नजिक पुग्छ। तर यो एउटा सङ्ख्याले
-मात्र "देखिन्छ/देखिँदैन" तय गर्दैन। वास्तविक निरीक्षणमा चोटको स्थान र पछाडिको फरक, noise को मात्रा र
-निर्णय गर्ने तरिका सँगै जाँचिन्छ।
+talako cellle harek resolution ma "sabaibhanda andhyaro pixel" janchchha.
+yo udaharan ma sano banaundai janda sabaibhanda andhyaro pixel ko maan pachhadiko najik pugchha. tar yo euta sankhyale
+matra "dekhinchha/dekhindain" tay gardaina. bastabik nirikshan ma chotako sthan ra pachhadiko farak, noise ko matra ra
+nirnaya garne tarika sangai janchinchha.
 
 <!-- ne-cell: 23b71a6c | after-heading -->
-### नतिजाको उदाहरण
+### natijako udaharan
 
-यो उदाहरणमा तलको नतिजा आउँछ (seed स्थिर छ। अन्तिम अङ्क NumPy को संस्करणअनुसार फरक पर्न सक्छ)।
-लेबल कोडले छाप्ने जापानी अक्षरमै देखिन्छ।
+yo udaharan ma talako natija aaunchha (seed sthir chha. antim angk NumPy ko sanskaranaanusar farak parna sakchha).
+label kodale chhapne Japani aksharamai dekhinchha.
 
-यहाँ "YES" भनेको 150 भन्दा अँध्यारो pixel बाँकी रह्यो भन्ने मात्र हो; यो सबैभन्दा अँध्यारो pixel को जाँच
-हो, चिन्ह सजिलै भेटिन्छ भन्ने प्रमाण होइन। चित्र सानो हुँदै जाँदा सबैभन्दा अँध्यारो मान 40 बाट 171
-पुग्छ, तर `teach_downsample_defect.png` (Part 6) को 30 px चित्रमा चिन्ह अझै देखिन्छ भन्ने कुरा ध्यान
-दिनुहोस्।
+yahan "YES" bhaneko 150 bhanda andhyaro pixel banki rahyo bhanne matra ho; yo sabaibhanda andhyaro pixel ko jaanch
+ho, chinh sajilai bhetinchha bhanne praman hoina. chitra sano hundai janda sabaibhanda andhyaro maan 40 baat 171
+pugchha, tar `teach_downsample_defect.png` (Part 6) ko 30 px chitra ma chinh ajhai dekhinchha bhanne kura dhyan
+dinuhos.
 
 <!-- ne-cell: f9071fc7 | after-heading -->
-## Part 7 अनुमान गरेपछि चलाउने
+## Part 7 anuman garepachhi chalaune
 
 <!-- ne-cell: e6e142e9 | after-heading -->
-**नतिजा अनुमान गर्नुहोस्**
+**natija anuman garnuhos**
 <!-- ne-pair: Predict the result -->
 
 <!-- ne-cell: e6e142e9 -->
-तलको सेलले `predict_me` भन्ने चित्र बनाउँछ। **चलाउनुअघि**
-नोटमा तलका ३ कुरा लेख्नुहोस्।
+talako cellle `predict_me` bhanne chitra banaunchha. **chalaunuaghi**
+notama talaka 3 kura lekhnuhos.
 
-1. चित्र कस्तो रङ देखिन्छ
-2. कता गाढा भाग बन्छ
-3. सम्पूर्ण औसत उज्यालो कति जति होला
+1. chitra kasto rang dekhinchha
+2. kata gadha bhaag banchha
+3. sampurna ausat ujyalo kati jati hola
 
-लेखिसकेपछि चलाएर अनुमानसँग तुलना गर्नुहोस्।
+lekhisakepachhi chalaera anuman sang tulna garnuhos.
 
 <!-- ne-cell: 46ee1d4a | after-heading -->
-**त्यस्तो किन भयो**
+**tyasto kina bhayo**
 <!-- ne-pair: Why it looks like that -->
 
 <!-- ne-cell: 46ee1d4a -->
-बायाँ भाग रातो देखिनुको कारण रातोको मान मात्र `230` बनाइयो। दायाँको गाढा भागमा तीनवटै मान `60`
-बनाइएकोले खैरो हो।
+bayan bhaag rato dekhinuko karan ratoko maan matra `230` banaiyo. dayanko gadha bhaag ma tinabatai maan `60`
+banaiyekole khairo ho.
 
-यो "अनुमान गरेपछि चलाउने" अभ्यास आउँदो ५ दिनभरि काम लाग्छ।
-**अनुमान नमिलेको क्षण नै सबैभन्दा धेरै सिकिने क्षण** हो।
+yo "anuman garepachhi chalaune" abhyas aundo 5 dinabhari kaam lagchha.
+**anuman namileko kshan nai sabaibhanda dherai sikine kshan** ho.
 
 <!-- ne-cell: 50a7a817 | after-heading -->
-## अभ्यास
+## abhyas
 
 <!-- ne-cell: c13aea22 | after-heading -->
-**अभ्यास १ (आधारभूत): आफ्नै चित्र बनाउने**
+**abhyas 1 (adharabhut): aphnai chitra banaune**
 <!-- ne-pair: Exercise 1 (basic): make your own image -->
 
-100×100 को greyscale चित्र बनाएर बीचको 20×20 pixel `30` बनाउनुहोस्।
-त्यसपछि `plt.imshow()` ले देखाउनुहोस्।
+100×100 ko greyscale chitra banaera bichako 20×20 pixel `30` banaunuhos.
+tyaspachhi `plt.imshow()` le dekhaunuhos.
 
-**सकिएको ठान्ने आधार:** देखाइएको चित्रको बीचमा एउटा अँध्यारो चौकोण देखिन्छ।
+**sakieko thanne adhar:** dekhaieko chitrako bichama euta andhyaro chaukon dekhinchha.
 
 <!-- ne-cell: b8228fc7 | after-heading -->
-**अभ्यास २ (मध्यम): रङ बदल्ने**
+**abhyas 2 (madhyam): rang badalne**
 <!-- ne-pair: Exercise 2 (intermediate): change colours -->
 
-अभ्यास १ को चित्रलाई **रङ** बनाएर बीचको चौकोण "रातो खालको खैरो" बनाउनुहोस्।
-त्यसपछि हरियो र निलो अंश 0 बनाएर देखाउनुहोस्। यो **रातो मात्र भएको RGB चित्र** हो।
-रातोको तीव्रता उज्यालोको रूपमा देखिन्छ, त्यसैले उज्यालो पछाडि रातो र `30` को चौकोण अँध्यारो रातो
-देखिन्छ।
+abhyas 1 ko chitra lai **rang** banaera bichako chaukon "rato khalako khairo" banaunuhos.
+tyaspachhi hariyo ra nilo ansh 0 banaera dekhaunuhos. yo **rato matra bhaeko RGB chitra** ho.
+ratoko tibrata ujyaloko rupama dekhinchha, tyasaile ujyalo pachhadi rato ra `30` ko chaukon andhyaro rato
+dekhinchha.
 
-**सकिएको ठान्ने आधार:** रातो मात्र राखिएको चित्रमा कुन pixel उज्यालो देखिन्छ (रातोको मान ठुलो भएको
-pixel) भनेर बुझाउन सक्ने।
+**sakieko thanne adhar:** rato matra rakhieko chitra ma kun pixel ujyalo dekhinchha (ratoko maan thulo bhaeko
+pixel) bhanera bujhaun sakne.
 
 <!-- ne-cell: 6850a83e | after-heading -->
-**अभ्यास ३ (विकास/ऐच्छिक): resolution र दोषको सम्बन्ध व्याख्या गर्ने**
+**abhyas 3 (bikas/aichchhik): resolution ra doshko sambandh byakhya garne**
 <!-- ne-pair: Exercise 3 (optional challenge): relate resolution to detectability -->
 
-Part 6 को नतिजा प्रयोग गरेर "चौडाइ 1,300 mm को सिटमा 0.3 mm को दोष भेट्टाउन तेर्सोतिर कति pixel
-चाहिन्छ" हिसाब गर्नुहोस्। कारण पनि लेख्नुहोस्।
+Part 6 ko natija prayog garera "chaudai 1,300 mm ko sitama 0.3 mm ko dosh bhettaun tersotir kati pixel
+chahinchha" hisab garnuhos. karan pani lekhnuhos.
 
-सङ्केत: एउटा दोष ३ pixel मा देखाउन चाहन्छौं भनेर मान्नुहोस्। यी ३ pixel यो तालिमका लागि छानिएको लक्ष्य
-मान हुन्। प्रकाशिकी, contrast, धमिलोपन र noise ले चाहिने pixel सङ्ख्या बदल्छ।
+sanket: euta dosh 3 pixel ma dekhauna chahanchhaun bhanera mannuhos. yi 3 pixel yo talimka lagi chhanieko lakshya
+maan hun. prakashiki, contrast, dhamilopan ra noise le chahine pixel sankhya badalchha.
 
-**सकिएको ठान्ने आधार:** चाहिने pixel सङ्ख्या र त्यसको आधार (प्रति mm pixel सङ्ख्या, ३ pixel भन्ने
-लक्ष्य मान) दुवै लेख्नुहोस्।
+**sakieko thanne adhar:** chahine pixel sankhya ra tyasko adhar (prati mm pixel sankhya, 3 pixel bhanne
+lakshya maan) dubai lekhnuhos.
 
 <!-- ne-cell: b41ca058 | after-heading -->
-#### बुझाइ जाँच
+#### bujhai jaanch
 
-1. 640×480 को रङ चित्रमा कतिवटा सङ्ख्या हुन्छन्? हिसाबको सूत्र पनि लेख्नुहोस्।
-2. चित्रको निर्देशांकमा `(0, 0)` कहाँ पर्छ? गणितको ग्राफभन्दा कसरी फरक छ?
-3. RGB का तीनवटै मान 120 भए त्यो pixel कस्तो रङ हुन्छ?
-4. resolution घटाउँदा सानो दोषको देखिने रूप कसरी बदलिन्छ? कारण पनि लेख्नुहोस्।
-5. "pixel बदल्ने" काम उत्पादन लाइनमा केसँग बराबर हुन्छ?
+1. 640×480 ko rang chitra ma katibata sankhya hunchhan? hisabako sutra pani lekhnuhos.
+2. chitrako nirdeshankama `(0, 0)` kahan parchha? ganitako graphabhanda kasari farak chha?
+3. RGB ka tinabatai maan 120 bhae tyo pixel kasto rang hunchha?
+4. resolution ghataunda sano doshko dekhine rup kasari badlinchha? karan pani lekhnuhos.
+5. "pixel badalne" kaam utpadan line ma ke sang barabar hunchha?
 
-नमुना जवाफ: `docs/instructor/day01_instructor_guide.md`।
+namuna jabaph: `docs/instructor/day01_instructor_guide.md`.
 
 <!-- ne-cell: caac07dd | after-heading -->
-## समस्या आउँदा
+## samasya aunda
 
-त्रुटि आए पहिले "कुन सेलमा", "कुन लाइनमा", "के सन्देश आयो" भनेर टिप्नुहोस्। बुझाउनुपर्ने काममा पनि
-त्यही अभिलेख राख्नुहोस्।
+truti ae pahile "kun cell ma", "kun line ma", "ke sandesh ayo" bhanera tipnuhos. bujhaunuparne kaam ma pani
+tyahi abhilekh rakhnuhos.
 
-| लक्षण | के गर्ने |
+| lakshan | ke garne |
 | --- | --- |
-| `FileNotFoundError` ले चित्र पढ्न सकिएन | सामग्री बनेको छैन। आधारभूत वातावरण सक्रिय गरेको CMD मा सामग्रीको मूल फोल्डरबाट `python assets\scripts\generate_training_assets.py` एक पटक चलाउनुहोस्। |
-| `TypeError: Invalid shape ... for image data` | `imshow` लाई दिइएको array को आयाम गलत छ। खैरो २ आयाम, रङ ३ आयाम हुन्छ। |
-| खैरो चित्र पूरै कालो/सेतो देखिन्छ | intensity देखाउने scale को समस्या हो। `vmin=0, vmax=255` दिनुहोस्। नदिए मानको दायरा स्वतः तन्किन्छ। |
-| `IndexError: index 200 is out of bounds` | निर्देशांक चित्रको बाहिर छ। `shape` जाँच्नुहोस् (`shape[0]` उचाइ, `shape[1]` चौडाइ)। |
-| रङ अनौठो (रातो र निलो उल्टो देखिन्छ) | channel को क्रमको समस्या हो। OpenCV BGR क्रम प्रयोग गर्छ, `cv2.cvtColor(image, cv2.COLOR_BGR2RGB)` ले बदल्नुहोस् (दिन २)। `vmin`/`vmax` ले यो मिल्दैन। |
-| सानो बनाउँदा चोट देख्न गाह्रो हुन्छ | pixel मिलाइने हुनाले सूक्ष्म विवरण र contrast हराउँछ। चोटको स्थान र पछाडिको फरक सानो बनाउनुअघि र पछि तुलना गर्नुहोस्। |
+| `FileNotFoundError` le chitra padhna sakien | samagri baneko chhaina. adharabhut batabaran sakriya gareko CMD ma samagriko mul folder baat `python assets\scripts\generate_training_assets.py` ek patak chalaunuhos. |
+| `TypeError: Invalid shape ... for image data` | `imshow` lai diieko array ko ayam galat chha. khairo 2 ayam, rang 3 ayam hunchha. |
+| khairo chitra purai kalo/seto dekhinchha | intensity dekhaune scale ko samasya ho. `vmin=0, vmax=255` dinuhos. nadie maanko dayara sbatah tankinchha. |
+| `IndexError: index 200 is out of bounds` | nirdeshank chitrako bahir chha. `shape` jaanchnuhos (`shape[0]` uchai, `shape[1]` chaudai). |
+| rang anautho (rato ra nilo ulto dekhinchha) | channel ko kramko samasya ho. OpenCV BGR kram prayog garchha, `cv2.cvtColor(image, cv2.COLOR_BGR2RGB)` le badalnuhos (din 2). `vmin`/`vmax` le yo mildaina. |
+| sano banaunda chot dekhna gahro hunchha | pixel milaine hunale sukshma biwaran ra contrast haraunchha. chotako sthan ra pachhadiko farak sano banaunuaghi ra pachhi tulna garnuhos. |
 
 <!-- ne-cell: 5254066a | after-heading -->
-## सकिएको जाँचसूची
+## sakieko janchasuchi
 
-**अनिवार्य** वस्तुहरू सूचीबद्ध छन्। सबैमा चिन्ह लागेपछि यो नोटबुक सकिन्छ।
+**aniwarya** bastuharu suchibaddh chhan. sabai ma chinh lagepachhi yo notebook sakinchha.
 
-- [ ] Part 1–Part 7 पढें
-- [ ] सबै कोड सेल चलाएँ
-- [ ] अनुमान लेखेर मात्र Part 7 चलाएँ
-- [ ] अभ्यास 1–2 (अनिवार्य) गरें
-- [ ] resolution र दोषको आकारको सम्बन्ध बुझाउन सक्छु
-- [ ] बुझाइ जाँचका ५ प्रश्नको जवाफ दिएँ
-- [ ] नोटबुक सुरक्षित गरें
+- [ ] Part 1–Part 7 padhen
+- [ ] sabai kod cell chalaen
+- [ ] anuman lekher matra Part 7 chalaen
+- [ ] abhyas 1–2 (aniwarya) garen
+- [ ] resolution ra doshko akarako sambandh bujhaun sakchhu
+- [ ] bujhai jaanchka 5 prashnako jabaph dien
+- [ ] notebook surakshit garen
 
-**ऐच्छिक (सकिएको सर्तमा पर्दैन):** अभ्यास ३ र "थप सिकाइ" को अतिरिक्त चुनौती।
+**aichchhik (sakieko sartama pardaina):** abhyas 3 ra "thap sikai" ko atirikt chunauti.
 
 <!-- ne-cell: 669d9fb1 | after-heading -->
-## थप सिकाइ (ऐच्छिक)
+## thap sikai (aichchhik)
 
 <!-- ne-cell: 669d9fb1 -->
-### सन्दर्भ लिङ्क
+### sandarbha lingk
 
-- [NumPy array को आधार](https://numpy.org/doc/stable/user/basics.creation.html)
+- [NumPy array ko adhar](https://numpy.org/doc/stable/user/basics.creation.html)
 - [Matplotlib imshow](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.imshow.html)
-- [Pillow को resize](https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.Image.resize)
-- [डिजिटल चित्रको आधार (OpenCV tutorial)](https://docs.opencv.org/4.x/d6/d00/tutorial_py_root.html)
+- [Pillow ko resize](https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.Image.resize)
+- [dijital chitrako adhar (OpenCV tutorial)](https://docs.opencv.org/4.x/d6/d00/tutorial_py_root.html)
 
-### अतिरिक्त चुनौती (अनिवार्य होइन)
+### atirikt chunauti (aniwarya hoina)
 
-`Image.resize` को `Image.BILINEAR` लाई `Image.NEAREST` बनाएर Part 6 को तालिका फेरि बनाउनुहोस्।
-नतिजा कसरी बदलियो? कारण के हो? चोट हरायो, कि देख्न गाह्रो मात्र भयो?
+`Image.resize` ko `Image.BILINEAR` lai `Image.NEAREST` banaera Part 6 ko talika feri banaunuhos.
+natija kasari badaliyo? karan ke ho? chot harayo, ki dekhna gahro matra bhayo?

@@ -71,6 +71,24 @@ Generation preserves existing archived TEST PNGs; the lesson inserter no longer 
 The existing archive gate still defaults to hidden and requires freeze/evaluation. Neither archived PNG
 nor its worked TEST answers are embedded in learner Day05/Week1 PDFs.
 
+## 2026-11-18 Day 2 threshold figure revision / しきい値スイープ図の改訂
+
+`assets/diagrams/teach_threshold_sweep.png` だけを作り直しました。入力（`_pvc_sheet(200, "spot", seed=52)`
+のグレースケール）と計算方法は変えていません。レイアウトだけを、2 軸の混在グラフから「上下 2 段・
+別々の 2 グラフ」に変えました。他の図・SVG・保存済み出力は再生成していません。
+Only this one figure was rebuilt; the synthetic input and the counting method are unchanged, and no
+other diagram, SVG or saved output was regenerated.
+
+| Asset / ID | Notebook / heading | Deterministic source | Provenance / limits | Preview | Learning question |
+|---|---|---|---|---|---|
+| `teach_threshold_sweep.png` / V07 | Day02_03 / `fig-teach_threshold_sweep` | `generate_teaching_diagrams.teach_threshold_sweep` -> `_pvc_sheet(200, "spot", 52)` + `cv2.threshold(..., THRESH_BINARY_INV)` + `cv2.findContours(..., RETR_EXTERNAL)` | Computed on a synthetic image. Pixel counts are not calibrated areas; an external contour is not a defect. | [PNG](../assets/diagrams/teach_threshold_sweep.png) | しきい値を上げても前景の画素数は減らないのに、外部輪郭の数は増減するのはなぜですか。 Why can the contour count move while the white-pixel count never falls? |
+
+Source-checked values (19 thresholds, 40–220 step 10, image 200×200 = 40,000 px):
+T = 100 → 249 px / 1 external contour; T = 160 → 249 px / 1; T = 190 → 302 px / 46;
+T = 200 → 12,634 px / 320; T = 210 → 36,677 px / 49; T = 220 → 40,000 px / 1.
+The spot is the disc of `teaching_data.spot_mask` (radius 9 px), which contains 249 pixels — an earlier
+note quoted 250; the computed value 249 is used.
+
 ## Existing source-checked figures / 既存の検証済み図
 
 | Asset | Notebook section | Source code/data | Provenance | Preview | Learning question |

@@ -89,12 +89,30 @@ def test_c_severity_is_reported_as_ng_without_changing_public_grade(capsys) -> N
 
 
 def freeze_namespace(tmp_path: Path) -> dict:
-    (tmp_path / "submissions" / "day05").mkdir(parents=True)
+    day05 = tmp_path / "submissions" / "day05"
+    day05.mkdir(parents=True)
+    sys.path.insert(0, str(ROOT / "assets" / "helpers"))
+    import experiment_identity as identity
+
+    manifest = {"model": {"backbone": "test fixture"}, "postprocessor": {"enabled": True},
+                "score_convention": "fixture", "partitions": {"test": ["test/a.png"]},
+                "dataset_name": "fixture", "dataset_seed": 0, "image_size": [8, 8],
+                "counts": {"calibration": 1, "test": 1},
+                "split": {"library": "fixture", "val_split_mode": "from_test",
+                          "val_split_ratio": 0.5}}
+    experiment = identity.base_identity(
+        manifest,
+        {"fingerprint": "0" * 64, "tensor_count": 0, "memory_bank": None},
+        {"available": False},
+    )
+    manifest["experiment"] = experiment
+    (day05 / "patchcore_fitted_state.json").write_text(
+        json.dumps({"schema_version": 1, "experiment": experiment}), encoding="utf-8")
     return {"COURSE_ROOT": tmp_path, "json": json, "YOLO_THRESHOLD": .06,
             "PATCHCORE_THRESHOLD": .5,
-            "manifest": {"model": {"backbone": "test fixture"}, "postprocessor": {"enabled": True},
-                         "score_convention": "fixture", "partitions": {"test": ["test/a.png"]}},
-            "yolo_data": {"weights": "fixture.pt"}}
+            "manifest": manifest,
+            "yolo_data": {"weights": "fixture.pt"},
+            "patchcore_data": {"experiment": experiment}}
 
 
 def test_freeze_requires_written_declaration_and_persists_reused_data_status(tmp_path) -> None:

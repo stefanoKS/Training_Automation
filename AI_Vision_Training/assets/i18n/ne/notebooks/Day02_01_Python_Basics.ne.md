@@ -1,435 +1,435 @@
 <!--
-नेपाली अनुवाद / Nepali translation source for
+Nepali anuwad / Nepali translation source for
 notebooks/Day02_Python_OpenCV/Day02_01_Python_Basics.ipynb
 
 Each block starts with an ne-cell directive naming the notebook cell id.
 Do not translate code, file names, URLs or kernel names.
 -->
-# दिन २ नोटबुक ०१ — नेपाली अनुवाद
+# din 2 notebook 01 — Nepali anuwad
 
 <!-- ne-cell: 79dc91db | after-heading -->
-# दिन २ नोटबुक ०१: Python परिचय
+# din 2 notebook 01: Python parichay
 
 <!-- ne-cell: 79dc91db -->
-## सिकाइ लक्ष्यहरू
+## sikai lakshyaharu
 
-| नेपाली |
+| Nepali |
 | --- |
-| 1. `print()` प्रयोग गरेर मान देखाउन सक्ने। |
-| 2. चल (variable) मा सङ्ख्या र अक्षर (text) राख्न सक्ने। |
-| 3. चार आधारभूत गणित र तुलना गर्ने सञ्चालक (operator) प्रयोग गर्न सक्ने। |
-| 4. True / False को अर्थ बताउन सक्ने। |
-| 5. त्रुटि सन्देश (error message) पढेर आफैं सुधार गर्न सक्ने। |
+| 1. `print()` prayog garera maan dekhauna sakne. |
+| 2. chal (variable) ma sankhya ra akshar (text) rakhna sakne. |
+| 3. chaar adharabhut ganit ra tulna garne sanchalak (operator) prayog garna sakne. |
+| 4. True / False ko arth bataun sakne. |
+| 5. truti sandesh (error message) padher aphain sudhar garna sakne. |
 
-## यो नोटबुकको आधारभूत जानकारी
+## yo notebookko adharabhut jankari
 
-| विषय | विवरण |
+| bishay | biwaran |
 | --- | --- |
-| सिकाइ समय (अनुमान) | 125 मिनेट |
-| कठिनाइ | सुरुवाती तह |
-| पूर्वशर्त | दिन १ सकिएको हुनुपर्छ। |
-| आवश्यक लाइब्रेरी | numpy, matplotlib, pillow |
-| प्रयोग हुने kernel | aivision |
-| आजको समयतालिका | [`COURSE_SYLLABUS.md` दिन २](../../COURSE_SYLLABUS.md#day2) |
+| sikai samay (anuman) | 125 minet |
+| kathinai | surubati tah |
+| poorwashart | din 1 sakieko hunuparchha. |
+| aawashyak laibreri | numpy, matplotlib, pillow |
+| prayog hune kernel | aivision |
+| ajako samayatalika | [`COURSE_SYLLABUS.md` din 2](../../COURSE_SYLLABUS.md#day2) |
 
-### बुझाउनुपर्ने काम
+### bujhaunuparne kaam
 
-| नेपाली |
+| Nepali |
 | --- |
-| अभ्यास 1–3 का कार्यक्रम |
-| त्रुटि अभिलेख (error log) |
+| abhyas 1–3 ka karyakram |
+| truti abhilekh (error log) |
 
 <!-- ne-cell: fcc49434 | after-heading -->
-## यो नोटबुक कहाँ पर्छ
+## yo notebook kahan parchha
 
 <!-- ne-cell: fcc49434 -->
-| विषय | विवरण |
+| bishay | biwaran |
 | --- | --- |
-| दिन | दिन २ |
-| आजको क्रम | आजको नोटबुकमध्ये 1 / 3 |
-| लाग्ने समय | 125 मिनेट |
-| पूर्वशर्त | दिन १ |
-| आजको समयतालिका | [`COURSE_SYLLABUS.md` दिन २](../../COURSE_SYLLABUS.md#day2) |
+| din | din 2 |
+| ajako kram | ajako notabukamadhye 1 / 3 |
+| lagne samay | 125 minet |
+| poorwashart | din 1 |
+| ajako samayatalika | [`COURSE_SYLLABUS.md` din 2](../../COURSE_SYLLABUS.md#day2) |
 
-दिनको समयतालिका `COURSE_SYLLABUS.md` मा एउटै ठाउँमा छ। यो नोटबुक त्यसको एउटा भाग मात्र हो, आफ्नो
-छुट्टै समयतालिका राख्दैन। समय थाहा नभए पहिले त्यही फाइल हेर्नुहोस्।
+dinko samayatalika `COURSE_SYLLABUS.md` ma eutai thaun ma chha. yo notebook tyasko euta bhaag matra ho, aphno
+chhuttai samayatalika rakhdain. samay thaha nabhae pahile tyahi file hernuhos.
 
 <!-- ne-cell: audit-learning-loop | after-heading -->
-### अनुमान गर्नुहोस्, चलाउनुहोस्, हेर्नुहोस्, व्याख्या गर्नुहोस्
+### anuman garnuhos, chalaunuhos, hernuhos, byakhya garnuhos
 
 <!-- ne-cell: audit-learning-loop -->
-मान राख्ने कामले नामलाई एउटा मानसँग बाँध्छ। `=` तुलना होइन। महत्त्वपूर्ण सेल चलाउनुअघि इनपुट, काम र
-नतिजा एक-एक वाक्यमा लेख्नुहोस्। पहिले अनुमान लेख्नुहोस्, त्यसपछि सेल चलाएर मान वा चित्र हेर्नुहोस्।
-एउटै कुरा मात्र बदल्नुहोस्, फेरि अनुमान गरेर चलाउनुहोस्। जानाजान राखिएका त्रुटि र नसकिएका अभ्यासका
-लागि लेखिएको निर्देशन पछ्याउनुहोस्।
+maan rakhne kaamle naam lai euta maan sang bandhchha. `=` tulna hoina. mahattwapurna cell chalaunuaghi input, kaam ra
+natija ek-ek bakyama lekhnuhos. pahile anuman lekhnuhos, tyaspachhi cell chalaera maan wa chitra hernuhos.
+eutai kura matra badalnuhos, feri anuman garera chalaunuhos. janajan rakhieka truti ra nasakieka abhyaska
+lagi lekhieko nirdeshan pachhyaunuhos.
 
 <!-- ne-cell: 289d22f2 | after-heading -->
-## Part 0 तयारी
+## Part 0 tayari
 
 <!-- ne-cell: f2e7dc76 | after-heading -->
-## Part 1 मान देखाउने
+## Part 1 maan dekhaune
 
 <!-- ne-cell: 4c543e1a | after-heading -->
-**`print()` को आधार**
+**`print()` ko adhar**
 <!-- ne-pair: The basics of `print()` -->
 
 <!-- ne-cell: 4c543e1a -->
-`print()` ले कोष्ठकभित्रको मान स्क्रिनमा देखाउँछ। माथिको कोड उदाहरण हेर्नुहोस्।
+`print()` le koshthakabhitrako maan skrinama dekhaunchha. mathiko kod udaharan hernuhos.
 
-तेस्रो लाइनजस्तै `"..."` र सङ्ख्या कमाले छुट्याएर राख्दा, ती **एउटा खाली ठाउँले छुट्याएर** एकै लहरमा
-देखिन्छन्।
+tesro line jastai `"..."` ra sankhya kamale chhutyaera rakhda, ti **euta khali thaunle chhutyaera** ekai laharama
+dekhinchhan.
 
-| लेख्ने तरिका | देखिने नतिजा |
+| lekhne tarika | dekhine natija |
 |---|---|
 | `print("abc")` | `abc` |
 | `print(100.3)` | `100.3` |
 | `print("abc", 100.3)` | `abc 100.3` |
-| `print("abc" + "def")` | `abcdef` (जोडिन्छ) |
-| `print("abc" + 100.3)` | **त्रुटि** (अक्षर र सङ्ख्या जोड्न मिल्दैन) |
+| `print("abc" + "def")` | `abcdef` (jodinchha) |
+| `print("abc" + 100.3)` | **truti** (akshar ra sankhya jodna mildaina) |
 
 <!-- ne-cell: 864e596f | after-heading -->
-### नतिजाको उदाहरण
+### natijako udaharan
 
 <!-- ne-cell: e18478f8 | after-heading -->
-## Part 2 चल (variables)
+## Part 2 chal (variables)
 
 <!-- ne-cell: 56698643 | after-heading -->
-### चलमा मान पुग्ने क्रम
+### chalama maan pugne kram
 
 <!-- ne-cell: 56698643 | after-image:../../assets/diagrams/teach_variable_trace.png -->
-चित्र: तीन लाइनको कोड र प्रत्येक लाइन सकिँदा चलमा रहेको मान। तेस्रो लाइनले `100.7 < 101.0` भन्ने
-सर्त तुलना गर्छ; सर्त पुगेको हुनाले `is_ok` को मान `True` हुन्छ। यसको अर्थ 100.7 भन्ने सङ्ख्या आफैं
-"सही" हो भन्ने चाहिँ होइन।
+chitra: tin lineko kod ra pratyek line sakinda chalama raheko maan. tesro linele `100.7 < 101.0` bhanne
+sart tulna garchha; sart pugeko hunale `is_ok` ko maan `True` hunchha. yasko arth 100.7 bhanne sankhya aphain
+"sahi" ho bhanne chahin hoina.
 
-**ध्यान दिनुपर्ने कुरा**
+**dhyan dinuparne kura**
 
-`=` को अर्थ "बराबर" होइन। यसको अर्थ **"दायाँपट्टिको हिसाब गरेर बायाँपट्टिको नाममा राख्ने"** हो। दोस्रो
-लाइनले `width_mm` लाई दायाँपट्टि पढ्छ, त्यसपछि नयाँ मान राख्छ।
+`=` ko arth "barabar" hoina. yasko arth **"dayanpattiko hisab garera bayanpattiko naam ma rakhne"** ho. dosro
+linele `width_mm` lai dayanpatti padhchha, tyaspachhi nayan maan rakhchha.
 
-तेस्रो लाइनको `True` ले **त्यहाँ लेखिएको सर्त (`width_mm < 101.0`) पूरा भयो** भन्ने मात्र जनाउँछ। सर्तलाई
-`width_mm < 100.0` बनाउनुभयो भने त्यही 100.7 ले `False` दिन्छ। `True` / `False` ले "सही / गलत" होइन,
-"सर्त पुग्यो / पुगेन" भन्ने जवाफ दिन्छ।
+tesro lineko `True` le **tyahan lekhieko sart (`width_mm < 101.0`) pura bhayo** bhanne matra janaunchha. sartalai
+`width_mm < 100.0` banaunubhayo bhane tyahi 100.7 le `False` dinchha. `True` / `False` le "sahi / galat" hoina,
+"sart pugyo / pugen" bhanne jabaph dinchha.
 
-**सोच्नुहोस्**
+**sochnuhos**
 
-- तेस्रो लाइन सकिँदा `width_mm` को मान कति हुन्छ? र `is_ok` `True` हुनुको कारण कुन सर्त पूरा हुनु हो?
+- tesro line sakinda `width_mm` ko maan kati hunchha? ra `is_ok` `True` hunuko karan kun sart pura hunu ho?
 
 <!-- ne-cell: 710318fa | after-heading -->
-**चल भनेको नाम भएको बाकस**
+**chal bhaneko naam bhaeko bakas**
 <!-- ne-pair: A variable is a named box -->
 
 <!-- ne-cell: 710318fa -->
-चल (variable) भनेको मान राख्ने **नाम भएको बाकस** हो। माथिको `sheet_width = 100.3` लेखिएको कोडले
-"`sheet_width` भन्ने बाकसमा `100.3` राख्ने" भन्ने अर्थ दिन्छ। यो गणितको `=` (बराबर) होइन।
+chal (variable) bhaneko maan rakhne **naam bhaeko bakas** ho. mathiko `sheet_width = 100.3` lekhieko kodale
+"`sheet_width` bhanne bakasama `100.3` rakhne" bhanne arth dinchha. yo ganitako `=` (barabar) hoina.
 
-**चलको नाम राख्ने नियम**
+**chalako naam rakhne niyam**
 
-- अङ्ग्रेजी अक्षर, अङ्क र `_` (underscore) प्रयोग गर्न पाइन्छ
-- अङ्कबाट सुरु गर्न पाइँदैन
-- ठुला र साना अक्षर फरक मानिन्छ (`Width` र `width` बेग्लै हुन्)
-- सुरक्षित शब्द (`if`, `for`, `class` आदि) प्रयोग गर्न पाइँदैन
+- Angreji akshar, angk ra `_` (underscore) prayog garna painchha
+- angkabat suru garna paindain
+- thula ra sana akshar farak maninchha (`Width` ra `width` beglai hun)
+- surakshit shabd (`if`, `for`, `class` adi) prayog garna paindain
 
-**राम्रो नामका उदाहरण:** `sheet_width`, `measured_thickness`, `defect_count`
-**नराम्रो नामका उदाहरण:** `a`, `x1`, `data2` — पछि पढ्दा अर्थ थाहा हुँदैन।
+**ramro naamka udaharan:** `sheet_width`, `measured_thickness`, `defect_count`
+**naramro naamka udaharan:** `a`, `x1`, `data2` — pachhi padhda arth thaha hundaina.
 
 <!-- ne-cell: 2702d72d | after-heading -->
-### नतिजाको उदाहरण
+### natijako udaharan
 
 <!-- ne-cell: 397ef12e | after-heading -->
-## Part 3 सङ्ख्या र गणना
+## Part 3 sankhya ra ganana
 
 <!-- ne-cell: 9fb383b4 | after-heading -->
-**सङ्ख्याका प्रकार र चार गणित**
+**sankhyaka prakar ra chaar ganit**
 <!-- ne-pair: Number types and the four operations -->
 
 <!-- ne-cell: 9fb383b4 -->
-Python मा मुख्यतः दुई प्रकारका सङ्ख्या हुन्छन्।
+Python ma mukhyatah dui prakarka sankhya hunchhan.
 
-| प्रकार | उदाहरण | कहाँ प्रयोग हुन्छ |
+| prakar | udaharan | kahan prayog hunchha |
 |---|---|---|
-| पूर्णाङ्क `int` | `3`, `-12`, `0` | गन्ने सङ्ख्या, पिक्सेल सङ्ख्या, क्रम सङ्ख्या |
-| दशमलव `float` | `100.3`, `0.05`, `2.0` | नापिएको मान, अनुपात, समय |
+| purnank `int` | `3`, `-12`, `0` | ganne sankhya, piksel sankhya, kram sankhya |
+| dashamalab `float` | `100.3`, `0.05`, `2.0` | napieko maan, anupaat, samay |
 
-**सञ्चालक (operators)**
+**sanchalak (operators)**
 
-| चिन्ह | अर्थ | उदाहरण | नतिजा |
+| chinh | arth | udaharan | natija |
 |---|---|---|---|
-| `+` | जोड्ने | `100.0 + 0.3` | `100.3` |
-| `-` | घटाउने | `100.0 - 0.3` | `99.7` |
-| `*` | गुणन | `1.2 * 100` | `120.0` |
-| `/` | भाग | `120 / 1.2` | `100.0` |
-| `//` | तलतिर राउन्ड गर्ने भाग (भागफल तलतिर) | `7 // 2` | `3` |
-| `%` | भागको शेष | `7 % 2` | `1` |
-| `**` | घात (power) | `2 ** 3` | `8` |
+| `+` | jodne | `100.0 + 0.3` | `100.3` |
+| `-` | ghataune | `100.0 - 0.3` | `99.7` |
+| `*` | gunan | `1.2 * 100` | `120.0` |
+| `/` | bhaag | `120 / 1.2` | `100.0` |
+| `//` | talatir raund garne bhaag (bhagaphal talatir) | `7 // 2` | `3` |
+| `%` | bhaagko shesh | `7 % 2` | `1` |
+| `**` | ghat (power) | `2 ** 3` | `8` |
 
-> `/` को नतिजा सधैं दशमलव हुन्छ। `4 / 2` को नतिजा `2.0` हो (`2` होइन)।
+> `/` ko natija sadhain dashamalab hunchha. `4 / 2` ko natija `2.0` ho (`2` hoina).
 
 <!-- ne-cell: fig-teach_units_conversion | after-heading -->
-### नाप र एकाइ परिवर्तन
+### nap ra ekai paribartan
 
 <!-- ne-cell: fig-teach_units_conversion | after-image:../../assets/diagrams/teach_units_conversion.png -->
-चित्र: एकाइ परिवर्तन र कम्प्युटरभित्र सङ्ख्या कसरी राखिन्छ (योजनाबद्ध चित्र)। माथिल्लो लहर भौतिक
-एकाइ हो, तल्लो लहर 2-आधारित (binary) अनुमान र राउन्ड गर्ने नीति हो।
+chitra: ekai paribartan ra kampyuterbhitra sankhya kasari rakhinchha (yojanabaddha chitra). mathillo lahar bhautik
+ekai ho, tallo lahar 2-adharit (binary) anuman ra raund garne niti ho.
 
-**ध्यान दिनुपर्ने कुरा**
+**dhyan dinuparne kura**
 
-तीन कुरा छुट्टाएर सोच्नुहोस्। ① भौतिक एकाइ (mm, px) को परिवर्तन, ② binary मा ठ्याक्कै लेख्न नसकिने
-सङ्ख्याको अनुमान (`0.1 + 0.2` ले `0.3` दिँदैन), ③ निरीक्षणमा कहाँ राउन्ड गर्ने। ② गणितको गुण हो, ③
-कम्पनीको नियम हो।
+tin kura chhuttaera sochnuhos. ① bhautik ekai (mm, px) ko paribartan, ② binary ma thyakkai lekhna nasakine
+sankhyako anuman (`0.1 + 0.2` le `0.3` dindain), ③ nirikshan ma kahan raund garne. ② ganitako gun ho, ③
+kampaniko niyam ho.
 
-**सोच्नुहोस्**
+**sochnuhos**
 
-- `0.1 + 0.2` ले `0.3` नदिनुको कारण एकाइ परिवर्तन हो कि सङ्ख्या भण्डारण गर्ने तरिका?
+- `0.1 + 0.2` le `0.3` nadinuko karan ekai paribartan ho ki sankhya bhandaran garne tarika?
 
 <!-- ne-cell: acfe495e | after-heading -->
-### नतिजाको उदाहरण
+### natijako udaharan
 
 <!-- ne-cell: acfe495e -->
-लामो दशमलव भनेको राखिएको सङ्ख्याको अनुमानको परिणाम हो। यसको विस्तृत व्याख्या पछि "वैकल्पिक:
-परिशुद्धता र विशेष सञ्चालक" भागमा आउँछ। यो एकाइ वा निरीक्षण-मापदण्ड बदल्ने कारण होइन।
+lamo dashamalab bhaneko rakhieko sankhyako anumanko parinam ho. yasko bistrit byakhya pachhi "baikalpik:
+parishuddhata ra bishesh sanchalak" bhaag ma aaunchha. yo ekai wa nirikshan-mapadand badalne karan hoina.
 
 <!-- ne-cell: 8464d545 | after-heading -->
-**अक्षर (string)**
+**akshar (string)**
 <!-- ne-pair: Strings -->
 
 <!-- ne-cell: 8464d545 -->
-अक्षरको लहर (string) भनेको `"..."` भित्र राखिएको अक्षरहरूको क्रम हो। `'...'` पनि उही हो। माथिको
-`product_name = "PVC sheet"` जस्तो लेखाइ त्यसैको उदाहरण हो।
+aksharako lahar (string) bhaneko `"..."` bhitra rakhieko aksharaharuko kram ho. `'...'` pani uhi ho. mathiko
+`product_name = "PVC sheet"` jasto lekhai tyasaiko udaharan ho.
 
-**प्रायः प्रयोग हुने काम**
+**prayah prayog hune kaam**
 
-| काम | उदाहरण | नतिजा |
+| kaam | udaharan | natija |
 |---|---|---|
-| जोड्ने | `"PVC" + " sheet"` | `PVC sheet` |
-| दोहोर्याउने | `"ab" * 3` | `ababab` |
-| लम्बाइ | `len("PVC")` | `3` |
-| अंश निकाल्ने | `"PVC sheet"[0:3]` | `PVC` |
-| ठुलो अक्षर बनाउने | `"pvc".upper()` | `PVC` |
+| jodne | `"PVC" + " sheet"` | `PVC sheet` |
+| dohoryaune | `"ab" * 3` | `ababab` |
+| lambai | `len("PVC")` | `3` |
+| ansh nikalne | `"PVC sheet"[0:3]` | `PVC` |
+| thulo akshar banaune | `"pvc".upper()` | `PVC` |
 
-> क्रम सङ्ख्या **0 बाट** सुरु हुन्छ। `[0:3]` को अर्थ "0 औँदेखि 3 औँ अघिसम्म" हो।
+> kram sankhya **0 baat** suru hunchha. `[0:3]` ko arth "0 aundekhi 3 aun aghi samma" ho.
 
 <!-- ne-cell: a1b4171f | after-heading -->
-### नतिजाको उदाहरण
+### natijako udaharan
 
 <!-- ne-cell: fd0785c0 | after-heading -->
-## Part 4 तुलना र सत्य/असत्य मान
+## Part 4 tulna ra saty/asaty maan
 
 <!-- ne-cell: 1bde6236 | after-heading -->
-**तुलना गर्ने सञ्चालक**
+**tulna garne sanchalak**
 <!-- ne-pair: Comparison operators -->
 
 <!-- ne-cell: 1bde6236 -->
-तुलना गर्दा नतिजा `True` वा `False` आउँछ। यी दुईलाई **सत्य/असत्य मान (boolean)** भनिन्छ।
+tulna garda natija `True` wa `False` aaunchha. yi dui lai **saty/asaty maan (boolean)** bhaninchha.
 
-`True` को अर्थ "**त्यो सर्त पूरा भयो**", `False` को अर्थ "**त्यो सर्त पूरा भएन**" हो। यो "सही / गलत"
-भन्ने निर्णय होइन। सर्त नमिलेर `False` आउनु प्रोग्रामको त्रुटि पनि नहुन सक्छ; त्यसको अर्थ मानले सर्त
-पूरा गरेन भन्ने मात्र हो।
+`True` ko arth "**tyo sart pura bhayo**", `False` ko arth "**tyo sart pura bhaen**" ho. yo "sahi / galat"
+bhanne nirnaya hoina. sart namiler `False` aunu programako truti pani nahun sakchha; tyasko arth maanle sart
+pura garen bhanne matra ho.
 
-| चिन्ह | अर्थ | उदाहरण | नतिजा |
+| chinh | arth | udaharan | natija |
 |---|---|---|---|
-| `==` | बराबर | `100.0 == 100.0` | `True` |
-| `!=` | बराबर होइन | `1 != 2` | `True` |
-| `<` | सानो | `1 < 2` | `True` |
-| `<=` | सानो वा बराबर | `2 <= 2` | `True` |
-| `>` | ठुलो | `1 > 2` | `False` |
-| `>=` | ठुलो वा बराबर | `2 >= 3` | `False` |
+| `==` | barabar | `100.0 == 100.0` | `True` |
+| `!=` | barabar hoina | `1 != 2` | `True` |
+| `<` | sano | `1 < 2` | `True` |
+| `<=` | sano wa barabar | `2 <= 2` | `True` |
+| `>` | thulo | `1 > 2` | `False` |
+| `>=` | thulo wa barabar | `2 >= 3` | `False` |
 
-> **`=` र `==` फरक हुन्**। `=` ले मान राख्छ, `==` ले तुलना गर्छ। नयाँ सिक्नेहरूले सबैभन्दा धेरै
-> यही ठाउँमा गल्ती गर्छन्।
+> **`=` ra `==` farak hun**. `=` le maan rakhchha, `==` le tulna garchha. nayan sikneharule sabaibhanda dherai
+> yahi thaun ma galti garchhan.
 
 <!-- ne-cell: fig-teach_assign_vs_compare | after-heading -->
-### `=` र `==` फरक काम हुन्
+### `=` ra `==` farak kaam hun
 
 <!-- ne-cell: fig-teach_assign_vs_compare | after-image:../../assets/diagrams/teach_assign_vs_compare.png -->
-चित्र: मान राख्ने (`=`) र सत्य/असत्य सोध्ने (`==`) को फरक, र साँच्चै गणना गरिएका चार नतिजा।
+chitra: maan rakhne (`=`) ra saty/asaty sodhne (`==`) ko farak, ra sanchchai ganana garieka chaar natija.
 
-**ध्यान दिनुपर्ने कुरा**
+**dhyan dinuparne kura**
 
-`=` भनेको "दायाँपट्टिको मानलाई नाममा बाँध्ने" वाक्य हो; यसले आफैं केही देखाउँदैन। `==` ले "बराबर छ
-कि छैन" जाँचेर True / False दिन्छ।
+`=` bhaneko "dayanpattiko maan lai naam ma bandhne" baky ho; yasle aphain kehi dekhaundain. `==` le "barabar chha
+ki chhaina" jancher True / False dinchha.
 
-**सोच्नुहोस्**
+**sochnuhos**
 
-- `a = 5` चलाउँदा केही पनि नदेखिनुको कारण के हो?
+- `a = 5` chalaunda kehi pani nadekhinuko karan ke ho?
 
-चलाउनुअघि अनुमान: `width = 100.3` ले मान देखाउँछ? त्यसपछि `print(width == 100.3)` ले के गर्छ?
-`width` मात्र 100.4 बनाएर तुलनाको True/False व्याख्या गर्नुहोस्।
+chalaunuaghi anuman: `width = 100.3` le maan dekhaunchha? tyaspachhi `print(width == 100.3)` le ke garchha?
+`width` matra 100.4 banaera tulnako True/False byakhya garnuhos.
 
-तलको छोटो सेलले बराबरी मात्र जाँच्छ। त्यसपछिको पुरानो उदाहरणले अर्को प्रश्न सोध्छ: "फरक मापदण्डभित्र
-छ कि छैन?"
+talako chhoto cellle barabari matra janchchha. tyaspachhiko purano udaharanle arko prashna sodhchha: "farak mapadandbhitra
+chha ki chhaina?"
 
 <!-- ne-cell: 6892283a | after-heading -->
-### नतिजाको उदाहरण
+### natijako udaharan
 
 <!-- ne-cell: d919c78b | after-heading -->
-## Part 5 किबोर्डबाट मान लिने
+## Part 5 kibordabat maan line
 
 <!-- ne-cell: e9217fc0 | after-heading -->
-**`input()` को प्रयोग र ध्यान दिनुपर्ने कुरा**
+**`input()` ko prayog ra dhyan dinuparne kura**
 <!-- ne-pair: How `input()` works, and its warnings -->
 
 <!-- ne-cell: e9217fc0 -->
-`input()` ले किबोर्डबाट एक लाइन पढ्छ। यसले **सधैं अक्षर (`str`)** फर्काउँछ। माथिको कोड उदाहरण हेर्नुहोस्।
+`input()` le kibordabat ek line padhchha. yasle **sadhain akshar (`str`)** pharkaunchha. mathiko kod udaharan hernuhos.
 
-सङ्ख्याको रूपमा प्रयोग गर्न **परिवर्तन (conversion) गर्नैपर्छ**। त्यो परिवर्तन असफल हुन सक्छ। त्यसैले
-माथिको उदाहरणले `try` / `except` भित्र `float(text)` राख्छ।
+sankhyako rupama prayog garna **paribartan (conversion) garnaiparchha**. tyo paribartan asaphal huna sakchha. tyasaile
+mathiko udaharanle `try` / `except` bhitra `float(text)` rakhchha.
 
-`float("abc")` ले `ValueError` दिन्छ। `input()` बाट आएको मान **सधैं परिवर्तन हुन्छ भन्ने ठान्नु हुँदैन**।
+`float("abc")` le `ValueError` dinchha. `input()` baat aeko maan **sadhain paribartan hunchha bhanne thannu hundaina**.
 
-**यो तालिममा `input()` प्रयोग नगर्ने कारण**
+**yo talim ma `input()` prayog nagarne karan**
 
-| कारण | व्याख्या |
+| karan | byakhya |
 |---|---|
-| स्वतः चलाउन मिल्दैन | नोटबुक एकैपटक चलाउँदा इनपुटको प्रतीक्षामा रोकिन्छ |
-| दिइएको मान नोटबुकमा बस्दैन | के राख्नुभयो भन्ने स्क्रिनमा मात्र देखिन्छ। पछि उही नतिजा दोहोर्याउन आफैं लेख्नुपर्छ |
-| गल्ती इनपुटमा कमजोर | अङ्क बाहेक अरू लेख्दा `float()` ले `ValueError` दिन्छ (माथिको `try` / `except` जस्तो उपाय चाहिन्छ) |
+| sbatah chalaun mildaina | notebook ekaipatak chalaunda inputko pratikshama rokinchha |
+| diieko maan notebook ma basdain | ke rakhnubhayo bhanne skrinama matra dekhinchha. pachhi uhi natija dohoryaun aphain lekhnuparchha |
+| galti input ma kamajor | angk bahek aru lekhda `float()` le `ValueError` dinchha (mathiko `try` / `except` jasto upay chahinchha) |
 
-त्यसैले मान **सेलभित्रै लेखेर** चलाउनुहोस्। मान बदलेर जति पटक पनि प्रयास गर्न सक्नुहुन्छ।
+tyasaile maan **selabhitrai lekher** chalaunuhos. maan badaler jati patak pani prayas garna saknuhunchha.
 
 <!-- ne-cell: 2713acd6 | after-heading -->
-## Part 6 त्रुटि र डिबगिङ
+## Part 6 truti ra dibaging
 
 <!-- ne-cell: 0f6a8f0a | after-heading -->
-**प्रायः देखिने पाँच त्रुटि**
+**prayah dekhine paanch truti**
 <!-- ne-pair: The five errors you will meet most -->
 
 <!-- ne-cell: 0f6a8f0a -->
-त्रुटि "असफलता" होइन, "जानकारी" हो। नामैले कारण बताउँछ।
+truti "asaphalata" hoina, "jankari" ho. namaile karan bataunchha.
 
-| त्रुटि | अर्थ | प्रायः हुने कारण |
+| truti | arth | prayah hune karan |
 |---|---|---|
-| `SyntaxError` | व्याकरण मिलेन | `if x > 1` मा `:` छुट्नु, कोष्ठक नबन्द हुनु |
-| `NameError` | त्यो नाम परिभाषित छैन | चलको नाममा टाइप गल्ती, अघिल्लो सेल नचलाइएको |
-| `TypeError` | प्रकार मिलेन | `"abc" + 100` (अक्षर र सङ्ख्या) |
-| `ValueError` | मान मिलेन | `float("abc")` (सङ्ख्या नभएको अक्षर) |
-| `IndexError` | दायराबाहिर | 3 वटा तत्त्व भएको सूचीमा `[10]` ले पुग्न खोज्नु |
+| `SyntaxError` | byakaran milen | `if x > 1` ma `:` chhutnu, koshthak naband hunu |
+| `NameError` | tyo naam paribhashit chhaina | chalako naam ma taip galti, aghillo cell nachalaieko |
+| `TypeError` | prakar milen | `"abc" + 100` (akshar ra sankhya) |
+| `ValueError` | maan milen | `float("abc")` (sankhya nabhaeko akshar) |
+| `IndexError` | dayarabahir | 3 bata tattb bhaeko soochi ma `[10]` le pugna khojnu |
 
-**त्रुटि सन्देश पढ्ने तीन चरण**
+**truti sandesh padhne tin charan**
 
-1. **अन्तिम लाइन**: त्रुटिको प्रकार (`NameError` आदि)
-2. **त्यसको माथिको लाइन**: के गर्न खोज्दा असफल भयो
-3. **`---->` भएको लाइन**: प्रोग्रामको कति नम्बर लाइन (Jupyter मा `line 3` आदि)
+1. **antim line**: trutiko prakar (`NameError` adi)
+2. **tyasko mathiko line**: ke garna khojda asaphal bhayo
+3. **`---->` bhaeko line**: programako kati number line (Jupyter ma `line 3` adi)
 
 <!-- ne-cell: fig-teach_traceback_annotated | after-heading -->
-### traceback कसरी पढ्ने
+### traceback kasari padhne
 
 <!-- ne-cell: fig-teach_traceback_annotated | after-image:../../assets/diagrams/teach_traceback_annotated.png -->
-चित्र: 0 ले भाग गर्दा आउने traceback, कुन क्रममा पढ्ने भनेर चिन्ह लगाइएको (योजनाबद्ध चित्र)।
+chitra: 0 le bhaag garda aune traceback, kun kram ma padhne bhanera chinh lagaieko (yojanabaddha chitra).
 
-**ध्यान दिनुपर्ने कुरा**
+**dhyan dinuparne kura**
 
-यो उदाहरण **Python का साधारण सङ्ख्यालाई** 0 ले भाग गर्दा आउने त्रुटि हो। भाषा वा सङ्ख्याको प्रकार
-फरक भए (जस्तै NumPy को array गणना) त्रुटि नआई `inf` वा `nan` पनि आउन सक्छ। "जुनसुकै भाषामा सधैं
-असफल हुन्छ" भन्ने होइन।
+yo udaharan **Python ka sadharan sankhya lai** 0 le bhaag garda aune truti ho. bhasha wa sankhyako prakar
+farak bhae (jastai NumPy ko array ganana) truti naai `inf` wa `nan` pani aun sakchha. "junasukai bhashama sadhain
+asaphal hunchha" bhanne hoina.
 
-**सोच्नुहोस्**
+**sochnuhos**
 
-- NumPy मा `1.0 / 0.0` गणना गर्दा त्रुटि आउँछ कि `inf` आउँछ?
+- NumPy ma `1.0 / 0.0` ganana garda truti aaunchha ki `inf` aaunchha?
 
 <!-- ne-cell: 7ed0594d | after-heading -->
-### नतिजाको उदाहरण
+### natijako udaharan
 
 <!-- ne-cell: 90a7e4fa | after-heading -->
-**डिबग गर्ने क्रम**
+**dibag garne kram**
 <!-- ne-pair: A debugging procedure -->
 
 <!-- ne-cell: 90a7e4fa -->
-त्रुटि आएपछि यही क्रममा जाँच्नुहोस्।
+truti aepachhi yahi kram ma jaanchnuhos.
 
-1. **कुन सेल** मा भयो भनेर हेर्नुहोस् (`In [ ]` को नम्बर)
-2. सन्देशको **अन्तिम लाइन** पढ्नुहोस्
-3. **अघिल्ला सेलहरू चलाइयो कि** जाँच्नुहोस्
-4. शङ्का लागेको मान **`print()` गर्नुहोस्** — यो सबैभन्दा भरपर्दो तरिका हो
-5. सुधारेपछि **त्यो सेल र त्यसको नतिजा प्रयोग गर्ने सेलहरू** फेरि चलाउनुहोस्। कति सम्म असर पर्छ थाहा
-   नभए **kernel पुनः सुरु गरेर आवश्यक सेलहरू माथिबाट क्रमैसँग चलाउनुहोस्**
+1. **kun cell** ma bhayo bhanera hernuhos (`In [ ]` ko number)
+2. sandeshko **antim line** padhnuhos
+3. **aghilla cellharu chalaiyo ki** jaanchnuhos
+4. shangka lageko maan **`print()` garnuhos** — yo sabaibhanda bharapardo tarika ho
+5. sudharepachhi **tyo cell ra tyasko natija prayog garne cellharu** feri chalaunuhos. kati samm asar parchha thaha
+   nabhae **kernel punah suru garera aawashyak cellharu mathibat kramaisang chalaunuhos**
 
-**एउटा सेल मात्र सुधारेर फेरि चलाउँदा पुरानो नतिजा रहिरहन्छ।** नोटबुकले माथिबाट तलसम्म अवस्था बनाउँछ,
-त्यसैले function वा चल सुधार्दा पहिले नै गणना भइसकेको पुरानो नतिजा स्क्रिनमा त्यसै रहन्छ। पुरानो र
-नयाँ नतिजा मिसिँदा कारण छुट्याउन सकिँदैन।
+**euta cell matra sudharer feri chalaunda purano natija rahirahanchha.** notebookle mathibat talasamm abastha banaunchha,
+tyasaile function wa chal sudharda pahile nai ganana bhaisakeko purano natija skrinama tyasai rahanchha. purano ra
+nayan natija misinda karan chhutyaun sakindaina.
 
 <!-- ne-cell: clarity-optional-operators | after-heading -->
-### वैकल्पिक: परिशुद्धता र विशेष सञ्चालक
+### baikalpik: parishuddhata ra bishesh sanchalak
 
 <!-- ne-cell: clarity-optional-operators -->
-पहिलो चरणमा नाम → सङ्ख्या → print → गणना → तुलना → True/False अभ्यास गर्नुहोस्। तलका कुरा दोस्रो
-पटकमा पढ्ने पूरक टिप्पणी हुन्। सीमा नजिकको नापिएको मानलाई सोचविचारविना राउन्ड गरेर पास बनाउनु
-हुँदैन। आवश्यक रिजोल्युसन र निर्णय नीति पहिले नै तोक्नुहोस्।
+pahilo charan ma naam → sankhya → print → ganana → tulna → True/False abhyas garnuhos. talaka kura dosro
+patakama padhne purak tippani hun. sima najikako napieko maan lai sochabicharabina raund garera pas banaunu
+hundaina. aawashyak rijolyusan ra nirnaya niti pahile nai toknuhos.
 
 <!-- ne-cell: 1b60ce34 | after-heading -->
-**दशमलव गणनामा त्रुटि आउँछ**
+**dashamalab ganana ma truti aaunchha**
 <!-- ne-pair: Floating-point rounding error -->
 
 <!-- ne-cell: 1b60ce34 -->
-माथिको नतिजामा `0.29999999999999716` देख्नुभयो? `100.3 - 100.0` को गणितीय उत्तर `0.3` हो, तर Python
-ले `0.3` देखाउँदैन।
+mathiko natija ma `0.29999999999999716` dekhnubhayo? `100.3 - 100.0` ko ganitiy uttar `0.3` ho, tar Python
+le `0.3` dekhaundain.
 
-यो Python को बिग्रेको गुण होइन। **कम्प्युटरले दशमलव सङ्ख्या 2-आधारित (0 र 1 को क्रम) मा राख्छ**, त्यसैले
-यस्तो हुन्छ। 0.1 र 0.3 दुवैलाई 2-आधारितमा सीमित अङ्कले ठ्याक्कै लेख्न सकिँदैन।
+yo Python ko bigreko gun hoina. **computerle dashamalab sankhya 2-adharit (0 ra 1 ko kram) ma rakhchha**, tyasaile
+yasto hunchha. 0.1 ra 0.3 dubailai 2-adharitama simit angkale thyakkai lekhna sakindaina.
 
-**यो एकाइको कुराभन्दा फरक हो।** यो त्रुटि mm वा cm को कुरा होइन; "एउटै सङ्ख्या कुन ढाँचामा राखिएको छ"
-भन्ने कुरा हो। सङ्ख्यामा एकाइको जानकारी हुँदैन। mm मा नापेको ठानेर cm मा गणना गर्दा पनि कार्यक्रमले
-त्रुटि दिँदैन।
+**yo ekaiko kurabhanda farak ho.** yo truti mm wa cm ko kura hoina; "eutai sankhya kun dhanchama rakhieko chha"
+bhanne kura ho. sankhya ma ekaiko jankari hundaina. mm ma napeko thaner cm ma ganana garda pani karyakramale
+truti dindain.
 
-**उत्पादन निरीक्षणमा यसको व्यवहार (यो तालिमको नीति)**
+**utpadan nirikshan ma yasko byabahar (yo talimko niti)**
 
-1. नापिएको मानको **रिजोल्युसन** तोक्नुहोस् (जस्तै 0.001 mm सम्म पढ्ने, वा 1 pixel = 0.05 mm)।
-2. सीमा तुलनामा **घोषित मापदण्डको सीमा** (जस्तै 11.8 mm वा बढी र 12.2 mm वा कम) त्यसै प्रयोग गर्नुहोस्।
-   पास बनाउन मापदण्ड फराकिलो बनाउनु हुँदैन।
-3. राउन्ड गर्ने नीति **पहिले नै तोकेर अभिलेख गर्नुहोस्**। यो तालिमका अभ्यासमा `round(फरक, 6)` प्रयोग हुन्छ।
-4. असमानताको चिन्हले त्रुटि हटाउँदैन। राउन्ड गरेपछि सीमाभन्दा अलि बाहिरको मान भित्र पर्न सक्छ। सीमा
-   नजिक राउन्ड नीति र नापको अनिश्चितता सँगै जाँच्नुहोस्।
+1. napieko maanko **rijolyusan** toknuhos (jastai 0.001 mm samm padhne, wa 1 pixel = 0.05 mm).
+2. sima tulna ma **ghoshit mapadandako sima** (jastai 11.8 mm wa badhi ra 12.2 mm wa kam) tyasai prayog garnuhos.
+   pas banaun mapadand pharakilo banaunu hundaina.
+3. raund garne niti **pahile nai toker abhilekh garnuhos**. yo talimka abhyas ma `round(farak, 6)` prayog hunchha.
+4. asamanatako chinhale truti hataundain. raund garepachhi simabhanda ali bahirako maan bhitra parna sakchha. sima
+   najik raund niti ra napako anishchitata sangai jaanchnuhos.
 
-तलको `1e-9` भनेको आफैं छानिएको सङ्ख्यात्मक सह्यतासँग गरिने एउटा खेलौना-तुलना हो। यो उत्पादनको
-पास/फेल मापदण्ड होइन।
+talako `1e-9` bhaneko aphain chhanieko sangkhyatmak sahyatasang garine euta khelauna-tulna ho. yo utpadanako
+pas/phel mapadand hoina.
 
 <!-- ne-cell: 31fc6d72 | after-heading -->
-### नतिजाको उदाहरण
+### natijako udaharan
 
 <!-- ne-cell: clarity-floor-notes | after-heading -->
-#### ऋणात्मक सङ्ख्याको भाग र assignment expression
+#### rinatmak sankhyako bhaag ra assignment expression
 
 <!-- ne-cell: clarity-floor-notes -->
-> `//` भनेको **तलतिर राउन्ड गर्ने भाग (floor division)** हो। यसले पूर्णाङ्क भाग मात्र निकाल्दैन, भागफललाई
-> **तलतिर (ऋणात्मक अनन्ततातिर)** राउन्ड गर्छ। `7 // 2` को नतिजा `3` हो, तर `-7 // 2` को नतिजा `-4` हुन्छ
-> (`-3` होइन)। `//` दशमलवमा पनि चल्छ: `7.0 // 2` को नतिजा `3.0` हो। पूर्णाङ्क चाहिए `int()` ले बदल्नुहोस्।
+> `//` bhaneko **talatir raund garne bhaag (floor division)** ho. yasle purnank bhaag matra nikaldain, bhagaphalalai
+> **talatir (rinatmak anantatatir)** raund garchha. `7 // 2` ko natija `3` ho, tar `-7 // 2` ko natija `-4` hunchha
+> (`-3` hoina). `//` dashamalabama pani chalchha: `7.0 // 2` ko natija `3.0` ho. purnank chahie `int()` le badalnuhos.
 
-`:=` भनेको मान पनि फर्काउने उच्च-स्तरीय assignment expression हो। यो पाठमा प्रयोग गरिँदैन।
+`:=` bhaneko maan pani pharkaune uchcha-stariy assignment expression ho. yo paath ma prayog garindain.
 
 <!-- ne-cell: cc676dcd | after-heading -->
-## अभ्यास
+## abhyas
 
 <!-- ne-cell: 7d48e791 | after-heading -->
-**अभ्यास 1 (आधारभूत): आफ्नो परिचय देखाउने**
+**abhyas 1 (adharabhut): aphno parichay dekhaune**
 <!-- ne-pair: Exercise 1 (basic): print an introduction -->
 
 <!-- ne-cell: 7d48e791 -->
-चलमा "नाम", "विभाग" र "आजको सिकाइ लक्ष्य" राखेर `print()` ले 3 लाइन देखाउनुहोस्। एउटा लाइन नेपालीमा
-र दुई लाइन अङ्ग्रेजीमा राख्नुहोस्।
+chalama "naam", "bibhag" ra "ajako sikai lakshya" rakher `print()` le 3 line dekhaunuhos. euta line Nepali ma
+ra dui line Angreji ma rakhnuhos.
 
-**सकिएको मानिने अवस्था:** नतिजामा नमुनाको अक्षर होइन, तपाईंको आफ्नै वास्तविक जानकारी देखिनुपर्छ।
+**sakieko manine abastha:** natija ma namunako akshar hoina, tapainko aphnai bastabik jankari dekhinuparchha.
 
 <!-- ne-cell: audit-teach_mass_units_chain | after-heading -->
-### कोड कसरी पढ्ने
+### kod kasari padhne
 
 <!-- ne-cell: audit-teach_mass_units_chain | after-image:../../assets/svg/teach_mass_units_chain.svg -->
-चित्र: क्षेत्रफल र आयतन छुट्याउनुहोस्। उत्तर आफैं गणना गर्नुहोस्। (गणना गरिएको संश्लेषित उदाहरण र
-योजनाबद्ध चित्र; model को वास्तविक नापिएको नतिजा होइन।)
+chitra: kshetraphal ra ayatan chhutyaunuhos. uttar aphain ganana garnuhos. (ganana garieko sansleshit udaharan ra
+yojanabaddha chitra; model ko bastabik napieko natija hoina.)
 
-**ध्यान दिनुपर्ने कुरा**
+**dhyan dinuparne kura**
 
-क्षेत्रफल र आयतन फरक हुन्। उत्तर आफैं गणना गर्नुहोस्। इनपुट र परिवर्तन भएको मान औंलाले देखाउँदै
-पछ्याउनुहोस्।
+kshetraphal ra ayatan farak hun. uttar aphain ganana garnuhos. input ra paribartan bhaeko maan aunlale dekhaundai
+pachhyaunuhos.
 
-**सोच्नुहोस्**
+**sochnuhos**
 
-मोटाइ मात्र दोब्बर बनाउँदा क्षेत्रफल र तौल कसरी बदलिन्छ?
+motai matra dobbar banaunda kshetraphal ra taul kasari badlinchha?
 
 <!-- ne-cell: clarity-mass-chain | after-heading -->
-#### एकाइको शृङ्खला (आदर्श गणना)
+#### ekaiko shringkhala (adarsh ganana)
 
 <!-- ne-cell: clarity-mass-chain -->
-माथिको चित्रकै इनपुट प्रयोग भएको छ। यी नापिएका नतिजा होइनन्। पहिले क्षेत्रफल किन दुई लम्बाइको गुणन र
-आयतन किन तीन लम्बाइको गुणन हुन्छ, अनुमान गर्नुहोस्।
+mathiko chitrakai input prayog bhaeko chha. yi napieka natija hoinan. pahile kshetraphal kina dui lambaiko gunan ra
+ayatan kina tin lambaiko gunan hunchha, anuman garnuhos.
 
 `1300 mm × 2500 mm = 3,250,000 mm² = 3.25 m²`
 
@@ -437,92 +437,92 @@ Python मा मुख्यतः दुई प्रकारका सङ्
 
 `1137.5 cm³ × 1.4 g/cm³ = 1592.5 g = 1.5925 kg`
 
-अभ्यासका खाली ठाउँ आफैं भर्नुहोस्। सानो प्रयोग: मोटाइ मात्र दोब्बर बनाउँदा क्षेत्रफल र तौल के हुन्छ?
+abhyaska khali thaun aphain bharnuhos. sano prayog: motai matra dobbar banaunda kshetraphal ra taul ke hunchha?
 
 <!-- ne-cell: 3ab12dde | after-heading -->
-**अभ्यास 2 (मध्यम): चौडाइ, लम्बाइ र क्षेत्रफल गणना**
+**abhyas 2 (madhyam): chaudai, lambai ra kshetraphal ganana**
 <!-- ne-pair: Exercise 2 (intermediate): compute width, length and area -->
 
 <!-- ne-cell: 3ab12dde -->
-चौडाइ 1,300 mm र लम्बाइ 2,500 mm भएको सिट छ।
+chaudai 1,300 mm ra lambai 2,500 mm bhaeko sit chha.
 
-1. क्षेत्रफल mm² मा देखाउनुहोस्
-2. क्षेत्रफल m² मा बदलेर देखाउनुहोस् (1 m² = 1,000,000 mm²)
-3. प्रति सिट 0.35 mm मोटाइ र 1.4 g/cm³ घनत्व मानेर तौल kg मा अनुमान गर्नुहोस्
+1. kshetraphal mm² ma dekhaunuhos
+2. kshetraphal m² ma badaler dekhaunuhos (1 m² = 1,000,000 mm²)
+3. prati sit 0.35 mm motai ra 1.4 g/cm³ ghanatb maner taul kg ma anuman garnuhos
 
-सङ्केत: तौल = आयतन × घनत्व। पहिले mm लाई cm मा बदल्नुहोस्।
+sanket: taul = ayatan × ghanatb. pahile mm lai cm ma badalnuhos.
 
-**सकिएको मानिने अवस्था:** तीनै मान एकाइसहित देखाइएका छन्।
+**sakieko manine abastha:** tinai maan ekaisahit dekhaieka chhan.
 
 <!-- ne-cell: 1ccd85ef | after-heading -->
-#### अभ्यास 3 (वैकल्पिक): त्रुटि सुधार्ने
+#### abhyas 3 (baikalpik): truti sudharne
 
 <!-- ne-cell: 1ccd85ef -->
-तलको सेलमा **जानाजान तीनवटा गल्ती** भएको कार्यक्रम छ। पहिले त्यसै चलाएर **त्रुटि सन्देश** पढ्नुहोस्।
+talako cell ma **janajan tinabata galti** bhaeko karyakram chha. pahile tyasai chalaera **truti sandesh** padhnuhos.
 
-त्यसपछि "उत्तर लेख्ने" सेलमा **सही सुधारिएको कार्यक्रम** लेख्नुहोस्। सुधारेपछि कारण के थियो भनेर
-comment मा लेख्नुहोस्।
+tyaspachhi "uttar lekhne" cell ma **sahi sudharieko karyakram** lekhnuhos. sudharepachhi karan ke thiyo bhanera
+comment ma lekhnuhos.
 
-**सकिएको मानिने अवस्था:** उत्तर सेलले OK/NG देखाउँछ र तीनवटा कारण comment लेखिएका छन्।
+**sakieko manine abastha:** uttar cellle OK/NG dekhaunchha ra tinabata karan comment lekhieka chhan.
 
 <!-- ne-cell: 95857ac2 | after-heading -->
-#### बुझाइ जाँच्ने प्रश्न
+#### bujhai jaanchne prashna
 
 <!-- ne-cell: 95857ac2 -->
-1. `=` र `==` को फरक व्याख्या गर्नुहोस्।
-2. `100.3 - 100.0` ले `0.3` नदिनुको कारण के हो?
-3. `a` अक्षर र `b` सङ्ख्या हुँदा `print(a, b)` र `print(a + b)` मा के फरक छ?
-4. `NameError` देख्दा पहिले के जाँच्नुहुन्छ?
-5. चलको नाम `x1` नभई `measured_width_mm` राख्दा के फाइदा हुन्छ?
+1. `=` ra `==` ko farak byakhya garnuhos.
+2. `100.3 - 100.0` le `0.3` nadinuko karan ke ho?
+3. `a` akshar ra `b` sankhya hunda `print(a, b)` ra `print(a + b)` ma ke farak chha?
+4. `NameError` dekhda pahile ke janchnuhunchha?
+5. chalako naam `x1` nabhai `measured_width_mm` rakhda ke phaida hunchha?
 
 <!-- ne-cell: b791fe79 | after-heading -->
-## समस्या परेमा
+## samasya parema
 
 <!-- ne-cell: b791fe79 -->
-त्रुटि आएपछि पहिले "कुन सेलमा", "कुन लाइनमा", "के सन्देश आयो" भनेर लेख्नुहोस्। बुझाउनुपर्ने काममा पनि
-त्यही अभिलेख राख्नुहोस्।
+truti aepachhi pahile "kun cell ma", "kun line ma", "ke sandesh ayo" bhanera lekhnuhos. bujhaunuparne kaam ma pani
+tyahi abhilekh rakhnuhos.
 
-| लक्षण | के गर्ने |
+| lakshan | ke garne |
 | --- | --- |
-| `SyntaxError: invalid syntax` | प्रायः `:` छुट्नु, कोष्ठक नबन्द हुनु वा पूर्ण-चौडाइको (full-width) खाली ठाउँ हुनु कारण हो। लाइन नम्बर जाँच्नुहोस्। |
-| `NameError: name 'x' is not defined` | चलको नामको हिज्जे वा अघिल्लो सेल नचलाइएको हुनु कारण हो। |
-| `IndentationError` | लाइनको सुरुवातको खाली ठाउँ मिलेको छैन। एउटै block भित्र सबै लाइन उति नै तल सार्नुहोस् (यो तालिममा 4 खाली ठाउँ)। tab र space मिसाउनु हुँदैन। |
-| `TypeError: can only concatenate str (not "int") to str` | अक्षर र सङ्ख्या `+` ले जोड्न खोजिएको छ। `print("a", 1)` वा f-string प्रयोग गर्नुहोस्। |
-| नतिजा `0.29999999999999716` आउँछ | यो दशमलवको त्रुटि हो, बिग्रेको गणना होइन। देखाउन `round()` ले राउन्ड गर्नुहोस्; तुलना "तोकिएको अङ्कमा राउन्ड गरेपछि" वा "सह्यतासहितको असमानता" ले गर्नुहोस्। राउन्ड नीति पहिले नै तोकेर अभिलेख गर्नुहोस्। |
-| जापानी अक्षर `??` वा `□□` देखिन्छ | कन्सोलको character code को समस्या हुन सक्छ। नोटबुकमा सामान्यतः यस्तो हुँदैन। |
+| `SyntaxError: invalid syntax` | prayah `:` chhutnu, koshthak naband hunu wa purna-chaudaiko (full-width) khali thaun hunu karan ho. line number jaanchnuhos. |
+| `NameError: name 'x' is not defined` | chalako naamko hijje wa aghillo cell nachalaieko hunu karan ho. |
+| `IndentationError` | lineko surubatako khali thaun mileko chhaina. eutai block bhitra sabai line uti nai tal sarnuhos (yo talim ma 4 khali thaun). tab ra space misaunu hundaina. |
+| `TypeError: can only concatenate str (not "int") to str` | akshar ra sankhya `+` le jodna khojieko chha. `print("a", 1)` wa f-string prayog garnuhos. |
+| natija `0.29999999999999716` aaunchha | yo dashamalabako truti ho, bigreko ganana hoina. dekhauna `round()` le raund garnuhos; tulna "tokieko angkama raund garepachhi" wa "sahyatasahitako asamanata" le garnuhos. raund niti pahile nai toker abhilekh garnuhos. |
+| Japani akshar `??` wa `□□` dekhinchha | kansolako character code ko samasya huna sakchha. notebook ma samanyatah yasto hundaina. |
 
 <!-- ne-cell: 6111fb35 | after-heading -->
-## सम्पन्नता जाँचसूची
+## sampannata janchasuchi
 
 <!-- ne-cell: 6111fb35 -->
-**अनिवार्य** र **वैकल्पिक** काम छुट्टाछुट्टै राखिएका छन्। **अभ्यास 3 (वैकल्पिक)** वैकल्पिक हो; नगरे पनि
-पूरा मानिन्छ। समय बाँकी भएमा मात्र गर्नुहोस्।
+**aniwarya** ra **baikalpik** kaam chhuttachhuttai rakhieka chhan. **abhyas 3 (baikalpik)** baikalpik ho; nagare pani
+pura maninchha. samay banki bhae ma matra garnuhos.
 
-सबै अनिवार्य बुँदामा चिन्ह लागेपछि यो नोटबुक पूरा हुन्छ।
+sabai aniwarya bundama chinh lagepachhi yo notebook pura hunchha.
 
-**अनिवार्य**
+**aniwarya**
 
-- [ ] Part 1–Part 6 पढेर सबै code सेल चलाएँ
-- [ ] अभ्यास 1–2 (अनिवार्य) गरें
-- [ ] `=` र `==` को फरक व्याख्या गर्न सक्छु
-- [ ] बुझाइ जाँच्ने 5 प्रश्नको उत्तर दिएँ
-- [ ] त्रुटि अभिलेख राखें
-- [ ] नोटबुक सुरक्षित गरें
+- [ ] Part 1–Part 6 padher sabai code cell chalaen
+- [ ] abhyas 1–2 (aniwarya) garen
+- [ ] `=` ra `==` ko farak byakhya garna sakchhu
+- [ ] bujhai jaanchne 5 prashnako uttar dien
+- [ ] truti abhilekh rakhen
+- [ ] notebook surakshit garen
 
-**वैकल्पिक**
+**baikalpik**
 
-- [ ] अभ्यास 3 (वैकल्पिक) का तीनवटा गल्ती आफैं सुधारें
+- [ ] abhyas 3 (baikalpik) ka tinabata galti aphain sudharen
 
 <!-- ne-cell: f428ef26 | after-heading -->
-## थप अध्ययन (वैकल्पिक)
+## thap adhyayan (baikalpik)
 
 <!-- ne-cell: f428ef26 -->
-### सन्दर्भ लिङ्क
+### sandarbha lingk
 
-- [Python आधिकारिक tutorial (जापानी)](https://docs.python.org/ja/3/tutorial/)
-- [Python का built-in प्रकार](https://docs.python.org/ja/3/library/stdtypes.html)
-- [Floating point गणनाको गुण](https://docs.python.org/ja/3/tutorial/floatingpoint.html)
+- [Python adhikarik tutorial (Japani)](https://docs.python.org/ja/3/tutorial/)
+- [Python ka built-in prakar](https://docs.python.org/ja/3/library/stdtypes.html)
+- [Floating point gananako gun](https://docs.python.org/ja/3/tutorial/floatingpoint.html)
 
-### थप चुनौती (अनिवार्य होइन)
+### thap chunauti (aniwarya hoina)
 
-`print(f"{0.1:.20f}")` चलाएर 0.1 भित्री रूपमा कसरी राखिएको छ हेर्नुहोस्।
+`print(f"{0.1:.20f}")` chalaera 0.1 bhitri rupama kasari rakhieko chha hernuhos.

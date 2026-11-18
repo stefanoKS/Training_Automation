@@ -35,42 +35,44 @@ pratisthapan gardaina.
 | ファイル / File | 内容 / Contents | ページ / Pages |
 |---|---|---|
 | `Day01_explanation_ja_en.pdf` | 第 1 日（ノートブック 01〜03） | 72 |
-| `Day02_explanation_ja_en.pdf` | 第 2 日（ノートブック 01〜03） | 86 |
+| `Day02_explanation_ja_en.pdf` | 第 2 日（ノートブック 01〜03） | 88 |
 | `Day03_explanation_ja_en.pdf` | 第 3 日（ノートブック 01〜03） | 56 |
 | `Day04_explanation_ja_en.pdf` | 第 4 日（ノートブック 01〜03） | 68 |
-| `Day05_explanation_ja_en.pdf` | 第 5 日（ノートブック 01〜03） | 63 |
-| `Week1_explanation_ja_en.pdf` | 5 日分をまとめたもの / all five days | 334 |
+| `Day05_explanation_ja_en.pdf` | 第 5 日（ノートブック 01〜03） | 64 |
+| `Week1_explanation_ja_en.pdf` | 5 日分をまとめたもの / all five days | 338 |
+
+日本語＋英語版のうち作り直したのは `Day02`・`Day05`・`Week1` だけです（図と案内文が変わったため）。
+`Day01`・`Day03`・`Day04` は 2026-11-16 の版をそのまま残しています。
+Of the Japanese + English booklets only `Day02`, `Day05` and `Week1` were rebuilt (the figure and the
+navigation changed); `Day01`, `Day03` and `Day04` still ship the 2026-11-16 files unchanged.
 
 日本語＋英語＋ネパール語 / Japanese, English and Nepali:
 
 > 第 3 の言語は **ローマ字表記のネパール語**（Nepali written with Latin letters, BCP 47 `ne-Latn`）です。
-> デーヴァナーガリー文字ではありません。Day 1〜3 のノートブックはまだデーヴァナーガリーのままなので、
-> その冊子だけは両方の文字が入ります。詳しくは
+> デーヴァナーガリー文字ではありません。16 冊のノートブックと 12 の学習者向け文書はすべてローマ字
+> 表記に移行済みなので、どの冊子にもデーヴァナーガリーは入りません。詳しくは
 > [`assets/i18n/ne/romanization_style_guide.md`](../../assets/i18n/ne/romanization_style_guide.md)。
 > The third language is **Nepali written with Latin letters** (`ne-Latn`), not Devanagari.
-> Day 1–3 notebooks are still Devanagari during the migration, so only those booklets mix scripts.
+> All 16 notebooks and 12 learner documents have been migrated, so no booklet mixes scripts.
 
 | ファイル / File | 内容 / Contents | ページ / Pages |
 |---|---|---|
-| `Day01_explanation_ja_en_ne.pdf` | 第 1 日（ノートブック 01〜03） | 95 |
-| `Day02_explanation_ja_en_ne.pdf` | 第 2 日（ノートブック 01〜03） | 112 |
-| `Day03_explanation_ja_en_ne.pdf` | 第 3 日（ノートブック 01〜03） | 75 |
+| `Day01_explanation_ja_en_ne.pdf` | 第 1 日（ノートブック 01〜03） | 98 |
+| `Day02_explanation_ja_en_ne.pdf` | 第 2 日（ノートブック 01〜03） | 115 |
+| `Day03_explanation_ja_en_ne.pdf` | 第 3 日（ノートブック 01〜03） | 77 |
 | `Day04_explanation_ja_en_ne.pdf` | 第 4 日（ノートブック 01〜03） | 88 |
-| `Day05_explanation_ja_en_ne.pdf` | 第 5 日（ノートブック 01〜03） | 86 |
-| `Week1_explanation_ja_en_ne.pdf` | 5 日分をまとめたもの / all five days | 445 |
-| `Setup_ja_en_ne.pdf` | 準備ノートブック `00_Environment_Setup.ipynb` | 39 |
+| `Day05_explanation_ja_en_ne.pdf` | 第 5 日（ノートブック 01〜03） | 88 |
+| `Week1_explanation_ja_en_ne.pdf` | 5 日分をまとめたもの / all five days | 455 |
+| `Setup_ja_en_ne.pdf` | 準備ノートブック `00_Environment_Setup.ipynb` | 41 |
 | `Installation_Guide_ja_en_ne.pdf` | `START_HERE.md` と `docs/troubleshooting/installation.md` | 23 |
 | `Repository_Guide_ja_en_ne.pdf` | `README.md` と `requirements/tested_versions.md` | 23 |
 | `Course_Syllabus_ja_en_ne.pdf` | `COURSE_SYLLABUS.md` | 20 |
 
-ページ数は生成のたびにスクリプトが表示します。日本語＋英語版の表は 2026-11-15 の生成結果、
-三言語版は 2026-11-18（ローマ字ネパール語への移行後）の生成結果です。
-全679ページの描画検査と図の点検範囲は [今回の検証記録](../reviews/2026-11-15_cmd_migration.md) にあります。
-The page counts are printed by the exporter on every run. The Japanese + English table is from the
-2026-11-15 rebuild; the tri-language table from 2026-11-16. All 679 pages of the first generation were
-rendered; see the [verification record](../reviews/2026-11-15_cmd_migration.md) for that scope. The
-tri-language generation is recorded in
-[Nepali_Localization_And_PDF_Implementation_2026-11-16.md](../reviews/Nepali_Localization_And_PDF_Implementation_2026-11-16.md).
+ページ数は生成のたびにスクリプトが表示します。下の表は 2026-11-19（ローマ字ネパール語への移行と
+Day 2・Day 5 の修正の後）の生成結果です。
+The page counts are printed by the exporter on every run. Both tables are from the 2026-11-19 rebuild,
+after the migration to Romanized Nepali and the Day 2 / Day 5 corrections. That rebuild is recorded in
+[Final_Romanized_Nepali_Day02_Day05_Implementation_Log.md](../reviews/Final_Romanized_Nepali_Day02_Day05_Implementation_Log.md).
 
 準備ノートブックは日本語＋英語版の 6 冊に含みません。三言語版では `Setup_ja_en_ne.pdf` として
 独立した 1 冊にしています。
@@ -91,9 +93,9 @@ own booklet, `Setup_ja_en_ne.pdf`.
 
 pana sankhya harek patak banaunda skriptale aphain dekhaunchha.
 
-> tesro bhasha **roman lipima lekheko Nepali** (`ne-Latn`) ho, Devanagari hoina. din 1-3 ka notebook
-> ahile pani Devanagari ma chhan, tyasaile ti pustikama dui lipi bhetinchha. thap jankari:
-> `assets/i18n/ne/romanization_style_guide.md`.
+> tesro bhasha **roman lipima lekheko Nepali** (`ne-Latn`) ho, Devanagari hoina. sabai 16 wata
+> notebook ra 12 wata shiksharthi file roman lipima chhan, tyasaile kunai pustikama Devanagari
+> bhetindaina. thap jankari: `assets/i18n/ne/romanization_style_guide.md`.
 <!-- ne:end -->
 
 ## 作り直す方法 / Regenerating
@@ -137,11 +139,12 @@ python assets\scripts\inspect_pdf_pages.py --languages ja,ne
   reads Markdown, figures and short code cells.
 * 日本語フォントは OS のもの（Windows なら Noto Sans JP / Yu Gothic / Meiryo）を PDF に埋め込みます。
   A Japanese font installed on the machine is embedded in the PDF.
-* ネパール語は Chromium の PDF 出力で組んでいます。ReportLab では文字の見た目は作れても本文が
-  私用領域の符号になり、**検索できません**。Chromium は字形も本文も正しく保ちます。
-  The Devanagari text is typeset through Chromium's PDF engine: ReportLab shapes it visually but
-  writes private-use code points, so the text cannot be searched. Chromium keeps both the shapes and
-  the text layer correct.
+* ネパール語（ローマ字表記）も Chromium の PDF 出力で組んでいます。日本語・英語・ネパール語を
+  1 つの組版で扱い、本文が**選択・検索できる**状態を保つためです。
+  The Nepali (Romanized) text is typeset through Chromium's PDF engine as well, so the three languages
+  share one typesetter and the text layer stays **selectable and searchable**. (The exporter was
+  introduced when the third language was Devanagari, which ReportLab could only write as private-use
+  code points; Chromium keeps both shapes and text correct, and it still does so for `ne-Latn`.)
 * 図の出典は各 PDF の最終ページ「出典と参照 / Sources and references」にあります。
   Figure provenance is on the last page of every PDF.
 

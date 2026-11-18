@@ -71,7 +71,7 @@ tasbir hun, bastabik karakhanaka tasbir hoinan.
 
 banaune karyakramalai **chaheko sahi uttar (class ra sthan) pahile nai thaha hunchha**. tar tyo sankhya tasbir ma
 tyasai sahi hunchha bhanne chhaina. chitra banaune kram, tasbirko chheuma katinu, nirdeshangk paribartan, tasbirko
-akar badalnu, ra karyakramakai bigreko bhaagle label dekhine kurabhanda sarn sakchha. tyasaile **banaiyeko ayat
+akar badalnu, ra karyakramakai bigreko bhaagle label dekhine kurabhanda sarna sakchha. tyasaile **banaiyeko ayat
 tasbir ma herer jaanchne** kaam chhodn mildaina.
 
 bastabik bigreko samanama "yo chiso kahan samma ho" bhanne kura manchhele tay garnuparchha ra bichar farak parna sakchha.
@@ -119,7 +119,7 @@ ra model sangai labelko gunastarale natijako uchchatam sima tay garchha.**
 <!-- ne-pair: The YOLO dataset layout -->
 
 <!-- ne-cell: 111d802b -->
-YOLO dataset tokieko rachana ma rakhinchha: `images/` bhitr `train/`, `val/`, `test/`, ra `labels/` bhitr pani
+YOLO dataset tokieko rachana ma rakhinchha: `images/` bhitra `train/`, `val/`, `test/`, ra `labels/` bhitra pani
 tyahi tin folder, sathai `data.yaml`.
 
 mahattwapurna kura **tasbir ra labelko file naam uhi** hunuparchha (extension matra farak). `train_0000.png`
@@ -151,11 +151,11 @@ chitra: talim datasetko bastabik file `train_0002.png` ra tyasko ek lineko label
 
 **dhyan dinuparne kura**
 
-ek line ma kram `class_id x_center y_center width height` hunchha. **pahilo `class_id` purnangk class
+ek line ma kram `class_id x_center y_center width height` hunchha. **pahilo `class_id` purnank class
 sankhya** ho; yo talim ma 0 = black_spot, 1 = scratch, 2 = streak. chitrako patalo dharka streak hunale
 `class_id` 2 hunchha. **class sankhya samanyikrit garindain.**
 
-**banki chaar maan (kendr x, kendr y, chaudai, uchai) matra** 0–1 bich hunchhan. ti pani piksel hoinan,
+**banki chaar maan (kendra x, kendra y, chaudai, uchai) matra** 0–1 bich hunchhan. ti pani piksel hoinan,
 **tasbirko chaudai-uchaiko anupaat** hun. tyasaile tasbir sano garda label feri lekhnu pardaina. panchai maan
 0–1 hundainan.
 
@@ -176,11 +176,11 @@ y2 = (y_center + height / 2) * tasbirko uchai       height   = (y2 - y1) / tasbi
 #### bastabik fileharu jodne
 
 <!-- ne-cell: clarity-label-bridge-predict -->
-pahile nai bhaeko sansleshit `train_0002.png` → uhi naamko label → `data.yaml` ko `2: streak` → milaer
-dekhaieko chitra jaanchnuhos. anuman: paanch manamadhye anupaat nabhaeko kun ho? pahilo matra purnangk class ID ho.
+pahile nai bhaeko sansleshit `train_0002.png` → uhi naamko label → `data.yaml` ko `2: streak` → milaera
+dekhaieko chitra jaanchnuhos. anuman: paanch manamadhye anupaat nabhaeko kun ho? pahilo matra purnank class ID ho.
 
 <!-- ne-cell: clarity-label-bridge-interpret -->
-pahilo 2 class ho; banki chaar maan matra samanyikrit nirdeshangk hun. tal milaer dekhaieko chitra ma patalo dharka
+pahilo 2 class ho; banki chaar maan matra samanyikrit nirdeshangk hun. tal milaera dekhaieko chitra ma patalo dharka
 khojnuhos. sano prayog: tasbirko chaudai ra uchai dubai dobbar garda piksel nirdeshangk ra samanyikrit
 nirdeshangk kasari badalinchhan?
 
@@ -194,11 +194,11 @@ label fileko ek line ma paanch sankhya hunchhan (maan udaharanka lagi).
 ```text
 2 0.550000 0.425000 0.300000 0.250000
 class_id  x_center  y_center  width  height
-(purnangk)   <- yi chaar matra 0–1 ma samanyikrit ->
+(purnank)   <- yi chaar matra 0–1 ma samanyikrit ->
 ```
 
-- `class_id` … purnangk class sankhya. yo talim ma 0 = black_spot, 1 = scratch, 2 = streak
-- banki chaar … tasbirko chaudai (x) ra uchai (y) le bhaag gareko kendr ra akar. ayat tasbirabhitr bhae 0–1
+- `class_id` … purnank class sankhya. yo talim ma 0 = black_spot, 1 = scratch, 2 = streak
+- banki chaar … tasbirko chaudai (x) ra uchai (y) le bhaag gareko kendra ra akar. ayat tasbirbhitra bhae 0–1
 
 **Akar matra badalera (na kati) herda** samanyikrit nirdeshangk uhi anupatma rahanchha. **Katne (crop),
 spatial warp, wa tasbir matra badaler label na milaune** kaam gare chahi samanyikrit nirdeshangk tyasai
@@ -227,11 +227,11 @@ y2 = (yc + h/2) * tasbirko uchai
 ```
 
 <!-- ne-cell: 5dbe36b0 | after-heading -->
-**label tasbir ma banaer jaanchne**
+**label tasbir ma banaera jaanchne**
 <!-- ne-pair: Draw the labels to inspect them -->
 
 <!-- ne-cell: 5dbe36b0 -->
-label sahi chha ki chhaina jaanchne sabaibhanda sajilo tarika **tasbir ma banaer hernu** ho.
+label sahi chha ki chhaina jaanchne sabaibhanda sajilo tarika **tasbir ma banaera hernu** ho.
 
 ayatale dosh ghereko chhaina bhane karan label matra hoina. yahi kram ma jaanchnuhos.
 
@@ -282,7 +282,7 @@ samuhako soochi (manifest) ra talimko setting baat janchinchha.
 | parikshan (test) | antim kshamata napchha. **talim ma kahilyai herindain** | talimapachhi, ek patak matra |
 
 kina bandne? prashikshan data ma matra napieko sankhyale **nayan data ma kati sakchha** bhanne dekhaundain. model le
-prashikshan tasbirka sukshm gunasamm kanth garera nayan tasbir ma lagu nahune abastha lai **obharaphiting
+prashikshan tasbirka sukshma gunasamm kanth garera nayan tasbir ma lagu nahune abastha lai **obharaphiting
 (overfitting)** bhaninchha.
 
 prashikshan data ma ramro natija aunu matrale "rateko" bhanera tunggo lagdain. prashikshanko sankhyale
@@ -302,7 +302,7 @@ dekhaundain. tyo bandaphantako abhilekh (file soochi, samuh, talimko setting) ba
 
 **sochnuhos**
 
-- yi 4 tasbir herer "talim ma prayog bhaeko chhaina" bhann sakinchha?
+- yi 4 tasbir herer "talim ma prayog bhaeko chhaina" bhanna sakinchha?
 
 <!-- ne-cell: 200e964b | after-heading -->
 ## Part 5 data chuhabat
@@ -367,7 +367,7 @@ udaharan: khichai A sabai train, B sabai val, C sabai test ma rakhnuhos.
 
 **sochnuhos**
 
-fileko dhancha pherepachhi SHA-256 farak ayo bhane ti sbatantr tasbir hun?
+fileko dhancha pherepachhi SHA-256 farak ayo bhane ti sbatantra tasbir hun?
 
 <!-- ne-cell: 585c7c08 | after-heading -->
 ## abhyas
@@ -396,14 +396,14 @@ pura bhaeko maapan: tin pratishat ek dashamalabasamm dekhaieka chhan.
 <!-- ne-pair: Exercise 3 (optional challenge): introduce and detect leakage -->
 
 <!-- ne-cell: 0fbbc7cb -->
-janajan data chuhabat banaer bhetn sakinchha ki parikshan garnuhos. **aniwarya hoina.**
+janajan data chuhabat banaera bhetna sakinchha ki parikshan garnuhos. **aniwarya hoina.**
 
 1. `images/test` baat euta tasbir chhaner `images/train` ma **pratilipi** garnuhos
 2. mathiko hash jaanch cell feri chalaunuhos
 3. dohoro bhetieko kura pushti garnuhos
-4. pratilipi metaer pahileko abastha ma pharkaunuhos
+4. pratilipi metaera pahileko abastha ma pharkaunuhos
 
-pura bhaeko maapan: dohoro 1 bata dekhiyo ra pratilipi metaer pahileko abastha ma pharkaiyo.
+pura bhaeko maapan: dohoro 1 bata dekhiyo ra pratilipi metaera pahileko abastha ma pharkaiyo.
 
 <!-- ne-cell: 27c8096a | after-heading -->
 #### bujhai jaanchne prashna
@@ -413,7 +413,7 @@ pura bhaeko maapan: dohoro 1 bata dekhiyo ra pratilipi metaer pahileko abastha m
 2. label fileko ek lineka paanch maanle ke-ke janaunchhan? kun-kun samanyikrit chhan?
 3. pramanikaran data ra parikshan data kina chhutyaune?
 4. data chuhabat bhae "natija ramro dekhinchha tar karyasthalama chaldain" kina hunchha?
-5. khali label (prishthabhumi tasbir) kina chahinchha? khali label bhae "dosh chhaina" bhann milchha?
+5. khali label (prishthabhumi tasbir) kina chahinchha? khali label bhae "dosh chhaina" bhanna milchha?
 
 <!-- ne-cell: ac9204c6 | after-heading -->
 ## samasya parema
@@ -441,7 +441,7 @@ sabai ma chinh lagepachhi yo notebook pura hunchha.
 **aniwarya**
 
 - [ ] Part 1–Part 5 padher sabai code cell chalaen
-- [ ] label tasbir ma banaer janchen
+- [ ] label tasbir ma banaera janchen
 - [ ] hash le dohoro janchen
 - [ ] abhyas 1–2 (aniwarya) garen
 - [ ] bujhai jaanchne 5 prashnako uttar dien
@@ -449,7 +449,7 @@ sabai ma chinh lagepachhi yo notebook pura hunchha.
 
 **baikalpik**
 
-- [ ] abhyas 3 (baikalpik): data chuhabat banaer bheten
+- [ ] abhyas 3 (baikalpik): data chuhabat banaera bheten
 
 <!-- ne-cell: 16f8af21 | after-heading -->
 ## thap adhyayan (baikalpik)
@@ -463,5 +463,5 @@ sabai ma chinh lagepachhi yo notebook pura hunchha.
 
 ### thap chunauti (aniwarya hoina)
 
-khali label euta ghataer (prishthabhumi tasbir euta dosh tasbir ma badaler) talim garnuhos ra jhuto pojitibhako
+khali label euta ghataera (prishthabhumi tasbir euta dosh tasbir ma badaler) talim garnuhos ra jhuto pojitibhako
 sankhya badlinchha ki hernuhos.

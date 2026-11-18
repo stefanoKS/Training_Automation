@@ -1,416 +1,416 @@
 <!--
-नेपाली अनुवाद / Nepali translation source for
+Nepali anuwad / Nepali translation source for
 notebooks/Day01_AI_Fundamentals/Day01_03_Computer_Vision_Tasks.ipynb
 
 Each block starts with an ne-cell directive naming the notebook cell id.
 Do not translate code, file names, URLs or kernel names.
 -->
-# दिन १ नोटबुक ०३ — नेपाली अनुवाद
+# din 1 notebook 03 — Nepali anuwad
 
 <!-- ne-cell: 85059ad2 | after-heading -->
-# दिन १ नोटबुक ०३: कम्प्युटर भिजन AI का किसिमहरू
+# din 1 notebook 03: computer bhijan AI ka kisimaharu
 
 <!-- ne-cell: 85059ad2 -->
-## सिकाइ लक्ष्यहरू
+## sikai lakshyaharu
 
-| नेपाली |
+| Nepali |
 | --- |
-| 1. image classification, object detection, segmentation र anomaly detection को फरक बुझाउन सक्ने। |
-| 2. प्रत्येकको नतिजा के हुन्छ भन्न सक्ने। |
-| 3. उत्पादन निरीक्षणमा कुन कहाँ प्रयोग गर्ने भनेर सुझाव दिन सक्ने। |
-| 4. प्रत्येकको फाइदा र सीमा बुझाउन सक्ने। |
+| 1. image classification, object detection, segmentation ra anomaly detection ko farak bujhaun sakne. |
+| 2. pratyekako natija ke hunchha bhanna sakne. |
+| 3. utpadan nirikshan ma kun kahan prayog garne bhanera sujhab din sakne. |
+| 4. pratyekako phaida ra sima bujhaun sakne. |
 
-## यो नोटबुकको आधारभूत जानकारी
+## yo notebookko adharabhut jankari
 
-| विषय | विवरण |
+| bishay | biwaran |
 | --- | --- |
-| सिकाइ समय (अनुमान) | 65 मिनेट |
-| कठिनाइ | सुरुवाती तह |
-| पूर्वशर्त | दिन १ नोटबुक ०१ र ०२ सकिएको हुनुपर्छ। |
-| आवश्यक लाइब्रेरी | numpy, matplotlib, pillow |
-| प्रयोग हुने kernel | aivision |
-| आजको समयतालिका | [`COURSE_SYLLABUS.md` दिन १](../../COURSE_SYLLABUS.md#day1) |
+| sikai samay (anuman) | 65 minet |
+| kathinai | surubati tah |
+| poorwashart | din 1 notebook 01 ra 02 sakieko hunuparchha. |
+| aawashyak laibreri | numpy, matplotlib, pillow |
+| prayog hune kernel | aivision |
+| ajako samayatalika | [`COURSE_SYLLABUS.md` din 1](../../COURSE_SYLLABUS.md#day1) |
 
-### बुझाउनुपर्ने काम
+### bujhaunuparne kaam
 
-| नेपाली |
+| Nepali |
 | --- |
-| ४ कामको फरक बुझाउने तालिका |
-| PVC निरीक्षणका लागि सुझाव (अभ्यास ३) |
+| 4 kaamko farak bujhaune talika |
+| PVC nirikshanka lagi sujhab (abhyas 3) |
 
 <!-- ne-cell: 31addddb | after-heading -->
-## यो नोटबुक कहाँ पर्छ
+## yo notebook kahan parchha
 
 <!-- ne-cell: 31addddb -->
-| विषय | विवरण |
+| bishay | biwaran |
 | --- | --- |
-| दिन | दिन १ |
-| आजको क्रम | आजको नोटबुकमध्ये 3 / 3 |
-| लाग्ने समय | 65 मिनेट |
-| पूर्वशर्त | `Day01_02_Pixels_and_Images.ipynb` |
-| आजको समयतालिका | [`COURSE_SYLLABUS.md` दिन १](../../COURSE_SYLLABUS.md#day1) |
+| din | din 1 |
+| ajako kram | ajako notabukamadhye 3 / 3 |
+| lagne samay | 65 minet |
+| poorwashart | `Day01_02_Pixels_and_Images.ipynb` |
+| ajako samayatalika | [`COURSE_SYLLABUS.md` din 1](../../COURSE_SYLLABUS.md#day1) |
 
-दिनको समयतालिका `COURSE_SYLLABUS.md` मा एउटै ठाउँमा छ। यो नोटबुक त्यसको एउटा भाग मात्र हो, आफ्नो
-छुट्टै समयतालिका राख्दैन। समय थाहा नभए पहिले त्यही फाइल हेर्नुहोस्।
+dinko samayatalika `COURSE_SYLLABUS.md` ma eutai thaun ma chha. yo notebook tyasko euta bhaag matra ho, aphno
+chhuttai samayatalika rakhdain. samay thaha nabhae pahile tyahi file hernuhos.
 
 <!-- ne-cell: audit-learning-loop | after-heading -->
-### अनुमान गर्नुहोस्, चलाउनुहोस्, हेर्नुहोस्, व्याख्या गर्नुहोस्
+### anuman garnuhos, chalaunuhos, hernuhos, byakhya garnuhos
 
 <!-- ne-cell: audit-learning-loop -->
-classification ले चित्रको जवाफ, detection ले स्थान, segmentation ले आकार, anomaly detection ले
-सामान्यसँगको फरक दिन्छ। महत्त्वपूर्ण सेल चलाउनुअघि इनपुट, काम र नतिजा एक-एक वाक्यमा लेख्नुहोस्।
-पहिले अनुमान लेख्नुहोस्, त्यसपछि सेल चलाएर मान वा चित्र हेर्नुहोस्। एउटा दोषको नतिजा ढाँचा बदलेर
-फेरि अनुमान गरेर चलाउनुहोस्। जानाजान राखिएका त्रुटि र नसकिएका अभ्यासका लागि लेखिएको निर्देशन
-पछ्याउनुहोस्।
+classification le chitrako jabaph, detection le sthan, segmentation le akar, anomaly detection le
+samanyasangako farak dinchha. mahattwapurna cell chalaunuaghi input, kaam ra natija ek-ek bakyama lekhnuhos.
+pahile anuman lekhnuhos, tyaspachhi cell chalaera maan wa chitra hernuhos. euta doshko natija dhancha badaler
+feri anuman garera chalaunuhos. janajan rakhieka truti ra nasakieka abhyaska lagi lekhieko nirdeshan
+pachhyaunuhos.
 
 <!-- ne-cell: d436d9c5 -->
-> ### ⚠️ यो नोटबुकका चित्रबारे
+> ### ⚠️ yo notebookka chitrabare
 >
-> यो नोटबुकमा देखिने "detection नतिजा" र "heatmap" **अवधारणा चित्र** हुन्।
-> AI ले वास्तवमै अनुमान गरेको होइन। चित्रमाथि **मानिसले कोरेका** व्याख्याका चित्र हुन्।
-> वास्तविक AI अनुमान दिन ३ पछि गरिनेछ।
+> yo notebook ma dekhine "detection natija" ra "heatmap" **abadharana chitra** hun.
+> AI le bastabamai anuman gareko hoina. chitramathi **manisale koreka** byakhyaka chitra hun.
+> bastabik AI anuman din 3 pachhi garinechha.
 
 <!-- ne-cell: 25ce99d9 | after-heading -->
-## Part 0 तयारी
+## Part 0 tayari
 
 <!-- ne-cell: 4aa1c309 | after-heading -->
-**चित्रमा प्रयोग हुने फन्ट मिलाउनुहोस्**
+**chitra ma prayog hune phant milaunuhos**
 <!-- ne-pair: Configure Japanese text in figures -->
 
 <!-- ne-cell: 4aa1c309 -->
-Matplotlib को पूर्वनिर्धारित फन्टले जापानी अक्षर देखाउन सक्दैन। त्यसैले चित्रको शीर्षक `□□□` जस्तो
-देखिन्छ। अर्को सेलले जापानी अक्षर देखाउन सक्ने फन्ट खोजेर मिलाउँछ। macOS वा Linux मा स्वतः अर्को फन्ट
-छानिन्छ।
+Matplotlib ko purbanirdharit phantale Japani akshar dekhauna sakdain. tyasaile chitrako shirshak `□□□` jasto
+dekhinchha. arko cellle Japani akshar dekhauna sakne phant khojer milaunchha. macOS wa Linux ma sbatah arko phant
+chhaninchha.
 
 <!-- ne-cell: 6c945e72 | after-heading -->
-## Part 1 image classification (चित्रको वर्गीकरण)
+## Part 1 image classification (chitrako bargikaran)
 
 <!-- ne-cell: audit-teach_cv_tasks_outputs | after-heading -->
-### कोड पढ्ने तरिका
+### kod padhne tarika
 
 <!-- ne-cell: audit-teach_cv_tasks_outputs | after-image:../../assets/svg/teach_cv_tasks_outputs.svg -->
-चित्र: उही mask बाट चौकोण निकालिन्छ। (हिसाब गरिएको कृत्रिम उदाहरण/योजनाबद्ध। model को मापन गरिएको
-नतिजा होइन।)
+chitra: uhi mask baat chaukon nikalinchha. (hisab garieko kritrim udaharan/yojanabaddha. model ko maapan garieko
+natija hoina.)
 
-**ध्यान दिनुपर्ने कुरा**
+**dhyan dinuparne kura**
 
-उही mask बाट चौकोण निकालिन्छ। इनपुट र बदलिएपछिको मान औंलाले पछ्याउनुहोस्।
+uhi mask baat chaukon nikalinchha. input ra badaliepachhiko maan aunlale pachhyaunuhos.
 
-**सोच्नुहोस्**
+**sochnuhos**
 
-mask को pixel सङ्ख्या र चौकोणको क्षेत्रफल बराबर हुन्छ?
+mask ko pixel sankhya ra chaukonako kshetraphal barabar hunchha?
 
 <!-- ne-cell: d7f165e1 | after-heading -->
-### ४ परिवार, ५ नतिजा उदाहरण
+### 4 paribar, 5 natija udaharan
 
 <!-- ne-cell: d7f165e1 -->
-classification, detection, segmentation र anomaly detection गरी ४ परिवार हुन्।
-segmentation मा semantic र instance गरी २ तरिका भएकोले पछिका उदाहरणमा ५ नतिजा देखाइन्छ।
-माथिको उही कृत्रिम कालो थोप्लोको चित्रमा स्थान फर्काउने तरिका कुन होला अनुमान गर्नुहोस्। यो
-वास्तविक अनुमान नतिजा होइन।
+classification, detection, segmentation ra anomaly detection gari 4 paribar hun.
+segmentation ma semantic ra instance gari 2 tarika bhaekole pachhika udaharan ma 5 natija dekhainchha.
+mathiko uhi kritrim kalo thoploko chitra ma sthan pharkaune tarika kun hola anuman garnuhos. yo
+bastabik anuman natija hoina.
 
 <!-- ne-cell: ed68e4b2 | after-heading -->
-**classification भनेको "एउटा चित्रमा एउटा जवाफ"**
+**classification bhaneko "euta chitra ma euta jabaph"**
 <!-- ne-pair: Classification gives one answer per image -->
 
 <!-- ne-cell: ed68e4b2 -->
-यो उदाहरणको image classification ले **एउटा चित्रका लागि एउटा लेबल** फर्काउने काम हो
-(एउटा चित्रमा एउटा class दिने, single-label classification)।
+yo udaharanko image classification le **euta chitraka lagi euta label** pharkaune kaam ho
+(euta chitra ma euta class dine, single-label classification).
 
 ```text
-इनपुट: सिटको एउटा चित्र
-नतिजा: OK वा NG (+ त्यसको विश्वसनीयता)
+input: sitako euta chitra
+natija: OK wa NG (+ tyasko bishbasaniyata)
 ```
 
-**फाइदा:** बनावट सरल छ, लागू गर्न सजिलो छ। एउटा चित्रमा एउटा लेबल दिए पुग्ने हुनाले pixel-पिच्छे
-रङ भर्नुभन्दा सही जवाफको डेटा बनाउन सजिलो हुन्छ।
+**phaida:** banabat saral chha, lagu garna sajilo chha. euta chitra ma euta label die pugne hunale pixel-pichchhe
+rang bharnubhanda sahi jabaphako data banaun sajilo hunchha.
 
-**कमी:** **कहाँ** बिग्रेको हो थाहा हुँदैन। "NG" भन्छ मात्र,
-"दायाँतिर 3 mm को कालो थोप्लो छ" भनेर बताउँदैन।
-चाहिने डेटाको मात्रा देखिने तरिकाको फैलावट, class सङ्ख्या र चाहिएको शुद्धतामा निर्भर हुन्छ।
-"classification मा सधैं सबैभन्दा कम डेटा पुग्छ" भन्न सकिँदैन।
+**kami:** **kahan** bigreko ho thaha hundaina. "NG" bhanchha matra,
+"dayantir 3 mm ko kalo thoplo chha" bhanera bataundain.
+chahine datako matra dekhine tarikako phailabat, class sankhya ra chahieko shuddhatama nirbhar hunchha.
+"classification ma sadhain sabaibhanda kam data pugchha" bhanna sakindaina.
 
 <!-- ne-cell: 803b0934 | after-heading -->
-## Part 2 object detection (वस्तु पहिचान)
+## Part 2 object detection (bastu pahichan)
 
 <!-- ne-cell: 7390e751 | after-heading -->
-**detection भनेको "कहाँ के कति"**
+**detection bhaneko "kahan ke kati"**
 <!-- ne-pair: Detection answers where, what and how many -->
 
 <!-- ne-cell: 7390e751 -->
-object detection ले **दोषको स्थानलाई चारकोण ढाँचा (bounding box) ले घेरेर**
-किसिम र विश्वसनीयता फर्काउँछ।
+object detection le **doshko sthanalai charakon dhancha (bounding box) le gherer**
+kisim ra bishbasaniyata pharkaunchha.
 
 ```text
-इनपुट: सिटको एउटा चित्र
-नतिजा: [x1, y1, x2, y2] को चौकोण + किसिम (कालो थोप्लो/चोट/धर्का) + विश्वसनीयता
+input: sitako euta chitra
+natija: [x1, y1, x2, y2] ko chaukon + kisim (kalo thoplo/chot/dharka) + bishbasaniyata
 ```
 
-**फाइदा:** स्थान र सङ्ख्या थाहा हुन्छ। दोषको अभिलेख र लाइन रोक्ने निर्णयमा प्रयोग गर्न सकिन्छ।
+**phaida:** sthan ra sankhya thaha hunchha. doshko abhilekh ra line rokne nirnaya ma prayog garna sakinchha.
 
-**कमी:** **तय गरिएका class नाम मात्र फर्काउन सक्छ**। सिकाइ नभएको किसिमको दोष जानिएका class
-मध्ये एउटामा थिचिएर पर्छ, वा विश्वसनीयता कम रहेर छुट्छ। साथै चौकोणले घेर्ने हुनाले तिर्छो चोटमा
-अतिरिक्त क्षेत्र पनि पर्छ।
+**kami:** **tay garieka class naam matra pharkaun sakchha**. sikai nabhaeko kisimako dosh janieka class
+madhye euta ma thichiera parchha, wa bishbasaniyata kam raher chhutchha. sathai chaukonale gherne hunale tirchho chotama
+atirikt kshetra pani parchha.
 
 <!-- ne-cell: c5f9e59d | after-heading -->
-## Part 3 segmentation (क्षेत्र विभाजन)
+## Part 3 segmentation (kshetra bibhajan)
 
 <!-- ne-cell: 02bee1e7 | after-heading -->
-**semantic segmentation (pixel-पिच्छे classification)**
+**semantic segmentation (pixel-pichchhe classification)**
 <!-- ne-pair: Semantic segmentation (classifying each pixel) -->
 
 <!-- ne-cell: 02bee1e7 -->
-segmentation ले **pixel-पिच्छे** "यो दोष हो वा होइन" फर्काउँछ।
-mask चित्र (सेतो = दोष, कालो = सामान्य) नतिजा हो।
+segmentation le **pixel-pichchhe** "yo dosh ho wa hoina" pharkaunchha.
+mask chitra (seto = dosh, kalo = samanya) natija ho.
 
-**फाइदा:** दोषको **क्षेत्रफल** थाहा हुन्छ। "0.5 mm² भन्दा ठुलो दोष NG" जस्तै सीमासहित निर्णय गर्न
-सकिन्छ। लामो-पातलो चोटको आकार पनि जस्ताको तस्तै देखाउन सकिन्छ।
+**phaida:** doshko **kshetraphal** thaha hunchha. "0.5 mm² bhanda thulo dosh NG" jastai simasahit nirnaya garna
+sakinchha. lamo-patalo chotako akar pani jastako tastai dekhauna sakinchha.
 
-**कमी:** सही जवाफको डेटा (mask) बनाउन **समय लाग्छ**।
-एउटा चित्रका लागि pixel-एकाइमा रङ भर्ने काम चाहिन्छ।
+**kami:** sahi jabaphako data (mask) banaun **samay lagchha**.
+euta chitraka lagi pixel-ekaima rang bharne kaam chahinchha.
 
-क्षेत्रफल mm² मा हिसाब गर्न **क्यालिब्रेसन** चाहिन्छ। १ pixel कति mm हो पहिले तय नगरेको भए pixel
-सङ्ख्याको क्षेत्रफललाई mm² को मानकसँग तुलना गर्नुपर्ने हुन्छ, र निर्णय बिग्रन्छ (दिन २ पछि सम्हालिनेछ)।
+kshetraphal mm² ma hisab garna **calibration** chahinchha. 1 pixel kati mm ho pahile tay nagareko bhae pixel
+sankhyako kshetraphalalai mm² ko manakasang tulna garnuparne hunchha, ra nirnaya bigranchha (din 2 pachhi samhalinechha).
 
 <!-- ne-cell: fig-teach_segmentation_modes | after-heading -->
-### semantic र instance को फरक
+### semantic ra instance ko farak
 
 <!-- ne-cell: fig-teach_segmentation_modes | after-image:../../assets/diagrams/teach_segmentation_modes.png -->
-चित्र: उही दुई दोषलाई semantic segmentation (एउटै class मा मिलाउने) र instance segmentation
-(एक-एकमा नम्बर लगाउने) मा देखाइएको (कृत्रिम चित्र)।
+chitra: uhi dui dosh lai semantic segmentation (eutai class ma milaune) ra instance segmentation
+(ek-ek ma number lagaune) ma dekhaieko (kritrim chitra).
 
-**ध्यान दिनुपर्ने कुरा**
+**dhyan dinuparne kura**
 
-semantic segmentation ले pixel-पिच्छे class फर्काउने हुनाले एउटै class का टाढा-टाढा क्षेत्र पनि
-गन्न सकिन्छ। छुट्ट्याउनु पर्ने कुरा **एक-अर्कालाई छोएका वस्तु** हुन्। त्यस्तो अवस्थामा instance
-segmentation प्रयोग गरिन्छ।
+semantic segmentation le pixel-pichchhe class pharkaune hunale eutai class ka tadha-tadha kshetra pani
+ganna sakinchha. chhuttyaunu parne kura **ek-arkalai chhoeka bastu** hun. tyasto abastha ma instance
+segmentation prayog garinchha.
 
-**सोच्नुहोस्**
+**sochnuhos**
 
-- नछोएका दुई कालो दाग semantic segmentation ले दुईवटा भनेर गन्न सकिन्छ?
+- nachhoeka dui kalo dag semantic segmentation le duibata bhanera ganna sakinchha?
 
 <!-- ne-cell: c5df01d0 | after-heading -->
-**instance segmentation (वस्तुगत क्षेत्र विभाजन)**
+**instance segmentation (bastugat kshetra bibhajan)**
 <!-- ne-pair: Instance segmentation -->
 
 <!-- ne-cell: c5df01d0 -->
-semantic segmentation ले "सबै मिलाएर दोष" भन्ने गर्छ, तर
-instance segmentation ले **प्रत्येक दोष छुट्याउँछ**।
+semantic segmentation le "sabai milaera dosh" bhanne garchha, tar
+instance segmentation le **pratyek dosh chhutyaunchha**.
 
 ```text
-semantic:  दोष ३ वटा → एउटा mask (३ क्षेत्र)
-instance:  दोष ३ वटा → mask 1, mask 2, mask 3 (प्रत्येक फरक रङ)
+semantic:  dosh 3 bata → euta mask (3 kshetra)
+instance:  dosh 3 bata → mask 1, mask 2, mask 3 (pratyek farak rang)
 ```
 
-semantic mask मा पनि **टाढा रहेका क्षेत्र** connected component को रूपमा गन्न सकिन्छ।
-गन्न नसकिने **छोएर बसेका दोष** हुन्। दुई दोष एक pixel मात्र छोए पनि
-semantic mask मा एउटै क्षेत्रमा मिलेर जान्छन्, छुट्याउन सकिँदैन।
-यही नै instance segmentation सँगको साँचो फरक हो।
+semantic mask ma pani **tadha raheka kshetra** connected component ko rupama ganna sakinchha.
+ganna nasakine **chhoera baseka dosh** hun. dui dosh ek pixel matra chhoe pani
+semantic mask ma eutai kshetra ma miler janchhan, chhutyaun sakindaina.
+yahi nai instance segmentation sangko sancho farak ho.
 
-टाढा भएका दोषको सङ्ख्या गन्न मात्र चाहिन्छ भने segmentation र connected component गनेर पुग्छ।
-छोएर बसेका दोष पनि एक-एक गरी छुट्याउन चाहिएको बेला instance segmentation चाहिन्छ।
+tadha bhaeka doshko sankhya ganna matra chahinchha bhane segmentation ra connected component ganer pugchha.
+chhoera baseka dosh pani ek-ek gari chhutyaun chahieko bela instance segmentation chahinchha.
 
 <!-- ne-cell: 7ea5662a | after-heading -->
-## Part 4 anomaly detection (असामान्यता पहिचान)
+## Part 4 anomaly detection (asamanyata pahichan)
 
 <!-- ne-cell: 9e24e09a | after-heading -->
-**anomaly detection ले "सधैंभन्दा फरक" खोज्छ**
+**anomaly detection le "sadhainbhanda farak" khojchha**
 <!-- ne-pair: Anomaly detection looks for 'not like usual' -->
 
 <!-- ne-cell: 9e24e09a -->
-यो तालिममा प्रयोग हुने PatchCore जस्तो anomaly detection ले **राम्रा उत्पादनको चित्र मात्र** बाट
-"सामान्य भनेको के हो" सिक्छ, र त्यसभन्दा फरक भागलाई **anomaly score** को रूपमा सङ्ख्यामा फर्काउँछ।
+yo talim ma prayog hune PatchCore jasto anomaly detection le **ramra utpadanako chitra matra** baat
+"samanya bhaneko ke ho" sikchha, ra tyasabhanda farak bhaag lai **anomaly score** ko rupama sankhya ma pharkaunchha.
 
 ```text
-इनपुट: सिटको एउटा चित्र
-नतिजा: anomaly score (सङ्ख्या) + असामान्य स्थान देखाउने heatmap
+input: sitako euta chitra
+natija: anomaly score (sankhya) + asamanya sthan dekhaune heatmap
 ```
 
-**फाइदा:** सिकाइमा **दोषको किसिम सिकाउनु नपर्ने** कुरा सबैभन्दा ठुलो फाइदा हो।
-"कालो थोप्लो", "चोट" भनेर लेबल लगाएका असामान्य चित्र जम्मा गर्नु नपर्ने, राम्रा उत्पादन मात्रले
-सिकाइ हुन्छ। लेबल भएका असामान्य चित्र सिकाइमा होइन, **थ्रेसहोल्ड क्यालिब्रेसन र मूल्याङ्कन** मा
-प्रयोग गरिन्छ।
+**phaida:** sikai ma **doshko kisim sikaunu naparne** kura sabaibhanda thulo phaida ho.
+"kalo thoplo", "chot" bhanera label lagaeka asamanya chitra jamma garnu naparne, ramra utpadan matrale
+sikai hunchha. label bhaeka asamanya chitra sikai ma hoina, **threshold calibration ra mulyankan** ma
+prayog garinchha.
 
-**कमी:** **कस्तो दोष हो थाहा हुँदैन**। साथै "सामान्य फैलावट" लाई असामान्य भनेर निर्णय गर्न सक्छ
-(रङको असमानता, ढाँचा, उज्यालोको असमानता आदि)।
+**kami:** **kasto dosh ho thaha hundaina**. sathai "samanya phailabat" lai asamanya bhanera nirnaya garna sakchha
+(rangako asamanata, dhancha, ujyaloko asamanata adi).
 
-heatmap ले **स्थानको सङ्केत** फर्काउँछ, तर दोषको किसिम वा ठ्याक्कै आकार थाहा हुँदैन।
+heatmap le **sthanako sanket** pharkaunchha, tar doshko kisim wa thyakkai akar thaha hundaina.
 
-> दिन ५ मा PatchCore भन्ने anomaly detection तरिका वास्तवमा चलाउनेछौं।
+> din 5 ma PatchCore bhanne anomaly detection tarika bastabama chalaunechhaun.
 
 <!-- ne-cell: 2db70af1 | after-heading -->
-#### उही इनपुटमा के फर्किन्छ
+#### uhi input ma ke pharkinchha
 
 <!-- ne-cell: 2db70af1 -->
-माथिको कृत्रिम सिटलाई साझा इनपुट बनाएर तुलना गर्छौं।
+mathiko kritrim sitalai sajha input banaera tulna garchhaun.
 
-| परिवार | नतिजाको रूप | यसले मात्र जवाफ दिन नसक्ने कुरा |
+| paribar | natijako rup | yasle matra jabaph din nasakne kura |
 |---|---|---|
-| classification | एउटा चित्रमा एउटा लेबल | स्थान वा क्षेत्रफल |
-| detection | N चौकोण + class + score | ठ्याक्कै आकार |
-| segmentation | H×W pixel mask, instance भए धेरै | mm² का लागि क्यालिब्रेसन चाहिन्छ |
-| anomaly detection | एउटा score + स्थान नक्सा | दोषको class नाम |
+| classification | euta chitra ma euta label | sthan wa kshetraphal |
+| detection | N chaukon + class + score | thyakkai akar |
+| segmentation | H×W pixel mask, instance bhae dherai | mm² ka lagi calibration chahinchha |
+| anomaly detection | euta score + sthan naksa | doshko class naam |
 
 <!-- ne-cell: 620867ac | after-heading -->
-## Part 5 उत्पादनमा कुन कहाँ प्रयोग गर्ने
+## Part 5 utpadanama kun kahan prayog garne
 
 <!-- ne-cell: fig-VisA_samples | after-heading -->
-### वास्तविक औद्योगिक anomaly detection डेटासेटको उदाहरण
+### bastabik audyogik anomaly detection datasetko udaharan
 
 <!-- ne-cell: fig-VisA_samples | after-image:../../assets/external_samples/open_reference/VisA_samples.png -->
-चित्र: VisA डेटासेटको सारांश (Yang Zou आदि / Amazon Science, VisA डेटासेट CC BY 4.0)। सर्किट बोर्ड,
-पार्ट, क्याप्सुलजस्ता **औद्योगिक उत्पादनका वास्तविक तस्बिर** छन्। यो तालिमको PVC उत्पादन होइन, र यो
-तालिमका model को नतिजा पनि होइन।
+chitra: VisA datasetko saransh (Yang Zou adi / Amazon Science, VisA dataset CC BY 4.0). sarkit bord,
+part, kyapsulajasta **audyogik utpadanaka bastabik tasbir** chhan. yo talimko PVC utpadan hoina, ra yo
+talimka model ko natija pani hoina.
 
-**ध्यान दिनुपर्ने कुरा**
+**dhyan dinuparne kura**
 
-दोष कस्तो देखिन्छ भन्ने कुरा उत्पादनअनुसार फरक पर्छ। उज्यालोको औसत एउटाले देखाउन नसक्ने फरक
-(आकार, ढाँचा, स्थान) हरेक उत्पादनमा हुन्छ।
+dosh kasto dekhinchha bhanne kura utpadanaanusar farak parchha. ujyaloko ausat eutale dekhauna nasakne farak
+(akar, dhancha, sthan) harek utpadanama hunchha.
 
-**सोच्नुहोस्**
+**sochnuhos**
 
-- यीमध्ये सम्पूर्ण चित्रको औसत उज्यालो तुलना गर्दा भेट्टाउन सबैभन्दा गाह्रो हुने दोष कुन होला?
+- yimadhye sampurna chitrako ausat ujyalo tulna garda bhettaun sabaibhanda gahro hune dosh kun hola?
 
 <!-- ne-cell: b3725e7f | after-heading -->
-#### प्रश्नबाट तरिका छान्ने सानो अभ्यास
+#### prashna baat tarika chhanne sano abhyas
 
 <!-- ne-cell: b3725e7f -->
-"NG हो कि होइन मात्र", "स्थान र सङ्ख्या", "pixel क्षेत्र", "नजानेको असामान्यता" — प्रत्येकका लागि
-माथिको तालिकाबाट तरिका छानेर कारण एक वाक्यमा लेख्नुहोस्। छोएर बसेका २ दोष छुट्टाछुट्टै सम्हाल्ने हो
-भने कुन तरिका छान्नुहुन्छ?
+"NG ho ki hoina matra", "sthan ra sankhya", "pixel kshetra", "najaneko asamanyata" — pratyekaka lagi
+mathiko talika baat tarika chhaner karan ek bakyama lekhnuhos. chhoera baseka 2 dosh chhuttachhuttai samhalne ho
+bhane kun tarika chhannuhunchha?
 
 <!-- ne-cell: 120c9c28 | after-heading -->
-## Part 6 बनाइएको नमुना चित्रले जाँच्ने
+## Part 6 banaiyeko namuna chitrale jaanchne
 
 <!-- ne-cell: 05049adb | after-heading -->
-**कृत्रिम सिटको दोष हेर्ने**
+**kritrim sitako dosh herne**
 <!-- ne-pair: Look at the synthetic defects -->
 
 <!-- ne-cell: 05049adb -->
-तयार भइसकेको कृत्रिम चित्र हेरेर ४ कामले के फर्काउँछ भनेर सोच्नुहोस्।
-यो चित्र **हामीले Python ले कोरेको** हो, वास्तविक कारखानाको चित्र होइन।
+tayar bhaisakeko kritrim chitra herer 4 kaamle ke pharkaunchha bhanera sochnuhos.
+yo chitra **hamile Python le koreko** ho, bastabik karakhanako chitra hoina.
 
 <!-- ne-cell: 68e42818 | after-heading -->
-### नतिजाको उदाहरण
+### natijako udaharan
 
-यो नतिजा `assets/defect_samples/defects.json` मा सुरक्षित सही जवाफको डेटाबाट बनाइन्छ
-(उही सामग्री भए उही नतिजा)। शीर्षक कोडले छाप्ने जापानी अक्षरमै देखिन्छ।
+yo natija `assets/defect_samples/defects.json` ma surakshit sahi jabaphako data baat banainchha
+(uhi samagri bhae uhi natija). shirshak kodale chhapne Japani aksharamai dekhinchha.
 
-तीन class `scratch`, `streak` र `black_spot` हुन्; चार सङ्ख्या [x1, y1, x2, y2] को रूपमा pixel
-एकाइमा चौकोण हुन्।
+tin class `scratch`, `streak` ra `black_spot` hun; chaar sankhya [x1, y1, x2, y2] ko rupama pixel
+ekaima chaukon hun.
 
 <!-- ne-cell: c2fe0d8c | after-heading -->
-**४ कामको नतिजा (segmentation २ किसिम)**
+**4 kaamko natija (segmentation 2 kisim)**
 <!-- ne-pair: What would each task return here -->
 
 <!-- ne-cell: c2fe0d8c -->
-माथिको चित्रका लागि ४ कामले तलको नतिजा फर्काउँछन्। segmentation मा मात्र semantic (class अनुसार) र
-instance (वस्तु अनुसार) गरी २ किसिम देखाइएको छ।
+mathiko chitraka lagi 4 kaamle talako natija pharkaunchhan. segmentation ma matra semantic (class anusar) ra
+instance (bastu anusar) gari 2 kisim dekhaieko chha.
 
-| काम | फर्किने कुरा |
+| kaam | pharkine kura |
 |---|---|
-| image classification | "NG" (एउटा चित्रमा एउटा लेबल) |
-| object detection | ३ चौकोण र प्रत्येकको class नाम (scratch / streak / black_spot) |
-| semantic segmentation | दोष class को mask (टाढा ३ क्षेत्र)। सङ्ख्या र pixel क्षेत्रफल पछि हिसाब गरिन्छ |
-| instance segmentation | दोषअनुसार छुट्टिएका ३ mask। क्षेत्रफल पछि हिसाब गरिन्छ |
-| anomaly detection | एउटा score (जस्तै 0.87) र स्थान देखाउने heatmap |
+| image classification | "NG" (euta chitra ma euta label) |
+| object detection | 3 chaukon ra pratyekako class naam (scratch / streak / black_spot) |
+| semantic segmentation | dosh class ko mask (tadha 3 kshetra). sankhya ra pixel kshetraphal pachhi hisab garinchha |
+| instance segmentation | dosh anusar chhuttieka 3 mask. kshetraphal pachhi hisab garinchha |
+| anomaly detection | euta score (jastai 0.87) ra sthan dekhaune heatmap |
 
-mm² मा बदल्न उही वस्तु सतहमा नापको क्यालिब्रेसन चाहिन्छ।
+mm² ma badalna uhi bastu satahama napako calibration chahinchha.
 
 <!-- ne-cell: e881aa20 | after-heading -->
-## अभ्यास
+## abhyas
 
 <!-- ne-cell: 16e4bbfc | after-heading -->
-**अभ्यास १ (आधारभूत): ४ काम आफ्नै शब्दमा बुझाउने**
+**abhyas 1 (adharabhut): 4 kaam aphnai shabdama bujhaune**
 <!-- ne-pair: Exercise 1 (basic): explain the four tasks in your own words -->
 
 <!-- ne-cell: 16e4bbfc -->
-तलको सेलमा ४ काम एक-एक पङ्क्तिमा बुझाउनुहोस्।
-"नतिजा के हो" र "कहिले प्रयोग गर्ने" समावेश गर्नुहोस्।
+talako cell ma 4 kaam ek-ek pangktima bujhaunuhos.
+"natija ke ho" ra "kahile prayog garne" samabesh garnuhos.
 
-**सकिएको ठान्ने आधार:** ४ पङ्क्तिमध्ये प्रत्येकमा नतिजाको रूप र उत्पादनमा ठोस प्रयोग लेखिएको छ।
+**sakieko thanne adhar:** 4 pangktimadhye pratyekama natijako rup ra utpadanama thos prayog lekhieko chha.
 
 <!-- ne-cell: 1cd0cf63 | after-heading -->
-**अभ्यास २ (मध्यम): कार्यस्थलको प्रश्नको जवाफ दिने**
+**abhyas 2 (madhyam): karyasthalako prashnako jabaph dine**
 <!-- ne-pair: Exercise 2 (intermediate): answer shop-floor questions -->
 
 <!-- ne-cell: 1cd0cf63 -->
-तलका ३ प्रश्नका लागि कुन काम छान्ने र किन, लेख्नुहोस्।
+talaka 3 prashnaka lagi kun kaam chhanne ra kina, lekhnuhos.
 
-1. "यो रोल पठाउन सकिन्छ? जसरी भए पनि छुटाउनु हुँदैन।"
-2. "यो महिना कालो थोप्लो कतिवटा थियो गन्न चाहन्छु।"
-3. "चोटको क्षेत्रफल 1 mm² भन्दा बढी भए NG बनाउन चाहन्छु।"
+1. "yo rol pathaun sakinchha? jasari bhae pani chhutaunu hundaina."
+2. "yo mahina kalo thoplo katibata thiyo ganna chahanchhu."
+3. "chotako kshetraphal 1 mm² bhanda badhi bhae NG banaun chahanchhu."
 
-**सकिएको ठान्ने आधार:** हरेक प्रश्नमा (1) छानिएको काम, (2) त्यसको नतिजाले आवश्यकता कसरी पूरा गर्छ,
-(3) त्यो छनोटमा बाँकी रहने सम्झौता (गर्न नसकिने कुरा, थपिने झन्झट वा झुटा चेतावनी) लेख्नुहोस्।
+**sakieko thanne adhar:** harek prashna ma (1) chhanieko kaam, (2) tyasko natijale abashyakata kasari pura garchha,
+(3) tyo chhanotama banki rahane samjhauta (garna nasakine kura, thapine jhanjhat wa jhuta chetabani) lekhnuhos.
 
 <!-- ne-cell: b0601286 | after-heading -->
-**अभ्यास ३ (विकास/ऐच्छिक): PVC निरीक्षणका लागि सुझाव**
+**abhyas 3 (bikas/aichchhik): PVC nirikshanka lagi sujhab**
 <!-- ne-pair: Exercise 3 (optional challenge): propose an approach for PVC inspection -->
 
 <!-- ne-cell: b0601286 -->
-चौडाइ 1,300 mm, दोष 0.3 mm, उच्च गतिको निरन्तर उत्पादन भन्ने सर्तमा
-**पहिले कुन काम प्रयास गर्नुपर्ला** भनेर सुझाव दिनुहोस्। तलका दृष्टिकोण समावेश गर्नुहोस्।
+chaudai 1,300 mm, dosh 0.3 mm, uchcha gatiko nirantar utpadan bhanne sartama
+**pahile kun kaam prayas garnuparla** bhanera sujhab dinuhos. talaka drishtikon samabesh garnuhos.
 
-- पहिले प्रयास गर्ने काम र त्यसको कारण
-- चाहिने डेटा (के, कति वटा जति)
-- राम्रो नहुने सम्भावना बढी भएको बुँदा
-- हप्ता २ मा जाँच्नुपर्ने कुरा (क्यामेरा, उज्यालो, गति)
+- pahile prayas garne kaam ra tyasko karan
+- chahine data (ke, kati bata jati)
+- ramro nahune sambhabana badhi bhaeko bunda
+- hapta 2 ma janchnuparne kura (kyamera, ujyalo, gati)
 
-**सकिएको ठान्ने आधार:** पहिलो काम, डेटा योजना, जोखिम र हप्ता २ मा जाँच्नुपर्ने कुरा प्रत्येक लेख्नुहोस्।
+**sakieko thanne adhar:** pahilo kaam, data yojana, jokhim ra hapta 2 ma janchnuparne kura pratyek lekhnuhos.
 
 <!-- ne-cell: 55e10325 | after-heading -->
-#### बुझाइ जाँच
+#### bujhai jaanch
 
-1. image classification र object detection को नतिजाको फरक बुझाउनुहोस्।
-2. semantic र instance segmentation मा के फरक छ?
-3. यो तालिमको anomaly detection (PatchCore) मा सिकाइमा दोषको किसिम सिकाउनु किन नपर्ने हो?
-   त्यसको सट्टा के थाहा हुँदैन?
-4. कार्यस्थलमा "क्षेत्रफलले निर्णय गर्न चाहन्छु" भनियो भने कुन काम छान्नुहुन्छ? के तयार गर्नुपर्छ?
-5. ४ काममध्ये सही जवाफको डेटा (लेबल) बनाउन सबैभन्दा गाह्रो कुन हो? कारण पनि लेख्नुहोस्।
+1. image classification ra object detection ko natijako farak bujhaunuhos.
+2. semantic ra instance segmentation ma ke farak chha?
+3. yo talimko anomaly detection (PatchCore) ma sikai ma doshko kisim sikaunu kina naparne ho?
+   tyasko satta ke thaha hundaina?
+4. karyasthalama "kshetraphalale nirnaya garna chahanchhu" bhaniyo bhane kun kaam chhannuhunchha? ke tayar garnuparchha?
+5. 4 kamamadhye sahi jabaphako data (label) banaun sabaibhanda gahro kun ho? karan pani lekhnuhos.
 
-नमुना जवाफ: `docs/instructor/day01_instructor_guide.md`।
+namuna jabaph: `docs/instructor/day01_instructor_guide.md`.
 
 <!-- ne-cell: ab02a78c | after-heading -->
-## समस्या आउँदा
+## samasya aunda
 
-त्रुटि आए पहिले "कुन सेलमा", "कुन लाइनमा", "के सन्देश आयो" भनेर टिप्नुहोस्। बुझाउनुपर्ने काममा पनि
-त्यही अभिलेख राख्नुहोस्।
+truti ae pahile "kun cell ma", "kun line ma", "ke sandesh ayo" bhanera tipnuhos. bujhaunuparne kaam ma pani
+tyahi abhilekh rakhnuhos.
 
-| लक्षण | के गर्ने |
+| lakshan | ke garne |
 | --- | --- |
-| सामग्री चित्र देखिँदैन | `python assets\scripts\generate_training_assets.py` चलाएर सामग्री बनाउनुहोस्। |
-| `json.decoder.JSONDecodeError` | `defects.json` बिग्रेको छ। सामग्री बनाउने स्क्रिप्ट `--clean` सहित फेरि चलाउनुहोस्। |
-| चित्रको विषयवस्तु AI को नतिजाभन्दा फरक देखिन्छ | तपाईंको बुझाइ ठीक छ। यो नोटबुकका चित्र अवधारणा चित्र हुन्, AI को अनुमान होइन। |
-| `KeyError: 'bbox'` | `defects.json` को ढाँचा पुरानो हुन सक्छ। सामग्री फेरि बनाउनुहोस्। |
+| samagri chitra dekhindain | `python assets\scripts\generate_training_assets.py` chalaera samagri banaunuhos. |
+| `json.decoder.JSONDecodeError` | `defects.json` bigreko chha. samagri banaune skript `--clean` sahit feri chalaunuhos. |
+| chitrako bishayabastu AI ko natijabhanda farak dekhinchha | tapainko bujhai thik chha. yo notebookka chitra abadharana chitra hun, AI ko anuman hoina. |
+| `KeyError: 'bbox'` | `defects.json` ko dhancha purano huna sakchha. samagri feri banaunuhos. |
 
 <!-- ne-cell: 022c2c2b | after-heading -->
-## सकिएको जाँचसूची
+## sakieko janchasuchi
 
-**अनिवार्य** वस्तुहरू सूचीबद्ध छन्। सबैमा चिन्ह लागेपछि यो नोटबुक सकिन्छ।
+**aniwarya** bastuharu suchibaddh chhan. sabai ma chinh lagepachhi yo notebook sakinchha.
 
-- [ ] Part 1–Part 6 का व्याख्या पढें
-- [ ] सबै कोड सेल चलाएँ
-- [ ] अवधारणा चित्र AI को अनुमान होइन भन्ने बुझें
-- [ ] अभ्यास 1–2 (अनिवार्य) गरें
-- [ ] ४ कामको फरक अरूलाई बुझाउन सक्छु
-- [ ] बुझाइ जाँचका ५ प्रश्नको जवाफ दिएँ
-- [ ] नोटबुक सुरक्षित गरें
+- [ ] Part 1–Part 6 ka byakhya padhen
+- [ ] sabai kod cell chalaen
+- [ ] abadharana chitra AI ko anuman hoina bhanne bujhen
+- [ ] abhyas 1–2 (aniwarya) garen
+- [ ] 4 kaamko farak arulai bujhaun sakchhu
+- [ ] bujhai jaanchka 5 prashnako jabaph dien
+- [ ] notebook surakshit garen
 
-**ऐच्छिक (सकिएको सर्तमा पर्दैन):** अभ्यास ३ र "थप सिकाइ" को अतिरिक्त चुनौती।
+**aichchhik (sakieko sartama pardaina):** abhyas 3 ra "thap sikai" ko atirikt chunauti.
 
 <!-- ne-cell: 45684e7a | after-heading -->
-## थप सिकाइ (ऐच्छिक)
+## thap sikai (aichchhik)
 
 <!-- ne-cell: 45684e7a -->
-### सन्दर्भ लिङ्क
+### sandarbha lingk
 
-- [Ultralytics: object detection को काम](https://docs.ultralytics.com/tasks/detect/)
+- [Ultralytics: object detection ko kaam](https://docs.ultralytics.com/tasks/detect/)
 - [Ultralytics: segmentation](https://docs.ultralytics.com/tasks/segment/)
-- [Anomalib कागजात](https://anomalib.readthedocs.io/)
+- [Anomalib kagajat](https://anomalib.readthedocs.io/)
 - [OpenCV image processing tutorial](https://docs.opencv.org/4.x/d6/d00/tutorial_py_root.html)
 
-### अतिरिक्त चुनौती (अनिवार्य होइन)
+### atirikt chunauti (aniwarya hoina)
 
-"anomaly detection" र "object detection" दुवै प्रयोग गर्ने हो भने कुन क्रममा प्रयोग गर्दा बिग्रेको
-उत्पादन एउटै पनि नजाने हुन्छ, सोच्नुहोस्।
+"anomaly detection" ra "object detection" dubai prayog garne ho bhane kun kram ma prayog garda bigreko
+utpadan eutai pani najane hunchha, sochnuhos.

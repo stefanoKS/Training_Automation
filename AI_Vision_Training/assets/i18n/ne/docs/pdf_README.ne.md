@@ -36,9 +36,9 @@ pratisthapan gardaina.
 
 pana sankhya harek patak banaunda skriptale aphain dekhaunchha.
 
-> tesro bhasha **roman lipima lekheko Nepali** (`ne-Latn`) ho, Devanagari hoina. din 1-3 ka notebook
-> ahile pani Devanagari ma chhan, tyasaile ti pustikama dui lipi bhetinchha. thap jankari:
-> `assets/i18n/ne/romanization_style_guide.md`.
+> tesro bhasha **roman lipima lekheko Nepali** (`ne-Latn`) ho, Devanagari hoina. sabai 16 wata
+> notebook ra 12 wata shiksharthi file roman lipima chhan, tyasaile kunai pustikama Devanagari
+> bhetindaina. thap jankari: `assets/i18n/ne/romanization_style_guide.md`.
 
 <!-- ne-section: ## 作り直す方法 / Regenerating -->
 ### Nepali ma

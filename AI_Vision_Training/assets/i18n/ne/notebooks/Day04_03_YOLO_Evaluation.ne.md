@@ -12,7 +12,7 @@ notebooks/Day04_YOLO_Training/Day04_03_YOLO_Evaluation.ipynb
 
 | Nepali |
 | --- |
-| 1. prashikshan ma prayog nabhaeka tasbir ma kshamata napn sakne. |
+| 1. prashikshan ma prayog nabhaeka tasbir ma kshamata napna sakne. |
 | 2. precision ra recall ko arth bataun sakne. |
 | 3. confusion matrix padhna sakne. |
 | 4. saphal ra asaphal pahichanka udaharan abhilekh garna sakne. |
@@ -70,7 +70,7 @@ udaharan chitrako IoU sart matra badaler feri anuman gari chalaunuhos.
 prashikshan bhaeko model `training_results/day04/.../weights/best.pt` ma chha. nabhetie pahile prashikshan
 (04_02) chalaunuhos.
 
-**prashikshan nagareko model ko mulyankan garna sakindaina.** sankhya banaer rakhnu hundaina.
+**prashikshan nagareko model ko mulyankan garna sakindaina.** sankhya banaera rakhnu hundaina.
 
 <!-- ne-cell: b264ae84 | after-heading -->
 ## Part 1 mulyankanka maapan
@@ -80,7 +80,7 @@ prashikshan bhaeko model `training_results/day04/.../weights/best.pt` ma chha. n
 
 <!-- ne-cell: clarity-evaluation-units -->
 uhi sansleshit udaharan: ek asamanya tasbir ma sahi ayat 2 bata, anuman 1 bata ra ek-ek milne jodi 1 ho.
-anuman: tasbir sahi rupama NG bhaniyo bhane pani dosh chhutn sakchha?
+anuman: tasbir sahi rupama NG bhaniyo bhane pani dosh chhutna sakchha?
 
 | drishti | yahan ganieko | recall ko har | chitrako aksh |
 |---|---|---|---|
@@ -110,10 +110,10 @@ recall    = sahi pahichanko sankhya ÷ bastabik doshko kul sankhya
 | precision kam | **jhuto alarm dherai**. kamadar thakchhan, line rokinchha |
 | recall kam | **chhutne dherai**. bigreko saman pathainchha |
 
-**uthi pahichanko suchi, uthi sahi uttar, uthi milaune niyam (IoU adi) ra uthi pachhi-prashodhan** prayog garda
-matra threshold badhaunda **recall badhdain** (uhi rahanchha wa ghatchha) bhanne kura nishchayaka sath bhann sakinchha.
+**uthi pahichanko soochi, uthi sahi uttar, uthi milaune niyam (IoU adi) ra uthi pachhi-prashodhan** prayog garda
+matra threshold badhaunda **recall badhdain** (uhi rahanchha wa ghatchha) bhanne kura nishchayaka sath bhanna sakinchha.
 threshold badalda anuman feri chaldain bhane pahichan aphai badalina sakne hunale yo nishchayata lagu hundaina.
-precision samanyataya badhchha, tar **sadhain badhchha bhanne chhaina**; score ko kram anusar ghatn pani sakchha ra dubai nabadalin
+precision samanyataya badhchha, tar **sadhain badhchha bhanne chhaina**; score ko kram anusar ghatna pani sakchha ra dubai nabadalin
 pani sakchhan (din 3 ma dekheko 3 → 1 → 1 udaharan). bastabik paribartan pramanikaran data ma jaanchnuhos.
 
 <!-- ne-cell: c479853d | after-heading -->
@@ -137,7 +137,7 @@ YOLO ko prashikshan lagama `mAP50` ra `mAP50-95` dekhinchhan.
 - `mAP50` … IoU 0.50 wa badhi lai "milyo" manda ko mAP
 - `mAP50-95` … IoU 0.50, 0.55, …, 0.95 gari 10 tharama mAP ganana garera ausat
 
-utpadanako karyasthalama **mAP bhanda precision / recall bujhn sajilo** hunchha. "kati pratishat chhutchha" bhanne kurako
+utpadanako karyasthalama **mAP bhanda precision / recall bujhna sajilo** hunchha. "kati pratishat chhutchha" bhanne kurako
 karyasthalama arth hunchha.
 
 <!-- ne-cell: 6bcff7a5 | after-heading -->
@@ -164,7 +164,7 @@ pharkanuhos. prashikshan `train` ko angk antim mulyankan hundaina.
 <!-- ne-cell: 0fe77594 -->
 Class-dar-class sahi sankhya (`black_spot` 5, `scratch` 7, `streak` 6) yo talimko parikshan datale tay garne
 maan hun. precision pachhika sankhya yo talim ma surakshit garieko abhilekhaka hun (`best.pt`,
-`split="test"`, `imgsz=320`, seed 2026). sukshm sankhya batabaran anusar farak parchha; prabritti ra thulo-sanoko
+`split="test"`, `imgsz=320`, seed 2026). sukshma sankhya batabaran anusar farak parchha; prabritti ra thulo-sanoko
 sambandh padhnuhos.
 
 <!-- ne-cell: cdbaa1cb | after-heading -->
@@ -246,7 +246,7 @@ chhutnu (FN) bhaneko "bastabama NG hundahundai OK bhanieko" tasbir sankhya ho. u
 jhuto alarm (FP) bhaneko "bastabama OK hundahundai NG bhanieko" sankhya ho. **rang matra herer nirnaya nagarnuhos.**
 TP ra TN dubai "milyo" hun, tar arth ulto chha.
 
-bastu pahichan ma prishthabhumilai gann milne **TN** mann sakindaina. yi chaar ganne tarika **tasbir-star** ko
+bastu pahichan ma prishthabhumilai ganna milne **TN** mann sakindaina. yi chaar ganne tarika **tasbir-star** ko
 mulyankan ma matra prayog hunchha.
 
 **sochnuhos**
@@ -288,14 +288,14 @@ sankhya dekhaunchha.
 
 - **prishthabhumiko stambha** … milne sahi ayat nabhaeko anuman. arthat **FP**
 - **prishthabhumiko line** … milne anuman nabhaeko sahi ayat. arthat **FN**
-- tal-dayanko khand (prishthabhumi ra prishthabhumi) bastu pahichan ma **gann milne TN hundaina**; kehi nabhaeko kshetr pani
+- tal-dayanko khand (prishthabhumi ra prishthabhumi) bastu pahichan ma **ganna milne TN hundaina**; kehi nabhaeko kshetra pani
   gannuparne hunchha. tyasaile yo talika ma TN chhaina.
 
 aghillo chitrako tasbir-star TP/FP/FN/TN sang **ganne ekai ra akshako disha dubai farak chhan**. misaunu hundaina.
 yo talimko model sang tin class chhan, tyasaile mulyankan chitra ma `streak` ka line ra stambha pani dekhinchhan.
 
 <!-- ne-cell: 8a71da19 | after-heading -->
-### dui confusion matrix chhutyaer padhne
+### dui confusion matrix chhutyaera padhne
 
 <!-- ne-cell: 8a71da19 -->
 tasbir-starko mulyankan ma harek tasbir lai OK wa NG ma bargikaran garera TP, FP, FN, TN ganinchha. NG nirnaya
@@ -304,7 +304,7 @@ ra tasbir ma bhaeko sahi label sang **chhuttai** tulna garinchha.
 
 bastu pahichanko mulyankan ma anumanko ayat ra sahi ayat milainchha. milaune kaam **class milnu, IoU,
 confidence ko byabahar ra ek-ek milaune** niyamle garinchha. tyasabela namileko anuman FP, namileko sahi ayat
-FN ho. purai prishthabhumilai gann milne TN mann sakindaina. line-stambhako disha chitra anusar farak parchha, tyasaile
+FN ho. purai prishthabhumilai ganna milne TN mann sakindaina. line-stambhako disha chitra anusar farak parchha, tyasaile
 **aksh label jancher** padhnuhos.
 
 <!-- ne-cell: 4607c1f7 | after-heading -->
@@ -361,9 +361,9 @@ parikshan datako kshamata kam hunuko karan obharaphiting matra hoina.
 
 | sambhabana | jaanchne tarika |
 |---|---|
-| obharaphiting | pramanikaranko loss ra maapan ko prabritti hernuhos (prashikshan ghatdai janchha, pramanikaran ghatn rokinchha) |
+| obharaphiting | pramanikaranko loss ra maapan ko prabritti hernuhos (prashikshan ghatdai janchha, pramanikaran ghatna rokinchha) |
 | kam prashikshan (underfitting) | prashikshan data ma pani kshamata kam chha ki hernuhos |
-| labelko galti | asaphal tasbirko label tasbir ma banaer jaanchnuhos |
+| labelko galti | asaphal tasbirko label tasbir ma banaera jaanchnuhos |
 | khichaiko abastha farak | prashikshan ra parikshan tasbirko ujyalo, prishthabhumi ra kon sangai rakher hernuhos |
 | prashikshan ra parikshan tasbirko dekhine rup farak (domain shift) | pratinidhitb garne bastabik data ma mulyankan garnuhos |
 

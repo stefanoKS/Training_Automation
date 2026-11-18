@@ -1,724 +1,724 @@
 <!--
-नेपाली अनुवाद / Nepali translation source for
+Nepali anuwad / Nepali translation source for
 notebooks/00_Setup/00_Environment_Setup.ipynb
 
 Each block starts with an ne-cell directive naming the notebook cell id.
 CMD commands, paths, file names and licence names stay byte-identical.
 -->
-# दिन ० नोटबुक ०० — नेपाली अनुवाद
+# din 0 notebook 00 — Nepali anuwad
 
 <!-- ne-cell: 1ac0141f | after-heading -->
-# दिन ० (दिन १ भन्दा अघि, पाठ समयबाहिर) नोटबुक ००: वातावरण सेटअप
+# din 0 (din 1 bhanda aghi, paath samayabahir) notebook 00: batabaran setaap
 
 <!-- ne-cell: 1ac0141f -->
-## सिकाइ लक्ष्यहरू
+## sikai lakshyaharu
 
-| नेपाली |
+| Nepali |
 | --- |
-| 1. Python कस्तो औजार हो भनेर बुझाउन सक्ने। |
-| 2. Command Prompt (CMD) खोलेर आदेश चलाउन सक्ने। |
-| 3. virtual environment बनाएर आवश्यक package राख्न सक्ने। |
-| 4. JupyterLab सुरु गरेर नोटबुक खोल्न र सुरक्षित गर्न सक्ने। |
-| 5. आफ्नो वातावरण ठीक छ कि छैन आफैं जाँच्न सक्ने। |
+| 1. Python kasto aujar ho bhanera bujhaun sakne. |
+| 2. Command Prompt (CMD) kholer adesh chalaun sakne. |
+| 3. virtual environment banaera aawashyak package rakhna sakne. |
+| 4. JupyterLab suru garera notebook kholna ra surakshit garna sakne. |
+| 5. aphno batabaran thik chha ki chhaina aphain jaanchna sakne. |
 
-## यो नोटबुकको आधारभूत जानकारी
+## yo notebookko adharabhut jankari
 
-| विषय | विवरण |
+| bishay | biwaran |
 | --- | --- |
-| सिकाइ समय (अनुमान) | 60 मिनेट |
-| कठिनाइ | सुरुवाती तह |
-| पूर्वशर्त | किबोर्ड र माउस चलाउन जान्नुपर्छ। प्रोग्रामिङ ज्ञान आवश्यक छैन। |
-| आवश्यक लाइब्रेरी | numpy, matplotlib, pillow, pandas, opencv-python, ipykernel, jupyterlab |
-| प्रयोग हुने kernel | `aivision` (आधारभूत वातावरण) |
-| समयतालिका | [`COURSE_SYLLABUS.md` तयारी](../../COURSE_SYLLABUS.md#preflight) |
+| sikai samay (anuman) | 60 minet |
+| kathinai | surubati tah |
+| poorwashart | kibord ra maus chalaun jannuparchha. programing jnan aawashyak chhaina. |
+| aawashyak laibreri | numpy, matplotlib, pillow, pandas, opencv-python, ipykernel, jupyterlab |
+| prayog hune kernel | `aivision` (adharabhut batabaran) |
+| samayatalika | [`COURSE_SYLLABUS.md` tayari](../../COURSE_SYLLABUS.md#preflight) |
 
-### बुझाउनुपर्ने काम
+### bujhaunuparne kaam
 
-| नेपाली |
+| Nepali |
 | --- |
-| वातावरण जाँच रिपोर्ट (यो नोटबुकको अन्त्यमा स्वतः बन्छ) |
-| पहिलो Python प्रोग्राम चलाएको नतिजा |
+| batabaran jaanch riport (yo notebookko antya ma sbatah banchha) |
+| pahilo Python program chalaeko natija |
 
-अझै वातावरण राखिएको छैन भने पहिले [START_HERE](../../START_HERE.md) को आधिकारिक प्रक्रिया Command
-Prompt मा सक्नुहोस्, त्यसपछि कोड सेलमा जानुहोस्।
+ajhai batabaran rakhieko chhaina bhane pahile [START_HERE](../../START_HERE.md) ko adhikarik prakriya Command
+Prompt ma saknuhos, tyaspachhi kod cell ma januhos.
 
 <!-- ne-cell: 3f811cde | after-heading -->
-## यो नोटबुक कहाँ पर्छ
+## yo notebook kahan parchha
 
 <!-- ne-cell: 3f811cde -->
-| विषय | विवरण |
+| bishay | biwaran |
 | --- | --- |
-| किसिम | तयारी (पाठ समयबाहिर) |
-| लाग्ने समय | 60 मिनेट |
-| पूर्वशर्त | छैन |
-| समयतालिका | [`COURSE_SYLLABUS.md` तयारी](../../COURSE_SYLLABUS.md#preflight) |
+| kisim | tayari (paath samayabahir) |
+| lagne samay | 60 minet |
+| poorwashart | chhaina |
+| samayatalika | [`COURSE_SYLLABUS.md` tayari](../../COURSE_SYLLABUS.md#preflight) |
 
-यो नोटबुक पाठ समयबाहिर गरिन्छ। ५ दिनको 360 मिनेटभित्र पर्दैन।
+yo notebook paath samayabahir garinchha. 5 dinko 360 minetbhitra pardaina.
 
 <!-- ne-cell: audit-learning-loop | after-heading -->
-### अनुमान गर्नुहोस्, चलाउनुहोस्, हेर्नुहोस्, व्याख्या गर्नुहोस्
+### anuman garnuhos, chalaunuhos, hernuhos, byakhya garnuhos
 
 <!-- ne-cell: audit-learning-loop -->
-variable भनेको मानको नाम हो। kernel भनेको मान राख्ने चलाउने भाग हो। महत्त्वपूर्ण सेल चलाउनुअघि इनपुट,
-काम र नतिजा एक-एक वाक्यमा लेख्नुहोस्। पहिले अनुमान लेख्नुहोस्, त्यसपछि सेल चलाएर मान वा चित्र
-हेर्नुहोस्। `defect_count` बढाउनुअघि र पछिको मान बदलेर फेरि अनुमान गरेर चलाउनुहोस्। जानाजान राखिएका
-त्रुटि र नसकिएका अभ्यासका लागि लेखिएको निर्देशन पछ्याउनुहोस्।
+variable bhaneko maanko naam ho. kernel bhaneko maan rakhne chalaune bhaag ho. mahattwapurna cell chalaunuaghi input,
+kaam ra natija ek-ek bakyama lekhnuhos. pahile anuman lekhnuhos, tyaspachhi cell chalaera maan wa chitra
+hernuhos. `defect_count` badhaunuaghi ra pachhiko maan badaler feri anuman garera chalaunuhos. janajan rakhieka
+truti ra nasakieka abhyaska lagi lekhieko nirdeshan pachhyaunuhos.
 
 <!-- ne-cell: 79328757 | after-heading -->
-**यो नोटबुक कसरी प्रयोग गर्ने**
+**yo notebook kasari prayog garne**
 <!-- ne-pair: How to use this notebook -->
 
 <!-- ne-cell: 79328757 -->
-यो नोटबुक **माथिबाट क्रमैसँग** चलाउनुहोस्। बीचको सेल छोड्यो भने पछिका सेल चल्दैनन्।
+yo notebook **mathibat kramaisang** chalaunuhos. bichako cell chhodyo bhane pachhika cell chaldainan.
 
-नोटबुकमा २ किसिमका "सेल" हुन्छन्। दुवै **बदल्न सकिन्छ**, तर काम फरक छ।
+notebook ma 2 kisimaka "cell" hunchhan. dubai **badalna sakinchha**, tar kaam farak chha.
 
-| किसिम | देखिने रूप | के गर्छ | चलाउँदा |
+| kisim | dekhine rup | ke garchha | chalaunda |
 |---|---|---|---|
-| Markdown सेल | अक्षर मात्र | व्याख्या पढ्ने | केही हुँदैन (छापिएको कागजजस्तै) |
-| कोड सेल | खैरो चौकोण र `In [ ]:` | प्रोग्राम हुन्छ | **Shift + Enter** ले त्यहीँ चल्छ |
+| Markdown cell | akshar matra | byakhya padhne | kehi hundaina (chhapieko kagajajastai) |
+| kod cell | khairo chaukon ra `In [ ]:` | program hunchha | **Shift + Enter** le tyahin chalchha |
 
-कोड सेल छानेर `Shift` थिचेर `Enter` थिच्दा त्यो सेल चल्छ।
+kod cell chhaner `Shift` thicher `Enter` thichda tyo cell chalchha.
 
-| देखिने | अर्थ |
+| dekhine | arth |
 |---|---|
-| `In [ ]:` | यो सेल **अझै चलेको छैन** (kernel को मेमोरी खाली छ भन्ने होइन) |
-| `In [*]:` | चलिरहेको। चल्दै गर्दा अक्षर देखिन पनि सक्छ |
-| `In [7]:` | चलिसक्यो (यो kernel मा सातौं पटक चलेको) |
+| `In [ ]:` | yo cell **ajhai chaleko chhaina** (kernel ko memory khali chha bhanne hoina) |
+| `In [*]:` | chaliraheko. chaldai garda akshar dekhin pani sakchha |
+| `In [7]:` | chalisakyo (yo kernel ma sataun patak chaleko) |
 
 <!-- ne-cell: fb740ebf | after-heading -->
-**पहिले जान्नुपर्ने कुरा: आदेश र Python कोड फरक हुन्**
+**pahile jannuparne kura: adesh ra Python kod farak hun**
 <!-- ne-pair: First, know the difference: commands and Python code are not the same -->
 
 <!-- ne-cell: fb740ebf -->
-अबदेखि २ किसिमका "निर्देश" आउनेछन्। **मिसाए अनिवार्य रूपमा असफल हुन्छ।**
+aba dekhi 2 kisimaka "nirdesh" aunechhan. **misae aniwarya rupama asaphal hunchha.**
 
-**1. CMD आदेश (Command Prompt मा लेखिने)**
+**1. CMD adesh (Command Prompt ma lekhine)**
 
 ```cmd
 python --version
 ```
 
-यो Windows को Command Prompt मा लेखिन्छ। `python` भन्ने **औजार** बोलाइएको छ।
+yo Windows ko Command Prompt ma lekhinchha. `python` bhanne **aujar** bolaieko chha.
 
-**2. Python कोड (यो नोटबुकको कोड सेलमा लेखिने)**
+**2. Python kod (yo notebookko kod cell ma lekhine)**
 
 ```python
 print("こんにちは")
 ```
 
-यो Python भन्ने **भाषा** मा लेखिएको वाक्य हो। CMD मा सिधै लेख्दा त्रुटि हुन्छ।
+yo Python bhanne **bhasha** ma lekhieko baky ho. CMD ma sidhai lekhda truti hunchha.
 
-> नोटबुकको कोड सेलमा `python -m pip install ...` जस्ता CMD आदेश लेख्नु हुँदैन।
-> Python को syntax त्रुटि हुन्छ। आधिकारिक installation CMD मा गरिन्छ। Part 3 को `%pip`
-> Jupyter का लागि मात्र अपवाद हो।
+> notebookko kod cell ma `python -m pip install ...` jasta CMD adesh lekhnu hundaina.
+> Python ko syntax truti hunchha. adhikarik installation CMD ma garinchha. Part 3 ko `%pip`
+> Jupyter ka lagi matra apabad ho.
 
 <!-- ne-cell: d68aa961 | after-heading -->
-## Part 1 आधारभूत शब्दहरू
+## Part 1 adharabhut shabdaharu
 
 <!-- ne-cell: f98449a1 | after-heading -->
-### स्क्रिनका भाग र तिनका नाम
+### skrinaka bhaag ra tinaka naam
 
 <!-- ne-cell: f98449a1 | after-image:../../assets/diagrams/teach_setup_jupyter_ui.png -->
-चित्र: notebook, सेल, kernel र output को स्थान-सम्बन्ध (योजनाबद्ध। वास्तविक स्क्रिनको फोटो होइन)।
+chitra: notebook, cell, kernel ra output ko sthan-sambandh (yojanabaddha. bastabik skrinako photo hoina).
 
-**ध्यान दिनुपर्ने कुरा**
+**dhyan dinuparne kura**
 
-सेल भनेको "अक्षर लेख्ने ठाउँ", kernel भनेको "हिसाब गर्ने छुट्टै प्रोग्राम" हो। Markdown सेल र कोड सेल
-दुवै **सम्पादन गर्न सकिन्छ**। फरक चलाउँदा गर्ने काममा हो। kernel फेरि छान्दा सेलको अक्षर हराउँदैन,
-तर restart गर्दा हिसाब गरिएका variable हराउँछन्।
+cell bhaneko "akshar lekhne thaun", kernel bhaneko "hisab garne chhuttai program" ho. Markdown cell ra kod cell
+dubai **sampadan garna sakinchha**. farak chalaunda garne kaam ma ho. kernel feri chhanda cellko akshar haraundain,
+tar restart garda hisab garieka variable haraunchhan.
 
-**सोच्नुहोस्**
+**sochnuhos**
 
-- kernel restart गर्दा सेलको अक्षर र variable मध्ये के हराउँछ?
+- kernel restart garda cellko akshar ra variable madhye ke haraunchha?
 
 <!-- ne-cell: fig-teach_setup_workflow | after-heading -->
-### प्रक्रियाको समग्र चित्र
+### prakriyako samagra chitra
 
 <!-- ne-cell: fig-teach_setup_workflow | after-image:../../assets/diagrams/teach_setup_workflow.png -->
-चित्र: नोटबुक खोलेपछि त्रुटिबाट फर्किनेसम्मको प्रवाह (योजनाबद्ध)। ① सेल छान्ने → ② kernel छान्ने →
-③ चलाउने → ④ output हेर्ने। त्रुटि आएको बेला मात्र ⑤ को पुनःस्थापनामा जान्छ।
+chitra: notebook kholepachhi truti baat pharkinesammako prabah (yojanabaddha). ① cell chhanne → ② kernel chhanne →
+③ chalaune → ④ output herne. truti aeko bela matra ⑤ ko punahsthapanama janchha.
 
-**ध्यान दिनुपर्ने कुरा**
+**dhyan dinuparne kura**
 
-तीर "चलाउने → output हेर्ने" क्रममा जोडिएका छन्। पुनःस्थापन (⑤) **चलाएर त्रुटि आएपछि** को बाटो हो।
-output नपढी अर्को सेलमा नजानुहोस्।
+tir "chalaune → output herne" kram ma jodieka chhan. punahsthapan (⑤) **chalaera truti aepachhi** ko bato ho.
+output napadhi arko cell ma najanuhos.
 
-**सोच्नुहोस्**
+**sochnuhos**
 
-- ③ को चलाइमा त्रुटि आयो भने ④ र ⑤ मध्ये कता जानुहुन्छ?
+- ③ ko chalaima truti ayo bhane ④ ra ⑤ madhye kata januhunchha?
 
 <!-- ne-cell: 198db0a3 | after-heading -->
-**Python भनेको के हो**
+**Python bhaneko ke ho**
 <!-- ne-pair: What is Python -->
 
 <!-- ne-cell: 198db0a3 -->
-Python "कम्प्युटरलाई काम लगाउने भाषा (प्रोग्रामिङ भाषा)" मध्ये एक हो।
+Python "computer lai kaam lagaune bhasha (programing bhasha)" madhye ek ho.
 
-उदाहरणका लागि तलका काम Python लाई दिन सकिन्छ।
+udaharanka lagi talaka kaam Python lai din sakinchha.
 
-- हिसाब गर्ने (100.3 ले 100±0.5 को दायराभित्र पर्छ कि पर्दैन निर्णय गर्ने)
-- चित्र पढ्ने (क्यामेराले खिचेको सिटको फोटो)
-- चित्रभित्रको कालो थोप्लो खोज्ने
-- नतिजालाई तालिका वा ग्राफ बनाउने
+- hisab garne (100.3 le 100±0.5 ko dayarabhitra parchha ki pardaina nirnaya garne)
+- chitra padhne (kyamerale khicheko sitako photo)
+- chitrabhitrako kalo thoplo khojne
+- natija lai talika wa graph banaune
 
-Python को फाइदा **पढ्दा अर्थ बुझिने** हो। तलको एक लाइन हेर्नुहोस्।
+Python ko phaida **padhda arth bujhine** ho. talako ek line hernuhos.
 
 ```python
 width = 100.3
 ```
 
-"width (चौडाइ) = 100.3" भनेर लगभग अङ्ग्रेजीमै पढ्न सकिन्छ। तपाईंले लेखेको Python को वाक्य
-**एक-एक लाइन माथिबाट क्रमैसँग** चल्छ।
+"width (chaudai) = 100.3" bhanera lagabhag anggrejimai padhna sakinchha. tapainle lekheko Python ko baky
+**ek-ek line mathibat kramaisang** chalchha.
 
 <!-- ne-cell: f4400f5e | after-heading -->
-**Command Prompt (CMD) भनेको के हो**
+**Command Prompt (CMD) bhaneko ke ho**
 <!-- ne-pair: What is Command Prompt (CMD) -->
 
 <!-- ne-cell: f4400f5e -->
-terminal भनेको "अक्षरले कम्प्युटरलाई आदेश दिने झ्याल" हो। यो तालिममा **Command Prompt (cmd.exe)**
-प्रयोग गर्छौं। माउसले क्लिक गर्नुको सट्टा अक्षरले आदेश दिन्छौं।
+terminal bhaneko "aksharale computer lai adesh dine jhyal" ho. yo talim ma **Command Prompt (cmd.exe)**
+prayog garchhaun. mausale klik garnuko satta aksharale adesh dinchhaun.
 
-**Command Prompt खोल्ने २ तरिका**
+**Command Prompt kholne 2 tarika**
 
-1. Windows को खोज बाकसमा `cmd` लेखेर "Command Prompt" खोल्ने।
-2. File Explorer मा सामग्री फोल्डर खोलेर ठेगाना बारमा `cmd` लेखेर Enter थिच्ने।
+1. Windows ko khoj bakasama `cmd` lekher "Command Prompt" kholne.
+2. File Explorer ma samagri folder kholer thegana barama `cmd` lekher Enter thichne.
 
-खोल्दा तलको जस्तो लाइन देखिन्छ। यसलाई **prompt** भनिन्छ।
+kholda talako jasto line dekhinchha. yas lai **prompt** bhaninchha.
 
 ```text
 C:\Users\Student>
 ```
 
-`>` अघिको भाग "अहिले भएको फोल्डर" हो। यो देखाउन मात्र हो, prompt आफैं टाइप गर्नु हुँदैन।
+`>` aghiko bhaag "ahile bhaeko folder" ho. yo dekhauna matra ho, prompt aphain taip garnu hundaina.
 
 <!-- ne-cell: d6b93483 | after-heading -->
-**virtual environment भनेको के हो, किन चाहिन्छ**
+**virtual environment bhaneko ke ho, kina chahinchha**
 <!-- ne-pair: What a virtual environment is, and why it matters -->
 
 <!-- ne-cell: d6b93483 -->
-**virtual environment** भनेको "यो तालिमका लागि मात्र छुट्ट्याइएको Python औजार-बाकस" हो।
+**virtual environment** bhaneko "yo talimka lagi matra chhuttyaieko Python aujar-bakas" ho.
 
-पूरै कम्प्युटरमा एउटै औजार-बाकस साझा गर्दा तलका समस्या आउँछन्।
+purai computer ma eutai aujar-bakas sajha garda talaka samasya aunchhan.
 
-| समस्या | ठोस उदाहरण |
+| samasya | thos udaharan |
 |---|---|
-| version द्वन्द्व | अर्को कामका लागि पुरानो OpenCV चाहियो, तालिमको OpenCV बिग्रियो |
-| पुनः उत्पादन गर्न नसकिने | "मेरो PC मा चल्छ नि" भन्ने अवस्था आउँछ |
-| बिग्रिएपछि उकास्न गाह्रो | कुन package कारण हो थाहा हुँदैन |
+| version dbandb | arko kaamka lagi purano OpenCV chahiyo, talimko OpenCV bigriyo |
+| punah utpadan garna nasakine | "mero PC ma chalchha ni" bhanne abastha aaunchha |
+| bigriepachhi ukasna gahro | kun package karan ho thaha hundaina |
 
-virtual environment बनाए **त्यही फोल्डरभित्र मात्र** package पस्छ।
-अर्को काम वा अर्को Python मा कुनै असर पर्दैन। बिग्रियो भने फोल्डर मेटाएर फेरि बनाउन सकिन्छ।
+virtual environment banae **tyahi foldarbhitra matra** package paschha.
+arko kaam wa arko Python ma kunai asar pardaina. bigriyo bhane folder metaera feri banaun sakinchha.
 
-> यो तालिममा २ वटा virtual environment प्रयोग गर्छौं।
-> `aivision` (आधारभूत + YOLO) र `aivision-anomalib` (PatchCore का लागि)।
-> कारण दिन ५ को नोटबुकमा व्याख्या गरिन्छ।
+> yo talim ma 2 bata virtual environment prayog garchhaun.
+> `aivision` (adharabhut + YOLO) ra `aivision-anomalib` (PatchCore ka lagi).
+> karan din 5 ko notebook ma byakhya garinchha.
 
 <!-- ne-cell: 8b3ad3d0 | after-heading -->
-**Jupyter notebook, सेल, kernel**
+**Jupyter notebook, cell ra kernel**
 <!-- ne-pair: Jupyter notebook, cell and kernel -->
 
 <!-- ne-cell: 8b3ad3d0 -->
-**Jupyter notebook** भनेको "व्याख्या", "चल्ने प्रोग्राम" र "नतिजा" एउटै फाइलमा राखिएको कागजात हो।
-फाइलको extension `.ipynb` हो।
+**Jupyter notebook** bhaneko "byakhya", "chalne program" ra "natija" eutai file ma rakhieko kagajat ho.
+fileko extension `.ipynb` ho.
 
-- **सेल (cell)**: नोटबुकभित्रको एउटा बाकस। व्याख्याका लागि (Markdown) र प्रोग्रामका लागि (कोड) हुन्छन्।
-- **kernel**: कोड सेल वास्तवमा चलाउने "Python को मुख्य भाग"।
-  नोटबुकले "कुन kernel मा चलाउने" सम्झिरहन्छ।
-- **variable kernel भित्र रहन्छ**। सेल A मा बनाइएको variable सेल B मा पनि प्रयोग गर्न सकिन्छ।
-  तर **kernel restart गर्दा सबै variable हराउँछन्**।
+- **cell (cell)**: notabukabhitrako euta bakas. byakhyaka lagi (Markdown) ra programaka lagi (kod) hunchhan.
+- **kernel**: kod cell bastabama chalaune "Python ko mukhy bhaag".
+  notebookle "kun kernel ma chalaune" samjhirahanchha.
+- **variable kernel bhitra rahanchha**. cell A ma banaiyeko variable cell B ma pani prayog garna sakinchha.
+  tar **kernel restart garda sabai variable haraunchhan**.
 
-> "kernel गलत छान्ने" यो तालिमको सबैभन्दा सामान्य समस्यामध्ये एक हो।
-> ठीक kernel हो कि होइन अर्को सेलको `sys.executable` ले जाँच्न सकिन्छ।
+> "kernel galat chhanne" yo talimko sabaibhanda samanya samasyamadhye ek ho.
+> thik kernel ho ki hoina arko cellko `sys.executable` le jaanchna sakinchha.
 
 <!-- ne-cell: da168b9c | after-heading -->
-## Part 2 installation प्रक्रिया (CMD मा चलाउने)
+## Part 2 installation prakriya (CMD ma chalaune)
 
 <!-- ne-cell: f78f8416 -->
-> ### ⚠️ महत्त्वपूर्ण
-> यो Part का आदेश **Command Prompt मा टाँसेर** चलाइन्छ।
-> नोटबुकको कोड सेलमा नलेख्नुहोस्।
+> ### ⚠️ mahattwapurna
+> yo Part ka adesh **Command Prompt ma tanser** chalainchha.
+> notebookko kod cell ma nalekhnuhos.
 
-तालिमको PC मा वातावरण पहिलै राखिएको छ भने Part 3 को जाँच मात्र गर्नुहोस्।
+talimko PC ma batabaran pahilai rakhieko chha bhane Part 3 ko jaanch matra garnuhos.
 
 <!-- ne-cell: 8065152f | after-heading -->
-**चरण 1: Python राखिएको छ कि छैन जाँच्ने**
+**charan 1: Python rakhieko chha ki chhaina jaanchne**
 <!-- ne-pair: Step 1: check whether Python is installed -->
 
 <!-- ne-cell: 8065152f -->
-Command Prompt खोलेर तलको आदेश चलाउनुहोस्।
+Command Prompt kholer talako adesh chalaunuhos.
 
 ```cmd
 py -3.11 --version
 ```
 
-अपेक्षित नतिजा (उदाहरण):
+apekshit natija (udaharan):
 
 ```text
 Python 3.11.9
 ```
 
-`Python 3.11.x` प्रयोग गर्छौं। अरू series जाँचिएको छैन। `py` छैन भने
-[START_HERE](../../START_HERE.md) चरण 2 हेर्नुहोस्।
+`Python 3.11.x` prayog garchhaun. aru series janchieko chhaina. `py` chhaina bhane
+[START_HERE](../../START_HERE.md) charan 2 hernuhos.
 
-**राम्रो नभएमा**
+**ramro nabhaema**
 
-| देखिने | अर्थ | के गर्ने |
+| dekhine | arth | ke garne |
 |---|---|---|
-| `Python was not found` | Python राखिएको छैन | python.org बाट 3.11 राख्ने (तलको ध्यान हेर्नुहोस्) |
-| `Python 2.7.x` | धेरै पुरानो | 3.11 राख्ने |
-| Microsoft Store खुल्छ | Windows को विकल्प | Settings → "App execution aliases" मा `python.exe` बन्द गर्ने |
+| `Python was not found` | Python rakhieko chhaina | python.org baat 3.11 rakhne (talako dhyan hernuhos) |
+| `Python 2.7.x` | dherai purano | 3.11 rakhne |
+| Microsoft Store khulchha | Windows ko bikalp | Settings → "App execution aliases" ma `python.exe` banda garne |
 
-python.org संस्करण राख्दा ध्यान दिने कुरा:
+python.org sanskaran rakhda dhyan dine kura:
 
-- "**Add python.exe to PATH**" मा अनिवार्य चिन्ह लगाउने।
-- "Install Now" ठीक छ।
+- "**Add python.exe to PATH**" ma aniwarya chinh lagaune.
+- "Install Now" thik chha.
 
 <!-- ne-cell: 3da79c65 | after-heading -->
-**चरण 2: तालिम फोल्डरमा जाने**
+**charan 2: talim folder ma jane**
 <!-- ne-pair: Step 2: move into the course folder -->
 
 <!-- ne-cell: 3da79c65 -->
-डाउनलोड गरिएको `AI_Vision_Training` फोल्डरमा जानुहोस्।
-`cd` भनेको "change directory (फोल्डर सर्ने)" हो।
+daunalod garieko `AI_Vision_Training` folder ma januhos.
+`cd` bhaneko "change directory (folder sarne)" ho.
 
 ```cmd
 cd /d "%USERPROFILE%\Documents\Training_Automation\AI_Vision_Training"
 ```
 
-ठीक सरेको छ कि छैन जाँच्नुहोस्।
+thik sareko chha ki chhaina jaanchnuhos.
 
 ```cmd
 cd
 dir
 ```
 
-`cd` ले अहिलेको ठाउँ, `dir` ले त्यसभित्रको सामग्री देखाउँछ। ZIP वा OneDrive भए वास्तविक निकालिएको
-ठाउँले बदल्नुहोस्। खाली ठाउँ भएको path पनि quote भित्र राख्नुहोस्।
-[START_HERE](../../START_HERE.md) चरण 1 पनि हेर्नुहोस्।
+`cd` le ahileko thaun, `dir` le tyasabhitrako samagri dekhaunchha. ZIP wa OneDrive bhae bastabik nikalieko
+thaunle badalnuhos. khali thaun bhaeko path pani quote bhitra rakhnuhos.
+[START_HERE](../../START_HERE.md) charan 1 pani hernuhos.
 
 <!-- ne-cell: e0bd50ff | after-heading -->
-#### तयारी प्रक्रियाको जाँच
+#### tayari prakriyako jaanch
 
 <!-- ne-cell: e0bd50ff -->
-installation को आधिकारिक प्रक्रिया [START_HERE](../../START_HERE.md) चरण 3–9 हो।
-Python 3.11, दुवै वातावरण, दुवै kernel, सामग्री, फोटो र weight पाठ अघि तयार गरिन्छ।
-यहाँ फेरि install नगरी तयार भइसकेको अवस्था जाँचिन्छ। सक्रिय गर्न मनाही भएको अवस्थामा quote भित्रको
-virtual environment को python.exe सिधै प्रयोग गर्नुहोस्। CMD मा सक्रिय गर्न policy परिवर्तन आवश्यक छैन।
+installation ko adhikarik prakriya [START_HERE](../../START_HERE.md) charan 3–9 ho.
+Python 3.11, dubai batabaran, dubai kernel, samagri, photo ra weight paath aghi tayar garinchha.
+yahan feri install nagari tayar bhaisakeko abastha janchinchha. sakriya garna manahi bhaeko abastha ma quote bhitrako
+virtual environment ko python.exe sidhai prayog garnuhos. CMD ma sakriya garna policy paribartan aawashyak chhaina.
 
 <!-- ne-cell: 620ede80 | after-heading -->
-#### तयारी प्रक्रियाको जाँच (पुनः)
+#### tayari prakriyako jaanch (punah)
 
 <!-- ne-cell: 620ede80 -->
-installation को आधिकारिक प्रक्रिया [START_HERE](../../START_HERE.md) चरण 3–9 हो।
-Python 3.11, दुवै वातावरण, दुवै kernel, सामग्री, फोटो र weight पाठ अघि तयार गरिन्छ।
-यहाँ फेरि install नगरी तयार भइसकेको अवस्था जाँचिन्छ। सक्रिय गर्न मनाही भएको अवस्थामा quote भित्रको
-virtual environment को python.exe सिधै प्रयोग गर्नुहोस्।
+installation ko adhikarik prakriya [START_HERE](../../START_HERE.md) charan 3–9 ho.
+Python 3.11, dubai batabaran, dubai kernel, samagri, photo ra weight paath aghi tayar garinchha.
+yahan feri install nagari tayar bhaisakeko abastha janchinchha. sakriya garna manahi bhaeko abastha ma quote bhitrako
+virtual environment ko python.exe sidhai prayog garnuhos.
 
 <!-- ne-cell: 319857e2 | after-heading -->
-#### तयारी प्रक्रियाको जाँच (तेस्रो पटक)
+#### tayari prakriyako jaanch (tesro patak)
 
 <!-- ne-cell: 319857e2 -->
-installation को आधिकारिक प्रक्रिया [START_HERE](../../START_HERE.md) चरण 3–9 हो।
-यहाँ फेरि install नगरी तयार भइसकेको अवस्था जाँचिन्छ। सक्रिय गर्न मनाही भएको अवस्थामा quote भित्रको
-virtual environment को python.exe सिधै प्रयोग गर्नुहोस्।
+installation ko adhikarik prakriya [START_HERE](../../START_HERE.md) charan 3–9 ho.
+yahan feri install nagari tayar bhaisakeko abastha janchinchha. sakriya garna manahi bhaeko abastha ma quote bhitrako
+virtual environment ko python.exe sidhai prayog garnuhos.
 
 <!-- ne-cell: b6c87f4f | after-heading -->
-**चरण 6 (ऐच्छिक): NVIDIA GPU प्रयोग गर्ने भए**
+**charan 6 (aichchhik): NVIDIA GPU prayog garne bhae**
 <!-- ne-pair: Step 6 (optional): using an NVIDIA GPU -->
 
 <!-- ne-cell: b6c87f4f -->
-GPU अनिवार्य छैन। GPU wheel को URL, संस्करण र driver को संयोजन जाँचिएको छैन।
-परिवर्तन आवश्यक भएको अवस्थामा मात्र प्रशिक्षक र
-[PyTorch आधिकारिक चयन स्क्रिन](https://pytorch.org/get-started/locally/) मा जाँच्नुहोस्।
-दोधार भए **केही नबदल्नुहोस्**। आधिकारिक प्रक्रिया CPU मा पूरा गर्न सकिन्छ।
+GPU aniwarya chhaina. GPU wheel ko URL, sanskaran ra driver ko sanyojan janchieko chhaina.
+paribartan aawashyak bhaeko abastha ma matra prashikshak ra
+[PyTorch adhikarik chayan skrin](https://pytorch.org/get-started/locally/) ma jaanchnuhos.
+dodhar bhae **kehi nabadalnuhos**. adhikarik prakriya CPU ma pura garna sakinchha.
 
 <!-- ne-cell: 60d3836e | after-heading -->
-## Part 3 नोटबुकभित्रबाट राख्ने तरिका (%pip)
+## Part 3 notabukabhitrabat rakhne tarika (%pip)
 
 <!-- ne-cell: c3d0cb90 | after-heading -->
-**`%pip` भनेको के हो**
+**`%pip` bhaneko ke ho**
 <!-- ne-pair: What `%pip` is -->
 
 <!-- ne-cell: c3d0cb90 -->
-`%` बाट सुरु हुने लाइनलाई **magic command** भनिन्छ, यो Jupyter का लागि मात्रको निर्देश हो।
-`%pip` भनेको "यो नोटबुकले प्रयोग गरेको kernel मा pip चलाउने" भन्ने हो।
+`%` baat suru hune line lai **magic command** bhaninchha, yo Jupyter ka lagi matrako nirdesh ho.
+`%pip` bhaneko "yo notebookle prayog gareko kernel ma pip chalaune" bhanne ho.
 
 ```text
 %pip install requests
 ```
 
-यो Python को व्याकरण होइन। त्यसैले CMD मा लेख्दा चल्दैन।
-उल्टो, `python -m pip install ...` नोटबुकमा लेख्दा पनि चल्दैन।
+yo Python ko byakaran hoina. tyasaile CMD ma lekhda chaldain.
+ulto, `python -m pip install ...` notebook ma lekhda pani chaldain.
 
-> **यो तालिमको नीति:** installation **सुरुमा एक पटक मात्र**। हरेक नोटबुक चलाउँदा install गर्दैनौं।
-> कारण ३ वटा छन्।
-> 1. हरेक पटक केही मिनेट कुर्नुपर्छ
-> 2. network नभएको दिन चल्दैन
-> 3. वातावरण बिस्तारै बदलिएर कारण थाहा पाउन गाह्रो हुन्छ
+> **yo talimko niti:** installation **suru ma ek patak matra**. harek notebook chalaunda install gardainaun.
+> karan 3 bata chhan.
+> 1. harek patak kehi minet kurnuparchha
+> 2. network nabhaeko din chaldain
+> 3. batabaran bistarai badaliera karan thaha paun gahro hunchha
 
 <!-- ne-cell: 1d7024f4 -->
-तलको सेल **नचलाउनुहोस्**। यो लेख्ने नमुना मात्र हो। आवश्यक भएको बेला मात्र
-`#` हटाएर चलाउनुहोस्।
+talako cell **nachalaunuhos**. yo lekhne namuna matra ho. aawashyak bhaeko bela matra
+`#` hataera chalaunuhos.
 
 <!-- ne-cell: a1b2c3d4 | after-heading -->
-#### तालिम फोल्डर र साझा भाग लोड गर्ने
+#### talim folder ra sajha bhaag lod garne
 
 <!-- ne-cell: a1b2c3d4 -->
-अर्को सेलले यो नोटबुकले प्रयोग गर्ने ठाउँ र भाग तयार गर्छ मात्र। भित्री कुरा बुझ्नु आवश्यक छैन।
+arko cellle yo notebookle prayog garne thaun ra bhaag tayar garchha matra. bhitri kura bujhnu aawashyak chhaina.
 
 <!-- ne-cell: 54340dcc | after-heading -->
-## Part 4 वातावरणको जाँच
+## Part 4 batabaranko jaanch
 
 <!-- ne-cell: audit-teach_code_cell_lifecycle | after-heading -->
-### कोड पढ्ने तरिका
+### kod padhne tarika
 
 <!-- ne-cell: audit-teach_code_cell_lifecycle | after-image:../../assets/svg/teach_code_cell_lifecycle.svg -->
-चित्र: मान सेलमा होइन, kernel मा रहन्छ। (हिसाब गरिएको कृत्रिम उदाहरण/योजनाबद्ध। model को मापन गरिएको
-नतिजा होइन।)
+chitra: maan cell ma hoina, kernel ma rahanchha. (hisab garieko kritrim udaharan/yojanabaddha. model ko maapan garieko
+natija hoina.)
 
-**ध्यान दिनुपर्ने कुरा**
+**dhyan dinuparne kura**
 
-मान सेलमा होइन, kernel मा रहन्छ। इनपुट र बदलिएपछि बनेको मान औंलाले पछ्याउनुहोस्।
+maan cell ma hoina, kernel ma rahanchha. input ra badaliepachhi baneko maan aunlale pachhyaunuhos.
 
-**सोच्नुहोस्**
+**sochnuhos**
 
-जोड्ने सेल मात्र फेरि चलाउँदा 4 कति हुन्छ?
+jodne cell matra feri chalaunda 4 kati hunchha?
 
 <!-- ne-cell: f839cd9f | after-heading -->
-**कुन Python प्रयोग भइरहेको छ जाँच्ने**
+**kun Python prayog bhairaheko chha jaanchne**
 <!-- ne-pair: Confirm which Python you are using -->
 
 <!-- ne-cell: f839cd9f -->
-अर्को सेल चलाउनुहोस्। `Executable` मा `.venv` छ भने वातावरण ठीक छ।
+arko cell chalaunuhos. `Executable` ma `.venv` chha bhane batabaran thik chha.
 
-यदि `C:\ProgramData\miniconda3\...` वा `C:\Python311\...` जस्तो
-`.venv` नभएको देखियो भने **kernel छनोट गलत छ**।
-त्यस्तो अवस्थामा मेनुको `Kernel` → `Change Kernel` → `Python 3 (AI Vision)` छान्नुहोस्।
+yadi `C:\ProgramData\miniconda3\...` wa `C:\Python311\...` jasto
+`.venv` nabhaeko dekhiyo bhane **kernel chhanot galat chha**.
+tyasto abastha ma menuko `Kernel` → `Change Kernel` → `Python 3 (AI Vision)` chhannuhos.
 
 <!-- ne-cell: c5ebf004 | after-heading -->
-**आवश्यक लाइब्रेरी जाँच्ने**
+**aawashyak laibreri jaanchne**
 <!-- ne-pair: Check the required libraries -->
 
 <!-- ne-cell: c5ebf004 -->
-`[MISSING]` देखियो भने Part 2 को चरण 4 मा फर्केर install गर्नुहोस्।
-यो सेलले **install गर्दैन**। जाँच मात्र गर्छ।
+`[MISSING]` dekhiyo bhane Part 2 ko charan 4 ma pharker install garnuhos.
+yo cellle **install gardaina**. jaanch matra garchha.
 
 <!-- ne-cell: 9bcfaf3c | after-heading -->
-**चित्रमा प्रयोग हुने फन्ट मिलाउनुहोस्**
+**chitra ma prayog hune phant milaunuhos**
 <!-- ne-pair: Configure Japanese text in figures -->
 
 <!-- ne-cell: 9bcfaf3c -->
-Matplotlib को पूर्वनिर्धारित फन्टले जापानी अक्षर देखाउन सक्दैन। त्यसैले चित्रको शीर्षक `□□□` जस्तो
-देखिन्छ। अर्को सेलले जापानी अक्षर देखाउन सक्ने फन्ट खोजेर मिलाउँछ। macOS वा Linux मा स्वतः अर्को फन्ट
-छानिन्छ।
+Matplotlib ko purbanirdharit phantale Japani akshar dekhauna sakdain. tyasaile chitrako shirshak `□□□` jasto
+dekhinchha. arko cellle Japani akshar dekhauna sakne phant khojer milaunchha. macOS wa Linux ma sbatah arko phant
+chhaninchha.
 
 <!-- ne-cell: cd8a9512 | after-heading -->
-**तालिम फोल्डर र सामग्रीको ठाउँ जाँच्ने**
+**talim folder ra samagriko thaun jaanchne**
 <!-- ne-pair: Confirm the course folder and the assets -->
 
 <!-- ne-cell: cd8a9512 -->
-यो नोटबुक तपाईंको प्रयोगकर्ता नाम वा install गरेको ठाउँमा निर्भर गर्दैन।
-`COURSE_SYLLABUS.md` र `assets` फोल्डरलाई चिन्ह बनाएर माथितिर खोज्दै तालिम फोल्डर भेट्टाउँछ।
+yo notebook tapainko prayogakarta naam wa install gareko thaun ma nirbhar gardaina.
+`COURSE_SYLLABUS.md` ra `assets` folder lai chinh banaera mathitir khojdai talim folder bhettaunchha.
 
-अर्को सेलले `FileNotFoundError` दियो भने `AI_Vision_Training` फोल्डरभित्रबाट JupyterLab खोल्नुहोस्
-(Part 2 चरण 5)।
+arko cellle `FileNotFoundError` diyo bhane `AI_Vision_Training` foldarbhitra baat JupyterLab kholnuhos
+(Part 2 charan 5).
 
 <!-- ne-cell: ea76d7d9 | after-heading -->
-**सन्दर्भ चित्र एक पटक मात्र डाउनलोड गर्ने**
+**sandarbha chitra ek patak matra daunalod garne**
 <!-- ne-pair: Download the reference photographs once -->
 
 <!-- ne-cell: ea76d7d9 -->
-यो तालिमका केही पाठमा वास्तविक सन्दर्भ चित्र **स्थानीय फाइल** को रूपमा देखाइन्छ। हरेक पटक
-internet बाट ल्याउनुको सट्टा **सुरुमा एक पटक मात्र** ल्याएर त्यसपछि सुरक्षित फाइल प्रयोग गरिन्छ।
+yo talimka kehi paath ma bastabik sandarbha chitra **sthaniy file** ko rupama dekhainchha. harek patak
+internet baat lyaunuko satta **suru ma ek patak matra** lyaera tyaspachhi surakshit file prayog garinchha.
 
-अर्को सेल चलाउँदा `assets/scripts/download_reference_images.py` ले ४ चित्र
-`assets/external_samples/open_reference/` मा ल्याउँछ। ल्याइएका फाइल यी हुन्।
+arko cell chalaunda `assets/scripts/download_reference_images.py` le 4 chitra
+`assets/external_samples/open_reference/` ma lyaunchha. lyaieka file yi hun.
 
-| फाइल | के हो | स्रोत र लाइसेन्स |
+| file | ke ho | srot ra laisens |
 | --- | --- | --- |
-| `chelsea.png` | वास्तविक रङको फोटो (RGB को उदाहरण) | scikit-image, Stefan van der Walt, CC0 1.0 |
-| `camera.png` | वास्तविक greyscale फोटो | scikit-image, Lav Varshney, CC0 1.0 |
-| `brick.png` | ढाँचा भएको पछाडिको फोटो | CC0Textures (scikit-image ले प्रशोधन), CC0 1.0 |
-| `VisA_samples.png` | औद्योगिक anomaly detection डेटासेटको सारांश | Yang Zou आदि / Amazon Science, VisA डेटासेट CC BY 4.0 |
+| `chelsea.png` | bastabik rangako photo (RGB ko udaharan) | scikit-image, Stefan van der Walt, CC0 1.0 |
+| `camera.png` | bastabik greyscale photo | scikit-image, Lav Varshney, CC0 1.0 |
+| `brick.png` | dhancha bhaeko pachhadiko photo | CC0Textures (scikit-image le prashodhan), CC0 1.0 |
+| `VisA_samples.png` | audyogik anomaly detection datasetko saransh | Yang Zou adi / Amazon Science, VisA dataset CC BY 4.0 |
 
-- ल्याइने **सन्दर्भ चित्र मात्र** हो। डेटासेट वा model को weight ल्याइँदैन।
-- चारवटै **नबदली** जस्ताको तस्तै सुरक्षित गरिन्छ र स्रोत, लाइसेन्स, SHA-256 `manifest.json` र
-  `ATTRIBUTION.md` मा अभिलेख गरिन्छ।
-- सन्दर्भ चित्र पाठमा हेर्नका लागि मात्र हुन्, **सिकाइ, क्यालिब्रेसन वा परीक्षणको डेटामा प्रयोग हुँदैनन्**।
-- जति पटक चलाए पनि ठीक सुरक्षित भइसकेका फाइल त्यसै प्रयोग हुन्छन् (ल्याउने काम एक पटक मात्र)।
+- lyaine **sandarbha chitra matra** ho. dataset wa model ko weight lyaindain.
+- charabatai **nabadali** jastako tastai surakshit garinchha ra srot, laisens, SHA-256 `manifest.json` ra
+  `ATTRIBUTION.md` ma abhilekh garinchha.
+- sandarbha chitra paath ma hernaka lagi matra hun, **sikai, calibration wa parikshanko data ma prayog hundainan**.
+- jati patak chalae pani thik surakshit bhaisakeka file tyasai prayog hunchhan (lyaune kaam ek patak matra).
 
-terminal भए आधारभूत वातावरण सक्रिय गरेको CMD मा सामग्रीको मूल फोल्डरबाट चलाउनुहोस्।
+terminal bhae adharabhut batabaran sakriya gareko CMD ma samagriko mul folder baat chalaunuhos.
 
 ```cmd
 python assets\scripts\download_reference_images.py --course-root .
 python assets\scripts\download_reference_images.py --course-root . --offline
 ```
 
-दोस्रो आदेशले **कुनै network अनुरोध नगरी** सुरक्षित फाइल जाँच्छ। फाइल छैन वा बिग्रेको छ भने स्क्रिप्टले
-त्यसको नाम भन्छ र त्यही आदेश फेरि चलाउन भन्छ; कहिल्यै अर्को चित्र राख्दैन।
+dosro adeshale **kunai network anurodh nagari** surakshit file janchchha. file chhaina wa bigreko chha bhane skriptale
+tyasko naam bhanchha ra tyahi adesh feri chalaun bhanchha; kahilyai arko chitra rakhdain.
 
 <!-- ne-cell: 63c0e92f | after-heading -->
-## Part 5 पहिलो Python प्रोग्राम
+## Part 5 pahilo Python program
 
 <!-- ne-cell: fig-teach_execution_state | after-heading -->
-### चलाउनुअघि, चल्दै र चलिसकेपछिको अवस्था
+### chalaunuaghi, chaldai ra chalisakepachhiko abastha
 
 <!-- ne-cell: fig-teach_execution_state | after-image:../../assets/diagrams/teach_execution_state.png -->
-चित्र: उही ३ लाइनको सेललाई चलाउनुअघि, चल्दै र चलिसकेपछि भनेर छुट्याएर मेमोरीभित्रको सामग्रीसँगै
-देखाइएको (योजनाबद्ध)।
+chitra: uhi 3 lineko cell lai chalaunuaghi, chaldai ra chalisakepachhi bhanera chhutyaera memoribhitrako samagrisangai
+dekhaieko (yojanabaddha).
 
-**ध्यान दिनुपर्ने कुरा**
+**dhyan dinuparne kura**
 
-`In [ ]` भनेको "यो सेल अझै चलेको छैन", मेमोरी खाली छ भन्ने होइन। `In [*]` भनेको चलिरहेको, र त्यसबेला
-output देखिन पनि सक्छ। सङ्ख्या भनेको चलिसक्यो। देखाइएको output र variable को रूपमा बाँकी रहने मान फरक
-कुरा हुन्। अघिल्लो चलाइको मान बाँकी रहने अवस्था (stale state) र नाम नै नभएको अवस्था (NameError) दुई
-फरक समस्या हुन्।
+`In [ ]` bhaneko "yo cell ajhai chaleko chhaina", memory khali chha bhanne hoina. `In [*]` bhaneko chaliraheko, ra tyasabela
+output dekhin pani sakchha. sankhya bhaneko chalisakyo. dekhaieko output ra variable ko rupama banki rahane maan farak
+kura hun. aghillo chalaiko maan banki rahane abastha (stale state) ra naam nai nabhaeko abastha (NameError) dui
+farak samasya hun.
 
-**सोच्नुहोस्**
+**sochnuhos**
 
-- variable परिभाषा गर्ने सेल एक पटक पनि नचलाएको बेला त्यो variable प्रयोग गर्ने सेलमा के हुन्छ?
+- variable paribhasha garne cell ek patak pani nachalaeko bela tyo variable prayog garne cell ma ke hunchha?
 
 <!-- ne-cell: 7246e348 | after-heading -->
-**`print()` ले अक्षर देखाउने**
+**`print()` le akshar dekhaune**
 <!-- ne-pair: Displaying text with `print()` -->
 
 <!-- ne-cell: 7246e348 -->
-`print()` भनेको "कोष्ठकभित्रको सामग्री स्क्रिनमा देखाउने" आदेश हो।
+`print()` bhaneko "koshthakabhitrako samagri skrinama dekhaune" adesh ho.
 
-`print` पछिको `( )` बिर्सिए त्रुटि हुन्छ। अक्षर लेख्दा `"` (double quote) भित्र राख्नुपर्छ।
+`print` pachhiko `( )` birsie truti hunchha. akshar lekhda `"` (double quote) bhitra rakhnuparchha.
 
 <!-- ne-cell: ee452a19 | after-heading -->
-**हिसाब र variable**
+**hisab ra variable**
 <!-- ne-pair: Calculating and variables -->
 
 <!-- ne-cell: ee452a19 -->
-Python क्याल्कुलेटरका रूपमा पनि प्रयोग गर्न सकिन्छ। `=` भनेको "दायाँपट्टिको नतिजालाई नाम दिने" हो।
+Python kyalkuletaraka rupama pani prayog garna sakinchha. `=` bhaneko "dayanpattiko natija lai naam dine" ho.
 
-गणितको `=` (बराबर) सँग अर्थ फरक छ। "`width` भन्ने बाकसमा 100.3 राख्ने" भनेर बुझ्नुहोस्।
+ganitako `=` (barabar) sang arth farak chha. "`width` bhanne bakasama 100.3 rakhne" bhanera bujhnuhos.
 
 <!-- ne-cell: d3a8869f | after-heading -->
-### नतिजाको उदाहरण
+### natijako udaharan
 
-यो उदाहरणमा तलको नतिजा आउँछ (उही इनपुट दिइयो भने उही नतिजा आउँछ)।
+yo udaharan ma talako natija aaunchha (uhi input diiyo bhane uhi natija aaunchha).
 
-`difference` लाई `round(difference, 3)` ले ३ दशमलवमा घुमाएर देखाइएकोले `0.3` देखिन्छ। घुमाउनुअघिको
-मान `0.29999999999999716` हो (0.3 लाई २ आधारमा ठ्याक्कै लेख्न नसकिने भएकोले)। विस्तृत कुरा दिन २ को
-नोटबुक ०१ मा सम्हालिन्छ।
+`difference` lai `round(difference, 3)` le 3 dashamalabama ghumaera dekhaiekole `0.3` dekhinchha. ghumaunuaghiko
+maan `0.29999999999999716` ho (0.3 lai 2 adharama thyakkai lekhna nasakine bhaekole). bistrit kura din 2 ko
+notebook 01 ma samhalinchha.
 
 <!-- ne-cell: d18c02fb | after-heading -->
-**त्रुटि सन्देश पढ्ने अभ्यास**
+**truti sandesh padhne abhyas**
 <!-- ne-pair: Practice reading an error message -->
 
 <!-- ne-cell: d18c02fb -->
-जानाजान त्रुटि बनाइहालौं। त्रुटि "असफलता" होइन "जानकारी" हो।
-तलको सेल चलाउँदा **रातो सन्देश** आउँछ। यो अपेक्षित नै हो।
+janajan truti banaihalaun. truti "asaphalata" hoina "jankari" ho.
+talako cell chalaunda **rato sandesh** aaunchha. yo apekshit nai ho.
 
-पढ्ने ३ बुँदा मात्र छन्।
+padhne 3 bunda matra chhan.
 
-1. **सबैभन्दा तलको लाइन** … त्रुटिको किसिम (`NameError`, `SyntaxError` आदि)
-2. **त्यसको माथिको लाइन** … के गडबड भयो
-3. **`---->` भएको लाइन** … प्रोग्रामको कति नम्बर लाइन
+1. **sabaibhanda talako line** … trutiko kisim (`NameError`, `SyntaxError` adi)
+2. **tyasko mathiko line** … ke gadabad bhayo
+3. **`---->` bhaeko line** … programako kati number line
 
 <!-- ne-cell: fig-teach_nameerror_recovery | after-heading -->
-### NameError बाट फर्किने प्रक्रिया
+### NameError baat pharkine prakriya
 
 <!-- ne-cell: fig-teach_nameerror_recovery | after-image:../../assets/diagrams/teach_nameerror_recovery.png -->
-चित्र: `widht_mm` र `width_mm` गलत लेख्दा आउने त्रुटि र सुधार्ने क्रम (योजनाबद्ध)।
+chitra: `widht_mm` ra `width_mm` galat lekhda aune truti ra sudharne kram (yojanabaddha).
 
-**ध्यान दिनुपर्ने कुरा**
+**dhyan dinuparne kura**
 
-`NameError` भनेको "त्यो नाम अझै छैन" भन्ने हो। परिभाषा गर्ने सेलभन्दा अघि प्रयोग गरियो, हिज्जे फरक छ,
-वा kernel restart गर्दा variable हरायो — यीमध्ये एउटा हो। माथिका सेल क्रमैसँग फेरि चलाउनु नै आधारभूत
-पुनःस्थापन हो।
+`NameError` bhaneko "tyo naam ajhai chhaina" bhanne ho. paribhasha garne selabhanda aghi prayog gariyo, hijje farak chha,
+wa kernel restart garda variable harayo — yimadhye euta ho. mathika cell kramaisang feri chalaunu nai adharabhut
+punahsthapan ho.
 
-**सोच्नुहोस्**
+**sochnuhos**
 
-- kernel restart गरेलगत्तै `width_mm` प्रयोग गर्न सकिन्छ?
+- kernel restart garelagattai `width_mm` prayog garna sakinchha?
 
 <!-- ne-cell: 852eaaf2 | after-heading -->
-### त्रुटि आएपछि
+### truti aepachhi
 
 <!-- ne-cell: 852eaaf2 -->
-तलको जस्तो `NameError` आयो भने सफल भयो।
+talako jasto `NameError` ayo bhane saphal bhayo.
 
 ```text
 NameError: name 'sheet_width' is not defined
 ```
 
-अर्थ "`sheet_width` भन्ने नाम परिभाषित छैन" भन्ने हो।
-यो त्रुटि आए अर्को सेल चलाएर सुधार्नुहोस्।
+arth "`sheet_width` bhanne naam paribhashit chhaina" bhanne ho.
+yo truti ae arko cell chalaera sudharnuhos.
 
 <!-- ne-cell: acc65cdf | after-heading -->
-## Part 6 चित्र बनाएर देखाउने
+## Part 6 chitra banaera dekhaune
 
 <!-- ne-cell: 824933ca | after-heading -->
-**सङ्ख्याको समूह नै चित्र बन्छ**
+**sankhyako samuh nai chitra banchha**
 <!-- ne-pair: An image is just a grid of numbers -->
 
 <!-- ne-cell: 824933ca -->
-चित्र जादु होइन। **सङ्ख्याको तालिका** हो।
+chitra jadu hoina. **sankhyako talika** ho.
 
-- एउटा चित्र साना चौकोण (**pixel**) तलमाथि र छेउछाउ मिलेर राखिएको हुन्छ।
-- प्रत्येक pixel मा एउटा सङ्ख्या हुन्छ। 0 कालो, 255 सेतो।
-- रङ चित्रमा रातो, हरियो, निलो गरी ३ सङ्ख्या हुन्छन्।
+- euta chitra sana chaukon (**pixel**) talamathi ra chheuchhau miler rakhieko hunchha.
+- pratyek pixel ma euta sankhya hunchha. 0 kalo, 255 seto.
+- rang chitra ma rato, hariyo, nilo gari 3 sankhya hunchhan.
 
-अर्थात् Python मा सङ्ख्याको तालिका बनायो भने त्यही चित्र बन्छ।
-अर्को सेलमा वास्तवमा बनाइन्छ।
+arthat Python ma sankhyako talika banayo bhane tyahi chitra banchha.
+arko cell ma bastabama banainchha.
 
 <!-- ne-cell: 68fda21f | after-heading -->
-### नतिजाको उदाहरण
+### natijako udaharan
 
-यो उदाहरणमा तलको नतिजा आउँछ (उही इनपुट दिइयो भने उही नतिजा आउँछ)।
+yo udaharan ma talako natija aaunchha (uhi input diiyo bhane uhi natija aaunchha).
 
-`...` भनेको "बाँकी पनि उही मानले जारी छ" भन्ने हो। 8 पङ्क्ति × 8 स्तम्भका 64 वटै मान `230` छन्।
+`...` bhaneko "banki pani uhi maanle jari chha" bhanne ho. 8 pangkti × 8 stambhaka 64 batai maan `230` chhan.
 
 <!-- ne-cell: 66eb3a87 | after-heading -->
-**Matplotlib ले देखाउने**
+**Matplotlib le dekhaune**
 <!-- ne-pair: Displaying with Matplotlib -->
 
 <!-- ne-cell: 66eb3a87 -->
-Jupyter भित्र `cv2.imshow()` प्रयोग गर्दैनौं। `cv2.imshow()` ले
-अलग झ्याल खोल्ने हुनाले Jupyter मा अड्किन सक्छ।
-त्यसको सट्टा **Matplotlib** प्रयोग गर्छौं। पूरै तालिममा यही तरिका अपनाइन्छ।
+Jupyter bhitra `cv2.imshow()` prayog gardainaun. `cv2.imshow()` le
+alag jhyal kholne hunale Jupyter ma adkin sakchha.
+tyasko satta **Matplotlib** prayog garchhaun. purai talim ma yahi tarika apanainchha.
 
-`plt.imshow()` ले चित्र तयार गर्छ, `plt.show()` ले वास्तवमा कोर्छ।
-`interpolation="nearest"` ले "ठुलो बनाउँदा पनि सीमा धमिलो नबनाउने" निर्देश दिन्छ।
+`plt.imshow()` le chitra tayar garchha, `plt.show()` le bastabama korchha.
+`interpolation="nearest"` le "thulo banaunda pani sima dhamilo nabanaune" nirdesh dinchha.
 
-यहाँ देखाइएको 8 × 8 को **कृत्रिम** चित्र हो। कारखानाको वास्तविक फोटो होइन।
+yahan dekhaieko 8 × 8 ko **kritrim** chitra ho. karakhanako bastabik photo hoina.
 
 <!-- ne-cell: 956099c4 | after-heading -->
-**आफैं बदलेर हेर्ने (निर्देशित प्रयोग)**
+**aphain badaler herne (nirdeshit prayog)**
 <!-- ne-pair: Change it yourself (guided experiment) -->
 
 <!-- ne-cell: 956099c4 -->
-तलको सेलका सङ्ख्या बदलेर नतिजा कसरी बदलिन्छ पहिले अनुमान गरेर चलाउनुहोस्।
+talako cellka sankhya badaler natija kasari badlinchha pahile anuman garera chalaunuhos.
 
-1. `230` लाई `120` बनाउने → चित्र उज्यालो हुन्छ? अँध्यारो?
-2. `image[2:4, 5:7]` लाई `image[0:2, 0:2]` बनाउने → कालो चौकोण कता सर्छ?
-3. `vmin=0, vmax=255` लाई `vmin=0, vmax=120` बनाउने → देखाइ कसरी बदलिन्छ?
+1. `230` lai `120` banaune → chitra ujyalo hunchha? andhyaro?
+2. `image[2:4, 5:7]` lai `image[0:2, 0:2]` banaune → kalo chaukon kata sarchha?
+3. `vmin=0, vmax=255` lai `vmin=0, vmax=120` banaune → dekhai kasari badlinchha?
 
 <!-- ne-cell: be1bb0f9 | after-heading -->
-## Part 7 वातावरण तयारी रिपोर्ट
+## Part 7 batabaran tayari riport
 
 <!-- ne-cell: 06c2fc5e | after-heading -->
-**रिपोर्ट स्वतः बनाउने**
+**riport sbatah banaune**
 <!-- ne-pair: Generate the report automatically -->
 
 <!-- ne-cell: 06c2fc5e -->
-अन्तमा अहिलेको वातावरणलाई एउटा रिपोर्टमा जम्मा गर्छौं।
-`submissions/reports/environment_report.json` मा सुरक्षित हुन्छ।
-बुझाउँदा यो सेलको output जस्ताको तस्तै टाँस्नुहोस्।
+antama ahileko batabaran lai euta riportama jamma garchhaun.
+`submissions/reports/environment_report.json` ma surakshit hunchha.
+bujhaunda yo cellko output jastako tastai tansnuhos.
 
-रिपोर्टमा Python को executable, package को संस्करण, प्रत्येक package import भयो कि भएन, र
-तालिमको सामग्री र सन्दर्भ चित्र पुगे कि पुगेन अभिलेख हुन्छ। नपुगेको कुरा "छैन" भनेर अभिलेख हुन्छ।
+riportama Python ko executable, package ko sanskaran, pratyek package import bhayo ki bhaen, ra
+talimko samagri ra sandarbha chitra puge ki pugen abhilekh hunchha. napugeko kura "chhaina" bhanera abhilekh hunchha.
 
 <!-- ne-cell: a9e07e4c | after-heading -->
-## अभ्यास
+## abhyas
 
 <!-- ne-cell: 6a2d7d09 | after-heading -->
-**अभ्यास १ (आधारभूत): आफ्नो नाम देखाउने**
+**abhyas 1 (adharabhut): aphno naam dekhaune**
 <!-- ne-pair: Exercise 1 (basic): print your name -->
 
 <!-- ne-cell: 6a2d7d09 -->
-तलको सेलमा जापानी र अङ्ग्रेजीमा आफ्नो नाम र विभाग देखाउने कोड लेख्नुहोस्।
-`print()` दुई लाइनमा प्रयोग गर्नुहोस्। चलाएर नतिजा जाँच्नुहोस्।
+talako cell ma Japani ra Angreji ma aphno naam ra bibhag dekhaune kod lekhnuhos.
+`print()` dui line ma prayog garnuhos. chalaera natija jaanchnuhos.
 
-सकिएको आधार: output मा **आफ्नै नाम** देखिनुपर्छ (नमुनाको वाक्य जस्ताको तस्तै भए सकिएको मानिँदैन)।
+sakieko adhar: output ma **aphnai naam** dekhinuparchha (namunako baky jastako tastai bhae sakieko manindain).
 
 <!-- ne-cell: d153c5f9 | after-heading -->
-**अभ्यास २ (मध्यम): मापन मानको निर्णय**
+**abhyas 2 (madhyam): maapan maanko nirnaya**
 <!-- ne-pair: Exercise 2 (intermediate): judge a measurement -->
 
 <!-- ne-cell: d153c5f9 -->
-`measured = 99.2` लाई `measured = 97.0` बनाउँदा अन्तिम लाइनमा `False` देखिन्छ।
-कुन चाहिँ "OK (मानकभित्र)" होला? कारण एक लाइनको comment मा लेख्नुहोस्।
+`measured = 99.2` lai `measured = 97.0` banaunda antim line ma `False` dekhinchha.
+kun chahin "OK (manakbhitra)" hola? karan ek lineko comment ma lekhnuhos.
 
-थप `tolerance = 0.5` लाई `2.0` बनाउँदाको नतिजा पनि जाँच्नुहोस्।
+thap `tolerance = 0.5` lai `2.0` banaundako natija pani jaanchnuhos.
 
-सकिएको आधार: सेल त्रुटि बिना चल्छ र **कारण एक लाइनको comment मा लेखिएको** हुन्छ।
+sakieko adhar: cell truti bina chalchha ra **karan ek lineko comment ma lekhieko** hunchha.
 
 <!-- ne-cell: 6affad1b | after-heading -->
-**अभ्यास ३ (विकास/ऐच्छिक): चित्रको "उज्यालो" नाप्ने**
+**abhyas 3 (bikas/aichchhik): chitrako "ujyalo" napne**
 <!-- ne-pair: Exercise 3 (optional challenge): measure image brightness -->
 
 <!-- ne-cell: 6affad1b -->
-NumPy को `mean()` प्रयोग गरेर सम्पूर्ण चित्रको औसत उज्यालो हिसाब गर्नुहोस्।
-थप `base_level` लाई ३ किसिम (जस्तै 120, 180, 230) बनाएर औसत मान कसरी बदलिन्छ तालिकामा लेख्नुहोस्।
+NumPy ko `mean()` prayog garera sampurna chitrako ausat ujyalo hisab garnuhos.
+thap `base_level` lai 3 kisim (jastai 120, 180, 230) banaera ausat maan kasari badlinchha talika ma lekhnuhos.
 
-सङ्केत: `image.mean()` ले औसत मान दिन्छ।
+sanket: `image.mean()` le ausat maan dinchha.
 
-सकिएको आधार: "औसत उज्यालो पछाडिको मान र अँध्यारो चौकोणको क्षेत्रफलले तय हुन्छ" जस्तै **नियम आफ्नै
-शब्दमा लेखिएको** हुन्छ। यो अभ्यास ऐच्छिक हो।
+sakieko adhar: "ausat ujyalo pachhadiko maan ra andhyaro chaukonako kshetraphalale tay hunchha" jastai **niyam aphnai
+shabdama lekhieko** hunchha. yo abhyas aichchhik ho.
 
 <!-- ne-cell: a5cf6274 | after-heading -->
-#### बुझाइ जाँच
+#### bujhai jaanch
 
-तलका प्रश्नको जवाफ आफ्नै शब्दमा दिनुहोस्। बुझाउनुपर्ने काममा लेख्नुहोस्।
-(ठ्याक्कै सही शब्दावली नभए पनि हुन्छ। आफ्नो बुझाइ जाँच्ने प्रश्न हुन्।)
+talaka prashnako jabaph aphnai shabdama dinuhos. bujhaunuparne kaam ma lekhnuhos.
+(thyakkai sahi shabdabali nabhae pani hunchha. aphno bujhai jaanchne prashna hun.)
 
-1. virtual environment प्रयोग नगरी पूरै कम्प्युटरमा package राख्दा कस्ता समस्या आउँछन्?
-2. CMD को आदेश र Python कोड कसरी छुट्याउने?
-3. `Kernel` → `Restart` गर्दा के हराउँछ? के बाँकी रहन्छ?
-4. `[MISSING] numpy` देखिँदा कुन क्रममा के जाँच्नुहुन्छ?
-5. चित्र "सङ्ख्याको तालिका" भनियो। 100 × 100 pixel को कालो-सेतो चित्रमा कतिवटा सङ्ख्या हुन्छन्?
+1. virtual environment prayog nagari purai computer ma package rakhda kasta samasya aunchhan?
+2. CMD ko adesh ra Python kod kasari chhutyaune?
+3. `Kernel` → `Restart` garda ke haraunchha? ke banki rahanchha?
+4. `[MISSING] numpy` dekhinda kun kram ma ke janchnuhunchha?
+5. chitra "sankhyako talika" bhaniyo. 100 × 100 pixel ko kalo-seto chitra ma katibata sankhya hunchhan?
 
-नमुना जवाफ प्रशिक्षक मार्गदर्शन (`docs/instructor/day01_instructor_guide.md`) मा छ।
-पहिले आफैं लेख्नुहोस्, त्यसपछि हेर्नुहोस्। नक्कल गर्नु होइन, आफ्नै शब्दमा भन्नु उद्देश्य हो।
+namuna jabaph prashikshak margadarshan (`docs/instructor/day01_instructor_guide.md`) ma chha.
+pahile aphain lekhnuhos, tyaspachhi hernuhos. nakkal garnu hoina, aphnai shabdama bhannu uddeshya ho.
 
 <!-- ne-cell: 9c31642a | after-heading -->
-## समस्या आउँदा
+## samasya aunda
 
-त्रुटि आए पहिले "कुन सेलमा", "कुन लाइनमा", "के सन्देश आयो" भनेर टिप्नुहोस्। बुझाउनुपर्ने काममा पनि
-त्यही अभिलेख राख्नुहोस्।
+truti ae pahile "kun cell ma", "kun line ma", "ke sandesh ayo" bhanera tipnuhos. bujhaunuparne kaam ma pani
+tyahi abhilekh rakhnuhos.
 
-| लक्षण | के गर्ने |
+| lakshan | ke garne |
 | --- | --- |
-| `ModuleNotFoundError: No module named 'numpy'` | kernel फरक हुन सक्छ। `sys.executable` मा `.venv` छ कि छैन जाँचेर `Kernel` → `Change Kernel` बाट फेरि छान्नुहोस्। |
-| virtual environment सक्रिय गर्न सकिएन | CMD मा `dir .venv\Scripts\python.exe` जाँच्नुहोस्, त्यसपछि `.\.venv\Scripts\activate.bat` चलाउनुहोस्। छैन भने START_HERE चरण 3 हेर्नुहोस्। |
-| `python` लेख्दा Microsoft Store खुल्छ | Settings → "App execution aliases" → `python.exe` बन्द गर्नुहोस्। |
-| installation `Read timed out` मा रोकिन्छ | network को समस्या। उही आदेश फेरि चलाउनुहोस्। कम्पनीमा proxy छ भने व्यवस्थापकसँग जाँच्नुहोस्। |
-| JupyterLab सुरु हुँदैन (`jupyter: command not found`) | virtual environment सक्रिय छ कि जाँच्नुहोस् (`(.venv)` देखिनुपर्छ)। छैन भने सक्रिय गरेर `jupyter lab` चलाउनुहोस्। |
-| `FileNotFoundError: 研修フォルダが見つかりません` | JupyterLab `AI_Vision_Training` भित्रबाट सुरु गरिएको छैन। फोल्डरमा गएर फेरि सुरु गर्नुहोस्। |
-| सन्दर्भ चित्रको सेलमा `取得失敗 / failed: ...` देखिन्छ | देखाइएको फाइल मात्र असफल भएको हो। जडान जाँचेर उही सेल फेरि चलाउनुहोस् (लिइसकेका फाइल जस्ताको तस्तै रहन्छन्)। |
-| सन्दर्भ चित्रको सेलमा `Pillow が未導入` देखिन्छ | Part 2 चरण 4 (`requirements\base.txt`) चलाएर उही सेल फेरि चलाउनुहोस्। |
-| मेमोरी अपुगको त्रुटि (`MemoryError`) | अरू अनुप्रयोग बन्द गर्नुहोस्। यो तालिमको डेटा सानो छ, सामान्यतः हुँदैन। |
+| `ModuleNotFoundError: No module named 'numpy'` | kernel farak huna sakchha. `sys.executable` ma `.venv` chha ki chhaina jancher `Kernel` → `Change Kernel` baat feri chhannuhos. |
+| virtual environment sakriya garna sakien | CMD ma `dir .venv\Scripts\python.exe` jaanchnuhos, tyaspachhi `.\.venv\Scripts\activate.bat` chalaunuhos. chhaina bhane START_HERE charan 3 hernuhos. |
+| `python` lekhda Microsoft Store khulchha | Settings → "App execution aliases" → `python.exe` banda garnuhos. |
+| installation `Read timed out` ma rokinchha | network ko samasya. uhi adesh feri chalaunuhos. kampanima proxy chha bhane byabasthapakasang jaanchnuhos. |
+| JupyterLab suru hundaina (`jupyter: command not found`) | virtual environment sakriya chha ki jaanchnuhos (`(.venv)` dekhinuparchha). chhaina bhane sakriya garera `jupyter lab` chalaunuhos. |
+| `FileNotFoundError: 研修フォルダが見つかりません` | JupyterLab `AI_Vision_Training` bhitra baat suru garieko chhaina. folder ma gaera feri suru garnuhos. |
+| sandarbha chitrako cell ma `取得失敗 / failed: ...` dekhinchha | dekhaieko file matra asaphal bhaeko ho. jadan jancher uhi cell feri chalaunuhos (liisakeka file jastako tastai rahanchhan). |
+| sandarbha chitrako cell ma `Pillow が未導入` dekhinchha | Part 2 charan 4 (`requirements\base.txt`) chalaera uhi cell feri chalaunuhos. |
+| memory apugako truti (`MemoryError`) | aru anuprayog banda garnuhos. yo talimko data sano chha, samanyatah hundaina. |
 
 <!-- ne-cell: 98c05d2e | after-heading -->
-## सकिएको जाँचसूची
+## sakieko janchasuchi
 
-**अनिवार्य: सबै कोड सेल + अभ्यास 1 र 2। ऐच्छिक: अभ्यास 3 र "थप सिकाइ" को अतिरिक्त चुनौती।**
-अभ्यास 3 नगरे पनि यो नोटबुक सकिएको मानिन्छ।
+**aniwarya: sabai kod cell + abhyas 1 ra 2. aichchhik: abhyas 3 ra "thap sikai" ko atirikt chunauti.**
+abhyas 3 nagare pani yo notebook sakieko maninchha.
 
-सबैमा चिन्ह लागेपछि यो नोटबुक सकिन्छ।
+sabai ma chinh lagepachhi yo notebook sakinchha.
 
-- [ ] Part 1–Part 4 का व्याख्या पढें र नबुझेका शब्द टिपें
-- [ ] सबै कोड सेल माथिबाट क्रमैसँग चलाएँ
-- [ ] सन्दर्भ चित्र (४ वटा) ल्याउने सेल चलाएँ र `assets/external_samples/open_reference/` मा चारवटै छन्
-- [ ] अभ्यास 1 र 2 चलाएँ
-- [ ] `submissions/reports/environment_report.json` बन्यो
-- [ ] kernel को जाँच (`Kernel` → `Change Kernel`) गर्न सक्ने भएँ
-- [ ] बुझाइ जाँचका ५ प्रश्नको जवाफ दिएँ
-- [ ] त्रुटि आएको टिपोट राखें (नभए "छैन" लेखें)
-- [ ] यो नोटबुक सुरक्षित गरें (`Ctrl + S`)
+- [ ] Part 1–Part 4 ka byakhya padhen ra nabujheka shabd tipen
+- [ ] sabai kod cell mathibat kramaisang chalaen
+- [ ] sandarbha chitra (4 bata) lyaune cell chalaen ra `assets/external_samples/open_reference/` ma charabatai chhan
+- [ ] abhyas 1 ra 2 chalaen
+- [ ] `submissions/reports/environment_report.json` banyo
+- [ ] kernel ko jaanch (`Kernel` → `Change Kernel`) garna sakne bhaen
+- [ ] bujhai jaanchka 5 prashnako jabaph dien
+- [ ] truti aeko tipot rakhen (nabhae "chhaina" lekhen)
+- [ ] yo notebook surakshit garen (`Ctrl + S`)
 
-ऐच्छिक:
+aichchhik:
 
-- [ ] अभ्यास ३ (विकास/ऐच्छिक) गरें
+- [ ] abhyas 3 (bikas/aichchhik) garen
 
 <!-- ne-cell: 235c801a | after-heading -->
-## थप सिकाइ (ऐच्छिक)
+## thap sikai (aichchhik)
 
 <!-- ne-cell: 235c801a -->
-### सन्दर्भ लिङ्क
+### sandarbha lingk
 
-- [Python आधिकारिक कागजात (जापानी)](https://docs.python.org/ja/3/)
-- [Jupyter आधिकारिक साइट](https://jupyter.org/)
-- [NumPy आधिकारिक कागजात](https://numpy.org/doc/)
-- [Matplotlib आधिकारिक कागजात](https://matplotlib.org/stable/)
-- [OpenCV आधिकारिक कागजात](https://docs.opencv.org/)
+- [Python adhikarik kagajat (Japani)](https://docs.python.org/ja/3/)
+- [Jupyter adhikarik sait](https://jupyter.org/)
+- [NumPy adhikarik kagajat](https://numpy.org/doc/)
+- [Matplotlib adhikarik kagajat](https://matplotlib.org/stable/)
+- [OpenCV adhikarik kagajat](https://docs.opencv.org/)
 
-### अतिरिक्त चुनौती (अनिवार्य होइन)
+### atirikt chunauti (aniwarya hoina)
 
-`np.zeros()` र `np.ones()` प्रयोग गरेर चित्र बनाएर `plt.imshow()` ले देखाउनुहोस्। `dtype` लाई `uint8`
-र `float64` बनाउँदा देखाइ कसरी बदलिन्छ पनि जाँच्नुहोस्।
+`np.zeros()` ra `np.ones()` prayog garera chitra banaera `plt.imshow()` le dekhaunuhos. `dtype` lai `uint8`
+ra `float64` banaunda dekhai kasari badlinchha pani jaanchnuhos.

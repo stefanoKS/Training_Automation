@@ -44,6 +44,23 @@ check can tell Romanized Nepali from copied English.
 7. **Punctuation.** A Devanagari danda `।` becomes `.`. Colons inside Nepali lines are ASCII `:`.
 8. **One idea, one spelling.** Do not alternate `thresold`/`threshold`/`threshhold`; use the
    glossary form.
+9. **`-एर` converbs keep the final `a`** (`बनाएर` → `banaera`, `चलाएर` → `chalaera`,
+   ` पढेर` → `padhera`). The letter rules alone stop at `र` and produce `banaer`, which cannot be
+   read aloud, so every converb the course uses is listed in `GLOSSARY`.
+10. **A final `र`/`न`/`ल` after another consonant takes an `a`** (`भित्र` → `bhitra`,
+    `क्षेत्र` → `kshetra`, `गन्न` → `ganna`, `निकाल्न` → `nikalna`). Rule 4 still drops the
+    ordinary word-final vowel (`काम` → `kaam`); this rule only rescues the clusters that would
+    otherwise end a word in three consonants.
+
+## Layout review rules
+
+* The empty `before`/`after` margins of `<!-- ne:begin … -->` regions are not content: only the
+  text between the markers is translated.
+* When the glossary grows, `convert_nepali_to_latin.py` re-applies the reviewed spellings to
+  catalogs that are already Latin. Only unambiguous rules are rewritten: when two Devanagari words
+  collapse onto the same Latin form (`हुन` and `हुन्` both give `hun`) they are different words, so
+  both are left alone, and short forms such as `ab`, `bat`, `man` or the file token `path` are
+  never touched.
 
 ## Approved glossary (operator training)
 
@@ -89,6 +106,9 @@ check can tell Romanized Nepali from copied English.
 | 意味 | meaning | `arth` |
 | 理由 | reason | `karan` |
 | 値 | value | `maan` |
+| …の中 / 内側 | inside | `bhitra` |
+| …して（連用） | by doing | `-era` (`banaera`, `chalaera`) |
+| 斜辺 | hypotenuse | `karna` |
 
 ## Review checklist (required before sign-off)
 
@@ -101,7 +121,9 @@ check can tell Romanized Nepali from copied English.
 - [ ] Command lines, file names and numbers are byte-identical to the Japanese/English source.
 - [ ] No Devanagari remains inside a migrated block, and no block is English copied as "Nepali".
 - [ ] The `--review` word list has been read, and every surprising spelling was either glossed or
-      accepted deliberately.
+      accepted deliberately. The reviewed spellings of the `-एर` converbs and of the words that
+      end in a consonant cluster live in `GLOSSARY`; the remaining rule-engine forms
+      (`utpadanako`, `tinabata`, `pikselama`) are accepted as they are.
 
 Automated tests can prove structure, coverage and script. They **cannot** certify conversational
 fluency: a native or advanced Nepali reviewer must sign off the wording before the course is taught.

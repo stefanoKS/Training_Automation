@@ -1,400 +1,400 @@
 <!--
-नेपाली अनुवाद / Nepali translation source for
+Nepali anuwad / Nepali translation source for
 notebooks/Day03_YOLO_Basics/Day03_02_YOLO_Inference.ipynb
 -->
-# दिन ३ नोटबुक ०२ — नेपाली अनुवाद
+# din 3 notebook 02 — Nepali anuwad
 
 <!-- ne-cell: 9dd6a5e7 | after-heading -->
-# दिन ३ नोटबुक ०२: पहिलो YOLO अनुमान
+# din 3 notebook 02: pahilo YOLO anuman
 
 <!-- ne-cell: 9dd6a5e7 -->
-## सिकाइ लक्ष्यहरू
+## sikai lakshyaharu
 
-| नेपाली |
+| Nepali |
 | --- |
-| 1. Ultralytics स्थापना भएको छ कि छैन जाँच्न सक्ने। |
-| 2. pretrained model पढेर तस्बिरमा अनुमान चलाउन सक्ने। |
-| 3. पहिचानको नतिजा (आयत, class, confidence) निकाल्न सक्ने। |
-| 4. नतिजा तस्बिरको रूपमा सुरक्षित गर्न सक्ने। |
-| 5. डाउनलोड असफल हुँदा के गर्ने बताउन सक्ने। |
+| 1. Ultralytics sthapana bhaeko chha ki chhaina jaanchna sakne. |
+| 2. pretrained model padher tasbir ma anuman chalaun sakne. |
+| 3. pahichanko natija (ayat, class, confidence) nikalna sakne. |
+| 4. natija tasbirko rupama surakshit garna sakne. |
+| 5. daunalod asaphal hunda ke garne bataun sakne. |
 
-## यो नोटबुकको आधारभूत जानकारी
+## yo notebookko adharabhut jankari
 
-| विषय | विवरण |
+| bishay | biwaran |
 | --- | --- |
-| सिकाइ समय (अनुमान) | 85 मिनेट |
-| कठिनाइ | सुरुवाती तह |
-| पूर्वशर्त | दिन ३ नोटबुक ०१ सकिएको हुनुपर्छ। पहिलो पटक मात्र इन्टरनेट चाहिन्छ। |
-| आवश्यक लाइब्रेरी | torch, torchvision, ultralytics, opencv-python, numpy, matplotlib |
-| प्रयोग हुने kernel | aivision |
-| आजको समयतालिका | [`COURSE_SYLLABUS.md` दिन ३](../../COURSE_SYLLABUS.md#day3) |
+| sikai samay (anuman) | 85 minet |
+| kathinai | surubati tah |
+| poorwashart | din 3 notebook 01 sakieko hunuparchha. pahilo patak matra intaranet chahinchha. |
+| aawashyak laibreri | torch, torchvision, ultralytics, opencv-python, numpy, matplotlib |
+| prayog hune kernel | aivision |
+| ajako samayatalika | [`COURSE_SYLLABUS.md` din 3](../../COURSE_SYLLABUS.md#day3) |
 
-### बुझाउनुपर्ने काम
+### bujhaunuparne kaam
 
-| नेपाली |
+| Nepali |
 | --- |
-| टिप्पणी लगाइएको तस्बिर (सुरक्षित गरेको फाइल) |
-| पहिचानको नतिजाको तालिका |
+| tippani lagaieko tasbir (surakshit gareko file) |
+| pahichanko natijako talika |
 
 <!-- ne-cell: 8b3be722 | after-heading -->
-## यो नोटबुक कहाँ पर्छ
+## yo notebook kahan parchha
 
 <!-- ne-cell: 8b3be722 -->
-| विषय | विवरण |
+| bishay | biwaran |
 | --- | --- |
-| दिन | दिन ३ |
-| आजको क्रम | आजको नोटबुकमध्ये 2 / 3 |
-| लाग्ने समय | 85 मिनेट |
-| पूर्वशर्त | `Day03_01_YOLO_Concepts.ipynb`, `yolo11n.pt` डाउनलोड सकिएको |
-| आजको समयतालिका | [`COURSE_SYLLABUS.md` दिन ३](../../COURSE_SYLLABUS.md#day3) |
+| din | din 3 |
+| ajako kram | ajako notabukamadhye 2 / 3 |
+| lagne samay | 85 minet |
+| poorwashart | `Day03_01_YOLO_Concepts.ipynb`, `yolo11n.pt` daunalod sakieko |
+| ajako samayatalika | [`COURSE_SYLLABUS.md` din 3](../../COURSE_SYLLABUS.md#day3) |
 
-दिनको समयतालिका `COURSE_SYLLABUS.md` मा एउटै ठाउँमा छ। यो नोटबुक त्यसको एउटा भाग मात्र हो।
+dinko samayatalika `COURSE_SYLLABUS.md` ma eutai thaun ma chha. yo notebook tyasko euta bhaag matra ho.
 
 <!-- ne-cell: audit-learning-loop | after-heading -->
-### अनुमान गर्नुहोस्, चलाउनुहोस्, हेर्नुहोस्, व्याख्या गर्नुहोस्
+### anuman garnuhos, chalaunuhos, hernuhos, byakhya garnuhos
 
 <!-- ne-cell: audit-learning-loop -->
-अनुमानले सुरक्षित गरिएको weight प्रयोग गरेर तस्बिरबाट नतिजा बनाउँछ। महत्त्वपूर्ण सेल चलाउनुअघि इनपुट,
-काम र नतिजा एक-एक वाक्यमा लेख्नुहोस्। पहिले अनुमान गरेर चलाउनुहोस् र मान वा चित्र हेर्नुहोस्।
-confidence देखाउने सर्त मात्र बदलेर फेरि अनुमान गरी चलाउनुहोस्। जानाजान राखिएका त्रुटि र नसकिएका अभ्यासका
-निर्देशन पछ्याउनुहोस्।
+anumanle surakshit garieko weight prayog garera tasbir baat natija banaunchha. mahattwapurna cell chalaunuaghi input,
+kaam ra natija ek-ek bakyama lekhnuhos. pahile anuman garera chalaunuhos ra maan wa chitra hernuhos.
+confidence dekhaune sart matra badaler feri anuman gari chalaunuhos. janajan rakhieka truti ra nasakieka abhyaska
+nirdeshan pachhyaunuhos.
 
 <!-- ne-cell: f4b54286 | after-heading -->
-## Part 0 तयारी
+## Part 0 tayari
 
 <!-- ne-cell: 60086395 | after-heading -->
-## Part 1 Ultralytics जाँच्ने
+## Part 1 Ultralytics jaanchne
 
 <!-- ne-cell: audit-teach_yolo_result_object | after-heading -->
-### कोड कसरी पढ्ने
+### kod kasari padhne
 
 <!-- ne-cell: audit-teach_yolo_result_object | after-image:../../assets/svg/teach_yolo_result_object.svg -->
-चित्र: confidence model को स्कोर हो, सही हुने ग्यारेन्टी होइन। (गणना गरिएको संश्लेषित उदाहरण र योजनाबद्ध
-चित्र; model को वास्तविक नापिएको नतिजा होइन।)
+chitra: confidence model ko score ho, sahi hune gyarenti hoina. (ganana garieko sansleshit udaharan ra yojanabaddha
+chitra; model ko bastabik napieko natija hoina.)
 
-**ध्यान दिनुपर्ने कुरा**
+**dhyan dinuparne kura**
 
-confidence model को स्कोर हो, सही हुने ग्यारेन्टी होइन। इनपुट र परिवर्तन भएको मान औंलाले पछ्याउनुहोस्।
+confidence model ko score ho, sahi hune gyarenti hoina. input ra paribartan bhaeko maan aunlale pachhyaunuhos.
 
-**सोच्नुहोस्**
+**sochnuhos**
 
-पहिचान शून्य भए तालिकामा कति लाइन हुन्छन्?
+pahichan shunya bhae talika ma kati line hunchhan?
 
 <!-- ne-cell: 907c6b68 | after-heading -->
-**पुस्तकालय र GPU को अवस्था हेर्ने**
+**pustakalay ra GPU ko abastha herne**
 <!-- ne-pair: Look at the library and the GPU -->
 
 <!-- ne-cell: 907c6b68 -->
-पहिले चाहिने साधन सबै छन् कि छैन जाँचौं।
+pahile chahine sadhan sabai chhan ki chhaina janchaun.
 
-`torch.cuda.is_available()` ले `False` दिए पनि **समस्या छैन**। यो तालिमको आधारभूत भाग CPU मा चल्छ।
+`torch.cuda.is_available()` le `False` die pani **samasya chhaina**. yo talimko adharabhut bhaag CPU ma chalchha.
 
 <!-- ne-cell: b514e5ac | after-heading -->
-**यो नोटबुकमा प्रयोग हुने model र तस्बिरको स्रोत**
+**yo notebook ma prayog hune model ra tasbirko srot**
 <!-- ne-pair: Where the model and the image come from -->
 
 <!-- ne-cell: b514e5ac -->
-यो नोटबुकमा दुई कुरा प्रयोग हुन्छन्।
+yo notebook ma dui kura prayog hunchhan.
 
-| प्रकार | विषय | स्रोत |
+| prakar | bishay | srot |
 |---|---|---|
-| model | `yolo26n.pt` (nano model) | Ultralytics को आधिकारिक release `ultralytics/assets` को `v8.4.0`। COCO का 80 class मा पहिले नै तालिम भएको |
-| तस्बिर | `bus.jpg` | स्थापना गरिएको `ultralytics` package (8.4.211) सँगै आउने `ultralytics/assets/bus.jpg` |
+| model | `yolo26n.pt` (nano model) | Ultralytics ko adhikarik release `ultralytics/assets` ko `v8.4.0`. COCO ka 80 class ma pahile nai talim bhaeko |
+| tasbir | `bus.jpg` | sthapana garieko `ultralytics` package (8.4.211) sangai aune `ultralytics/assets/bus.jpg` |
 
-**स्रोत र लाइसेन्सबारे**
+**srot ra laisensabare**
 
-- "COCO मा पहिले नै तालिम भएको" भन्नाले **model कुन डेटामा तालिम भयो** भन्ने मात्र हो। सँगै आउने फोटो
-  COCO कै तस्बिर हो भन्ने होइन।
-- package को AGPL-3.0 **package वितरणको सर्त** हो। सँगै आउने हरेक फोटोको अधिकारको प्रमाण होइन (package
-  मा `bus.jpg` र `zidane.jpg` को छुट्टै लाइसेन्स सूचना छैन)।
-- यो तालिममा चल्ने कि नचल्ने जाँच्न सँगै आउने तस्बिर जस्ताको तस्तै प्रयोग गरिन्छ। **फोटो फेरि वितरण
-  गर्ने वा उत्पादनमा राख्ने भए प्रयोगकर्ता आफैंले अधिकार जाँच्नुपर्छ।**
-- विस्तृत विवरण `assets/external_samples/PROVENANCE.md` मा छ।
+- "COCO ma pahile nai talim bhaeko" bhannale **model kun data ma talim bhayo** bhanne matra ho. sangai aune photo
+  COCO kai tasbir ho bhanne hoina.
+- package ko AGPL-3.0 **package bitaranko sart** ho. sangai aune harek photoko adhikarako praman hoina (package
+  ma `bus.jpg` ra `zidane.jpg` ko chhuttai laisens suchana chhaina).
+- yo talim ma chalne ki nachalne jaanchna sangai aune tasbir jastako tastai prayog garinchha. **photo feri bitaran
+  garne wa utpadanama rakhne bhae prayogakarta aphainle adhikar janchnuparchha.**
+- bistrit biwaran `assets/external_samples/PROVENANCE.md` ma chha.
 
-> यो तस्बिर "बस र मानिस" को फोटो हो। **PVC को दोष होइन।** pretrained model "ठीक चल्छ" भनेर जाँच्ने
-> तयारी-परीक्षण मात्र हो।
+> yo tasbir "bas ra manis" ko photo ho. **PVC ko dosh hoina.** pretrained model "thik chalchha" bhanera jaanchne
+> tayari-parikshan matra ho.
 
 <!-- ne-cell: b1bde3f5 | after-heading -->
-## Part 2 model पढ्ने
+## Part 2 model padhne
 
 <!-- ne-cell: ced84bb3 | after-heading -->
-**पहिलो पटक मात्र डाउनलोड हुन्छ**
+**pahilo patak matra daunalod hunchha**
 <!-- ne-pair: Downloaded once, cached afterwards -->
 
-model फाइल (करिब 5 MB) **पहिलो पटक मात्र** डाउनलोड हुन्छ। दोस्रो पटकदेखि `assets/models/` बाट पढिन्छ,
-त्यसैले इन्टरनेट नभए पनि चल्छ।
+model file (karib 5 MB) **pahilo patak matra** daunalod hunchha. dosro patakadekhi `assets/models/` baat padhinchha,
+tyasaile intaranet nabhae pani chalchha.
 
-**डाउनलोड असफल हुँदा के गर्ने**
+**daunalod asaphal hunda ke garne**
 
-1. त्यही सेल फेरि चलाउनुहोस् (सामान्यतया अस्थायी समस्या हुन्छ)
-2. ब्राउजरमा `https://github.com/ultralytics/assets/releases` खोलेर `yolo26n.pt` हातैले डाउनलोड गरी
-   `assets/models/` मा राख्नुहोस्
-3. कम्पनीको proxy छ भने व्यवस्थापकसँग सोध्नुहोस्
+1. tyahi cell feri chalaunuhos (samanyataya asthayi samasya hunchha)
+2. braujarama `https://github.com/ultralytics/assets/releases` kholer `yolo26n.pt` hataile daunalod gari
+   `assets/models/` ma rakhnuhos
+3. kampaniko proxy chha bhane byabasthapakasang sodhnuhos
 
-> **डाउनलोड हुन नसके "जस्तो देखिने नतिजा" बनाउनु हुँदैन।** त्रुटि जस्ताको तस्तै अभिलेख गरेर
-> प्रशिक्षकसँग सल्लाह लिनुहोस्।
+> **daunalod huna nasake "jasto dekhine natija" banaunu hundaina.** truti jastako tastai abhilekh garera
+> prashikshakasang sallah linuhos.
 
 <!-- ne-cell: 16326241 | after-heading -->
-### नतिजाको उदाहरण
+### natijako udaharan
 
 <!-- ne-cell: 16326241 -->
-यो नतिजा उही model फाइल भएमा उही आउँछ। model अद्यावधिक गर्दा class सङ्ख्या वा नामको क्रम बदलिन सक्छ।
+yo natija uhi model file bhae ma uhi aaunchha. model adyabadhik garda class sankhya wa naamko kram badalin sakchha.
 
 <!-- ne-cell: c1293292 | after-heading -->
-**जाँच्नुपर्ने कुरा**
+**janchnuparne kura**
 <!-- ne-pair: What to verify here -->
 
 <!-- ne-cell: c1293292 -->
-class सूचीमा `black_spot` र `scratch` **छैनन्** भनेर पक्का गर्नुहोस्। दिन ४ मा नयाँ तालिम किन चाहिन्छ
-भन्ने कारण यही हो।
+class soochi ma `black_spot` ra `scratch` **chhainan** bhanera pakka garnuhos. din 4 ma nayan talim kina chahinchha
+bhanne karan yahi ho.
 
 <!-- ne-cell: de1be408 | after-heading -->
-## Part 3 अनुमान चलाउने
+## Part 3 anuman chalaune
 
 <!-- ne-cell: cf0e60bc | after-heading -->
-### पहिचानको नतिजा "आयतहरूको सूची" हो
+### pahichanko natija "ayataharuko soochi" ho
 
 <!-- ne-cell: cf0e60bc | after-image:../../assets/diagrams/diagram_detection.png -->
-चित्र: पहिचानले के फर्काउँछ (योजनाबद्ध चित्र, वास्तविक अनुमानको नतिजा होइन, उदाहरणका लागि बनाइएको डेटा)।
-आयत Ultralytics को `result.boxes.xyxy` ढाँचामा (`x1, y1, x2, y2`) फर्किन्छ, र confidence model ले दिएको
-स्कोर हो, सही हुने सम्भावना होइन। वास्तविक नतिजा तलको सेलले तपाईंको कम्प्युटरमा बनाउँछ।
+chitra: pahichanle ke pharkaunchha (yojanabaddha chitra, bastabik anumanko natija hoina, udaharanka lagi banaiyeko data).
+ayat Ultralytics ko `result.boxes.xyxy` dhanchama (`x1, y1, x2, y2`) pharkinchha, ra confidence model le dieko
+score ho, sahi hune sambhabana hoina. bastabik natija talako cellle tapainko computer ma banaunchha.
 
-**ध्यान दिनुपर्ने कुरा**
+**dhyan dinuparne kura**
 
-पहिचानले एउटै उत्तर फर्काउँदैन। **आयत, class र confidence को जोडी जति पनि** फर्काउन सक्छ; शून्य पनि
-हुन सक्छ। तलको सेल चलाउँदा तपाईंको तस्बिरको वास्तविक सूची देखिन्छ।
+pahichanle eutai uttar pharkaundain. **ayat, class ra confidence ko jodi jati pani** pharkaun sakchha; shunya pani
+huna sakchha. talako cell chalaunda tapainko tasbirko bastabik soochi dekhinchha.
 
-**सोच्नुहोस्**
+**sochnuhos**
 
-- पहिचान शून्य भन्नु "केही असामान्य छैन" भन्ने अर्थ हो?
+- pahichan shunya bhannu "kehi asamanya chhaina" bhanne arth ho?
 
 <!-- ne-cell: 674b1102 | after-heading -->
-**तस्बिर पढेर अनुमान गर्ने**
+**tasbir padher anuman garne**
 <!-- ne-pair: Load an image and predict -->
 
 <!-- ne-cell: 674b1102 -->
-`model.predict()` का मुख्य argument:
+`model.predict()` ka mukhy argument:
 
-| argument | अर्थ | उदाहरण |
+| argument | arth | udaharan |
 |---|---|---|
-| `source` | तस्बिरको बाटो | `"image.jpg"` |
-| `conf` | यसभन्दा कम भएका पहिचान **अनुमानकै बेला फालिन्छ** | `0.25` |
-| `imgsz` | इनपुट आकार (सानो भए छिटो) | `640` |
-| `verbose` | लग देखाउने कि नदेखाउने | `False` |
+| `source` | tasbirko bato | `"image.jpg"` |
+| `conf` | yasabhanda kam bhaeka pahichan **anumanakai bela phalinchha** | `0.25` |
+| `imgsz` | input akar (sano bhae chhito) | `640` |
+| `verbose` | lag dekhaune ki nadekhaune | `False` |
 
-फर्काउने मान "नतिजाको सूची" हो। एउटा तस्बिर भए `results[0]` मा त्यो तस्बिरको नतिजा हुन्छ।
+pharkaune maan "natijako soochi" ho. euta tasbir bhae `results[0]` ma tyo tasbirko natija hunchha.
 
-`conf` ले फालेका उम्मेदवार, **पछि थ्रेसहोल्ड घटाए पनि फर्केर आउँदैनन्**। "कम थ्रेसहोल्डमा एक पटक अनुमान
-गरेर पछि छान्ने" तरिका र हरेक पटक `conf` बदलेर फेरि अनुमान गर्ने तरिका फरक हुन्। दिन ३ नोटबुक ०३ मा
-विस्तृत हेरिन्छ।
+`conf` le phaleka ummedabar, **pachhi threshold ghatae pani pharker aundainan**. "kam threshold ma ek patak anuman
+garera pachhi chhanne" tarika ra harek patak `conf` badaler feri anuman garne tarika farak hun. din 3 notebook 03 ma
+bistrit herinchha.
 
 <!-- ne-cell: 1a88508f | after-heading -->
-**के-के देखियो**
+**ke-ke dekhiyo**
 <!-- ne-pair: What you should see -->
 
 <!-- ne-cell: 1a88508f -->
-तस्बिरमा **एउटा बस र केही मानिस** छन्। हरेकमा आयत बन्छ र class नामसँग confidence देखिन्छ। यो तालिमको
-अभिलेखमा `bus 0.88` `person 0.87` जस्तो देखियो। मान model, तस्बिर र `conf` अनुसार बदलिन्छ।
+tasbir ma **euta bas ra kehi manis** chhan. harekama ayat banchha ra class naam sang confidence dekhinchha. yo talimko
+abhilekhama `bus 0.88` `person 0.87` jasto dekhiyo. maan model, tasbir ra `conf` anusar badlinchha.
 
-यहाँ महत्त्वपूर्ण कुरा **model ले तालिम लिएका class फर्काउन सक्छ** भन्ने पुष्टि हो। PVC को दोष पहिचान
-अझै सम्भव छैन।
+yahan mahattwapurna kura **model le talim lieka class pharkaun sakchha** bhanne pushti ho. PVC ko dosh pahichan
+ajhai sambhab chhaina.
 
-**पहिचान शून्य भए के?** यहाँ शून्य भन्नाले **"तोकिएका class (COCO का 80 प्रकार) मा बाँकी पहिचान शून्य"**
-भन्ने मात्र हो। "यो तस्बिरमा दोष छैन" भन्ने प्रमाण होइन।
+**pahichan shunya bhae ke?** yahan shunya bhannale **"tokieka class (COCO ka 80 prakar) ma banki pahichan shunya"**
+bhanne matra ho. "yo tasbir ma dosh chhaina" bhanne praman hoina.
 
-शून्य हुनुका धेरै कारण हुन सक्छन्।
+shunya hunuka dherai karan huna sakchhan.
 
-- यो तस्बिरमा COCO का class साँच्चै छैनन्
-- `conf` थ्रेसहोल्डले सबै उम्मेदवार फालेको
-- अनुमान आफैं असफल भएको (बाटो गलत, तस्बिर पढ्न नसकिने आदि)
+- yo tasbir ma COCO ka class sanchchai chhainan
+- `conf` thresholdle sabai ummedabar phaleko
+- anuman aphain asaphal bhaeko (bato galat, tasbir padhna nasakine adi)
 
-उल्टो, थ्रेसहोल्ड घटाउँदा **COCO class को रूपमा गलत पहिचान पनि आउन सक्छ** (जस्तै पृष्ठभूमिको बुट्टालाई
-`stop sign` भनेर)। COCO pretrained model PVC को दोषबारे अर्थपूर्ण निर्णय दिन बनाइएको होइन। त्यसैले शून्यलाई
-"OK" भनेर नपढी, **कुन डेटामा तालिम भएको model हो, कुन थ्रेसहोल्डमा चलाइयो, तस्बिरमा के छ** भन्ने कुरा
-सँगै पढ्नुहोस्।
+ulto, threshold ghataunda **COCO class ko rupama galat pahichan pani aun sakchha** (jastai prishthabhumiko buttalai
+`stop sign` bhanera). COCO pretrained model PVC ko doshabare arthapurna nirnaya din banaiyeko hoina. tyasaile shunya lai
+"OK" bhanera napadhi, **kun data ma talim bhaeko model ho, kun threshold ma chalaiyo, tasbir ma ke chha** bhanne kura
+sangai padhnuhos.
 
 <!-- ne-cell: 75c3644d | after-heading -->
-## Part 4 नतिजा निकाल्ने
+## Part 4 natija nikalne
 
 <!-- ne-cell: clarity-result-tree | after-heading -->
-### फर्किएको वस्तुबाट तालिकाको एक लाइनसम्म
+### pharkieko bastubat talikako ek line samma
 
 <!-- ne-cell: clarity-result-tree -->
-इनपुट अघिल्लो अनुमानको `results` हो; नतिजा हरेक पहिचानको तालिका, चित्र र CSV हो। अनुमान: N=0 भए
-तालिकामा कति लाइन हुन्छन्?
+input aghillo anumanko `results` ho; natija harek pahichanko talika, chitra ra CSV ho. anuman: N=0 bhae
+talika ma kati line hunchhan?
 
-`results` (सूची / प्रति तस्बिर एउटा) → `results[0]` = पहिलो तस्बिरको result → `boxes.xyxy` (N,4),
-`boxes.cls` (N,), `boxes.conf` (N,) → तालिकाको लाइन → CSV, र `result.plot()` ले BGR चित्र।
+`results` (soochi / prati tasbir euta) → `results[0]` = pahilo tasbirko result → `boxes.xyxy` (N,4),
+`boxes.cls` (N,), `boxes.conf` (N,) → talikako line → CSV, ra `result.plot()` le BGR chitra.
 
-एउटै `i` मा तीनै गुण मिलाउनुहोस्। तल देखाइएको सुरक्षित चित्र पहिलेको एक पटकको अनुमान हो, यो पटकको N को
-ग्यारेन्टी होइन। चलाएपछि पहिलो लाइनलाई उही नम्बरको आयतसँग मिलाउनुहोस्। सानो प्रयोग: confidence फिल्टर
-बढाउँदा तालिकाको लाइन सङ्ख्या के हुन्छ?
+eutai `i` ma tinai gun milaunuhos. tal dekhaieko surakshit chitra pahileko ek patakako anuman ho, yo patakako N ko
+gyarenti hoina. chalaepachhi pahilo line lai uhi numberko ayatasang milaunuhos. sano prayog: confidence philtar
+badhaunda talikako line sankhya ke hunchha?
 
 <!-- ne-cell: 541f0482 | after-heading -->
-**आयत, class र confidence सङ्ख्याको रूपमा निकाल्ने**
+**ayat, class ra confidence sankhyako rupama nikalne**
 <!-- ne-pair: Pull out boxes, classes and confidences -->
 
 <!-- ne-cell: 541f0482 -->
-तस्बिरमा बनाएर मात्र अभिलेख वा निर्णयका लागि पुग्दैन। **सङ्ख्या** को रूपमा निकाल्नुपर्छ।
+tasbir ma banaera matra abhilekh wa nirnayaka lagi pugdain. **sankhya** ko rupama nikalnuparchha.
 
-| गुण | सामग्री | आकार |
+| gun | samagri | akar |
 |---|---|---|
-| `result.boxes.xyxy` | दुई-बिन्दु शैलीको निर्देशाङ्क | (N, 4) |
-| `result.boxes.cls` | class क्रम सङ्ख्या | (N,) |
+| `result.boxes.xyxy` | dui-bindu shailiko nirdeshangk | (N, 4) |
+| `result.boxes.cls` | class kram sankhya | (N,) |
 | `result.boxes.conf` | confidence | (N,) |
-| `result.boxes.data` | माथिका सबै मिलेर 6 स्तम्भको तालिका | (N, 6) |
-| `result.names` | क्रम सङ्ख्या → class नाम को dictionary | dict |
+| `result.boxes.data` | mathika sabai miler 6 stambhako talika | (N, 6) |
+| `result.names` | kram sankhya → class naam ko dictionary | dict |
 
-`boxes.data` का 6 स्तम्भ बायाँबाट **`x1, y1, x2, y2, confidence, class क्रम सङ्ख्या`** हुन्। यी 6 भएपछि
-तालिका वा CSV बनाउन सकिन्छ।
+`boxes.data` ka 6 stambha bayanbat **`x1, y1, x2, y2, confidence, class kram sankhya`** hun. yi 6 bhaepachhi
+talika wa CSV banaun sakinchha.
 
 <!-- ne-cell: fig-ref_inference_boxes_table | after-heading -->
-### सुरक्षित गरिएको उदाहरण: तस्बिरको नम्बर र तालिकाको लाइन
+### surakshit garieko udaharan: tasbirko number ra talikako line
 
 <!-- ne-cell: fig-ref_inference_boxes_table | after-image:../../assets/reference_outputs/ref_inference_boxes_table.png -->
-चित्र: यो तालिममा साँच्चै सुरक्षित गरिएका 5 पहिचानमा नम्बर लगाएर उही नम्बरका तालिका लाइनसँग राखिएको।
-सन्दर्भ नतिजा (वास्तविक नतिजा)।
+chitra: yo talim ma sanchchai surakshit garieka 5 pahichan ma number lagaera uhi numberka talika line sang rakhieko.
+sandarbha natija (bastabik natija).
 
-**ध्यान दिनुपर्ने कुरा**
+**dhyan dinuparne kura**
 
-यो तालिका र चित्र एउटै पटकको अनुमानको नतिजा हो (`yolo26n.pt`, conf=0.25, imgsz=640 को अभिलेख)।
-फोटो ultralytics package सँगै आउने नमुना तस्बिर हो, COCO मा तालिम भएको model चिनाउन प्रयोग भएको।
-फोटोको स्रोत र अधिकार package को लाइसेन्सभन्दा छुट्टै जाँच्नुपर्छ (`assets/external_samples/PROVENANCE.md`)।
-यो PVC को दोष होइन।
+yo talika ra chitra eutai patakako anumanko natija ho (`yolo26n.pt`, conf=0.25, imgsz=640 ko abhilekh).
+photo ultralytics package sangai aune namuna tasbir ho, COCO ma talim bhaeko model chinaun prayog bhaeko.
+photoko srot ra adhikar package ko laisensabhanda chhuttai janchnuparchha (`assets/external_samples/PROVENANCE.md`).
+yo PVC ko dosh hoina.
 
-**सोच्नुहोस्**
+**sochnuhos**
 
-- यो तालिकाको confidence सही पहिचान हुने सम्भावना हो?
+- yo talikako confidence sahi pahichan hune sambhabana ho?
 
-पहिले सुरक्षित गरिएको एक पटकको अनुमान हो; अहिलेको नतिजा सङ्ख्या वातावरणअनुसार फरक हुन्छ।
+pahile surakshit garieko ek patakako anuman ho; ahileko natija sankhya batabaran anusar farak hunchha.
 
 <!-- ne-cell: 18b85475 | after-heading -->
-### नतिजाको उदाहरण
+### natijako udaharan
 
 <!-- ne-cell: 18b85475 -->
-यो नतिजा यो तालिममा सुरक्षित गरिएको अभिलेख हो (`yolo26n.pt`, `conf=0.25`, `imgsz=640`)। सूक्ष्म सङ्ख्या
-वातावरणअनुसार फरक पर्छ, तर प्रवृत्ति र ठुलो-सानोको सम्बन्ध पढ्नुहोस्।
+yo natija yo talim ma surakshit garieko abhilekh ho (`yolo26n.pt`, `conf=0.25`, `imgsz=640`). sukshma sankhya
+batabaran anusar farak parchha, tar prabritti ra thulo-sanoko sambandh padhnuhos.
 
 <!-- ne-cell: 37628bc4 | after-heading -->
-## Part 5 नतिजा सुरक्षित गर्ने
+## Part 5 natija surakshit garne
 
 <!-- ne-cell: 4635e510 | after-heading -->
-**तस्बिर र तालिका सुरक्षित गर्ने**
+**tasbir ra talika surakshit garne**
 <!-- ne-pair: Save the image and the table -->
 
 <!-- ne-cell: 4635e510 -->
-बुझाउनुपर्ने कामका रूपमा दुई कुरा सुरक्षित गरिन्छ।
+bujhaunuparne kaamka rupama dui kura surakshit garinchha.
 
-1. टिप्पणी लगाइएको तस्बिर → `submissions/day03/`
-2. पहिचान नतिजाको तालिका (CSV) → `submissions/day03/`
+1. tippani lagaieko tasbir → `submissions/day03/`
+2. pahichan natijako talika (CSV) → `submissions/day03/`
 
-सुरक्षित गर्ने ठाउँ **तालिम फोल्डरबाट सापेक्ष बाटो** ले तय गरिन्छ। तपाईंको प्रयोगकर्ता नाम वा स्थापना
-ठाउँमा निर्भर हुँदैन।
+surakshit garne thaun **talim folder baat sapeksh bato** le tay garinchha. tapainko prayogakarta naam wa sthapana
+thaun ma nirbhar hundaina.
 
 <!-- ne-cell: 7886dfe4 | after-heading -->
-**`utf-8-sig` किन लगाउने**
+**`utf-8-sig` kina lagaune**
 <!-- ne-pair: Why `utf-8-sig` -->
 
 <!-- ne-cell: 7886dfe4 -->
-CSV Excel मा खोल्दा `utf-8` मात्र भए जापानी अक्षर बिग्रन सक्छ। `utf-8-sig` लगाउँदा Excel मा पनि ठीक
-देखिन्छ। नेपाली अक्षरको हकमा पनि यही कारणले `utf-8-sig` उपयोगी हुन्छ।
+CSV Excel ma kholda `utf-8` matra bhae Japani akshar bigran sakchha. `utf-8-sig` lagaunda Excel ma pani thik
+dekhinchha. Nepali aksharako hakama pani yahi karanle `utf-8-sig` upayogi hunchha.
 
 <!-- ne-cell: a82596f0 | after-heading -->
-## अभ्यास
+## abhyas
 
 <!-- ne-cell: fbd218e2 | after-heading -->
-**अभ्यास 1 (आधारभूत): confidence का आधारमा क्रममा राख्ने**
+**abhyas 1 (adharabhut): confidence ka adharama kram ma rakhne**
 <!-- ne-pair: Exercise 1 (basic): sort by confidence -->
 
 <!-- ne-cell: fbd218e2 -->
-पहिचानको नतिजा confidence को **बढीबाट घटी** क्रममा मिलाएर माथिल्ला 3 वटा देखाउनुहोस्।
+pahichanko natija confidence ko **badhi baat ghati** kram ma milaera mathilla 3 bata dekhaunuhos.
 
-सङ्केत: `table.sort_values(by="confidence", ascending=False)`
+sanket: `table.sort_values(by="confidence", ascending=False)`
 
-पूरा भएको मापन: पहिलो लाइनको confidence तपाईंको तालिकामा सबैभन्दा ठुलो हो। class नाम र मान हरेक पटक
-फरक हुन सक्छ, अभिलेखको `bus 0.88` सँग मिल्नैपर्छ भन्ने छैन।
+pura bhaeko maapan: pahilo lineko confidence tapainko talika ma sabaibhanda thulo ho. class naam ra maan harek patak
+farak huna sakchha, abhilekhako `bus 0.88` sang milnaiparchha bhanne chhaina.
 
 <!-- ne-cell: 744ed2c5 | after-heading -->
-**अभ्यास 2 (मध्यम): `zidane.jpg` मा पनि अनुमान चलाउने**
+**abhyas 2 (madhyam): `zidane.jpg` ma pani anuman chalaune**
 <!-- ne-pair: Exercise 2 (intermediate): run it on `zidane.jpg` too -->
 
 <!-- ne-cell: 744ed2c5 -->
-Ultralytics सँगै `zidane.jpg` पनि आउँछ। उही क्रममा अनुमान चलाएर **भेटिएका class र सङ्ख्या** देखाउनुहोस्।
+Ultralytics sangai `zidane.jpg` pani aaunchha. uhi kram ma anuman chalaera **bhetieka class ra sankhya** dekhaunuhos.
 
-पूरा भएको मापन: आफ्नै नतिजाबाट कति `person` भेटियो र अरू के भेटियो भनेर बताउन सक्ने।
+pura bhaeko maapan: aphnai natija baat kati `person` bhetiyo ra aru ke bhetiyo bhanera bataun sakne.
 
 <!-- ne-cell: 5759f10e | after-heading -->
-**अभ्यास 3 (वैकल्पिक): PVC को तस्बिरमा लगाएर हेर्ने**
+**abhyas 3 (baikalpik): PVC ko tasbir ma lagaera herne**
 <!-- ne-pair: Exercise 3 (optional challenge): try it on a PVC-like image -->
 
 <!-- ne-cell: 5759f10e -->
-`assets/defect_samples/defect_multi.png` मा अनुमान चलाउनुहोस्। **के बाँकी रह्यो? केही बाँकी रहेन भने
-त्यसको अर्थ के हो?**
+`assets/defect_samples/defect_multi.png` ma anuman chalaunuhos. **ke banki rahyo? kehi banki rahen bhane
+tyasko arth ke ho?**
 
-दिन १ र दिन ३ नोटबुक ०१ मा सिकेका कारण प्रयोग गरेर तीन लाइनमा व्याख्या गर्नुहोस्।
+din 1 ra din 3 notebook 01 ma sikeka karan prayog garera tin line ma byakhya garnuhos.
 
-पूरा भएको मापन: बाँकी रहेका पहिचान (भए) र केही नरहनुको कारण class परिभाषा, क्षेत्र, आकार र खिचाइको
-अवस्थाको दृष्टिले व्याख्या गरेको छ, र शून्यलाई "सामान्य" वा "दोष छैन भन्ने सही उत्तर" लेखेको छैन।
+pura bhaeko maapan: banki raheka pahichan (bhae) ra kehi narahanuko karan class paribhasha, kshetra, akar ra khichaiko
+abasthako drishtile byakhya gareko chha, ra shunya lai "samanya" wa "dosh chhaina bhanne sahi uttar" lekheko chhaina.
 
 <!-- ne-cell: d60cb985 | after-heading -->
-#### बुझाइ जाँच्ने प्रश्न
+#### bujhai jaanchne prashna
 
 <!-- ne-cell: d60cb985 -->
-1. `model.predict()` ले के फर्काउँछ? एउटा तस्बिर हुँदा कहाँ हेर्ने?
-2. `conf` घटाउँदा बाँकी पहिचानको सङ्ख्या के हुन्छ? सधैं बढ्छ? त्यसको सट्टा के बढ्छ?
-3. पहिचानको नतिजाबाट "class नाम" कसरी निकाल्ने?
-4. model डाउनलोड असफल भए तपाईं के गर्नुहुन्छ?
-5. सँगै आउने `bus.jpg` र `zidane.jpg` प्रयोग गर्नुका फाइदा र ध्यान दिनुपर्ने कुरा भन्नुहोस्।
+1. `model.predict()` le ke pharkaunchha? euta tasbir hunda kahan herne?
+2. `conf` ghataunda banki pahichanko sankhya ke hunchha? sadhain badhchha? tyasko satta ke badhchha?
+3. pahichanko natija baat "class naam" kasari nikalne?
+4. model daunalod asaphal bhae tapain ke garnuhunchha?
+5. sangai aune `bus.jpg` ra `zidane.jpg` prayog garnuka phaida ra dhyan dinuparne kura bhannuhos.
 
 <!-- ne-cell: 3417c856 | after-heading -->
-## समस्या परेमा
+## samasya parema
 
 <!-- ne-cell: 3417c856 -->
-त्रुटि आएपछि पहिले "कुन सेलमा", "कुन लाइनमा", "के सन्देश आयो" भनेर लेख्नुहोस्। बुझाउनुपर्ने काममा पनि
-त्यही अभिलेख राख्नुहोस्।
+truti aepachhi pahile "kun cell ma", "kun line ma", "ke sandesh ayo" bhanera lekhnuhos. bujhaunuparne kaam ma pani
+tyahi abhilekh rakhnuhos.
 
-| लक्षण | के गर्ने |
+| lakshan | ke garne |
 | --- | --- |
-| `ModuleNotFoundError: No module named 'ultralytics'` | kernel गलत छ वा `ultralytics` छैन। `requirements\yolo.txt` जाँच्नुहोस्। |
-| `URLError` / `TimeoutError` ले डाउनलोड हुँदैन | फेरि चलाउनुहोस्। सुधार नभए releases पेजबाट हातैले डाउनलोड गरी `assets/models/` मा राख्नुहोस्। |
-| `RuntimeError: ... CUDA ...` | CPU संस्करणको torch छ कि जाँच्नुहोस्। GPU नभई CUDA तोक्दा असफल हुन्छ। |
-| पहिचान सङ्ख्या शून्य | `conf` घटाउनुहोस् (जस्तै 0.10) वा तस्बिरमा साँच्चै वस्तु छ कि जाँच्नुहोस्। |
-| तस्बिर देखिँदैन | `result.plot()` BGR फर्काउँछ। `cv2.cvtColor(..., cv2.COLOR_BGR2RGB)` बिर्सिएको छ कि जाँच्नुहोस्। |
-| धेरै ढिलो चल्छ | CPU मा एउटा तस्बिरमा केही सेकेन्ड लाग्छ। `imgsz=320` राख्दा छिटो हुन्छ। |
+| `ModuleNotFoundError: No module named 'ultralytics'` | kernel galat chha wa `ultralytics` chhaina. `requirements\yolo.txt` jaanchnuhos. |
+| `URLError` / `TimeoutError` le daunalod hundaina | feri chalaunuhos. sudhar nabhae releases pejabat hataile daunalod gari `assets/models/` ma rakhnuhos. |
+| `RuntimeError: ... CUDA ...` | CPU sanskaranako torch chha ki jaanchnuhos. GPU nabhai CUDA tokda asaphal hunchha. |
+| pahichan sankhya shunya | `conf` ghataunuhos (jastai 0.10) wa tasbir ma sanchchai bastu chha ki jaanchnuhos. |
+| tasbir dekhindain | `result.plot()` BGR pharkaunchha. `cv2.cvtColor(..., cv2.COLOR_BGR2RGB)` birsieko chha ki jaanchnuhos. |
+| dherai dhilo chalchha | CPU ma euta tasbir ma kehi sekend lagchha. `imgsz=320` rakhda chhito hunchha. |
 
 <!-- ne-cell: 3f7ce62e | after-heading -->
-## सम्पन्नता जाँचसूची
+## sampannata janchasuchi
 
 <!-- ne-cell: 3f7ce62e -->
-**अनिवार्य** भनेको तलको "अनिवार्य" सूची मात्र हो। **अभ्यास 3 र थप चुनौती वैकल्पिक** हुन्; नगरे पनि पूरा
-मानिन्छ। समय बाँकी भएमा मात्र गर्नुहोस्।
+**aniwarya** bhaneko talako "aniwarya" soochi matra ho. **abhyas 3 ra thap chunauti baikalpik** hun; nagare pani pura
+maninchha. samay banki bhae ma matra garnuhos.
 
-**अनिवार्य**
+**aniwarya**
 
-- [ ] Part 1–Part 5 पढेर सबै code सेल चलाएँ
-- [ ] model डाउनलोड भएर `assets/models/` मा सुरक्षित भयो
-- [ ] टिप्पणी लगाइएको तस्बिर सुरक्षित गरें
-- [ ] पहिचान नतिजाको तालिका CSV मा सुरक्षित गरें
-- [ ] अभ्यास 1 र 2 (अनिवार्य) गरें
-- [ ] class सूचीमा `black_spot` छैन भनेर पक्का गरें
-- [ ] बुझाइ जाँच्ने 5 प्रश्नको उत्तर दिएँ
-- [ ] नोटबुक सुरक्षित गरें
+- [ ] Part 1–Part 5 padher sabai code cell chalaen
+- [ ] model daunalod bhaera `assets/models/` ma surakshit bhayo
+- [ ] tippani lagaieko tasbir surakshit garen
+- [ ] pahichan natijako talika CSV ma surakshit garen
+- [ ] abhyas 1 ra 2 (aniwarya) garen
+- [ ] class soochi ma `black_spot` chhaina bhanera pakka garen
+- [ ] bujhai jaanchne 5 prashnako uttar dien
+- [ ] notebook surakshit garen
 
-**वैकल्पिक**
+**baikalpik**
 
-- [ ] अभ्यास 3 (वैकल्पिक): PVC तस्बिरमा नतिजा जाँचेर कारण तीन लाइनमा लेखें
-- [ ] थप चुनौती: `imgsz` बदलेर पहिचान सङ्ख्या र समय तुलना गरें
+- [ ] abhyas 3 (baikalpik): PVC tasbir ma natija jancher karan tin line ma lekhen
+- [ ] thap chunauti: `imgsz` badaler pahichan sankhya ra samay tulna garen
 
 <!-- ne-cell: bceb7c93 | after-heading -->
-## थप अध्ययन (वैकल्पिक)
+## thap adhyayan (baikalpik)
 
 <!-- ne-cell: bceb7c93 -->
-### सन्दर्भ लिङ्क
+### sandarbha lingk
 
-- [Ultralytics Predict मोड](https://docs.ultralytics.com/modes/predict/)
-- [Ultralytics model को सूची](https://docs.ultralytics.com/models/)
-- [COCO डेटासेट](https://cocodataset.org/)
+- [Ultralytics Predict mod](https://docs.ultralytics.com/modes/predict/)
+- [Ultralytics model ko soochi](https://docs.ultralytics.com/models/)
+- [COCO dataset](https://cocodataset.org/)
 
-### थप चुनौती (अनिवार्य होइन)
+### thap chunauti (aniwarya hoina)
 
-`imgsz` लाई 320 / 640 / 1280 बदलेर पहिचान सङ्ख्या र चल्ने समयको परिवर्तन तालिकामा राख्नुहोस्।
+`imgsz` lai 320 / 640 / 1280 badaler pahichan sankhya ra chalne samayko paribartan talika ma rakhnuhos.

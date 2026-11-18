@@ -82,22 +82,22 @@ SUFFIX_JOINED = {
 GLOSSARY = {
     "नेपाली": "Nepali", "जापानी": "Japani", "अङ्ग्रेजी": "Angreji",
     "दिन": "din", "नोटबुक": "notebook", "पाठ": "paath", "भाग": "bhaag",
-    "अभ्यास": "abhyaas", "उदाहरण": "udaharan", "प्रश्न": "prashna",
+    "उदाहरण": "udaharan", "प्रश्न": "prashna",
     "उत्तर": "uttar", "काम": "kaam", "समय": "samay", "मिनेट": "minet",
-    "सिकाइ": "sikai", "लक्ष्य": "lakshya", "पूर्वशर्त": "poorwashart",
+    "लक्ष्य": "lakshya", "पूर्वशर्त": "poorwashart",
     "तस्बिर": "tasbir", "चित्र": "chitra", "तालिम": "talim",
     "प्रशिक्षण": "prashikshan", "परीक्षण": "parikshan",
-    "प्रमाणीकरण": "pramaanikaran", "क्यालिब्रेसन": "calibration",
-    "मूल्याङ्कन": "moolyankan", "डेटा": "data", "डेटासेट": "dataset",
-    "मोडेल": "model", "स्कोर": "score", "थ्रेसहोल्ड": "threshold",
+    "क्यालिब्रेसन": "calibration",
+    "डेटा": "data", "डेटासेट": "dataset",
+    "मोडेल": "model", "थ्रेसहोल्ड": "threshold",
     "सामान्य": "samanya", "असामान्य": "asamanya", "दोष": "dosh",
     "नतिजा": "natija", "सङ्ख्या": "sankhya", "मान": "maan", "स्तर": "star",
     "तस्बिर-स्तर": "tasbir-star", "वस्तु-स्तर": "wastu-star",
     "फाइल": "file", "फोल्डर": "folder", "बाटो": "bato", "नाम": "naam",
     "सेटिङ": "setting", "सेटिङमा": "setting ma", "सेल": "cell",
     "कर्नेल": "kernel", "मेमोरी": "memory", "ब्याङ्क": "bank",
-    "स्कोर": "score", "स्कोरको": "score ko", "म्याप": "map",
-    "इनपुट": "input", "हिटम्याप": "heatmap", "हिटम्यापको": "heatmap ko",
+    "स्कोर": "score", "स्कोरको": "scoreko", "म्याप": "map",
+    "इनपुट": "input", "हिटम्याप": "heatmap", "हिटम्यापको": "heatmapko",
     "आउटपुट": "output", "नम्बर": "number", "वर्गीकरण": "bargikaran",
     "विवरण": "biwaran", "वाक्य": "baky", "वाक्यमा": "bakyama",
     "सुरक्षित": "surakshit", "जाँच": "jaanch", "जाँच्नुहोस्": "jaanchnuhos",
@@ -127,7 +127,7 @@ GLOSSARY = {
     "बेला": "bela", "बेलामा": "belama", "समयमा": "samayma",
     "मा": "ma", "मा।": "ma.", "लाई": "lai", "ले": "le", "को": "ko",
     "का": "ka", "की": "ki", "बाट": "baat", "सँग": "sang", "सँगै": "sangai",
-    "र": "ra", "वा": "wa", "तर": "tar", "पनि": "pani", "मात्र": "maatra",
+    "र": "ra", "वा": "wa", "तर": "tar", "पनि": "pani",
     "अनि": "ani", "किन": "kina", "कसरी": "kasari", "के": "ke",
     "कुन": "kun", "कति": "kati", "कहाँ": "kahan", "कहिले": "kahile",
     "यो": "yo", "त्यो": "tyo", "यी": "yi", "ती": "ti", "यस": "yas",
@@ -150,8 +150,8 @@ GLOSSARY = {
     "अनुपात": "anupaat", "दर": "dar", "प्रतिशत": "pratishat",
     "सही": "sahi", "गलत": "galat", "झुटो": "jhuto", "अलार्म": "alarm",
     "छुट्ने": "chhutne", "छुट्नु": "chhutnu", "पहिचान": "pahichan",
-    "क्याप्सन": "caption", "सन्दर्भ": "sandarbha", "योजनाबद्ध": "yojanabaddha",
-    "संश्लेषित": "sanshleshit",     "वास्तविक": "bastabik", "गणना": "ganana",
+    "क्याप्सन": "caption", "सन्दर्भ": "sandarbha",
+    "वास्तविक": "bastabik",
     "गरिएको": "garieko", "गरिएका": "garieka", "बनाइएको": "banaiyeko",
     "देखाइएको": "dekhaieko", "नापिएको": "napieko", "लेखिएको": "lekhieko",
     "सकिएको": "sakieko", "भनिएको": "bhanieko", "राखिएको": "rakhieko",
@@ -161,11 +161,11 @@ GLOSSARY = {
     "नियम": "niyam", "निर्णय": "nirnaya", "विधि": "bidhi", "चरण": "charan",
     "क्रम": "kram", "दिशा": "disha", "सीमा": "sima", "स्तम्भ": "stambha",
     "लाइन": "line", "तालिका": "talika", "सूची": "soochi", "सङ्केत": "sanket",
-    "हिस्सा": "hissa", "भूमिका": "bhoomika", "वातावरण": "batabaran",
+    "वातावरण": "batabaran",
     "कम्प्युटर": "computer", "प्रणाली": "pranali", "समस्या": "samasya",    "समाधान": "samadhan", "त्रुटि": "truti", "सन्देश": "sandesh",
-    "सुरु": "suru", "अन्त्य": "antya", "अन्तिम": "antim", "पूरा": "poora",
+    "सुरु": "suru", "अन्त्य": "antya", "अन्तिम": "antim",
     "तयार": "tayar", "तयारी": "tayari", "खुला": "khula", "बन्द": "banda",
-    "सक्रिय": "sakriya", "निष्क्रिय": "nishkriya", "स्थिर": "sthir",
+    "सक्रिय": "sakriya", "निष्क्रिय": "nishkriya",
     "बदलिन्छ": "badlinchha", "बदल्नुहोस्": "badalnuhos",
     "फरक": "farak", "फरक छ": "farak chha", "उही": "uhi", "समान": "saman",
     "समान छ": "saman chha", "बराबर": "barabar", "हुनसक्छ": "hunasakchha",
@@ -179,11 +179,10 @@ GLOSSARY = {
     "अनुवाद": "anuwad", "मूल्याङ्कन": "mulyankan", "पूरा": "pura",
     "संश्लेषित": "sansleshit", "योजनाबद्ध": "yojanabaddha",
     "अनुवादमा": "anuwad ma", "नेपालीमा": "Nepali ma",
-    "मापन": "maapan", "मापनको": "maapan ko", "तुलना": "tulna",
-    "सिकाइ": "sikai", "सिकाइको": "sikai ko", "गणना": "ganana",
+    "मापन": "maapan", "मापनको": "maapanko", "तुलना": "tulna",
+    "सिकाइ": "sikai", "सिकाइको": "sikaiko", "गणना": "ganana",
     "गणना गर्नुहोस्": "ganana garnuhos", "तय": "tay", "तय गर्नुहोस्": "tay garnuhos",
     "स्थिर": "sthir", "स्थिर गर्नुहोस्": "sthir garnuhos",
-    "पहिले": "pahile", "पछि": "pachhi", "अघि": "aghi",
     "राख्नुहोस्": "rakhnuhos", "हेर्नुहोस्": "hernuhos",
     "लेख्नुहोस्": "lekhnuhos", "जाँच्नुहोस्": "jaanchnuhos",
     "सोच्नुहोस्": "sochnuhos", "चलाउनुहोस्": "chalaunuhos",
@@ -207,6 +206,39 @@ GLOSSARY = {
     "पक्ष": "paksh", "हिस्सा": "hissa", "थप": "thap", "अध्ययन": "adhyayan",
     "निकाल्ने": "nikalne", "आधारमा": "adharama", "वितरण": "bitaran",
     "निरीक्षण": "nirikshan", "निरीक्षणमा": "nirikshan ma",
+    # `-एर` 動詞連用形 / `-एर` converbs: the rule engine stops at the final `र` and yields
+    # `banaer`. Nepali says `banaera`, so every converb of the course is glossed by hand.
+    "बनाएर": "banaera", "चलाएर": "chalaera", "भएर": "bhaera", "मिलाएर": "milaera",
+    "छुट्याएर": "chhutyaera", "छोएर": "chhoera", "लगाएर": "lagaera",
+    "घुमाएर": "ghumaera", "लिएर": "liera", "घटाएर": "ghataera",
+    "मेटाएर": "metaera", "बदलिएर": "badaliera", "हटाएर": "hataera",
+    "ल्याएर": "lyaera", "गएर": "gaera", "भेट्टाएर": "bhettaera",
+    "उल्ट्याएर": "ultyaera", "थिचिएर": "thichiera", "छुट्टाएर": "chhuttaera",
+    "फर्काएर": "pharkaera", "साटिएर": "satiera", "पछ्याएर": "pachhyaera",
+    "जोडिएर": "jodiera", "रोकिएर": "rokiera",
+    # `र`/`न`/`ल` で終わる語 / words ending in a consonant cluster: the dropped final vowel
+    # would leave `bhitr`, `gann`, `kshetr`, which nobody can read aloud.
+    "भित्र": "bhitra", "क्षेत्र": "kshetra", "केन्द्र": "kendra", "सूत्र": "sutra",
+    "गन्न": "ganna", "भन्न": "bhanna", "नाप्न": "napna", "निकाल्न": "nikalna",
+    "भेट्न": "bhetna", "देख्न": "dekhna", "बढ्न": "badhna", "उकास्न": "ukasna",
+    "छुट्न": "chhutna", "जोड्न": "jodna", "कर्ण": "karna", "विभिन्न": "bibhinna",
+    "खोल्न": "kholna", "सम्हाल्न": "samhalna", "सँभाल्न": "sanbhalna",
+    "सर्न": "sarna", "पुग्न": "pugna", "चल्न": "chalna", "पार्न": "parna",
+    "समात्न": "samatna", "घट्न": "ghatna", "बुझ्न": "bujhna", "चिन्न": "chinna",
+    "नगन्न": "naganna", "नबिगार्न": "nabigarna",
+    "सम्पूर्ण": "sampurna", "पूर्ण": "purna", "अर्थपूर्ण": "arthapurna",
+    "पूर्णाङ्क": "purnank", "सूक्ष्म": "sukshma", "शून्य": "shunya",
+    "समग्र": "samagra", "नत्र": "natra", "चक्र": "chakra", "यन्त्र": "yantra",
+    "संयन्त्र": "sanyantra", "स्वतन्त्र": "sbatantra", "विज्ञ": "bigya",
+    "प्रमाणपत्र": "pramanapatra", "दृश्यक्षेत्र": "drishyakshetra",
+    "गुरुत्वकेन्द्र": "gurutbakendra",
+    # 複合語「〜भित्र」/ compounds in `-भित्र` keep the same spelling as the simple word
+    "मानकभित्र": "manakbhitra", "दायराभित्र": "dayarabhitra",
+    "मापदण्डभित्र": "mapadandbhitra", "तस्बिरभित्र": "tasbirbhitra",
+    "मिनेटभित्र": "minetbhitra", "फोल्डरभित्र": "foldarbhitra",
+    "गुणभित्र": "gunbhitra", "पङ्क्तिभित्र": "pangktibhitra",
+    "कम्प्युटरभित्र": "kampyuterbhitra", "सीमाभित्र": "simabhitra",
+    "सह्यताभित्र": "sahyatabhitra", "लूपभित्र": "lupbhitra",
 }
 
 
@@ -258,7 +290,11 @@ def romanize_word(word: str) -> str:
     split = _suffix_split(stripped)
     if split is not None:
         return split[0] + split[1] + trailing
+    return _rule_romanize(stripped) + trailing
 
+
+def _rule_romanize(stripped: str) -> str:
+    """用語集を通さない変換規則そのもの / the letter rules, with no glossary lookup."""
     out: list[str] = []
     inherent = False
     index = 0
@@ -328,7 +364,48 @@ def romanize_word(word: str) -> str:
     text = "".join(out)
     if text.endswith("aa"):
         text = text[:-1]
-    return text + trailing
+    return text
+
+
+# 綴り直しの安全弁 / guards for the respelling pass. Short rule outputs collide with code
+# identifiers and English words (`ab`, `bat`, `man`), and `path` is a file-path token in the
+# YOLO lessons, so neither is ever rewritten.
+_RESPELLING_MIN_LENGTH = 4
+_RESPELLING_SKIP = frozenset({"path", "data", "model", "test", "train", "range", "byte"})
+
+
+def glossary_respellings() -> dict[str, str]:
+    """規則の出力 → 用語集の綴り / rule-engine spelling -> reviewed glossary spelling.
+
+    Used to bring an already Romanized catalog back in line after the glossary is extended;
+    ``convert_nepali_to_latin.py`` applies it to Latin catalogs, where no Devanagari is left to
+    transliterate. Only *unambiguous* rules are kept: when two glossary words collapse onto the
+    same rule output (``हुन`` and ``हुन्`` both give ``hun``) the pair is different words, so
+    rewriting one into the other would be wrong.
+    """
+    produced: dict[str, list[str]] = {}
+    for devanagari in GLOSSARY:
+        produced.setdefault(_rule_romanize(devanagari), []).append(devanagari)
+    mapping = {}
+    for rule, sources in produced.items():
+        if len(sources) != 1 or not rule.isalpha():
+            continue
+        if len(rule) < _RESPELLING_MIN_LENGTH or rule in _RESPELLING_SKIP:
+            continue
+        reviewed = GLOSSARY[sources[0]]
+        if reviewed != rule and reviewed.isalpha() and rule not in ENGLISH_MARKERS:
+            mapping[rule] = reviewed
+    return mapping
+
+
+def apply_glossary_spellings(text: str) -> str:
+    """ラテン文字だけのカタログに用語集の綴りを当てる / re-apply the glossary to Latin text."""
+    mapping = glossary_respellings()
+    if not mapping:
+        return text
+    pattern = re.compile(r"(?<![\w-])(%s)(?![\w-])"
+                         % "|".join(sorted(map(re.escape, mapping), key=len, reverse=True)))
+    return pattern.sub(lambda match: mapping[match.group(0)], text)
 
 
 def romanize_text(text: str) -> str:
@@ -371,6 +448,19 @@ _FUNCTION_WORDS = {
     "abhilekh", "surakshit", "mulyankan", "udaharan", "prashna", "uttar",
     "abhyas", "sikai", "lakshya", "din", "bhaag", "charan", "kram", "kura",
     "tayari", "tulna", "bishay", "biwaran", "tah", "padhne", "jaanchne",
+    # 見出しだけの短いブロックは語数が少ないので、見出しによく出る語も数える。
+    # Short `after-heading` blocks hold a handful of words, so the vocabulary that headings use
+    # most is listed here as well.
+    "pahilo", "paila", "rakhne", "tarika", "khojne", "herne", "heraun", "gardai",
+    "bandne", "badalne", "badalinda", "sanbhalne", "dohoryaun", "lagaunu",
+    "chitrako", "bhaagko", "bhaneko", "bastabama", "bastubat", "prakriya",
+    "ujyalo", "utpadan", "ramra", "seto", "mathi", "bayan", "talatir",
+    "akshar", "anusar", "sart", "apabad", "abashyakata", "mapadand", "ayat",
+    "baks", "baunding", "kantur", "kinara", "lup", "naper", "napne", "sarer",
+    "sanyog", "pratichchhed", "pichchhe", "pharkieko", "phankshan", "dip",
+    "mesin", "mesinalai", "sbachalan", "nirdeshank", "mulabindu", "chitrabindu",
+    "notabukabhitrabat", "talikako", "pikselalai", "milimitarama", "bikas",
+    "aichchhik", "bishbas", "lekher", "samma", "chal", "sikai", "kram",
 }
 
 NEPALI_MARKERS = (

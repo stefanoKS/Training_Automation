@@ -102,12 +102,12 @@ tulna (sansleshit tasbir, ganana garieka maan).
 **dhyan dinaparne kura**
 
 ujyaloko asamanata, butta, sthanako sarai jasta kurale samanya tasbir ma pani bhinnata aaunchha. euta
-samagr chamakale tyo bhinnata byakhya garna sakdain bhanne kura pahile thaha pae asamanyata naksa padhne tarika
+samagra chamakale tyo bhinnata byakhya garna sakdain bhanne kura pahile thaha pae asamanyata naksa padhne tarika
 nai badlinchha.
 
 **sochnuhos**
 
-- samagr chamak uhi bhaeka dui tasbir pani asamanya bhanieko natija farak kina huna sakchha?
+- samagra chamak uhi bhaeka dui tasbir pani asamanya bhanieko natija farak kina huna sakchha?
 
 <!-- ne-cell: ef2014d3 | after-heading -->
 **samanya ra asamanya namuna**
@@ -122,7 +122,7 @@ matra" aaunchha. asamanyata pahichanle yahi gun prayog garchha.
 
 **talako cell le ke dekhaunchha.** samanya prashikshan tasbir ra `assets/defect_samples/` ka sansleshit
 (shikshan) dosh namuna matra. mulyankan folder (`test/`) ma pachhiko notebook le calibration ra test ma
-chhutyaune tasbir milieka hunchhan, tyasaile tyasko sankhya ra bhitri bibaran threshold sthir garnuaghi
+chhutyaune tasbir milieka hunchhan, tyasaile tyasko sankhya ra bhitri biwaran threshold sthir garnuaghi
 dekhaindain. yahan pahile dekhaune ho bhane pachhiko mulyankan "punar prayog garieko data" banchha.
 
 <!-- ne-cell: d5d90ce4 | after-heading -->
@@ -133,7 +133,7 @@ dekhaindain. yahan pahile dekhaune ho bhane pachhiko mulyankan "punar prayog gar
 
 <!-- ne-cell: fig-VisA_samples | after-image:../../assets/external_samples/open_reference/VisA_samples.png -->
 chitra: VisA datasetko saransh (Yang Zou adi / Amazon Science; VisA dataset CC BY 4.0). samanya ra asamanya
-dubai manchhele chhutyaer jamma gareko bastabik audyogik data. yo talimko PVC saman hoina.
+dubai manchhele chhutyaera jamma gareko bastabik audyogik data. yo talimko PVC saman hoina.
 
 **dhyan dinaparne kura**
 
@@ -143,7 +143,7 @@ calibrationka lagi 26 ra mulyankanka lagi 26 tasbir chhutyaieka chhan.
 
 **sochnuhos**
 
-- samanya tasbir matra bhae kun kura napn sakindaina: chhutne dar ki jhuto alarm dar?
+- samanya tasbir matra bhae kun kura napna sakindaina: chhutne dar ki jhuto alarm dar?
 
 <!-- ne-cell: clarity-patch-data-roles | after-heading -->
 ### shabdabalibhanda pahile datako bhoomika padhne
@@ -206,14 +206,14 @@ PatchCore le tasbir lai **sana bhaag (pyach)** ma bander sochchha. talako chitra
 
 **bastabik model yasari chaldain.** yo talimko model le talim bhaeko CNN (resnet18) ko bichako tah
 (`layer2`, `layer3`) ka **feature naksa** prayog garchha. feature naksako euta sthanale input tasbirko
-**obharalyap hune pharakilo kshetr** saransh garchha. tyasaile:
+**obharalyap hune pharakilo kshetra** saransh garchha. tyasaile:
 
 - euta "pyach" pikselalai 16 × 16 ma katieko tukra hoina
-- grid kati sukshm hunchha bhanne kura backbone, prayog hune tah ra purb-prashodhan (input akar) le tay garchha
-- euta sthanale samhalne kshetr obharalyap hune hunale sthan sankhya ra piksel sankhyako sambandh sidha chhaina
+- grid kati sukshma hunchha bhanne kura backbone, prayog hune tah ra purb-prashodhan (input akar) le tay garchha
+- euta sthanale samhalne kshetra obharalyap hune hunale sthan sankhya ra piksel sankhyako sambandh sidha chhaina
 
 bander hernuko karan uhi ho: **dherai asamanyata sthaniy rupama hunchhan**, tyasaile sthaniy bhaag lai samanya sang
-tulna garda bhetn sajilo hunchha. tar **tasbirabhariko chamak paribartan, buttako sarai, akar bigranu** jasta
+tulna garda bhetna sajilo hunchha. tar **tasbirabhariko chamak paribartan, buttako sarai, akar bigranu** jasta
 pharakilo dayaraka asamanyata (global wa sanrachanagat) sthaniy tulnale matra thamyaun gahro huna sakchha.
 
 <!-- ne-cell: f6726637 | after-heading -->
@@ -228,7 +228,7 @@ tasbirko euta sthan → [0.14, 0.73, 0.08, ...] (sayaundekhi hajaraun sankhya)
 ```
 
 dekhine rup uhi bhae sankhyako shringkhala pani mildo hunchha. **"dekhine rup" lai "sankhyako thegana" ma
-badaleko** bhanera sochda bujhn sajilo hunchha.
+badaleko** bhanera sochda bujhna sajilo hunchha.
 
 feature ganana garne bhaag (**backbone**) dherai tasbir ma pahile nai talim bhaeko model baat liinchha (jastai ImageNet
 ma talim bhaeko ResNet). **yo talim ma backbone ko weight talim garindain (sthir rakhinchha).**
@@ -241,7 +241,7 @@ ma talim bhaeko ResNet). **yo talim ma backbone ko weight talim garindain (sthir
 nayan sthanako feature **samanya featureko samuh (memory bank)** baat kati tadha chha napinchha.
 
 ```text
-nayan feature → memory bank bhitr sabaibhanda najikako samanya feature khojne
+nayan feature → memory bank bhitra sabaibhanda najikako samanya feature khojne
           → tyo duri "samanyabhanda kati farak chha" bhanne sankhya banchha
 ```
 
@@ -249,11 +249,11 @@ nayan feature → memory bank bhitr sabaibhanda najikako samanya feature khojne
 - duri **thulo** … rakhieka samanya feature baat **tadha** (dekhine rup mildaina)
 
 **duri "praman" ho, "uttar" hoina.** duri sano hunda samanya sang milne sambandh matra hunchha; duri aphain
-"samanya" bhanne label hoina. OK/NG nikaln **threshold** chahinchha ra thresholdle gareko nirnaya **galat huna
+"samanya" bhanne label hoina. OK/NG nikalna **threshold** chahinchha ra thresholdle gareko nirnaya **galat huna
 sakchha**.
 
 sathai **kachcha duri 0–1 dayarama simit hundaina**. yo talim ma surakshit kachcha duri karib 9–21 dayarama thiyo.
-0–1 hune kura pachhi calibration datako tathyangkale badaleko **score** ho. dui kura chhutyaer padhnuhos
+0–1 hune kura pachhi calibration datako tathyangkale badaleko **score** ho. dui kura chhutyaera padhnuhos
 (Part 5 ma bistrit).
 
 <!-- ne-cell: a85f80ca | after-heading -->
@@ -289,8 +289,8 @@ chitra: euta sthanako feature nikaler sabaibhanda najikako samanya phicharasanga
 **dhyan dinaparne kura**
 
 ③ **byakhyaka lagi banaiyeko 2-ayam yojanabaddha chitra** ho. binduharu **feature spes** ko drishtant hun,
-piksel tyasai milaer rakhieko hoina. bastabik "pyach" pikselabat naobharalyap hune tailama katieko hoina;
-**CNN feature naksako euta sthan** le input tasbirko **obharalyap hune kshetr** saransh garchha. bastabik
+piksel tyasai milaera rakhieko hoina. bastabik "pyach" pikselabat naobharalyap hune tailama katieko hoina;
+**CNN feature naksako euta sthan** le input tasbirko **obharalyap hune kshetra** saransh garchha. bastabik
 model le sayaun ayamako bhitri pratinidhitb prayog garchha. samjhanuparne kura eutai sambandh ho: rakhieka samanya
 feature baat jati tadha, tyo dekhine rup samanyabhanda tyati farak. **"thulo = asamanya" threshold tay garepachhi
 matra** lagu hunchha; duri thulo bhae pani thresaholdabhanda kam bhae nirnaya OK nai hunchha.
@@ -324,7 +324,7 @@ chitra: samanya pyachka feature jamma garieko memory bank ra dui kberibatako dur
 **dhyan dinaparne kura**
 
 memory bank ma samanya tasbirka feature surakshit hunchhan. samanya nabhaeko tasbir misiyo bhane score ghater
-chhutne badhn **sakchha** (sadhainbhari pahichanai hundaina bhanne gyarenti hoina). misieko bhetie hataer feri banaunuhos
+chhutne badhna **sakchha** (sadhainbhari pahichanai hundaina bhanne gyarenti hoina). misieko bhetie hataera feri banaunuhos
 ra arko tasbir ma jaanchnuhos.
 
 **sochnuhos**
@@ -399,7 +399,7 @@ threshold calibration data ma tay garnuhos ra parikshan data ma nasarnuhos (din 
 badhi bishbas nagarnuhos. yi kurako gyarenti chhaina.
 
 1. **sabai dosh bhetne** — "samanya sang milne dosh" chhutchha
-2. **doshko prakar bhanne** — "kalo thoplo" ki "chiso" bhann sakdain
+2. **doshko prakar bhanne** — "kalo thoplo" ki "chiso" bhanna sakdain
 3. **samanya bhinnatalai asamanya nabhanne** — rangako asamanata, butta ra ujyaloko asamanata asamanya thanne
    sambhabana dherai hunchha
 
@@ -452,7 +452,7 @@ rakhne sujhab dinuhos.
 1. asamanyata pahichanko talim ma doshko label chahinchha? karan pani lekhnuhos.
 2. tasbir lai pyach ma kina bandne?
 3. "memory bank" le ke surakshit garchha?
-4. score uchcha = sadhain bigreko saman, bhann kina mildaina?
+4. score uchcha = sadhain bigreko saman, bhanna kina mildaina?
 5. samanya samanako bhinnata (rangako asamanata adi) talim data ma narakhda kasto samasya aaunchha?
 
 <!-- ne-cell: 2fb637f4 | after-heading -->
@@ -465,9 +465,9 @@ tyahi abhilekh rakhnuhos.
 | lakshan | ke garne |
 | --- | --- |
 | samanya tasbir dekhindain | `python assets\scripts\prepare_datasets.py --only anomaly` le data banaunuhos. |
-| graphaka bindu obharalyap bhaer dekhindain | samanya pyach 120 bata chhan. `alpha` ghataunuhos wa `s` sano banaunuhos. |
+| graphaka bindu obharalyap bhaera dekhindain | samanya pyach 120 bata chhan. `alpha` ghataunuhos wa `s` sano banaunuhos. |
 | "duri" ko arth bujhien | yasle bahu-ayami sankhyako farak lai euta sankhya ma badalchha. 2-ayam udaharan ma jaanchnuhos. |
-| threshold kasari tay garne thaha bhaen | samanya tasbir matra bhae jhuto alarm napn sakinchha, chhutne hoina. samanya-asamanya label bhaeko calibration data ma jhuto rijekt darko sima tay garera recall adhikatam banaunuhos. din 5 notebook 02 ma garinchha. |
+| threshold kasari tay garne thaha bhaen | samanya tasbir matra bhae jhuto alarm napna sakinchha, chhutne hoina. samanya-asamanya label bhaeko calibration data ma jhuto rijekt darko sima tay garera recall adhikatam banaunuhos. din 5 notebook 02 ma garinchha. |
 | score 0–1 ma aundain | samanyikaranako tathyangk chhaina (NaN) bhane Anomalib le kachcha duri pharkaunchha. calibration data ma pachhi-prashodhan fit bhaeko chha ki jaanchnuhos. |
 
 <!-- ne-cell: f1c0d7cd | after-heading -->

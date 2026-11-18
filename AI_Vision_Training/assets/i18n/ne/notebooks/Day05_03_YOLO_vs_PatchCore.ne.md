@@ -122,7 +122,7 @@ yo patakako threshold calibration kodale ganana gareko maan baat aaunchha.
 <!-- ne-pair: Read the three files -->
 
 <!-- ne-cell: be4aa133 -->
-| file | banaeko thaun | bhitr ke chha |
+| file | banaeko thaun | bhitra ke chha |
 |---|---|---|
 | `submissions/day05/split_manifest.json` | din 5 notebook 02 | **bibhajanako abhilekh**: kun tasbir talim, calibration wa parikshan ho |
 | `submissions/day04/yolo_predictions_on_shared_set.json` | din 4 notebook 03 | sabai tasbirko YOLO pahichan (confidence sahit) |
@@ -138,7 +138,7 @@ tulnako adhar bann sakdain. purano dhanchako file bhae karan dekhaer rokinchha.
 
 <!-- ne-cell: 415b6d88 -->
 `image` stambha dubai bidhi ma eutai tarikale (`prakar/phailanam.png`) milainchha. namilae eutai tasbir lai dui
-bidhi sang jodn sakindaina.
+bidhi sang jodna sakindaina.
 
 <!-- ne-cell: ff4aa9d1 | after-heading -->
 ## Part 3 eutai tasbir ma sangai rakhne
@@ -167,7 +167,7 @@ threshold wa purb-prashodhan badaliyo bhane tyo data "ajhai nadekhieko data" rah
 uhi mulyankan feri chalaun hunchha (tyo punarutpadanako jaanch ho).
 
 yo talimka sandarbha chitra **surakshit garieko ek patakako chalaibat baneka prakashit natija** hun. ti chitra ma
-parikshanka udaharan herepachhi setting badaliyo bhane tapainko parikshan data aba prayog nabhaeko bhann mildaina.
+parikshanka udaharan herepachhi setting badaliyo bhane tapainko parikshan data aba prayog nabhaeko bhanna mildaina.
 nayan antim natijaka lagi **nayan prayog nabhaeko data** chahinchha.
 
 <!-- ne-cell: 904252da | after-heading -->
@@ -225,7 +225,7 @@ suruko mukhy kram ma pharker calibration ma matra chhanieka dui maan ra model ma
 parikshan herer setting badaliyo bhane nayan antim mulyankanka lagi nayan prayog nabhaeko data chahinchha.
 
 <!-- ne-cell: c818bf0a | after-heading -->
-**threshold sarn milne calibration data ma matra**
+**threshold sarna milne calibration data ma matra**
 <!-- ne-pair: You may move thresholds on the calibration data only -->
 
 <!-- ne-cell: c818bf0a -->
@@ -269,21 +269,23 @@ calibrationka prayog sakepachhi talako ghoshana aphnai shabdama bharnuhos:
 "parikshan hernuaghi setting sthir garen ra parikshan herepachhi samayojan garne chhaina." model, purb-prashodhan ra
 thresholdko abhilekh jaanchnuhos. parikshan tasbir wa natija pahile herisaknubhaeko chha bhane
 `TEST_ALREADY_SEEN=True` nai rakhnuhos; tyo natija **punah prayog garieko datako udaharan mulyankan**
-ho. nahereko abastha ma matra False banaunuhos. khali chhode parikshan mulyankan chaln sakdain.
+ho. nahereko abastha ma matra False banaunuhos. khali chhode parikshan mulyankan chalna sakdain.
 
 <!-- ne-cell: clarity-slider-before-freeze -->
 calibration slider hernaka lagi matra ho, apanaine dui maan badaldain. uddeshyaanusarako maan calibration
-chhanot garne cell feri chalaer jaanchnuhos. yo abalokanapachhi sthir garnuhos ra sthir abhilekhako
+chhanot garne cell feri chalaera jaanchnuhos. yo abalokanapachhi sthir garnuhos ra sthir abhilekhako
 `assessment_role` bujhaunuparne kaam ma samabesh garnuhos.
 
 <!-- ne-cell: clarity-sealed-test-read | after-heading -->
 **sealed test prediction padhne**
 
 <!-- ne-cell: clarity-sealed-test-read -->
-test score sthir abhilekh gariepachhi din 5 notebook 02 ko antim cell le ek patak matra mulyankan garera
-`submissions/day05/patchcore_test_predictions.json` ma sealed garera rakheko hun. yo cell tyo sealed file
-padhchha ra **bibhajan abhilekh, model ra threshold milchha ki** jaanchera matra talika banaunchha.
-namilyo bhane rokinchha. yahan feri mulyankan garindaina.
+test score sthir abhilekh gariepachhi `Day05_02_PatchCore_Training.ipynb` ko
+`clarity-sealed-test-scoring` cell le ek patak matra mulyankan garera
+`submissions/day05/patchcore_test_predictions.json` ma sealed garera rakheko hunchha. yo cell tyo seal
+padhchha ra **experiment ko fingerprint, bibhajan, model ra threshold milchha ki** jaanchera matra talika
+banaunchha. namilera bhane rokinchha ra sealed file tyasai rahanchha. yahan feri mulyankan garindaina.
+chalne kram chaar charan ko ho. 1 ra 3 `Day05_02` ma, 2 ra 4 yo notebook ma.
 
 <!-- ne-cell: 3d343aab | after-heading -->
 **sthir garieko thresholdle parikshan ek patak matra mulyankan garne**
@@ -291,7 +293,7 @@ namilyo bhane rokinchha. yahan feri mulyankan garindaina.
 
 <!-- ne-cell: 3d343aab -->
 threshold calibration data ma tay garera **yahan sthir** gariyo. aba parikshanko sankhya herer threshold
-sarnubhayo bhane tyo talika "uttar herer angk dieko talika" banchha. sarn man lage aghillo calibration
+sarnubhayo bhane tyo talika "uttar herer angk dieko talika" banchha. sarna man lage aghillo calibration
 slider **calibration data** ma prayog garnuhos. parikshan pahile nai herisaknubhaeko bhae badalieko settingka
 lagi **arko prayog nabhaeko data** chahinchha; uhi parikshan ma feri garieko mulyankan lai mul antim parikshan
 natijako rupama dekhaunu hundaina.
@@ -304,7 +306,7 @@ maan hoina.
 ### natijako udaharan
 
 <!-- ne-cell: ec601269 -->
-yo natija yo talim ma surakshit garieko abhilekh ho (model, data bibhajan ra seed lekhama chha). sukshm sankhya
+yo natija yo talim ma surakshit garieko abhilekh ho (model, data bibhajan ra seed lekhama chha). sukshma sankhya
 batabaran anusar farak parchha; prabritti ra thulo-sanoko sambandh padhnuhos. `x` raheko thaun tapainko batabaranle
 tay garne maan ho.
 
@@ -318,7 +320,7 @@ thaun) ra dosrolai **ek patakako parikshan mulyankan** padhnuhos.
 ### tulna garnuaghi: tin pyanal kasari padhne
 
 <!-- ne-cell: bf9157ac | after-image:../../assets/diagrams/teach_score_map_overlay.png -->
-yo yojanabaddha chitra **tin pyanal** ko chha: mul tasbir, asamanyata naksa ra milaer dekhaieko chitra.
+yo yojanabaddha chitra **tin pyanal** ko chha: mul tasbir, asamanyata naksa ra milaera dekhaieko chitra.
 yo bastabik model ko natija pani hoina ra paanch-stambha tulna pani hoina.
 
 anuman: rangako dayara matra badaliyo bhane score badlinchha? sthanako sanket padhna rang-patti hernuhos.
@@ -329,7 +331,7 @@ anuman: rangako dayara matra badaliyo bhane score badlinchha? sthanako sanket pa
 <!-- ne-cell: fig-ref_comparison_5col -->
 talako baikalpik cellle matra surakshit TEST ko chitra dekhaunchha. pahilo prayog nabhaeko parikshan sakunjel
 False rakhnuhos. dekhaisakepachhi yo data ma feri chhanieko setting lai "prayog nabhaeko parikshanko natija"
-bhann mildaina.
+bhanna mildaina.
 
 <!-- ne-cell: clarity-calibration-boundary | after-heading -->
 ### yahan baat CALIBRATION
@@ -342,7 +344,7 @@ naam `test/` le hoina, bibhajan manifest le bhoomika tay garchha.
 #### tulnako byakhya
 
 <!-- ne-cell: 29824f9c -->
-heatmaple sthan dekhaunchha, YOLO le talim lieka class ko sanket dinchha. milaer prayog garda phaida hunchha
+heatmaple sthan dekhaunchha, YOLO le talim lieka class ko sanket dinchha. milaera prayog garda phaida hunchha
 bhanne gyarenti chhaina; gati ra galti naper nirnaya garnuhos. surakshit TEST ka thos asaphal udaharan sthir
 garepachhiko baikalpik parishishtama matra chhan. sansleshit ra bastabikko farak, thorai data, labelko bajet, ra
 rijolyusan, purb-prashodhan tatha threshold ma nirbharata riport garnuhos.
@@ -423,7 +425,7 @@ truti aepachhi pahile "kun cell ma", "kun line ma", "ke sandesh ayo" bhanera lek
 | `yolo_predictions_on_shared_set.json` chhaina | din 4 notebook 03 ko Part 5 chalaunuhos. |
 | `patchcore_predictions.json` chhaina | din 5 notebook 02 ko Part 5 chalaunuhos. |
 | sajha tasbir 0 hunchha | batoko dhancha farak huna sakchha. `image` stambhako suruko `test/` hataieko chha ki jaanchnuhos. |
-| precision wa recall `nan` hunchha | TP + FP wa TP + FN shuny chha. asamanya tasbir ek pani chhaina, wa ek pani pahichan bhaeko chhaina. |
+| precision wa recall `nan` hunchha | TP + FP wa TP + FN shunya chha. asamanya tasbir ek pani chhaina, wa ek pani pahichan bhaeko chhaina. |
 
 <!-- ne-cell: dca7b3f3 | after-heading -->
 ## sampannata janchasuchi

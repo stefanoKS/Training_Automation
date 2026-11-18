@@ -1,582 +1,630 @@
 <!--
-नेपाली अनुवाद / Nepali translation source for
+Nepali anuwad / Nepali translation source for
 notebooks/Day02_Python_OpenCV/Day02_03_OpenCV_Image_Processing.ipynb
 -->
-# दिन २ नोटबुक ०३ — नेपाली अनुवाद
+# din 2 notebook 03 — Nepali anuwad
 
 <!-- ne-cell: f477b90d | after-heading -->
-# दिन २ नोटबुक ०३: OpenCV र दूरी नाप्ने
+# din 2 notebook 03: OpenCV ra duri napne
 
 <!-- ne-cell: f477b90d -->
-## सिकाइ लक्ष्यहरू
+## sikai lakshyaharu
 
-| नेपाली |
+| Nepali |
 | --- |
-| 1. OpenCV ले तस्बिर पढ्न, देखाउन र सुरक्षित गर्न सक्ने। |
-| 2. ग्रेस्केल र बाइनरीकरणको अर्थ बताउन सक्ने। |
-| 3. कन्टुर (contour) भेटेर त्यसको स्थान निकाल्न सक्ने। |
-| 4. दुई बिन्दुबीचको दूरी पिक्सेलमा गणना गर्न सक्ने। |
-| 5. पिक्सेललाई मिलिमिटरमा बदल्न र शुद्धताको सीमा बताउन सक्ने। |
+| 1. OpenCV le tasbir padhna, dekhauna ra surakshit garna sakne. |
+| 2. greskel ra bainarikaranako arth bataun sakne. |
+| 3. kantur (contour) bheter tyasko sthan nikalna sakne. |
+| 4. dui bindubichako duri pikselama ganana garna sakne. |
+| 5. pikselalai milimitarama badalna ra shuddhatako sima bataun sakne. |
 
-## यो नोटबुकको आधारभूत जानकारी
+## yo notebookko adharabhut jankari
 
-| विषय | विवरण |
+| bishay | biwaran |
 | --- | --- |
-| सिकाइ समय (अनुमान) | 60 मिनेट |
-| कठिनाइ | सुरुवाती तह |
-| पूर्वशर्त | दिन २ नोटबुक ०१ र ०२ सकिएको हुनुपर्छ। |
-| आवश्यक लाइब्रेरी | opencv-python, numpy, matplotlib, pillow |
-| प्रयोग हुने kernel | aivision |
-| आजको समयतालिका | [`COURSE_SYLLABUS.md` दिन २](../../COURSE_SYLLABUS.md#day2) |
+| sikai samay (anuman) | 60 minet |
+| kathinai | surubati tah |
+| poorwashart | din 2 notebook 01 ra 02 sakieko hunuparchha. |
+| aawashyak laibreri | opencv-python, numpy, matplotlib, pillow |
+| prayog hune kernel | aivision |
+| ajako samayatalika | [`COURSE_SYLLABUS.md` din 2](../../COURSE_SYLLABUS.md#day2) |
 
-### बुझाउनुपर्ने काम
+### bujhaunuparne kaam
 
-| नेपाली |
+| Nepali |
 | --- |
-| किनारा (edge) र कन्टुर भेटेको नतिजा |
-| पिक्सेल→mm को नतिजा र नापको त्रुटिबारे छोटो विचार |
+| kinara (edge) ra kantur bheteko natija |
+| piksel→mm ko natija ra napako trutibare chhoto bichar |
 
 <!-- ne-cell: 061efcfb | after-heading -->
-## यो नोटबुक कहाँ पर्छ
+## yo notebook kahan parchha
 
 <!-- ne-cell: 061efcfb -->
-| विषय | विवरण |
+| bishay | biwaran |
 | --- | --- |
-| दिन | दिन २ |
-| आजको क्रम | आजको नोटबुकमध्ये 3 / 3 |
-| लाग्ने समय | 60 मिनेट |
-| पूर्वशर्त | `Day02_02_Conditions_Loops_Functions.ipynb` |
-| आजको समयतालिका | [`COURSE_SYLLABUS.md` दिन २](../../COURSE_SYLLABUS.md#day2) |
+| din | din 2 |
+| ajako kram | ajako notabukamadhye 3 / 3 |
+| lagne samay | 60 minet |
+| poorwashart | `Day02_02_Conditions_Loops_Functions.ipynb` |
+| ajako samayatalika | [`COURSE_SYLLABUS.md` din 2](../../COURSE_SYLLABUS.md#day2) |
 
-दिनको समयतालिका `COURSE_SYLLABUS.md` मा एउटै ठाउँमा छ। यो नोटबुक त्यसको एउटा भाग मात्र हो, आफ्नो
-छुट्टै समयतालिका राख्दैन।
+dinko samayatalika `COURSE_SYLLABUS.md` ma eutai thaun ma chha. yo notebook tyasko euta bhaag matra ho, aphno
+chhuttai samayatalika rakhdain.
 
 <!-- ne-cell: audit-learning-loop | after-heading -->
-### अनुमान गर्नुहोस्, चलाउनुहोस्, हेर्नुहोस्, व्याख्या गर्नुहोस्
+### anuman garnuhos, chalaunuhos, hernuhos, byakhya garnuhos
 
 <!-- ne-cell: audit-learning-loop -->
-थ्रेसहोल्डले पिक्सेलको चमक छुट्याउँछ; यो क्षेत्रफलको सर्त होइन। महत्त्वपूर्ण सेल चलाउनुअघि इनपुट,
-काम र नतिजा एक-एक वाक्यमा लेख्नुहोस्। पहिले अनुमान गरेर चलाउनुहोस् र मान वा चित्र हेर्नुहोस्।
-उल्टो थ्रेसहोल्ड मात्र बदलेर फेरि अनुमान गरी चलाउनुहोस्। जानाजान राखिएका त्रुटि र नसकिएका अभ्यासका
-निर्देशन पछ्याउनुहोस्।
+thresholdle pikselako chamak chhutyaunchha; yo kshetraphalako sart hoina. mahattwapurna cell chalaunuaghi input,
+kaam ra natija ek-ek bakyama lekhnuhos. pahile anuman garera chalaunuhos ra maan wa chitra hernuhos.
+ulto threshold matra badaler feri anuman gari chalaunuhos. janajan rakhieka truti ra nasakieka abhyaska
+nirdeshan pachhyaunuhos.
 
 <!-- ne-cell: be632326 | after-heading -->
-## Part 0 तयारी
+## Part 0 tayari
 
 <!-- ne-cell: e15c580c | after-heading -->
-**OpenCV को रङको क्रममा ध्यान दिनुहोस्**
+**OpenCV ko rangako kram ma dhyan dinuhos**
 <!-- ne-pair: Watch out for OpenCV's colour order -->
 
 <!-- ne-cell: e15c580c -->
-OpenCV ले रङ **BGR** (निलो, हरियो, रातो) क्रममा राख्छ। `cv2.imread()` ले पढेको array BGR हुन्छ।
-Matplotlib ले **RGB** (रातो, हरियो, निलो) क्रममा देखाउँछ।
+OpenCV le rang **BGR** (nilo, hariyo, rato) kram ma rakhchha. `cv2.imread()` le padheko array BGR hunchha.
+Matplotlib le **RGB** (rato, hariyo, nilo) kram ma dekhaunchha.
 
-BGR array त्यसै `plt.imshow()` मा दिँदा रातो र निलो साटिएर देखिन्छ। **BGR array देखाउनुअघि बदल्नुहोस्।**
+BGR array tyasai `plt.imshow()` ma dinda rato ra nilo satiera dekhinchha. **BGR array dekhaunuaghi badalnuhos.**
 
-`cv2.cvtColor()` ले **नयाँ array फर्काउँछ**; `image_bgr` आफैं बदलिँदैन।
+`cv2.cvtColor()` le **nayan array pharkaunchha**; `image_bgr` aphain badalindain.
 
-**कहिले बदल्नुपर्छ?** **BGR array** मा मात्र। यी पहिले नै RGB हुन्, बदल्नु पर्दैन:
+**kahile badalnuparchha?** **BGR array** ma matra. yi pahile nai RGB hun, badalnu pardaina:
 
-- `PIL.Image.open(...)` ले खोलेको तस्बिर (वास्तविक रङको सन्दर्भ फोटो सहित)
-- scikit-image जस्ता लाइब्रेरीका RGB array
+- `PIL.Image.open(...)` le kholeko tasbir (bastabik rangako sandarbha photo sahit)
+- scikit-image jasta laibrerika RGB array
 
-उल्टो, RGB array लाई `COLOR_BGR2RGB` ले बदल्दा रङ साटिन्छ। **"यो array BGR हो कि RGB" पहिले जाँच्नुहोस्।**
+ulto, RGB array lai `COLOR_BGR2RGB` le badalda rang satinchha. **"yo array BGR ho ki RGB" pahile jaanchnuhos.**
 
-यो तालिमभरि **देखाउन Matplotlib, प्रशोधन OpenCV** भन्ने नियम राखिन्छ। `cv2.imshow()` Jupyter मा
-अड्किन सक्ने हुनाले प्रयोग गरिँदैन।
+yo talimabhari **dekhauna Matplotlib, prashodhan OpenCV** bhanne niyam rakhinchha. `cv2.imshow()` Jupyter ma
+adkin sakne hunale prayog garindain.
 
 <!-- ne-cell: clarity-bgr-predict | after-heading -->
-#### अनुमान: रातो किन निलो बन्छ?
+#### anuman: rato kina nilo banchha?
 
 <!-- ne-cell: clarity-bgr-predict -->
-इनपुट एउटै संश्लेषित BGR पट्टी हो। बायाँ गल्तीले RGB मानेर देखाइएको छ, दायाँ बदलेपछिको। चलाउनुअघि
-बायाँ छेउको रङ अनुमान गर्नुहोस्। यो model को अनुमान वा फोटो होइन।
+input eutai sansleshit BGR patti ho. bayan galtile RGB maner dekhaieko chha, dayan badalepachhiko. chalaunuaghi
+bayan chheuko rang anuman garnuhos. yo model ko anuman wa photo hoina.
 
 <!-- ne-cell: clarity-bgr-interpret -->
-बायाँ छेउको उही मान `[0,0,255]` BGR मा रातो हो, RGB मा देखाउँदा निलो हुन्छ। `cvtColor` ले च्यानलको क्रम
-बदल्छ। बीचको हरियो किन नबदलियो व्याख्या गर्नुहोस्, त्यसपछि बायाँ पट्टी `[0,255,255]` बनाएर अनुमान गर्नुहोस्।
+bayan chheuko uhi maan `[0,0,255]` BGR ma rato ho, RGB ma dekhaunda nilo hunchha. `cvtColor` le chyanalako kram
+badalchha. bichako hariyo kina nabadaliyo byakhya garnuhos, tyaspachhi bayan patti `[0,255,255]` banaera anuman garnuhos.
 
 <!-- ne-cell: d0b1221a | after-heading -->
-## Part 1 तस्बिर पढ्ने र सुरक्षित गर्ने
+## Part 1 tasbir padhne ra surakshit garne
 
 <!-- ne-cell: a2bfa0aa | after-heading -->
-**तीन आधारभूत काम**
+**tin adharabhut kaam**
 <!-- ne-pair: The three basic operations -->
 
 <!-- ne-cell: a2bfa0aa -->
-| काम | function | फर्काउने मान |
+| kaam | function | pharkaune maan |
 |---|---|---|
-| पढ्ने | `cv2.imread(path)` | NumPy array (BGR)। असफल भए `None` |
-| देखाउने | `plt.imshow(...)` | — |
-| सुरक्षित गर्ने | `cv2.imwrite(path, image)` | सफल भए `True`, असफल भए `False` |
+| padhne | `cv2.imread(path)` | NumPy array (BGR). asaphal bhae `None` |
+| dekhaune | `plt.imshow(...)` | — |
+| surakshit garne | `cv2.imwrite(path, image)` | saphal bhae `True`, asaphal bhae `False` |
 
-> `cv2.imread` ले **फाइल नभएमा त्रुटि होइन, `None` फर्काउँछ**। सधैं `None` हो कि होइन जाँच्नुहोस्।
-> नयाँ सिक्नेहरूले सबैभन्दा धेरै यही कुरा छुटाउँछन्।
+> `cv2.imread` le **file nabhaema truti hoina, `None` pharkaunchha**. sadhain `None` ho ki hoina jaanchnuhos.
+> nayan sikneharule sabaibhanda dherai yahi kura chhutaunchhan.
 
-`cv2.imwrite` पनि **त्रुटि होइन, `False`** फर्काउन सक्छ। `False` को कारण एउटै हुँदैन।
+`cv2.imwrite` pani **truti hoina, `False`** pharkaun sakchha. `False` ko karan eutai hundaina.
 
-| `False` को कारण | के जाँच्ने |
+| `False` ko karan | ke jaanchne |
 |---|---|
-| सुरक्षित गर्ने फोल्डर छैन | पहिले `output_dir.mkdir(parents=True, exist_ok=True)` चलाइयो? |
-| लेख्ने अनुमति छैन | त्यो फोल्डरमा लेख्न मिल्छ? (read-only, साझा फोल्डर, administrator अधिकार) |
-| extension र ढाँचा मिल्दैन | `.png` / `.jpg` जस्ता extension ले त्यो ढाँचा राख्न सक्छ? (16 bit तस्बिर `.jpg` मा राख्नु) |
-| बाटो गलत | नचल्ने अक्षर, अत्यधिक लामो बाटो |
+| surakshit garne folder chhaina | pahile `output_dir.mkdir(parents=True, exist_ok=True)` chalaiyo? |
+| lekhne anumati chhaina | tyo folder ma lekhna milchha? (read-only, sajha folder, administrator adhikar) |
+| extension ra dhancha mildaina | `.png` / `.jpg` jasta extension le tyo dhancha rakhna sakchha? (16 bit tasbir `.jpg` ma rakhnu) |
+| bato galat | nachalne akshar, atyadhik lamo bato |
 
 <!-- ne-cell: fcc102a2 | after-heading -->
-**सुरक्षित गर्ने**
+**surakshit garne**
 <!-- ne-pair: Saving -->
 
 <!-- ne-cell: fcc102a2 -->
-`cv2.imwrite` ले सुरक्षित गर्छ। सुरक्षित गर्ने फोल्डर **पहिले बनाइसक्नुपर्छ**।
+`cv2.imwrite` le surakshit garchha. surakshit garne folder **pahile banaisaknuparchha**.
 
-`cv2.imwrite` असफल हुँदा `False` फर्काउँछ (त्रुटि होइन)। **फर्काएको मान सधैं जाँच्नुहोस्**; `False`
-आए फोल्डर छ कि छैन, लेख्ने अनुमति छ कि छैन, र extension र तस्बिर ढाँचा मिल्छ कि मिल्दैन क्रमैसँग हेर्नुहोस्।
+`cv2.imwrite` asaphal hunda `False` pharkaunchha (truti hoina). **pharkaeko maan sadhain jaanchnuhos**; `False`
+ae folder chha ki chhaina, lekhne anumati chha ki chhaina, ra extension ra tasbir dhancha milchha ki mildaina kramaisang hernuhos.
 
-यो तालिममा **मूल सामग्री नबिगार्न** नतिजा `submissions` भित्र सुरक्षित गरिन्छ।
+yo talim ma **mul samagri nabigarna** natija `submissions` bhitra surakshit garinchha.
 
 <!-- ne-cell: 7355da79 | after-heading -->
-## Part 2 ग्रेस्केल र बाइनरीकरण
+## Part 2 greskel ra bainarikaran
 
 <!-- ne-cell: audit-teach_opencv_pixel_pipeline | after-heading -->
-### कोड कसरी पढ्ने
+### kod kasari padhne
 
 <!-- ne-cell: audit-teach_opencv_pixel_pipeline | after-image:../../assets/svg/teach_opencv_pixel_pipeline.svg -->
-चित्र: चमकको थ्रेसहोल्ड र क्षेत्रफलको सर्त फरक हुन्। (गणना गरिएको संश्लेषित उदाहरण र योजनाबद्ध चित्र;
-model को वास्तविक नापिएको नतिजा होइन।)
+chitra: chamakako threshold ra kshetraphalako sart farak hun. (ganana garieko sansleshit udaharan ra yojanabaddha chitra;
+model ko bastabik napieko natija hoina.)
 
-**ध्यान दिनुपर्ने कुरा**
+**dhyan dinuparne kura**
 
-चमकको थ्रेसहोल्ड र क्षेत्रफलको सर्त फरक हुन्। इनपुट र परिवर्तन भएको मान औंलाले पछ्याउनुहोस्।
+chamakako threshold ra kshetraphalako sart farak hun. input ra paribartan bhaeko maan aunlale pachhyaunuhos.
 
-**सोच्नुहोस्**
+**sochnuhos**
 
-पिक्सेलको मान थ्रेसहोल्डसँग ठ्याक्कै बराबर हुँदा उल्टो मास्कमा के हुन्छ?
+pikselako maan threshold sang thyakkai barabar hunda ulto maskama ke hunchha?
 
 <!-- ne-cell: be0db14f | after-heading -->
-### मूल तस्बिर → मास्क (अग्रभाग) → कन्टुर
+### mul tasbir → mask (agrabhag) → kantur
 
 <!-- ne-cell: be0db14f | after-image:../../assets/diagrams/teach_opencv_pipeline.png -->
-चित्र: उही संश्लेषित तस्बिर प्रशोधन गरेको वास्तविक नतिजा (संश्लेषित तस्बिर, वास्तविक गणना)। प्यानल ②
-`THRESH_BINARY_INV` (T=150) को मास्क **आफैं** हो: 150 वा कम मान भएका पिक्सेल सेता (अग्रभाग), 150 भन्दा
-बढी भएका काला (पृष्ठभूमि)। प्यानल ③ ले त्यही मास्कबाट निकालेको कन्टुर मूल तस्बिरमा राखेको देखाउँछ।
+chitra: uhi sansleshit tasbir prashodhan gareko bastabik natija (sansleshit tasbir, bastabik ganana). pyanal ②
+`THRESH_BINARY_INV` (T=150) ko mask **aphain** ho: 150 wa kam maan bhaeka piksel seta (agrabhag), 150 bhanda
+badhi bhaeka kala (prishthabhumi). pyanal ③ le tyahi maskabat nikaleko kantur mul tasbir ma rakheko dekhaunchha.
 
-**ध्यान दिनुपर्ने कुरा**
+**dhyan dinuparne kura**
 
-तीनवटै प्यानल **एउटै** तस्बिरबाट बनेका हुन्। यहाँ महत्त्वपूर्ण कुरा **थ्रेसहोल्ड** र `findContours` मा
-दिइने **मास्कको ध्रुवता (polarity)** हो।
+tinabatai pyanal **eutai** tasbir baat baneka hun. yahan mahattwapurna kura **threshold** ra `findContours` ma
+diine **maskako dhrubata (polarity)** ho.
 
-यो नोटबुकले `cv2.THRESH_BINARY_INV` प्रयोग गर्छ, त्यसैले मास्क यस्तो हुन्छ:
+yo notebookle `cv2.THRESH_BINARY_INV` prayog garchha, tyasaile mask yasto hunchha:
 
-| ग्रेस्केल मान | मास्कको मान | देखिने रूप |
+| greskel maan | maskako maan | dekhine rup |
 |---|---|---|
-| थ्रेसहोल्ड **वा कम** (`g <= T`) | 255 | सेतो (**अग्रभाग**: `findContours` ले खोज्ने पिक्सेल) |
-| थ्रेसहोल्ड **भन्दा बढी** (`g > T`) | 0 | कालो (पृष्ठभूमि) |
+| threshold **wa kam** (`g <= T`) | 255 | seto (**agrabhag**: `findContours` le khojne piksel) |
+| threshold **bhanda badhi** (`g > T`) | 0 | kalo (prishthabhumi) |
 
-अर्थात् **गाढा दोष जति सेतो** देखिन्छ। प्यानल ② मा देखाइएको मास्क नै **`findContours` मा दिइने array** हो।
-सेतो अग्रभागको किनारा पछ्याउन यही ध्रुवता चाहिन्छ; उल्टो ध्रुवता दिइयो (गाढा पिक्सेल कालै छोडियो) भने
-तस्बिरको बाहिरी फ्रेमलाई कन्टुर ठान्छ।
+arthat **gadha dosh jati seto** dekhinchha. pyanal ② ma dekhaieko mask nai **`findContours` ma diine array** ho.
+seto agrabhagako kinara pachhyaun yahi dhrubata chahinchha; ulto dhrubata diiyo (gadha piksel kalai chhodiyo) bhane
+tasbirko bahiri phremalai kantur thanchha.
 
-**सोच्नुहोस्**
+**sochnuhos**
 
-- थ्रेसहोल्ड बढाउँदा कन्टुर बढ्छ कि घट्छ? यो संश्लेषित तस्बिरमा साँच्चै के हुन्छ, तलको sweep चित्रमा हेर्नुहोस्।
+- threshold badhaunda kantur badhchha ki ghatchha? yo sansleshit tasbir ma sanchchai ke hunchha, talako sweep chitra ma hernuhos.
 
 <!-- ne-cell: clarity-mask-predict | after-heading -->
-#### एउटै सानो तस्बिर: पिक्सेल → मास्क → कन्टुर
+#### eutai sano tasbir: piksel → mask → kantur
 
 <!-- ne-cell: clarity-mask-predict -->
-संश्लेषित 7×8 तस्बिरको बीचको 3 लाइन × 4 स्तम्भ गाढा बनाइन्छ। T=100 को उल्टो बाइनरीकरणमा बराबर पनि सेतो
-हुन्छ। अनुमान: सेता पिक्सेलको सङ्ख्या र पिक्सेल केन्द्र जोडेर बन्ने कन्टुरको क्षेत्रफल बराबर हुन्छ?
+sansleshit 7×8 tasbirko bichako 3 line × 4 stambha gadha banainchha. T=100 ko ulto bainarikaranama barabar pani seto
+hunchha. anuman: seta pikselako sankhya ra piksel kendra joder banne kanturako kshetraphal barabar hunchha?
 
-| g / पिक्सेल मान | 40 | 99 | 100 (=T) | 101 |
+| g / piksel maan | 40 | 99 | 100 (=T) | 101 |
 |---|---|---|---|---|
-| उल्टो मास्क | 255 | 255 | 255 | 0 |
+| ulto mask | 255 | 255 | 255 | 0 |
 
 <!-- ne-cell: clarity-mask-interpret -->
-सेता पिक्सेल 3×4 = 12 वटा हुन्छन्, तर कन्टुर पिक्सेल केन्द्रबीच चौडाइ 3 × उचाइ 2 = 6 px² मात्र हुन्छ।
-कन्टुरको क्षेत्रफललाई "सेता पिक्सेलको सङ्ख्या" भन्नु हुँदैन। गाढा भागको स्तम्भ अन्त्य 6 बाट 7 बनाउँदा दुवै
-कति हुन्छन्? पछि आउने 2→1→18 को चित्रमा, थ्रेसहोल्डले दुई क्षेत्र जोडिने कुरा र अर्को आवाज (noise) क्षेत्र
-देखा पर्ने कुरा छुट्टाछुट्टै पढ्नुहोस्।
+seta piksel 3×4 = 12 bata hunchhan, tar kantur piksel kendrabich chaudai 3 × uchai 2 = 6 px² matra hunchha.
+kanturako kshetraphalalai "seta pikselako sankhya" bhannu hundaina. gadha bhaagko stambha antya 6 baat 7 banaunda dubai
+kati hunchhan? pachhi aune 2→1→18 ko chitra ma, thresholdle dui kshetra jodine kura ra arko abaj (noise) kshetra
+dekha parne kura chhuttachhuttai padhnuhos.
 
 <!-- ne-cell: fbc7ce1c | after-heading -->
-**ग्रेस्केल बनाउने**
+**greskel banaune**
 <!-- ne-pair: Converting to greyscale -->
 
 <!-- ne-cell: fbc7ce1c -->
-**यो अभ्यासजस्तै "गाढा दोषलाई चमकले भेट्ने" अवस्था** मा रङको जानकारी प्रायः प्रयोग हुँदैन। चमक मात्र
-राख्दा गणना छिटो र सजिलो हुन्छ। तर **रङ आफैं असामान्य** (रङ बिग्रिनु, डढेको दाग, बाहिरी पदार्थको रङ) भए
-रङ राख्नैपर्छ।
+**yo abhyas jastai "gadha dosh lai chamakale bhetne" abastha** ma rangako jankari prayah prayog hundaina. chamak matra
+rakhda ganana chhito ra sajilo hunchha. tar **rang aphain asamanya** (rang bigrinu, dadheko dag, bahiri padarthako rang) bhae
+rang rakhnaiparchha.
 
-`gray` दुई-आयामिक (उचाइ, चौडाइ) array हुन्छ। यो परिवर्तन **तीन च्यानल (BGR) array** मा गरिन्छ। पहिले
-नै एक च्यानल भएको ग्रेस्केल तस्बिर (वास्तविक सन्दर्भ फोटो जस्तै) त्यसै प्रयोग गर्न सकिन्छ, बदल्नु पर्दैन।
+`gray` dui-ayamik (uchai, chaudai) array hunchha. yo paribartan **tin chyanal (BGR) array** ma garinchha. pahile
+nai ek chyanal bhaeko greskel tasbir (bastabik sandarbha photo jastai) tyasai prayog garna sakinchha, badalnu pardaina.
 
 <!-- ne-cell: eb10df2a | after-heading -->
-**बाइनरीकरण (थ्रेसहोल्ड गर्ने)**
+**bainarikaran (threshold garne)**
 <!-- ne-pair: Thresholding -->
 
 <!-- ne-cell: eb10df2a -->
-बाइनरीकरणले **थ्रेसहोल्डसँग तुलना गरेर प्रत्येक पिक्सेललाई दुई मान (0 र 255) मा बदल्छ**। कुन पट्टि सेतो
-हुने भन्ने कुरा छानिएको विधिले (`THRESH_BINARY` वा `THRESH_BINARY_INV`) तय गर्छ।
+bainarikaranale **threshold sang tulna garera pratyek pikselalai dui maan (0 ra 255) ma badalchha**. kun patti seto
+hune bhanne kura chhanieko bidhile (`THRESH_BINARY` wa `THRESH_BINARY_INV`) tay garchha.
 
-**थ्रेसहोल्डसँग ठ्याक्कै बराबर पिक्सेल "वा कम" मा पर्छ।** तालिका हेर्नुहोस्।
+**threshold sang thyakkai barabar piksel "wa kam" ma parchha.** talika hernuhos.
 
-| मूल चमक | `THRESH_BINARY` | `THRESH_BINARY_INV` |
+| mul chamak | `THRESH_BINARY` | `THRESH_BINARY_INV` |
 |---|---|---|
-| थ्रेसहोल्डभन्दा बढी (`g > T`) | 255 (सेतो) | 0 (कालो) |
-| ठ्याक्कै थ्रेसहोल्ड (`g == T`) | 0 (कालो) | 255 (सेतो) |
-| थ्रेसहोल्डभन्दा कम (`g < T`) | 0 (कालो) | 255 (सेतो) |
+| thresaholdabhanda badhi (`g > T`) | 255 (seto) | 0 (kalo) |
+| thyakkai threshold (`g == T`) | 0 (kalo) | 255 (seto) |
+| thresaholdabhanda kam (`g < T`) | 0 (kalo) | 255 (seto) |
 
-यो नोटबुकमा **गाढा दोषलाई सेतो अग्रभाग** बनाउनु छ, त्यसैले `THRESH_BINARY_INV` प्रयोग हुन्छ। यसले
-पछिको "कन्टुर खोज्ने" कामलाई "सेतो भाग खोज्ने" भन्ने सरल रूपमा बदल्छ। `findContours` मा यही सेतो
-अग्रभागको मास्क **आफैं** दिइन्छ।
+yo notebook ma **gadha dosh lai seto agrabhag** banaunu chha, tyasaile `THRESH_BINARY_INV` prayog hunchha. yasle
+pachhiko "kantur khojne" kaam lai "seto bhaag khojne" bhanne saral rupama badalchha. `findContours` ma yahi seto
+agrabhagako mask **aphain** diinchha.
 
-`cv2.threshold` ले **नयाँ array फर्काउँछ**, त्यसैले इनपुट `gray` (मूल तस्बिर) बदलिँदैन। थ्रेसहोल्ड
-बदल्दा मूल तस्बिर उही रहन्छ, बदलिने मास्क मात्र हो।
+`cv2.threshold` le **nayan array pharkaunchha**, tyasaile input `gray` (mul tasbir) badalindain. threshold
+badalda mul tasbir uhi rahanchha, badaline mask matra ho.
 
-यहाँ थ्रेसहोल्ड **मान्छेले छानेको स्थिर मान (150)** हो। OpenCV मा `cv2.THRESH_OTSU` (तस्बिरबाट एउटा मान
-स्वतः) र `cv2.adaptiveThreshold` (ठाउँ-ठाउँमा फरक) पनि छन्, तर "यो नतिजा ठीक छ कि छैन" भनेर मान्छेले
-जाँच्ने काम सधैं बाँकी रहन्छ।
+yahan threshold **manchhele chhaneko sthir maan (150)** ho. OpenCV ma `cv2.THRESH_OTSU` (tasbir baat euta maan
+sbatah) ra `cv2.adaptiveThreshold` (thaun-thaun ma farak) pani chhan, tar "yo natija thik chha ki chhaina" bhanera manchhele
+jaanchne kaam sadhain banki rahanchha.
 
 <!-- ne-cell: fdc17f13 | after-heading -->
-**थ्रेसहोल्ड बदल्दा के बदलिन्छ**
+**threshold badalda ke badlinchha**
 <!-- ne-pair: What changes with the threshold -->
 
 <!-- ne-cell: fdc17f13 -->
-थ्रेसहोल्ड **मान्छेले तय गर्ने सङ्ख्या** हो। यही नै तस्बिर प्रशोधनको कठिनाई हो।
+threshold **manchhele tay garne sankhya** ho. yahi nai tasbir prashodhanako kathinai ho.
 
-यो भागको प्रयोग **नियन्त्रित पृष्ठभूमिमा भएको गाढा दाग** का लागि हो र थ्रेसहोल्ड **हातैले छानिएको** छ।
-उज्यालो वा पृष्ठभूमि फरक भए त्यही मान उत्तम हुन्छ भन्ने छैन।
+yo bhaagko prayog **niyantrit prishthabhumima bhaeko gadha dag** ka lagi ho ra threshold **hataile chhanieko** chha.
+ujyalo wa prishthabhumi farak bhae tyahi maan uttam hunchha bhanne chhaina.
 
-- थ्रेसहोल्ड **बढाउँदा** (जस्तै 200) → "गाढा" ठानिने दायरा फराकिलो हुन्छ → पृष्ठभूमिको असमानता पनि
-  अग्रभागमा पर्छ, **झुटो अलार्म बढ्छ**
-- थ्रेसहोल्ड **घटाउँदा** (जस्तै 60) → अग्रभाग घट्छ → हल्का दोष बाँकी रहँदैन, **छुट्ने (miss) बढ्छ**
+- threshold **badhaunda** (jastai 200) → "gadha" thanine dayara pharakilo hunchha → prishthabhumiko asamanata pani
+  agrabhagama parchha, **jhuto alarm badhchha**
+- threshold **ghataunda** (jastai 60) → agrabhag ghatchha → halka dosh banki rahandain, **chhutne (miss) badhchha**
 
-**थ्रेसहोल्ड T ले बदलिने र नबदलिने कुरा**
+**threshold T le badaline ra nabadaline kura**
 
-| T ले बदलिन्छ | T ले बदलिँदैन |
+| T le badlinchha | T le badalindain |
 |---|---|
-| बाइनरी मास्क (अग्रभागको दायरा) | मूल तस्बिर र ग्रेस्केल तस्बिर |
-| अग्रभागका पिक्सेलको सङ्ख्या | क्यालिब्रेसन मान (px/mm) र खिचाइको अवस्था |
-| कन्टुरको सङ्ख्या र क्षेत्रफल | तस्बिरको आकार (पिक्सेल सङ्ख्याको सीमा) |
+| bainari mask (agrabhagako dayara) | mul tasbir ra greskel tasbir |
+| agrabhagaka pikselako sankhya | calibration maan (px/mm) ra khichaiko abastha |
+| kanturako sankhya ra kshetraphal | tasbirko akar (piksel sankhyako sima) |
 
 <!-- ne-cell: fig-teach_threshold_sweep | after-heading -->
-### थ्रेसहोल्ड घुमाएर गन्ने
+### threshold ghumaera ganne
 
 <!-- ne-cell: fig-teach_threshold_sweep | after-image:../../assets/diagrams/teach_threshold_sweep.png -->
-चित्र: यो संश्लेषित तस्बिरमा थ्रेसहोल्ड बदल्दा अग्रभागका पिक्सेल सङ्ख्या र कन्टुर सङ्ख्या (नापिएका मान)।
+chitra: yo sansleshit tasbir ma threshold badalda seto agrabhag ra external contour sankhya kati hunchha
+(napieka maan). tasbir chai eutai ho; badalne kura threshold matra ho.
 
-**ध्यान दिनुपर्ने कुरा**
+<!-- ne-cell: fig-teach_threshold_sweep -->
+**yo chitra kasari padhne.** mathiko hangama eutai grayscale tasbir chaar patak dekhaieko chha. input
+badaldaina; badalne kura threshold T matra ho. `cv2.THRESH_BINARY_INV` ma **I ≤ T bhae seto (255) =
+chhanieko agrabhag**, ra **I > T bhae kalo (0) = chhodine prishthabhumi**. tallo graph A le seto piksel
+ganchha, graph B le `cv2.RETR_EXTERNAL` le paeka external contour ganchha. dui ota chhuttai graph ma
+rakhieko chha: eutai graph ma dui wota thado aksh hald a galat padhine hunchha.
 
-ठाडो अक्ष **पिक्सेल सङ्ख्या** हो, mm² मा बदलेको क्षेत्रफल होइन। वक्रको आकार तस्बिर र दोषअनुसार फरक हुन्छ।
-थ्रेसहोल्ड बदल्दा पनि कन्टुर सङ्ख्या नबदलिने दायरा पनि देखिन्छ — त्यो पनि पढ्नुहोस्।
+**1. T = 100 ra T = 160 le kina eutai mask dinchhan?** yo tasbirka piksel maan dherai jaso dui
+samuha ma chhan: karib 40 (kalo thoplo) ra 189–218 (sheet). T 40–180 bichama rakhda I ≤ T ma parne
+kalo thoplo matra ho. tyasaile T = 100 ra T = 160 duitai ma seto hune kshetra eutai 249 px ho.
+**natija eutai hune karan: input eutai ho ra ti dui threshold bichama kunai piksel maan chhaina** —
+threshold le farak pardaina bhanne hoina.
 
-**सोच्नुहोस्**
+**2. T = 210 ma kina tasbirko dherai bhaag seto hunchha?** sheetko piksel maan 189–218 hun. T = 210
+gard a tyasbhitraka dherai piksel I ≤ T kharcha. tyasaile 40,000 px madhye 36,677 px (91.7 %) seto
+hunchha. tyahan chhanieko kura dosh hoina, **sheet aphai** ho.
 
-- थ्रेसहोल्ड बढाउँदा अग्रभागका पिक्सेल बढ्छन् कि घट्छन्?
+**3. baki raheka kalo bhaag kina agrabhag ma ganieko chhaina?** I > T hune piksel 0 (kalo) nai
+rahanchha. kalo bhaneko "ramro" hoina, **"nachhanieko"** ho. T = 210 ko seto kshetra bhitra raheka
+sano kalo thopla T bhanda ujyalo piksel hun. ganieko kura seto piksel matra ho.
+
+**4. seto piksel badhda pani external contour sankhya kina nabadhna sakchha?** `cv2.RETR_EXTERNAL` le
+seto kshetrako **bahirako kinara** matra ganchha. seto kshetra failiera arko sang jodida dui kinara
+euta hunchha. yo tasbir ma T = 200 le 12,634 px ra 320 contour, T = 210 le 36,677 px ra **49**
+contour dieko thiyo. piksel badhe pani contour ghatyo. ulto, T = 190 ma prishthabhumi ko mura seto
+bhaera 46 pugyo. **graph A kahilyai ghatdaina; graph B badhchha ra ghatchha.**
+
+**5. external contour nai dosh ho?** hoina. external contour bhaneko "seto kshetrako bahirako kinara"
+matra ho, dosh hunu aniwarya chhaina. prishthabhumi ko mura, reflection, dhulo ra chhaya le pani
+banchha (T = 210 ko 49 contour madhye dherai mura hun). sathai euta dosh dui contour ma
+chhutin sakchha, ra pwal bhaeko dosh bahirako kinara le matra ganinchha. **contour sankhya "doshko
+sankhya" hoina.**
+
+**6. PVC nirikshan ma aru kun filter chahinchha?** jastai:
+
+| filter | ke hataunchha |
+|---|---|
+| nyoonatam kshetraphal / minimum area | dherai sano, noise jasto kshetra |
+| akar (golopan, lamapan) / shape | mura ra dharki lai thoplo bhanda chhuttaune |
+| wari-pari ko ujyalo farak / local contrast | ujyalo ko asamanata le baneka jhuto dosh |
+| sthan (nirikshan kshetra) / region of interest | utpadan baahirako naksha |
+| morphology | euta dosh dui ma chhutieko wa pwal bhaeko |
+| calibration (px/mm) | px lai mm² ma badalna |
+
+**sano sankhya udaharan.** yo tasbir 200 × 200 = 40,000 px ho. T = 100 ma seto 249 px, arthaat
+249 ÷ 40,000 = 0.62 %. T = 210 ma 36,677 ÷ 40,000 = 91.7 %. din 2 ko calibration 2.00 px/mm
+prayog garda 1 px = 0.5 mm ra 1 px² = 0.25 mm² hunchha, tyasaile 249 px = 249 × 0.25 =
+**62.25 mm²**, ra 36,677 px = **9,169 mm²**. **piksel sankhya lai mapadand sang tulna garna
+sakindaina**; calibration garepachhi matra mm² hunchha.
+
+**sochnuhos ra anuman garnuhos**
+
+- threshold badhda seto piksel badhchha ki ghatchha?
+- threshold badhda external contour sankhya badhchha ki ghatchha? yo chitra ko T = 200 ra T = 210
+  herera uttar dinuhos.
 
 <!-- ne-cell: fig-camera | after-heading -->
-### वास्तविक ग्रेस्केल फोटोमा प्रयास गर्ने
+### bastabik greskel photoma prayas garne
 
 <!-- ne-cell: fig-camera | after-image:../../assets/external_samples/open_reference/camera.png -->
-फोटो: वास्तविक ग्रेस्केल तस्बिर (scikit-image `camera`, Lav Varshney, CC0 1.0)। 0–255 को एक च्यानल, यो
-तालिमका संश्लेषित तस्बिरभन्दा जटिल।
+photo: bastabik greskel tasbir (scikit-image `camera`, Lav Varshney, CC0 1.0). 0–255 ko ek chyanal, yo
+talimka sansleshit tasbirabhanda jatil.
 
-**ध्यान दिनुपर्ने कुरा**
+**dhyan dinuparne kura**
 
-उज्यालोको असमानता, छाया र पृष्ठभूमिको बुट्टा सबै 0–255 को सङ्ख्या बन्छन्। यहाँ सेतो अग्रभाग भनेको
-"दोष" होइन, "थ्रेसहोल्डभन्दा गाढा पिक्सेल" मात्र हो। यो फोटोमा उत्पादनको कुनै दोष छैन।
+ujyaloko asamanata, chhaya ra prishthabhumiko butta sabai 0–255 ko sankhya banchhan. yahan seto agrabhag bhaneko
+"dosh" hoina, "thresaholdabhanda gadha piksel" matra ho. yo photoma utpadanako kunai dosh chhaina.
 
-**सोच्नुहोस्**
+**sochnuhos**
 
-- थ्रेसहोल्ड 100 राख्दा यो फोटोमा कहाँ-कहाँ सेतो रहन्छ? पहिले अनुमान गरेर चलाउनुहोस्।
+- threshold 100 rakhda yo photoma kahan-kahan seto rahanchha? pahile anuman garera chalaunuhos.
 
 <!-- ne-cell: fig-brick | after-heading -->
-### बुट्टा भएको पृष्ठभूमिमा गन्ने तरिका बदलिन्छ
+### butta bhaeko prishthabhumima ganne tarika badlinchha
 
 <!-- ne-cell: fig-brick | after-image:../../assets/external_samples/open_reference/brick.png -->
-फोटो: इँटाको पर्खाल (CC0Textures, scikit-image ले प्रशोधन गरेको, CC0 1.0)। बुट्टा दोहोरिने पृष्ठभूमिको
-उदाहरण। यो सामान्य बुट्टा हो, दोष होइन।
+photo: intako parkhal (CC0Textures, scikit-image le prashodhan gareko, CC0 1.0). butta dohorine prishthabhumiko
+udaharan. yo samanya butta ho, dosh hoina.
 
-**ध्यान दिनुपर्ने कुरा**
+**dhyan dinuparne kura**
 
-बुट्टा दोहोरिने पृष्ठभूमिमा एउटा थ्रेसहोल्ड तय गर्दा **बुट्टाका भागहरू सामूहिक रूपमा** अग्रभाग बन्छन्।
-त्यसैले कन्टुर सङ्ख्या "दोषको सङ्ख्या" होइन, "गाढा क्षेत्रको सङ्ख्या" हो। सामान्य भिन्नता पहिले थाहा
-पाउनु नै दोष पहिचानको सुरुवात हो।
+butta dohorine prishthabhumima euta threshold tay garda **buttaka bhaagharu samuhik rupama** agrabhag banchhan.
+tyasaile kantur sankhya "doshko sankhya" hoina, "gadha kshetrako sankhya" ho. samanya bhinnata pahile thaha
+paunu nai dosh pahichanko surubat ho.
 
-**सोच्नुहोस्**
+**sochnuhos**
 
-- यो फोटोमा थ्रेसहोल्ड बढाउँदै जाँदा सेतो अग्रभागको क्षेत्रफल बढ्छ कि घट्छ?
+- yo photoma threshold badhaundai janda seto agrabhagako kshetraphal badhchha ki ghatchha?
 
 <!-- ne-cell: c342c62c | after-heading -->
-**वैकल्पिक अभ्यास: वास्तविक फोटोमा थ्रेसहोल्डको सीमा हेर्ने**
+**baikalpik abhyas: bastabik photoma thresholdko sima herne**
 <!-- ne-pair: Optional: the limits of one threshold on real photographs -->
 
 <!-- ne-cell: c342c62c -->
-माथिका दुई फोटो **सामान्य फोटो** हुन्, दोषको फोटो होइनन्। त्यसै पनि एउटा थ्रेसहोल्ड तय गर्दा "गाढा
-पिक्सेल" सामूहिक रूपमा अग्रभाग बन्छ। छाया, बुट्टा र उज्यालोको असमानता अग्रभागमा पर्ने कुरा जाँच्नुहोस्।
-यो अभ्यास **वैकल्पिक** हो (सम्पन्नता जाँचसूचीको अनिवार्य बुँदा होइन)।
+mathika dui photo **samanya photo** hun, doshko photo hoinan. tyasai pani euta threshold tay garda "gadha
+piksel" samuhik rupama agrabhag banchha. chhaya, butta ra ujyaloko asamanata agrabhagama parne kura jaanchnuhos.
+yo abhyas **baikalpik** ho (sampannata janchasuchiko aniwarya bunda hoina).
 
-**गर्नुपर्ने काम (वैकल्पिक)**
+**garnuparne kaam (baikalpik)**
 
-1. माथिको **ग्रेस्केल सन्दर्भ फोटो** पढेर थ्रेसहोल्ड 100 मा `THRESH_BINARY_INV` लगाउनुहोस्।
-2. कहाँ सेतो रहन्छ **पहिले अनुमान** गरेर चलाएर जाँच्नुहोस्।
-3. त्यसपछि **बुट्टा भएको सन्दर्भ फोटो** मा उही काम गरेर अग्रभाग "दोष" होइन "गाढो बुट्टा" बनेको देख्नुहोस्।
+1. mathiko **greskel sandarbha photo** padher threshold 100 ma `THRESH_BINARY_INV` lagaunuhos.
+2. kahan seto rahanchha **pahile anuman** garera chalaera jaanchnuhos.
+3. tyaspachhi **butta bhaeko sandarbha photo** ma uhi kaam garera agrabhag "dosh" hoina "gadho butta" baneko dekhnuhos.
 
-फाइलको नाम माथिको चित्रको Markdown लिङ्क (कोष्ठकभित्रको बाटो) बाटै लेख्नुहोस्।
+fileko naam mathiko chitrako Markdown lingk (koshthakabhitrako bato) batai lekhnuhos.
 
-**ध्यान दिनुपर्ने कुरा**
+**dhyan dinuparne kura**
 
-- अग्रभागका पिक्सेलको सङ्ख्या तस्बिर र थ्रेसहोल्डले तय गर्छ। **यो भौतिक क्षेत्रफल (mm²) होइन।**
-- कन्टुर सङ्ख्या "गाढा क्षेत्रको सङ्ख्या" हो, "दोषको सङ्ख्या" होइन।
-- उज्यालो र बुट्टा फरक भएका तस्बिरलाई एउटै स्थिर थ्रेसहोल्डले उस्तै व्यवहार गर्न सकिँदैन। त्यसैले
-  **सामान्य देखिने रूप पहिले थाहा पाउनु** दोष पहिचानको सुरुवात हो।
+- agrabhagaka pikselako sankhya tasbir ra thresholdle tay garchha. **yo bhautik kshetraphal (mm²) hoina.**
+- kantur sankhya "gadha kshetrako sankhya" ho, "doshko sankhya" hoina.
+- ujyalo ra butta farak bhaeka tasbir lai eutai sthir thresholdle ustai byabahar garna sakindaina. tyasaile
+  **samanya dekhine rup pahile thaha paunu** dosh pahichanko surubat ho.
 
-**सोच्नुहोस्:** सेतो अग्रभाग सधैं दोष हो?
+**sochnuhos:** seto agrabhag sadhain dosh ho?
 
 <!-- ne-cell: 4a6c53f8 | after-heading -->
-#### थ्रेसहोल्ड सार्दै मूल तस्बिर, मास्क र कन्टुर सँगै हेर्ने
+#### threshold sardai mul tasbir, mask ra kantur sangai herne
 
 <!-- ne-cell: 4a6c53f8 -->
-बायाँको मूल तस्बिर थ्रेसहोल्ड बदल्दा पनि बदलिँदैन। थ्रेसहोल्ड T बदल्दा बीचको बाइनरी मास्क बदलिन्छ र
-दायाँको कन्टुर त्यही मास्कबाट फेरि गणना हुन्छ। बीचमा देखाइएको मास्क `findContours` मा दिइएको array कै हो।
+bayanko mul tasbir threshold badalda pani badalindain. threshold T badalda bichako bainari mask badlinchha ra
+dayanko kantur tyahi maskabat feri ganana hunchha. bichama dekhaieko mask `findContours` ma diieko array kai ho.
 
-| अनुमान | के हेर्ने |
+| anuman | ke herne |
 |---|---|
-| थ्रेसहोल्ड बढाउँदा | सेतो क्षेत्रफल बढ्छ? घट्छ? |
-| कन्टुर सङ्ख्या | बढ्छ? घट्छ? |
-| थ्रेसहोल्ड 0 | मास्क सबै सेतो? सबै कालो? |
+| threshold badhaunda | seto kshetraphal badhchha? ghatchha? |
+| kantur sankhya | badhchha? ghatchha? |
+| threshold 0 | mask sabai seto? sabai kalo? |
 
-widget नभए पनि तलको parameter सेलले उही प्रयोग गर्न दिन्छ।
+widget nabhae pani talako parameter cellle uhi prayog garna dinchha.
 
 <!-- ne-cell: 8af2cdb3 | after-heading -->
-## Part 3 कन्टुर खोज्ने
+## Part 3 kantur khojne
 
 <!-- ne-cell: 77680506 | after-heading -->
-**कन्टुर भनेको "सेतो भागको किनारा"**
+**kantur bhaneko "seto bhaagko kinara"**
 <!-- ne-pair: A contour is the boundary of a white region -->
 
 <!-- ne-cell: 77680506 -->
-`cv2.findContours` ले बाइनरी तस्बिरको **सेतो भागको किनारा (कन्टुर)** भेट्छ। फर्काउने कुरा किनारा पछ्याएर
-बनेका बिन्दुहरूको क्रम हो। कन्टुर "क्षेत्र आफैं" होइन, "अग्रभागका पिक्सेल गनेको अभिलेख" पनि होइन।
+`cv2.findContours` le bainari tasbirko **seto bhaagko kinara (kantur)** bhetchha. pharkaune kura kinara pachhyaera
+baneka binduharuko kram ho. kantur "kshetra aphain" hoina, "agrabhagaka piksel ganeko abhilekh" pani hoina.
 
-| argument | अर्थ |
+| argument | arth |
 |---|---|
-| `cv2.RETR_EXTERNAL` | सबैभन्दा बाहिरी कन्टुर मात्र फर्काउने |
-| `cv2.CHAIN_APPROX_SIMPLE` | कन्टुरका बिन्दु घटाएर हल्का बनाउने |
+| `cv2.RETR_EXTERNAL` | sabaibhanda bahiri kantur matra pharkaune |
+| `cv2.CHAIN_APPROX_SIMPLE` | kanturaka bindu ghataera halka banaune |
 
-प्रत्येक कन्टुरबाट यी जानकारी पाइन्छन्।
+pratyek kanturabat yi jankari painchhan.
 
-| function | पाइने कुरा |
+| function | paine kura |
 |---|---|
-| `cv2.contourArea(c)` | कन्टुरले घेरेको आकृतिको क्षेत्रफल (पिक्सेल² एकाइको ज्यामितीय क्षेत्रफल) |
-| `cv2.boundingRect(c)` | बाहिरबाट घेर्ने आयत (x, y, w, h) |
-| `cv2.moments(c)` | गुरुत्वकेन्द्र गणना गर्न प्रयोग हुने मान |
+| `cv2.contourArea(c)` | kanturale ghereko akritiko kshetraphal (piksel² ekaiko jyamitiy kshetraphal) |
+| `cv2.boundingRect(c)` | bahirabat gherne ayat (x, y, w, h) |
+| `cv2.moments(c)` | gurutbakendra ganana garna prayog hune maan |
 
-`cv2.contourArea` किनाराका बिन्दुबाट गणना गरिएको **आकृतिको क्षेत्रफल** हो। अग्रभागका पिक्सेल गनेको सङ्ख्यासँग
-सधैं मिल्दैन (पातलो आकार र किनाराको व्यवहारले बदल्छ)। साथै यो **पिक्सेल²** हो, mm² होइन। mm² बनाउन
-क्यालिब्रेसन र Part 5 मा भनिएका सर्त चाहिन्छ।
+`cv2.contourArea` kinaraka bindubat ganana garieko **akritiko kshetraphal** ho. agrabhagaka piksel ganeko sankhya sang
+sadhain mildaina (patalo akar ra kinarako byabaharale badalchha). sathai yo **piksel²** ho, mm² hoina. mm² banaun
+calibration ra Part 5 ma bhanieka sart chahinchha.
 
 <!-- ne-cell: fig-teach_contour_merge | after-heading -->
-### जोडिँदा सङ्ख्या घट्छ
+### jodinda sankhya ghatchha
 
 <!-- ne-cell: fig-teach_contour_merge | after-image:../../assets/diagrams/teach_contour_merge.png -->
-चित्र: नजिकका दुई दोष, थ्रेसहोल्ड बढाउँदा 2 क्षेत्र → 1 क्षेत्र → 18 क्षेत्र (पृष्ठभूमिको आवाज) हुने
-उदाहरण (संश्लेषित तस्बिर, वास्तविक गणना)।
+chitra: najikaka dui dosh, threshold badhaunda 2 kshetra → 1 kshetra → 18 kshetra (prishthabhumiko abaj) hune
+udaharan (sansleshit tasbir, bastabik ganana).
 
-**ध्यान दिनुपर्ने कुरा**
+**dhyan dinuparne kura**
 
-कन्टुर क्षेत्रको **किनारा** जनाउने बिन्दुहरूको क्रम हो; अग्रभागका पिक्सेल वा तिनको सङ्ख्या होइन। नजिकका
-क्षेत्र जोडिँदा कन्टुर सङ्ख्या घट्छ। क्षेत्रफलमा `contourArea` (कन्टुरको ज्यामितीय क्षेत्रफल) र अग्रभागका
-पिक्सेल गन्ने तरिका छुट्ट्याउनुहोस्।
+kantur kshetrako **kinara** janaune binduharuko kram ho; agrabhagaka piksel wa tinako sankhya hoina. najikaka
+kshetra jodinda kantur sankhya ghatchha. kshetraphalama `contourArea` (kanturako jyamitiy kshetraphal) ra agrabhagaka
+piksel ganne tarika chhuttyaunuhos.
 
-**सोच्नुहोस्**
+**sochnuhos**
 
-- दुई दाग पातलो रेखाले जोडिए कन्टुर सङ्ख्या के हुन्छ?
+- dui dag patalo rekhale jodie kantur sankhya ke hunchha?
 
 <!-- ne-cell: 5a58ab0d | after-heading -->
-## Part 4 दुई बिन्दुबीचको दूरी
+## Part 4 dui bindubichako duri
 
 <!-- ne-cell: 3340cb70 | after-heading -->
-**पहिले चित्रमा सोचौं**
+**pahile chitra ma sochaun**
 <!-- ne-pair: Think with a picture first -->
 
-बिन्दु A र B बीचको दूरी निकाल्नु छ भनौं। तस्बिरमा A बाट B सम्म सिधा नाप्न गाह्रो हुन्छ।
+bindu A ra B bichako duri nikalnu chha bhanaun. tasbir ma A baat B samm sidha napna gahro hunchha.
 
-त्यसैले **समकोण त्रिभुज** बनाइन्छ।
+tyasaile **samakon tribhuj** banainchha.
 
-1. तिर्सो फरक: `dx = x2 - x1`
-2. ठाडो फरक: `dy = y2 - y1`
-3. तिर्सो लम्बाइ (अर्थात् दूरी) पाइथागोरसको नियमले निस्कन्छ
+1. tirso farak: `dx = x2 - x1`
+2. thado farak: `dy = y2 - y1`
+3. tirso lambai (arthat duri) paithagorasako niyamle niskanchha
 
-यहाँ पाइने दूरीको एकाइ **px (पिक्सेल)** हो। mm मा बदल्न Part 5 को क्यालिब्रेसन चाहिन्छ।
+yahan paine duriko ekai **px (piksel)** ho. mm ma badalna Part 5 ko calibration chahinchha.
 
 <!-- ne-cell: fig-teach_distance_345 | after-heading -->
-### दुई बिन्दुको दूरी कर्ण हो
+### dui binduko duri karna ho
 
 <!-- ne-cell: fig-teach_distance_345 | after-image:../../assets/diagrams/teach_distance_345.png -->
-चित्र: dx=300, dy=400, दूरी=500 px भएको समकोण त्रिभुज (सबै गणना गरिएका मान)।
+chitra: dx=300, dy=400, duri=500 px bhaeko samakon tribhuj (sabai ganana garieka maan).
 
-**ध्यान दिनुपर्ने कुरा**
+**dhyan dinuparne kura**
 
-दूरी "dx र dy दुवैको वर्ग गरेर जोड्ने, त्यसपछि वर्गमूल निकाल्ने" तरिकाले पाइन्छ। 3-4-5 भनेको त्यो गणना
-पूर्णाङ्कमा आउने उदाहरण हो। px मा पाइएको दूरीलाई mm बनाउन क्यालिब्रेसन (px/mm) चाहिन्छ।
+duri "dx ra dy dubaiko barg garera jodne, tyaspachhi bargamul nikalne" tarikale painchha. 3-4-5 bhaneko tyo ganana
+purnank ma aune udaharan ho. px ma paieko duri lai mm banaun calibration (px/mm) chahinchha.
 
-**सोच्नुहोस्**
+**sochnuhos**
 
-- dx = 6, dy = 8 हुँदा दूरी कति px हुन्छ?
+- dx = 6, dy = 8 hunda duri kati px hunchha?
 
 <!-- ne-cell: 1c601d07 | after-heading -->
-**सूत्रको अर्थ**
+**sutrako arth**
 <!-- ne-pair: What the formula means -->
 
 <!-- ne-cell: 1c601d07 -->
-सूत्र एक लाइनको मात्र हो: `दूरी = √( dx² + dy² )`।
+sutra ek lineko matra ho: `duri = √( dx² + dy² )`.
 
-`dx²` भनेको "dx को वर्ग", `√` भनेको "वर्गमूल"। **dx र dy दुवैको वर्ग गर्ने, जोड्ने, त्यसपछि वर्गमूल निकाल्ने।**
-Python मा `** 0.5` वा `math.sqrt` प्रयोग गर्नुहोस्।
+`dx²` bhaneko "dx ko barg", `√` bhaneko "bargamul". **dx ra dy dubaiko barg garne, jodne, tyaspachhi bargamul nikalne.**
+Python ma `** 0.5` wa `math.sqrt` prayog garnuhos.
 
-> "वर्ग गर्ने, जोड्ने, वर्गमूल निकाल्ने" — यत्ति मात्र। सूत्र कण्ठ गर्नु पर्दैन। **समकोण त्रिभुजको कर्ण**
-> निकालिएको मात्र हो।
+> "barg garne, jodne, bargamul nikalne" — yatti matra. sutra kanth garnu pardaina. **samakon tribhujako karna**
+> nikalieko matra ho.
 
-पाइने दूरीको एकाइ **px** हो (पिक्सेलबीचको दूरी, भौतिक लम्बाइको एकाइ होइन)। mm बनाउन क्यालिब्रेसनको
-गुणकले गुणन गर्नुपर्छ।
+paine duriko ekai **px** ho (pikselabichako duri, bhautik lambaiko ekai hoina). mm banaun calibrationko
+gunakale gunan garnuparchha.
 
 <!-- ne-cell: daed0037 | after-heading -->
-### नतिजाको उदाहरण
+### natijako udaharan
 
 <!-- ne-cell: 6fa3f5d0 | after-heading -->
-**3-4-5 को जाँच**
+**3-4-5 ko jaanch**
 <!-- ne-pair: Verifying 3-4-5 -->
 
 <!-- ne-cell: 6fa3f5d0 -->
-`(0,0)` र `(3,4)` बीचको दूरी **5** हो: `3² + 4² = 9 + 16 = 25`, `√25 = 5`। गणना मिल्यो।
+`(0,0)` ra `(3,4)` bichako duri **5** ho: `3² + 4² = 9 + 16 = 25`, `√25 = 5`. ganana milyo.
 
 <!-- ne-cell: 00f34871 | after-heading -->
-## Part 5 पिक्सेललाई मिलिमिटरमा बदल्ने
+## Part 5 pikselalai milimitarama badalne
 
 <!-- ne-cell: b78a5571 | after-heading -->
-### पिक्सेललाई मिलिमिटर बनाउने
+### pikselalai milimitar banaune
 
 <!-- ne-cell: b78a5571 | after-image:../../assets/diagrams/teach_pixel_to_mm.png -->
-चित्र: सन्दर्भ लम्बाइ 100 px = 50.0 mm बाट गुणक 2.00 px/mm निकालेर 200 px चौडाइलाई 100.0 mm मा बदलेको
-उदाहरण। किनाराको स्थानमा मानिएको अनिश्चितता (±0.5 px ÷ 2.00 px/mm = ±0.25 mm) पनि त्यही चित्रमा छ।
+chitra: sandarbha lambai 100 px = 50.0 mm baat gunak 2.00 px/mm nikaler 200 px chaudailai 100.0 mm ma badaleko
+udaharan. kinarako sthanama manieko anishchitata (±0.5 px ÷ 2.00 px/mm = ±0.25 mm) pani tyahi chitra ma chha.
 
-**ध्यान दिनुपर्ने कुरा**
+**dhyan dinuparne kura**
 
-गुणक "सन्दर्भ लम्बाइ कति px मा कति mm हो" बाट निस्कन्छ। गुणक तय भएपछि भाग गर्ने मात्र। **एकाइ सधैं
-लेख्नुहोस्।** चित्रमा किनाराको अनिश्चितता ±0.5 px मानेर ±0.25 mm मा बदलिएको छ। यो नापको शुद्धताको
-ग्यारेन्टी होइन।
+gunak "sandarbha lambai kati px ma kati mm ho" baat niskanchha. gunak tay bhaepachhi bhaag garne matra. **ekai sadhain
+lekhnuhos.** chitra ma kinarako anishchitata ±0.5 px maner ±0.25 mm ma badalieko chha. yo napako shuddhatako
+gyarenti hoina.
 
-**यो चित्र एउटै समतलमा गरिएको परिवर्तनको उदाहरण हो।** सन्दर्भ लम्बाइ र नाप्ने लम्बाइ एउटै समतलमा छन्,
-लेन्सको विकृति सानो छ र गुणक देखिने क्षेत्रभरि स्थिर छ भन्ने पूर्वशर्त छ। वास्तविक नापमा
-**धेरै स्थान र दिशा** मा जाँच्नुपर्छ र विकृतिको सुधार (वा क्षेत्र-दर-क्षेत्र क्यालिब्रेसन) पनि चाहिन्छ।
+**yo chitra eutai samatalama garieko paribartanako udaharan ho.** sandarbha lambai ra napne lambai eutai samatalama chhan,
+lensako bikriti sano chha ra gunak dekhine kshetrabhari sthir chha bhanne poorwashart chha. bastabik napama
+**dherai sthan ra disha** ma janchnuparchha ra bikritiko sudhar (wa kshetra-dar-kshetra calibration) pani chahinchha.
 
-**सोच्नुहोस्**
+**sochnuhos**
 
-- उही वास्तविक 50.0 mm सन्दर्भ, zoom गर्दा 240 px मा देखियो। गुणक कति px/mm हुन्छ? त्यसबेला उही 1 px
-  त्रुटि mm मा ठुलो हुन्छ कि सानो?
+- uhi bastabik 50.0 mm sandarbha, zoom garda 240 px ma dekhiyo. gunak kati px/mm hunchha? tyasabela uhi 1 px
+  truti mm ma thulo hunchha ki sano?
 
 <!-- ne-cell: b877b171 | after-heading -->
-**क्यालिब्रेसन किन चाहिन्छ**
+**calibration kina chahinchha**
 <!-- ne-pair: Why calibration is necessary -->
 
 <!-- ne-cell: b877b171 -->
-तस्बिरको दूरी **पिक्सेल** मा नापिन्छ, तर कार्यस्थलमा **मिलिमिटर** चाहिन्छ।
+tasbirko duri **piksel** ma napinchha, tar karyasthalama **milimitar** chahinchha.
 
-उही 100 mm को वस्तु क्यामेरा टाढा हुँदा **सानो**, नजिक हुँदा **ठुलो** देखिन्छ। अर्थात् "एक पिक्सेल कति mm
-हो" भन्ने कुरा **क्यामेरा र वस्तुको स्थिति** ले तय गर्छ।
+uhi 100 mm ko bastu kyamera tadha hunda **sano**, najik hunda **thulo** dekhinchha. arthat "ek piksel kati mm
+ho" bhanne kura **kyamera ra bastuko sthiti** le tay garchha.
 
-त्यसैले **लम्बाइ थाहा भएको वस्तु** (सन्दर्भ स्केल) उही दृश्यमा राखेर पिक्सेल र mm को अनुपात निकालिन्छ।
-यसलाई **क्यालिब्रेसन** भनिन्छ।
+tyasaile **lambai thaha bhaeko bastu** (sandarbha skel) uhi drishyama rakher piksel ra mm ko anupaat nikalinchha.
+yas lai **calibration** bhaninchha.
 
-उदाहरण: `px_per_mm = सन्दर्भको पिक्सेल लम्बाइ ÷ सन्दर्भको वास्तविक लम्बाइ (mm)` र
-`mm_per_px = सन्दर्भको वास्तविक लम्बाइ (mm) ÷ सन्दर्भको पिक्सेल लम्बाइ`।
+udaharan: `px_per_mm = sandarbhako piksel lambai ÷ sandarbhako bastabik lambai (mm)` ra
+`mm_per_px = sandarbhako bastabik lambai (mm) ÷ sandarbhako piksel lambai`.
 
 <!-- ne-cell: deffde3a | after-heading -->
-**क्यालिब्रेसनको सोचाइ देखाउने चित्र**
+**calibrationko sochai dekhaune chitra**
 <!-- ne-pair: The idea of calibration -->
 
 <!-- ne-cell: deffde3a -->
-तलको चित्रले **उही 100 mm सन्दर्भ** क्यामेराको दूरीअनुसार कति पिक्सेलमा देखिन्छ देखाउँछ।
+talako chitrale **uhi 100 mm sandarbha** kyamerako duri anusar kati pikselama dekhinchha dekhaunchha.
 
-- टाढा: 100 mm = 120 px → **1.20 px/mm**
-- नजिक: 100 mm = 240 px → **2.40 px/mm**
+- tadha: 100 mm = 120 px → **1.20 px/mm**
+- najik: 100 mm = 240 px → **2.40 px/mm**
 
-अर्थात् क्यालिब्रेसन मान **त्यही खिचाइको अवस्थामा मात्र** चल्छ। क्यामेरा सारियो भने **फेरि
-क्यालिब्रेसन गर्नैपर्छ**।
+arthat calibration maan **tyahi khichaiko abastha ma matra** chalchha. kyamera sariyo bhane **feri
+calibration garnaiparchha**.
 
-**दुई फरक काम नमिसाउनुहोस्।**
+**dui farak kaam namisaunuhos.**
 
-- **सन्दर्भ आफैं दोब्बर लम्बाइको बनाउने** (100 mm → 200 mm): वास्तविक लम्बाइ बदलिन्छ, तर गुणक (px/mm) उही रहन्छ।
-- **zoom गरेर सन्दर्भ देखिने पिक्सेल सङ्ख्या मात्र दोब्बर बनाउने** (120 px → 240 px): वास्तविक लम्बाइ
-  100 mm नै हुन्छ, त्यसैले गुणक (px/mm) दोब्बर हुन्छ।
+- **sandarbha aphain dobbar lambaiko banaune** (100 mm → 200 mm): bastabik lambai badlinchha, tar gunak (px/mm) uhi rahanchha.
+- **zoom garera sandarbha dekhine piksel sankhya matra dobbar banaune** (120 px → 240 px): bastabik lambai
+  100 mm nai hunchha, tyasaile gunak (px/mm) dobbar hunchha.
 
-क्यालिब्रेसनले बदल्ने कुरा "एक px कति mm हो" भन्ने मात्र हो। कुन काम गरियो भनेर सधैं छुट्याउनुहोस्।
+calibrationle badalne kura "ek px kati mm ho" bhanne matra ho. kun kaam gariyo bhanera sadhain chhutyaunuhos.
 
 <!-- ne-cell: e3c33e34 | after-heading -->
-**नापेर हेर्ने**
+**naper herne**
 <!-- ne-pair: Measure something -->
 
 <!-- ne-cell: e3c33e34 -->
-क्यालिब्रेसन मान प्रयोग गरेर दुई बिन्दुबीचको दूरी mm मा निकालिन्छ: `दूरी(mm) = दूरी(px) × mm_per_px`।
+calibration maan prayog garera dui bindubichako duri mm ma nikalinchha: `duri(mm) = duri(px) × mm_per_px`.
 
-तलको सेलले पहिले क्यालिब्रेसन तस्बिरको सन्दर्भ रेखाका दुई छेउ नापेर **100 mm मै फर्किन्छ कि** जाँच्छ।
-तर यो "गुणक निकालेकै रेखालाई उही गुणकले फेरि नापेको" मात्र हो, त्यसैले **गणनाको जाँच** मात्र हुन्छ,
-नापको शुद्धताको प्रमाण होइन।
+talako cellle pahile calibration tasbirko sandarbha rekhaka dui chheu naper **100 mm mai pharkinchha ki** janchchha.
+tar yo "gunak nikalekai rekhalai uhi gunakale feri napeko" matra ho, tyasaile **gananako jaanch** matra hunchha,
+napako shuddhatako praman hoina.
 
-त्यसैले क्यालिब्रेसनमा नप्रयोग गरिएको **ठाडो जाँच रेखा (50 mm)** पनि नापिन्छ। अर्को स्थान, अर्को दिशाको
-रेखा 50 mm मै फर्कियो भने **यो संश्लेषित तस्बिरभित्र परिवर्तन एकनासले चलेको** स्वतन्त्र प्रमाण बन्छ।
+tyasaile calibration ma naprayog garieko **thado jaanch rekha (50 mm)** pani napinchha. arko sthan, arko dishako
+rekha 50 mm mai pharkiyo bhane **yo sansleshit tasbirbhitra paribartan ekanasale chaleko** sbatantra praman banchha.
 
-**यो जाँचले भन्न सक्ने र नसक्ने कुरा**
+**yo jaanchle bhanna sakne ra nasakne kura**
 
-- भन्न सक्ने: यो तस्बिरभित्र एउटै गुणकले अर्को रेखालाई पनि सही mm मा बदल्यो (**परिवर्तनको एकनासताको जाँच**)।
-- भन्न नसक्ने: देखिने क्षेत्रको छेउ, विभिन्न दिशा वा विभिन्न दूरीमा पनि उही शुद्धता हुन्छ भन्ने। दुवै रेखा
-  **एउटै समतल** मा, **तस्बिरको अक्षसँग समानान्तर** बनाइएका आदर्श आकार हुन्।
+- bhanna sakne: yo tasbirbhitra eutai gunakale arko rekhalai pani sahi mm ma badalyo (**paribartanako ekanasatako jaanch**).
+- bhanna nasakne: dekhine kshetrako chheu, bibhinna disha wa bibhinna duri ma pani uhi shuddhata hunchha bhanne. dubai rekha
+  **eutai samatal** ma, **tasbirko akshasang samanantar** banaieka adarsh akar hun.
 
-वास्तविक नापमा **धेरै स्थान र दिशा** मा जाँच गरिन्छ र लेन्सको विकृति तथा सतहको ढल्काइ पनि सोचिन्छ।
+bastabik napama **dherai sthan ra disha** ma jaanch garinchha ra lensako bikriti tatha satahako dhalkai pani sochinchha.
 
 <!-- ne-cell: 3c3e557c | after-heading -->
-### नतिजाको उदाहरण
+### natijako udaharan
 
 <!-- ne-cell: 3c3e557c -->
-यी दुई रेखा दुवै संश्लेषित तस्बिरमा बनाइएका आदर्श आकार हुन्। त्रुटि ठ्याक्कै 0 हुनुको कारण पिक्सेल निर्देशाङ्क
-पूर्णाङ्कमा दिइएको र रेखा तस्बिरको अक्षसँग समानान्तर भएको हो। वास्तविक फोटोमा पिक्सेल स्याम्पलिङ,
-किनाराको स्थान अनुमान (subpixel) र लेन्स विकृतिले त्रुटि निम्त्याउँछन्।
+yi dui rekha dubai sansleshit tasbir ma banaieka adarsh akar hun. truti thyakkai 0 hunuko karan piksel nirdeshangk
+purnank ma diieko ra rekha tasbirko akshasang samanantar bhaeko ho. bastabik photoma piksel syampaling,
+kinarako sthan anuman (subpixel) ra lens bikritile truti nimtyaunchhan.
 
 <!-- ne-cell: 87c3a290 | after-heading -->
-**एउटै गुणक प्रयोग गर्न मिल्ने सर्त**
+**eutai gunak prayog garna milne sart**
 <!-- ne-pair: When one scale factor is valid -->
 
 <!-- ne-cell: 87c3a290 -->
-"एउटै px/mm ले पूरै नाप्ने" काम यी सर्त पूरा भए मात्र मिल्छ।
+"eutai px/mm le purai napne" kaam yi sart pura bhae matra milchha.
 
-| सर्त | नपुगे के हुन्छ |
+| sart | napuge ke hunchha |
 |---|---|
-| क्यामेरा सिटको सतहसँग **सीधा (perpendicular)** छ | तिर्सो भए ठाउँअनुसार स्केल बदलिन्छ |
-| लेन्स विकृति सानो (वा सुधारिएको) | तस्बिरको छेउतिर त्रुटि बढ्छ |
-| सिट समतल छ र क्यामेराबाट **उही दूरी** मा छ | उठ्ने वा फुल्ने भागमा स्केल बदलिन्छ |
-| देखिने क्षेत्रभरि गुणक स्थिर छ | फराकिलो-कोण (wide) लेन्समा छेउतिर स्केल बदलिन्छ |
+| kyamera sitako satahasang **sidha (perpendicular)** chha | tirso bhae thaun anusar skel badlinchha |
+| lens bikriti sano (wa sudharieko) | tasbirko chheutir truti badhchha |
+| sit samatal chha ra kyamerabat **uhi duri** ma chha | uthne wa phulne bhaag ma skel badlinchha |
+| dekhine kshetrabhari gunak sthir chha | pharakilo-kon (wide) lensama chheutir skel badlinchha |
 
-**फराकिलो-कोण लेन्स भए पनि क्यालिब्रेसन गरिएको नाप सम्भव छ।** विकृति ठुलो भए सुधार प्रयोग गर्नुहोस्
-(`cv2.calibrateCamera` ले गुणक निकालेर `cv2.undistort` ले सुधार्ने) वा **क्षेत्र-दर-क्षेत्र क्यालिब्रेसन**
-गरेर स्थानीय गुणक प्रयोग गर्नुहोस्। नमिल्ने कुरा भनेको "सुधार नगरी एउटै गुणक पूरै दृश्यमा लगाउनु" हो।
+**pharakilo-kon lens bhae pani calibration garieko nap sambhab chha.** bikriti thulo bhae sudhar prayog garnuhos
+(`cv2.calibrateCamera` le gunak nikaler `cv2.undistort` le sudharne) wa **kshetra-dar-kshetra calibration**
+garera sthaniy gunak prayog garnuhos. namilne kura bhaneko "sudhar nagari eutai gunak purai drishyama lagaunu" ho.
 
-अर्थात् **क्यालिब्रेसन नगरिएको तस्बिरको नाप सही छ भन्न मिल्दैन**। "पिक्सेलमा नापें" भन्ने मात्रले mm को
-कुनै ग्यारेन्टी दिँदैन।
+arthat **calibration nagarieko tasbirko nap sahi chha bhanna mildaina**. "pikselama napen" bhanne matrale mm ko
+kunai gyarenti dindain.
 
 <!-- ne-cell: 5078b3fb | after-heading -->
-## अभ्यास
+## abhyas
 
 <!-- ne-cell: audit-same-plane-intro | after-heading -->
-### एउटै समतलको सन्दर्भ र लक्ष्य
+### eutai samatalako sandarbha ra lakshya
 
 <!-- ne-cell: audit-same-plane-intro -->
-लम्बाइको परिवर्तन जाँचेपछि, छुट्टै क्यालिब्रेसन भएको एउटै-समतलको दोष दृश्य प्रयोग गरिन्छ। निलो सन्दर्भ
-रेखा थ्रेसहोल्ड 80 मा अग्रभागमा पर्दैन। यो संश्लेषित तस्बिरको कोडबाट गुणक 1.2 px/mm, स्वतन्त्र जाँच 50 mm,
-कन्टुर क्षेत्रफल 475 / 925 px² र अग्रभागका पिक्सेल 1508 पाइन्छ।
-अभ्यासको सूत्र पूरा गर्दा जाँच्ने गणना: 475 px² → 329.861111 mm², 925 px² → 642.361111 mm²।
+lambaiko paribartan janchepachhi, chhuttai calibration bhaeko eutai-samatalako dosh drishy prayog garinchha. nilo sandarbha
+rekha threshold 80 ma agrabhagama pardaina. yo sansleshit tasbirko kodabat gunak 1.2 px/mm, sbatantra jaanch 50 mm,
+kantur kshetraphal 475 / 925 px² ra agrabhagaka piksel 1508 painchha.
+abhyasko sutra pura garda jaanchne ganana: 475 px² → 329.861111 mm², 925 px² → 642.361111 mm².
 
 <!-- ne-cell: clarity-scale-equations | after-heading -->
-#### पहिले एकाइको सूत्र
+#### pahile ekaiko sutra
 
 <!-- ne-cell: clarity-scale-equations -->
 `px_per_mm = reference_length_px / reference_length_mm`
@@ -585,129 +633,129 @@ Python मा `** 0.5` वा `math.sqrt` प्रयोग गर्नुह�
 
 `area_mm2 = area_px2 / (px_per_mm ** 2)`
 
-एउटै समतलको संश्लेषित उदाहरणमा 120 px / 100 mm = 1.2 px/mm, र स्वतन्त्र 60 px ले 50 mm दिन्छ। 475/925 px²
-का कन्टुर करिब 329.861/642.361 mm² हुन्छन्। अनुमान: गुणक मात्र दोब्बर भए बदलिएको क्षेत्रफल कति हुन्छ?
-यो नापको शुद्धताको प्रमाणपत्र होइन; समतल, हेराइको कोण र लेन्स विकृति पनि जाँच्नुहोस्।
+eutai samatalako sansleshit udaharan ma 120 px / 100 mm = 1.2 px/mm, ra sbatantra 60 px le 50 mm dinchha. 475/925 px²
+ka kantur karib 329.861/642.361 mm² hunchhan. anuman: gunak matra dobbar bhae badalieko kshetraphal kati hunchha?
+yo napako shuddhatako pramanapatra hoina; samatal, heraiko kon ra lens bikriti pani jaanchnuhos.
 
 <!-- ne-cell: audit-teach_calibration_same_plane | after-heading -->
-### कोड कसरी पढ्ने
+### kod kasari padhne
 
 <!-- ne-cell: audit-teach_calibration_same_plane | after-image:../../assets/svg/teach_calibration_same_plane.svg -->
-चित्र: सन्दर्भ रेखा र लक्ष्य एउटै तस्बिर, एउटै समतलमा छन्। (गणना गरिएको संश्लेषित उदाहरण र योजनाबद्ध चित्र;
-model को वास्तविक नापिएको नतिजा होइन।)
+chitra: sandarbha rekha ra lakshya eutai tasbir, eutai samatalama chhan. (ganana garieko sansleshit udaharan ra yojanabaddha chitra;
+model ko bastabik napieko natija hoina.)
 
-**ध्यान दिनुपर्ने कुरा**
+**dhyan dinuparne kura**
 
-सन्दर्भ रेखा र लक्ष्य एउटै तस्बिर, एउटै समतलमा छन्। इनपुट र परिवर्तन भएको मान औंलाले पछ्याउनुहोस्।
+sandarbha rekha ra lakshya eutai tasbir, eutai samatalama chhan. input ra paribartan bhaeko maan aunlale pachhyaunuhos.
 
-**सोच्नुहोस्**
+**sochnuhos**
 
-गुणक दोब्बर मानियो भने उही px² को mm² कति गुणा हुन्छ?
+gunak dobbar maniyo bhane uhi px² ko mm² kati guna hunchha?
 
 <!-- ne-cell: 2e70399c | after-heading -->
-**अभ्यास 1 (आधारभूत): एउटै तस्बिरको कन्टुर क्षेत्रफल mm² मा बदल्ने**
+**abhyas 1 (adharabhut): eutai tasbirko kantur kshetraphal mm² ma badalne**
 <!-- ne-pair: Exercise 1 (basic): convert areas from the same calibrated image -->
 
 <!-- ne-cell: 2e70399c -->
-तलको सेलमा Part 3 को `kept` होइन, माथिको क्यालिब्रेसन भएको तस्बिरको `calibrated_contours` प्रयोग हुन्छ।
-Part 3 को `defect_multi.png` मा अर्को तस्बिरबाट पाइएको गुणक लगाउनु हुँदैन। सङ्केत: `area_px2` लाई
-`calibrated_px_per_mm ** 2` ले भाग गर्नुहोस्। कन्टुरको ज्यामितीय क्षेत्रफल र अग्रभागका पिक्सेल सङ्ख्या
-फरक हुन्। वर्गाकार पिक्सेल, उही वस्तु-समतल, सीधा हेराइ (वा सुधारिएको perspective), सानो लेन्स विकृति र
-सन्दर्भ रेखाको अनिश्चितता पनि जाँच्नुहोस्। यो आदर्श संश्लेषित दृश्य हो।
+talako cell ma Part 3 ko `kept` hoina, mathiko calibration bhaeko tasbirko `calibrated_contours` prayog hunchha.
+Part 3 ko `defect_multi.png` ma arko tasbir baat paieko gunak lagaunu hundaina. sanket: `area_px2` lai
+`calibrated_px_per_mm ** 2` le bhaag garnuhos. kanturako jyamitiy kshetraphal ra agrabhagaka piksel sankhya
+farak hun. bargakar piksel, uhi bastu-samatal, sidha herai (wa sudharieko perspective), sano lens bikriti ra
+sandarbha rekhako anishchitata pani jaanchnuhos. yo adarsh sansleshit drishy ho.
 
-**सकिएको मानिने अवस्था:** दुवै कन्टुरको क्षेत्रफल px² र mm² दुवैमा देखाइएको छ।
+**sakieko manine abastha:** dubai kanturako kshetraphal px² ra mm² dubaima dekhaieko chha.
 
 <!-- ne-cell: 73d9d23e | after-heading -->
-**अभ्यास 2 (मध्यम): थ्रेसहोल्ड बदलेर कन्टुर सङ्ख्या तुलना गर्ने**
+**abhyas 2 (madhyam): threshold badaler kantur sankhya tulna garne**
 <!-- ne-pair: Exercise 2 (intermediate): compare contour counts for several thresholds -->
 
 <!-- ne-cell: 73d9d23e -->
-थ्रेसहोल्ड 100 / 150 / 180 / 200 बदलेर **भेटिएका कन्टुरको सङ्ख्या** र **सबैभन्दा ठुलो कन्टुरको क्षेत्रफल**
-तालिकामा राख्नुहोस्। कुन मानले "दोष मात्र" समात्छ? कारण पनि लेख्नुहोस्।
+threshold 100 / 150 / 180 / 200 badaler **bhetieka kanturako sankhya** ra **sabaibhanda thulo kanturako kshetraphal**
+talika ma rakhnuhos. kun maanle "dosh matra" samatchha? karan pani lekhnuhos.
 
 <!-- ne-cell: e7f5ac65 | after-heading -->
-**अभ्यास 3 (वैकल्पिक): नापको त्रुटिबारे सोच्ने**
+**abhyas 3 (baikalpik): napako trutibare sochne**
 <!-- ne-pair: Exercise 3 (optional challenge): discuss measurement error -->
 
 <!-- ne-cell: e7f5ac65 -->
-0.3 mm को दोष 1 px/mm गुणकमा नाप्ने मानौं।
+0.3 mm ko dosh 1 px/mm gunakama napne manaun.
 
-1. 0.3 mm कति पिक्सेल हुन्छ?
-2. **पिक्सेलको क्रम सङ्ख्या पूर्णाङ्क** हो, तर कन्टुरको गुरुत्वकेन्द्र वा किनाराको स्थान **दशमलव
-   (subpixel)** मा अनुमान गर्न सकिन्छ। यी दुई कुराको फरक व्याख्या गर्नुहोस्।
-3. 0.3 mm लाई 3 पिक्सेलमा समात्न कति px/mm वा बढी चाहिन्छ?
-4. त्रुटि घटाउने तीन उपाय भन्नुहोस् (क्यामेरा, उज्यालो, क्यालिब्रेसनको दृष्टिले)।
+1. 0.3 mm kati piksel hunchha?
+2. **pikselako kram sankhya purnank** ho, tar kanturako gurutbakendra wa kinarako sthan **dashamalab
+   (subpixel)** ma anuman garna sakinchha. yi dui kurako farak byakhya garnuhos.
+3. 0.3 mm lai 3 pikselama samatna kati px/mm wa badhi chahinchha?
+4. truti ghataune tin upay bhannuhos (kyamera, ujyalo, calibrationko drishtile).
 
-**सैम्पलिङ, subpixel अनुमान र अनिश्चितता फरक कुरा हुन्।** पिक्सेल क्रम सङ्ख्या पूर्णाङ्क भए पनि स्थानको
-अनुमान दशमलवमा निकाल्न सकिन्छ र "0.3 px" लाई निरन्तर मानको रूपमा प्रयोग गर्न सकिन्छ। तर हरेक अनुमानसँग
-अनिश्चितता (बिखण्डन) जोडिएर आउँछ।
+**saimpaling, subpixel anuman ra anishchitata farak kura hun.** piksel kram sankhya purnank bhae pani sthanako
+anuman dashamalabama nikalna sakinchha ra "0.3 px" lai nirantar maanko rupama prayog garna sakinchha. tar harek anuman sang
+anishchitata (bikhandan) jodiera aaunchha.
 
-**सकिएको मानिने अवस्था:** चारै उत्तर लेखिएका छन् र प्रश्न 3 मा सङ्ख्या दिइएको छ।
+**sakieko manine abastha:** charai uttar lekhieka chhan ra prashna 3 ma sankhya diieko chha.
 
 <!-- ne-cell: 79f73b1f | after-heading -->
-#### बुझाइ जाँच्ने प्रश्न
+#### bujhai jaanchne prashna
 
 <!-- ne-cell: 79f73b1f -->
-1. OpenCV को तस्बिर र Matplotlib को तस्बिरमा रङको क्रम कसरी फरक छ? बदल्न बिर्से के हुन्छ?
-2. `cv2.imread` ले नभएको फाइल पढ्दा त्रुटि दिन्छ?
-3. `THRESH_BINARY` र `THRESH_BINARY_INV` मा के फरक छ? किन दोस्रो प्रयोग गरियो?
-4. थ्रेसहोल्ड धेरै बढाउँदा झुटो अलार्म बढ्छ कि छुट्ने बढ्छ?
-5. "क्यालिब्रेसन नगरिएको तस्बिरको नाप विश्वास गर्न मिल्दैन" किन? क्यामेराको दूरीको उदाहरण दिनुहोस्।
+1. OpenCV ko tasbir ra Matplotlib ko tasbir ma rangako kram kasari farak chha? badalna birse ke hunchha?
+2. `cv2.imread` le nabhaeko file padhda truti dinchha?
+3. `THRESH_BINARY` ra `THRESH_BINARY_INV` ma ke farak chha? kina dosro prayog gariyo?
+4. threshold dherai badhaunda jhuto alarm badhchha ki chhutne badhchha?
+5. "calibration nagarieko tasbirko nap bishbas garna mildaina" kina? kyamerako duriko udaharan dinuhos.
 
 <!-- ne-cell: 5889e8ae | after-heading -->
-## समस्या परेमा
+## samasya parema
 
 <!-- ne-cell: 5889e8ae -->
-त्रुटि आएपछि पहिले "कुन सेलमा", "कुन लाइनमा", "के सन्देश आयो" भनेर लेख्नुहोस्। बुझाउनुपर्ने काममा पनि
-त्यही अभिलेख राख्नुहोस्।
+truti aepachhi pahile "kun cell ma", "kun line ma", "ke sandesh ayo" bhanera lekhnuhos. bujhaunuparne kaam ma pani
+tyahi abhilekh rakhnuhos.
 
-| लक्षण | के गर्ने |
+| lakshan | ke garne |
 | --- | --- |
-| `image_bgr` `None` हुन्छ | बाटो गलत छ वा सामग्री बनाइएको छैन। `ASSETS / "defect_samples" / "defect_multi.png"` जाँच्नुहोस्। |
-| `cv2.imwrite` ले `False` फर्काउँछ | क्रमैसँग हेर्नुहोस्: फोल्डर छैन, लेख्ने अनुमति छैन, extension र ढाँचा मिल्दैन, बाटो गलत। फोल्डर `mkdir(parents=True, exist_ok=True)` ले पहिले बनाउनुहोस्। |
-| रङ अनौठो (रातो र निलो साटिएको) | BGR array मा `cv2.cvtColor(image, cv2.COLOR_BGR2RGB)` लगाउन बिर्सिएको छ। उल्टो, पहिले नै RGB भएको तस्बिर (PIL ले खोलेको फोटो) बदल्दा पनि रङ साटिन्छ। |
-| `findContours` ले तीन मान फर्काउँछ भनिन्छ | त्यो OpenCV 3 को जानकारी हो। OpenCV 4 मा दुई मान (contours, hierarchy) फर्काउँछ। |
-| कन्टुर धेरै / आवाजै आवाज | `cv2.contourArea` ले साना कन्टुर फाल्नुहोस् (जस्तै 5 px² भन्दा कम)। थ्रेसहोल्ड र ध्रुवता (`THRESH_BINARY_INV`) पनि जाँच्नुहोस्। |
-| क्षेत्रफलको परिवर्तन मिलेन | क्षेत्रफल `px_per_mm ** 2` ले भाग गरिन्छ (लम्बाइ घात 1, क्षेत्रफल घात 2)। यो सूत्र पिक्सेल वर्गाकार भए र वस्तु क्यालिब्रेसनकै समतलमा भए मात्र मिल्छ। |
-| तस्बिरको छेउतिर नाप सर्छ (wide लेन्स) | त्यो लेन्स विकृति हो। `cv2.calibrateCamera` र `cv2.undistort` ले सुधार्नुहोस् वा क्षेत्र-दर-क्षेत्र क्यालिब्रेसन गर्नुहोस्। सुधार गरेपछि wide लेन्समा पनि क्यालिब्रेसन भएको नाप सम्भव छ। |
-| `ModuleNotFoundError: No module named 'cv2'` | kernel गलत छ वा `opencv-python` छैन। `verify_environment.py` चलाउनुहोस्। |
+| `image_bgr` `None` hunchha | bato galat chha wa samagri banaiyeko chhaina. `ASSETS / "defect_samples" / "defect_multi.png"` jaanchnuhos. |
+| `cv2.imwrite` le `False` pharkaunchha | kramaisang hernuhos: folder chhaina, lekhne anumati chhaina, extension ra dhancha mildaina, bato galat. folder `mkdir(parents=True, exist_ok=True)` le pahile banaunuhos. |
+| rang anautho (rato ra nilo satieko) | BGR array ma `cv2.cvtColor(image, cv2.COLOR_BGR2RGB)` lagaun birsieko chha. ulto, pahile nai RGB bhaeko tasbir (PIL le kholeko photo) badalda pani rang satinchha. |
+| `findContours` le tin maan pharkaunchha bhaninchha | tyo OpenCV 3 ko jankari ho. OpenCV 4 ma dui maan (contours, hierarchy) pharkaunchha. |
+| kantur dherai / abajai abaj | `cv2.contourArea` le sana kantur phalnuhos (jastai 5 px² bhanda kam). threshold ra dhrubata (`THRESH_BINARY_INV`) pani jaanchnuhos. |
+| kshetraphalako paribartan milen | kshetraphal `px_per_mm ** 2` le bhaag garinchha (lambai ghat 1, kshetraphal ghat 2). yo sutra piksel bargakar bhae ra bastu kyalibresanakai samatalama bhae matra milchha. |
+| tasbirko chheutir nap sarchha (wide lens) | tyo lens bikriti ho. `cv2.calibrateCamera` ra `cv2.undistort` le sudharnuhos wa kshetra-dar-kshetra calibration garnuhos. sudhar garepachhi wide lensama pani calibration bhaeko nap sambhab chha. |
+| `ModuleNotFoundError: No module named 'cv2'` | kernel galat chha wa `opencv-python` chhaina. `verify_environment.py` chalaunuhos. |
 
 <!-- ne-cell: 9abd1567 | after-heading -->
-## सम्पन्नता जाँचसूची
+## sampannata janchasuchi
 
 <!-- ne-cell: 9abd1567 -->
-**अनिवार्य** र **वैकल्पिक** काम छुट्टाछुट्टै छन्। **अभ्यास 3 (वैकल्पिक)** वैकल्पिक हो; नगरे पनि पूरा
-मानिन्छ। सबै अनिवार्य बुँदामा चिन्ह लागेपछि यो नोटबुक पूरा हुन्छ।
+**aniwarya** ra **baikalpik** kaam chhuttachhuttai chhan. **abhyas 3 (baikalpik)** baikalpik ho; nagare pani pura
+maninchha. sabai aniwarya bundama chinh lagepachhi yo notebook pura hunchha.
 
-**अनिवार्य**
+**aniwarya**
 
-- [ ] Part 1–Part 5 पढेर सबै code सेल चलाएँ
-- [ ] तस्बिर पढेर सुरक्षित गर्ने फोल्डरमा सुरक्षित गरें
-- [ ] ग्रेस्केल र बाइनरीकरणको नतिजा आँखाले हेरें
-- [ ] कन्टुर भेटेर क्षेत्रफल र बाहिरी आयत देखाएँ
-- [ ] दुई बिन्दुको दूरी px मा गणना गरें
-- [ ] px/mm गणना गरेर mm मा बदलें
-- [ ] अभ्यास 1–2 (अनिवार्य) गरें
-- [ ] बुझाइ जाँच्ने 5 प्रश्नको उत्तर दिएँ
-- [ ] नोटबुक सुरक्षित गरें
+- [ ] Part 1–Part 5 padher sabai code cell chalaen
+- [ ] tasbir padher surakshit garne folder ma surakshit garen
+- [ ] greskel ra bainarikaranako natija ankhale heren
+- [ ] kantur bheter kshetraphal ra bahiri ayat dekhaen
+- [ ] dui binduko duri px ma ganana garen
+- [ ] px/mm ganana garera mm ma badalen
+- [ ] abhyas 1–2 (aniwarya) garen
+- [ ] bujhai jaanchne 5 prashnako uttar dien
+- [ ] notebook surakshit garen
 
-**वैकल्पिक**
+**baikalpik**
 
-- [ ] वास्तविक सन्दर्भ फोटो (ग्रेस्केल र बुट्टा भएको) मा थ्रेसहोल्डको सीमा प्रयास गरें
-- [ ] अभ्यास 3 (वैकल्पिक) का चार प्रश्नको उत्तर दिएँ
+- [ ] bastabik sandarbha photo (greskel ra butta bhaeko) ma thresholdko sima prayas garen
+- [ ] abhyas 3 (baikalpik) ka chaar prashnako uttar dien
 
 <!-- ne-cell: d0b2693d | after-heading -->
-## थप अध्ययन (वैकल्पिक)
+## thap adhyayan (baikalpik)
 
 <!-- ne-cell: d0b2693d -->
-### सन्दर्भ लिङ्क
+### sandarbha lingk
 
-- [OpenCV आधिकारिक tutorial](https://docs.opencv.org/4.x/d6/d00/tutorial_py_root.html)
+- [OpenCV adhikarik tutorial](https://docs.opencv.org/4.x/d6/d00/tutorial_py_root.html)
 - [cv2.threshold](https://docs.opencv.org/4.x/d7/d4d/tutorial_py_thresholding.html)
 - [cv2.findContours](https://docs.opencv.org/4.x/d3/d05/tutorial_py_table_of_contents_contours.html)
-- [क्यामेरा क्यालिब्रेसनको सोचाइ](https://docs.opencv.org/4.x/dc/dbb/tutorial_py_calibration.html)
+- [kyamera calibrationko sochai](https://docs.opencv.org/4.x/dc/dbb/tutorial_py_calibration.html)
 
-### थप चुनौती (अनिवार्य होइन)
+### thap chunauti (aniwarya hoina)
 
-`cv2.adaptiveThreshold` प्रयास गर्नुहोस्। उज्यालो असमान भएको तस्बिरमा यसले स्थिर थ्रेसहोल्डभन्दा राम्रो
-नतिजा किन दिन सक्छ, सोच्नुहोस्।
+`cv2.adaptiveThreshold` prayas garnuhos. ujyalo asaman bhaeko tasbir ma yasle sthir thresaholdabhanda ramro
+natija kina din sakchha, sochnuhos.

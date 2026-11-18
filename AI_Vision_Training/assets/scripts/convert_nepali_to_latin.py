@@ -20,7 +20,8 @@ import re
 import sys
 from pathlib import Path
 
-from romanize_nepali import DEVANAGARI_RE, GLOSSARY, RUN_RE, romanize_text
+from romanize_nepali import (DEVANAGARI_RE, GLOSSARY, RUN_RE, apply_glossary_spellings,
+                             romanize_text)
 
 COURSE_ROOT = Path(__file__).resolve().parents[2]
 CATALOG_ROOT = COURSE_ROOT / "assets" / "i18n" / "ne"
@@ -39,7 +40,9 @@ def catalogs(only: str | None = None, scope: str = "all") -> list[Path]:
 
 def convert(path: Path, write: bool) -> dict:
     original = path.read_text(encoding="utf-8")
-    converted = romanize_text(original)
+    # A catalog that is already Latin still has to follow the reviewed glossary, so the respelling
+    # pass runs after the transliteration and also on its own.
+    converted = apply_glossary_spellings(romanize_text(original))
     leftover = DEVANAGARI_RE.findall(converted)
     return {
         "path": path.relative_to(COURSE_ROOT).as_posix(),

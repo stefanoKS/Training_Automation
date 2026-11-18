@@ -99,8 +99,12 @@ def test_day05_03_freezes_before_loading_the_sealed_test() -> None:
     positions = order[0]
     assert positions["clarity-freeze-record"] < positions["clarity-load-sealed-test"]
     sealed = "".join(cells[positions["clarity-load-sealed-test"]]["source"])
-    for key in ("model", "score_convention", "patchcore_threshold", "manifest_test"):
-        assert key in sealed, f"the sealed loader does not verify {key}"
+    # 検証は experiment_identity.validate_sealed に集約しています。どの項目を見るかは、その
+    # ヘルパーのテスト（test_experiment_identity.py）が一件ずつ確かめます。
+    # The checks live in experiment_identity.validate_sealed; test_experiment_identity.py verifies
+    # each field one by one.
+    assert "validate_sealed(" in sealed
+    assert "expected=expected" in sealed and "manifest=manifest" in sealed
     assert "engine.predict" not in sealed, "the comparison must not re-score test"
 
 

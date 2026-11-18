@@ -45,6 +45,7 @@ import re
 import sys
 from pathlib import Path
 from course_notebooks import course_notebooks
+from apply_nepali_translations import REGION_RE
 
 from PIL import Image as PILImage
 from reportlab.lib import colors
@@ -553,8 +554,20 @@ def _markdown_flowables(text: str, notebook_dir: Path, styles: dict) -> list:
 NOTEBOOK_TITLE_RE = re.compile(r"^#\s+(.*)$", re.M)
 
 
+def strip_nepali(text: str) -> str:
+    """日本語＋英語の冊子からネパール語を完全に取り除く / drop every Nepali region.
+
+    The Nepali regions and their markers are part of the notebook source. This booklet is the
+    Japanese + English companion, so the region has to go: when the Nepali was Devanagari the
+    typesetter dropped the glyphs by accident, and Latin letters would otherwise be printed.
+    """
+    text = REGION_RE.sub("", text)
+    text = re.sub(r"(?m)^[ \t]*<!--\s*ne[:\-][^\n]*-->[ \t]*$\n?", "", text)
+    return re.sub(r"\n{3,}", "\n\n", text)
+
+
 def notebook_title(nb: dict) -> tuple[str, str]:
-    first = "".join(nb["cells"][0]["source"])
+    first = strip_nepali("".join(nb["cells"][0]["source"]))
     ja, en = "", ""
     for line in first.splitlines():
         match = NOTEBOOK_TITLE_RE.match(line.strip())
@@ -608,6 +621,7 @@ def notebook_flowables(path: Path, styles: dict, title_toc_level: int = 1) -> li
     for position, cell in enumerate(nb["cells"]):
         source = "".join(cell["source"])
         if cell["cell_type"] == "markdown":
+            source = strip_nepali(source)
             if position == 0:
                 # 先頭セルの H1（ノートブック表題）は上ですでに見出しにしているので落とす。
                 # H2 以降は本文の一部なので残す / drop only the title lines, keep the rest.

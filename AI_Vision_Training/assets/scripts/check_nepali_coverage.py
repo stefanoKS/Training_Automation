@@ -43,12 +43,14 @@ SEPARATOR_RE = re.compile(r"^\s*([-*_])\1{2,}\s*$")
 PLACEHOLDER_MARKERS = ("ここに書いてください", "write your code here", "ここに記入")
 
 # Nepali must not slip into Hindi or into a machine-translation placeholder.
+# `karna` is deliberately absent from the Latin list: in Nepali `karna` (कर्ण) is the hypotenuse of
+# the Day 2 geometry lesson, so only the Devanagari Hindi verb `करना` is a reliable marker.
 FORBIDDEN_PATTERNS = {
     "hindi-है": re.compile(r"(?<![\u0900-\u097f])है(?![\u0900-\u097f])"),
     "hindi-करना": re.compile(r"करना"),
     "hindi-नहीं": re.compile(r"नहीं"),
     "hindi-होता": re.compile(r"होता"),
-    "hindi-latin": re.compile(r"(?i)\b(hai|hain|nahin|karna|hota)\b"),
+    "hindi-latin": re.compile(r"(?i)\b(hai|hain|nahin|hota)\b"),
     "placeholder": re.compile(r"(?i)\b(TODO|TBD|FIXME|XXX|लोरेम|ipsum)\b"),
     "todo-marker": re.compile(r"(?i)translat(e|ion) (needed|pending)"),
 }

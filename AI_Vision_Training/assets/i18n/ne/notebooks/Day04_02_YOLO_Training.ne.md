@@ -106,7 +106,7 @@ warmup ko bela jamma hune sankhya badalin sakchha.
 64 ÷ 8 = 8 batch le ek epoch banchha. namamatr 8 batch ko gradient jamma garera update hunchha, tyasaile
 **1 batch = 1 update hoina**. sathai prashikshanko suru ma **warmup** (learning rate ra jamma garne sankhya
 bistarai lakshyatir laijane abadhi) hunchha, tyasabela sankhya 1 baat kramaisang badhchha. tyasaile "64 ÷ 8 = 8
-update" bhanera gann mildaina; update sankhya prashikshak (trainer) le tay garchha.
+update" bhanera ganna mildaina; update sankhya prashikshak (trainer) le tay garchha.
 
 loss le "ahile kati galti bhairaheko chha" janaunchha. sadhai ghatdai janchha bhanne chhaina — badhna pani
 sakchha. prashikshan loss ghatnu matra naya tasbir ma kshamata badheko praman hoina; pramanikaran maapan ra
@@ -139,7 +139,7 @@ bhanne chhaina** (obharaphiting).
 ### euta batch ma ke hunchha
 
 <!-- ne-cell: fig-teach_training_update | after-image:../../assets/diagrams/teach_training_update.png -->
-chitra: anuman → loss → gradient → update ko ek chakr, ra batch, step, epoch ganne tarika (weight ko
+chitra: anuman → loss → gradient → update ko ek chakra, ra batch, step, epoch ganne tarika (weight ko
 paribartan udaharanka lagi).
 
 **dhyan dinuparne kura**
@@ -168,7 +168,7 @@ bastabik update sadhain ek patak ho bhanera nathani chalaieko setting ra lag jaa
 | prashikshan (train) | sankhya tay garne kaam | — |
 | pramanikaran (val) | prashikshanakai bela kshamata jaanchne | harek epoch pachhi |
 
-batch size thulo banaunda ek patakako kaam bhari hunchha. tar "thulo bhae sadhain sthir hunchha" bhann mildaina. memory
+batch size thulo banaunda ek patakako kaam bhari hunchha. tar "thulo bhae sadhain sthir hunchha" bhanna mildaina. memory
 napuge sano banaunuhos ra sthir chha ki chhaina **pramanikaranko maapan** le jaanchnuhos.
 
 <!-- ne-cell: baf19a2b | after-heading -->
@@ -183,7 +183,7 @@ karan: COCO ma sikeko "bastuko akar herne kshamata" PVC ko dosh ma pani kaam lag
 akar herne tarika suru dekhi siknu pardaina.
 
 taipani **64 tasbir dherai thorai** ho. kati chahinchha bhanne kura doshko prakar, akar, bhinnata ra ujyaloko abasthale
-tay garchha. "kati bata bhae pugchha" bhanera eutai sankhya bhann sakindaina. kaam lagchha ki lagdain bhanne **pratinidhitb garne
+tay garchha. "kati bata bhae pugchha" bhanera eutai sankhya bhanna sakindaina. kaam lagchha ki lagdain bhanne **pratinidhitb garne
 bastabik data** ma janchinchha.
 
 <!-- ne-cell: 16aa5ff6 | after-heading -->
@@ -300,7 +300,7 @@ prashikshanko loss matra herda nadekhine paribartan yahin dekhinchha.
 
 prashikshan loss sadhai ghatdai janchha bhanne chhaina — badhna pani sakchha. **prashikshan loss ghatnu
 matra naya tasbir ma kshamata badheko praman hoina** (obharaphiting); `metrics/mAP50-95` jasta pramanikaran
-mapan ra anuman dekhaieka tasbir sangai padhnuhos.
+maapan ra anuman dekhaieka tasbir sangai padhnuhos.
 
 <!-- ne-cell: 90708cf6 | after-heading -->
 ## Part 4 prashikshanko natija surakshit garne
@@ -316,15 +316,15 @@ chitra: bakrako **akarako udaharan** matra ho. tapainko prashikshanko natija hoi
 chitrako **terso aksh epoch (kati aun pher)** ra **thado aksh loss** ho. dui line prashikshan ra pramanikaranka
 hun, legend le chhutyaunuhos. prashikshan loss matra herda epoch badhaundai janda ramro bhaeko jasto dekhinchha.
 chitrako dated rekha ("yahan baat obharaphiting") akar dekhauna banaiyeko udaharan ho; bastabik data ma tyahi thaun
-tay hunchha bhanne hoina. **chhoto abadhiko sthirata wa briddhile matra obharaphiting bhann mildaina.**
+tay hunchha bhanne hoina. **chhoto abadhiko sthirata wa briddhile matra obharaphiting bhanna mildaina.**
 
-hernuparne: "pramanikaran patti ghatn rokiyo ki", "pramanikaranko maapan (mAP50-95 adi) ajh badhdai chha ki".
+hernuparne: "pramanikaran patti ghatna rokiyo ki", "pramanikaranko maapan (mAP50-95 adi) ajh badhdai chha ki".
 bastabik tasbir ma dekhieka asaphalatako samagri pani sangai prayog garnuhos. **prashikshan loss ghatnu aphain
 "ramro bhayo" bhanne praman hoina.**
 
 **sochnuhos**
 
-- pramanikaran loss kehi epoch sthir rahyo bhane obharaphiting bhann milchha? aru ke hernuhunchha?
+- pramanikaran loss kehi epoch sthir rahyo bhane obharaphiting bhanna milchha? aru ke hernuhunchha?
 
 <!-- ne-cell: fig-ref_train_val_curves | after-heading -->
 ### prashikshan lagalai dui line ma padhne
@@ -376,10 +376,10 @@ aphain chhanna, wa `resume` garera prashikshan jari rakhna prayog hunchha.
 
 <!-- ne-cell: f800c794 -->
 yo natija yo talim ma surakshit garieko abhilekh ho (`yolo26n.pt`, 15 epoch, `imgsz=320`, `batch=8`,
-seed 2026, CPU). sukshm samay ra file akar batabaran anusar farak parchha, tar chaar file baneko kura jaanchnuhos.
+seed 2026, CPU). sukshma samay ra file akar batabaran anusar farak parchha, tar chaar file baneko kura jaanchnuhos.
 
 <!-- ne-cell: 845f2d52 | after-heading -->
-**prashikshan saphal bhayo bhann milchha?**
+**prashikshan saphal bhayo bhanna milchha?**
 <!-- ne-pair: Can we call this training successful? -->
 
 <!-- ne-cell: 845f2d52 -->
@@ -388,7 +388,7 @@ loss ghatnu matra pugdain. **yo charan ma kshamata ajhai janchieko chhaina.**
 arko notebook (04_03) ma **prashikshan ma prayog nabhaeka tasbir** ma kshamata napinchha. tyahan matra
 "kaam lagchha / lagdain" thaha hunchha.
 
-loss sthir bhayo bhane pani tyasaile obharaphiting bhann mildaina. nirnayaka lagi **pramanikaran maapan ko prabritti**
+loss sthir bhayo bhane pani tyasaile obharaphiting bhanna mildaina. nirnayaka lagi **pramanikaran maapan ko prabritti**
 (`metrics/mAP50-95` adi) ra bastabik tasbir ma dekhieka asaphalata sangai prayog garnuhos. sathai kaam lagchha ki
 lagdain bhanne **pratinidhitb garne bastabik data** ma janchiepachhi matra thaha hunchha.
 
@@ -403,7 +403,7 @@ dekhaundain.
 <!-- ne-pair: Exercise 1 (basic): train for 5 epochs -->
 
 <!-- ne-cell: 4febd099 -->
-`EPOCHS` 5 banaer prashikshan chalaunuhos ra `box_loss` ko pahilo ra antim maan abhilekh garnuhos. sathai
+`EPOCHS` 5 banaera prashikshan chalaunuhos ra `box_loss` ko pahilo ra antim maan abhilekh garnuhos. sathai
 `metrics/mAP50-95` ko pahilo ra antim pani abhilekh garnuhos. loss matrale nirnaya garna namilne kura
 pushti garnuhos.
 
@@ -412,8 +412,8 @@ pushti garnuhos.
 | 1 | | |
 | 5 | | |
 
-- pura bhaeko maapan: dubai maan abhilekh bhaeka chhan ra loss ghatyo ki ghaten bhann sakinchha
-- loss naghate wa sthir rahe pani tyasaile asaphal bhann mildaina
+- pura bhaeko maapan: dubai maan abhilekh bhaeka chhan ra loss ghatyo ki ghaten bhanna sakinchha
+- loss naghate wa sthir rahe pani tyasaile asaphal bhanna mildaina
 
 <!-- ne-cell: 8273b533 | after-heading -->
 **abhyas 2 (madhyam): `imgsz` badaler tulna garne**
@@ -444,7 +444,7 @@ pura bhaeko maapan: chaar karan ra chaar jaanchne tarika lekhieka chhan.
 2. loss ghatnu bhaneko ke ho? tyasle matra kshamata tay garna milchha?
 3. fine-tuning garnuka dui phaida bhannuhos.
 4. `best.pt` kun adharama chhaninchha? `last.pt` sang ke farak chha?
-5. prashikshan sakielagattai "shuddhata 95%" bhann kina mildaina?
+5. prashikshan sakielagattai "shuddhata 95%" bhanna kina mildaina?
 
 <!-- ne-cell: a4a1e4b0 | after-heading -->
 ## samasya parema

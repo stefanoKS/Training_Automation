@@ -1,470 +1,470 @@
 <!--
-नेपाली अनुवाद / Nepali translation source for
+Nepali anuwad / Nepali translation source for
 notebooks/Day03_YOLO_Basics/Day03_03_YOLO_Experiments.ipynb
 -->
-# दिन ३ नोटबुक ०३ — नेपाली अनुवाद
+# din 3 notebook 03 — Nepali anuwad
 
 <!-- ne-cell: 60315362 | after-heading -->
-# दिन ३ नोटबुक ०३: पहिचानको नतिजा पढ्ने
+# din 3 notebook 03: pahichanko natija padhne
 
 <!-- ne-cell: 60315362 -->
-## सिकाइ लक्ष्यहरू
+## sikai lakshyaharu
 
-| नेपाली |
+| Nepali |
 | --- |
-| 1. confidence को थ्रेसहोल्ड बदलेर नतिजा तुलना गर्न सक्ने। |
-| 2. पहिचानको नतिजाको निर्देशाङ्क पढेर अर्थ बताउन सक्ने। |
-| 3. वास्तविक तस्बिरमा झुटो पोजिटिभ र झुटो नेगेटिभ देखाउन सक्ने। |
-| 4. तस्बिरको आकार घटाउँदा किन पहिचान गुम्छ बताउन सक्ने। |
-| 5. प्रयोगको नतिजा तालिकामा राखेर रिपोर्ट गर्न सक्ने। |
+| 1. confidence ko threshold badaler natija tulna garna sakne. |
+| 2. pahichanko natijako nirdeshangk padher arth bataun sakne. |
+| 3. bastabik tasbir ma jhuto pojitibh ra jhuto negetibh dekhauna sakne. |
+| 4. tasbirko akar ghataunda kina pahichan gumchha bataun sakne. |
+| 5. prayogko natija talika ma rakher riport garna sakne. |
 
-## यो नोटबुकको आधारभूत जानकारी
+## yo notebookko adharabhut jankari
 
-| विषय | विवरण |
+| bishay | biwaran |
 | --- | --- |
-| सिकाइ समय (अनुमान) | 110 मिनेट |
-| कठिनाइ | सुरुवाती तह |
-| पूर्वशर्त | दिन ३ नोटबुक ०१ र ०२ सकिएको हुनुपर्छ। |
-| आवश्यक लाइब्रेरी | torch, ultralytics, opencv-python, numpy, matplotlib, pandas |
-| प्रयोग हुने kernel | aivision |
-| आजको समयतालिका | [`COURSE_SYLLABUS.md` दिन ३](../../COURSE_SYLLABUS.md#day3) |
+| sikai samay (anuman) | 110 minet |
+| kathinai | surubati tah |
+| poorwashart | din 3 notebook 01 ra 02 sakieko hunuparchha. |
+| aawashyak laibreri | torch, ultralytics, opencv-python, numpy, matplotlib, pandas |
+| prayog hune kernel | aivision |
+| ajako samayatalika | [`COURSE_SYLLABUS.md` din 3](../../COURSE_SYLLABUS.md#day3) |
 
-### बुझाउनुपर्ने काम
+### bujhaunuparne kaam
 
-| नेपाली |
+| Nepali |
 | --- |
-| थ्रेसहोल्डअनुसार पहिचान सङ्ख्याको तालिका |
-| कम्तीमा एउटा अनिश्चित पहिचानको पुनरावलोकन अभिलेख |
+| threshold anusar pahichan sankhyako talika |
+| kamtima euta anishchit pahichanko punarabalokan abhilekh |
 
 <!-- ne-cell: 5fdd18cf | after-heading -->
-## यो नोटबुक कहाँ पर्छ
+## yo notebook kahan parchha
 
 <!-- ne-cell: 5fdd18cf -->
-| विषय | विवरण |
+| bishay | biwaran |
 | --- | --- |
-| दिन | दिन ३ |
-| आजको क्रम | आजको नोटबुकमध्ये 3 / 3 |
-| लाग्ने समय | 110 मिनेट |
-| पूर्वशर्त | `Day03_02_YOLO_Inference.ipynb` |
-| आजको समयतालिका | [`COURSE_SYLLABUS.md` दिन ३](../../COURSE_SYLLABUS.md#day3) |
+| din | din 3 |
+| ajako kram | ajako notabukamadhye 3 / 3 |
+| lagne samay | 110 minet |
+| poorwashart | `Day03_02_YOLO_Inference.ipynb` |
+| ajako samayatalika | [`COURSE_SYLLABUS.md` din 3](../../COURSE_SYLLABUS.md#day3) |
 
-दिनको समयतालिका `COURSE_SYLLABUS.md` मा एउटै ठाउँमा छ। यो नोटबुक त्यसको एउटा भाग मात्र हो।
+dinko samayatalika `COURSE_SYLLABUS.md` ma eutai thaun ma chha. yo notebook tyasko euta bhaag matra ho.
 
 <!-- ne-cell: audit-learning-loop | after-heading -->
-### अनुमान गर्नुहोस्, चलाउनुहोस्, हेर्नुहोस्, व्याख्या गर्नुहोस्
+### anuman garnuhos, chalaunuhos, hernuhos, byakhya garnuhos
 
 <!-- ne-cell: audit-learning-loop -->
-थ्रेसहोल्डले आयत छान्ने काम र तस्बिर सानो बनाउने काम फरक प्रयोग हुन्। महत्त्वपूर्ण सेल चलाउनुअघि
-इनपुट, काम र नतिजा एक-एक वाक्यमा लेख्नुहोस्। पहिले अनुमान गरेर चलाउनुहोस् र मान वा चित्र हेर्नुहोस्।
-confidence मात्र बदलेर फेरि अनुमान गरी चलाउनुहोस्। जानाजान राखिएका त्रुटि र नसकिएका अभ्यासका निर्देशन
-पछ्याउनुहोस्।
+thresholdle ayat chhanne kaam ra tasbir sano banaune kaam farak prayog hun. mahattwapurna cell chalaunuaghi
+input, kaam ra natija ek-ek bakyama lekhnuhos. pahile anuman garera chalaunuhos ra maan wa chitra hernuhos.
+confidence matra badaler feri anuman gari chalaunuhos. janajan rakhieka truti ra nasakieka abhyaska nirdeshan
+pachhyaunuhos.
 
 <!-- ne-cell: ddb249df | after-heading -->
-## Part 0 तयारी
+## Part 0 tayari
 
 <!-- ne-cell: e00d64c2 | after-heading -->
-## Part 1 confidence को थ्रेसहोल्ड
+## Part 1 confidence ko threshold
 
 <!-- ne-cell: clarity-experiment-provenance | after-heading -->
-### यो भागको स्रोत छुट्याउने
+### yo bhaagko srot chhutyaune
 
 <!-- ne-cell: clarity-experiment-provenance -->
-हरेक चित्र वा तालिकाअघि A/B/C हेर्नुहोस्। तस्बिर, model, पूर्व-प्रशोधन र उम्मेदवारको समूह उही नभए
-गनेको सङ्ख्यालाई "थ्रेसहोल्डको मात्र असर" भनेर तुलना गर्न मिल्दैन। `imgsz` भनेको model मा दिइने तस्बिरको
-आकार हो।
+harek chitra wa talikaaghi A/B/C hernuhos. tasbir, model, purb-prashodhan ra ummedabarako samuh uhi nabhae
+ganeko sankhya lai "thresholdko matra asar" bhanera tulna garna mildaina. `imgsz` bhaneko model ma diine tasbirko
+akar ho.
 
-| सन्दर्भ | इनपुट सङ्ख्या | imgsz | अनुमानको तल्लो सीमा | के थाहा हुन्छ |
+| sandarbha | input sankhya | imgsz | anumanko tallo sima | ke thaha hunchha |
 |---|---|---|---|---|
-| A बनाइएको उदाहरण | 4 उम्मेदवार | लागू हुँदैन | लागू हुँदैन | स्थिर समूह छान्ने काम |
-| B सुरक्षित 52 तस्बिर | 52 तस्बिर, 42 मा उम्मेदवार | अभिलेख जाँच्नुहोस् | 0.01 | त्यो सुरक्षित चलाइमा मात्र |
-| C1 आफ्नै bus अनुमान | 1 तस्बिर | 640 | 0.05 | उही cache भित्रको तुलना |
-| C2 आफ्नै bus widget | 1 तस्बिर | 320 | 0.05 | C1 भन्दा फरक प्रयोग |
+| A banaiyeko udaharan | 4 ummedabar | lagu hundaina | lagu hundaina | sthir samuh chhanne kaam |
+| B surakshit 52 tasbir | 52 tasbir, 42 ma ummedabar | abhilekh jaanchnuhos | 0.01 | tyo surakshit chalaima matra |
+| C1 aphnai bus anuman | 1 tasbir | 640 | 0.05 | uhi cache bhitrako tulna |
+| C2 aphnai bus widget | 1 tasbir | 320 | 0.05 | C1 bhanda farak prayog |
 
-confidence model को स्कोर हो, सही हुने सम्भावना आफैं होइन। उही उम्मेदवार समूहमा थ्रेसहोल्ड बढाउँदा बाँकी
-सङ्ख्या बढ्दैन। तल्लो सीमाभन्दा कम भएका उम्मेदवार फेरि फर्काउन सकिँदैन।
+confidence model ko score ho, sahi hune sambhabana aphain hoina. uhi ummedabar samuhama threshold badhaunda banki
+sankhya badhdain. tallo simabhanda kam bhaeka ummedabar feri pharkaun sakindaina.
 
 <!-- ne-cell: fig-teach_confidence_filter | after-heading -->
-### थ्रेसहोल्डले बाँकी सङ्ख्या बदल्छ
+### thresholdle banki sankhya badalchha
 
 <!-- ne-cell: fig-teach_confidence_filter | after-image:../../assets/diagrams/teach_confidence_filter.png -->
-**A: बनाइएका 4 उम्मेदवार**
+**A: banaieka 4 ummedabar**
 
-चित्र: एउटै पटकको अनुमानबाट आएका 4 उम्मेदवारलाई 0.25, 0.50 र 0.75 थ्रेसहोल्डले छान्दा आएको नतिजा
-(संश्लेषित तस्बिर, उदाहरणका लागि बनाइएका मान)।
+chitra: eutai patakako anuman baat aeka 4 ummedabaralai 0.25, 0.50 ra 0.75 thresholdle chhanda aeko natija
+(sansleshit tasbir, udaharanka lagi banaieka maan).
 
-**ध्यान दिनुपर्ने कुरा**
+**dhyan dinuparne kura**
 
-बाँकी सङ्ख्या 3 → 1 → 1 हो। थ्रेसहोल्ड बढाउँदा **सङ्ख्या नबदलिन** पनि सक्छ — यही चित्रको मुख्य कुरा हो।
-फालिएका उम्मेदवार "अवस्थित छैनन्" भन्ने होइन, "स्वीकार गरिएन" भन्ने मात्र हो।
+banki sankhya 3 → 1 → 1 ho. threshold badhaunda **sankhya nabadalin** pani sakchha — yahi chitrako mukhy kura ho.
+phalieka ummedabar "abasthit chhainan" bhanne hoina, "sbikar garien" bhanne matra ho.
 
-**सोच्नुहोस्**
+**sochnuhos**
 
-- 0.50 र 0.75 मा बाँकी सङ्ख्या उही किन हुन्छ?
+- 0.50 ra 0.75 ma banki sankhya uhi kina hunchha?
 
 <!-- ne-cell: fig-ref_confidence_counts | after-heading -->
-### वास्तविक नतिजामा गन्ने
+### bastabik natija ma ganne
 
 <!-- ne-cell: fig-ref_confidence_counts | after-image:../../assets/reference_outputs/ref_confidence_counts.png -->
-**B: सुरक्षित 52 तस्बिरको अनुमान**
+**B: surakshit 52 tasbirko anuman**
 
-चित्र: यो तालिममा साँच्चै सुरक्षित गरिएका 52 तस्बिरको अनुमानमध्ये उम्मेदवार बाँकी रहेका 42 तस्बिरमा,
-थ्रेसहोल्ड बदल्दा NG ठहरिने तस्बिरको सङ्ख्या। दायाँ प्रत्येक तस्बिरको अधिकतम confidence। सन्दर्भ नतिजा।
+chitra: yo talim ma sanchchai surakshit garieka 52 tasbirko anumanamadhye ummedabar banki raheka 42 tasbir ma,
+threshold badalda NG thaharine tasbirko sankhya. dayan pratyek tasbirko adhikatam confidence. sandarbha natija.
 
-**ध्यान दिनुपर्ने कुरा**
+**dhyan dinuparne kura**
 
-अनुमान conf = 0.01 मा एक पटक मात्र गरियो। **पहिचान शून्य बाँकी रहेका 10 तस्बिर** मा उम्मेदवार नै छैनन्,
-त्यसैले कुनै थ्रेसहोल्डले तिनलाई NG बनाउँदैन (सुरक्षित 0 भनेको "कमजोर पहिचान" होइन, चिन्ह मान मात्र हो)।
-0.01 मा 42, 0.25 मा 28, 0.50 मा 23, 0.75 मा 13 तस्बिर।
+anuman conf = 0.01 ma ek patak matra gariyo. **pahichan shunya banki raheka 10 tasbir** ma ummedabar nai chhainan,
+tyasaile kunai thresholdle tinalai NG banaundain (surakshit 0 bhaneko "kamajor pahichan" hoina, chinh maan matra ho).
+0.01 ma 42, 0.25 ma 28, 0.50 ma 23, 0.75 ma 13 tasbir.
 
-**सोच्नुहोस्**
+**sochnuhos**
 
-- थ्रेसहोल्ड 0.01 बाट 0.25 बनाउँदा कति तस्बिर NG बाट हट्छन्? हटेका तस्बिरलाई "दोष छैन" भन्न मिल्छ?
+- threshold 0.01 baat 0.25 banaunda kati tasbir NG baat hatchhan? hateka tasbir lai "dosh chhaina" bhanna milchha?
 
 <!-- ne-cell: 9082bf2f | after-heading -->
-### पहिचानले "आयतहरूको सूची" फर्काउँछ
+### pahichanle "ayataharuko soochi" pharkaunchha
 
 <!-- ne-cell: 9082bf2f | after-image:../../assets/diagrams/diagram_detection.png -->
-चित्र: पहिचानले के फर्काउँछ (योजनाबद्ध चित्र)। यो नोटबुक ०२ कै **एउटै पहिचान उदाहरण दोहोर्याइएको**
-चित्र हो, चार प्यानलको चित्र होइन। तलको प्रयोगले वास्तविक आयत र सङ्ख्या बदल्छ।
+chitra: pahichanle ke pharkaunchha (yojanabaddha chitra). yo notebook 02 kai **eutai pahichan udaharan dohoryaieko**
+chitra ho, chaar pyanalako chitra hoina. talako prayogle bastabik ayat ra sankhya badalchha.
 
-**ध्यान दिनुपर्ने कुरा**
+**dhyan dinuparne kura**
 
-model ले धेरै उम्मेदवार दिन्छ, र थ्रेसहोल्डले तिनमध्ये "राख्ने कि फाल्ने" मात्र तय गर्छ। **model ले
-देखेका उम्मेदवार आफैं बदलिँदैनन्।** थ्रेसहोल्ड बढाउँदा बाँकी सङ्ख्या **बढ्न सक्दैन**, तर **नबदलिन पनि
-सक्छ**। त्यसैले "सङ्ख्या 0" को अर्थ "केही असामान्य छैन" होइन।
+model le dherai ummedabar dinchha, ra thresholdle tinamadhye "rakhne ki phalne" matra tay garchha. **model le
+dekheka ummedabar aphain badalindainan.** threshold badhaunda banki sankhya **badhna sakdain**, tar **nabadalin pani
+sakchha**. tyasaile "sankhya 0" ko arth "kehi asamanya chhaina" hoina.
 
-**सोच्नुहोस्**
+**sochnuhos**
 
-- थ्रेसहोल्ड 0.9 बनाउँदा बाँकी सङ्ख्या सधैं 0 हुन्छ? कहिले 0 हुँदैन?
+- threshold 0.9 banaunda banki sankhya sadhain 0 hunchha? kahile 0 hundaina?
 
 <!-- ne-cell: 2abea6c2 | after-heading -->
-**थ्रेसहोल्डले "कसलाई पहिचान मान्ने" तय गर्छ**
+**thresholdle "kasalai pahichan manne" tay garchha**
 <!-- ne-pair: A threshold decides what counts as a detection -->
 
 <!-- ne-cell: 2abea6c2 -->
-model ले धेरै उम्मेदवार दिन्छ। तिनमध्ये **confidence थ्रेसहोल्ड वा बढी भएका मात्र स्वीकार** गरिन्छ।
+model le dherai ummedabar dinchha. tinamadhye **confidence threshold wa badhi bhaeka matra sbikar** garinchha.
 
-| थ्रेसहोल्ड | नतिजा |
+| threshold | natija |
 |---|---|
-| 0.90 | अत्यधिक उच्च स्कोरका पहिचान मात्र। **छुट्ने (miss) बढ्न सक्छ** |
-| 0.25 | प्रायः प्रयोग हुने पूर्वनिर्धारित मान |
-| 0.05 | लगभग सबै बाँकी। **झुटो अलार्म बढ्न सक्छ** |
+| 0.90 | atyadhik uchcha scoreka pahichan matra. **chhutne (miss) badhna sakchha** |
+| 0.25 | prayah prayog hune purbanirdharit maan |
+| 0.05 | lagabhag sabai banki. **jhuto alarm badhna sakchha** |
 
-उही उम्मेदवार समूहमा थ्रेसहोल्ड बढाउँदा **बाँकी सङ्ख्या बढ्दैन**, तर **घट्न पनि सक्दैन** (यो तालिमको
-चित्रमा 0.50 र 0.75 दुवैमा 1 वटा बाँकी थियो)। थ्रेसहोल्ड घटाउँदा फालिएका उम्मेदवार फर्केर आउँछन्; ती
-"थिएनन्" होइन, **फालिएका** थिए। कुन थ्रेसहोल्डमा कति बाँकी रहन्छ भन्ने कुरा डेटा र स्कोरमा निर्भर छ।
+uhi ummedabar samuhama threshold badhaunda **banki sankhya badhdain**, tar **ghatna pani sakdain** (yo talimko
+chitra ma 0.50 ra 0.75 dubaima 1 bata banki thiyo). threshold ghataunda phalieka ummedabar pharker aunchhan; ti
+"thienan" hoina, **phalieka** thie. kun threshold ma kati banki rahanchha bhanne kura data ra score ma nirbhar chha.
 
-थ्रेसहोल्ड **model ले होइन, मान्छेले तय गर्ने** सङ्ख्या हो। "छुटाउनु हुँदैन" कि "झुटो अलार्म घटाउनु
-पर्छ" भन्ने कुराले बदल्नुपर्ने मान फरक पार्छ।
+threshold **model le hoina, manchhele tay garne** sankhya ho. "chhutaunu hundaina" ki "jhuto alarm ghataunu
+parchha" bhanne kurale badalnuparne maan farak parchha.
 
 <!-- ne-cell: d87d261f | after-heading -->
-### नतिजाको उदाहरण — C1 सुरक्षित उदाहरण
+### natijako udaharan — C1 surakshit udaharan
 
 <!-- ne-cell: d87d261f -->
-यो नतिजा यो तालिममा सुरक्षित गरिएको अभिलेख हो (`yolo26n.pt`, `imgsz=640`, `bus.jpg`)। सूक्ष्म सङ्ख्या
-वातावरणअनुसार फरक पर्छ, प्रवृत्ति र ठुलो-सानोको सम्बन्ध पढ्नुहोस्।
+yo natija yo talim ma surakshit garieko abhilekh ho (`yolo26n.pt`, `imgsz=640`, `bus.jpg`). sukshma sankhya
+batabaran anusar farak parchha, prabritti ra thulo-sanoko sambandh padhnuhos.
 
-यो तालिकामा 0.25, 0.40 र 0.60 सबैमा 5 वटा छन्। **थ्रेसहोल्ड बढाउँदा सङ्ख्या नबदलिने** उदाहरण हो।
-`max_conf` 0.000 हुनु भनेको बाँकी पहिचान शून्य हुँदा अधिकतम मान नभएको **देखाइको मान** हो; कमजोर पहिचान
-थियो भन्ने होइन।
+yo talika ma 0.25, 0.40 ra 0.60 sabai ma 5 bata chhan. **threshold badhaunda sankhya nabadaline** udaharan ho.
+`max_conf` 0.000 hunu bhaneko banki pahichan shunya hunda adhikatam maan nabhaeko **dekhaiko maan** ho; kamajor pahichan
+thiyo bhanne hoina.
 
-अहिलेको C1 ले स्थिर उम्मेदवार प्रयोग गर्छ। यो पुरानो पुनः-अनुमान तालिकाकै सङ्ख्या आउँछ भन्ने छैन।
+ahileko C1 le sthir ummedabar prayog garchha. yo purano punah-anuman talikakai sankhya aaunchha bhanne chhaina.
 
 <!-- ne-cell: 8aa62c20 | after-heading -->
-**ध्यान दिनुपर्ने कुरा**
+**dhyan dinuparne kura**
 <!-- ne-pair: What you should notice -->
 
 <!-- ne-cell: 8aa62c20 -->
-यो अभिलेखित चलाइमा थ्रेसहोल्ड 0.90 बनाउँदा **बसको पहिचान (confidence 0.881) पनि हरायो**, किनभने
-0.881 < 0.90।
+yo abhilekhit chalaima threshold 0.90 banaunda **basako pahichan (confidence 0.881) pani harayo**, kinabhane
+0.881 < 0.90.
 
-**"थ्रेसहोल्ड बढाउनु = कडाइ गर्नु" भन्नाले सही पहिचान पनि फाल्नु** हो। कति बाँकी रहन्छ र कुन पहिचान हराउँछ
-भन्ने कुरा अभिलेखित स्कोरमा निर्भर छ। 0.90 भन्दा माथि एक पनि नभए सङ्ख्या 0 हुन्छ।
+**"threshold badhaunu = kadai garnu" bhannale sahi pahichan pani phalnu** ho. kati banki rahanchha ra kun pahichan haraunchha
+bhanne kura abhilekhit score ma nirbhar chha. 0.90 bhanda mathi ek pani nabhae sankhya 0 hunchha.
 
 <!-- ne-cell: f0a405bf | after-heading -->
-#### पहिचान राख्ने वा फाल्ने सीमा हेर्ने
+#### pahichan rakhne wa phalne sima herne
 
 <!-- ne-cell: f0a405bf -->
-**C2: आफ्नै bus तस्बिर, imgsz=320**
+**C2: aphnai bus tasbir, imgsz=320**
 
-**अनुमान एक पटक मात्र** चल्छ; नतिजालाई थ्रेसहोल्डले छान्छ। थ्रेसहोल्ड सार्दा फेरि अनुमान चल्दैन।
+**anuman ek patak matra** chalchha; natija lai thresholdle chhanchha. threshold sarda feri anuman chaldain.
 
-> यो cache **conf=0.05** मा बनाइएको छ। 0.05 भन्दा कम उम्मेदवार अनुमानकै बेला फालिएका हुनाले
-> **यो सूचीमा छैनन्** ("अवस्थित छैन" होइन, "यहाँ प्रयोग गर्न मिल्दैन")। त्यसैले 0.05 भन्दा कम
-> थ्रेसहोल्ड छान्न मिल्दैन।
+> yo cache **conf=0.05** ma banaiyeko chha. 0.05 bhanda kam ummedabar anumanakai bela phalieka hunale
+> **yo soochi ma chhainan** ("abasthit chhaina" hoina, "yahan prayog garna mildaina"). tyasaile 0.05 bhanda kam
+> threshold chhanna mildaina.
 
-यो भागको सन्दर्भ चित्रले सुरक्षित 52 तस्बिरमध्ये **अनुमानको तल्लो सीमा 0.01 मा पहिचान बाँकी रहेका 42
-तस्बिर** गन्छ। बाँकी 10 मा "कमजोर पहिचान" थिएन; **एक पनि आयत बाँकी थिएन**। 0.01 भन्दा कम उम्मेदवार
-अभिलेखमा नभएको हुनाले प्रयोग गर्न सकिँदैन।
+yo bhaagko sandarbha chitrale surakshit 52 tasbiramadhye **anumanko tallo sima 0.01 ma pahichan banki raheka 42
+tasbir** ganchha. banki 10 ma "kamajor pahichan" thien; **ek pani ayat banki thien**. 0.01 bhanda kam ummedabar
+abhilekhama nabhaeko hunale prayog garna sakindaina.
 
-| अनुमान | के हेर्ने |
+| anuman | ke herne |
 |---|---|
-| थ्रेसहोल्ड बढाउँदा | बाँकी पहिचान कति? |
-| 0.9 बनाउँदा | बाँकी सङ्ख्या बदलिन्छ? |
-| बाँकी सङ्ख्या 0 | "केही असामान्य छैन" कै अर्थ हो? |
+| threshold badhaunda | banki pahichan kati? |
+| 0.9 banaunda | banki sankhya badlinchha? |
+| banki sankhya 0 | "kehi asamanya chhaina" kai arth ho? |
 
-widget नभए पनि तलको parameter सेलले उही प्रयोग गर्न दिन्छ।
+widget nabhae pani talako parameter cellle uhi prayog garna dinchha.
 
 <!-- ne-cell: f9b7ab5c | after-heading -->
-## Part 2 निर्देशाङ्क पढ्ने
+## Part 2 nirdeshangk padhne
 
 <!-- ne-cell: 9890093b | after-heading -->
-**निर्देशाङ्कबाट के थाहा हुन्छ**
+**nirdeshangk baat ke thaha hunchha**
 <!-- ne-pair: What coordinates tell you -->
 
 <!-- ne-cell: 9890093b -->
-निर्देशाङ्क पढ्दा यी कुरा थाहा हुन्छन्।
+nirdeshangk padhda yi kura thaha hunchhan.
 
-- वस्तुको **स्थान** (तस्बिरको कहाँ)
-- **आयतले देखाउने विस्तार** (चौडाइ, उचाइ)। यो वस्तुको अनुमानित दायरा हो, **दोषको ठ्याक्कै नाप होइन**
-- तस्बिरको छेउसँग जोडिएको छ कि छैन (**बीचैमा काटिएको** हुन सक्छ)
-- एउटै स्थानमा धेरै पहिचान छ कि छैन (**दोहोरो पहिचान**)
+- bastuko **sthan** (tasbirko kahan)
+- **ayatale dekhaune bistar** (chaudai, uchai). yo bastuko anumanit dayara ho, **doshko thyakkai nap hoina**
+- tasbirko chheusang jodieko chha ki chhaina (**bichaima katieko** huna sakchha)
+- eutai sthanama dherai pahichan chha ki chhaina (**dohoro pahichan**)
 
-आयत model ले "यहाँ वस्तु छ" भनेर अनुमान गरेको दायरा हो। दोषको वास्तविक नाप (mm) वा क्षेत्रफल निकाल्न
-क्यालिब्रेसन (दिन २) र नाप्ने तरिका ठीक छ कि छैन भन्ने जाँच छुट्टै चाहिन्छ।
+ayat model le "yahan bastu chha" bhanera anuman gareko dayara ho. doshko bastabik nap (mm) wa kshetraphal nikalna
+calibration (din 2) ra napne tarika thik chha ki chhaina bhanne jaanch chhuttai chahinchha.
 
 <!-- ne-cell: e502c791 | after-heading -->
-**आकार अनुपातमा देखाउने**
+**akar anupaat ma dekhaune**
 <!-- ne-pair: Express size as a ratio -->
 
 <!-- ne-cell: e502c791 -->
-वास्तविक पिक्सेलमा तुलना गर्दा तस्बिरको आकार बदलिए अर्थ बुझ्न गाह्रो हुन्छ। **तस्बिरको तुलनामा प्रतिशत**
-मा हेर्दा तस्बिरको आकार बदलिए पनि तुलना गर्न सकिन्छ।
+bastabik pikselama tulna garda tasbirko akar badalie arth bujhna gahro hunchha. **tasbirko tulna ma pratishat**
+ma herda tasbirko akar badalie pani tulna garna sakinchha.
 
-तर अनुपातले तुलना गर्न मिल्ने कुरा **देखिने क्षेत्र (field of view) र काटिएको भाग उही भए** मात्र हो।
-क्यामेराको दूरी, zoom वा काटाइ बदलियो भने उही दोषको अनुपात पनि बदलिन्छ। देखिने क्षेत्र फरक भएका
-तस्बिर तुलना गर्दा त्यो फरक अभिलेख गर्नुहोस्।
+tar anupaatle tulna garna milne kura **dekhine kshetra (field of view) ra katieko bhaag uhi bhae** matra ho.
+kyamerako duri, zoom wa katai badaliyo bhane uhi doshko anupaat pani badlinchha. dekhine kshetra farak bhaeka
+tasbir tulna garda tyo farak abhilekh garnuhos.
 
 <!-- ne-cell: d87bb599 | after-heading -->
-## Part 3 तस्बिर फेरेर तुलना गर्ने
+## Part 3 tasbir pherer tulna garne
 
 <!-- ne-cell: caae9118 | after-heading -->
-## Part 4 झुटो पोजिटिभ र झुटो नेगेटिभ
+## Part 4 jhuto pojitibh ra jhuto negetibh
 
 <!-- ne-cell: 92bbe170 | after-heading -->
-**तस्बिर-स्तरका चार अवस्था**
+**tasbir-starka chaar abastha**
 <!-- ne-pair: The four image-level outcomes -->
 
 <!-- ne-cell: 92bbe170 -->
-एउटा तस्बिरलाई **OK कि NG** भनेर निर्णय गर्दा नतिजा यी चारमध्ये एक हुन्छ।
+euta tasbir lai **OK ki NG** bhanera nirnaya garda natija yi charamadhye ek hunchha.
 
-| तस्बिर-स्तरको निर्णय | वास्तवमा दोष छ | वास्तवमा सामान्य छ |
+| tasbir-starko nirnaya | bastabama dosh chha | bastabama samanya chha |
 |---|---|---|
-| **NG भनियो** | सही पहिचान (true positive) | **झुटो पोजिटिभ** (false positive, झुटो अलार्म) |
-| **OK भनियो** | **झुटो नेगेटिभ** (false negative, छुट्नु) | सही (true negative) |
+| **NG bhaniyo** | sahi pahichan (true positive) | **jhuto pojitibh** (false positive, jhuto alarm) |
+| **OK bhaniyo** | **jhuto negetibh** (false negative, chhutnu) | sahi (true negative) |
 
-**उत्पादन निरीक्षणमा झुटो नेगेटिभ (छुट्नु) विशेष गम्भीर** हुन्छ, किनभने बिग्रेको सामान पठाइन्छ।
-अर्कोतिर झुटो पोजिटिभ धेरै भए लाइन बारम्बार रोकिएर कामदार थाक्छन्।
+**utpadan nirikshan ma jhuto negetibh (chhutnu) bishesh gambhir** hunchha, kinabhane bigreko saman pathainchha.
+arkotir jhuto pojitibh dherai bhae line barambar rokiera kamadar thakchhan.
 
-त्यसैले **कुन कुरा कति स्वीकार गर्ने** पहिले नै तय गर्नुपर्छ।
+tyasaile **kun kura kati sbikar garne** pahile nai tay garnuparchha.
 
-**वस्तु पहिचानमा यी चार सिधै गन्न मिल्दैन।** अनुमान गरिएको आयत र सही आयत मिलाउनुपर्छ; नमिलेको अनुमान FP,
-नमिलेको सही वस्तु FN हो। पूरै पृष्ठभूमिलाई TN गनेर राख्न मिल्दैन (वस्तु-स्तरको मूल्याङ्कन दिन ४ मा आउँछ)।
+**bastu pahichan ma yi chaar sidhai ganna mildaina.** anuman garieko ayat ra sahi ayat milaunuparchha; namileko anuman FP,
+namileko sahi bastu FN ho. purai prishthabhumilai TN ganer rakhna mildaina (bastu-starko mulyankan din 4 ma aaunchha).
 
 <!-- ne-cell: 73de97ad | after-heading -->
-**confidence र सही हुनु फरक कुरा**
+**confidence ra sahi hunu farak kura**
 <!-- ne-pair: Confidence and correctness are different -->
 
 <!-- ne-cell: 73de97ad -->
-यी दुई **दुवै हुन्छन्**।
+yi dui **dubai hunchhan**.
 
-- **कम confidence भएको पहिचान सही हुन सक्छ** — सानो र देख्न गाह्रो, तर वास्तविक
-- **उच्च confidence भएको पहिचान गलत हुन सक्छ** — model देखिने रूपले ठगिएको
+- **kam confidence bhaeko pahichan sahi huna sakchha** — sano ra dekhna gahro, tar bastabik
+- **uchcha confidence bhaeko pahichan galat huna sakchha** — model dekhine rupale thagieko
 
-त्यसैले "confidence बढी छ, त्यसैले ठीक छ" भन्न मिल्दैन। साथै **कम confidence भनेको "शङ्कास्पद" मात्र हो,
-गलत भनेर टुङ्गो लागेको होइन**। **तस्बिर हेरेर जाँच्नु** नै यो तालिममा र व्यवहारमा पनि आधार हो।
+tyasaile "confidence badhi chha, tyasaile thik chha" bhanna mildaina. sathai **kam confidence bhaneko "shangkaspad" matra ho,
+galat bhanera tunggo lageko hoina**. **tasbir herer janchnu** nai yo talim ma ra byabaharama pani adhar ho.
 
 <!-- ne-cell: fig-teach_score_vs_correctness | after-heading -->
-### असफलताको प्रकार confidence ले छुट्याउने
+### asaphalatako prakar confidence le chhutyaune
 
 <!-- ne-cell: fig-teach_score_vs_correctness | after-image:../../assets/diagrams/teach_score_vs_correctness.png -->
-चित्र: confidence र सही हुनुलाई सँगै राखेर, थ्रेसहोल्ड माथि-तल असफलता कसरी बाँडिन्छ देखाउने चित्र
-(मान उदाहरणका लागि)।
+chitra: confidence ra sahi hunulai sangai rakher, threshold mathi-tal asaphalata kasari bandinchha dekhaune chitra
+(maan udaharanka lagi).
 
-**ध्यान दिनपर्ने कुरा**
+**dhyan dinaparne kura**
 
-थ्रेसहोल्ड घटाउँदा "कम confidence भएको सही पहिचान" जोगिन्छ, सँगै "कम confidence भएको गलत पहिचान" पनि
-भित्र पर्छ। एउटा पट्टि मात्र हटाउन सकिँदैन।
+threshold ghataunda "kam confidence bhaeko sahi pahichan" joginchha, sangai "kam confidence bhaeko galat pahichan" pani
+bhitra parchha. euta patti matra hataun sakindaina.
 
-**सोच्नुहोस्**
+**sochnuhos**
 
-- यी 5 मध्ये थ्रेसहोल्ड 0.30 बनाउँदा कति गलत पहिचान बाँकी रहन्छन्?
+- yi 5 madhye threshold 0.30 banaunda kati galat pahichan banki rahanchhan?
 
 <!-- ne-cell: 4a886707 | after-heading -->
-**अनिश्चित पहिचान अभिलेख गर्ने**
+**anishchit pahichan abhilekh garne**
 <!-- ne-pair: Record an uncertain detection -->
 
 <!-- ne-cell: 4a886707 -->
-तलको सेलले `bus.jpg` को नतिजाबाट **कम confidence भएका पहिचान** सूचीमा राख्छ। कम भए जति "शङ्कास्पद"
-उम्मेदवार हुन्।
+talako cellle `bus.jpg` ko natija baat **kam confidence bhaeka pahichan** soochi ma rakhchha. kam bhae jati "shangkaspad"
+ummedabar hun.
 
-अभ्यासमा यीमध्ये एउटा छानेर **तस्बिरसँग तुलना गरी** "सही / गलत / निर्णय गर्न सकिँदैन" मध्ये एउटा
-अभिलेख गर्नुहोस्। त्यसपछि **किन कम भयो** (धेरै सानो, लुकेको, देखिने रूप मिल्ने) भनेर **अनुमान** लेख्नुहोस्।
-तस्बिर हेरेर पनि निर्णय गर्न नसकिने हुन सक्छ; त्यस अवस्थामा "निर्णय गर्न सकिँदैन" लेख्नुहोस्।
+abhyas ma yimadhye euta chhaner **tasbir sang tulna gari** "sahi / galat / nirnaya garna sakindaina" madhye euta
+abhilekh garnuhos. tyaspachhi **kina kam bhayo** (dherai sano, lukeko, dekhine rup milne) bhanera **anuman** lekhnuhos.
+tasbir herer pani nirnaya garna nasakine huna sakchha; tyas abastha ma "nirnaya garna sakindaina" lekhnuhos.
 
 <!-- ne-cell: d3580c9b | after-heading -->
-## Part 5 रिजोल्युसन र साना वस्तु
+## Part 5 rijolyusan ra sana bastu
 
 <!-- ne-cell: fig-teach_resolution_effect | after-heading -->
-### रिजोल्युसनले दोष कसरी देखिन्छ तय गर्छ
+### rijolyusanale dosh kasari dekhinchha tay garchha
 
 <!-- ne-cell: fig-teach_resolution_effect | after-image:../../assets/diagrams/teach_resolution_effect.png -->
-चित्र: उही संश्लेषित तस्बिर सानो बनाउँदा दोष कसरी देखिन्छ र केन्द्रको पिक्सेलमा कति फरक पर्छ (गणना गरिएका मान)।
+chitra: uhi sansleshit tasbir sano banaunda dosh kasari dekhinchha ra kendrako pikselama kati farak parchha (ganana garieka maan).
 
-**ध्यान दिनपर्ने कुरा**
+**dhyan dinaparne kura**
 
-एक पिक्सेलभन्दा सानो दोषले पनि त्यो पिक्सेलको चमक बदल्न सक्छ। तर आकार र स्थान भरपर्दो रूपमा ठम्याउन
-सकिन्छ भन्ने छैन। देखिने क्षेत्र, interpolation र बाँकी रहेको contrast छुट्टाछुट्टै पढ्नुहोस्।
+ek pikselabhanda sano doshle pani tyo pikselako chamak badalna sakchha. tar akar ra sthan bharapardo rupama thamyaun
+sakinchha bhanne chhaina. dekhine kshetra, interpolation ra banki raheko contrast chhuttachhuttai padhnuhos.
 
-**सोच्नुहोस्**
+**sochnuhos**
 
-- 0.5 px को दोष पनि थ्रेसहोल्डले भेट्न सक्नुको कारण के हो?
+- 0.5 px ko dosh pani thresholdle bhetna saknuko karan ke ho?
 
 <!-- ne-cell: 860a5fd3 | after-heading -->
-**तस्बिर सानो बनाउँदा पहिचान गाह्रो हुन्छ**
+**tasbir sano banaunda pahichan gahro hunchha**
 <!-- ne-pair: Shrinking an image makes detection harder -->
 
 <!-- ne-cell: 860a5fd3 -->
-model ले इनपुटलाई तोकिएको आकार (`imgsz`, पूर्वनिर्धारित 640) मा बदलेर प्रशोधन गर्छ। मूल तस्बिर सानो
-भए **साना वस्तु केही पिक्सेलमा मात्र बाँकी रहन्छन्**।
+model le input lai tokieko akar (`imgsz`, purbanirdharit 640) ma badaler prashodhan garchha. mul tasbir sano
+bhae **sana bastu kehi pikselama matra banki rahanchhan**.
 
-दिन १ मा देखेजस्तै एक पिक्सेलभन्दा सानो दोषले पनि पिक्सेलको चमकमा असर गर्न सक्छ। तर त्यसको
-**आकार र स्थान भरपर्दो रूपमा ठम्याउन गाह्रो** हुन्छ। सानो बनाउँदा सूक्ष्म विवरण र वरपरसँगको चमकको
-फरक (contrast) पनि हराउँछ।
+din 1 ma dekhejastai ek pikselabhanda sano doshle pani pikselako chamakama asar garna sakchha. tar tyasko
+**akar ra sthan bharapardo rupama thamyaun gahro** hunchha. sano banaunda sukshma biwaran ra baraparasangako chamakako
+farak (contrast) pani haraunchha.
 
-अर्कोतिर **सानो बनाउँदैमा सधैं 0 हुँदैन**। बाँकी सङ्ख्या तस्बिर, वस्तु र थ्रेसहोल्डमा निर्भर छ। तलको
-सेलले तस्बिर जानाजान सानो बनाएर अनुमान चलाउँछ र पहिचान सङ्ख्या कसरी बदलिन्छ हेर्छ।
+arkotir **sano banaundaima sadhain 0 hundaina**. banki sankhya tasbir, bastu ra threshold ma nirbhar chha. talako
+cellle tasbir janajan sano banaera anuman chalaunchha ra pahichan sankhya kasari badlinchha herchha.
 
-**फाइलको रूपमा स्वीकार हुनु** र **model ले साँच्चै प्रशोधन गर्ने रिजोल्युसन** फरक कुरा हुन्। ठुलो तस्बिर
-त्रुटि नगरी दिन सकिन्छ, तर `imgsz` अनुसार भित्रै सानो बनाइन्छ, त्यसैले सूक्ष्म विवरण हराउँछ।
+**fileko rupama sbikar hunu** ra **model le sanchchai prashodhan garne rijolyusan** farak kura hun. thulo tasbir
+truti nagari din sakinchha, tar `imgsz` anusar bhitrai sano banainchha, tyasaile sukshma biwaran haraunchha.
 
 <!-- ne-cell: 1937768a | after-heading -->
-**सङ्ख्या किन घट्छ**
+**sankhya kina ghatchha**
 <!-- ne-pair: Why the count drops -->
 
 <!-- ne-cell: 1937768a -->
-सानो बनाउँदा मानिसको चौडाइ दर्जनौं पिक्सेलबाट केही पिक्सेलमा झर्छ। model ले "मानिसको आकार" चिन्न
-गाह्रो हुन्छ। 0 हुन्छ कि हुँदैन भन्ने कुरा तस्बिर र थ्रेसहोल्डमा निर्भर छ।
+sano banaunda manisako chaudai darjanaun pikselabat kehi pikselama jharchha. model le "manisako akar" chinna
+gahro hunchha. 0 hunchha ki hundaina bhanne kura tasbir ra threshold ma nirbhar chha.
 
-PVC को 0.3 mm दोषमा **अझ कठिन** हुन्छ। देखिने क्षेत्रको तुलनामा दोष केही पिक्सेलमा मात्र बाँकी भए
-चमकको फरक देखिए पनि आकार र स्थान स्थिर हुँदैन। त्यस अवस्थामा AI को क्षमता होइन,
-**खिचाइको रिजोल्युसन (देखिने क्षेत्र र pixel pitch)** बढाउने वा तस्बिर टुक्रा-टुक्रा गरेर खिच्ने कुरा सोच्नुपर्छ।
+PVC ko 0.3 mm dosh ma **ajh kathin** hunchha. dekhine kshetrako tulna ma dosh kehi pikselama matra banki bhae
+chamakako farak dekhie pani akar ra sthan sthir hundaina. tyas abastha ma AI ko kshamata hoina,
+**khichaiko rijolyusan (dekhine kshetra ra pixel pitch)** badhaune wa tasbir tukra-tukra garera khichne kura sochnuparchha.
 
 <!-- ne-cell: clarity-image-box-transfer | after-heading -->
-### तस्बिर र आयतको एकाइ नमिसाउने
+### tasbir ra ayatako ekai namisaune
 
 <!-- ne-cell: clarity-image-box-transfer -->
-दुई संश्लेषित तस्बिरमा अनुमान गर्नुहोस्। A मा दोष 3 वटा छन् र सही मिल्ने अनुमान 2 वटा। B सामान्य छ,
-अनुमान 0 वटा। तस्बिर-एकाइमा A=TP र B=TN; आयत-एकाइमा A मा TP=2 र FN=1 छ। सामान्य B मा आयत-एकाइको
-TN बनाइँदैन। यो कुरा दिन ४ को मूल्याङ्कन नोटबुकको "गन्ने एकाइ" सँग जोडिन्छ।
+dui sansleshit tasbir ma anuman garnuhos. A ma dosh 3 bata chhan ra sahi milne anuman 2 bata. B samanya chha,
+anuman 0 bata. tasbir-ekaima A=TP ra B=TN; ayat-ekaima A ma TP=2 ra FN=1 chha. samanya B ma ayat-ekaiko
+TN banaindain. yo kura din 4 ko mulyankan notebookko "ganne ekai" sang jodinchha.
 
-सानो प्रयोग: A मा अनुमान एक भए तस्बिर-स्तरको recall र वस्तु-स्तरको recall मध्ये कुन बदलिन्छ?
+sano prayog: A ma anuman ek bhae tasbir-starko recall ra bastu-starko recall madhye kun badlinchha?
 
 <!-- ne-cell: 1e45eae2 | after-heading -->
-## अभ्यास
+## abhyas
 
 <!-- ne-cell: 23ef30f5 | after-heading -->
-**अभ्यास 1 (आधारभूत): थ्रेसहोल्डको तालिका बनाउने**
+**abhyas 1 (adharabhut): thresholdko talika banaune**
 <!-- ne-pair: Exercise 1 (basic): build the threshold table -->
 
 <!-- ne-cell: 23ef30f5 -->
-Part 1 को तालिका `zidane.jpg` मा पनि फेरि बनाउनुहोस्। थ्रेसहोल्ड 0.05–0.90 मा पहिचान सङ्ख्याको परिवर्तन
-अभिलेख गर्नुहोस्।
+Part 1 ko talika `zidane.jpg` ma pani feri banaunuhos. threshold 0.05–0.90 ma pahichan sankhyako paribartan
+abhilekh garnuhos.
 
-पूरा भएको मापन: 7 लाइनको तालिका बन्यो, थ्रेसहोल्ड बढाउँदा पहिचान सङ्ख्या नबढ्ने कुरा पुष्टि भयो, र
-सङ्ख्या 0 भएको थ्रेसहोल्ड अभिलेख गरियो। **कुनै थ्रेसहोल्डमा 0 भएन भने त्यही कुरा अभिलेख गरे पनि पूरा मानिन्छ।**
+pura bhaeko maapan: 7 lineko talika banyo, threshold badhaunda pahichan sankhya nabadhne kura pushti bhayo, ra
+sankhya 0 bhaeko threshold abhilekh gariyo. **kunai threshold ma 0 bhaen bhane tyahi kura abhilekh gare pani pura maninchha.**
 
 <!-- ne-cell: 48325aa1 | after-heading -->
-**अभ्यास 2 (मध्यम): एउटा अनिश्चित पहिचान पुनरावलोकन गर्ने**
+**abhyas 2 (madhyam): euta anishchit pahichan punarabalokan garne**
 <!-- ne-pair: Exercise 2 (intermediate): review one uncertain detection -->
 
 <!-- ne-cell: 48325aa1 -->
-माथिको "कम confidence को सूची" बाट एउटा छानेर अभिलेख गर्नुहोस्।
+mathiko "kam confidence ko soochi" baat euta chhaner abhilekh garnuhos.
 
-| विषय | लेख्ने |
+| bishay | lekhne |
 |---|---|
 | class | |
 | confidence | |
-| आकार (चौडाइ×उचाइ) | |
-| तस्बिरसँग तुलना गर्दा निर्णय (सही / गलत / निर्णय गर्न सकिँदैन) | |
-| कम हुनुको कारणबारे अनुमान (अनुमान हो भनेर स्पष्ट लेख्नुहोस्) | |
+| akar (chaudai×uchai) | |
+| tasbir sang tulna garda nirnaya (sahi / galat / nirnaya garna sakindaina) | |
+| kam hunuko karanabare anuman (anuman ho bhanera spasht lekhnuhos) | |
 
-पूरा भएको मापन: पाँचै महल भरियो, "तस्बिरसँग तुलना गर्दा निर्णय" तस्बिर वा सही लेबलमा आधारित छ, र
-कम हुनुको कारण **अनुमान** को रूपमा लेखिएको छ।
+pura bhaeko maapan: panchai mahal bhariyo, "tasbir sang tulna garda nirnaya" tasbir wa sahi label ma adharit chha, ra
+kam hunuko karan **anuman** ko rupama lekhieko chha.
 
 <!-- ne-cell: 2aedccfa | after-heading -->
-**अभ्यास 3 (वैकल्पिक): PVC निरीक्षणका लागि चाहिने रिजोल्युसन सुझाउने**
+**abhyas 3 (baikalpik): PVC nirikshanka lagi chahine rijolyusan sujhaune**
 <!-- ne-pair: Exercise 3 (optional challenge): propose the resolution needed for PVC -->
 
 <!-- ne-cell: 2aedccfa -->
-चौडाइ 1,300 mm भएको सिटमा 0.3 mm को दोष **कम्तीमा 3 पिक्सेल** मा समात्नु छ भनौं।
+chaudai 1,300 mm bhaeko sitama 0.3 mm ko dosh **kamtima 3 piksel** ma samatnu chha bhanaun.
 
-1. तिर्सो दिशामा चाहिने पिक्सेल सङ्ख्या गणना गर्नुहोस्।
-2. त्यो तस्बिर YOLO मा त्यसै दिन सकिन्छ? फाइलको रूपमा स्वीकार हुनु र model ले साँच्चै प्रशोधन गर्ने
-   रिजोल्युसन फरक हुन्। के उपाय गर्नुहुन्छ?
-3. Part 5 को नतिजालाई आधार मानेर "तस्बिर सानो बनाएर अनुमान चलाउने" तरिकाको समस्या व्याख्या गर्नुहोस्।
+1. tirso disha ma chahine piksel sankhya ganana garnuhos.
+2. tyo tasbir YOLO ma tyasai din sakinchha? fileko rupama sbikar hunu ra model le sanchchai prashodhan garne
+   rijolyusan farak hun. ke upay garnuhunchha?
+3. Part 5 ko natija lai adhar maner "tasbir sano banaera anuman chalaune" tarikako samasya byakhya garnuhos.
 
-पूरा भएको मापन: चाहिने पिक्सेल सङ्ख्या (13,000 पिक्सेल) गणना गरिएको छ, `imgsz` बढाउने र ओभरल्यापसहित
-टाइलमा बाँड्ने दुवै कुरा उल्लेख छन्, र सानो बनाउँदा पर्ने असर व्याख्या गरिएको छ।
+pura bhaeko maapan: chahine piksel sankhya (13,000 piksel) ganana garieko chha, `imgsz` badhaune ra obharalyapasahit
+tailama bandne dubai kura ullekh chhan, ra sano banaunda parne asar byakhya garieko chha.
 
 <!-- ne-cell: cc0a4b24 | after-heading -->
-#### बुझाइ जाँच्ने प्रश्न
+#### bujhai jaanchne prashna
 
 <!-- ne-cell: cc0a4b24 -->
-1. अभिलेखित `bus.jpg` को चलाइमा थ्रेसहोल्ड 0.90 बनाउँदा सही पहिचान पनि किन हरायो?
-2. झुटो पोजिटिभ र झुटो नेगेटिभ कार्यस्थलको भाषामा व्याख्या गर्नुहोस्।
-3. "confidence बढी छ, त्यसैले सही छ" भन्न किन मिल्दैन?
-4. तस्बिर सानो बनाउँदा पहिचान घट्ने दुई कारण भन्नुहोस्।
-5. PVC निरीक्षणमा "छुट्ने" र "झुटो अलार्म" मध्ये कुन पहिले घटाउनुपर्छ? तपाईंको विचार र कारण लेख्नुहोस्।
+1. abhilekhit `bus.jpg` ko chalaima threshold 0.90 banaunda sahi pahichan pani kina harayo?
+2. jhuto pojitibh ra jhuto negetibh karyasthalako bhashama byakhya garnuhos.
+3. "confidence badhi chha, tyasaile sahi chha" bhanna kina mildaina?
+4. tasbir sano banaunda pahichan ghatne dui karan bhannuhos.
+5. PVC nirikshan ma "chhutne" ra "jhuto alarm" madhye kun pahile ghataunuparchha? tapainko bichar ra karan lekhnuhos.
 
 <!-- ne-cell: 36d302d7 | after-heading -->
-## समस्या परेमा
+## samasya parema
 
 <!-- ne-cell: 36d302d7 -->
-त्रुटि आएपछि पहिले "कुन सेलमा", "कुन लाइनमा", "के सन्देश आयो" भनेर लेख्नुहोस्। बुझाउनुपर्ने काममा पनि
-त्यही अभिलेख राख्नुहोस्।
+truti aepachhi pahile "kun cell ma", "kun line ma", "ke sandesh ayo" bhanera lekhnuhos. bujhaunuparne kaam ma pani
+tyahi abhilekh rakhnuhos.
 
-| लक्षण | के गर्ने |
+| lakshan | ke garne |
 | --- | --- |
-| तालिका खाली हुन्छ | `conf` धेरै उच्च हुन सक्छ। 0.05 सम्म घटाएर जाँच्नुहोस्। |
-| `model` परिभाषित छैन | Part 0 को model पढ्ने सेल चलाउनुहोस्। |
-| सानो बनाएको तस्बिरमा त्रुटि | `int()` ले पूर्णाङ्क बनाइन्छ, तर अत्यधिक सानो भए 0 हुन्छ। `scale` 0.10 भन्दा कम नराख्नुहोस्। |
-| CSV Excel मा बिग्रन्छ | `encoding="utf-8-sig"` लगाएर सुरक्षित गर्नुहोस्। |
-| हरेक पटक डाउनलोड सुरु हुन्छ | `assets/models/` मा फाइल छ कि जाँच्नुहोस्। छैन भने हातैले राख्नुहोस्। |
+| talika khali hunchha | `conf` dherai uchcha huna sakchha. 0.05 samm ghataera jaanchnuhos. |
+| `model` paribhashit chhaina | Part 0 ko model padhne cell chalaunuhos. |
+| sano banaeko tasbir ma truti | `int()` le purnank banainchha, tar atyadhik sano bhae 0 hunchha. `scale` 0.10 bhanda kam narakhnuhos. |
+| CSV Excel ma bigranchha | `encoding="utf-8-sig"` lagaera surakshit garnuhos. |
+| harek patak daunalod suru hunchha | `assets/models/` ma file chha ki jaanchnuhos. chhaina bhane hataile rakhnuhos. |
 
 <!-- ne-cell: e3887914 | after-heading -->
-## सम्पन्नता जाँचसूची
+## sampannata janchasuchi
 
 <!-- ne-cell: e3887914 -->
-**अनिवार्य** भनेको तलको "अनिवार्य" सूची मात्र हो। **अभ्यास 3 र थप चुनौती वैकल्पिक** हुन्; नगरे पनि पूरा
-मानिन्छ। समय बाँकी भएमा मात्र गर्नुहोस्।
+**aniwarya** bhaneko talako "aniwarya" soochi matra ho. **abhyas 3 ra thap chunauti baikalpik** hun; nagare pani pura
+maninchha. samay banki bhae ma matra garnuhos.
 
-**अनिवार्य**
+**aniwarya**
 
-- [ ] Part 1–Part 5 पढेर सबै code सेल चलाएँ
-- [ ] थ्रेसहोल्डअनुसार पहिचान सङ्ख्याको तालिका बनाएँ
-- [ ] निर्देशाङ्कबाट चौडाइ, उचाइ र अनुपात निकालें
-- [ ] रिजोल्युसन घटाउँदा पहिचान सङ्ख्यामा पर्ने असर हेरें
-- [ ] अभ्यास 1 र 2 (अनिवार्य) गरें
-- [ ] कम्तीमा एउटा अनिश्चित पहिचान पुनरावलोकन गरी निर्णय र अनुमान अभिलेख गरें
-- [ ] बुझाइ जाँच्ने 5 प्रश्नको उत्तर दिएँ
-- [ ] नोटबुक सुरक्षित गरें
+- [ ] Part 1–Part 5 padher sabai code cell chalaen
+- [ ] threshold anusar pahichan sankhyako talika banaen
+- [ ] nirdeshangk baat chaudai, uchai ra anupaat nikalen
+- [ ] rijolyusan ghataunda pahichan sankhya ma parne asar heren
+- [ ] abhyas 1 ra 2 (aniwarya) garen
+- [ ] kamtima euta anishchit pahichan punarabalokan gari nirnaya ra anuman abhilekh garen
+- [ ] bujhai jaanchne 5 prashnako uttar dien
+- [ ] notebook surakshit garen
 
-**वैकल्पिक**
+**baikalpik**
 
-- [ ] अभ्यास 3 (वैकल्पिक): चाहिने रिजोल्युसन गणना गरेर `imgsz` र टाइलिङ सोचें
-- [ ] थप चुनौती: NMS को `iou` थ्रेसहोल्ड बदलेर दोहोरो पहिचान जाँचें
+- [ ] abhyas 3 (baikalpik): chahine rijolyusan ganana garera `imgsz` ra tailing sochen
+- [ ] thap chunauti: NMS ko `iou` threshold badaler dohoro pahichan janchen
 
 <!-- ne-cell: 987dc9d2 | after-heading -->
-## थप अध्ययन (वैकल्पिक)
+## thap adhyayan (baikalpik)
 
 <!-- ne-cell: 987dc9d2 -->
-### सन्दर्भ लिङ्क
+### sandarbha lingk
 
-- [Ultralytics Predict मोड](https://docs.ultralytics.com/modes/predict/)
-- [Ultralytics मूल्याङ्कन (val) मोड](https://docs.ultralytics.com/modes/val/)
-- [COCO मूल्याङ्कन मापनको सोचाइ](https://cocodataset.org/#detection-eval)
+- [Ultralytics Predict mod](https://docs.ultralytics.com/modes/predict/)
+- [Ultralytics mulyankan (val) mod](https://docs.ultralytics.com/modes/val/)
+- [COCO mulyankan maapanko sochai](https://cocodataset.org/#detection-eval)
 
-### थप चुनौती (अनिवार्य होइन)
+### thap chunauti (aniwarya hoina)
 
-`iou` थ्रेसहोल्ड (`model.predict(..., iou=...)`) बदल्दा दोहोरो पहिचान कसरी बदलिन्छ खोज्नुहोस्।
+`iou` threshold (`model.predict(..., iou=...)`) badalda dohoro pahichan kasari badlinchha khojnuhos.

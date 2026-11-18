@@ -1,432 +1,432 @@
 <!--
-नेपाली अनुवाद / Nepali translation source for
+Nepali anuwad / Nepali translation source for
 notebooks/Day03_YOLO_Basics/Day03_01_YOLO_Concepts.ipynb
 -->
-# दिन ३ नोटबुक ०१ — नेपाली अनुवाद
+# din 3 notebook 01 — Nepali anuwad
 
 <!-- ne-cell: fa4f448a | after-heading -->
-# दिन ३ नोटबुक ०१: YOLO बुझ्ने
+# din 3 notebook 01: YOLO bujhne
 
 <!-- ne-cell: fa4f448a -->
-## सिकाइ लक्ष्यहरू
+## sikai lakshyaharu
 
-| नेपाली |
+| Nepali |
 | --- |
-| 1. वस्तु पहिचान गर्ने model ले के गर्छ बताउन सक्ने। |
-| 2. बाउन्डिङ बक्स र निर्देशाङ्क लेख्ने तरिका बताउन सक्ने। |
-| 3. विश्वास स्कोर (confidence) को अर्थ बताउन सक्ने। |
-| 4. IoU हातैले गणना गर्न सक्ने। |
-| 5. पहिले नै तालिम भएको model ले PVC को दोष किन भेट्न नसक्छ बताउन सक्ने। |
+| 1. bastu pahichan garne model le ke garchha bataun sakne. |
+| 2. baunding baks ra nirdeshangk lekhne tarika bataun sakne. |
+| 3. bishbas score (confidence) ko arth bataun sakne. |
+| 4. IoU hataile ganana garna sakne. |
+| 5. pahile nai talim bhaeko model le PVC ko dosh kina bhetna nasakchha bataun sakne. |
 
-## यो नोटबुकको आधारभूत जानकारी
+## yo notebookko adharabhut jankari
 
-| विषय | विवरण |
+| bishay | biwaran |
 | --- | --- |
-| सिकाइ समय (अनुमान) | 80 मिनेट |
-| कठिनाइ | सुरुवाती तह |
-| पूर्वशर्त | दिन १ र दिन २ सकिएको हुनुपर्छ। |
-| आवश्यक लाइब्रेरी | numpy, matplotlib, pillow |
-| प्रयोग हुने kernel | aivision |
-| आजको समयतालिका | [`COURSE_SYLLABUS.md` दिन ३](../../COURSE_SYLLABUS.md#day3) |
+| sikai samay (anuman) | 80 minet |
+| kathinai | surubati tah |
+| poorwashart | din 1 ra din 2 sakieko hunuparchha. |
+| aawashyak laibreri | numpy, matplotlib, pillow |
+| prayog hune kernel | aivision |
+| ajako samayatalika | [`COURSE_SYLLABUS.md` din 3](../../COURSE_SYLLABUS.md#day3) |
 
-### बुझाउनुपर्ने काम
+### bujhaunuparne kaam
 
-| नेपाली |
+| Nepali |
 | --- |
-| IoU हातैले गणना गरेको नतिजा |
-| YOLO ढाँचाको निर्देशाङ्क गणना |
+| IoU hataile ganana gareko natija |
+| YOLO dhanchako nirdeshangk ganana |
 
 <!-- ne-cell: fig-teach_score_vs_correctness | after-heading -->
-### confidence र सही हुनु फरक कुरा हुन्
+### confidence ra sahi hunu farak kura hun
 
 <!-- ne-cell: fig-teach_score_vs_correctness | after-image:../../assets/diagrams/teach_score_vs_correctness.png -->
-चित्र: 5 वटा पहिचानको confidence र सही उत्तरसँग तुलना गर्दा कति सही भयो (मान उदाहरणका लागि मात्र)।
+chitra: 5 bata pahichanko confidence ra sahi uttar sang tulna garda kati sahi bhayo (maan udaharanka lagi matra).
 
-**ध्यान दिनुपर्ने कुरा**
+**dhyan dinuparne kura**
 
-confidence बढी भएको पहिचान पनि गलत हुन सक्छ, र कम भएको पनि सही हुन सक्छ। confidence भनेको model
-ले दिएको स्कोर हो; यो सही उत्तर पनि होइन, "सही हुने सम्भावना" पनि होइन। सही छ कि छैन भन्ने कुरा सही
-लेबलसँग तोकिएको नियमअनुसार मिलाएर जाँचिन्छ।
+confidence badhi bhaeko pahichan pani galat huna sakchha, ra kam bhaeko pani sahi huna sakchha. confidence bhaneko model
+le dieko score ho; yo sahi uttar pani hoina, "sahi hune sambhabana" pani hoina. sahi chha ki chhaina bhanne kura sahi
+label sang tokieko niyam anusar milaera janchinchha.
 
-**सोच्नुहोस्**
+**sochnuhos**
 
-- थ्रेसहोल्ड 0.60 मा बाँकी रहने पहिचानमध्ये कुन-कुन गलत छन्?
+- threshold 0.60 ma banki rahane pahichanamadhye kun-kun galat chhan?
 
 <!-- ne-cell: audit-learning-loop | after-heading -->
-### अनुमान गर्नुहोस्, चलाउनुहोस्, हेर्नुहोस्, व्याख्या गर्नुहोस्
+### anuman garnuhos, chalaunuhos, hernuhos, byakhya garnuhos
 
 <!-- ne-cell: audit-learning-loop -->
-class भनेको दोषको प्रकार हो। confidence model को स्कोर हो, सही हुने ग्यारेन्टी होइन। महत्त्वपूर्ण सेल
-चलाउनुअघि इनपुट, काम र नतिजा एक-एक वाक्यमा लेख्नुहोस्। पहिले अनुमान गरेर चलाउनुहोस् र मान वा चित्र
-हेर्नुहोस्। `x2` मात्र बदलेर फेरि अनुमान गरी चलाउनुहोस्। जानाजान राखिएका त्रुटि र नसकिएका अभ्यासका
-निर्देशन पछ्याउनुहोस्।
+class bhaneko doshko prakar ho. confidence model ko score ho, sahi hune gyarenti hoina. mahattwapurna cell
+chalaunuaghi input, kaam ra natija ek-ek bakyama lekhnuhos. pahile anuman garera chalaunuhos ra maan wa chitra
+hernuhos. `x2` matra badaler feri anuman gari chalaunuhos. janajan rakhieka truti ra nasakieka abhyaska
+nirdeshan pachhyaunuhos.
 
 <!-- ne-cell: 65c518c5 | after-heading -->
-## यो नोटबुक कहाँ पर्छ
+## yo notebook kahan parchha
 
 <!-- ne-cell: 65c518c5 -->
-| विषय | विवरण |
+| bishay | biwaran |
 | --- | --- |
-| दिन | दिन ३ |
-| आजको क्रम | आजको नोटबुकमध्ये 1 / 3 |
-| लाग्ने समय | 80 मिनेट |
-| पूर्वशर्त | दिन २ |
-| आजको समयतालिका | [`COURSE_SYLLABUS.md` दिन ३](../../COURSE_SYLLABUS.md#day3) |
+| din | din 3 |
+| ajako kram | ajako notabukamadhye 1 / 3 |
+| lagne samay | 80 minet |
+| poorwashart | din 2 |
+| ajako samayatalika | [`COURSE_SYLLABUS.md` din 3](../../COURSE_SYLLABUS.md#day3) |
 
-दिनको समयतालिका `COURSE_SYLLABUS.md` मा एउटै ठाउँमा छ। यो नोटबुक त्यसको एउटा भाग मात्र हो।
+dinko samayatalika `COURSE_SYLLABUS.md` ma eutai thaun ma chha. yo notebook tyasko euta bhaag matra ho.
 
 <!-- ne-cell: f78a487c | after-heading -->
-## Part 0 तयारी
+## Part 0 tayari
 
 <!-- ne-cell: 6e36b163 | after-heading -->
-#### YOLO के हो
+#### YOLO ke ho
 
 <!-- ne-cell: 6e36b163 -->
-YOLO (You Only Look Once) भनेको तस्बिरबाट आयत, तालिम लिएका class र स्कोर अनुमान गर्ने वस्तु-पहिचान
-model हो। model को forward pass र postprocessing मिलेर नतिजा बन्छ; "एकै पटकको गणना मात्र" भन्ने होइन।
-उत्पादन लाइनको गतिमा समय पुग्छ कि पुग्दैन भन्ने कुरा वास्तविक यन्त्र, तस्बिरको आकार, पूर्व-प्रशोधन र
-पछि-प्रशोधन सहित नापेर मात्र थाहा हुन्छ।
+YOLO (You Only Look Once) bhaneko tasbir baat ayat, talim lieka class ra score anuman garne bastu-pahichan
+model ho. model ko forward pass ra postprocessing miler natija banchha; "ekai patakako ganana matra" bhanne hoina.
+utpadan lineko gatima samay pugchha ki pugdain bhanne kura bastabik yantra, tasbirko akar, purb-prashodhan ra
+pachhi-prashodhan sahit naper matra thaha hunchha.
 
 <!-- ne-cell: 3423fdc1 | after-heading -->
-## Part 1 बाउन्डिङ बक्स
+## Part 1 baunding baks
 
 <!-- ne-cell: fig-teach_bbox_coords | after-heading -->
-### तस्बिरमा आयत पढ्ने
+### tasbir ma ayat padhne
 
 <!-- ne-cell: fig-teach_bbox_coords | after-image:../../assets/diagrams/teach_bbox_coords.png -->
-चित्र: एउटै दोषको आयतलाई बायाँ पिक्सेल सङ्ख्याले र दायाँ तस्बिरको आकारले भाग गरेको मानले देखाइएको छ।
-निर्देशाङ्क गणना गरेर चित्रमा राखिएका हुन्।
+chitra: eutai doshko ayatalai bayan piksel sankhyale ra dayan tasbirko akarale bhaag gareko maanle dekhaieko chha.
+nirdeshangk ganana garera chitra ma rakhieka hun.
 
-**ध्यान दिनुपर्ने कुरा**
+**dhyan dinuparne kura**
 
-बायाँ पिक्सेलको xyxy र दायाँ तस्बिरको आकारले भाग गरेको cx, cy, w, h — **एउटै बक्स** हो। पूरै तस्बिर
-सानो-ठुलो गर्दा 0–1 का मान अर्थपूर्ण रहन्छन्, तर काट्दा (crop) वा खाली ठाउँ थप्दा (letterbox) निर्देशाङ्क
-बदलिन्छन्। API-अनुसार ढाँचा फरक हुन्छ, नाम जाँच्नुहोस् (Ultralytics को `xyxy`, OpenCV को
-`boundingRect` xywh हो)।
+bayan pikselako xyxy ra dayan tasbirko akarale bhaag gareko cx, cy, w, h — **eutai baks** ho. purai tasbir
+sano-thulo garda 0–1 ka maan arthapurna rahanchhan, tar katda (crop) wa khali thaun thapda (letterbox) nirdeshangk
+badalinchhan. API-anusar dhancha farak hunchha, naam jaanchnuhos (Ultralytics ko `xyxy`, OpenCV ko
+`boundingRect` xywh ho).
 
-**सोच्नुहोस्**
+**sochnuhos**
 
-- तस्बिरको बायाँ आधा भाग मात्र काट्दा, पहिले cx = 0.6 भएको बक्स के हुन्छ?
+- tasbirko bayan adha bhaag matra katda, pahile cx = 0.6 bhaeko baks ke hunchha?
 
 <!-- ne-cell: 9bff031a | after-heading -->
-**आयतले घेर्ने, चार सङ्ख्या**
+**ayatale gherne, chaar sankhya**
 <!-- ne-pair: A rectangle is four numbers -->
 
 <!-- ne-cell: 9bff031a -->
-बाउन्डिङ बक्सले दोषलाई आयतले घेर्छ। बक्स चार सङ्ख्याले लेखिन्छ, र ती सङ्ख्याको क्रम
-(**निर्देशाङ्कको ढाँचा**) API-अनुसार तोकिएको हुन्छ।
+baunding baksale dosh lai ayatale gherchha. baks chaar sankhyale lekhinchha, ra ti sankhyako kram
+(**nirdeshangkko dhancha**) API-anusar tokieko hunchha.
 
-| ढाँचा | चार सङ्ख्या | कहाँ प्रयोग हुन्छ |
+| dhancha | chaar sankhya | kahan prayog hunchha |
 |---|---|---|
-| `xyxy` | `x1, y1, x2, y2` (माथि-बायाँ र तल-दायाँ) | Ultralytics को `result.boxes.xyxy`, चित्र बनाउने लाइब्रेरी |
-| `xywh` | `x, y, w, h` (माथि-बायाँ र चौडाइ, उचाइ) | `cv2.boundingRect()` (OpenCV को कन्टुर वरिपरिको आयत) |
-| `xc, yc, w, h` (सामान्यीकृत) | केन्द्र र आकारलाई तस्बिरको आकारले भाग गरेको 0–1 मान | YOLO को label फाइल (सही लेबल) |
+| `xyxy` | `x1, y1, x2, y2` (mathi-bayan ra tal-dayan) | Ultralytics ko `result.boxes.xyxy`, chitra banaune laibreri |
+| `xywh` | `x, y, w, h` (mathi-bayan ra chaudai, uchai) | `cv2.boundingRect()` (OpenCV ko kantur baripariko ayat) |
+| `xc, yc, w, h` (samanyikrit) | kendra ra akaralai tasbirko akarale bhaag gareko 0–1 maan | YOLO ko label file (sahi label) |
 
-उही "चार सङ्ख्या" भए पनि `xyxy`, `xywh` र YOLO label मा **अर्थ र क्रम फरक** हुन्छ। function बोलाउँदा
-कुन ढाँचा फर्किन्छ सधैं जाँच्नुहोस्।
+uhi "chaar sankhya" bhae pani `xyxy`, `xywh` ra YOLO label ma **arth ra kram farak** hunchha. function bolaunda
+kun dhancha pharkinchha sadhain jaanchnuhos.
 
-YOLO label **केन्द्र-शैली** मा हुन्छ र **तस्बिरको चौडाइ-उचाइले भाग गरेको 0–1 मान** (सामान्यीकृत) हुन्छ।
-पूरै तस्बिर एउटै अनुपातमा सानो-ठुलो गर्दा यी मान उही रहन्छन्। तर तस्बिरको भाग काट्दा (crop) वा अनुपात
-जोगाउन खाली ठाउँ थप्दा (letterbox) आधार बन्ने फ्रेम बदलिन्छ, त्यसैले त्यसै प्रयोग गर्न मिल्दैन। फ्रेम
-बदलियो भने नयाँ फ्रेमको चौडाइ-उचाइले फेरि गणना गर्नुहोस्।
+YOLO label **kendra-shaili** ma hunchha ra **tasbirko chaudai-uchaile bhaag gareko 0–1 maan** (samanyikrit) hunchha.
+purai tasbir eutai anupaat ma sano-thulo garda yi maan uhi rahanchhan. tar tasbirko bhaag katda (crop) wa anupaat
+jogaun khali thaun thapda (letterbox) adhar banne phrem badlinchha, tyasaile tyasai prayog garna mildaina. phrem
+badaliyo bhane nayan phremako chaudai-uchaile feri ganana garnuhos.
 
 <!-- ne-cell: aaf95ec6 | after-heading -->
-**निर्देशाङ्क परिवर्तन आफैं गणना गर्ने**
+**nirdeshangk paribartan aphain ganana garne**
 <!-- ne-pair: Do the conversion yourself -->
 
 <!-- ne-cell: aaf95ec6 -->
-पिक्सेल निर्देशाङ्क `(x1, y1, x2, y2)` बाट YOLO ढाँचामा बदल्न चार लाइन पुग्छ:
+piksel nirdeshangk `(x1, y1, x2, y2)` baat YOLO dhanchama badalna chaar line pugchha:
 
 ```text
-xc = (x1 + x2) / 2 / तस्बिरको चौडाइ
-yc = (y1 + y2) / 2 / तस्बिरको उचाइ
-w  = (x2 - x1)     / तस्बिरको चौडाइ
-h  = (y2 - y1)     / तस्बिरको उचाइ
+xc = (x1 + x2) / 2 / tasbirko chaudai
+yc = (y1 + y2) / 2 / tasbirko uchai
+w  = (x2 - x1)     / tasbirko chaudai
+h  = (y2 - y1)     / tasbirko uchai
 ```
 
-भाग गर्न बिर्से मान 1 भन्दा बढी हुन्छ। **0–1 दायराभित्र छ कि छैन सधैं जाँच्नुहोस्।**
+bhaag garna birse maan 1 bhanda badhi hunchha. **0–1 dayarabhitra chha ki chhaina sadhain jaanchnuhos.**
 
-यी चार लाइनले **मूल तस्बिरको पूरै चौडाइ र उचाइ** प्रयोग गर्छन्। काटेपछि (crop) वा letterbox को खाली
-ठाउँ थपेपछि नयाँ तस्बिरको चौडाइ-उचाइले फेरि गणना गर्नुहोस्। पुरानै मान प्रयोग गर्दा बक्स सर्छ।
+yi chaar linele **mul tasbirko purai chaudai ra uchai** prayog garchhan. katepachhi (crop) wa letterbox ko khali
+thaun thapepachhi nayan tasbirko chaudai-uchaile feri ganana garnuhos. puranai maan prayog garda baks sarchha.
 
 <!-- ne-cell: audit-teach_bbox_one_example | after-heading -->
-### कोड कसरी पढ्ने
+### kod kasari padhne
 
 <!-- ne-cell: audit-teach_bbox_one_example | after-image:../../assets/svg/teach_bbox_one_example.svg -->
-चित्र: class_id पूर्णाङ्क हो र सामान्यीकृत गरिँदैन। (गणना गरिएको संश्लेषित उदाहरण र योजनाबद्ध चित्र;
-model को वास्तविक नापिएको नतिजा होइन।)
+chitra: class_id purnank ho ra samanyikrit garindain. (ganana garieko sansleshit udaharan ra yojanabaddha chitra;
+model ko bastabik napieko natija hoina.)
 
-**ध्यान दिनुपर्ने कुरा**
+**dhyan dinuparne kura**
 
-class_id पूर्णाङ्क हो र सामान्यीकृत गरिँदैन। इनपुट र परिवर्तन भएको मान औंलाले पछ्याउनुहोस्।
+class_id purnank ho ra samanyikrit garindain. input ra paribartan bhaeko maan aunlale pachhyaunuhos.
 
-**सोच्नुहोस्**
+**sochnuhos**
 
-`x2` मात्र 24 px बढाउँदा केन्द्र र चौडाइ कसरी बदलिन्छ?
+`x2` matra 24 px badhaunda kendra ra chaudai kasari badlinchha?
 
 <!-- ne-cell: 06fb8c28 | after-heading -->
-### नतिजाको उदाहरण
+### natijako udaharan
 
 <!-- ne-cell: clarity-bbox-predict | after-heading -->
-#### उही आयत तीन ढाँचामा पढ्ने
+#### uhi ayat tin dhanchama padhne
 
 <!-- ne-cell: clarity-bbox-predict -->
-इनपुट 240×240 तस्बिरमा पहिले नै देखाइएको `(96,72,168,132)` हो। तलको सेलले तीन ढाँचाको तालिका देखाउँछ।
-अनुमान: दायाँ छेउ `x2` मात्र 24 px बढाउँदा चौडाइ र केन्द्र x कति px बढ्छ? y का मान बदलिन्छन्?
+input 240×240 tasbir ma pahile nai dekhaieko `(96,72,168,132)` ho. talako cellle tin dhanchako talika dekhaunchha.
+anuman: dayan chheu `x2` matra 24 px badhaunda chaudai ra kendra x kati px badhchha? y ka maan badalinchhan?
 
 <!-- ne-cell: clarity-bbox-interpret -->
-चौडाइ 72 बाट 96, केन्द्र x 132 बाट 144 हुन्छ। YOLO को xc र w मात्र बदलिन्छन्; yc र h उही रहन्छन्।
-24 को सट्टा 12 राखेर अनुमान गर्नुहोस् र बदलेको आयत मूल चित्रको आयतभन्दा किन फरक छ व्याख्या गर्नुहोस्।
+chaudai 72 baat 96, kendra x 132 baat 144 hunchha. YOLO ko xc ra w matra badalinchhan; yc ra h uhi rahanchhan.
+24 ko satta 12 rakher anuman garnuhos ra badaleko ayat mul chitrako ayatabhanda kina farak chha byakhya garnuhos.
 
 <!-- ne-cell: ea7a5e4f | after-heading -->
-## Part 2 class र विश्वास स्कोर
+## Part 2 class ra bishbas score
 
 <!-- ne-cell: 2b02787b | after-heading -->
-**class लेबल**
+**class label (barga ko naam)**
 <!-- ne-pair: Class label -->
 
 <!-- ne-cell: 2b02787b -->
-**class** भनेको "प्रकार" हो। YOLO ले पहिचान तालिम लिएका प्रकारमध्ये एउटामा राख्छ।
+**class** bhaneko "prakar" ho. YOLO le pahichan talim lieka prakaramadhye euta ma rakhchha.
 
-सामान्य पहिले नै तालिम भएको model (COCO डेटासेट) ले 80 प्रकार जान्दछ। जस्तै `person`, `car`, `bus`,
+samanya pahile nai talim bhaeko model (COCO dataset) le 80 prakar jandachha. jastai `person`, `car`, `bus`,
 `dog`, `bottle` …
 
-यसमा **`black_spot` (कालो थोप्लो) वा `scratch` (चिसो) छैनन्**। त्यसैले PVC को दोष भेट्न सक्दैन।
+yas ma **`black_spot` (kalo thoplo) wa `scratch` (chiso) chhainan**. tyasaile PVC ko dosh bhetna sakdain.
 
 <!-- ne-cell: 797f53b6 | after-heading -->
-**विश्वास स्कोर (confidence)**
+**bishbas score (confidence)**
 <!-- ne-pair: Confidence -->
 
 <!-- ne-cell: 797f53b6 -->
-**confidence** model ले प्रत्येक उम्मेदवारलाई दिएको **स्कोर** हो। यो 0–1 बीचको मान हुन्छ।
+**confidence** model le pratyek ummedabaralai dieko **score** ho. yo 0–1 bichako maan hunchha.
 
-| मान | कसरी पढ्ने |
+| maan | kasari padhne |
 |---|---|
-| 0.95 | स्कोर उच्च (model ले बलियो समर्थन गरेको) |
-| 0.50 | मध्यम स्कोर |
-| 0.10 | स्कोर न्यून |
+| 0.95 | score uchcha (model le baliyo samarthan gareko) |
+| 0.50 | madhyam score |
+| 0.10 | score nyoon |
 
-**यो स्कोर "सही हुने सम्भावना" होइन।** 0.8 लाई "80% सम्भावनाले सही" भनेर पढ्न मिल्दैन, 0.50 पनि
-"आधा-आधा सम्भावना" होइन। स्कोरले तालिम लिएको class को देखिने रूपसँग कति मिल्छ भन्ने कुरा model ले
-सङ्ख्यामा बदलेको हो। **स्कोर उच्च भए पनि सही हुन्छ भन्ने छैन, र कम भए पनि सही पहिचान हुन्छ।** सही छ कि
-छैन भन्ने कुरा सही लेबलसँग तोकिएको नियम (जस्तै IoU कुनै थ्रेसहोल्ड वा बढी) ले जाँचिन्छ।
+**yo score "sahi hune sambhabana" hoina.** 0.8 lai "80% sambhabanale sahi" bhanera padhna mildaina, 0.50 pani
+"adha-adha sambhabana" hoina. scorele talim lieko class ko dekhine rupasang kati milchha bhanne kura model le
+sankhya ma badaleko ho. **score uchcha bhae pani sahi hunchha bhanne chhaina, ra kam bhae pani sahi pahichan hunchha.** sahi chha ki
+chhaina bhanne kura sahi label sang tokieko niyam (jastai IoU kunai threshold wa badhi) le janchinchha.
 
 <!-- ne-cell: dd8128d0 | after-heading -->
-## Part 3 IoU (ओभरल्यापको मात्रा)
+## Part 3 IoU (obharalyapako matra)
 
 <!-- ne-cell: d097f138 | after-heading -->
-### प्रतिच्छेद, संयोग र IoU
+### pratichchhed, sanyog ra IoU
 
 <!-- ne-cell: d097f138 | after-image:../../assets/diagrams/teach_iou_rects.png -->
-चित्र: A (सही उत्तर) र B (अनुमान) का आयत साँच्चै मिलाएर प्रतिच्छेद (ओभरल्यापको क्षेत्रफल) र संयोग (दुई
-आयत मिलेर बन्ने क्षेत्र; ओभरल्याप एक पटक मात्र गनिन्छ) गणना गरिएको। यो चित्रमा 6,750 ÷ 15,150 ≒ 0.45 हो।
+chitra: A (sahi uttar) ra B (anuman) ka ayat sanchchai milaera pratichchhed (obharalyapako kshetraphal) ra sanyog (dui
+ayat miler banne kshetra; obharalyap ek patak matra ganinchha) ganana garieko. yo chitra ma 6,750 ÷ 15,150 ≒ 0.45 ho.
 
-**ध्यान दिनुपर्ने कुरा**
+**dhyan dinuparne kura**
 
-IoU ले "ओभरल्यापको मात्रा" एउटा सङ्ख्यामा बदल्छ। 0 नजिक हुँदा ओभरल्याप कम, 1 नजिक हुँदा ठ्याक्कै
-मिलेको। यो **क्षेत्रफलको अनुपात** हुनाले एकाइ हुँदैन। संयोग दुई क्षेत्रफल जोडेर मात्र पाइँदैन; ओभरल्याप
-दुई पटक नगन्न एक पटक मात्र गनिन्छ।
+IoU le "obharalyapako matra" euta sankhya ma badalchha. 0 najik hunda obharalyap kam, 1 najik hunda thyakkai
+mileko. yo **kshetraphalako anupaat** hunale ekai hundaina. sanyog dui kshetraphal joder matra paindain; obharalyap
+dui patak naganna ek patak matra ganinchha.
 
-**सोच्नुहोस्**
+**sochnuhos**
 
-- IoU 0.3 हुँदा प्रतिच्छेद "अनुमानको आयत" को 30% हो, "सही आयत" को 30% हो, कि अरू कुनै कुराको 30%?
+- IoU 0.3 hunda pratichchhed "anumanko ayat" ko 30% ho, "sahi ayat" ko 30% ho, ki aru kunai kurako 30%?
 
 <!-- ne-cell: 4dd6c2de | after-heading -->
-**IoU भनेको "दुई आयतको ओभरल्यापको मात्रा"**
+**IoU bhaneko "dui ayatako obharalyapako matra"**
 <!-- ne-pair: IoU measures how much two boxes overlap -->
 
 <!-- ne-cell: 4dd6c2de -->
-**IoU** ले अनुमान गरिएको बक्स र सही बक्स **कति ओभरल्याप छन्** भन्ने कुरा 0–1 मा देखाउँछ।
+**IoU** le anuman garieko baks ra sahi baks **kati obharalyap chhan** bhanne kura 0–1 ma dekhaunchha.
 
 ```text
-IoU = प्रतिच्छेदको क्षेत्रफल ÷ दुई आयत मिलेर बन्ने क्षेत्रफल (ओभरल्याप एक पटक मात्र)
+IoU = pratichchhedako kshetraphal ÷ dui ayat miler banne kshetraphal (obharalyap ek patak matra)
 ```
 
-"दुई आयत मिलेर बन्ने क्षेत्र" नै **संयोग** हो। दुई क्षेत्रफल त्यसै जोड्दा ओभरल्याप दुई पटक गनिन्छ,
-त्यसैले ओभरल्याप एक पटक मात्र गनिने गरी जोडघटाउ गरिन्छ।
+"dui ayat miler banne kshetra" nai **sanyog** ho. dui kshetraphal tyasai jodda obharalyap dui patak ganinchha,
+tyasaile obharalyap ek patak matra ganine gari jodaghatau garinchha.
 
-- `IoU = 1.0` … ठ्याक्कै मिल्यो
-- `IoU = 0.5` … ठिकै मिल्यो
-- `IoU = 0.0` … केही पनि ओभरल्याप छैन
+- `IoU = 1.0` … thyakkai milyo
+- `IoU = 0.5` … thikai milyo
+- `IoU = 0.0` … kehi pani obharalyap chhaina
 
-`IoU = 0.3` को अर्थ "प्रतिच्छेदको क्षेत्रफल **दुई आयत मिलेर बन्ने क्षेत्रको** 30%" हो। अनुमानको आयतको
-30% वा सही आयतको 30% होइन।
+`IoU = 0.3` ko arth "pratichchhedako kshetraphal **dui ayat miler banne kshetrako** 30%" ho. anumanko ayatako
+30% wa sahi ayatako 30% hoina.
 
-सामान्यतया `IoU >= 0.5` लाई "सही पहिचान" मानिन्छ। तर यो **चलन** हो, प्रयोगअनुसार फरक पर्छ।
+samanyataya `IoU >= 0.5` lai "sahi pahichan" maninchha. tar yo **chalan** ho, prayog anusar farak parchha.
 
 <!-- ne-cell: 7805f6a4 | after-heading -->
-### नतिजाको उदाहरण
+### natijako udaharan
 
 <!-- ne-cell: 5cde7a67 | after-heading -->
-**हातैले गणना गरेर जाँच्ने**
+**hataile ganana garera jaanchne**
 <!-- ne-pair: Verify by hand -->
 
 <!-- ne-cell: 5cde7a67 -->
-"अलि सरेको" अवस्था हातैले गणना गरौं।
+"ali sareko" abastha hataile ganana garaun.
 
-- सही: `(100,100)` देखि `(200,200)` → क्षेत्रफल **10,000**
-- अनुमान: `(110,110)` देखि `(210,210)` → क्षेत्रफल **10,000**
-- प्रतिच्छेद: `(110,110)` देखि `(200,200)` → 90 × 90 = **8,100**
-- संयोग: 10,000 + 10,000 − 8,100 = **11,900**
+- sahi: `(100,100)` dekhi `(200,200)` → kshetraphal **10,000**
+- anuman: `(110,110)` dekhi `(210,210)` → kshetraphal **10,000**
+- pratichchhed: `(110,110)` dekhi `(200,200)` → 90 × 90 = **8,100**
+- sanyog: 10,000 + 10,000 − 8,100 = **11,900**
 - IoU = 8,100 ÷ 11,900 ≒ **0.681**
 
 <!-- ne-cell: 27c2070a | after-heading -->
-**आयत सारेर प्रतिच्छेद, संयोग र IoU हेर्ने**
+**ayat sarer pratichchhed, sanyog ra IoU herne**
 <!-- ne-pair: Move a box and watch the intersection, the union and IoU -->
 
 <!-- ne-cell: 27c2070a -->
-`offset_x` र `offset_y` मात्र सारिन्छन्। सर्ने **अनुमानको आयत** हो।
+`offset_x` ra `offset_y` matra sarinchhan. sarne **anumanko ayat** ho.
 
-| अनुमान | के हेर्ने |
+| anuman | ke herne |
 |---|---|
-| सराइ 0 | IoU कति? |
-| सराइ बढाउने | प्रतिच्छेद र संयोग के हुन्छ? |
-| केही ओभरल्याप नहुने | IoU कति? |
+| sarai 0 | IoU kati? |
+| sarai badhaune | pratichchhed ra sanyog ke hunchha? |
+| kehi obharalyap nahune | IoU kati? |
 
-widget नभए पनि तलको parameter सेलले उही प्रयोग गर्न दिन्छ।
+widget nabhae pani talako parameter cellle uhi prayog garna dinchha.
 
 <!-- ne-cell: 5ae021d1 | after-heading -->
-## Part 4 पहिले नै तालिम भएको model र weight फाइल
+## Part 4 pahile nai talim bhaeko model ra weight file
 
 <!-- ne-cell: 112b5bfa | after-heading -->
-**"तालिम भइसकेको" model ल्याउने**
+**"talim bhaisakeko" model lyaune**
 <!-- ne-pair: Starting from something already trained -->
 
-सुरुदेखि तालिम गर्न धेरै तस्बिर र लामो गणना समय चाहिन्छ। कति चाहिन्छ भन्ने कुरा model, डेटा र कम्प्युटरअनुसार
-धेरै फरक पर्छ। त्यसैले **पहिले नै धेरै तस्बिरमा तालिम भएको model** प्रयोग गरिन्छ। यसलाई
-**पहिले नै तालिम भएको model (pretrained model)** भनिन्छ।
+suru dekhi talim garna dherai tasbir ra lamo ganana samay chahinchha. kati chahinchha bhanne kura model, data ra computer anusar
+dherai farak parchha. tyasaile **pahile nai dherai tasbir ma talim bhaeko model** prayog garinchha. yas lai
+**pahile nai talim bhaeko model (pretrained model)** bhaninchha.
 
-**weight फाइल** भनेको त्यो तालिमको नतिजा राखिएको फाइल हो।
+**weight file** bhaneko tyo talimko natija rakhieko file ho.
 
-| शब्द | अर्थ |
+| shabd | arth |
 |---|---|
-| pretrained model | अरू डेटामा पहिले नै तालिम भएको model |
-| weight | तालिमले तय गरेका सङ्ख्याहरूको समूह |
-| अनुमान (inference) | तालिम भएको model ले नयाँ तस्बिर जाँच्ने काम |
-| fine-tuning | pretrained model लाई आफ्नै डेटामा थप तालिम गर्ने |
+| pretrained model | aru data ma pahile nai talim bhaeko model |
+| weight | talimle tay gareka sankhyaharuko samuh |
+| anuman (inference) | talim bhaeko model le nayan tasbir jaanchne kaam |
+| fine-tuning | pretrained model lai aphnai data ma thap talim garne |
 
-दिन ४ मा गरिने काम **fine-tuning** हो। COCO मा सिकेको "वस्तुको आकार हेर्ने क्षमता" उधारो लिएर PVC को
-दोष सिकाइन्छ। यो तालिमको अभिलेखमा दिन ४ को fine-tuning (15 epoch, CPU) करिब 90 सेकेन्डमा सकियो
-(`training_results/day04/pvc_defect_quick/results.csv` को `time` स्तम्भ, अन्तिम लाइन 89.7 सेकेन्ड),
-किनभने यो तालिमको डेटासेट सानो छ। तस्बिर वा epoch बढाउँदा समय पनि बढ्छ।
+din 4 ma garine kaam **fine-tuning** ho. COCO ma sikeko "bastuko akar herne kshamata" udharo liera PVC ko
+dosh sikainchha. yo talimko abhilekhama din 4 ko fine-tuning (15 epoch, CPU) karib 90 sekendama sakiyo
+(`training_results/day04/pvc_defect_quick/results.csv` ko `time` stambha, antim line 89.7 sekend),
+kinabhane yo talimko dataset sano chha. tasbir wa epoch badhaunda samay pani badhchha.
 
 <!-- ne-cell: clarity-optional-weight-formats | after-heading -->
-#### वैकल्पिक: checkpoint र export
+#### baikalpik: checkpoint ra export
 
 <!-- ne-cell: clarity-optional-weight-formats -->
-पहिलो अनुमानपछि पढ्ने प्राविधिक थप जानकारी।
+pahilo anumanapachhi padhne prabidhik thap jankari.
 
-| फाइल | भित्र के हुन्छ |
+| file | bhitra ke hunchha |
 |---|---|
-| `.pt` (PyTorch) | **तालिमको checkpoint**: model को बनावट, तालिमले तय गरेका parameter र तालिमको अवस्था |
-| `.onnx` (ONNX) | **export गरिएको गणना ग्राफ र parameter**: तालिमको अवस्था होइन, अर्को वातावरणमा चलाउन बनाइएको ढाँचा |
+| `.pt` (PyTorch) | **talimko checkpoint**: model ko banabat, talimle tay gareka parameter ra talimko abastha |
+| `.onnx` (ONNX) | **export garieko ganana graph ra parameter**: talimko abastha hoina, arko batabaran ma chalaun banaiyeko dhancha |
 
-`.pt` लाई `.onnx` मा export गर्दा तालिमको अभिलेख (epoch सङ्ख्या, optimizer को अवस्था) सर्दैन।
-"तालिम जारी राख्न मिल्ने फाइल" र "अर्को वातावरणमा चलाउने फाइल" फरक कुरा हुन्।
+`.pt` lai `.onnx` ma export garda talimko abhilekh (epoch sankhya, optimizer ko abastha) sardain.
+"talim jari rakhna milne file" ra "arko batabaran ma chalaune file" farak kura hun.
 
 <!-- ne-cell: c82b89d9 | after-heading -->
-#### COCO model र PVC दोष class
+#### COCO model ra PVC dosh class
 
 <!-- ne-cell: c82b89d9 -->
-COCO pretrained model सँग यो सामग्रीका `black_spot` / `scratch` / `streak` दोष class छैनन्। त्यसैले
-चाहेको दोषको नाम विश्वासका साथ राख्न सकिँदैन। केही नदेखाउने भन्ने पनि छैन; सम्बन्ध नभएको class फर्काउन
-सक्छ। पहिचान शून्य हुनु पनि "PVC सामान्य छ" भन्ने प्रमाण होइन। दिन ४ मा यही तालिमका लेबलले model तालिम गरिन्छ।
+COCO pretrained model sang yo samagrika `black_spot` / `scratch` / `streak` dosh class chhainan. tyasaile
+chaheko doshko naam bishbasaka sath rakhna sakindaina. kehi nadekhaune bhanne pani chhaina; sambandh nabhaeko class pharkaun
+sakchha. pahichan shunya hunu pani "PVC samanya chha" bhanne praman hoina. din 4 ma yahi talimka labelle model talim garinchha.
 
 <!-- ne-cell: 0b071006 | after-heading -->
-## अभ्यास
+## abhyas
 
 <!-- ne-cell: 00ad41f6 | after-heading -->
-**अभ्यास 1 (आधारभूत): YOLO ढाँचामा बदल्ने**
+**abhyas 1 (adharabhut): YOLO dhanchama badalne**
 <!-- ne-pair: Exercise 1 (basic): convert to YOLO format -->
 
 <!-- ne-cell: 00ad41f6 -->
-तस्बिरको आकार 640 × 480 र बक्स `x1=320, y1=200, x2=400, y2=260` हुँदा YOLO ढाँचाका चार मान गणना गर्नुहोस्।
+tasbirko akar 640 × 480 ra baks `x1=320, y1=200, x2=400, y2=260` hunda YOLO dhanchaka chaar maan ganana garnuhos.
 
-पूरा भएको मापन: चारै मान 0–1 दायराभित्र छन् र 6 दशमलवसम्म देखाइएका छन्।
+pura bhaeko maapan: charai maan 0–1 dayarabhitra chhan ra 6 dashamalabasamm dekhaieka chhan.
 
 <!-- ne-cell: cc2d6cd5 | after-heading -->
-**अभ्यास 2 (मध्यम): IoU हातैले गणना गरेर जाँच्ने**
+**abhyas 2 (madhyam): IoU hataile ganana garera jaanchne**
 <!-- ne-pair: Exercise 2 (intermediate): a hand calculation of IoU -->
 
 <!-- ne-cell: cc2d6cd5 -->
-सही `(50, 50, 150, 150)` र अनुमान `(100, 50, 200, 150)` को IoU **कागजमा** गणना गरेपछि तलको सेलले जाँच्नुहोस्।
-प्रतिच्छेदको क्षेत्रफल दुई आयत मिलेर बन्ने क्षेत्रको कति अंश हो, सोच्नुहोस्।
+sahi `(50, 50, 150, 150)` ra anuman `(100, 50, 200, 150)` ko IoU **kagajama** ganana garepachhi talako cellle jaanchnuhos.
+pratichchhedako kshetraphal dui ayat miler banne kshetrako kati ansh ho, sochnuhos.
 
-पूरा भएको मापन: कागजको मान र `iou(...)` को मान मिल्नुपर्छ (0.333)।
+pura bhaeko maapan: kagajako maan ra `iou(...)` ko maan milnuparchha (0.333).
 
 <!-- ne-cell: 50f63c6d | after-heading -->
-**अभ्यास 3 (वैकल्पिक): दिन ४ मा के सिकाउनुपर्छ भनेर योजना बनाउने**
+**abhyas 3 (baikalpik): din 4 ma ke sikaunuparchha bhanera yojana banaune**
 <!-- ne-pair: Exercise 3 (optional challenge): plan what Day 4 must teach the model -->
 
 <!-- ne-cell: 50f63c6d -->
-pretrained model ले PVC को दोष किन भेट्न सक्दैन भन्ने चार कारणका आधारमा दिन ४ मा के तयार गर्नुपर्छ भनेर
-व्यवस्थित गर्नुहोस्।
+pretrained model le PVC ko dosh kina bhetna sakdain bhanne chaar karanka adharama din 4 ma ke tayar garnuparchha bhanera
+byabasthit garnuhos.
 
-| विषय | तपाईंको उत्तर |
+| bishay | tapainko uttar |
 |---|---|
-| class को नाम | |
-| प्रति तस्बिर दोषको सङ्ख्या (अनुमान) | |
-| चाहिने तस्बिर सङ्ख्या (प्रशिक्षणका लागि) | |
-| सही लेबलको ढाँचा | |
+| class ko naam | |
+| prati tasbir doshko sankhya (anuman) | |
+| chahine tasbir sankhya (prashikshanka lagi) | |
+| sahi labelko dhancha | |
 
-पूरा भएको मापन: तालिका भरिएको छ र लेबल ढाँचाको महलमा YOLO को केन्द्र ढाँचा
-(`class_id x_center y_center width height`) लेखिएको छ।
+pura bhaeko maapan: talika bharieko chha ra label dhanchako mahalama YOLO ko kendra dhancha
+(`class_id x_center y_center width height`) lekhieko chha.
 
 <!-- ne-cell: 69ca863c | after-heading -->
-#### बुझाइ जाँच्ने प्रश्न
+#### bujhai jaanchne prashna
 
 <!-- ne-cell: 69ca863c -->
-1. YOLO को नतिजामा के-के हुन्छ? तीन कुरा भन्नुहोस्।
-2. confidence 0.9 भएको पहिचान सधैं सही हुन्छ? कारण पनि लेख्नुहोस्।
-3. IoU 0.3 हुँदा प्रतिच्छेद "कसको" 30% हो?
-4. pretrained model ले PVC को दोष किन भेट्न सक्दैन, दुई कारण भन्नुहोस्।
-5. "अनुमान" र "प्रशिक्षण" बीचको फरक समयको दृष्टिले बताउनुहोस्।
+1. YOLO ko natija ma ke-ke hunchha? tin kura bhannuhos.
+2. confidence 0.9 bhaeko pahichan sadhain sahi hunchha? karan pani lekhnuhos.
+3. IoU 0.3 hunda pratichchhed "kasako" 30% ho?
+4. pretrained model le PVC ko dosh kina bhetna sakdain, dui karan bhannuhos.
+5. "anuman" ra "prashikshan" bichako farak samayko drishtile bataunuhos.
 
 <!-- ne-cell: 67d928a3 | after-heading -->
-## समस्या परेमा
+## samasya parema
 
 <!-- ne-cell: 67d928a3 -->
-त्रुटि आएपछि पहिले "कुन सेलमा", "कुन लाइनमा", "के सन्देश आयो" भनेर लेख्नुहोस्। बुझाउनुपर्ने काममा पनि
-त्यही अभिलेख राख्नुहोस्।
+truti aepachhi pahile "kun cell ma", "kun line ma", "ke sandesh ayo" bhanera lekhnuhos. bujhaunuparne kaam ma pani
+tyahi abhilekh rakhnuhos.
 
-| लक्षण | के गर्ने |
+| lakshan | ke garne |
 | --- | --- |
-| YOLO ढाँचाको मान 1 भन्दा बढी हुन्छ | तस्बिरको चौडाइ-उचाइले भाग गर्न बिर्सिएको छ। `/ image_width` जाँच्नुहोस्। |
-| IoU ऋणात्मक आउँछ | ओभरल्याप नभए 0 हुनुपर्छ। `max(0.0, ...)` लेख्न बिर्सिएको छ कि जाँच्नुहोस्। |
-| `confidence` र सम्भावना मिसाउँछु | confidence model ले दिएको स्कोर हो, सही हुने सम्भावना होइन। सही छ कि छैन सही लेबलसँग तुलना गरेर जाँच्नुहोस्। |
-| सङ्ख्या नोटको उदाहरणभन्दा अलि फरक आउँछ | प्रायः राउन्ड गरेको दशमलव सङ्ख्या फरक हुन्छ। `round()` मा लेखिएको अङ्क जाँच्नुहोस्। |
+| YOLO dhanchako maan 1 bhanda badhi hunchha | tasbirko chaudai-uchaile bhaag garna birsieko chha. `/ image_width` jaanchnuhos. |
+| IoU rinatmak aaunchha | obharalyap nabhae 0 hunuparchha. `max(0.0, ...)` lekhna birsieko chha ki jaanchnuhos. |
+| `confidence` ra sambhabana misaunchhu | confidence model le dieko score ho, sahi hune sambhabana hoina. sahi chha ki chhaina sahi label sang tulna garera jaanchnuhos. |
+| sankhya notako udaharanabhanda ali farak aaunchha | prayah raund gareko dashamalab sankhya farak hunchha. `round()` ma lekhieko angk jaanchnuhos. |
 
 <!-- ne-cell: 60e5ea71 | after-heading -->
-## सम्पन्नता जाँचसूची
+## sampannata janchasuchi
 
 <!-- ne-cell: 60e5ea71 -->
-**अनिवार्य** भनेको तलको "अनिवार्य" सूची मात्र हो। **अभ्यास 3 र थप चुनौती वैकल्पिक** हुन्; नगरे पनि पूरा
-मानिन्छ। समय बाँकी भएमा मात्र गर्नुहोस्।
+**aniwarya** bhaneko talako "aniwarya" soochi matra ho. **abhyas 3 ra thap chunauti baikalpik** hun; nagare pani pura
+maninchha. samay banki bhae ma matra garnuhos.
 
-**अनिवार्य**
+**aniwarya**
 
-- [ ] Part 1–Part 4 पढेर सबै code सेल चलाएँ
-- [ ] YOLO ढाँचाको निर्देशाङ्क आफैं गणना गरें
-- [ ] IoU हातैले गणना गरेर कोडसँग मिलाएँ
-- [ ] अभ्यास 1 र 2 (अनिवार्य) गरें
-- [ ] बुझाइ जाँच्ने 5 प्रश्नको उत्तर दिएँ
-- [ ] नोटबुक सुरक्षित गरें
+- [ ] Part 1–Part 4 padher sabai code cell chalaen
+- [ ] YOLO dhanchako nirdeshangk aphain ganana garen
+- [ ] IoU hataile ganana garera kodasang milaen
+- [ ] abhyas 1 ra 2 (aniwarya) garen
+- [ ] bujhai jaanchne 5 prashnako uttar dien
+- [ ] notebook surakshit garen
 
-**वैकल्पिक**
+**baikalpik**
 
-- [ ] अभ्यास 3 (वैकल्पिक): दिन ४ का तयारीका बुँदा व्यवस्थित गरें
-- [ ] थप चुनौती: COCO का 80 class मध्ये उत्पादन निरीक्षणमा काम लाग्ने कुनै छ कि हेरें
+- [ ] abhyas 3 (baikalpik): din 4 ka tayarika bunda byabasthit garen
+- [ ] thap chunauti: COCO ka 80 class madhye utpadan nirikshan ma kaam lagne kunai chha ki heren
 
 <!-- ne-cell: f9c29d7d | after-heading -->
-## थप अध्ययन (वैकल्पिक)
+## thap adhyayan (baikalpik)
 
 <!-- ne-cell: f9c29d7d -->
-### सन्दर्भ लिङ्क
+### sandarbha lingk
 
-- [Ultralytics कागजात](https://docs.ultralytics.com/)
-- [Ultralytics: वस्तु पहिचान कार्य](https://docs.ultralytics.com/tasks/detect/)
-- [COCO डेटासेटका class को सूची](https://cocodataset.org/#explore)
+- [Ultralytics kagajat](https://docs.ultralytics.com/)
+- [Ultralytics: bastu pahichan kary](https://docs.ultralytics.com/tasks/detect/)
+- [COCO datasetka class ko soochi](https://cocodataset.org/#explore)
 
-### थप चुनौती (अनिवार्य होइन)
+### thap chunauti (aniwarya hoina)
 
-COCO का 80 class को सूची हेरेर उत्पादन निरीक्षणमा काम लाग्ने class छ कि छैन खोज्नुहोस्।
+COCO ka 80 class ko soochi herer utpadan nirikshan ma kaam lagne class chha ki chhaina khojnuhos.

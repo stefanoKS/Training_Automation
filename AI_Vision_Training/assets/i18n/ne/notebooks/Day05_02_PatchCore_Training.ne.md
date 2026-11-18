@@ -15,7 +15,7 @@ notebooks/Day05_PatchCore/Day05_02_PatchCore_Training.ipynb
 | 1. Anomalib ko API prayog garera PatchCore suru garna sakne. |
 | 2. asamanyata pahichanko data banabat bataun sakne. |
 | 3. samanya tasbir matra prayog garera fit garna sakne. |
-| 4. score ra heatmap nikaln sakne. |
+| 4. score ra heatmap nikalna sakne. |
 | 5. natija surakshit garera thresaholdabare sochn sakne. |
 
 ## yo notebookko adharabhut jankari
@@ -101,7 +101,7 @@ yo talim ma **Anomalib 2.7.0** ma janchieko chha. prayog hune tin class matra hu
 <!-- ne-pair: Only normal images are used for training -->
 
 <!-- ne-cell: bc41a079 -->
-prayog hune folder banabat yasto chha: `assets/anomaly_dataset/pvc_sheet/` bhitr `train/good/` (talim,
+prayog hune folder banabat yasto chha: `assets/anomaly_dataset/pvc_sheet/` bhitra `train/good/` (talim,
 samanya matra), `test/good/` (mulyankan, samanya), `test/black_spot/`, `test/scratch/`,
 `test/streak/`, `test/irregular_mark/` (mulyankan, asamanya), ra
 `ground_truth/<prakar>/xxx_mask.png` (sahi mask, mulyankanka lagi).
@@ -138,10 +138,10 @@ yahan **abashy jaanchnuhos**. `train` ma asamanya tasbir misiyo bhane tyo asaman
 baner memory bank ma parchha. phalasbarup **ustai dekhine asamanyatako score ghatchha ra chhutne badhchha**.
 
 tar "misiepachhi tyo dosh kahilyai bhetindain" bhanera tunggo lagdain. coreset kasari chhaniyo, featureko chhimek,
-sthan ra baraparako dekhine rup, ra thresholdle natija badalchha. **bhann sakine kura "chhutne jokhim badhchha" samm**
+sthan ra baraparako dekhine rup, ra thresholdle natija badalchha. **bhanna sakine kura "chhutne jokhim badhchha" samm**
 ho.
 
-sabaibhanda bharapardo upay: **misieko tasbir hataer memory bank feri banaune, ra chhutyaer rakhieka
+sabaibhanda bharapardo upay: **misieko tasbir hataera memory bank feri banaune, ra chhutyaera rakhieka
 calibration ra mulyankan tasbir ma jaanchne**.
 
 <!-- ne-cell: 9e971153 | after-heading -->
@@ -270,15 +270,15 @@ parikshan datako maapan threshold sthir garepachhi din 5 notebook 03 ma ek patak
 |---|---|
 | `image_AUROC` | tasbir-star ma OK/NG chhutyaune kshamata (1.0 sarbottam) |
 | `image_F1Score` | tasbir-starko precision ra recall ko santulit ausat |
-| `pixel_AUROC` | piksel-star ma asamanya kshetr bhetne kshamata |
+| `pixel_AUROC` | piksel-star ma asamanya kshetra bhetne kshamata |
 | `pixel_F1Score` | piksel-starko santulit ausat |
 
 **AUROC** le "threshold natoki samanya ra asamanya lai kati ramro kram ma rakhna sakiyo" dekhaunchha. 0.5
-aniyamit, 1.0 purn kram. tar **AUROC 1.0 bhae "junasukai threshold ma purn" bhanne hoina**; **yo
-calibration data ma kram purn thiyo** bhanne matra ho. bastabik nirnaya chhanieko euta thresholdle garchha,
+aniyamit, 1.0 purna kram. tar **AUROC 1.0 bhae "junasukai threshold ma purna" bhanne hoina**; **yo
+calibration data ma kram purna thiyo** bhanne matra ho. bastabik nirnaya chhanieko euta thresholdle garchha,
 tyasaile **chhutne ra jhuto alarmko sankhya chhuttai ganinchha**.
 
-calibration data ma samanya 6 ra asamanya 20 tasbir chhan. **yo sankhyale napn sakne shuddhatako sima chha.**
+calibration data ma samanya 6 ra asamanya 20 tasbir chhan. **yo sankhyale napna sakne shuddhatako sima chha.**
 
 yahan `engine.test()` pustakalayako method naam ho. diieko `datamodule.val_dataloader()` le kun tasbir
 mulyankan hune tay garne hunale yo CALIBRATION ho, prayog nabhaeko antim TEST mulyankan hoina.
@@ -287,7 +287,7 @@ mulyankan hune tay garne hunale yo CALIBRATION ho, prayog nabhaeko antim TEST mu
 ### natijako udaharan
 
 <!-- ne-cell: ba5da1ef -->
-yo natija yo talim ma surakshit garieko abhilekh ho (model, data bandaphant ra seed lekhama chha). sukshm sankhya
+yo natija yo talim ma surakshit garieko abhilekh ho (model, data bandaphant ra seed lekhama chha). sukshma sankhya
 batabaran anusar farak parchha; prabritti ra thulo-sanoko sambandh padhnuhos. yi **calibration** ka sankhya hun
 (ResNet-18, `image_size=256`, seed 2026); parikshanka sankhya notebook 03 ma matra aunchhan.
 
@@ -309,11 +309,11 @@ yo talimko sankhya lai **utpadanako nirikshan shuddhata bhanera uddhrit garnu hu
 ## Part 5 score ra heatmap
 
 <!-- ne-cell: 8cfeab62 | after-heading -->
-### mul tasbir, score naksa ra milaer dekhaieko chitra
+### mul tasbir, score naksa ra milaera dekhaieko chitra
 
 <!-- ne-cell: 8cfeab62 | after-image:../../assets/diagrams/teach_score_map_overlay.png -->
 chitra: **byakhyaka lagi banaiyeko sansleshit yojanabaddha chitra** (halka dandajasto akar) ho. yo bastabik
-PatchCore ko natija hoina. milaer rakhne tarika dekhauna uhi tasbir lai uhi rang-maapan (0.0–0.4) ma tin
+PatchCore ko natija hoina. milaera rakhne tarika dekhauna uhi tasbir lai uhi rang-maapan (0.0–0.4) ma tin
 rupama rakhieko chha.
 
 **dhyan dinuparne kura**
@@ -343,7 +343,7 @@ prayog bhaeko chhaina. anuman: khelaunako pas/phel kun linele tay garchha?
 | clip((4.8 − 4) / 8 + 0.5, 0, 1) = 0.600 | manieko tasbir threshold 0.50 sang tulna: NG |
 
 5×5 duri grid ma sabai 1, kendrama 6 ra mathi-tal-bayan-dayan 2 chhan. kinara dohoryaer 3×3 ausat ganana
-garinchha. weight 0.8, kendr 4, dayara 8 ra threshold 0.50 byakhyaka lagi chhanieka maan hun, calibrationle
+garinchha. weight 0.8, kendra 4, dayara 8 ra threshold 0.50 byakhyaka lagi chhanieka maan hun, calibrationle
 nikaleka tathyangk hoinan. yo bastabik PatchCore gananako punarutpadan hoina, farak sankhyaka bhoomikako
 byakhya matra ho. 0.600 sambhabana hoina. kachcha maan lai 0.50 sang tulna garnu hundaina. dekhaine vmax matra
 badalda nirnaya badlinchha?
@@ -352,7 +352,7 @@ badalda nirnaya badlinchha?
 ### sansleshit khelaunako sangkhyatmak naksa
 
 <!-- ne-cell: fig-ref_anomaly_panels | after-image:../../assets/reference_outputs/teach_numeric_map_toy.png -->
-chitra: khelaunako input, 3×3 ausat naksa ra uhi maanko milaer dekhaieko chitra. yo
+chitra: khelaunako input, 3×3 ausat naksa ra uhi maanko milaera dekhaieko chitra. yo
 `generate_reference_outputs.toy_numeric_map` ko sthir array baat ganana garinchha. bastabik calibration/TEST
 data wa anumanko natija hoina.
 
@@ -395,12 +395,12 @@ pharkaunchha**, jun 0–1 ma simit hundaina. "sadhain 0–1 mai pharkinchha" bha
 threshold **chhuttachhuttai** tay hunchhan.
 
 yo threshold **sansleshit dataka lagi** ho. bastabik sanchalanama **ramro bhanera thaha bhaeka saman matra
-chalaer score ko bitaran napne ra threshold feri tay garne** aawashyak hunchha. tar **samanya saman matra bhae
-"chhutne (recall)" napn sakindaina**; samanya samanale napine kura **jhuto alarm (samanya samanalai NG bhanne
-dar)** samm ho. chhutne pani napn **asamanya label bhaeko calibration data** chahinchha (din 5 notebook 03
+chalaera score ko bitaran napne ra threshold feri tay garne** aawashyak hunchha. tar **samanya saman matra bhae
+"chhutne (recall)" napna sakindaina**; samanya samanale napine kura **jhuto alarm (samanya samanalai NG bhanne
+dar)** samm ho. chhutne pani napna **asamanya label bhaeko calibration data** chahinchha (din 5 notebook 03
 le tyahi garchha).
 
-> **baikalpik biwaran: score samanyikaranako sutr (anomalib 2.7.0)**
+> **baikalpik biwaran: score samanyikaranako sutra (anomalib 2.7.0)**
 > tasbir score ra piksel naksa chhuttachhuttai tathyangkale
 > `clip((raw - threshold) / (max - min) + 0.5, 0, 1)` ma badalinchhan. `min`, `max` ra `threshold`
 > **calibration (validation) bhaag** baat nikalieka hun. `max - min = 0` hunda threshold sang tulna
@@ -414,7 +414,7 @@ le tyahi garchha).
 <!-- ne-cell: 748dffdf -->
 din 5 notebook 03 ma YOLO ko natijasangai dekhauna heatmap lai tasbir fileko rupama surakshit garinchha.
 
-- **milaer dekhaieko tasbir (`heatmaps/`)** **calibration data** baat banchha. threshold sthir garnuaghi
+- **milaera dekhaieko tasbir (`heatmaps/`)** **calibration data** baat banchha. threshold sthir garnuaghi
   ankhale herna milne calibration matra ho.
 - **sangkhyatmak naksa (`maps/*.npz`)** calibration tasbirka lagi matra, pachhi samagrika chitra feri banaun
   sakine gari surakshit garinchha. mulyankan (test) tasbirka sangkhyatmak naksa sthir garepachhi antim
@@ -434,7 +434,7 @@ kinarako rangama katinchhan (clipping). **rang-pattibat sankhya jaanchnuhos**.
 - **OK tasbir ma** pani asaman bhaag ali chamkilo dekhin sakchha.
 
 tyasaile **chamkilo bindu chha ki chhaina bhanera nirnaya nagarnuhos**. nirnaya tasbir score ra thresholdle garchha;
-heatmap "kahan heriraheko chha" jaanchna prayog hunchha. OK tasbir ma chamkilo kshetr dekhiyo bhane tyo
+heatmap "kahan heriraheko chha" jaanchna prayog hunchha. OK tasbir ma chamkilo kshetra dekhiyo bhane tyo
 **"samanya bhinnatalai asamanya thanieko"** huna sakchha; tyo bhinnata talim data ma thapnuparchha.
 
 <!-- ne-cell: d5e2bc6d | after-heading -->
@@ -444,11 +444,36 @@ heatmap "kahan heriraheko chha" jaanchna prayog hunchha. OK tasbir ma chamkilo k
 **Part 5: sthir garepachhi sealed testko mulyankan**
 
 <!-- ne-cell: clarity-sealed-test -->
-**yo kram palna garnuhos.** din 5 notebook 02 (yo notebook) ma calibration matra mulyankan garincha.
-din 5 notebook 03 ma threshold ra model sthir garincha, ra **tyaspachhi matra yo notebookko antim cell ek
-patak** chalaunuhos. test data mulyankan hune tyahi ek patak matra ho. sthir abhilekh
-(`comparison_freeze_record.json`) chhaina, wa yo notebookko model ra bhaag sang milena bhane cell
-**chalna rokinchha**.
+**chalne kram chaar charan ko ho.** test data mulyankan hune tyahi charan 3 ma ek patak matra ho.
+
+| charan | notebook | garnuparne kaam |
+|---|---|---|
+| 1 | `Day05_02_PatchCore_Training.ipynb` (yo notebook) | PatchCore fit garnuhos, **calibration matra** mulyankan garnuhos, ra tyo anuman surakshit garnuhos. test ahile nasaadhhnuhos. |
+| 2 | `Day05_03_YOLO_vs_PatchCore.ipynb` | calibration ma tulna garnuhos, YOLO ra PatchCore ko threshold chhannuhos, ra sthir gareko ghoshana abhilekh garnuhos. |
+| 3 | `Day05_02_PatchCore_Training.ipynb` (yo notebook) | **`clarity-sealed-test-scoring` cell matra** chalaunuhos. yo cell le sthir abhilekh jaanchera matra test ek patak mulyankan garchha. |
+| 4 | `Day05_03_YOLO_vs_PatchCore.ipynb` | sealed test anuman padhnuhos, tyasko parichay jaanchnuhos, ra antim tulna pura garnuhos. |
+
+```text
+Day05_02  fit → calibration mulyankan → surakshit   (charan 1)
+      ↓
+Day05_03  calibration ma tulna → threshold → sthir  (charan 2)
+      ↓
+Day05_02  clarity-sealed-test-scoring matra chalaune (charan 3)
+      ↓
+Day05_03  sealed padhne → parichay jaanchne → antim tulna (charan 4)
+```
+
+| abastha | ke hunchha | ke garnu |
+|---|---|---|
+| sthir garnuaghi test mulyankan garyo bhane | threshold test ko natijama milauna sakinchha, ra "nahereko data ko natija" rahndaina. tyasaile talako cell sthir abhilekh nabhae **chalna rokinchha**. | charan 1 ma pharkera `Day05_03` ma sthir pura garnuhos, ani charan 3 chalaunuhos. |
+| "sabai chalaunuhos / Run All" bichma rokiyo | janajan rokieko ho. charan 2 ma sthir nagare samma test mulyankan garna mildaina. | rokieko karan padhera mathiko chaar charan ek-ek garnuhos. |
+| `comparison_freeze_record.json` chhaina | sthir gareko ghoshana ahile abhilekh bhaeko chhaina. | `Day05_03_YOLO_vs_PatchCore.ipynb` ko `clarity-freeze-record` cell chalaunuhos. |
+| kernel feri suru gariyo | talim gareko model haraeko chha, tyasaile mulyankan garna mildaina. | mulyankan garnuaghi kernel feri suru nagarnuhos. suru gareko bhane `Day05_02` ko Part 3 ko fit cell baat kramaisang feri chalaunuhos. |
+
+**sthir abhilekh (`submissions/day05/comparison_freeze_record.json`) bhaneko** test hernuaghi "yo setting le
+mulyankan garne" bhanera tay gareko praman ho. tyasma model, purb-prashodhan, threshold ra experiment ko
+fingerprint hunchha. test mulyankan garepachhi yo abhilekh badalda natijako artha badlinchha, tyasaile
+nabadalnuhos.
 
 <!-- ne-cell: 09b10a38 | after-heading -->
 **abhyas 1 (adharabhut): maapan abhilekh garne**
@@ -479,7 +504,7 @@ tulna gari abhilekh garnu" ho.
 
 <!-- ne-cell: 1fd52dc9 -->
 `assets/scripts/pvc_synth.py` prayog garera **ujyaloko asamanata badhaieka samanya tasbir** 10 bata thap
-banaer `train/good/` ma rakhnuhos. tyaspachhi feri fit garera **calibration data (uhi sthir set) ma
+banaera `train/good/` ma rakhnuhos. tyaspachhi feri fit garera **calibration data (uhi sthir set) ma
 samanya score ko adhikatam maan** ghatyo ki jaanchnuhos.
 
 <!-- ne-cell: c81c8cac | after-heading -->
@@ -503,7 +528,7 @@ truti aepachhi pahile "kun cell ma", "kun line ma", "ke sandesh ayo" bhanera lek
 | `ModuleNotFoundError: No module named 'anomalib'` | kernel galat chha. `Kernel` → `Change Kernel` → `Python 3 (AI Vision Anomalib)` chhannuhos. |
 | `AttributeError: 'Folder' object has no attribute 'val_data'` | `val_split_mode="none"` rakhda aaunchha. `from_test` wa `from_train` toknuhos. |
 | `MisMatchError` aaunchha | asamanya tasbir ra maskako jodi milen. `ground_truth/<prakar>/` ka file naam jaanchnuhos. |
-| backbone daunalod asaphal | kakshaaghi `preload_models.py --profile anomalib` le lier janchinchha. kami bhae prashikshakasang sodhnuhos. |
+| backbone daunalod asaphal | kakshaaghi `preload_models.py --profile anomalib` le liera janchinchha. kami bhae prashikshakasang sodhnuhos. |
 | talim anautho rupama dhilo | `wide_resnet50_2` CPU ma dherai dhilo hunchha. `resnet18` prayog garnuhos. |
 | memory apug hunchha | `train_batch_size` ra `eval_batch_size` 4 banaunuhos. |
 

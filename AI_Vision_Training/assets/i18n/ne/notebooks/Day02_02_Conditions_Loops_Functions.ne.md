@@ -1,617 +1,617 @@
 <!--
-नेपाली अनुवाद / Nepali translation source for
+Nepali anuwad / Nepali translation source for
 notebooks/Day02_Python_OpenCV/Day02_02_Conditions_Loops_Functions.ipynb
 -->
-# दिन २ नोटबुक ०२ — नेपाली अनुवाद
+# din 2 notebook 02 — Nepali anuwad
 
 <!-- ne-cell: 7f7e8a41 | after-heading -->
-# दिन २ नोटबुक ०२: सर्त, दोहोरिने काम र function
+# din 2 notebook 02: sart, dohorine kaam ra function
 
 <!-- ne-cell: 7f7e8a41 -->
-## सिकाइ लक्ष्यहरू
+## sikai lakshyaharu
 
-| नेपाली |
+| Nepali |
 | --- |
-| 1. `if` / `elif` / `else` ले सर्त अनुसार फरक काम गर्न सक्ने। |
-| 2. `for` लूपले धेरै मानमा एउटै काम गर्न सक्ने। |
-| 3. सूची (list) बनाएर तत्त्व निकाल्न सक्ने। |
-| 4. parameter र return मान भएको function लेख्न सक्ने। |
-| 5. अपवाद (exception) समातेर गलत इनपुट सँभाल्न सक्ने। |
+| 1. `if` / `elif` / `else` le sart anusar farak kaam garna sakne. |
+| 2. `for` lupale dherai maan ma eutai kaam garna sakne. |
+| 3. soochi (list) banaera tattb nikalna sakne. |
+| 4. parameter ra return maan bhaeko function lekhna sakne. |
+| 5. apabad (exception) samater galat input sanbhalna sakne. |
 
-## यो नोटबुकको आधारभूत जानकारी
+## yo notebookko adharabhut jankari
 
-| विषय | विवरण |
+| bishay | biwaran |
 | --- | --- |
-| सिकाइ समय (अनुमान) | 115 मिनेट |
-| कठिनाइ | सुरुवाती तह |
-| पूर्वशर्त | दिन २ नोटबुक ०१ सकिएको हुनुपर्छ। |
-| आवश्यक लाइब्रेरी | numpy, matplotlib, pillow |
-| प्रयोग हुने kernel | aivision |
-| आजको समयतालिका | [`COURSE_SYLLABUS.md` दिन २](../../COURSE_SYLLABUS.md#day2) |
+| sikai samay (anuman) | 115 minet |
+| kathinai | surubati tah |
+| poorwashart | din 2 notebook 01 sakieko hunuparchha. |
+| aawashyak laibreri | numpy, matplotlib, pillow |
+| prayog hune kernel | aivision |
+| ajako samayatalika | [`COURSE_SYLLABUS.md` din 2](../../COURSE_SYLLABUS.md#day2) |
 
-### बुझाउनुपर्ने काम
+### bujhaunuparne kaam
 
-| नेपाली |
+| Nepali |
 | --- |
-| नापिएको मान जाँच्ने कार्यक्रम (धेरै नाप सँभाल्ने) |
-| इनपुट जाँच भएको function |
+| napieko maan jaanchne karyakram (dherai nap sanbhalne) |
+| input jaanch bhaeko function |
 
 <!-- ne-cell: c09bb5e1 | after-heading -->
-## यो नोटबुक कहाँ पर्छ
+## yo notebook kahan parchha
 
 <!-- ne-cell: c09bb5e1 -->
-| विषय | विवरण |
+| bishay | biwaran |
 | --- | --- |
-| दिन | दिन २ |
-| आजको क्रम | आजको नोटबुकमध्ये 2 / 3 |
-| लाग्ने समय | 115 मिनेट |
-| पूर्वशर्त | `Day02_01_Python_Basics.ipynb` |
-| आजको समयतालिका | [`COURSE_SYLLABUS.md` दिन २](../../COURSE_SYLLABUS.md#day2) |
+| din | din 2 |
+| ajako kram | ajako notabukamadhye 2 / 3 |
+| lagne samay | 115 minet |
+| poorwashart | `Day02_01_Python_Basics.ipynb` |
+| ajako samayatalika | [`COURSE_SYLLABUS.md` din 2](../../COURSE_SYLLABUS.md#day2) |
 
-दिनको समयतालिका `COURSE_SYLLABUS.md` मा एउटै ठाउँमा छ। यो नोटबुक त्यसको एउटा भाग मात्र हो, आफ्नो
-छुट्टै समयतालिका राख्दैन। समय थाहा नभए पहिले त्यही फाइल हेर्नुहोस्।
+dinko samayatalika `COURSE_SYLLABUS.md` ma eutai thaun ma chha. yo notebook tyasko euta bhaag matra ho, aphno
+chhuttai samayatalika rakhdain. samay thaha nabhae pahile tyahi file hernuhos.
 
 <!-- ne-cell: audit-learning-loop | after-heading -->
-### अनुमान गर्नुहोस्, चलाउनुहोस्, हेर्नुहोस्, व्याख्या गर्नुहोस्
+### anuman garnuhos, chalaunuhos, hernuhos, byakhya garnuhos
 
 <!-- ne-cell: audit-learning-loop -->
-function ले इनपुट लिन्छ र `return` ले नतिजा फर्काउँछ। सर्तले सत्य हो कि असत्य जाँच्छ। महत्त्वपूर्ण सेल
-चलाउनुअघि इनपुट, काम र नतिजा एक-एक वाक्यमा लेख्नुहोस्। पहिले अनुमान लेखेर सेल चलाउनुहोस् र मान वा
-चित्र हेर्नुहोस्। नापिएको मान मात्र बदलेर फेरि अनुमान गरी चलाउनुहोस्। जानाजान राखिएका त्रुटि र
-नसकिएका अभ्यासका निर्देशन पछ्याउनुहोस्।
+function le input linchha ra `return` le natija pharkaunchha. sartale saty ho ki asaty janchchha. mahattwapurna cell
+chalaunuaghi input, kaam ra natija ek-ek bakyama lekhnuhos. pahile anuman lekher cell chalaunuhos ra maan wa
+chitra hernuhos. napieko maan matra badaler feri anuman gari chalaunuhos. janajan rakhieka truti ra
+nasakieka abhyaska nirdeshan pachhyaunuhos.
 
 <!-- ne-cell: 59bedbb1 | after-heading -->
-## Part 0 तयारी
+## Part 0 tayari
 
 <!-- ne-cell: 7f81201b | after-heading -->
-## Part 1 सर्त अनुसार बाँड्ने
+## Part 1 sart anusar bandne
 
 <!-- ne-cell: 0c826365 | after-heading -->
-**`if` ले "यदि यस्तो भए" लेख्ने**
+**`if` le "yadi yasto bhae" lekhne**
 <!-- ne-pair: Writing 'if' with `if` -->
 
 <!-- ne-cell: 0c826365 -->
-`if` को अर्थ हो "यदि सर्त पूरा भयो भने यो काम गर्ने"।
+`if` ko arth ho "yadi sart pura bhayo bhane yo kaam garne".
 
-**अनिवार्य दुई कुरा**
+**aniwarya dui kura**
 
-1. सर्तपछि **`:` (colon)**
-2. अर्को लाइनको **indentation (लाइनको सुरुवातमा खाली ठाउँ)**। एउटै block भित्र सबै लाइन उति नै तल
-   सार्नुपर्छ
+1. sartapachhi **`:` (colon)**
+2. arko lineko **indentation (lineko surubatama khali thaun)**. eutai block bhitra sabai line uti nai tal
+   sarnuparchha
 
-कति खाली ठाउँ राख्ने भन्ने Python को व्याकरणले तोक्दैन, तर **एउटै block भित्र फरक-फरक मात्रा राख्दा
-`IndentationError`** आउँछ। पढ्न सजिलो होस् भनेर यो तालिममा सधैं **4 खाली ठाउँ** प्रयोग गरिन्छ (tab
-प्रयोग गरिँदैन)।
+kati khali thaun rakhne bhanne Python ko byakaranale tokdain, tar **eutai block bhitra farak-farak matra rakhda
+`IndentationError`** aaunchha. padhna sajilo hos bhanera yo talim ma sadhain **4 khali thaun** prayog garinchha (tab
+prayog garindain).
 
 <!-- ne-cell: clarity-independent-spec | after-heading -->
-#### अर्को सीमाको उदाहरण
+#### arko simako udaharan
 
 <!-- ne-cell: clarity-independent-spec -->
-पहिले चित्रबाट 12.0±0.2 mm को सीमा सिक्नुहोस्। त्यसपछिका मुख्य कोडमा 100.0±0.5 mm प्रयोग हुन्छ।
-चित्रको सङ्ख्या पछिको कोडमा नमिसाउनुहोस्।
+pahile chitra baat 12.0±0.2 mm ko sima siknuhos. tyaspachhika mukhy kodama 100.0±0.5 mm prayog hunchha.
+chitrako sankhya pachhiko kodama namisaunuhos.
 
 <!-- ne-cell: fig-teach_tolerance_boundary | after-heading -->
-### सीमा "भित्र" पर्छ कि पर्दैन
+### sima "bhitra" parchha ki pardaina
 
 <!-- ne-cell: fig-teach_tolerance_boundary | after-image:../../assets/diagrams/teach_tolerance_boundary.png -->
-चित्र: 12.0 ± 0.2 mm को सीमा र साँच्चै तुलना गरिएका 5 मानको निर्णय। 12.200 mm सीमा भित्र पर्छ, त्यसैले
-OK हो।
+chitra: 12.0 ± 0.2 mm ko sima ra sanchchai tulna garieka 5 maanko nirnaya. 12.200 mm sima bhitra parchha, tyasaile
+OK ho.
 
-**ध्यान दिनुपर्ने कुरा**
+**dhyan dinuparne kura**
 
-मापदण्डमा "11.8 वा बढी र 12.2 वा कम" लेखिएको छ भने सीमाको मान आफैं पनि समावेश हुन्छ। समावेश हुने
-कि नहुने कुरा **मापदण्ड कसरी लेखिएको छ** भन्नेमा निर्भर छ; कोडमा `<=` र `<` ले त्यही जनाउँछन्। नापको
-रिजोल्युसन र निर्णय गर्नुअघि राउन्ड गर्ने नीति पनि पहिले नै तय गर्नुहोस्।
+mapadandama "11.8 wa badhi ra 12.2 wa kam" lekhieko chha bhane simako maan aphain pani samabesh hunchha. samabesh hune
+ki nahune kura **mapadand kasari lekhieko chha** bhanne ma nirbhar chha; kodama `<=` ra `<` le tyahi janaunchhan. napako
+rijolyusan ra nirnaya garnuaghi raund garne niti pani pahile nai tay garnuhos.
 
-**सोच्नुहोस्**
+**sochnuhos**
 
-- 12.2005 mm लाई 3 दशमलवमा राउन्ड गरेर निर्णय गर्दा नतिजा कसरी बदलिन्छ?
+- 12.2005 mm lai 3 dashamalabama raund garera nirnaya garda natija kasari badlinchha?
 
 <!-- ne-cell: fig-teach_condition_branch | after-heading -->
-### सर्तले काम कसरी बाँड्छ
+### sartale kaam kasari bandchha
 
 <!-- ne-cell: fig-teach_condition_branch | after-image:../../assets/diagrams/teach_condition_branch.png -->
-चित्र: नापिएको मान 12.14 mm लाई सर्त 11.8 ≤ x ≤ 12.2 मा पठाउँदा हुने क्रम, र 4 मान साँच्चै हालेर हेरेको
-नतिजा (योजनाबद्ध चित्र)।
+chitra: napieko maan 12.14 mm lai sart 11.8 ≤ x ≤ 12.2 ma pathaunda hune kram, ra 4 maan sanchchai haler hereko
+natija (yojanabaddha chitra).
 
-**ध्यान दिनुपर्ने कुरा**
+**dhyan dinuparne kura**
 
-बदलिने कुरा देखाइने अक्षर मात्र हो; सर्त एउटै हो। सीमाको मान 12.20 mm "भित्र" पर्ने हुनाले OK हुन्छ।
-**इनपुट मान बदल्नु** र **मापदण्ड बदल्नु** फरक काम हुन्।
+badaline kura dekhaine akshar matra ho; sart eutai ho. simako maan 12.20 mm "bhitra" parne hunale OK hunchha.
+**input maan badalnu** ra **mapadand badalnu** farak kaam hun.
 
-**सोच्नुहोस्**
+**sochnuhos**
 
-- मापदण्ड नबदली 12.30 mm लाई OK बनाउने उपाय छ?
+- mapadand nabadali 12.30 mm lai OK banaune upay chha?
 
 <!-- ne-cell: 9058ead5 | after-heading -->
-### स्वीकृत मापदण्ड नबदली राख्नुहोस्
+### sbikrit mapadand nabadali rakhnuhos
 
 <!-- ne-cell: 9058ead5 -->
-**यो अर्को सीमाको उदाहरण हो। मुख्य कोड उदाहरणको 100.0±0.5 mm भन्दा फरक मापदण्ड हो।**
-माथिको चित्रको स्वीकृत मापदण्ड **11.8 mm वा बढी, 12.2 mm वा कम** मै स्थिर राख्नुहोस्। 12.200 mm सीमा
-भित्र पर्ने हुनाले OK, 12.201 mm NG हो। नमिल्ने सामान पास बनाउन मान राउन्ड गर्ने वा मापदण्ड, सर्त बदल्ने
-काम गर्नु हुँदैन। अर्को सामान नाप्नु र आवश्यकता (मापदण्ड) बदल्नु फरक कुरा हुन्।
+**yo arko simako udaharan ho. mukhy kod udaharanko 100.0±0.5 mm bhanda farak mapadand ho.**
+mathiko chitrako sbikrit mapadand **11.8 mm wa badhi, 12.2 mm wa kam** mai sthir rakhnuhos. 12.200 mm sima
+bhitra parne hunale OK, 12.201 mm NG ho. namilne saman pas banaun maan raund garne wa mapadand, sart badalne
+kaam garnu hundaina. arko saman napnu ra abashyakata (mapadand) badalnu farak kura hun.
 
-व्यावहारिक टिप्पणी: औपचारिक रूपमा मापदण्ड बदल्न डिजाइन वा ग्राहकको स्वीकृति, संशोधन नम्बर, लागू हुने
-मिति र अभिलेख चाहिन्छ। यो पाठमा "मान बदल्नु" भन्नाले नापिएको इनपुट मात्र जनाउँछ। अनुमान: 12.201 को
-सट्टा 12.200 आयो भने के बदलिन्छ?
+byabaharik tippani: aupacharik rupama mapadand badalna dijain wa grahakako sbikriti, sanshodhan number, lagu hune
+miti ra abhilekh chahinchha. yo paath ma "maan badalnu" bhannale napieko input matra janaunchha. anuman: 12.201 ko
+satta 12.200 ayo bhane ke badlinchha?
 
 <!-- ne-cell: audit-teach_if_live_trace | after-heading -->
-### कोड कसरी पढ्ने
+### kod kasari padhne
 
 <!-- ne-cell: audit-teach_if_live_trace | after-image:../../assets/svg/teach_if_live_trace.svg -->
-चित्र: देखाउनका लागि गरिएको राउन्डिङलाई निर्णयको नियम बनाइँदैन। (गणना गरिएको संश्लेषित उदाहरण र
-योजनाबद्ध चित्र; model को वास्तविक नापिएको नतिजा होइन।)
+chitra: dekhaunaka lagi garieko raundingalai nirnayako niyam banaindain. (ganana garieko sansleshit udaharan ra
+yojanabaddha chitra; model ko bastabik napieko natija hoina.)
 
-**ध्यान दिनुपर्ने कुरा**
+**dhyan dinuparne kura**
 
-देखाउनका लागि गरिएको राउन्डिङ निर्णयको नियम होइन। इनपुट र परिवर्तन भएको मान औंलाले पछ्याउनुहोस्।
+dekhaunaka lagi garieko raunding nirnayako niyam hoina. input ra paribartan bhaeko maan aunlale pachhyaunuhos.
 
-**सोच्नुहोस्**
+**sochnuhos**
 
-100.5001 mm बनाउँदा कुन शाखा चल्छ?
+100.5001 mm banaunda kun shakha chalchha?
 
 <!-- ne-cell: clarity-main-spec | after-heading -->
-#### मुख्य उदाहरण: इनपुट → सर्त → नतिजा
+#### mukhy udaharan: input → sart → natija
 
 <!-- ne-cell: clarity-main-spec -->
-स्वीकृत मापदण्ड 100.0±0.5 mm नै स्थिर राखेर नापिएको मान 100.3 mm बाट OK/NG निकाल्नुहोस्। चलाउनुअघि
-फरक र निर्णय अनुमान गर्नुहोस्। चलाएपछि 100.6 बनाएर, मापदण्ड नबदली NG किन आयो व्याख्या गर्नुहोस्।
+sbikrit mapadand 100.0±0.5 mm nai sthir rakher napieko maan 100.3 mm baat OK/NG nikalnuhos. chalaunuaghi
+farak ra nirnaya anuman garnuhos. chalaepachhi 100.6 banaera, mapadand nabadali NG kina ayo byakhya garnuhos.
 
 <!-- ne-cell: f831e7cd | after-heading -->
-### नतिजाको उदाहरण
+### natijako udaharan
 
 <!-- ne-cell: 9ca817a3 | after-heading -->
-**`elif` ले तीन वा बढी भागमा बाँड्ने**
+**`elif` le tin wa badhi bhaag ma bandne**
 <!-- ne-pair: Splitting into three or more with `elif` -->
 
 <!-- ne-cell: 9ca817a3 -->
-तीन वा बढी भाग चाहिए `elif` (else if) प्रयोग गर्नुहोस्। सर्त **माथिबाट क्रमैसँग** जाँचिन्छ र
-**पहिलो मिलेको काम मात्र** चल्छ। क्रम महत्त्वपूर्ण छ: `if x < 10` पहिले लेखियो भने `x = 5` कहिल्यै
-`elif x < 20` सम्म पुग्दैन।
+tin wa badhi bhaag chahie `elif` (else if) prayog garnuhos. sart **mathibat kramaisang** janchinchha ra
+**pahilo mileko kaam matra** chalchha. kram mahattwapurna chha: `if x < 10` pahile lekhiyo bhane `x = 5` kahilyai
+`elif x < 20` samm pugdain.
 
 <!-- ne-cell: clarity-severity | after-heading -->
-#### श्रेणी र पास/फेल फरक हुन्
+#### shreni ra pas/phel farak hun
 
 <!-- ne-cell: clarity-severity -->
-A/B/C/D भनेको कति टाढा गएको भन्ने वर्गीकरण हो। हालको मापदण्ड ±0.5 mm मा **A र B OK, C र D NG** हुन्छन्।
-पहिलेको `C (warning / 注意)` भन्ने नतिजा जस्ताको तस्तै राखिएको छ, तर **C मापदण्डबाहिर (जाँच आवश्यक) हो
-र पठाउन मिल्ने सामान होइन**। अनुमान: 0.6 mm फरक कुन श्रेणीमा पर्छ र पास/फेल के हो? चलाएपछि 0.5 mm
-सँग तुलना गर्नुहोस्।
+A/B/C/D bhaneko kati tadha gaeko bhanne bargikaran ho. halako mapadand ±0.5 mm ma **A ra B OK, C ra D NG** hunchhan.
+pahileko `C (warning / 注意)` bhanne natija jastako tastai rakhieko chha, tar **C mapadandabahir (jaanch aawashyak) ho
+ra pathaun milne saman hoina**. anuman: 0.6 mm farak kun shrenima parchha ra pas/phel ke ho? chalaepachhi 0.5 mm
+sang tulna garnuhos.
 
 <!-- ne-cell: f86492fe | after-heading -->
-### नतिजा कसरी पढ्ने
+### natija kasari padhne
 
 <!-- ne-cell: f86492fe -->
-हरेक लाइनमा श्रेणी र `spec` छुट्टाछुट्टै पढ्नुहोस्। ±0.60 फरक C हो, तर NG हो। ±0.15 र 0 A भएर OK हुन्;
-±2.00 D भएर NG हो।
+harek line ma shreni ra `spec` chhuttachhuttai padhnuhos. ±0.60 farak C ho, tar NG ho. ±0.15 ra 0 A bhaera OK hun;
+±2.00 D bhaera NG ho.
 
 <!-- ne-cell: b0cf9283 | after-heading -->
-## Part 2 सूची र दोहोरिने काम
+## Part 2 soochi ra dohorine kaam
 
 <!-- ne-cell: 7584722b | after-heading -->
-### 5 वटा नाप क्रमैसँग जाँच्ने
+### 5 bata nap kramaisang jaanchne
 
 <!-- ne-cell: 7584722b | after-image:../../assets/diagrams/teach_loop_trace.png -->
-चित्र: यही नोटबुकका 5 नाप (100.0, 100.3, 99.7, 100.6, 99.4) लाई उही मापदण्ड (100.0 mm ± 0.5 mm) मा
-क्रमैसँग जाँचेको अभिलेख। NG i=3 र i=4 हुन्।
+chitra: yahi notebookka 5 nap (100.0, 100.3, 99.7, 100.6, 99.4) lai uhi mapadand (100.0 mm ± 0.5 mm) ma
+kramaisang jancheko abhilekh. NG i=3 ra i=4 hun.
 
-**ध्यान दिनुपर्ने कुरा**
+**dhyan dinuparne kura**
 
-लूप कुनै नौलो कुरा होइन। **एउटै निर्णय, मान फरक पारेर 5 पटक दोहोर्याउने** मात्र हो। हरेक पटक "अहिले
-कुन मान छ" भनेर जाँच्नु नै सीप हो। ठीक तलको कोडले **चित्रकै मान र मापदण्ड** प्रयोग गर्छ, त्यसैले
-नतिजा चित्रको लाइनसँग मिल्छ।
+lup kunai naulo kura hoina. **eutai nirnaya, maan farak parer 5 patak dohoryaune** matra ho. harek patak "ahile
+kun maan chha" bhanera janchnu nai sip ho. thik talako kodale **chitrakai maan ra mapadand** prayog garchha, tyasaile
+natija chitrako line sang milchha.
 
-Part 2 को पछिल्लो stepper ले **अर्को डेटा (12.xx)** मा उही कुरा देखाउँछ। मान फरक भए पनि गरिने काम उही हो।
+Part 2 ko pachhillo stepper le **arko data (12.xx)** ma uhi kura dekhaunchha. maan farak bhae pani garine kaam uhi ho.
 
-**सोच्नुहोस्**
+**sochnuhos**
 
-- चित्रमा NG i=3 र i=4 हुन्। दुवैमा `|value - 100.0| = 0.6` छ र `0.6 <= 0.5` पुग्दैन। दुईवटा किन?
-- ठीक तलको कोड चलाउँदा चित्रकै 5 लाइन आउँछ? पहिले अनुमान गर्नुहोस्।
+- chitra ma NG i=3 ra i=4 hun. dubaima `|value - 100.0| = 0.6` chha ra `0.6 <= 0.5` pugdain. duibata kina?
+- thik talako kod chalaunda chitrakai 5 line aaunchha? pahile anuman garnuhos.
 
 <!-- ne-cell: 7d26f19c | after-heading -->
-**सूची भनेको मानहरूको शृङ्खला**
+**soochi bhaneko maanharuko shringkhala**
 <!-- ne-pair: A list is a sequence of values -->
 
 <!-- ne-cell: 7d26f19c -->
-सूची (list) ले धेरै मान एउटै ठाउँमा राख्छ। `measurements = [100.0, 100.3, 99.7]` जस्तो लेखिन्छ।
+soochi (list) le dherai maan eutai thaun ma rakhchha. `measurements = [100.0, 100.3, 99.7]` jasto lekhinchha.
 
-| काम | उदाहरण | नतिजा |
+| kaam | udaharan | natija |
 |---|---|---|
-| सङ्ख्या | `len(measurements)` | `3` |
-| तत्त्व निकाल्ने | `measurements[0]` | `100.0` |
-| अन्तिम | `measurements[-1]` | `99.7` |
-| दायरा | `measurements[0:2]` | `[100.0, 100.3]` |
-| थप्ने | `measurements.append(100.1)` | अन्तमा थपिन्छ |
-| जोड | `sum(measurements)` | जम्मा |
-| ठुलो | `max(measurements)` | अधिकतम |
+| sankhya | `len(measurements)` | `3` |
+| tattb nikalne | `measurements[0]` | `100.0` |
+| antim | `measurements[-1]` | `99.7` |
+| dayara | `measurements[0:2]` | `[100.0, 100.3]` |
+| thapne | `measurements.append(100.1)` | antama thapinchha |
+| jod | `sum(measurements)` | jamma |
+| thulo | `max(measurements)` | adhikatam |
 
-> क्रम सङ्ख्या 0 बाट सुरु हुन्छ। `measurements[1]` भनेको **दोस्रो** तत्त्व हो।
+> kram sankhya 0 baat suru hunchha. `measurements[1]` bhaneko **dosro** tattb ho.
 
 <!-- ne-cell: c534d731 | after-heading -->
-### नतिजाको उदाहरण
+### natijako udaharan
 
 <!-- ne-cell: a0529062 | after-heading -->
-**`for` ले सबै तत्त्वमा एउटै काम गर्ने**
+**`for` le sabai tattbama eutai kaam garne**
 <!-- ne-pair: Processing every element with `for` -->
 
 <!-- ne-cell: a0529062 -->
-`for` को अर्थ हो "सूचीभित्रका तत्त्व एक-एक गरेर निकालेर उही काम गर्ने"।
+`for` ko arth ho "suchibhitraka tattb ek-ek garera nikaler uhi kaam garne".
 
-- लूपको चल `value` हरेक पटक **नयाँ चल बनिएको होइन**; **उही नामलाई** अर्को तत्त्वसँग बाँधिन्छ (नाम
-  जे पनि राख्न सकिन्छ)
-- सूचीमा जति तत्त्व छन् त्यति पटक दोहोरिन्छ
-- **तल सारिएको भाग** मात्र दोहोरिन्छ
-- फरक इनपुटले उही नतिजा दिन पनि सक्छ (100.0 ± 0.5 mm मापदण्डमा 100.2 mm र 100.4 mm दुवैले `"OK"` दिन्छन्)
+- lupako chal `value` harek patak **nayan chal banieko hoina**; **uhi naam lai** arko tattbasang bandhinchha (naam
+  je pani rakhna sakinchha)
+- soochi ma jati tattb chhan tyati patak dohorinchha
+- **tal sarieko bhaag** matra dohorinchha
+- farak inputle uhi natija din pani sakchha (100.0 ± 0.5 mm mapadandama 100.2 mm ra 100.4 mm dubaile `"OK"` dinchhan)
 
-"100 वटा नाप एक-एक गरेर जाँच्ने" — यही स्वचालनको आधारभूत ढाँचा हो।
+"100 bata nap ek-ek garera jaanchne" — yahi sbachalanako adharabhut dhancha ho.
 
 <!-- ne-cell: audit-tolerance-policy | after-heading -->
-### सीमा र देखाइने मान
+### sima ra dekhaine maan
 
 <!-- ne-cell: audit-tolerance-policy -->
-आधारभूत उदाहरणले फरक नराउन्ड गरी `abs(measured_mm - nominal_mm) <= tolerance_mm` ले जाँच्छ। 99.5 र
-100.5 mm OK, 100.5001 mm NG हुन्। देखाइने दशमलव सङ्ख्या, नाप्ने यन्त्रको रिजोल्युसन र पास/फेल नीति
-छुट्टाछुट्टै कुरा हुन्। `2.1 - 2.0` जस्ता दशमलव binary मा ठ्याक्कै लेख्न नसकिने हुन सक्छ। पछि आउने
-मोटाइ अभ्यासको राउन्डिङ त्यो अभ्यासमा मात्र लागू हुने स्पष्ट नीति हो, आधारभूत उदाहरणमा होइन।
+adharabhut udaharanle farak naraund gari `abs(measured_mm - nominal_mm) <= tolerance_mm` le janchchha. 99.5 ra
+100.5 mm OK, 100.5001 mm NG hun. dekhaine dashamalab sankhya, napne yantrako rijolyusan ra pas/phel niti
+chhuttachhuttai kura hun. `2.1 - 2.0` jasta dashamalab binary ma thyakkai lekhna nasakine huna sakchha. pachhi aune
+motai abhyasko raunding tyo abhyas ma matra lagu hune spasht niti ho, adharabhut udaharan ma hoina.
 
 <!-- ne-cell: clarity-loop-predict | after-heading -->
-#### उही 5 नाप पछ्याउने
+#### uhi 5 nap pachhyaune
 
 <!-- ne-cell: clarity-loop-predict -->
-इनपुट `measurements_mm` हो; हरेक पटक फरक गणना र मापदण्ड तुलना हुन्छ; नतिजा एक लाइन हो। अनुमान: NG कुन
-क्रम सङ्ख्यामा पर्छ? तलको तालिका माथिको चित्रसँग लाइन-दर-लाइन मिलाउनुहोस्।
+input `measurements_mm` ho; harek patak farak ganana ra mapadand tulna hunchha; natija ek line ho. anuman: NG kun
+kram sankhya ma parchha? talako talika mathiko chitra sang line-dar-line milaunuhos.
 
 <!-- ne-cell: 13daa786 | after-heading -->
-### नतिजाको उदाहरण
+### natijako udaharan
 
 <!-- ne-cell: 13daa786 -->
-चिह्नसहितको फरक र सीमाभित्र छ कि छैन भन्ने लाइन पनि हरेक निर्णयपछि देखाइन्छ।
+chihnasahitako farak ra simabhitra chha ki chhaina bhanne line pani harek nirnayapachhi dekhainchha.
 
 <!-- ne-cell: clarity-transfer-stepper | after-heading -->
-#### अर्को उदाहरण: 12.50±0.10 mm
+#### arko udaharan: 12.50±0.10 mm
 
 <!-- ne-cell: clarity-transfer-stepper -->
-तलको stepper मात्र फरक मापदण्ड र फरक नाप प्रयोग गर्छ। मुख्य if→for→def उदाहरण 100.0±0.5 mm मै रहन्छ।
-उदाहरण फेर्दा आधार मान, सह्यता र एकाइ फेरि पढ्नुहोस्।
+talako stepper matra farak mapadand ra farak nap prayog garchha. mukhy if→for→def udaharan 100.0±0.5 mm mai rahanchha.
+udaharan pherda adhar maan, sahyata ra ekai feri padhnuhos.
 
 <!-- ne-cell: bc94f88f | after-heading -->
-#### लूप एक-एक पाइला गर्दै हेर्ने
+#### lup ek-ek paila gardai herne
 
 <!-- ne-cell: bc94f88f -->
-लूप भनेको "उही निर्णय, मान फरक पारेर दोहोर्याउने" मात्र हो। तलको stepper मा **अहिले कुन मान हेरिएको
-छ** एक-एक गरेर जाँच्नुहोस्।
+lup bhaneko "uhi nirnaya, maan farak parer dohoryaune" matra ho. talako stepper ma **ahile kun maan herieko
+chha** ek-ek garera jaanchnuhos.
 
-| पाइला | के हेर्ने |
+| paila | ke herne |
 |---|---|
-| `i = 0` | पहिलो नाप र सर्त सत्य भयो कि भएन |
-| `i = 2` | \|12.38 − 12.50\| = 0.12 > 0.10 हुनाले NG |
-| `i = 3` | \|12.92 − 12.50\| = 0.42 हुनाले NG। NG भए पनि टाढा भएको फरक छ |
-| `i = 4` | लूपको अन्तिम पटक |
+| `i = 0` | pahilo nap ra sart saty bhayo ki bhaen |
+| `i = 2` | \|12.38 − 12.50\| = 0.12 > 0.10 hunale NG |
+| `i = 3` | \|12.92 − 12.50\| = 0.42 hunale NG. NG bhae pani tadha bhaeko farak chha |
+| `i = 4` | lupako antim patak |
 
-widget चल्न नसके तलको parameter सेलले उही काम गर्छ।
+widget chalna nasake talako parameter cellle uhi kaam garchha.
 
 <!-- ne-cell: 83428140 | after-heading -->
-## Part 3 function (फंक्शन)
+## Part 3 function (phankshan)
 
 <!-- ne-cell: clarity-function-transfer | after-heading -->
-#### चित्र अर्को उदाहरण हो
+#### chitra arko udaharan ho
 
 <!-- ne-cell: clarity-function-transfer -->
-तलको चित्रमा मात्र stepper कै 12.50±0.10 mm प्रयोग भएको छ। आधारभूत function ले 100.0±0.5 mm प्रयोग गर्छ।
-पहिले `judge_width(100.3)` र `judge_width(100.6)` को नतिजा अनुमान गर्नुहोस्, त्यसपछि चित्रमा लागू गर्नुहोस्।
+talako chitra ma matra stepper kai 12.50±0.10 mm prayog bhaeko chha. adharabhut function le 100.0±0.5 mm prayog garchha.
+pahile `judge_width(100.3)` ra `judge_width(100.6)` ko natija anuman garnuhos, tyaspachhi chitra ma lagu garnuhos.
 
 <!-- ne-cell: c0809d54 | after-heading -->
-### function भनेको "इनपुट → नियम → नतिजा"
+### function bhaneko "input → niyam → natija"
 
 <!-- ne-cell: c0809d54 | after-image:../../assets/diagrams/teach_function_io.png -->
-चित्र: इनपुट (नापिएको मान, आधार मान, सह्यता) लिएर तोकिएको क्रममा गणना गरी एउटा मान फर्काउने बाकस।
-नाप 12.55, आधार 12.5, सह्यता 0.1 भए `|12.55 - 12.5| = 0.05 <= 0.10` हुनाले **OK**; 12.92 भए
-`0.42 > 0.10` हुनाले **NG** (सबै गणना गरिएका मान)।
+chitra: input (napieko maan, adhar maan, sahyata) liera tokieko kram ma ganana gari euta maan pharkaune bakas.
+nap 12.55, adhar 12.5, sahyata 0.1 bhae `|12.55 - 12.5| = 0.05 <= 0.10` hunale **OK**; 12.92 bhae
+`0.42 > 0.10` hunale **NG** (sabai ganana garieka maan).
 
-**ध्यान दिनुपर्ने कुरा**
+**dhyan dinuparne kura**
 
-function बनाएपछि एउटै नियम धेरै पटक लेख्नु पर्दैन। मान फेरेर बोलाउँदा हरेक पटक उही क्रम चल्छ। इनपुट
-बदलिँदा नतिजा बदलिन पनि सक्छ, **उही पनि रहन सक्छ** (100.2 mm र 100.4 mm दुवै `"OK"`)।
+function banaepachhi eutai niyam dherai patak lekhnu pardaina. maan pherer bolaunda harek patak uhi kram chalchha. input
+badalinda natija badalin pani sakchha, **uhi pani rahan sakchha** (100.2 mm ra 100.4 mm dubai `"OK"`).
 
-**नतिजा तीनै इनपुटले तय गर्छ।** सह्यता नलेखिए त्यो बाकसले उत्तर दिन सक्दैन।
+**natija tinai inputle tay garchha.** sahyata nalekhie tyo bakasale uttar din sakdain.
 
-**सोच्नुहोस्**
+**sochnuhos**
 
-- चित्रका दुई उदाहरणमा नतिजा OK र NG किन फरक भयो? तीनमध्ये कुन इनपुट फरक थियो?
+- chitraka dui udaharan ma natija OK ra NG kina farak bhayo? tinamadhye kun input farak thiyo?
 
 <!-- ne-cell: 0838864d | after-heading -->
-### चित्रको उदाहरण कोडले जाँच्ने
+### chitrako udaharan kodale jaanchne
 
 <!-- ne-cell: 0838864d -->
-चित्रका तीन इनपुट त्यसै `judge_width` मा पठाउन सकिन्छ: नाप 12.55, आधार मान (यहाँ मापदण्डको केन्द्र)
-12.5, सह्यता 0.1। फरक 0.05 हुनाले सह्यताभित्र पर्छ र नतिजा `"OK"` आउँछ। **नाप 12.92 बनाउँदा** फरक 0.42
-हुन्छ, सह्यताभन्दा बाहिर, त्यसैले उही function ले `"NG"` फर्काउँछ। नतिजा तीनै इनपुटले तय गर्ने हुनाले
-तीनै सँगै पढ्नुहोस्।
+chitraka tin input tyasai `judge_width` ma pathaun sakinchha: nap 12.55, adhar maan (yahan mapadandako kendra)
+12.5, sahyata 0.1. farak 0.05 hunale sahyatabhitra parchha ra natija `"OK"` aaunchha. **nap 12.92 banaunda** farak 0.42
+hunchha, sahyatabhanda bahir, tyasaile uhi function le `"NG"` pharkaunchha. natija tinai inputle tay garne hunale
+tinai sangai padhnuhos.
 
-यो नोटबुकको `judge_width` मा आधार मानको पूर्वनिर्धारित 100.0 mm र सह्यताको 0.5 mm छ। त्यसैले
-`judge_width(12.55)` लाई "100.0 ± 0.5 mm मापदण्डमा 12.55 mm" भनेर पढ्छ र NG दिन्छ। चित्रको उदाहरण
-चलाउन `judge_width(12.55, nominal_mm=12.5, tolerance_mm=0.1)` जस्तै **आधार मान र सह्यता पनि** पठाउनुहोस्।
+yo notebookko `judge_width` ma adhar maanko purbanirdharit 100.0 mm ra sahyatako 0.5 mm chha. tyasaile
+`judge_width(12.55)` lai "100.0 ± 0.5 mm mapadandama 12.55 mm" bhanera padhchha ra NG dinchha. chitrako udaharan
+chalaun `judge_width(12.55, nominal_mm=12.5, tolerance_mm=0.1)` jastai **adhar maan ra sahyata pani** pathaunuhos.
 
 <!-- ne-cell: abe05345 | after-heading -->
-**function भनेको "नाम दिइएको काम"**
+**function bhaneko "naam diieko kaam"**
 <!-- ne-pair: A function is a named block of processing -->
 
 <!-- ne-cell: abe05345 -->
-function ले बारम्बार प्रयोग हुने कामलाई नाम दिन्छ।
+function le barambar prayog hune kaam lai naam dinchha.
 
-| शब्द | अर्थ | उदाहरण |
+| shabd | arth | udaharan |
 |---|---|---|
-| `def` | function परिभाषित गर्छ | `def judge_width(...)` |
-| parameter (औपचारिक नाम) | **परिभाषा लेख्ने ठाउँमा** लेखिने नाम; बोलाउँदा मान पाउँछ | परिभाषाको `measured_mm` |
-| argument (पठाइएको मान) | **बोलाउने ठाउँले** दिने मान | `judge_width(100.3)` को `100.3` |
-| return मान | function ले फर्काउने नतिजा | `"OK"` |
-| `return` | मान फर्काएर function अन्त्य गर्छ | `return "OK"` |
+| `def` | function paribhashit garchha | `def judge_width(...)` |
+| parameter (aupacharik naam) | **paribhasha lekhne thaun ma** lekhine naam; bolaunda maan paunchha | paribhashako `measured_mm` |
+| argument (pathaieko maan) | **bolaune thaunle** dine maan | `judge_width(100.3)` ko `100.3` |
+| return maan | function le pharkaune natija | `"OK"` |
+| `return` | maan pharkaera function antya garchha | `return "OK"` |
 
-`judge_width(measured_mm=100.3)` जस्तै **नामसहित पठाउँदा** कुन मान कुन parameter हो पढ्न सजिलो हुन्छ।
-तर यसले मान आफैं सही छ भन्ने प्रमाण दिँदैन।
+`judge_width(measured_mm=100.3)` jastai **namasahit pathaunda** kun maan kun parameter ho padhna sajilo hunchha.
+tar yasle maan aphain sahi chha bhanne praman dindain.
 
-**function प्रयोग गर्ने तीन फाइदा**
+**function prayog garne tin phaida**
 
-1. **उही कोड बारम्बार लेख्नु पर्दैन**
-2. **नामले अर्थ बुझिन्छ** (`judge_width(100.3)` हेर्दै बुझिन्छ)
-3. **सुधार एउटै ठाउँमा** (नियम बदलियो भने function भित्र मात्र बदल्ने)
+1. **uhi kod barambar lekhnu pardaina**
+2. **naamle arth bujhinchha** (`judge_width(100.3)` herdai bujhinchha)
+3. **sudhar eutai thaun ma** (niyam badaliyo bhane function bhitra matra badalne)
 
 <!-- ne-cell: fig-teach_definition_vs_call | after-heading -->
-### परिभाषा र बोलाउने काम फरक
+### paribhasha ra bolaune kaam farak
 
 <!-- ne-cell: fig-teach_definition_vs_call | after-image:../../assets/diagrams/teach_definition_vs_call.png -->
-चित्र: `def` ले नियमको नाम मात्र राख्छ, बोलाएपछि मात्र भित्रको काम चल्छ (निर्णय गणना गरिएका मान)।
+chitra: `def` le niyamko naam matra rakhchha, bolaepachhi matra bhitrako kaam chalchha (nirnaya ganana garieka maan).
 
-**ध्यान दिनुपर्ने कुरा**
+**dhyan dinuparne kura**
 
-function परिभाषित गर्दैमा केही चल्दैन। बोलाउँदा मान पठाइन्छ। परिभाषाको नाम (parameter) र बोलाउने
-ठाउँको मान (argument) फरक हुन्; क्रम वा नामले तिनी तालमेल गरिन्छ।
+function paribhashit gardaima kehi chaldain. bolaunda maan pathainchha. paribhashako naam (parameter) ra bolaune
+thaunko maan (argument) farak hun; kram wa naamle tini talamel garinchha.
 
-**सोच्नुहोस्**
+**sochnuhos**
 
-- function परिभाषित मात्र गर्दा भित्रको काम चल्छ?
+- function paribhashit matra garda bhitrako kaam chalchha?
 
 <!-- ne-cell: 335a1b26 | after-heading -->
-### नतिजाको उदाहरण
+### natijako udaharan
 
 <!-- ne-cell: 335a1b26 -->
-> **मान तुलना गर्ने नीति**
+> **maan tulna garne niti**
 >
-> `2.1 - 2.0` को नतिजा `0.10000000000000009` आउँछ। त्यसै तुलना गर्दा 2.1 mm "±0.1 mm भित्र" हुँदाहुँदै
-> पनि NG बन्छ। त्यसैले यो अभ्यासमा **फरकलाई `round(फरक, 6)` ले राउन्ड गरेर मात्र** तुलना गर्ने सहमति
-> राखिएको छ (माथिको कोडमा पनि त्यही छ)।
+> `2.1 - 2.0` ko natija `0.10000000000000009` aaunchha. tyasai tulna garda 2.1 mm "±0.1 mm bhitra" hundahundai
+> pani NG banchha. tyasaile yo abhyas ma **farak lai `round(farak, 6)` le raund garera matra** tulna garne sahamati
+> rakhieko chha (mathiko kodama pani tyahi chha).
 >
-> यो **यो तालिमको अभ्यासका लागि बनाइएको सहमति** हो; जुनसुकै मानमा सुरक्षित हुन्छ भन्ने होइन। राउन्ड गर्दा
-> सीमाभन्दा अलि बाहिरको मान भित्र पर्न सक्छ (जस्तै तल्लो सीमा 11.8 mm सँग 11.7999999 mm)। दशमलव सीमामा
-> ठ्याक्कै निर्णय चाहिए पूर्णाङ्कको सानो एकाइ (µm जस्तै) मा नाप्ने वा `decimal.Decimal` प्रयोग गर्ने
-> विकल्प सोच्नुहोस्। सीमाको भित्र र बाहिर दुवै परीक्षण गर्नुहोस् र **कति दशमलवमा राउन्ड गरियो** अभिलेख
-> राख्नुहोस्।
+> yo **yo talimko abhyaska lagi banaiyeko sahamati** ho; junasukai maan ma surakshit hunchha bhanne hoina. raund garda
+> simabhanda ali bahirako maan bhitra parna sakchha (jastai tallo sima 11.8 mm sang 11.7999999 mm). dashamalab sima ma
+> thyakkai nirnaya chahie purnankko sano ekai (µm jastai) ma napne wa `decimal.Decimal` prayog garne
+> bikalp sochnuhos. simako bhitra ra bahir dubai parikshan garnuhos ra **kati dashamalabama raund gariyo** abhilekh
+> rakhnuhos.
 
 <!-- ne-cell: 8ab30612 | after-heading -->
-## Part 4 अपवाद सँभाल्ने
+## Part 4 apabad sanbhalne
 
 <!-- ne-cell: 8ab30612 -->
-**यहाँबाट प्रशिक्षकसँगै गरिने दोस्रो चक्र सुरु हुन्छ।** पहिलो अनिवार्य बाटो if→for→def हो। इनपुट ठीक छ
-कि छैन भन्ने र मापदण्डभित्र छ कि छैन भन्ने निर्णय फरक हुन्।
+**yahan baat prashikshakasangai garine dosro chakra suru hunchha.** pahilo aniwarya bato if→for→def ho. input thik chha
+ki chhaina bhanne ra mapadandbhitra chha ki chhaina bhanne nirnaya farak hun.
 
 ```text
-कच्चा इनपुट / raw input -> float मा बदल्ने / parse
-  असफल / failure -> कारण अभिलेख गरेर अस्वीकार गर्ने / log reason, reject input
-  सफल / success -> मान्य सङ्ख्या / valid number -> स्थिर मापदण्ड / fixed tolerance -> OK or NG
+kachcha input / raw input -> float ma badalne / parse
+  asaphal / failure -> karan abhilekh garera asbikar garne / log reason, reject input
+  saphal / success -> many sankhya / valid number -> sthir mapadand / fixed tolerance -> OK or NG
 ```
 
-अनुमान: खाली अक्षर NG सामान हो कि नापको इनपुट त्रुटि? तलको नतिजाको `rejected` मा कारण हेर्नुहोस्।
-सानो प्रयोग: `"not-a-number"` को सट्टा `"100.6"` राख्दा इनपुट मान्य हुन्छ तर सामान NG पनि हुन सक्छ।
+anuman: khali akshar NG saman ho ki napako input truti? talako natijako `rejected` ma karan hernuhos.
+sano prayog: `"not-a-number"` ko satta `"100.6"` rakhda input many hunchha tar saman NG pani huna sakchha.
 
 <!-- ne-cell: 77f645e0 | after-heading -->
-**`try` / `except` ले असामान्य अवस्था सँभाल्ने**
+**`try` / `except` le asamanya abastha sanbhalne**
 <!-- ne-pair: Handling abnormal input with `try` / `except` -->
 
 <!-- ne-cell: 77f645e0 -->
-कार्यस्थलमा सधैं सही मान आउँदैन। खाली ठाउँ, अक्षर, `None`, अत्यधिक ठुलो मान आउन सक्छ।
+karyasthalama sadhain sahi maan aundain. khali thaun, akshar, `None`, atyadhik thulo maan aun sakchha.
 
-`try` / `except` प्रयोग गर्दा **त्रुटिले रोकिनुअघि** नै व्यवस्था गर्न सकिन्छ।
+`try` / `except` prayog garda **trutile rokinuaghi** nai byabastha garna sakinchha.
 
-महत्त्वपूर्ण कुरा: **त्रुटि लुकाउनु हुँदैन**। "जसो भए पनि `except: pass`" कहिल्यै नलेख्नुहोस्।
-**के भयो भनेर अभिलेख राख्नु** नै सही तरिका हो।
+mahattwapurna kura: **truti lukaunu hundaina**. "jaso bhae pani `except: pass`" kahilyai nalekhnuhos.
+**ke bhayo bhanera abhilekh rakhnu** nai sahi tarika ho.
 
 <!-- ne-cell: ec5196af | after-heading -->
-### नतिजाको उदाहरण
+### natijako udaharan
 
 <!-- ne-cell: ec5196af -->
-66.7% भनेको 6 इनपुटमध्ये **4 वटा सङ्ख्याको रूपमा पढ्न सकियो** भन्ने अनुपात हो (4 ÷ 6 = 66.7%)। यो
-निरीक्षणको "recall" होइन। Recall भनेको नछुटाई भेटिएका दोषको अनुपात (TP ÷ (TP + FN)) हो, जुन दिन ४ पछि
-सिकाइन्छ।
+66.7% bhaneko 6 inaputamadhye **4 bata sankhyako rupama padhna sakiyo** bhanne anupaat ho (4 ÷ 6 = 66.7%). yo
+nirikshanko "recall" hoina. Recall bhaneko nachhutai bhetieka doshko anupaat (TP ÷ (TP + FN)) ho, jun din 4 pachhi
+sikainchha.
 
 <!-- ne-cell: 5eff1e70 | after-heading -->
-**इनपुट जाँच भएको function**
+**input jaanch bhaeko function**
 <!-- ne-pair: A function with validation -->
 
 <!-- ne-cell: 5eff1e70 -->
-व्यवहारमा function को प्रवेशद्वारमै मान जाँचिन्छ। यसलाई **इनपुट जाँच (validation)** भनिन्छ।
+byabaharama function ko prabeshadbaramai maan janchinchha. yas lai **input jaanch (validation)** bhaninchha.
 
-जाँच्नुपर्ने कुराका उदाहरण:
+janchnuparne kuraka udaharan:
 
-- सङ्ख्या हो कि (`str` वा `None` आएको छैन?)
-- सह्यता धनात्मक छ कि
-- यथार्थपरक दायरामा छ कि (जस्तै सिटको चौडाइ **5,000 mm भन्दा बढी** भए नापको गल्ती; ठ्याक्कै 5,000 mm
-  स्वीकार, 5,001 mm अस्वीकार)
+- sankhya ho ki (`str` wa `None` aeko chhaina?)
+- sahyata dhanatmak chha ki
+- yatharthaparak dayarama chha ki (jastai sitako chaudai **5,000 mm bhanda badhi** bhae napako galti; thyakkai 5,000 mm
+  sbikar, 5,001 mm asbikar)
 
-**"5,000 mm भन्दा बढी" र "5,000 mm वा बढी" फरक हुन्।** तलको कोडले
-`minimum_mm <= measured_mm <= maximum_mm` जाँच्छ, त्यसैले 5,000 mm पास हुन्छ र 5,001 mm ले `ValueError`
-दिन्छ। सीमाको कुन पट्टि पास हुने हो, कोड र लेखाइ दुवैमा एउटै बनाउनुहोस्।
+**"5,000 mm bhanda badhi" ra "5,000 mm wa badhi" farak hun.** talako kodale
+`minimum_mm <= measured_mm <= maximum_mm` janchchha, tyasaile 5,000 mm pas hunchha ra 5,001 mm le `ValueError`
+dinchha. simako kun patti pas hune ho, kod ra lekhai dubaima eutai banaunuhos.
 
 <!-- ne-cell: 446e985d | after-heading -->
-### नतिजाको उदाहरण
+### natijako udaharan
 
 <!-- ne-cell: e16cecde | after-heading -->
-## Part 5 साधारण परीक्षण
+## Part 5 sadharan parikshan
 
 <!-- ne-cell: 8f3eb327 | after-heading -->
-**`assert` ले स्वतः जाँच्ने**
+**`assert` le sbatah jaanchne**
 <!-- ne-pair: Automatic checks with `assert` -->
 
 <!-- ne-cell: 8f3eb327 -->
-`assert` ले "यो सर्त पूरा हुनुपर्छ" भनेर घोषणा गर्छ। पूरा भए केही हुँदैन, नभए त्रुटि आउँछ।
+`assert` le "yo sart pura hunuparchha" bhanera ghoshana garchha. pura bhae kehi hundaina, nabhae truti aaunchha.
 
 ```python
 assert round(100.3 - 100.0, 6) <= 0.5
 ```
 
-कोड बदलेपछि, **लेखिएका परीक्षणको दायरामा** अपेक्षा अनुसार चल्छ कि चल्दैन जाँच्न सकिन्छ। यसलाई
-**regression test** भनिन्छ। नलेखिएका इनपुट सही छन् कि छैनन् यो परीक्षणले देखाउँदैन।
+kod badalepachhi, **lekhieka parikshanko dayarama** apeksha anusar chalchha ki chaldain jaanchna sakinchha. yas lai
+**regression test** bhaninchha. nalekhieka input sahi chhan ki chhainan yo parikshanle dekhaundain.
 
 <!-- ne-cell: fa5475bf | after-heading -->
-### नतिजाको उदाहरण
+### natijako udaharan
 
 <!-- ne-cell: 9d19737f | after-heading -->
-**परीक्षण असफल हुँदा के हुन्छ**
+**parikshan asaphal hunda ke hunchha**
 <!-- ne-pair: What a failing test looks like -->
 
 <!-- ne-cell: 9d19737f -->
-तलको सेलमा **जानाजान गलत अपेक्षा** लेखिएको छ। `AssertionError` आउनेछ। त्यो नै सही व्यवहार हो।
+talako cell ma **janajan galat apeksha** lekhieko chha. `AssertionError` aunechha. tyo nai sahi byabahar ho.
 
 <!-- ne-cell: e1548d66 | after-heading -->
-## Part 6 नाप जाँच्ने कार्यक्रम पूरा गर्ने
+## Part 6 nap jaanchne karyakram pura garne
 
 <!-- ne-cell: 172094ac | after-heading -->
-**आवश्यकता (मापदण्ड)**
+**abashyakata (mapadand)**
 <!-- ne-pair: Requirements -->
 
 <!-- ne-cell: 172094ac -->
-तलको मापदण्डअनुसार कार्यक्रम बनाउनुहोस्।
+talako mapadandaanusar karyakram banaunuhos.
 
-| विषय | मान |
+| bishay | maan |
 |---|---|
-| आधार मान (यहाँ मापदण्डको केन्द्र) | 100.0 mm |
-| सह्यता | ±0.5 mm |
-| इनपुट | नापिएका मानको सूची (अक्षर पनि हुन सक्छ) |
-| नतिजा | हरेक नापको निर्णय, OK/NG सङ्ख्या, NG अनुपात, सबैभन्दा नराम्रो मान |
+| adhar maan (yahan mapadandako kendra) | 100.0 mm |
+| sahyata | ±0.5 mm |
+| input | napieka maanko soochi (akshar pani huna sakchha) |
+| natija | harek napako nirnaya, OK/NG sankhya, NG anupaat, sabaibhanda naramro maan |
 
-`आधार मान` भनेको सीमा दुवैतिर बराबर हुँदा "बीचको मान" हो। माथिल्लो र तल्लो सीमा बराबर नभए दुई सीमा
-छुट्टाछुट्टै लेख्नुहोस्।
+`adhar maan` bhaneko sima dubaitir barabar hunda "bichako maan" ho. mathillo ra tallo sima barabar nabhae dui sima
+chhuttachhuttai lekhnuhos.
 
 <!-- ne-cell: 25671959 | after-heading -->
-### नतिजाको उदाहरण
+### natijako udaharan
 
 <!-- ne-cell: 43c80070 | after-heading -->
-## अभ्यास
+## abhyas
 
 <!-- ne-cell: b7cfa925 | after-heading -->
-#### अभ्यास 1A (आधारभूत): निर्णय गर्ने function आफैं लेख्ने
+#### abhyas 1A (adharabhut): nirnaya garne function aphain lekhne
 
 <!-- ne-cell: b7cfa925 -->
-मोटाइ जाँच्ने function `judge_thickness(measured, nominal=2.0, tolerance=0.1)` **आफैं लेख्नुहोस्**।
-मापदण्ड **2.00 ± 0.10 mm** हो र `return` ले `"OK"` वा `"NG"` फर्काउनुपर्छ। `[1.95, 2.0, 2.1, 2.15]`
-जाँचेर देखाउनुहोस्।
+motai jaanchne function `judge_thickness(measured, nominal=2.0, tolerance=0.1)` **aphain lekhnuhos**.
+mapadand **2.00 ± 0.10 mm** ho ra `return` le `"OK"` wa `"NG"` pharkaunuparchha. `[1.95, 2.0, 2.1, 2.15]`
+jancher dekhaunuhos.
 
-**सकिएको मानिने अवस्था:** 1.95 → OK, 2.0 → OK, 2.1 → OK, 2.15 → NG देखिन्छ।
+**sakieko manine abastha:** 1.95 → OK, 2.0 → OK, 2.1 → OK, 2.15 → NG dekhinchha.
 
-**सीमा र राउन्डिङ**
+**sima ra raunding**
 
-सीमा "भित्र" पर्ने हुनाले माथिल्लो सीमा ठ्याक्कै 2.1 mm **OK** हो। तर `2.1 - 2.0` को नतिजा
-`0.10000000000000009` आउने हुनाले त्यसै तुलना गर्दा 2.1 mm NG बन्छ। त्यसैले यो अभ्यासमा
-**फरकलाई `round(measured - nominal, 6)` ले राउन्ड गरेर** तुलना गर्ने सहमति छ (तलको उदाहरण उत्तरजस्तै)।
+sima "bhitra" parne hunale mathillo sima thyakkai 2.1 mm **OK** ho. tar `2.1 - 2.0` ko natija
+`0.10000000000000009` aune hunale tyasai tulna garda 2.1 mm NG banchha. tyasaile yo abhyas ma
+**farak lai `round(measured - nominal, 6)` le raund garera** tulna garne sahamati chha (talako udaharan uttar jastai).
 
-मापदण्ड (2.00 ± 0.10 mm) बदलिँदैन। राउन्डिङ **यो अभ्यासका लागि** बनाइएको सहमति हो र सीमाभन्दा अलि
-बाहिरको मान भित्र पार्न सक्छ।
+mapadand (2.00 ± 0.10 mm) badalindain. raunding **yo abhyaska lagi** banaiyeko sahamati ho ra simabhanda ali
+bahirako maan bhitra parna sakchha.
 
 <!-- ne-cell: cbf93b2a | after-heading -->
-#### अभ्यास 1B (आधारभूत): मोटाइको निर्णयमा बदल्ने
+#### abhyas 1B (adharabhut): motaiko nirnaya ma badalne
 
 <!-- ne-cell: cbf93b2a -->
-माथिको `analyse_measurements` लाई **मोटाइ 2.00 ± 0.10 mm** को निर्णयमा प्रयोग गर्नुहोस्।
-`nominal_mm=2.0`, `tolerance_mm=0.1` तोकेर यो डेटा जाँच्नुहोस्:
+mathiko `analyse_measurements` lai **motai 2.00 ± 0.10 mm** ko nirnaya ma prayog garnuhos.
+`nominal_mm=2.0`, `tolerance_mm=0.1` toker yo data jaanchnuhos:
 
 `["2.00", "2.05", "2.11", "1.95", "2.20"]`
 
-**सकिएको मानिने अवस्था:** कुन दुई NG हुन् र किन, भनेर बताउन सक्ने (2.11 र 2.20)।
+**sakieko manine abastha:** kun dui NG hun ra kina, bhanera bataun sakne (2.11 ra 2.20).
 
 <!-- ne-cell: fae217f5 | after-heading -->
-**अभ्यास 2 (मध्यम): धेरै मापदण्ड सँभाल्ने**
+**abhyas 2 (madhyam): dherai mapadand sanbhalne**
 <!-- ne-pair: Exercise 2 (intermediate): support several specifications -->
 
 <!-- ne-cell: fae217f5 -->
-चौडाइ, मोटाइ र लम्बाइ — तीन मापदण्ड सँगै जाँच्न सक्ने बनाउनुहोस्। मापदण्डलाई dictionary (`dict`) मा
-राखेर `for` ले घुमाउनुहोस्।
+chaudai, motai ra lambai — tin mapadand sangai jaanchna sakne banaunuhos. mapadandalai dictionary (`dict`) ma
+rakher `for` le ghumaunuhos.
 
-| मापदण्ड | आधार मान | सह्यता |
+| mapadand | adhar maan | sahyata |
 |---|---|---|
-| चौडाइ | 100.0 mm | ±0.5 mm |
-| मोटाइ | 2.00 mm | ±0.10 mm |
-| लम्बाइ | 2500.0 mm | ±2.0 mm |
+| chaudai | 100.0 mm | ±0.5 mm |
+| motai | 2.00 mm | ±0.10 mm |
+| lambai | 2500.0 mm | ±2.0 mm |
 
-**dictionary (`dict`)** ले "key → मान" का जोडी राख्छ। `specifications["width"]` ले चौडाइको भाग निकाल्छ र
-`specifications["width"]["nominal"]` ले त्यसको आधार मान (100.0) दिन्छ। आधार मान र सह्यता नापिएको मानकै
-एकाइमा (यहाँ mm) लेख्नुहोस्।
+**dictionary (`dict`)** le "key → maan" ka jodi rakhchha. `specifications["width"]` le chaudaiko bhaag nikalchha ra
+`specifications["width"]["nominal"]` le tyasko adhar maan (100.0) dinchha. adhar maan ra sahyata napieko manakai
+ekaima (yahan mm) lekhnuhos.
 
-**सकिएको मानिने अवस्था:** एउटै लूपले मापदण्डअनुसार एक-एक लाइन नतिजा देखाउँछ।
+**sakieko manine abastha:** eutai lupale mapadandaanusar ek-ek line natija dekhaunchha.
 
 <!-- ne-cell: 2dc30e46 | after-heading -->
-#### अभ्यास 3 (वैकल्पिक): असामान्य मानको अभिलेख राख्ने
+#### abhyas 3 (baikalpik): asamanya maanko abhilekh rakhne
 
 <!-- ne-cell: 2dc30e46 -->
-`analyse_measurements` सुधारेर **अस्वीकार गरिएको मान र त्यसको कारण** `rejected` मा
-`(मान, कारण)` tuple को रूपमा राख्नुहोस्। अन्तमा कारणअनुसार गनेर प्रत्येक कारणको सङ्ख्या देखाउनुहोस्।
+`analyse_measurements` sudharer **asbikar garieko maan ra tyasko karan** `rejected` ma
+`(maan, karan)` tuple ko rupama rakhnuhos. antama karan anusar ganer pratyek karanko sankhya dekhaunuhos.
 
-**सकिएको मानिने अवस्था:** अस्वीकारको प्रत्येक कारणसँग त्यसको सङ्ख्या देखिन्छ।
+**sakieko manine abastha:** asbikarako pratyek karan sang tyasko sankhya dekhinchha.
 
 <!-- ne-cell: 1f203ca5 | after-heading -->
-#### बुझाइ जाँच्ने प्रश्न
+#### bujhai jaanchne prashna
 
 <!-- ne-cell: 1f203ca5 -->
-1. `if` पछि `:` छुट्यो भने के हुन्छ?
-2. `elif` तीनवटा राख्दा दोस्रो र तेस्रो सर्त दुवै सत्य भए के हुन्छ?
-3. function लेख्नुका दुई फाइदा भन्नुहोस्।
-4. `for` लूपभित्र `continue` प्रयोग गर्दा के हुन्छ? (आफैं खोज्नुहोस्।)
-5. "जसो भए पनि `except: pass`" किन खतरनाक छ?
+1. `if` pachhi `:` chhutyo bhane ke hunchha?
+2. `elif` tinabata rakhda dosro ra tesro sart dubai saty bhae ke hunchha?
+3. function lekhnuka dui phaida bhannuhos.
+4. `for` lupbhitra `continue` prayog garda ke hunchha? (aphain khojnuhos.)
+5. "jaso bhae pani `except: pass`" kina khataranak chha?
 
 <!-- ne-cell: 0f28a584 | after-heading -->
-## समस्या परेमा
+## samasya parema
 
 <!-- ne-cell: 0f28a584 -->
-त्रुटि आएपछि पहिले "कुन सेलमा", "कुन लाइनमा", "के सन्देश आयो" भनेर लेख्नुहोस्। बुझाउनुपर्ने काममा पनि
-त्यही अभिलेख राख्नुहोस्।
+truti aepachhi pahile "kun cell ma", "kun line ma", "ke sandesh ayo" bhanera lekhnuhos. bujhaunuparne kaam ma pani
+tyahi abhilekh rakhnuhos.
 
-| लक्षण | के गर्ने |
+| lakshan | ke garne |
 | --- | --- |
-| `IndentationError: expected an indented block` | `if` पछिको लाइनलाई block का अरू लाइनजत्तिकै तल सार्नुहोस् (यो तालिममा 4 खाली ठाउँ)। |
-| `NameError: name 'judge_width' is not defined` | function परिभाषित गर्ने सेल चलाइएको छैन। माथिबाट क्रमैसँग फेरि चलाउनुहोस्। |
-| `AssertionError: just outside tolerance` | परीक्षणको अपेक्षित मान वा function — एउटा गलत छ। दुवै `print` गरेर जाँच्नुहोस्। |
-| function भित्र `ValueError` आउँछ | इनपुट जाँचले काम गरेको छ। सन्देशमा कुन मान समस्या भएको लेखिएको हुन्छ। |
-| लूपले अन्तिम तत्त्व जाँच्दैन | `range(len(items) - 1)` जस्तो लेख्दा दायरा एक कम हुन्छ र अन्तिम तत्त्व छुट्छ। `range(len(items))` ले सबै क्रम समावेश गर्छ; `for value in items:` सबैभन्दा सजिलो हो। |
+| `IndentationError: expected an indented block` | `if` pachhiko line lai block ka aru lainajattikai tal sarnuhos (yo talim ma 4 khali thaun). |
+| `NameError: name 'judge_width' is not defined` | function paribhashit garne cell chalaieko chhaina. mathibat kramaisang feri chalaunuhos. |
+| `AssertionError: just outside tolerance` | parikshanko apekshit maan wa function — euta galat chha. dubai `print` garera jaanchnuhos. |
+| function bhitra `ValueError` aaunchha | input jaanchle kaam gareko chha. sandesh ma kun maan samasya bhaeko lekhieko hunchha. |
+| lupale antim tattb janchdain | `range(len(items) - 1)` jasto lekhda dayara ek kam hunchha ra antim tattb chhutchha. `range(len(items))` le sabai kram samabesh garchha; `for value in items:` sabaibhanda sajilo ho. |
 
 <!-- ne-cell: 22b083fc | after-heading -->
-## सम्पन्नता जाँचसूची
+## sampannata janchasuchi
 
 <!-- ne-cell: 22b083fc -->
-**अनिवार्य** र **वैकल्पिक** काम छुट्टाछुट्टै राखिएका छन्। **अभ्यास 3 (वैकल्पिक)** वैकल्पिक हो; नगरे पनि
-पूरा मानिन्छ। समय बाँकी भएमा मात्र गर्नुहोस्। सबै अनिवार्य बुँदामा चिन्ह लागेपछि यो नोटबुक पूरा हुन्छ।
+**aniwarya** ra **baikalpik** kaam chhuttachhuttai rakhieka chhan. **abhyas 3 (baikalpik)** baikalpik ho; nagare pani
+pura maninchha. samay banki bhae ma matra garnuhos. sabai aniwarya bundama chinh lagepachhi yo notebook pura hunchha.
 
-**अनिवार्य**
+**aniwarya**
 
-- [ ] Part 1–Part 6 पढेर सबै code सेल चलाएँ
-- [ ] अभ्यास 1A, 1B र 2 (अनिवार्य) गरें
-- [ ] `analyse_measurements` चल्ने कुरा जाँचें
-- [ ] `assert` प्रयोग गरेर परीक्षण लेखें
-- [ ] बुझाइ जाँच्ने 5 प्रश्नको उत्तर दिएँ
-- [ ] नोटबुक सुरक्षित गरें
+- [ ] Part 1–Part 6 padher sabai code cell chalaen
+- [ ] abhyas 1A, 1B ra 2 (aniwarya) garen
+- [ ] `analyse_measurements` chalne kura janchen
+- [ ] `assert` prayog garera parikshan lekhen
+- [ ] bujhai jaanchne 5 prashnako uttar dien
+- [ ] notebook surakshit garen
 
-**वैकल्पिक**
+**baikalpik**
 
-- [ ] अभ्यास 3 (वैकल्पिक) मा अस्वीकारको कारण गनेर देखाएँ
+- [ ] abhyas 3 (baikalpik) ma asbikarako karan ganer dekhaen
 
 <!-- ne-cell: 84120fa4 | after-heading -->
-## थप अध्ययन (वैकल्पिक)
+## thap adhyayan (baikalpik)
 
 <!-- ne-cell: 84120fa4 -->
-### सन्दर्भ लिङ्क
+### sandarbha lingk
 
-- [Python control flow (जापानी)](https://docs.python.org/ja/3/tutorial/controlflow.html)
-- [Python त्रुटि र अपवाद](https://docs.python.org/ja/3/tutorial/errors.html)
+- [Python control flow (Japani)](https://docs.python.org/ja/3/tutorial/controlflow.html)
+- [Python truti ra apabad](https://docs.python.org/ja/3/tutorial/errors.html)
 - [Python built-in function](https://docs.python.org/ja/3/library/functions.html)
 
-### थप चुनौती (अनिवार्य होइन)
+### thap chunauti (aniwarya hoina)
 
-`for` र `while` को फरक खोज्नुहोस् र "कति पटक दोहोरिने थाहा नभएको" काम कुनले लेख्नुपर्ने हो सोच्नुहोस्।
+`for` ra `while` ko farak khojnuhos ra "kati patak dohorine thaha nabhaeko" kaam kunle lekhnuparne ho sochnuhos.

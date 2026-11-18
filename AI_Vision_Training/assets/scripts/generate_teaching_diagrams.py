@@ -2327,56 +2327,97 @@ def _threshold_sweep(grey: np.ndarray, thresholds) -> list[dict]:
 
 
 def teach_threshold_sweep(out: Path) -> Path:
+    """しきい値を動かすと「白い画素」と「外部輪郭」がどう変わるか / how T moves both counts.
+
+    入力画像は 1 枚のまま動かしません。変えるのはしきい値 T だけです。CV_THRESH_BINARY_INV なので
+    画素値 I ≤ T が白（前景）255、I > T が黒（無視）0 になります。
+    The input image never changes; only T moves. With THRESH_BINARY_INV a pixel with I <= T becomes
+    white (foreground, 255) and I > T becomes black (ignored, 0).
+    """
     import cv2
 
     image = _pvc_sheet(200, defect="spot", seed=52)
     grey = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
     thresholds = list(range(40, 221, 10))
     sweep = _threshold_sweep(grey, thresholds)
+    picked = (100, 160, 210)
+    samples = [next(row for row in sweep if row["threshold"] == value) for value in picked]
 
-    fig = plt.figure(figsize=(11.8, 6.2))
-    grid = fig.add_gridspec(2, 3, height_ratios=[1.0, 1.35], hspace=0.42, wspace=0.22)
+    fig = plt.figure(figsize=(12.6, 7.2))
+    grid = fig.add_gridspec(2, 4, height_ratios=[1.0, 0.95], hspace=0.40, wspace=0.40,
+                            top=0.82, bottom=0.16, left=0.10, right=0.985)
 
-    samples = [next(r for r in sweep if r["threshold"] == t) for t in (100, 160, 210)]
-    for column, row in enumerate(samples):
+    ax_input = fig.add_subplot(grid[0, 0])
+    ax_input.imshow(grey, cmap="gray", vmin=0, vmax=255)
+    ax_input.set_title("入力（グレースケール）\ninput, never changed", fontsize=8.4)
+    ax_input.set_xticks([])
+    ax_input.set_yticks([])
+    ax_input.text(0.5, -0.10, "この 1 枚を最後まで使う", transform=ax_input.transAxes,
+                  ha="center", fontsize=7.6, color=MUTED)
+
+    for column, row in enumerate(samples, start=1):
         sub = fig.add_subplot(grid[0, column])
         sub.imshow(row["binary"], cmap="gray", vmin=0, vmax=255)
-        sub.set_title(f"しきい値 / threshold {row['threshold']}\n"
-                      f"前景 {row['foreground']} px・{row['regions']} 領域", fontsize=8.6)
+        sub.set_title(f"しきい値 T = {row['threshold']}\nTHRESH_BINARY_INV", fontsize=8.4)
         sub.set_xticks([])
         sub.set_yticks([])
+        sub.set_xlabel(f"白 {row['foreground']} px・外部輪郭 {row['regions']}", fontsize=7.4,
+                       color=MUTED, labelpad=4)
 
-    ax = fig.add_subplot(grid[1, :])
-    ax.plot([r["threshold"] for r in sweep], [r["foreground"] for r in sweep],
-            marker="o", markersize=3.5, color=ACCENT, label="前景の画素数 / foreground pixels")
-    ax.set_xlabel("しきい値 / threshold（THRESH_BINARY_INV：画素値 ≤ T が前景）", fontsize=8.6)
-    ax.set_ylabel("前景の画素数 / foreground pixels", fontsize=8.6, color=ACCENT)
-    ax.tick_params(labelsize=7.6)
-    ax.grid(alpha=0.25)
+    fig.text(0.075, 0.925, "白＝選ばれた前景（画素値 ≤ T）　黒＝無視する背景（画素値 > T）",
+             fontsize=8.6, color=INK)
+    fig.text(0.075, 0.900, "white = selected foreground (I ≤ T)     black = ignored background (I > T)",
+             fontsize=8.0, color=MUTED)
 
-    ax2 = ax.twinx()
-    ax2.plot([r["threshold"] for r in sweep], [r["regions"] for r in sweep],
-             marker="s", markersize=3.5, color=BAD, label="連結領域の数 / regions")
-    ax2.set_ylabel("連結領域の数 / number of regions", fontsize=8.6, color=BAD)
-    ax2.tick_params(labelsize=7.6)
-    ax.set_title("しきい値を動かすと、前景の画素数と領域数が同時に動く / "
-                 "the foreground pixel count and the region count both move", fontsize=9.6)
+    axis_values = [row["threshold"] for row in sweep]
+    foreground = [row["foreground"] for row in sweep]
+    contours_count = [row["regions"] for row in sweep]
+    sampled_contours = "\n".join(f"T = {row['threshold']}:  {row['regions']}" for row in samples)
+    graph_a = fig.add_subplot(grid[1, 0:2])
+    graph_a.plot(axis_values, foreground, marker="o", markersize=3.4, linewidth=1.6, color=ACCENT)
+    graph_a.set_xlabel("しきい値 T / threshold T", fontsize=8.4)
+    graph_a.set_ylabel("白い前景の画素数 / white foreground pixels (px)", fontsize=8.4)
+    graph_a.set_title("グラフ A：前景の画素数は減らない / graph A: pixel count never falls",
+                      fontsize=9.0)
+    graph_a.set_ylim(0, 40000)
+    graph_a.set_xlim(axis_values[0] - 5, axis_values[-1] + 5)
+    graph_a.grid(alpha=0.25)
+    graph_a.tick_params(labelsize=7.6)
+    graph_a.text(0.02, 0.55, "\n".join(
+        f"T = {row['threshold']}:  {row['foreground']:,} px" for row in samples),
+        transform=graph_a.transAxes, va="top", fontsize=7.2, color=MUTED, linespacing=1.6)
 
-    for picked in (100, 160, 210):
-        ax.axvline(picked, color=MUTED, linestyle=":", linewidth=1.1)
-        row = next(r for r in sweep if r["threshold"] == picked)
-        offset = (-64, 10) if row["foreground"] < 1000 else (-64, -30)
-        ax.annotate(f"{picked}: {row['foreground']} px\n{row['regions']} 領域",
-                    xy=(picked, row["foreground"]), textcoords="offset points",
-                    xytext=offset, fontsize=7.2, color=MUTED)
+    graph_b = fig.add_subplot(grid[1, 2:4])
+    graph_b.plot(axis_values, contours_count, marker="s", markersize=3.4, linewidth=1.6, color=BAD)
+    graph_b.set_xlabel("しきい値 T / threshold T", fontsize=8.4)
+    graph_b.set_ylabel("外部輪郭の数 / external contours", fontsize=8.4)
+    graph_b.set_title("グラフ B：外部輪郭の数は増減する / graph B: contour count rises and falls",
+                      fontsize=9.0)
+    graph_b.set_xlim(axis_values[0] - 5, axis_values[-1] + 5)
+    graph_b.grid(alpha=0.25)
+    graph_b.tick_params(labelsize=7.6)
+    graph_b.text(0.02, 0.96, sampled_contours, transform=graph_b.transAxes, va="top", fontsize=7.2,
+                 color=MUTED, linespacing=1.5)
+    graph_b.text(0.02, 0.70, "数え方 / counted by: cv2.findContours(..., cv2.RETR_EXTERNAL, ...)",
+                 transform=graph_b.transAxes, fontsize=6.8, color=MUTED)
 
-    fig.suptitle(f"同じ 1 枚を、しきい値だけ変えて {len(thresholds)} 通りに処理した結果（合成画像）/ "
-                 f"one image, {len(thresholds)} thresholds, everything else unchanged", fontsize=10)
-    _caption(fig, "図：しきい値は「どこまでを欠陥と呼ぶか」を決める数。数え方が変わるので、"
-                  "しきい値を書かずに面積や個数を比べてはいけません。ここで数えているのは校正前の"
-                  "画素数で、mm² ではありません。 / "
-                  "Figure: the threshold decides what counts as a defect, so a count is meaningless "
-                  "without it; these are pixel counts, not calibrated areas.", y=-0.01)
+    for value in picked:
+        for graph in (graph_a, graph_b):
+            graph.axvline(value, color=MUTED, linestyle=":", linewidth=1.0)
+
+    fig.suptitle(
+        f"しきい値 T を {thresholds[0]}〜{thresholds[-1]} の {len(thresholds)} 通りに動かす"
+        "（同じ合成画像・実測値）/ sweeping T on one synthetic image",
+        fontsize=10.2)
+    _caption(
+        fig,
+        "図：白い画素は「画素値 ≤ T」で選ばれ、T を上げても減りません（グラフ A）。外部輪郭の数は、"
+        "白い領域が現れたりつながったりするので増減します（グラフ B）。外部輪郭は欠陥そのものではなく、"
+        "画素数も mm² ではありません。 / "
+        "Figure: white pixels are those with I <= T, so raising T never removes them (graph A). The "
+        "number of external contours rises and falls as white regions appear and merge (graph B). "
+        "An external contour is not a defect, and a pixel count is not a calibrated area in mm².",
+        y=0.085)
     return _save(fig, out)
 
 
