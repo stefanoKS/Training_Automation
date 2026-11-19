@@ -63,8 +63,8 @@ Of the Japanese + English booklets, `Day02`, `Day04`, `Day05` and `Week1` were r
 | `Day02_explanation_ja_en_ne.pdf` | 第 2 日（ノートブック 01〜03） | 115 |
 | `Day03_explanation_ja_en_ne.pdf` | 第 3 日（ノートブック 01〜03） | 77 |
 | `Day04_explanation_ja_en_ne.pdf` | 第 4 日（ノートブック 01〜03） | 90 |
-| `Day05_explanation_ja_en_ne.pdf` | 第 5 日（ノートブック 01〜03） | 89 |
-| `Week1_explanation_ja_en_ne.pdf` | 5 日分をまとめたもの / all five days | 458 |
+| `Day05_explanation_ja_en_ne.pdf` | 第 5 日（ノートブック 01〜03） | 90 |
+| `Week1_explanation_ja_en_ne.pdf` | 5 日分をまとめたもの / all five days | 459 |
 | `Setup_ja_en_ne.pdf` | 準備ノートブック `00_Environment_Setup.ipynb` | 41 |
 | `Installation_Guide_ja_en_ne.pdf` | `START_HERE.md` と `docs/troubleshooting/installation.md` | 23 |
 | `Repository_Guide_ja_en_ne.pdf` | `README.md` と `requirements/tested_versions.md` | 23 |
