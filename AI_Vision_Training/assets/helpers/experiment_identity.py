@@ -225,11 +225,10 @@ def frozen_identity(base: dict, *, yolo_threshold, patchcore_threshold) -> dict:
     return identity
 
 
-def write_json_atomic(path: Path, payload) -> Path:
+def write_text_atomic(path: Path, text: str) -> Path:
     """途中で失敗しても壊れたファイルを残さない / publish a complete file or nothing."""
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
-    text = json.dumps(payload, indent=2, ensure_ascii=False)
     handle, temporary = tempfile.mkstemp(prefix=path.name + ".", suffix=".tmp", dir=path.parent)
     try:
         with os.fdopen(handle, "w", encoding="utf-8", newline="\n") as stream:
@@ -244,6 +243,73 @@ def write_json_atomic(path: Path, payload) -> Path:
             pass
         raise
     return path
+
+
+def write_json_atomic(path: Path, payload) -> Path:
+    """JSON も同じやり方で公開する / publish a JSON file the same way."""
+    return write_text_atomic(path, json.dumps(payload, indent=2, ensure_ascii=False))
+
+
+def file_sha256(path: Path) -> str:
+    """ファイルの中身の指紋 / the SHA-256 of the file contents.
+
+    A relative path proves only where a file was looked for. The digest proves *which* file it
+    was, so a retrained ``best.pt`` under the same name cannot inherit the frozen provenance.
+    """
+    digest = hashlib.sha256()
+    with Path(path).open("rb") as stream:
+        for block in iter(lambda: stream.read(1 << 20), b""):
+            digest.update(block)
+    return digest.hexdigest()
+
+
+def file_set_digest(paths) -> dict:
+    """ファイル集合の指紋 / a digest over a set of files (name → SHA-256, then one hash).
+
+    Counting files is not enough: two runs can publish the same *number* of maps for different
+    images. Hashing the names together with their contents is what makes the set identifiable.
+    """
+    digests = {Path(path).name: file_sha256(path) for path in paths}
+    return {"count": len(digests), "digest": digest_json(digests)}
+
+
+def check_file_sha256(path: Path, expected, *, what: str) -> str:
+    """期待した中身かを確かめて、指紋を返す / verify the contents, then hand the digest back."""
+    if not expected:
+        raise ProvenanceError(
+            f"{what} の中身の指紋が記録されていません / no SHA-256 was recorded for {what}")
+    path = Path(path)
+    if not path.is_file():
+        raise ProvenanceError(f"{what} が見つかりません / {what} is missing: {path}")
+    actual = file_sha256(path)
+    if actual != expected:
+        raise ProvenanceError(
+            f"{what} の中身が記録と違います / the contents of {what} changed: "
+            f"recorded={str(expected)[:16]}… actual={actual[:16]}…")
+    return actual
+
+
+def recover_fitted_model(model_class, checkpoint_path: Path, *, frozen_fingerprint: str,
+                         map_location: str = "cpu"):
+    """チェックポイントを読み、固定した実験と同一だと確かめてから返す。
+
+    A kernel restart removes the fitted model but not the ``.ckpt``. Reloading that checkpoint
+    restores the *same* memory bank, so the recovered model can still stand behind the frozen
+    identity — but only if the fingerprint agrees. A refit never does: it builds a new memory
+    bank and therefore a new experiment, so it is rejected here instead of being passed off as a
+    recovery.
+
+    Load the checkpoint and prove it is the frozen experiment; a refit is a different experiment.
+    """
+    loaded = model_class.load_from_checkpoint(str(checkpoint_path), map_location=map_location)
+    recovered = fitted_state(loaded)
+    if recovered["fingerprint"] != frozen_fingerprint:
+        raise ProvenanceError(
+            "読み直したチェックポイントは固定したモデルではありません。fit し直すと別の実験に"
+            "なります / the checkpoint is not the frozen model "
+            f"(checkpoint={recovered['fingerprint'][:12]}, frozen={str(frozen_fingerprint)[:12]}). "
+            "A refit is a new experiment: redo the freeze; never reuse the sealed test scores.")
+    return loaded
 
 
 def normalise_image_id(name: str) -> str:

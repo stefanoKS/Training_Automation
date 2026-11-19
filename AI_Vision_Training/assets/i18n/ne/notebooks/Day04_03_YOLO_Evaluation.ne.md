@@ -416,7 +416,7 @@ badaldaina.
 
 - sthir abhilekh `submissions/day05/comparison_freeze_record.json` ra tyasko ghoshana
 - sthir abhilekh ma lekheko bandaphant ra yo Part ma tay gareko bandaphant ko milan
-- sthir abhilekh ma lekheko YOLO weight ra yahan load bhaeko weight ko milan
+- sthir abhilekh ma lekheko YOLO weight ko path ra **bhitar (SHA-256)** ra yahan load bhaeko weight ko milan
 
 **kernel YOLO batabaran mai** rakhera chalaunuhos. anomalib batabaran ma `ultralytics` chhaina,
 tyasaile yo cell chaldaina. kernel feri suru gareko bhane Part 5 ko bandaphant cell baat feri

@@ -231,12 +231,17 @@ objective and the score convention. The old `yolo_vs_patchcore.csv` is kept as `
 
 参考実測（CPU, resnet18, `image_size=256`, seed 2026 の **較正用 = validation** データ）:
 `image_AUROC 1.0000 / image_F1Score 0.9744 / pixel_AUROC 0.9851 / pixel_F1Score 0.4307`。
-この 4 つは **較正用データ** の値で、試験用の値はノートブック 03 で出します。
+この 4 つは **較正用データ** の値です。試験用の数字は、固定のあとで第4日ノートブック03
+（`shared-sealed-test`）と第5日ノートブック02（`clarity-sealed-test-scoring`）が 1 回ずつ採点し、
+第5日ノートブック03 が 2 つの封印を読んで最終比較としてまとめます。
 **pixel_F1 が低いのは異常** ではなく、**画素単位の一致が厳しい** ためです。説明できるようにしてください。
 
 Reference values on CPU with ResNet-18 (`image_size=256`, seed 2026) **on the calibration
 (validation) partition**: image_AUROC 1.0000, image_F1Score 0.9744, pixel_AUROC 0.9851,
-pixel_F1Score 0.4307. These four are **calibration** numbers; the test numbers appear in Notebook 03.
+pixel_F1Score 0.4307. These four are **calibration** numbers. The test numbers come from two sealed
+scorings that happen after the freeze — Day 4 Notebook 03 (`shared-sealed-test`) and Day 5 Notebook 02
+(`clarity-sealed-test-scoring`) — and Day 5 Notebook 03 reads both seals and assembles the final
+comparison.
 The low pixel_F1 is not a fault — pixel-level agreement is simply demanding.
 
 ### よくあるエラー / Common errors

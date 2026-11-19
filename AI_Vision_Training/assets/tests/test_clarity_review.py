@@ -111,11 +111,15 @@ def freeze_namespace(tmp_path: Path) -> dict:
     (day05 / "patchcore_calibrated_state.json").write_text(
         json.dumps({"schema_version": 1, "experiment": experiment,
                     "postprocessor": {"available": False}}), encoding="utf-8")
+    weights = tmp_path / "weights" / "best.pt"
+    weights.parent.mkdir(parents=True)
+    weights.write_bytes(b"fixture YOLO weights")
     return {"COURSE_ROOT": tmp_path, "json": json, "YOLO_THRESHOLD": .06,
             "comparison_is_final": True,
             "PATCHCORE_THRESHOLD": .5,
             "manifest": manifest,
-            "yolo_data": {"weights": "fixture.pt"},
+            "yolo_data": {"weights": "weights/best.pt",
+                          "weights_sha256": identity.file_sha256(weights)},
             "patchcore_data": {"experiment": experiment}}
 
 

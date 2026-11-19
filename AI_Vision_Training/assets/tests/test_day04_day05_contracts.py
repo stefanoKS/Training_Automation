@@ -238,6 +238,7 @@ def _pipeline(tmp_path: Path) -> dict:
     day05.mkdir(parents=True)
     best_weights = course_root / "training_results" / "day04" / "run" / "weights" / "best.pt"
     best_weights.parent.mkdir(parents=True)
+    best_weights.write_bytes(b"yolo-weights, run 1")
 
     common = {"COURSE_ROOT": course_root, "ASSETS": course_root / "assets",
               "model": _FakeYolo(), "best_weights": best_weights,
@@ -351,9 +352,12 @@ def test_the_archived_test_images_land_in_the_test_partition() -> None:
 def test_the_prefreeze_export_holds_calibration_rows_only(tmp_path, capsys) -> None:
     course_root = tmp_path / "course"
     dataset_root = _dataset(course_root)
+    best_weights = course_root / "training_results/day04/run/weights/best.pt"
+    best_weights.parent.mkdir(parents=True)
+    best_weights.write_bytes(b"yolo-weights, run 1")
     namespace = {"COURSE_ROOT": course_root, "ASSETS": course_root / "assets",
                  "model": _FakeYolo(), "shared_set_split": shared_set_split,
-                 "best_weights": course_root / "training_results/day04/run/weights/best.pt"}
+                 "best_weights": best_weights}
 
     run_cell(namespace, "Day04_03", "f7f5833b")
     run_cell(namespace, "Day04_03", "552d3581")
@@ -526,3 +530,201 @@ def test_the_repository_holds_no_generated_comparison_artifacts() -> None:
     assert "comparison_test_results.json" not in generated
     assert "patchcore_test_predictions.json" not in generated
     assert (ROOT / "assets" / "reference_outputs" / "ref_comparison_5col.png").is_file()
+
+
+# ---------------------------------------------------------------------------
+# GROUP F — the freeze record is immutable once test has been sealed
+# ---------------------------------------------------------------------------
+
+
+def test_the_freeze_record_is_immutable_once_a_seal_exists(tmp_path, capsys) -> None:
+    """An identical rerun is a no-op; a changed setting fails and touches nothing."""
+    state = _pipeline(tmp_path)
+    day05, course_root = state["day05"], state["course_root"]
+    freeze_path = day05 / "comparison_freeze_record.json"
+    seal_path = course_root / "submissions" / "day04" / "yolo_predictions_sealed_test.json"
+
+    sealer = dict(state["common"])
+    sealer.update({"json": json})
+    run_cell(sealer, "Day04_03", "shared-sealed-test")
+    freeze_before, seal_before = freeze_path.read_bytes(), seal_path.read_bytes()
+
+    rerun = dict(state["consumer"])
+    same = (('FREEZE_DECLARATION = ""',
+             'FREEZE_DECLARATION = "frozen before test; no retuning"'),
+            ("TEST_ALREADY_SEEN = True", "TEST_ALREADY_SEEN = False"))
+    run_cell(rerun, "Day05_03", "clarity-freeze-record", same)
+    printed = capsys.readouterr().out
+    assert "Identical freeze record" in printed
+    assert freeze_path.read_bytes() == freeze_before
+    assert seal_path.read_bytes() == seal_before
+
+    with pytest.raises(RuntimeError, match="immutable"):
+        run_cell(rerun, "Day05_03", "clarity-freeze-record", (
+            ('FREEZE_DECLARATION = ""', 'FREEZE_DECLARATION = "changed after seeing test"'),
+            ("TEST_ALREADY_SEEN = True", "TEST_ALREADY_SEEN = False")))
+    assert freeze_path.read_bytes() == freeze_before
+    assert seal_path.read_bytes() == seal_before
+
+
+# ---------------------------------------------------------------------------
+# GROUP G — an existing YOLO seal is fully validated, never silently re-scored
+# ---------------------------------------------------------------------------
+
+
+def _yolo_seal(state: dict) -> dict:
+    """A seal that would pass every check, so each test can break exactly one thing."""
+    freeze = json.loads((state["day05"] / "comparison_freeze_record.json")
+                        .read_text(encoding="utf-8"))
+    payload = json.loads((state["course_root"] / "submissions" / "day04"
+                          / "yolo_predictions_on_shared_set.json").read_text(encoding="utf-8"))
+    names = state["split"]["partitions"]["test"]
+    weights = state["course_root"] / "training_results/day04/run/weights/best.pt"
+    seal = {
+        "schema_version": 1,
+        "scored_partitions": ["test"],
+        "experiment": freeze["experiment"],
+        "model": {"weights": payload["weights"], "weights_sha256": payload["weights_sha256"],
+                  "imgsz": 320, "min_inference_conf": 0.01},
+        "frozen": {"declaration": freeze["declaration"],
+                   "yolo_threshold": freeze["yolo_threshold"],
+                   "patchcore_threshold": freeze["patchcore_threshold"],
+                   "assessment_role": freeze["assessment_role"],
+                   "split_manifest": freeze["manifest"]["counts"]},
+        "split_partitions_digest": payload["split_partitions_digest"],
+        "scored_at_utc": "2026-11-19T00:00:00+00:00",
+        "images": [{"partition": "test", "image": name,
+                    "truly_abnormal": "good" not in name, "yolo_max_conf": 0.9}
+                   for name in names],
+    }
+    assert identity.file_sha256(weights) == seal["model"]["weights_sha256"]
+    return seal
+
+
+def _break_role(seal: dict) -> None:
+    seal["frozen"]["assessment_role"] = "illustrative_reused_data"
+
+
+def _break_threshold(seal: dict) -> None:
+    seal["frozen"]["yolo_threshold"] = 0.99
+
+
+def _break_coverage(seal: dict) -> None:
+    seal["images"].pop()
+
+
+def _break_duplicates(seal: dict) -> None:
+    seal["images"][1]["image"] = seal["images"][0]["image"]
+
+
+def _break_partition(seal: dict) -> None:
+    seal["images"][0]["partition"] = "calibration"
+
+
+def _break_schema(seal: dict) -> None:
+    seal["schema_version"] = 0
+
+
+@pytest.mark.parametrize("mutate", [_break_role, _break_threshold, _break_coverage,
+                                    _break_duplicates, _break_partition, _break_schema])
+def test_an_invalid_existing_yolo_seal_is_rejected_and_test_is_not_re_scored(
+        tmp_path, mutate) -> None:
+    """Schema, role, thresholds, IDs, duplicates, partitions and coverage are all checked."""
+    state = _pipeline(tmp_path)
+    seal = _yolo_seal(state)
+    mutate(seal)
+    seal_path = state["course_root"] / "submissions" / "day04" / "yolo_predictions_sealed_test.json"
+    seal_path.write_text(json.dumps(seal), encoding="utf-8")
+    before = seal_path.read_bytes()
+    calls_before = len(state["common"]["model"].calls)
+
+    sealer = dict(state["common"])
+    sealer.update({"json": json})
+    with pytest.raises(identity.ProvenanceError, match="could not be verified"):
+        run_cell(sealer, "Day04_03", "shared-sealed-test")
+
+    assert len(state["common"]["model"].calls) == calls_before
+    assert seal_path.read_bytes() == before
+
+
+def test_a_valid_existing_yolo_seal_is_accepted_without_re_scoring(tmp_path, capsys) -> None:
+    state = _pipeline(tmp_path)
+    seal = _yolo_seal(state)
+    seal_path = state["course_root"] / "submissions" / "day04" / "yolo_predictions_sealed_test.json"
+    seal_path.write_text(json.dumps(seal), encoding="utf-8")
+    calls_before = len(state["common"]["model"].calls)
+
+    sealer = dict(state["common"])
+    sealer.update({"json": json})
+    run_cell(sealer, "Day04_03", "shared-sealed-test")
+
+    assert "matches this frozen experiment" in capsys.readouterr().out
+    assert len(state["common"]["model"].calls) == calls_before
+    assert json.loads(seal_path.read_text(encoding="utf-8")) == seal
+
+
+# ---------------------------------------------------------------------------
+# GROUP H — the YOLO weights are frozen by content, not by name
+# ---------------------------------------------------------------------------
+
+
+def test_the_yolo_weight_contents_are_frozen_and_verified(tmp_path) -> None:
+    state = _pipeline(tmp_path)
+    course_root = state["course_root"]
+    weights = course_root / "training_results/day04/run/weights/best.pt"
+    payload = json.loads((course_root / "submissions" / "day04"
+                          / "yolo_predictions_on_shared_set.json").read_text(encoding="utf-8"))
+    freeze = json.loads((state["day05"] / "comparison_freeze_record.json")
+                        .read_text(encoding="utf-8"))
+
+    assert payload["weights_sha256"] == identity.file_sha256(weights)
+    assert freeze["yolo_weights"] == {"path": payload["weights"],
+                                      "sha256": payload["weights_sha256"]}
+
+    # the same path with different contents is a different experiment
+    weights.write_bytes(b"retrained run 2")
+    sealer = dict(state["common"])
+    sealer.update({"json": json})
+    with pytest.raises(identity.ProvenanceError, match="changed"):
+        run_cell(sealer, "Day04_03", "shared-sealed-test")
+    assert not (course_root / "submissions" / "day04"
+                / "yolo_predictions_sealed_test.json").exists()
+
+
+# ---------------------------------------------------------------------------
+# GROUP I — numeric maps: no stale or partial set is presented as a result
+# ---------------------------------------------------------------------------
+
+
+def test_stale_maps_are_quarantined_and_the_seal_records_the_published_set(tmp_path) -> None:
+    state = _pipeline(tmp_path)
+    day05 = state["day05"]
+    (day05 / "maps").mkdir(parents=True, exist_ok=True)
+    stale = day05 / "maps" / "old_map.npz"
+    stale.write_bytes(b"stale map from an interrupted attempt")
+
+    _seal_test_scores(state, lambda batch, index, path: path.write_bytes(b"map:" + path.name.encode()))
+
+    sealed = json.loads((day05 / "patchcore_test_predictions.json").read_text(encoding="utf-8"))
+    published = sorted((day05 / "maps").glob("*_map.npz"))
+    assert not stale.exists()
+    assert sealed["maps"]["count"] == len(published) == len(state["split"]["partitions"]["test"])
+    assert sealed["maps"]["digest"] == identity.file_set_digest(published)["digest"]
+    assert not (day05 / "maps_pending").exists()
+
+
+def test_a_map_digest_mismatch_is_not_presented_as_this_experiments_output(tmp_path, capsys) -> None:
+    """Scores stay authoritative: a stale map set is reported, never shown as evidence."""
+    state = _pipeline(tmp_path)
+    sealer = dict(state["common"])
+    sealer.update({"json": json})
+    run_cell(sealer, "Day04_03", "shared-sealed-test")
+    _seal_test_scores(state, lambda batch, index, path: path.write_bytes(b"map"))
+    (state["day05"] / "maps" / "extra_map.npz").write_bytes(b"left over")
+
+    reader = dict(state["consumer"])
+    reader.update({"pd": pd, "Path": Path, "json": json})
+    run_cell(reader, "Day05_03", "clarity-load-sealed-test")
+
+    assert reader["numeric_maps_status"]["verified"] is False
+    assert "do not match the sealed record" in capsys.readouterr().out

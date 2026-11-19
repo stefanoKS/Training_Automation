@@ -417,3 +417,103 @@ def test_image_ids_from_both_conventions_agree() -> None:
     assert identity.normalise_image_id("good/a.png") == "good/a.png"
     assert identity.normalise_image_id("test\\bad\\b.png") == "bad/b.png"
     assert identity.test_partition(_manifest()) == {"good/a.png", "bad/b.png"}
+
+
+# ---------------------------------------------------------------------------
+# file contents, not file names (CASE 12) — YOLO weights and numeric maps
+# ---------------------------------------------------------------------------
+
+
+def test_file_digest_helpers_name_what_changed(tmp_path) -> None:
+    weights = tmp_path / "best.pt"
+    weights.write_bytes(b"weights v1")
+    digest = identity.file_sha256(weights)
+    assert identity.check_file_sha256(weights, digest, what="the weights") == digest
+
+    weights.write_bytes(b"weights v2")
+    with pytest.raises(identity.ProvenanceError, match="changed"):
+        identity.check_file_sha256(weights, digest, what="the weights")
+    with pytest.raises(identity.ProvenanceError, match="no SHA-256"):
+        identity.check_file_sha256(weights, None, what="the weights")
+
+    maps = [tmp_path / "a_map.npz", tmp_path / "b_map.npz"]
+    for path in maps:
+        path.write_bytes(path.name.encode())
+    recorded = identity.file_set_digest(maps)
+    assert recorded["count"] == 2
+    assert identity.file_set_digest(maps)["digest"] == recorded["digest"]
+
+    # the same number of files under different names is a different set
+    renamed = []
+    for index, path in enumerate(maps):
+        target = tmp_path / f"c{index}_map.npz"
+        path.rename(target)
+        renamed.append(target)
+    assert identity.file_set_digest(renamed)["digest"] != recorded["digest"]
+
+
+# ---------------------------------------------------------------------------
+# checkpoint recovery (CASE 13) — reloading is not refitting
+# ---------------------------------------------------------------------------
+
+
+def _checkpoint_model(values):
+    torch = pytest.importorskip("torch")
+
+    class Inner:
+        def __init__(self, tensor):
+            self.tensor = tensor
+            self.memory_bank = tensor
+
+        def state_dict(self):
+            return {"memory_bank": self.tensor}
+
+    class Model:
+        """Stands in for ``Patchcore.load_from_checkpoint``; the fingerprint is the real one."""
+
+        def __init__(self, tensor):
+            self.model = Inner(tensor)
+
+        @classmethod
+        def load_from_checkpoint(cls, path, map_location="cpu"):
+            return cls(torch.tensor(json.loads(Path(path).read_text(encoding="utf-8")),
+                                    dtype=torch.float32))
+
+    return Model(torch.tensor(values, dtype=torch.float32)), Model
+
+
+def test_checkpoint_recovery_accepts_only_the_frozen_bytes(tmp_path) -> None:
+    model, model_class = _checkpoint_model([1.0, 2.0, 3.0])
+    frozen = identity.fitted_state(model)["fingerprint"]
+    checkpoint = tmp_path / "model.ckpt"
+    checkpoint.write_text(json.dumps([1.0, 2.0, 3.0]), encoding="utf-8")
+
+    recovered = identity.recover_fitted_model(model_class, checkpoint,
+                                              frozen_fingerprint=frozen)
+    assert identity.fitted_state(recovered)["fingerprint"] == frozen
+
+    # a refit produces other bytes: it is a new experiment, not a recovery
+    checkpoint.write_text(json.dumps([1.0, 2.0, 4.0]), encoding="utf-8")
+    with pytest.raises(identity.ProvenanceError, match="new experiment"):
+        identity.recover_fitted_model(model_class, checkpoint, frozen_fingerprint=frozen)
+
+
+# ---------------------------------------------------------------------------
+# the canonical accessor against the pinned library
+# ---------------------------------------------------------------------------
+
+
+def test_the_canonical_helper_reads_the_pinned_anomalib_postprocessor() -> None:
+    """Runs wherever anomalib 2.x is installed; the base course env has 1.1.0dev only."""
+    import types
+
+    post_processing = pytest.importorskip("anomalib.post_processing")
+    torch = pytest.importorskip("torch")
+
+    post_processor = post_processing.PostProcessor()
+    # anomalib 2.x has no `adaptive_threshold`; the notebook asked for exactly that name
+    assert not hasattr(post_processor, "adaptive_threshold")
+    post_processor._image_threshold = torch.tensor(9.75)
+
+    state = identity.postprocessor_state(types.SimpleNamespace(post_processor=post_processor))
+    assert state["adaptive_threshold"] == pytest.approx(9.75)
