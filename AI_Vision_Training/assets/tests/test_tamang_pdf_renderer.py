@@ -98,6 +98,133 @@ def test_switching_the_locale_does_not_relabel_the_nepali_booklets(tmp_path) -> 
     exporter.configure_locale("ne")
 
 
+# ---------------------------------------------------------------------------
+# Day 5: one concept, three languages, one reading order
+# ---------------------------------------------------------------------------
+
+UNIT_JA = "しきい値は較正用データで決めます。"
+UNIT_EN = "The threshold is chosen on the calibration data."
+UNIT_TAJ = "तामाङ पाठ।"
+ROW_JA = "低いしきい値"
+ROW_EN = "low threshold"
+ROW_TAJ = "तामाङ पंक्ति।"
+CAPTION_JA = "図：較正で決めたしきい値。"
+CAPTION_EN = "Figure: the threshold chosen on calibration."
+CAPTION_TAJ = "तामाङ चित्र।"
+
+
+def day5_cells(folder: Path) -> tuple[Path, list[dict]]:
+    image = ROOT / "assets" / "diagrams" / "diagram_dataset_split.png"
+    (folder / "split.png").write_bytes(image.read_bytes())
+    cells = [
+        {"cell_type": "markdown", "id": "concept",
+         "source": "#### しきい値 / Threshold\n\n"
+                   f"{UNIT_JA}\n\n{UNIT_EN}\n\n<!-- taj-unit: threshold -->\n"},
+        {"cell_type": "markdown", "id": "row",
+         "source": "| しきい値<br>threshold | 意味<br>meaning |\n| --- | --- |\n"
+                   f"| {ROW_JA}<br>{ROW_EN} <!-- taj-row: low --> | 較正で決める<br>chosen on calibration |\n"},
+        {"cell_type": "markdown", "id": "figure",
+         "source": "![split](split.png)\n\n"
+                   f"{CAPTION_JA}\n\n{CAPTION_EN}\n\n<!-- taj-unit: threshold-caption -->\n"},
+        {"cell_type": "markdown", "id": "next",
+         "source": "#### 次の概念 / Next concept\n\n次の説明。\n\nThe next explanation.\n\n"
+                   "<!-- taj-unit: next-concept -->\n"},
+    ]
+    return folder, cells
+
+
+def test_the_grouped_day5_layout_keeps_one_concept_in_one_reading_order(tmp_path) -> None:
+    """日本語 → 英語 → タマン語が同じ概念の位置に並ぶこと / JA, EN, then Tamang per concept."""
+    folder, cells = day5_cells(tmp_path)
+    blocks = {
+        "concept": [{"at": "unit:threshold", "text": UNIT_TAJ}],
+        "row": [{"at": "row:low", "text": ROW_TAJ}],
+        "figure": [{"at": "unit:threshold-caption", "text": CAPTION_TAJ}],
+    }
+    document = exporter.Document("", "", "")
+    for cell in cells:
+        source = "".join(cell["source"])
+        filled = apply_translations.apply_blocks(source, blocks.get(cell["id"], []),
+                                                 i18n_locales.locale("taj"))
+        assert apply_translations.apply_blocks(filled, blocks.get(cell["id"], []),
+                                               i18n_locales.locale("taj")) == filled
+        document.add(exporter.markdown_cell_html(filled, folder, cell["id"], document))
+    html = exporter.html_document(document)
+    assert "ne:begin" not in html and "ne:end" not in html
+    assert html.count("<img") == 1, "the figure appears once, not once per language"
+    assert html.count("<table>") == 1, "the table appears once, not once per language"
+    html_path = tmp_path / "grouped.html"
+    html_path.write_text(html, encoding="utf-8")
+    pdf_path = tmp_path / "grouped.pdf"
+    exporter.render(html_path, pdf_path, "grouped Day 5 fixture")
+    texts = exporter.page_texts(pdf_path)
+    text = "\n".join(texts)
+    assert "\ufffd" not in text, "the Devanagari text layer must be searchable Unicode"
+    key = exporter._search_key(text)
+    for marker in (UNIT_TAJ, ROW_TAJ, CAPTION_TAJ):
+        assert exporter._search_key(marker) in key, marker
+    assert key.index(exporter._search_key(UNIT_JA)) < key.index(exporter._search_key(UNIT_EN))
+    assert key.index(exporter._search_key(UNIT_EN)) < key.index(exporter._search_key(UNIT_TAJ))
+    assert key.index(exporter._search_key(CAPTION_EN)) < key.index(exporter._search_key(CAPTION_TAJ))
+    assert "Hapta" not in text and "Pahile" not in text, "no legacy Nepali in the Day 5 layout"
+
+
+def test_the_grouped_day5_layout_puts_the_row_text_inside_its_row(tmp_path) -> None:
+    pdfium = pytest.importorskip("pypdfium2")
+    folder, cells = day5_cells(tmp_path)
+    document = exporter.Document("", "", "")
+    for cell in cells:
+        if cell["id"] != "row":
+            continue
+        filled = apply_translations.apply_blocks(
+            "".join(cell["source"]), [{"at": "row:low", "text": ROW_TAJ}],
+            i18n_locales.locale("taj"))
+        document.add(exporter.markdown_cell_html(filled, folder, cell["id"], document))
+    html_path = tmp_path / "row.html"
+    html_path.write_text(exporter.html_document(document), encoding="utf-8")
+    pdf_path = tmp_path / "row.pdf"
+    exporter.render(html_path, pdf_path, "grouped row fixture")
+    pdf = pdfium.PdfDocument(str(pdf_path))
+    page = pdf[0]
+    textpage = page.get_textpage()
+    ja = textpage.search(ROW_JA).get_next()
+    taj = textpage.search(ROW_TAJ).get_next()
+    assert ja and taj, "both the Japanese label and the Tamang row text must render"
+    ja_box = textpage.get_charbox(ja[0])
+    taj_box = textpage.get_charbox(taj[0])
+    assert taj_box[1] < ja_box[1], "the Tamang cell text sits underneath the Japanese in its row"
+    assert abs(taj_box[0] - ja_box[0]) < 40, "and in the same cell, not in another column"
+
+
+def test_the_grouped_day5_layout_keeps_the_tamang_caption_under_its_image(tmp_path) -> None:
+    pdfium = pytest.importorskip("pypdfium2")
+    folder, cells = day5_cells(tmp_path)
+    document = exporter.Document("", "", "")
+    cell = next(item for item in cells if item["id"] == "figure")
+    filled = apply_translations.apply_blocks(
+        "".join(cell["source"]), [{"at": "unit:threshold-caption", "text": CAPTION_TAJ}],
+        i18n_locales.locale("taj"))
+    document.add(exporter.markdown_cell_html(filled, folder, cell["id"], document))
+    html_path = tmp_path / "caption.html"
+    html_path.write_text(exporter.html_document(document), encoding="utf-8")
+    pdf_path = tmp_path / "caption.pdf"
+    exporter.render(html_path, pdf_path, "grouped caption fixture")
+    pdf = pdfium.PdfDocument(str(pdf_path))
+    page = pdf[0]
+    textpage = page.get_textpage()
+    images = [obj for obj in page.get_objects() if obj.type == pdfium.raw.FPDF_PAGEOBJ_IMAGE]
+    assert images
+    image_bottom = min(obj.get_bounds()[1] for obj in images)
+    english = textpage.search(CAPTION_EN[:20]).get_next()
+    tamang = textpage.search(CAPTION_TAJ).get_next()
+    assert english and tamang
+    english_bottom = textpage.get_charbox(english[0])[1]
+    tamang_bottom = textpage.get_charbox(tamang[0])[1]
+    assert 0 <= image_bottom - english_bottom < 100, "the captions stay under the picture"
+    assert tamang_bottom < english_bottom, "the Tamang caption follows the English one"
+    assert english_bottom - tamang_bottom < 100, "and stays in the same caption block"
+
+
 def test_approved_fixture_exports_day_and_document_jobs(tmp_path, monkeypatch):
     pypdf = pytest.importorskip("pypdf")
     root = tmp_path / "course"

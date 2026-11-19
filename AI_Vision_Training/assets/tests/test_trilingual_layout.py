@@ -14,6 +14,7 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "assets" / "scripts"))
 
 import apply_nepali_translations as applier
+import apply_translations as translations
 import export_trilingual_pdf as exporter
 from course_notebooks import course_notebooks
 
@@ -21,9 +22,12 @@ CASES = [
     ("00_Environment_Setup", "79328757", "f98449a1", "teach_setup_jupyter_ui.png", "Setup"),
     ("Day02_03_OpenCV_Image_Processing", "e15c580c", "audit-teach_opencv_pixel_pipeline",
      "teach_opencv_pixel_pipeline.svg", "Day02_explanation"),
-    ("Day05_03_YOLO_vs_PatchCore", "3d343aab", "fig-teach_threshold_freeze",
-     "teach_threshold_freeze.png", "Day05_explanation"),
 ]
+
+# Day 5 was regrouped into one concept per block, so its figure cells carry a concept anchor instead
+# of a Nepali `after-image` region; `test_day05_caption_anchor_sits_under_its_image` pins that.
+DAY5_FIGURE = ("Day05_03_YOLO_vs_PatchCore", "fig-teach_threshold_freeze",
+               "teach_threshold_freeze.png")
 
 
 def lesson(stem):
@@ -63,7 +67,11 @@ def test_only_declared_pairs_merge_and_code_comments_are_not_headings():
 
 def test_all_declared_pairs_are_unique_and_all_catalogs_are_idempotent():
     for path in course_notebooks(ROOT / "notebooks"):
-        entries = applier.parse_catalog(applier.CATALOG_DIR / (path.stem + ".ne.md"))
+        catalog = applier.CATALOG_DIR / (path.stem + ".ne.md")
+        if not catalog.is_file():
+            # Day 5 moved to Tamang (taj) and has no Nepali catalog any more
+            continue
+        entries = applier.parse_catalog(catalog)
         for cell in json.loads(path.read_text(encoding="utf-8"))["cells"]:
             if cell["cell_type"] != "markdown":
                 continue
@@ -94,10 +102,14 @@ def test_every_visual_region_is_inside_its_exact_figure():
             if cell["cell_type"] != "markdown":
                 continue
             text = "".join(cell["source"])
-            regions = {a.partition(":")[2]: r["body"] for a, r in applier.parse_regions(text).items()
-                       if a.startswith("after-image:")}
             if not exporter.IMAGE_RE.search(text):
                 continue
+            if path.stem.startswith("Day05_"):
+                # Day 5 has no Nepali region; its figures use a concept-level caption anchor.
+                assert "after-image:" not in text, (path, cell["id"])
+                continue
+            regions = {a.partition(":")[2]: r["body"] for a, r in applier.parse_regions(text).items()
+                       if a.startswith("after-image:")}
             assert regions, (path, cell["id"])
             tree = ET.fromstring("<main>" + exporter.markdown_cell_html(
                 text, path.parent, cell["id"], exporter.Document("", "", "")) + "</main>")
@@ -174,13 +186,19 @@ def test_all_visual_explanations_fit_with_their_existing_images(tmp_path):
                     continue
                 document.add(ET.tostring(figure, encoding="unicode", method="html"))
                 notes = "".join(figure.find("div[@class='visual-notes']").itertext())
-                caption = figure.find("div[@class='cap ne']")
-                text = "".join(caption.itertext()) if caption is not None else notes
+                captions = [node for node in figure.findall("div")
+                            if node.attrib.get("class", "").startswith("cap ")]
+                text = "".join("".join(node.itertext()) for node in captions) or notes
+                # Day 5 の図はタマン語の注記がまだ空なので、日英のキャプションで探します。
+                # Day 5 carries no third-language note yet, so its Japanese/English captions
+                # identify the figure.
+                if not text.strip():
+                    continue
                 # 先頭 60 文字だけで探すと、同じ図を 2 つの授業で使ったときの共通の書き出しで衝突
                 # します。同じページにある説明の末尾も条件に入れて、その図だけに絞ります。
                 # The first 60 characters alone collide when one figure is reused in two lessons with
                 # the same opening sentence, so the tail of its own notes identifies the page.
-                expected.append((cell["id"], text[:60], notes[-60:]))
+                expected.append((cell["id"], text[:60], (notes.strip() or text)[-60:]))
     html_path = tmp_path / "all-figures.html"
     html_path.write_text(exporter.html_document(document), encoding="utf-8")
     pdf_path = tmp_path / "all-figures.pdf"
@@ -295,11 +313,17 @@ def test_font_preflight_fails_instead_of_accepting_generic_fallback():
         exporter.check_fonts(page, needs_devanagari=True)
 
 
-@pytest.mark.parametrize("key", exporter.DAY_ORDER + ["Week1"])
+@pytest.mark.parametrize("key", [day for day in exporter.DAY_ORDER if day != "Day05"])
 def test_distributed_toc_text_and_page_numbers_match_body(key):
+    """配布済み冊子の目次と本文のページが一致すること / the shipped TOC still points at its body.
+
+    Day 5 と Week 1 は今回の再構成より前の内容で作られた配布物なので、ここでは対象外です
+    （Day 5 の日本語＋英語版は作り直し、タマン語版は承認まで発行しません）。
+    Day 5 and Week 1 booklets were typeset before this regroup; Day 5 is rebuilt for Japanese plus
+    English, and its Tamang booklet stays blocked until the translation is approved.
+    """
     pytest.importorskip("pypdfium2")
-    keys = exporter.DAY_ORDER if key == "Week1" else [key]
-    doc, _ = exporter.build_document(keys, single=len(keys) == 1)
+    doc, _ = exporter.build_document([key], single=True)
     texts = exporter.page_texts(ROOT / "docs" / "pdf" / f"{key}_explanation_ja_en_ne.pdf")
     start = exporter.body_start_page(texts)
     pages = exporter.locate_headings(texts, doc.toc, start)
@@ -343,3 +367,109 @@ def test_cited_caption_and_question_share_the_rendered_figure_page(
     # Raster rendering is required as well as a searchable text layer.
     image = page.render(scale=1).to_pil()
     assert image.convert("L").getextrema()[0] < 100
+
+
+# ---------------------------------------------------------------------------
+# Day 5: one concept per block, Japanese and English together, Tamang beside them
+# ---------------------------------------------------------------------------
+
+DAY5_STEMS = ("Day05_01_Anomaly_Detection_Concepts", "Day05_02_PatchCore_Training",
+              "Day05_03_YOLO_vs_PatchCore")
+
+
+def day5_cells(stem):
+    path, = course_notebooks(ROOT / "notebooks", stem + ".ipynb")
+    notebook = json.loads(path.read_text(encoding="utf-8"))
+    return path, [cell for cell in notebook["cells"] if cell["cell_type"] == "markdown"]
+
+
+@pytest.mark.parametrize("stem", DAY5_STEMS)
+def test_day5_has_no_language_chapters_and_no_nepali(stem):
+    """日本語章→英語章に分かれていないこと / no Japanese chapter followed by an English chapter."""
+    for cell in day5_cells(stem)[1]:
+        text = "".join(cell["source"])
+        assert "ne:begin" not in text and "ne:end" not in text, cell["id"]
+        headings = [line for line in text.splitlines() if line.startswith("#")]
+        english_only = [line for line in headings
+                        if not re.search(r"[\u3040-\u30ff\u4e00-\u9fff]", line)]
+        assert not english_only, (stem, cell["id"], english_only)
+        assert not re.search(r"^#+ .*\b(Nepali|नेपाली)\b", text, re.M), cell["id"]
+
+
+@pytest.mark.parametrize("stem", DAY5_STEMS)
+def test_day5_tables_and_tuples_appear_once_per_concept(stem):
+    """表や言語表は 1 つだけ / one table per concept, never one table per language."""
+    for cell in day5_cells(stem)[1]:
+        text = "".join(cell["source"])
+        tables = [block for block in text.split("\n\n") if block.strip().startswith("|")]
+        headers = [block.splitlines()[0].strip() for block in tables]
+        assert len(headers) == len(set(headers)), (stem, cell["id"], headers)
+        assert "| 日本語 | English |" not in text, (stem, cell["id"])
+
+
+@pytest.mark.parametrize("stem", DAY5_STEMS)
+def test_day5_caption_anchor_sits_under_its_image(stem):
+    """図の直後に説明があり、その直後にタマン語の枠があること / captions, then the Tamang slot."""
+    seen = 0
+    with_caption = 0
+    for cell in day5_cells(stem)[1]:
+        text = "".join(cell["source"])
+        if not exporter.IMAGE_RE.search(text):
+            continue
+        seen += 1
+        lines = text.splitlines()
+        image_at = next(i for i, line in enumerate(lines) if exporter.IMAGE_RE.search(line))
+        rest = [line for line in lines[image_at + 1:] if line.strip()]
+        captions = 0
+        while captions < len(rest) and exporter.CAPTION_RE.match(rest[captions]):
+            captions += 1
+        if not captions:
+            continue
+        with_caption += 1
+        assert captions >= 2, (stem, cell["id"], "a Japanese caption and its English twin")
+        anchor = rest[captions].strip()
+        assert anchor.startswith("<!-- taj-unit:") and anchor.endswith("-caption -->"), \
+            (stem, cell["id"], anchor)
+    assert seen >= 3, f"{stem}: no figure cell found"
+    assert with_caption >= 2, f"{stem}: no captioned figure found"
+
+
+@pytest.mark.parametrize("stem", DAY5_STEMS)
+def test_groups_read_japanese_then_english_then_tamang(stem):
+    """同じ概念のタマン語が、日本語＋英語の直後に入ること / JA, EN, then Tamang, in that order."""
+    path, cells = day5_cells(stem)
+    checked = 0
+    for cell in cells:
+        text = "".join(cell["source"])
+        anchors = translations.unit_anchors(text, exporter._locale("taj"))
+        units = [anchor for anchor in anchors if anchor.startswith("unit:")]
+        if not units:
+            continue
+        blocks = [{"at": units[0], "text": "तामाङ व्याख्या।"}]
+        filled = translations.apply_blocks(text, blocks, exporter._locale("taj"))
+        tree = ET.fromstring("<main>" + exporter.markdown_cell_html(
+            filled, path.parent, cell["id"], exporter.Document("", "", "")) + "</main>")
+        parts = [node for node in tree]
+        tamang = [index for index, node in enumerate(parts) if "तामाङ व्याख्या।" in "".join(node.itertext())]
+        assert len(tamang) == 1, (stem, cell["id"])
+        position = tamang[0]
+        headings = [index for index, node in enumerate(parts) if re.fullmatch("h[1-4]", node.tag)]
+        before = [index for index in headings if index < position]
+        after = [index for index in headings if index > position]
+        if after:
+            assert position < after[0], (stem, cell["id"], "Tamang text drifted past the next heading")
+        start = before[-1] if before else 0
+        section = "".join("".join(node.itertext()) for node in parts[start:position])
+        assert exporter.JP_CHAR_RE.search(section) and re.search(r"[A-Za-z]{4,}", section), \
+            (stem, cell["id"], section[:60])
+        checked += 1
+    assert checked > 20, f"{stem}: only {checked} concept slots rendered"
+
+
+def test_day5_english_and_japanese_share_one_table_cell():
+    """三言語は同じ説明セルに入る / the three languages live inside one explanation cell."""
+    _, cells = day5_cells("Day05_03_YOLO_vs_PatchCore")
+    cell = next(item for item in cells if item["id"] == "404278ad")
+    text = "".join(cell["source"])
+    row = next(line for line in text.splitlines() if "main output" in line)
+    assert "主な出力" in row and "main output" in row and "<br>" in row

@@ -38,24 +38,27 @@ pratisthapan gardaina.
 | `Day02_explanation_ja_en.pdf` | 第 2 日（ノートブック 01〜03） | 88 |
 | `Day03_explanation_ja_en.pdf` | 第 3 日（ノートブック 01〜03） | 56 |
 | `Day04_explanation_ja_en.pdf` | 第 4 日（ノートブック 01〜03） | 70 |
-| `Day05_explanation_ja_en.pdf` | 第 5 日（ノートブック 01〜03） | 65 |
+| `Day05_explanation_ja_en.pdf` | 第 5 日（ノートブック 01〜03） | 68 |
 | `Week1_explanation_ja_en.pdf` | 5 日分をまとめたもの / all five days | 340 |
 
 日本語＋英語版のうち、2026-11-19 に作り直したのは `Day02`・`Day04`・`Day05`・`Week1` です
 （Day 2 の図、Day 4・Day 5 の手順の説明が変わったため）。`Day01`・`Day03` は 2026-11-16 の版を
-そのまま残しています。
+そのまま残しています。2026-11-20 に `Day05` を、三言語の再構成（1 概念 1 ブロック）に合わせて
+もう一度作り直しました。
 Of the Japanese + English booklets, `Day02`, `Day04`, `Day05` and `Week1` were rebuilt on 2026-11-19
 (the Day 2 figure and the Day 4/5 workflow text changed); `Day01` and `Day03` still ship the
-2026-11-16 files unchanged.
+2026-11-16 files unchanged. `Day05` was rebuilt again on 2026-11-20 for the one-concept-per-block
+layout.
 
-日本語＋英語＋ネパール語 / Japanese, English and Nepali:
+日本語＋英語＋第 3 の言語 / Japanese, English and a third language:
 
-> 第 3 の言語は **ローマ字表記のネパール語**（Nepali written with Latin letters, BCP 47 `ne-Latn`）です。
-> デーヴァナーガリー文字ではありません。16 冊のノートブックと 12 の学習者向け文書はすべてローマ字
-> 表記に移行済みなので、どの冊子にもデーヴァナーガリーは入りません。詳しくは
-> [`assets/i18n/ne/romanization_style_guide.md`](../../assets/i18n/ne/romanization_style_guide.md)。
-> The third language is **Nepali written with Latin letters** (`ne-Latn`), not Devanagari.
-> All 16 notebooks and 12 learner documents have been migrated, so no booklet mixes scripts.
+> 第 3 の言語は、第 1〜4 日が **ローマ字表記のネパール語**（Nepali written with Latin letters,
+> BCP 47 `ne-Latn`）、第 5 日が **タマン語**（provisional Eastern Tamang, Devanagari, `taj-Deva`）です。
+> 第 5 日のタマン語はまだ承認されていないため、**第 5 日の三言語版は発行していません**。
+> 古いネパール語版の `Day05_explanation_ja_en_ne.pdf` は配布物から外しました（履歴には残っています）。
+> Days 1-4 carry Romanized Nepali (`ne-Latn`); Day 5 carries Tamang (`taj-Deva`). No Day 5 trilingual
+> booklet is distributed until its Tamang text is reviewed and approved, and the old Nepali Day 5
+> booklet has been withdrawn from the course distribution.
 
 | ファイル / File | 内容 / Contents | ページ / Pages |
 |---|---|---|
@@ -63,7 +66,6 @@ Of the Japanese + English booklets, `Day02`, `Day04`, `Day05` and `Week1` were r
 | `Day02_explanation_ja_en_ne.pdf` | 第 2 日（ノートブック 01〜03） | 115 |
 | `Day03_explanation_ja_en_ne.pdf` | 第 3 日（ノートブック 01〜03） | 77 |
 | `Day04_explanation_ja_en_ne.pdf` | 第 4 日（ノートブック 01〜03） | 90 |
-| `Day05_explanation_ja_en_ne.pdf` | 第 5 日（ノートブック 01〜03） | 92 |
 | `Week1_explanation_ja_en_ne.pdf` | 5 日分をまとめたもの / all five days | 460 |
 | `Setup_ja_en_ne.pdf` | 準備ノートブック `00_Environment_Setup.ipynb` | 41 |
 | `Installation_Guide_ja_en_ne.pdf` | `START_HERE.md` と `docs/troubleshooting/installation.md` | 23 |
@@ -81,12 +83,18 @@ after the migration to Romanized Nepali and the Day 2 / Day 5 corrections. That 
 Setup is not part of the six Japanese + English books; the tri-language generation ships it as its
 own booklet, `Setup_ja_en_ne.pdf`.
 
+第 5 日は 1 概念 1 ブロック（日本語 → 英語 → 承認済みタマン語）で組むため、三言語版の組み方は
+`export_trilingual_pdf.py --locale taj` のままですが、**承認ゲートが通るまで発行しません**。
+Day 5 is typeset one concept per block (Japanese, English, then approved Tamang). The third-language
+build is still `export_trilingual_pdf.py --locale taj`, and it stays gated: no Day 5 booklet is
+produced until every concept is reviewed and approved.
+
 <!-- ne:begin doc:724f15e073 -->
 ### Nepali ma
 
 | file | samagri |
 |---|---|
-| `Day01_explanation_ja_en_ne.pdf` … `Day05_explanation_ja_en_ne.pdf` | pratyek dinka 3 notebook (din 5 ma 3) |
+| `Day01_explanation_ja_en_ne.pdf` … `Day04_explanation_ja_en_ne.pdf` | pratyek dinka 3 notebook (din 4 samma; din 5 Taj bhasaiko swikriti pachhi) |
 | `Week1_explanation_ja_en_ne.pdf` | 5 dinakai samagri eutai pustikama |
 | `Setup_ja_en_ne.pdf` | tayari notebook `00_Environment_Setup.ipynb` |
 | `Installation_Guide_ja_en_ne.pdf` | `START_HERE.md` ra `docs/troubleshooting/installation.md` |
@@ -95,9 +103,11 @@ own booklet, `Setup_ja_en_ne.pdf`.
 
 pana sankhya harek patak banaunda skriptale aphain dekhaunchha.
 
-> tesro bhasha **roman lipima lekheko Nepali** (`ne-Latn`) ho, Devanagari hoina. sabai 16 wata
-> notebook ra 12 wata shiksharthi file roman lipima chhan, tyasaile kunai pustikama Devanagari
-> bhetindaina. thap jankari: `assets/i18n/ne/romanization_style_guide.md`.
+> din 1-4 ko tesro bhasha **roman lipima lekheko Nepali** (`ne-Latn`) ho. din 5 ko tesro bhasha
+> **Tamang** (`taj-Deva`) ho ra tyo ahile samma swikrit bhaeko chhaina, tyasaile din 5 ko
+> trilingual pustika ahile badhiyeko chhaina. purano Nepali `Day05_explanation_ja_en_ne.pdf`
+> hataieko chha (git history ma raheko chha). thap jankari:
+> `assets/i18n/ne/romanization_style_guide.md`.
 <!-- ne:end -->
 
 ## 作り直す方法 / Regenerating

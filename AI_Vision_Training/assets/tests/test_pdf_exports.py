@@ -100,8 +100,11 @@ def test_installation_and_regeneration_commands_are_documented() -> None:
     assert "reportlab" in requirements
 
 
-@pytest.mark.parametrize("name", ["Day05", "Week1"])
-@pytest.mark.parametrize("languages", ["ja_en", "ja_en_ne"])
+@pytest.mark.parametrize("name,languages", [
+    ("Day05", "ja_en"),
+    ("Week1", "ja_en"),
+    ("Week1", "ja_en_ne"),
+])
 def test_learner_pdfs_exclude_archived_test_images_and_worked_answers(name, languages) -> None:
     from PIL import Image
 

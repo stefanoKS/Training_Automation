@@ -12,14 +12,30 @@ One sidecar per notebook. A block starts with a directive line owned by its loca
     <!-- taj-cell: 79dc91db -->                 # append at the end of the cell
     <!-- taj-cell: 79dc91db | after-heading --> # directly after the leading heading block
     <!-- taj-cell: figure-id | after-image:../../assets/diagrams/example.png -->
+    <!-- taj-cell: ba87b991 | unit:learning-objectives -->
 
 and runs until the next directive. Two more directives carry review state rather than text::
 
-    <!-- taj-status: 79dc91db approved -->      # a reviewer signed this block off
-    <!-- taj-pending: 79dc91db | reason -->     # no dependable text yet; nothing is inserted
+    <!-- taj-status: ba87b991/unit:learning-objectives approved -->
+    <!-- taj-pending: ba87b991/unit:learning-objectives | reason -->
 
 ``pending`` exists so an untranslated cell is *recorded as pending* instead of being filled with
 something invented. The coverage checker counts the two states separately.
+
+概念単位のアンカー / concept-level anchors
+------------------------------------------
+A cell that carries invisible anchor comments is translated **per concept**, not per cell::
+
+    #### パッチ＝画像の小片 / A patch is a small piece of the image   <- one concept
+    …Japanese explanation…
+    …English explanation…
+    <!-- taj-unit: a-patch-is-a-small-piece-of-the-image -->          <- slot for Tamang
+
+    | 主な出力<br>main output | … <!-- taj-row: main-output --> |      <- slot inside a table row
+
+``unit:`` slots receive a paragraph of their own; ``row:`` slots live inside a table row and are
+appended with ``<br>`` so the row keeps its shape. A catalog entry that names a slot which no longer
+exists is rejected, so a renamed heading fails loudly instead of silently moving the translation.
 
 差し込みの仕組み / how insertion stays idempotent
 -------------------------------------------------
@@ -52,6 +68,10 @@ COURSE_ROOT = Path(__file__).resolve().parents[2]
 
 FORBIDDEN_LABELS = ("日本語：", "日本語:", "English:", "English：")
 VALID_ANCHORS = ("end", "after-heading")
+# 概念単位のアンカー / concept-level anchors (Day 5 and later)
+UNIT_SLUG_RE = r"[A-Za-z0-9][A-Za-z0-9._\-]*"
+UNIT_ANCHOR_RE = re.compile(r"<!--\s*([a-z]{2,3})-unit:\s*(" + UNIT_SLUG_RE + r")\s*-->")
+ROW_ANCHOR_RE = re.compile(r"<!--\s*([a-z]{2,3})-row:\s*(" + UNIT_SLUG_RE + r")\s*-->")
 IMAGE_RE = re.compile(r"!\[([^\]]*)\]\(([^)\s]+)\)")
 CAPTION_RE = re.compile(
     r"^(?:図[：:]|Figure[：:]|चित्र[：:]|चित्रमा|फोटो[：:]|写真[：:]|Photo[：:]"
@@ -64,8 +84,12 @@ class CatalogError(SystemExit):
 
 
 def valid_anchor(anchor: str) -> bool:
-    return anchor in VALID_ANCHORS or (
-        anchor.startswith("after-image:") and bool(anchor.partition(":")[2]))
+    if anchor in VALID_ANCHORS:
+        return True
+    if anchor.startswith("after-image:"):
+        return bool(anchor.partition(":")[2])
+    kind, _, slug = anchor.partition(":")
+    return kind in ("unit", "row") and bool(re.fullmatch(UNIT_SLUG_RE, slug))
 
 
 def begin_marker(loc: Locale, anchor: str) -> str:
@@ -134,6 +158,26 @@ def image_captions(lines: list[str], start: int) -> tuple[list[str], int]:
     return captions, index
 
 
+def inline_region_re(loc: Locale) -> re.Pattern:
+    """行の中に埋め込む領域 / a region that lives inside one table row or list item."""
+    return re.compile(
+        r"<!--\s*" + loc.code + r":begin\s+((?:row|unit):" + UNIT_SLUG_RE + r")\s*-->"
+        r"(?P<body>[^\n]*?)<!--\s*" + loc.code + r":end\s*-->", re.S)
+
+
+def unit_anchors(source: str, loc: Locale) -> list[str]:
+    """セル内の概念アンカーを順番に返す / the ordered concept anchors of one cell."""
+    found = [(match.start(), f"unit:{match.group(2)}") for match in
+             UNIT_ANCHOR_RE.finditer(source) if match.group(1) == loc.code]
+    found += [(match.start(), f"row:{match.group(2)}") for match in
+              ROW_ANCHOR_RE.finditer(source) if match.group(1) == loc.code]
+    anchors = [anchor for _position, anchor in sorted(found)]
+    duplicates = {anchor for anchor in anchors if anchors.count(anchor) > 1}
+    if duplicates:
+        raise CatalogError(f"duplicate {loc.code} concept anchor(s): {sorted(duplicates)}")
+    return anchors
+
+
 def parse_regions(source: str, loc: Locale) -> dict[str, dict]:
     """差し込み済みの領域を取り出す / collect the existing regions of one cell."""
     regions: dict[str, dict] = {}
@@ -144,13 +188,28 @@ def parse_regions(source: str, loc: Locale) -> dict[str, dict]:
         if anchor in regions:
             raise CatalogError(f"two {loc.code} regions with anchor {anchor!r} in one cell")
         regions[anchor] = {"span": match.span(), "body": match.group("body")}
+    for match in inline_region_re(loc).finditer(source):
+        anchor = match.group(1)
+        if anchor in regions:
+            raise CatalogError(f"two {loc.code} regions with anchor {anchor!r} in one cell")
+        regions[anchor] = {"span": match.span(), "body": match.group("body")}
     return regions
 
 
 def strip_regions(source: str, loc: Locale) -> str:
     """領域を取り除いた元の本文 / the original source without the translated regions."""
-    text = loc.region_re().sub("", source)
+    text = inline_region_re(loc).sub("", source)
+    text = loc.region_re().sub("", text)
     return text.rstrip("\n") + "\n" if text.strip() else text
+
+
+def outside_of_regions(source: str, loc: Locale) -> str:
+    """差し込み済みの領域の外側 / the source with every inserted region removed."""
+    text = inline_region_re(loc).sub("", source)
+    text = loc.region_re().sub("", text)
+    if loc.code != "ne":
+        text = without_legacy(text)
+    return text
 
 
 def _heading_insert_index(lines: list[str]) -> int:
@@ -173,9 +232,35 @@ def _heading_insert_index(lines: list[str]) -> int:
     return last_heading + 1
 
 
+def inline_body(text: str) -> str:
+    """行内領域の中身 / one table cell cannot hold a newline, so breaks become ``<br>``."""
+    stripped = text.strip()
+    while stripped.startswith("<br>") or stripped.startswith("<br/>"):
+        stripped = stripped[4:] if stripped.startswith("<br>") else stripped[5:]
+        stripped = stripped.lstrip()
+    return "<br>" + stripped.replace("\n", "<br>")
+
+
 def _insert_region(text: str, anchor: str, body: str, loc: Locale) -> str:
     marker = begin_marker(loc, anchor)
     end = end_marker(loc)
+    if anchor.startswith(("row:", "unit:")):
+        kind, _, slug = anchor.partition(":")
+        pattern = ROW_ANCHOR_RE if kind == "row" else UNIT_ANCHOR_RE
+        hits = [match for match in pattern.finditer(text)
+                if match.group(1) == loc.code and match.group(2) == slug]
+        if len(hits) != 1:
+            raise CatalogError(f"{kind} anchor {slug!r}: expected one anchor, found {len(hits)}")
+        position = hits[0].end()
+        line_end = text.find("\n", position)
+        line_end = len(text) if line_end < 0 else line_end
+        rest_of_line = text[position:line_end]
+        if kind == "row" and " |" not in rest_of_line:
+            raise CatalogError(f"row anchor {slug!r} is not inside a table row")
+        if rest_of_line.strip():
+            # 箇条書きの中の枠 / the slot shares its line with a bullet or a table row
+            return text[:position] + f"{marker}{inline_body(body)}{end}" + text[position:]
+        return text[:position] + f"\n\n{marker}\n{body}\n{end}\n" + text[position:].lstrip("\n")
     if anchor.startswith("after-image:"):
         target = anchor.partition(":")[2]
         lines = text.split("\n")
@@ -207,6 +292,8 @@ def apply_blocks(source: str, blocks: list[dict], loc: Locale) -> str:
     for anchor in wanted:
         if not valid_anchor(anchor):
             raise CatalogError(f"unknown anchor: {anchor!r}")
+        if anchor.startswith(("unit:", "row:")) and anchor not in unit_anchors(original, loc):
+            raise CatalogError(f"anchor {anchor!r} does not exist in this cell")
         if anchor.startswith("after-image:"):
             target = anchor.partition(":")[2]
             count = sum(match.group(2) == target for match in IMAGE_RE.finditer(original))
@@ -228,6 +315,10 @@ def apply_blocks(source: str, blocks: list[dict], loc: Locale) -> str:
             match = loc.region_re().match(text, span_start)
             if match and match.group("anchor") == anchor:
                 text = text[:match.start("body")] + body + text[match.end("body"):]
+                continue
+            inline = inline_region_re(loc).match(text, span_start)
+            if inline and inline.group(1) == anchor:
+                text = text[:inline.start("body")] + inline_body(body) + text[inline.end("body"):]
                 continue
         text = _insert_region(text, anchor, body, loc)
 
@@ -352,9 +443,7 @@ def apply_catalog(path: Path, entries: dict[str, list[dict]], write: bool, loc: 
             report["conflicts"].append(f"{cell_id}: not a markdown cell")
             continue
         current = "".join(cell["source"])
-        outside = loc.region_re().sub("", current)
-        if loc.code != "ne":
-            outside = without_legacy(outside)
+        outside = outside_of_regions(current, loc)
         if DEVANAGARI_RE.search(outside):
             report["untracked_devanagari"].append(cell_id)
             continue
@@ -367,9 +456,7 @@ def apply_catalog(path: Path, entries: dict[str, list[dict]], write: bool, loc: 
     for cell in nb["cells"]:
         if cell["cell_type"] != "markdown" or cell.get("id") in entries:
             continue
-        outside = loc.region_re().sub("", "".join(cell["source"]))
-        if loc.code != "ne":
-            outside = without_legacy(outside)
+        outside = outside_of_regions("".join(cell["source"]), loc)
         if DEVANAGARI_RE.search(outside):
             report["untracked_devanagari"].append(cell.get("id"))
 

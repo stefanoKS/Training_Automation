@@ -70,6 +70,15 @@ DOCUMENTS = [
     "submissions/day05/Day05_Report_Template.md",
 ]
 
+# タマン語へ移行したノートブック / notebooks migrated from Nepali to Tamang.
+# Their third language is タマン語 (taj), so they carry no Nepali region and no Nepali catalog; the
+# Tamang coverage tool owns them. Days 1-4 are untouched and keep their Nepali material.
+TAMANG_MIGRATED = (
+    "Day05_01_Anomaly_Detection_Concepts",
+    "Day05_02_PatchCore_Training",
+    "Day05_03_YOLO_vs_PatchCore",
+)
+
 
 def cell_text(cell: dict) -> str:
     source = cell.get("source", [])
@@ -121,6 +130,11 @@ def is_exempt(text: str) -> bool:
 
 
 def check_notebook(path: Path) -> dict:
+    if path.stem in TAMANG_MIGRATED:
+        return {"path": path.relative_to(COURSE_ROOT).as_posix(), "markdown_cells": 0,
+                "translated": 0, "exempt": 0, "missing": [], "forbidden": [],
+                "stray_devanagari": [], "unverified": [], "scripts": [], "chars": 0,
+                "catalog": "migrated-to-taj", "migrated": True}
     notebook = json.loads(path.read_text(encoding="utf-8"))
     cells = notebook["cells"]
     report = {
@@ -205,6 +219,7 @@ def run() -> dict:
             "romanized_blocks": sum(item["scripts"].count("romanized") for item in notebooks),
             "devanagari_blocks": sum(item["scripts"].count("devanagari") for item in notebooks),
             "chars": sum(item["chars"] for item in notebooks),
+            "migrated": sum(1 for item in notebooks if item.get("migrated")),
             "documents_with_nepali": sum(1 for item in documents if item["regions"]),
         },
     }
@@ -222,6 +237,9 @@ def main(argv=None) -> int:
         print(json.dumps(report, ensure_ascii=False, indent=2))
     else:
         for item in report["notebooks"]:
+            if item.get("migrated"):
+                print(f"[nb]  {item['path']:<70} migrated to Tamang (taj): no Nepali expected")
+                continue
             state = "ok" if not item["missing"] else f"missing {len(item['missing'])}"
             print(f"[nb]  {item['path']:<70} md={item['markdown_cells']:>3} "
                   f"ne={item['translated']:>3} exempt={item['exempt']:>2} "

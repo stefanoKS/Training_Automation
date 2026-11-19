@@ -27,7 +27,7 @@ pratisthapan gardaina.
 
 | file | samagri |
 |---|---|
-| `Day01_explanation_ja_en_ne.pdf` … `Day05_explanation_ja_en_ne.pdf` | pratyek dinka 3 notebook (din 5 ma 3) |
+| `Day01_explanation_ja_en_ne.pdf` … `Day04_explanation_ja_en_ne.pdf` | pratyek dinka 3 notebook (din 4 samma; din 5 Taj bhasaiko swikriti pachhi) |
 | `Week1_explanation_ja_en_ne.pdf` | 5 dinakai samagri eutai pustikama |
 | `Setup_ja_en_ne.pdf` | tayari notebook `00_Environment_Setup.ipynb` |
 | `Installation_Guide_ja_en_ne.pdf` | `START_HERE.md` ra `docs/troubleshooting/installation.md` |
@@ -36,9 +36,11 @@ pratisthapan gardaina.
 
 pana sankhya harek patak banaunda skriptale aphain dekhaunchha.
 
-> tesro bhasha **roman lipima lekheko Nepali** (`ne-Latn`) ho, Devanagari hoina. sabai 16 wata
-> notebook ra 12 wata shiksharthi file roman lipima chhan, tyasaile kunai pustikama Devanagari
-> bhetindaina. thap jankari: `assets/i18n/ne/romanization_style_guide.md`.
+> din 1-4 ko tesro bhasha **roman lipima lekheko Nepali** (`ne-Latn`) ho. din 5 ko tesro bhasha
+> **Tamang** (`taj-Deva`) ho ra tyo ahile samma swikrit bhaeko chhaina, tyasaile din 5 ko
+> trilingual pustika ahile badhiyeko chhaina. purano Nepali `Day05_explanation_ja_en_ne.pdf`
+> hataieko chha (git history ma raheko chha). thap jankari:
+> `assets/i18n/ne/romanization_style_guide.md`.
 
 <!-- ne-section: ## 作り直す方法 / Regenerating -->
 ### Nepali ma

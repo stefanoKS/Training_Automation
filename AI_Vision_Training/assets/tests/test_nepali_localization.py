@@ -33,13 +33,15 @@ TRILINGUAL_PDFS = [
     "Day02_explanation_ja_en_ne.pdf",
     "Day03_explanation_ja_en_ne.pdf",
     "Day04_explanation_ja_en_ne.pdf",
-    "Day05_explanation_ja_en_ne.pdf",
     "Week1_explanation_ja_en_ne.pdf",
     "Setup_ja_en_ne.pdf",
     "Installation_Guide_ja_en_ne.pdf",
     "Repository_Guide_ja_en_ne.pdf",
     "Course_Syllabus_ja_en_ne.pdf",
 ]
+
+# Day 5 の三言語版は発行しません / no Day 5 trilingual booklet until the Tamang text is approved.
+DAY5_TRILINGUAL = "Day05_explanation_ja_en_ne.pdf"
 
 # Every trilingual booklet is Romanized (`ne-Latn`) now: the 16 notebook catalogs and the 12 learner
 # documents were migrated, so no learner-facing PDF may still carry Devanagari.
@@ -89,9 +91,12 @@ def doc_applier():
 
 def test_every_markdown_cell_is_translated_or_exempt(coverage) -> None:
     report = coverage.run()
-    missing = {item["path"]: item["missing"] for item in report["notebooks"] if item["missing"]}
+    migrated = set(coverage.TAMANG_MIGRATED)
+    missing = {item["path"]: item["missing"] for item in report["notebooks"]
+               if item["missing"] and Path(item["path"]).stem not in migrated}
     assert missing == {}, f"Markdown cells without Nepali: {missing}"
     assert report["totals"]["translated"] > 0
+    assert report["totals"]["migrated"] == 3, "the three Day 5 notebooks moved to Tamang"
 
 
 def test_nepali_has_no_hindi_or_placeholder_text(coverage) -> None:
@@ -119,9 +124,11 @@ def test_catalogs_cover_exactly_the_shipped_notebooks(coverage) -> None:
 
 
 def test_all_sixteen_catalogs_are_romanized(coverage) -> None:
-    """全 16 冊のカタログがラテン文字であること / every notebook catalog is `ne-Latn`."""
+    """16 冊のうち第 1〜4 日の 13 冊がラテン文字であること / Day 5 moved to Tamang."""
     catalogs = sorted(CATALOG_DIR.glob("*.ne.md"))
-    assert len(catalogs) == 16, f"expected 16 notebook catalogs, found {len(catalogs)}"
+    assert len(catalogs) == 13, f"expected 13 Nepali notebook catalogs, found {len(catalogs)}"
+    assert not [path for path in catalogs if path.name.startswith("Day05_")], \
+        "the Day 5 notebooks no longer carry a Nepali catalog"
     devanagari = {path.name: len(DEVANAGARI_RE.findall(path.read_text(encoding="utf-8")))
                   for path in catalogs if DEVANAGARI_RE.search(path.read_text(encoding="utf-8"))}
     assert devanagari == {}, f"catalogs still carrying Devanagari: {devanagari}"
@@ -136,7 +143,7 @@ def test_no_devanagari_survives_in_any_notebook_region(coverage) -> None:
                  for item in report["notebooks"] if "devanagari" in item["scripts"]}
     assert survivors == {}, f"Devanagari Nepali regions remain: {survivors}"
     assert report["totals"]["devanagari_blocks"] == 0
-    assert report["totals"]["romanized_blocks"] > 1000
+    assert report["totals"]["romanized_blocks"] > 800
 
 
 @pytest.mark.parametrize("name", LEARNER_DOCUMENTS)
@@ -228,6 +235,12 @@ def test_nepali_timetable_keeps_every_window_and_notebook_part(doc_applier) -> N
 def test_trilingual_pdf_exists(name: str) -> None:
     path = PDF_DIR / name
     assert path.is_file(), f"missing {name}; run assets/scripts/export_trilingual_pdf.py"
+
+
+def test_no_day5_trilingual_booklet_is_distributed_yet() -> None:
+    """タマン語が承認されるまで第 5 日の三言語版は出しません / gated until approval."""
+    assert not (PDF_DIR / DAY5_TRILINGUAL).is_file(), (
+        "the legacy Day 5 Nepali booklet must not ship; the Tamang booklet waits for approval")
 
 
 @pytest.mark.parametrize("name", TRILINGUAL_PDFS)

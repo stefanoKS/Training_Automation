@@ -16,12 +16,16 @@ learner-facing Markdown/docs and the pictures those files already reference.
 ------------------------------------------
 With ``--locale ne`` (default, legacy)::
 
-    Day01_explanation_ja_en_ne.pdf … Day05_explanation_ja_en_ne.pdf
+    Day01_explanation_ja_en_ne.pdf … Day04_explanation_ja_en_ne.pdf
     Week1_explanation_ja_en_ne.pdf
     Setup_ja_en_ne.pdf                          (notebooks/00_Setup)
     Installation_Guide_ja_en_ne.pdf             (START_HERE.md + installation troubleshooting)
     Repository_Guide_ja_en_ne.pdf               (README.md)
     Course_Syllabus_ja_en_ne.pdf                (COURSE_SYLLABUS.md)
+
+Day 5 はタマン語の承認まで発行しません / Day 5 has no distributed third-language booklet: its
+notebooks carry Tamang slots instead of Nepali regions, and the gate below keeps the booklet
+blocked until the Tamang text is approved.
 
 With ``--locale taj`` the same booklets are named ``*_ja_en_taj.pdf``, the text layer declares
 ``taj-Deva`` and the terminology file is read from ``assets/i18n/taj/``. That build is **gated**: it
@@ -213,14 +217,51 @@ def inline(text: str) -> str:
         spans[key] = f"<code>{_esc(match.group(1))}</code>"
         return key
 
+    def keep_third(match: re.Match) -> str:
+        """行内の第 3 言語は改行のうえで別の span にする / an inline third-language slot."""
+        key = f"\x00{len(spans)}\x00"
+        body = match.group("body")
+        while body.startswith("<br>"):
+            body = body[4:].lstrip()
+        spans[key] = (f'<br/><span class="ne" lang="{lang_attr("ne")}">'
+                      f"{inline(body)}</span>")
+        return key
+
+    text = anchor_comment_re().sub("", text)
+    text = inline_region_re().sub(keep_third, text)
     text = re.sub(r"`([^`]+)`", keep_code, text)
     text = _esc(text)
+    text = text.replace("&lt;br/&gt;", "<br/>").replace("&lt;br&gt;", "<br/>")
     text = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", text)
     text = re.sub(r"(?<!\*)\*([^*]+)\*(?!\*)", r"<em>\1</em>", text)
     text = re.sub(r"\[([^\]]+)\]\(([^)\s]+)\)", r'<a href="\2">\1</a>', text)
     for key, replacement in spans.items():
         text = text.replace(key, replacement)
     return text
+
+
+def anchor_comment_re() -> re.Pattern:
+    return re.compile(r"<!--\s*[a-z]{2,3}-(?:unit|row):\s*[A-Za-z0-9._\-]+\s*-->")
+
+
+_INLINE_CACHE: dict[str, re.Pattern] = {}
+
+
+def inline_region_re() -> re.Pattern:
+    """行内に差し込まれた第 3 言語 / a third-language region inside one table row or bullet."""
+    pattern = _INLINE_CACHE.get(LOCALE.code)
+    if pattern is None:
+        pattern = re.compile(
+            r"<!--\s*" + LOCALE.code + r":begin\s+(?:row|unit):[^\s]+\s*-->(?P<body>[^\n]*?)"
+            r"<!--\s*" + LOCALE.code + r":end\s*-->", re.S)
+        _INLINE_CACHE[LOCALE.code] = pattern
+    return pattern
+
+
+def cell_language(text: str) -> str:
+    """表のセルの言語 / the language of a table cell, ignoring anchors and inline regions."""
+    cleaned = anchor_comment_re().sub("", inline_region_re().sub("", text))
+    return glyph_language(cleaned)
 
 
 def is_heading(line: str) -> tuple[int, str] | None:
@@ -328,11 +369,17 @@ def _code_block(code: str) -> str:
     return f'<pre class="code"><code>{body}</code></pre>'
 
 
+def _cell_measure(text: str) -> int:
+    """見出し・注記のマーカーを除いた見かけの長さ / visible length without anchors."""
+    body = inline_region_re().sub(lambda match: match.group("body"), anchor_comment_re().sub("", text))
+    return display_len(body.replace("<br>", "\n"))
+
+
 def _table_html(rows: list[list[str]], header: bool, force: str | None = None) -> str:
     columns = max(len(row) for row in rows)
     weights = []
     for column in range(columns):
-        longest = max((display_len(row[column]) for row in rows if column < len(row)), default=1)
+        longest = max((_cell_measure(row[column]) for row in rows if column < len(row)), default=1)
         weights.append(min(max(longest, 8), 64))
     total = sum(weights)
     shares = "".join(f'<col style="width:{100 * weight / total:.2f}%"/>' for weight in weights)
@@ -342,7 +389,7 @@ def _table_html(rows: list[list[str]], header: bool, force: str | None = None) -
         tag = "th" if (index == 0 and header) else "td"
         rendered_cells = []
         for cell in cells:
-            language = force or glyph_language(cell)
+            language = force or cell_language(cell)
             rendered_cells.append(
                 f'<{tag} class="{language}" lang="{lang_attr(language)}">{inline(cell)}</{tag}>')
         out.append(f"<tr>{''.join(rendered_cells)}</tr>")
@@ -1475,6 +1522,18 @@ def general_pdf(out_path: Path, job: dict) -> dict:
 JOBS = [(key, [key], f"{key} 解説 / explanation") for key in DAY_ORDER]
 JOBS.append(("Week1", DAY_ORDER, "第 1 週 まとめ / Week 1 companion"))
 
+
+def jobs_for(loc: Locale) -> list[tuple[str, list[str], str]]:
+    """冊子の一覧 / the booklets this locale may produce.
+
+    Day 5 は 3 言語目の承認まで発行しません / Day 5 ships no third-language booklet until its
+    Tamang text is approved, so it is left out of the ``ne`` build and only reachable through the
+    gated ``taj`` build.
+    """
+    if loc.code == "ne":
+        return [job for job in JOBS if job[0] != "Day05"]
+    return list(JOBS)
+
 DOC_JOBS = [
     dict(
         name="Setup",
@@ -1560,7 +1619,7 @@ def main(argv=None) -> int:
             return 2
     suffix = third.pdf_suffix()
     results = {}
-    for name, keys, label in JOBS:
+    for name, keys, label in jobs_for(third):
         if args.only and args.only not in name:
             continue
         out_path = args.out / f"{name}_explanation_{suffix}.pdf"

@@ -28,7 +28,12 @@ Nepali:
 
 ```
 <!-- taj-pending: 1c4cd018 | no dependable reference translation ... -->
+<!-- taj-pending: ba87b991/unit:learning-objectives | no dependable reference translation ... -->
 ```
+
+Days 1-4 are translated **per cell**; the three Day 5 notebooks are translated **per concept**
+(`unit:` for a paragraph or caption block, `row:` for one item of a table). The Day 5 inventory is
+281 concept slots (79 + 113 + 89), all pending.
 
 The production gate reflects that honestly:
 
@@ -41,17 +46,27 @@ python assets\scripts\check_localization_coverage.py --locale taj --strict   # e
 1. A translator (native or advanced Tamang speaker) replaces a `taj-pending` line with a real block:
 
    ```
-   <!-- taj-cell: <cell id> -->
+   <!-- taj-cell: <cell id> -->                          # Days 1-4: the whole cell
+   <!-- taj-cell: <cell id> | unit:<anchor slug> -->     # Day 5: one concept in that cell
+   <!-- taj-cell: <cell id> | row:<anchor slug> -->      # Day 5: one table row
    …Tamang text…
    ```
 
    For documents, copy the exact key from the pending line (`<!-- taj-section: ## 4. … -->`).
    Repeated headings are qualified with their parent headings, separated by ` > `. Code
    fences and headings inside legacy translations do not define sections.
+
+   The Day 5 anchors are already in the notebooks as invisible comments — a concept block ends
+   with `<!-- taj-unit: <slug> -->`, a table item with `<!-- taj-row: <slug> -->` at the end of its
+   row. The Tamang text then lands **immediately beneath that concept's Japanese and English**
+   (`row:` text is appended inside the same table cell, after a `<br>`). A catalog entry that names
+   an anchor the notebook no longer has is refused, so a renamed heading fails loudly instead of
+   leaving the translation somewhere else.
 2. A reviewer reads the block against the Japanese and English source and records the decision:
 
    ```
    <!-- taj-status: <cell id> approved -->
+   <!-- taj-status: <cell id>/unit:<anchor slug> approved -->
    <!-- taj-status: ## 4. … | approved -->
    ```
 
@@ -66,10 +81,12 @@ python assets\scripts\check_localization_coverage.py --locale taj --strict   # e
 4. `check_localization_coverage.py --locale taj --strict` must pass before a booklet is produced.
 
 The Tamang PDF takes its third-language text only from those reviewed blocks. Built-in cover
-and navigation labels remain Japanese/English; there is no fallback to Nepali. For a paired
-heading, use `after-heading` with `<!-- taj-pair: Exact English heading -->` and a translated
-Markdown heading. For a translated figure caption, start the first paragraph of an
-`after-image:` block with `<!-- taj-caption -->`, then put the caption on the next line.
+and navigation labels remain Japanese/English; there is no fallback to Nepali. For Days 1-4 a
+paired heading uses `after-heading` with `<!-- taj-pair: Exact English heading -->` and a
+translated Markdown heading; a figure caption starts the first paragraph of an `after-image:`
+block with `<!-- taj-caption -->`. Day 5 needs neither: its headings are already bilingual
+(`## 日本語 / English`) and its captions carry a `unit: …-caption` anchor directly under the
+picture, so the third language is appended in the concept's own block.
 
 ## Files
 

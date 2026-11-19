@@ -148,49 +148,123 @@ def classify_notebook(path: Path, loc: Locale) -> dict:
     report = {"path": path.relative_to(COURSE_ROOT).as_posix(), "catalog": catalog.name,
               "cells": {}, "counts": {label: 0 for label in STATUS_LABELS},
               "translated_ids": sorted(entries), "review": metadata.get("review", ""),
-              "issues": issues}
+              "issues": issues, "units": 0}
     for cell in notebook["cells"]:
         if cell["cell_type"] != "markdown":
             continue
         cell_id = cell.get("id") or ""
-        source = "".join(cell.get("source", []))
+        source = without_legacy("".join(cell.get("source", [])))
         if not cell_id or cell_id in report["cells"]:
             issues.append(f"missing or duplicate markdown cell ID: {cell_id!r}")
-        source = without_legacy(source)
-        outside = loc.region_re().sub("", source)
-        cell_issues = outside_errors(outside, loc)
-        bodies = {}
-        wanted = {block["at"]: block["text"] for block in entries.get(cell_id, [])}
         try:
-            regions = apply_translations.parse_regions(source, loc)
-            bodies = {anchor: region["body"] for anchor, region in regions.items()}
-            for anchor, body in bodies.items():
-                apply_translations.validate_block(loc, body, f"cell {cell_id}, {anchor}")
-                if marker_remains(body, loc):
-                    cell_issues.append(f"{anchor}: nested translation markers")
-            for anchor, body in wanted.items():
-                if anchor != "end":
-                    apply_translations.apply_blocks(outside, [{"at": anchor, "text": body}], loc)
+            anchors = apply_translations.unit_anchors(source, loc)
         except apply_translations.CatalogError as error:
-            cell_issues.append(str(error))
-        if bodies != wanted:
-            cell_issues.append("inserted translation anchors or content differ from the catalog")
-        if claimed.get(cell_id) == "approved" and not review:
-            cell_issues.append("approved claim lacks matching human review provenance")
-        issues.extend(f"{cell_id}: {issue}" for issue in cell_issues)
-        if bodies:
-            status = "approved" if claimed.get(cell_id) == "approved" and review and not cell_issues else "draft"
-        elif legacy.is_exempt(outside) and cell_id not in (entries.keys() | pending.keys()):
-            status = "exempt"
-        elif cell_id in pending:
+            issues.append(f"{cell_id}: {error}")
+            anchors = []
+        if anchors:
+            classify_units(source, cell_id, anchors, loc, entries, pending, claimed, review,
+                           report, issues)
+        else:
+            classify_cell(source, cell_id, loc, entries, pending, claimed, review, report, issues)
+    report["translated_ids"] = sorted(set(report["translated_ids"]) | {
+        key for key, item in report["cells"].items() if item["status"] in ("approved", "draft")})
+    issues.extend(catalog_errors(report["cells"].keys(), built_entries(entries, report), pending,
+                                 claimed))
+    return report
+
+
+def classify_cell(source: str, cell_id: str, loc: Locale, entries: dict, pending: dict,
+                  claimed: dict, review: bool, report: dict, issues: list[str]) -> None:
+    """セル単位の従来判定 / the cell-level judgement used by Days 1-4."""
+    outside = loc.region_re().sub("", source)
+    cell_issues = outside_errors(outside, loc)
+    bodies = {}
+    wanted = {block["at"]: block["text"] for block in entries.get(cell_id, [])}
+    try:
+        regions = apply_translations.parse_regions(source, loc)
+        bodies = {anchor: region["body"] for anchor, region in regions.items()}
+        for anchor, body in bodies.items():
+            apply_translations.validate_block(loc, body, f"cell {cell_id}, {anchor}")
+            if marker_remains(body, loc):
+                cell_issues.append(f"{anchor}: nested translation markers")
+        for anchor, body in wanted.items():
+            if anchor != "end":
+                apply_translations.apply_blocks(outside, [{"at": anchor, "text": body}], loc)
+    except apply_translations.CatalogError as error:
+        cell_issues.append(str(error))
+    if bodies != wanted:
+        cell_issues.append("inserted translation anchors or content differ from the catalog")
+    if claimed.get(cell_id) == "approved" and not review:
+        cell_issues.append("approved claim lacks matching human review provenance")
+    issues.extend(f"{cell_id}: {issue}" for issue in cell_issues)
+    if bodies:
+        status = "approved" if claimed.get(cell_id) == "approved" and review and not cell_issues else "draft"
+    elif legacy.is_exempt(outside) and cell_id not in (entries.keys() | pending.keys()):
+        status = "exempt"
+    elif cell_id in pending:
+        status = "pending"
+    else:
+        status = "missing"
+    report["cells"][cell_id] = {"status": status, "chars": sum(len(b) for b in bodies.values()),
+                                "reason": pending.get(cell_id, "")}
+    report["counts"][status] += 1
+
+
+def classify_units(source: str, cell_id: str, anchors: list[str], loc: Locale, entries: dict,
+                   pending: dict, claimed: dict, review: bool, report: dict,
+                   issues: list[str]) -> None:
+    """概念単位の判定 / one status per concept anchor inside a cell."""
+    bodies: dict[str, str] = {}
+    try:
+        regions = apply_translations.parse_regions(source, loc)
+        bodies = {anchor: region["body"] for anchor, region in regions.items()}
+        for anchor, body in bodies.items():
+            apply_translations.validate_block(loc, body, f"cell {cell_id}, {anchor}")
+            if marker_remains(body, loc):
+                issues.append(f"{cell_id}/{anchor}: nested translation markers")
+    except apply_translations.CatalogError as error:
+        issues.append(f"{cell_id}: {error}")
+    outside = loc.region_re().sub("", source)
+    issues.extend(f"{cell_id}: {issue}" for issue in outside_errors(outside, loc))
+    wanted = {block["at"]: block["text"] for block in entries.get(cell_id, [])}
+    stale = set(wanted) - set(anchors)
+    if stale:
+        issues.append(f"{cell_id}: catalog names anchors the notebook does not have: {sorted(stale)}")
+    for anchor in anchors:
+        key = f"{cell_id}/{anchor}"
+        body = bodies.get(anchor, "")
+        unit_issues = []
+        if body:
+            if key in wanted and wanted[key].strip() != body.strip():
+                unit_issues.append("inserted text differs from the catalog")
+        elif anchor in wanted:
+            unit_issues.append("catalog text is not inserted")
+        if claimed.get(key) == "approved" and not review:
+            unit_issues.append("approved claim lacks matching human review provenance")
+        issues.extend(f"{key}: {issue}" for issue in unit_issues)
+        if body:
+            status = ("approved" if claimed.get(key) == "approved" and review and not unit_issues
+                      else "draft")
+        elif key in pending:
             status = "pending"
         else:
             status = "missing"
-        report["cells"][cell_id] = {"status": status, "chars": sum(len(b) for b in bodies.values()),
-                                    "reason": pending.get(cell_id, "")}
+        report["cells"][key] = {"status": status, "chars": len(body),
+                                "reason": pending.get(key, ""), "cell": cell_id}
         report["counts"][status] += 1
-    issues.extend(catalog_errors(report["cells"].keys(), entries, pending, claimed))
-    return report
+        report["units"] += 1
+
+
+def built_entries(entries: dict, report: dict) -> dict:
+    """カタログの差し込み先を必要キーへそろえる / map catalog blocks onto the required keys."""
+    built: dict[str, list[dict]] = {}
+    for cell_id, blocks in entries.items():
+        if all(f"{cell_id}/{block['at']}" in report["cells"] for block in blocks):
+            for block in blocks:
+                built[f"{cell_id}/{block['at']}"] = [block]
+        else:
+            built[cell_id] = blocks
+    return built
 
 
 def document_source(text: str, loc: Locale) -> str:
@@ -360,7 +434,18 @@ def emit_pending_catalogs(loc: Locale, write: bool) -> list[str]:
             source = "".join(cell.get("source", []))
             if loc.region_re().search(source) or cell_id in translated:
                 continue
-            if legacy.is_exempt(without_legacy(loc.region_re().sub("", source))):
+            outside = without_legacy(loc.region_re().sub("", source))
+            try:
+                anchors = apply_translations.unit_anchors(outside, loc)
+            except apply_translations.CatalogError:
+                anchors = []
+            if anchors:
+                for anchor in anchors:
+                    key = f"{cell_id}/{anchor}"
+                    lines.append(f"<!-- {loc.code}-pending: {key} | "
+                                 f"{pending_now.get(key, PENDING_REASON)} -->")
+                continue
+            if legacy.is_exempt(outside):
                 continue
             # 既存の pending はそのまま残す（理由つきで書き直さない）
             # Keep an existing pending entry, including its reason, instead of dropping it.

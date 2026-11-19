@@ -269,7 +269,7 @@ offline reading; the exercises are still done in Jupyter.
 |---|---|
 | `docs/pdf/Day01_explanation_ja_en.pdf` … `Day05_…` | 各日の解説（日本語 → 英語） / one booklet per day |
 | `docs/pdf/Week1_explanation_ja_en.pdf` | 5 日分をまとめたもの / all five days |
-| `docs/pdf/Day01_explanation_ja_en_ne.pdf` … `Day05_…` | 各日の解説（日本語 → 英語 → ネパール語） / one booklet per day, with Nepali |
+| `docs/pdf/Day01_explanation_ja_en_ne.pdf` … `Day04_…` | 各日の解説（日本語 → 英語 → ネパール語） / one booklet per day, with Nepali（第 5 日はタマン語の承認後に発行 / Day 5 follows once its Tamang text is approved） |
 | `docs/pdf/Week1_explanation_ja_en_ne.pdf` | 5 日分をまとめた三言語版 / all five days, trilingual |
 | `docs/pdf/Setup_ja_en_ne.pdf`, `Installation_Guide_ja_en_ne.pdf`, `Repository_Guide_ja_en_ne.pdf`, `Course_Syllabus_ja_en_ne.pdf` | 準備ノートブック・導入・リポジトリ案内・シラバスの三言語版 / the setup notebook, installation, repository guide and syllabus in three languages |
 | `docs/pdf/README.md` | 作り方・含まれるもの・限界 / how to rebuild, what is in, limitations |
@@ -306,7 +306,7 @@ hun; abhyas bhane notabukamai garinchha.
 
 | file | samagri |
 |---|---|
-| `docs/pdf/Day01_explanation_ja_en_ne.pdf` … `Day05_…` | pratyek dinko byakhya (Japani → Angreji → Nepali) |
+| `docs/pdf/Day01_explanation_ja_en_ne.pdf` … `Day04_…` | pratyek dinko byakhya (Japani → Angreji → Nepali) |
 | `docs/pdf/Week1_explanation_ja_en_ne.pdf` | 5 dinko ekai pustika |
 | `docs/pdf/Setup_ja_en_ne.pdf` | tayari notebook |
 | `docs/pdf/Installation_Guide_ja_en_ne.pdf` | sthapana ra samasya samadhan |

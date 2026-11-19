@@ -120,7 +120,7 @@ hun; abhyas bhane notabukamai garinchha.
 
 | file | samagri |
 |---|---|
-| `docs/pdf/Day01_explanation_ja_en_ne.pdf` … `Day05_…` | pratyek dinko byakhya (Japani → Angreji → Nepali) |
+| `docs/pdf/Day01_explanation_ja_en_ne.pdf` … `Day04_…` | pratyek dinko byakhya (Japani → Angreji → Nepali) |
 | `docs/pdf/Week1_explanation_ja_en_ne.pdf` | 5 dinko ekai pustika |
 | `docs/pdf/Setup_ja_en_ne.pdf` | tayari notebook |
 | `docs/pdf/Installation_Guide_ja_en_ne.pdf` | sthapana ra samasya samadhan |

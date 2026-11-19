@@ -74,8 +74,11 @@ class Locale:
         return re.compile(r"^<!--\s*" + self.code + r"-cell:\s*([A-Za-z0-9_\-]+)\s*"
                           r"(?:\|\s*([^\s]+)\s*)?-->$")
 
+    # セルまたは概念単位のキー / a key is a cell id or "cell id/unit:slug"
+    KEY = r"[A-Za-z0-9_\-]+(?:[/:][A-Za-z0-9._\-]+)*"
+
     def pending_directive_re(self) -> re.Pattern:
-        return re.compile(r"^<!--\s*" + self.code + r"-pending:\s*([A-Za-z0-9_\-]+)\s*"
+        return re.compile(r"^<!--\s*" + self.code + r"-pending:\s*(" + self.KEY + r")\s*"
                           r"(?:\|\s*(.+?)\s*)?-->$")
 
     def doc_pending_directive_re(self) -> re.Pattern:
@@ -84,7 +87,7 @@ class Locale:
                           r"(?P<reason>.+?)\s*-->$")
 
     def status_directive_re(self) -> re.Pattern:
-        return re.compile(r"^<!--\s*" + self.code + r"-status:\s*([A-Za-z0-9_\-]+)\s+"
+        return re.compile(r"^<!--\s*" + self.code + r"-status:\s*(" + self.KEY + r")\s+"
                           r"(approved|draft)\s*-->$")
 
     def doc_status_directive_re(self) -> re.Pattern:

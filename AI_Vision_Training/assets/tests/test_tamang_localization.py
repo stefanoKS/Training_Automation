@@ -65,6 +65,51 @@ def test_every_notebook_has_a_tamang_catalog() -> None:
     assert sorted(path.name[: -len(".taj.md")] for path in catalog_paths(TAJ)) == notebooks
 
 
+DAY5 = ("Day05_01_Anomaly_Detection_Concepts", "Day05_02_PatchCore_Training",
+        "Day05_03_YOLO_vs_PatchCore")
+
+
+def test_day5_is_translated_per_concept_and_days_1_4_per_cell() -> None:
+    """Day 5 は概念単位、第 1〜4 日はセル単位 / Day 5 is unit-level; Days 1-4 stay cell-level."""
+    report = coverage.run(TAJ)
+    legacy = coverage.legacy.run()
+    day5_units = sum(item["units"] for item in report["notebooks"]
+                     if Path(item["path"]).stem in DAY5)
+    legacy_units = sum(item["counts"]["pending"] + item["counts"]["approved"]
+                       + item["counts"]["draft"] + item["counts"]["missing"]
+                       for item in report["notebooks"] if Path(item["path"]).stem not in DAY5)
+    assert day5_units > 3 * sum(1 for item in report["notebooks"]
+                                if Path(item["path"]).stem in DAY5), "one unit per concept, not one per cell"
+    assert legacy_units == sum(item["translated"] for item in legacy["notebooks"]
+                               if Path(item["path"]).stem not in DAY5), \
+        "Days 1-4 keep exactly the cells the legacy Nepali pass translated"
+    totals = report["totals"]
+    assert totals["pending"] == day5_units + legacy_units
+    assert totals["missing"] == 0, "every required unit is pending, apart from exempt cells"
+    assert totals["approved"] == 0 and totals["draft"] == 0
+    day5_exempt = sum(item["counts"]["exempt"] for item in report["notebooks"]
+                      if Path(item["path"]).stem in DAY5)
+    assert totals["exempt"] == legacy["totals"]["exempt"] + day5_exempt
+
+
+def test_every_day5_concept_slot_is_recorded_as_pending() -> None:
+    """承認済みのタマン語はまだ無い / no Day 5 concept carries Tamang text yet."""
+    for stem in DAY5:
+        path, = course_notebooks(ROOT / "notebooks", stem + ".ipynb")
+        notebook = json.loads(path.read_text(encoding="utf-8"))
+        catalog = coverage.catalogue_path(TAJ, stem)
+        pending = {line.strip().rsplit(" | ", 1)[0].split(":", 1)[1].strip()
+                   for line in catalog.read_text(encoding="utf-8").splitlines()
+                   if line.strip().startswith("<!-- taj-pending:")}
+        for cell in notebook["cells"]:
+            if cell["cell_type"] != "markdown":
+                continue
+            source = "".join(cell["source"])
+            for anchor in apply_translations.unit_anchors(source, TAJ):
+                assert f"{cell['id']}/{anchor}" in pending, (stem, cell["id"], anchor)
+            assert "taj:begin" not in source, "no Tamang text may be inserted yet"
+
+
 def test_every_learner_document_has_a_tamang_catalog() -> None:
     documents = coverage.DOCUMENTS
     assert len(documents) == 12
@@ -98,14 +143,14 @@ def test_notebook_catalog_records_its_provenance(path: Path) -> None:
 
 
 def test_the_pending_inventory_covers_every_cell_the_nepali_pass_translated() -> None:
+    """第 1〜4 日の在庫はネパール語の対象セルと一致する / Days 1-4 still match the Nepali pass."""
     report = coverage.run(TAJ)
     nepali = coverage.legacy.run()
-    nepali_translated = sum(item["translated"] for item in nepali["notebooks"])
-    totals = report["totals"]
-    assert totals["pending"] == nepali_translated
-    assert totals["missing"] == 0, "every required cell is pending, apart from exempt cells"
-    assert totals["approved"] == 0 and totals["draft"] == 0
-    assert totals["exempt"] == nepali["totals"]["exempt"]
+    days_1_4 = [item for item in nepali["notebooks"] if Path(item["path"]).stem not in DAY5]
+    nepali_translated = sum(item["translated"] for item in days_1_4)
+    tamang_days = [item for item in report["notebooks"] if Path(item["path"]).stem not in DAY5]
+    assert sum(item["counts"]["pending"] for item in tamang_days) == nepali_translated
+    assert sum(item["counts"]["missing"] for item in tamang_days) == 0
 
 
 def test_the_document_inventory_counts_every_current_section() -> None:
@@ -170,6 +215,99 @@ def test_nepali_and_tamang_regions_do_not_collide(tmp_path) -> None:
     assert "<!-- ne:begin after-heading -->" in without_taj
     assert without_taj.count("नेपाली पाठ") == 1
     assert "तामाङ पाठ" not in without_taj
+
+
+def test_concept_anchors_are_discovered_in_source_order() -> None:
+    source = ("#### 見出し / Heading\n\n日本語。\n\n<!-- taj-unit: heading -->\n\n"
+              "| 項目<br>Item | 説明<br>Explanation |\n| --- | --- |\n"
+              "| しきい値<br>threshold | 説明 <!-- taj-row: threshold --> |\n")
+    assert apply_translations.unit_anchors(source, TAJ) == ["unit:heading", "row:threshold"]
+    with pytest.raises(apply_translations.CatalogError, match="duplicate"):
+        apply_translations.unit_anchors(source + "\n<!-- taj-unit: heading -->\n", TAJ)
+
+
+def test_a_concept_block_lands_under_its_own_anchor() -> None:
+    source = ("#### 第一 / First\n\n日本語の説明。\n\nEnglish explanation.\n\n"
+              "<!-- taj-unit: first -->\n\n#### 第二 / Second\n\n次の説明。\n\nSecond explanation.\n\n"
+              "<!-- taj-unit: second -->\n")
+    blocks = [{"at": "unit:second", "text": "तामाङ दोस्रो।"}]
+    once = apply_translations.apply_blocks(source, blocks, TAJ)
+    twice = apply_translations.apply_blocks(once, blocks, TAJ)
+    assert once == twice
+    assert once.index("तामाङ दोस्रो।") > once.index("Second explanation.")
+    assert once.index("तामाङ दोस्रो।") < once.index("<!-- taj-unit: second -->") + 200
+    assert "taj-unit: first" in once and "तामाङ दोस्रो।" not in once.split("#### 第二")[0]
+    assert apply_translations.strip_regions(once, TAJ).strip() == source.strip()
+
+
+def test_a_table_row_concept_stays_inside_its_row() -> None:
+    source = ("| 項目<br>Item | 説明<br>Explanation |\n| --- | --- |\n"
+              "| 低い<br>low | 説明<br>explanation <!-- taj-row: low --> |\n"
+              "| 高い<br>high | 説明<br>explanation <!-- taj-row: high --> |\n")
+    blocks = [{"at": "row:low", "text": "तामाङ व्याख्या।"}]
+    once = apply_translations.apply_blocks(source, blocks, TAJ)
+    twice = apply_translations.apply_blocks(once, blocks, TAJ)
+    assert once == twice, "a second run must not duplicate the row text"
+    low_row, high_row = [line for line in once.splitlines() if line.startswith("| ")][-2:]
+    assert "तामाङ व्याख्या।" in low_row and "तामाङ व्याख्या।" not in high_row
+    assert once.count("तामाङ व्याख्या।") == 1
+    assert apply_translations.strip_regions(once, TAJ).strip() == source.strip()
+
+
+def test_a_catalog_anchor_that_no_longer_exists_is_refused() -> None:
+    source = "#### 見出し / Heading\n\n説明。\n\n<!-- taj-unit: heading -->\n"
+    with pytest.raises(apply_translations.CatalogError, match="does not exist"):
+        apply_translations.apply_blocks(
+            source, [{"at": "unit:renamed-heading", "text": "तामाङ"}], TAJ)
+
+
+def test_reapplying_a_catalog_updates_instead_of_duplicating() -> None:
+    source = "#### 見出し / Heading\n\n説明。\n\n<!-- taj-unit: heading -->\n"
+    once = apply_translations.apply_blocks(source, [{"at": "unit:heading", "text": "एक"}], TAJ)
+    twice = apply_translations.apply_blocks(once, [{"at": "unit:heading", "text": "दुई"}], TAJ)
+    assert "एक" not in twice and twice.count("दुई") == 1
+    assert apply_translations.strip_regions(twice, TAJ).strip() == source.strip()
+
+
+def test_an_empty_day5_unit_stays_empty_while_it_is_pending() -> None:
+    """未承認の単位は何も差し込まない / a pending unit inserts nothing."""
+    path, = course_notebooks(ROOT / "notebooks", "Day05_01_Anomaly_Detection_Concepts.ipynb")
+    notebook = json.loads(path.read_text(encoding="utf-8"))
+    catalog = coverage.catalogue_path(TAJ, path.stem)
+    entries = apply_translations.parse_catalog(catalog, TAJ) if catalog.is_file() else {}
+    for cell in notebook["cells"]:
+        if cell["cell_type"] != "markdown":
+            continue
+        source = "".join(cell["source"])
+        assert entries.get(cell["id"]) is None, "every Day 5 unit is still pending"
+        assert apply_translations.apply_blocks(source, [], TAJ) == source
+
+
+@pytest.mark.parametrize("stem", DAY5)
+def test_a_synthetic_approved_catalog_reaches_every_day5_unit(stem) -> None:
+    """承認済みの合成カタログが、すべての単位に一度ずつ入る / idempotent per concept."""
+    squeeze = lambda text: [line for line in text.splitlines() if line.strip()]  # noqa: E731
+    path, = course_notebooks(ROOT / "notebooks", stem + ".ipynb")
+    notebook = json.loads(path.read_text(encoding="utf-8"))
+    inserted = 0
+    for cell in notebook["cells"]:
+        if cell["cell_type"] != "markdown":
+            continue
+        source = "".join(cell["source"])
+        anchors = apply_translations.unit_anchors(source, TAJ)
+        if not anchors:
+            continue
+        blocks = [{"at": anchor, "text": f"तामाङ पाठ {index + 1} अन्त।"}
+                  for index, anchor in enumerate(anchors)]
+        once = apply_translations.apply_blocks(source, blocks, TAJ)
+        twice = apply_translations.apply_blocks(once, blocks, TAJ)
+        assert once == twice, (stem, cell["id"])
+        assert squeeze(apply_translations.strip_regions(once, TAJ)) == squeeze(source)
+        for index, anchor in enumerate(anchors):
+            marker = f"तामाङ पाठ {index + 1} अन्त।"
+            assert once.count(marker) == 1, (stem, cell["id"], anchor)
+        inserted += len(anchors)
+    assert inserted > 40, f"{stem}: only {inserted} concept slots found"
 
 
 def test_document_blocks_are_marker_aware(tmp_path) -> None:
