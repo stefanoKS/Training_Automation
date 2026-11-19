@@ -15,6 +15,7 @@ Where something is BLOCKED it says so instead of claiming PASS.
 | Item | Value |
 |---|---|
 | HEAD when the work started | `61f8ff6` (main), working tree had one accidental kernelspec edit in `Day01_01` |
+| Final HEAD of this work | `831edaa` on `feature/day05-final-fixes-and-tamang-localization`; working tree clean; nothing pushed |
 | That edit | VS Code rewrote `kernelspec` to `python3`; `test_notebook_kernel_is_one_of_the_course_kernels` failed because of it. Restored with `git checkout --`; it is not part of any commit |
 | Report read first | `docs/reviews/Day04_Day05_Final_Stabilization_Report.md` |
 | Tests collected at HEAD | 509 (`pytest --collect-only`) |
