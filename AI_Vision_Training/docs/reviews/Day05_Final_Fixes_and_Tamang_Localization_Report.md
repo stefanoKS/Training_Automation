@@ -15,7 +15,7 @@ Where something is BLOCKED it says so instead of claiming PASS.
 | Item | Value |
 |---|---|
 | HEAD when the work started | `61f8ff6` (main), working tree had one accidental kernelspec edit in `Day01_01` |
-| Final HEAD of this work | `831edaa` on `feature/day05-final-fixes-and-tamang-localization`; working tree clean; nothing pushed |
+| Final HEAD of this work | branch tip of `feature/day05-final-fixes-and-tamang-localization` (see the commit list at the end of this report); working tree clean; nothing pushed |
 | That edit | VS Code rewrote `kernelspec` to `python3`; `test_notebook_kernel_is_one_of_the_course_kernels` failed because of it. Restored with `git checkout --`; it is not part of any commit |
 | Report read first | `docs/reviews/Day04_Day05_Final_Stabilization_Report.md` |
 | Tests collected at HEAD | 509 (`pytest --collect-only`) |
@@ -325,3 +325,19 @@ integration remains duck-typed because `ultralytics` cannot share the environmen
 **Tamang localization: NOT READY (BLOCKED).** Zero approved blocks, zero drafts, 656 notebook cells and
 154 document sections recorded as pending, the variety and script unconfirmed, and no `*_ja_en_taj.pdf`
 produced. This is the honest state, not a partial success.
+
+---
+
+## K. Substantive commits on this branch
+
+The last two commits on the branch only amend this report, so they are not listed.
+
+| Commit | Content |
+|---|---|
+| `581af2b` | Day 5 technical fixes: holdout, freeze immutability, full YOLO seal validation, canonical PostProcessor accessor, restart message, weight digests, map publication |
+| `baebee0` | Tamang locale infrastructure, catalogs, tools, gate, PDF `--locale`, tests, docs |
+| `eb3eee0` | recovery snippet kept inside the printable width; Day05/Week1 booklets rebuilt |
+| `cb0dc2d` | this report |
+| `831edaa` | repair of the Japanese text of the PDF README section (encoding slip) |
+
+Nothing was pushed and nothing was merged.
