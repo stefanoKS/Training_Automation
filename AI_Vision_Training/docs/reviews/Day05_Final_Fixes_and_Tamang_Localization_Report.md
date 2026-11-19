@@ -271,7 +271,7 @@ sample, not a translation of lesson content.
 
 | Suite / command | Environment | Result |
 |---|---|---|
-| `python -m pytest assets/tests -q` | base | **579 passed, 2 skipped, 4 warnings, 482.72 s** |
+| `python -m pytest assets/tests -q` | base | **579 passed, 2 skipped, 4 warnings** (two consecutive full runs: 482.72 s and 480.40 s) |
 | `assets/tests/test_day05_anomalib27_integration.py` | `.venv-anomalib` (anomalib 2.7.0) | **6 passed, 34 s** |
 | `assets/tests/test_day05_anomalib27_integration.py` | base | **BLOCKED** (module-level skip: no `anomalib.post_processing`) |
 | `assets/scripts/validate_notebooks.py --execute none` | base | **194 passed, 0 failed** |
