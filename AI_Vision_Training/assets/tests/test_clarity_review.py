@@ -137,6 +137,7 @@ def test_freeze_requires_written_declaration_and_persists_reused_data_status(tmp
     evaluation = next("".join(c["source"]) for c in cells("Day05_03")
                       if c["cell_type"] == "code" and "test_predictions = {" in "".join(c["source"]))
     guard = evaluation.split("test_predictions = {")[0]
+    values["test_frame"] = object()  # stand-in for an already verified frame; the guard does not read rows
     run(guard, values)
     for changed in ("YOLO_THRESHOLD", "PATCHCORE_THRESHOLD"):
         altered = dict(values)

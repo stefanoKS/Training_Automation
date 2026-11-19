@@ -39,6 +39,7 @@ import shared_set_split  # noqa: E402
 
 NOTEBOOKS = {
     "Day04_03": ROOT / "notebooks" / "Day04_YOLO_Training" / "Day04_03_YOLO_Evaluation.ipynb",
+    "Day05_01": ROOT / "notebooks" / "Day05_PatchCore" / "Day05_01_Anomaly_Detection_Concepts.ipynb",
     "Day05_02": ROOT / "notebooks" / "Day05_PatchCore" / "Day05_02_PatchCore_Training.ipynb",
     "Day05_03": ROOT / "notebooks" / "Day05_PatchCore" / "Day05_03_YOLO_vs_PatchCore.ipynb",
 }
@@ -421,9 +422,16 @@ def test_end_to_end_from_the_split_to_the_final_comparison(tmp_path) -> None:
     results = json.loads((day05 / "comparison_test_results.json").read_text(encoding="utf-8"))
     assert results["assessment_role"] == "declared_untouched_test"
     assert results["assessment_is_final"] is True
+    expected_abnormal = sum(state["truths"][Path(name).name] for name in split["partitions"]["test"])
     for method in results["test"]:
         assert method["n_images"] == len(test_frame)
         assert method["TP"] + method["FP"] + method["FN"] + method["TN"] == len(test_frame)
+        assert method["n_abnormal"] == method["TP"] + method["FN"] == expected_abnormal
+        assert method["n_normal"] == method["FP"] + method["TN"] == len(expected_ids) - expected_abnormal
+        threshold = freeze[f"{method['method'].lower()}_threshold"]
+        score_column = {"YOLO": "yolo_max_conf", "PatchCore": "score"}[method["method"]]
+        assert method["threshold"] == round(threshold, 3)
+        assert method["TP"] + method["FP"] == int((test_frame[score_column] >= threshold).sum())
     csv = pd.read_csv(day05 / "comparison_test_results.csv")
     assert set(csv["assessment_role"]) == {"declared_untouched_test"}
     assert list(csv["n_images"]) == [len(test_frame)] * len(csv)
@@ -491,7 +499,8 @@ def test_a_rejected_map_publish_leaves_no_seal_behind(tmp_path) -> None:
     assert not maps.is_dir() or not list(maps.glob("*.npz"))
 
 
-def test_the_archive_gate_cannot_relabel_a_sealed_role(tmp_path) -> None:
+@pytest.mark.parametrize("seals", [(), ("yolo",), ("patchcore",), ("yolo", "patchcore")])
+def test_the_archive_gate_cannot_relabel_a_sealed_role(tmp_path, seals) -> None:
     """Opening the archive may record a downgrade, but never rewrite a sealed role."""
     course_root = tmp_path / "course"
     docs = course_root / "docs" / "instructor"
@@ -503,25 +512,30 @@ def test_the_archive_gate_cannot_relabel_a_sealed_role(tmp_path) -> None:
     freeze = {"declaration": "frozen before test", "assessment_role": "declared_untouched_test",
               "test_already_seen": False}
     freeze_path.write_text(json.dumps(freeze), encoding="utf-8")
+    original = freeze_path.read_bytes()
+    seal_paths = {
+        "yolo": course_root / "submissions" / "day04" / "yolo_predictions_sealed_test.json",
+        "patchcore": day05 / "patchcore_test_predictions.json",
+    }
+    for label in seals:
+        path = seal_paths[label]
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text("{}", encoding="utf-8")
 
     show = (("SHOW_ARCHIVED_TEST = False", "SHOW_ARCHIVED_TEST = True"),)
 
-    # no seal yet: the downgrade is recorded, with its reason
     namespace = {"COURSE_ROOT": course_root, "comparison": None,
                  "freeze_record": dict(freeze), "freeze_path": freeze_path, "json": json}
     run_cell(namespace, "Day05_03", "clarity-archive-gate", show)
-    recorded = json.loads(freeze_path.read_text(encoding="utf-8"))
-    assert recorded["assessment_role"] == "illustrative_reused_data"
-    assert "assessment_role_downgraded" in recorded
-
-    # a seal exists: the record must be left exactly as it is
-    freeze_path.write_text(json.dumps(freeze), encoding="utf-8")
-    (day05 / "patchcore_test_predictions.json").write_text("{}", encoding="utf-8")
-    namespace = {"COURSE_ROOT": course_root, "comparison": None,
-                 "freeze_record": dict(freeze), "freeze_path": freeze_path, "json": json}
-    run_cell(namespace, "Day05_03", "clarity-archive-gate", show)
-    assert json.loads(freeze_path.read_text(encoding="utf-8"))["assessment_role"] == (
-        "declared_untouched_test")
+    if seals:
+        assert freeze_path.read_bytes() == original
+        assert namespace["freeze_record"] == freeze
+        assert all(seal_paths[label].read_bytes() == b"{}" for label in seals)
+    else:
+        recorded = json.loads(freeze_path.read_bytes())
+        assert recorded["assessment_role"] == "illustrative_reused_data"
+        assert recorded["test_already_seen"] is True
+        assert "assessment_role_downgraded" in recorded
 
 
 def test_the_repository_holds_no_generated_comparison_artifacts() -> None:
@@ -563,8 +577,27 @@ def test_the_freeze_record_is_immutable_once_a_seal_exists(tmp_path, capsys) -> 
         run_cell(rerun, "Day05_03", "clarity-freeze-record", (
             ('FREEZE_DECLARATION = ""', 'FREEZE_DECLARATION = "changed after seeing test"'),
             ("TEST_ALREADY_SEEN = True", "TEST_ALREADY_SEEN = False")))
+    assert rerun["freeze_record"] == json.loads(freeze_before)
     assert freeze_path.read_bytes() == freeze_before
     assert seal_path.read_bytes() == seal_before
+
+
+@pytest.mark.parametrize("relative_seal", [
+    "day04/yolo_predictions_sealed_test.json", "day05/patchcore_test_predictions.json",
+])
+def test_a_seal_without_the_original_freeze_blocks_a_new_record(tmp_path, relative_seal) -> None:
+    state = _pipeline(tmp_path)
+    freeze_path = state["day05"] / "comparison_freeze_record.json"
+    seal_path = state["course_root"] / "submissions" / relative_seal
+    seal_path.write_bytes(b"existing seal")
+    freeze_path.unlink()
+    rerun = dict(state["consumer"])
+    with pytest.raises(RuntimeError, match="original freeze record is missing"):
+        run_cell(rerun, "Day05_03", "clarity-freeze-record", (
+            ('FREEZE_DECLARATION = ""', 'FREEZE_DECLARATION = "replacement attempt"'),))
+    assert "freeze_record" not in rerun
+    assert not freeze_path.exists()
+    assert seal_path.read_bytes() == b"existing seal"
 
 
 # ---------------------------------------------------------------------------
@@ -708,9 +741,57 @@ def test_stale_maps_are_quarantined_and_the_seal_records_the_published_set(tmp_p
     sealed = json.loads((day05 / "patchcore_test_predictions.json").read_text(encoding="utf-8"))
     published = sorted((day05 / "maps").glob("*_map.npz"))
     assert not stale.exists()
+    assert [p.read_bytes() for p in day05.glob("maps_unsealed/*/old_map.npz")] == [
+        b"stale map from an interrupted attempt"]
     assert sealed["maps"]["count"] == len(published) == len(state["split"]["partitions"]["test"])
     assert sealed["maps"]["digest"] == identity.file_set_digest(published)["digest"]
     assert not (day05 / "maps_pending").exists()
+
+
+def test_same_count_with_wrong_map_name_does_not_seal(tmp_path) -> None:
+    state = _pipeline(tmp_path)
+
+    def save_with_wrong_names(batch, index, path):
+        path.with_name("wrong-" + path.name).write_bytes(b"map")
+
+    with pytest.raises(identity.ProvenanceError, match="one-to-one"):
+        _seal_test_scores(state, save_with_wrong_names)
+    assert not (state["day05"] / "patchcore_test_predictions.json").exists()
+    assert not (state["day05"] / "maps").exists()
+
+
+@pytest.mark.parametrize("after_commit", [False, True])
+def test_interruption_at_seal_publication_can_be_retried(tmp_path, monkeypatch, after_commit) -> None:
+    state = _pipeline(tmp_path)
+    day05 = state["day05"]
+    seal = day05 / "patchcore_test_predictions.json"
+    save_map = lambda batch, index, path: path.write_bytes(b"map")
+    original_write = identity.write_json_atomic
+
+    def interrupted_write(path, payload):
+        assert path == seal
+        assert identity.file_set_digest((day05 / "maps").glob("*_map.npz"))["digest"] == (
+            payload["maps"]["digest"])
+        if after_commit:
+            original_write(path, payload)
+        raise KeyboardInterrupt
+
+    with monkeypatch.context() as patch:
+        patch.setattr(identity, "write_json_atomic", interrupted_write)
+        with pytest.raises(KeyboardInterrupt):
+            _seal_test_scores(state, save_map)
+
+    if after_commit:
+        before = seal.read_bytes()
+        _seal_test_scores(state, lambda *args: pytest.fail("the committed seal must not be re-scored"))
+        assert seal.read_bytes() == before
+    else:
+        assert not seal.exists()
+        assert not (day05 / "maps").exists()
+        _seal_test_scores(state, save_map)
+
+    recorded = json.loads(seal.read_bytes())["maps"]
+    assert recorded["digest"] == identity.file_set_digest((day05 / "maps").glob("*_map.npz"))["digest"]
 
 
 def test_a_map_digest_mismatch_is_not_presented_as_this_experiments_output(tmp_path, capsys) -> None:
@@ -730,6 +811,22 @@ def test_a_map_digest_mismatch_is_not_presented_as_this_experiments_output(tmp_p
     assert "do not match the sealed record" in capsys.readouterr().out
 
 
+def test_failed_seal_reread_cannot_republish_previous_test_frame(tmp_path) -> None:
+    state = _pipeline(tmp_path)
+    sealer = dict(state["common"], json=json)
+    run_cell(sealer, "Day04_03", "shared-sealed-test")
+    _seal_test_scores(state, lambda batch, index, path: path.write_bytes(b"map"))
+
+    reader = dict(state["consumer"], pd=pd, Path=Path, json=json)
+    run_cell(reader, "Day05_03", "clarity-load-sealed-test")
+    (state["day05"] / "patchcore_test_predictions.json").unlink()
+    with pytest.raises(RuntimeError, match="no sealed PatchCore"):
+        run_cell(reader, "Day05_03", "clarity-load-sealed-test")
+    with pytest.raises(RuntimeError, match="load and verify both seals first"):
+        run_cell(reader, "Day05_03", "9747ac10")
+    assert not (state["day05"] / "comparison_test_results.json").exists()
+
+
 # ---------------------------------------------------------------------------
 # GROUP J — the teaching text must not contradict the protocol
 # ---------------------------------------------------------------------------
@@ -738,9 +835,47 @@ def test_a_map_digest_mismatch_is_not_presented_as_this_experiments_output(tmp_p
 def test_the_datamodule_cell_hides_the_test_composition() -> None:
     """Notebook 01 promises the test count and composition stay unseen until the freeze."""
     source = cell_source("Day05_02", "f1a28c15")
-    assert "test_data.samples" not in source
-    assert "test composition" not in source
+    assert "test_data" not in source
+    assert "evaluation folder total" not in source
     assert "固定するまで表示しません" in source
+    assert 'layout["counts"]' not in cell_source("Day05_02", "83008bb8")
+
+
+@pytest.mark.parametrize("mismatch", [None, "fitted", "postprocessing"])
+def test_the_checkpoint_recovery_recipe_checks_both_frozen_states(tmp_path, mismatch) -> None:
+    state = _pipeline(tmp_path)
+    checkpoint = tmp_path / "original.ckpt"
+    checkpoint.touch()
+    restored = state["patchcore"]
+    if mismatch == "fitted":
+        restored.model.tensor[0] = 900
+    if mismatch == "postprocessing":
+        restored.post_processor.image_min = -1
+
+    def load(path, *, map_location):
+        assert Path(path) == checkpoint
+        assert map_location == "cpu"
+        return restored
+
+    namespace = {"COURSE_ROOT": state["course_root"], "Path": Path, "json": json,
+                 "Patchcore": types.SimpleNamespace(load_from_checkpoint=load),
+                 "Engine": types.SimpleNamespace}
+    run_cell(namespace, "Day05_02", "39a9c510")
+    assert callable(namespace["save_map"])
+    assert not (state["day05"] / "maps_calibration").exists()
+    recipe = cell_source("Day05_02", "clarity-sealed-test").split("```python\n", 1)[1].split("```", 1)[0]
+    recipe = recipe.replace("PASTE_THE_ORIGINAL_CHECKPOINT_PATH_HERE", str(checkpoint))
+    code = compile(recipe, "<checkpoint recovery recipe>", "exec")
+    if mismatch:
+        with pytest.raises(identity.ProvenanceError, match={
+            "fitted": "checkpoint is not the frozen model",
+            "postprocessing": "calibrated postprocessing does not match",
+        }[mismatch]):
+            exec(code, namespace)  # noqa: S102
+        assert "model" not in namespace and "engine" not in namespace
+    else:
+        exec(code, namespace)  # noqa: S102
+        assert namespace["model"] is restored and namespace["engine"].accelerator == "cpu"
 
 
 def test_the_restart_message_matches_the_documented_recovery() -> None:
@@ -749,6 +884,13 @@ def test_the_restart_message_matches_the_documented_recovery() -> None:
     assert "新しい実験" in source or "NEW experiment" in source
     # the old, contradictory instruction: refitting was offered as the way to resume
     assert "re-run the fit cells from Part 3, then run this cell once" not in source
+
+
+def test_fresh_kernel_gets_recovery_guidance_instead_of_missing_manifest(tmp_path) -> None:
+    state = _pipeline(tmp_path)
+    with pytest.raises(RuntimeError, match="Recover after a kernel restart"):
+        run_cell({"COURSE_ROOT": state["course_root"]}, "Day05_02", "clarity-sealed-test-scoring")
+    assert not (state["day05"] / "patchcore_test_predictions.json").exists()
 
 
 def test_the_threshold_comes_from_the_canonical_helper() -> None:
@@ -767,9 +909,24 @@ def test_the_wording_puts_test_inference_in_day4_and_day5_02() -> None:
 def test_the_six_step_table_names_the_right_owners() -> None:
     text = cell_source("Day05_02", "clarity-sealed-test")
     assert "6 ステップ" in text and "The order has six steps" in text
-    assert "shared-sealed-test" in text and "clarity-sealed-test-scoring" in text
-    # step 4 and step 5 are the two sealing cells, in that order
-    assert text.index("shared-sealed-test") < text.index("clarity-sealed-test-scoring")
+    for table in text.split("| 1 |")[1:3]:  # Japanese then English
+        rows = [table.splitlines()[0], *(line for line in table.splitlines()
+                                         if line.startswith(tuple(f"| {step} |" for step in range(2, 7))))]
+        expected = ["Day04_03", "Day05_02", "Day05_03", "Day04_03", "Day05_02", "Day05_03"]
+        assert len(rows) == len(expected)
+        assert all(owner in row for owner, row in zip(expected, rows))
+        assert "shared-sealed-test" in rows[3] and "clarity-sealed-test-scoring" in rows[4]
+
+
+def test_the_notebook_intros_link_the_calibration_and_test_handoffs() -> None:
+    intro01 = cell_source("Day05_01", "b071950f")
+    intro02 = cell_source("Day05_02", "01bf2bc9")
+    intro03 = cell_source("Day05_03", "1e496b72")
+    assert "(Day05_02_PatchCore_Training.ipynb)" in intro01
+    assert "(Day05_03_YOLO_vs_PatchCore.ipynb)" in intro02
+    assert "stop before the sealed scoring cell" in intro02
+    assert "stop after `clarity-freeze-record`" in intro03
+    assert "resume at `clarity-load-sealed-test`" in intro03
 
 
 @pytest.mark.parametrize("stem,cell_id,owners", [
