@@ -14,12 +14,19 @@ learner-facing Markdown/docs and the pictures those files already reference.
 
 作られるもの / What is produced (docs/pdf/)
 ------------------------------------------
+With ``--locale ne`` (default, legacy)::
+
     Day01_explanation_ja_en_ne.pdf … Day05_explanation_ja_en_ne.pdf
     Week1_explanation_ja_en_ne.pdf
     Setup_ja_en_ne.pdf                          (notebooks/00_Setup)
     Installation_Guide_ja_en_ne.pdf             (START_HERE.md + installation troubleshooting)
     Repository_Guide_ja_en_ne.pdf               (README.md)
     Course_Syllabus_ja_en_ne.pdf                (COURSE_SYLLABUS.md)
+
+With ``--locale taj`` the same booklets are named ``*_ja_en_taj.pdf``, the text layer declares
+``taj-Deva`` and the terminology file is read from ``assets/i18n/taj/``. That build is **gated**: it
+refuses to run while ``check_localization_coverage.py --locale taj --strict`` fails, so a booklet is
+never produced from unreviewed or pending Tamang. The Japanese and English booklets do not change.
 
 使い方 / Usage (Windows CMD, course environment activated)
 ---------------------------------------------------------
@@ -50,19 +57,27 @@ from pathlib import Path
 from PIL import Image as PILImage
 
 from course_notebooks import course_notebooks
-from apply_nepali_translations import REGION_RE, CAPTION_RE, image_captions
+from apply_nepali_translations import CAPTION_RE, image_captions
+from i18n_locales import Locale, locale as _locale
 
 COURSE_ROOT = Path(__file__).resolve().parents[2]
 NOTEBOOK_DIR = COURSE_ROOT / "notebooks"
 OUTPUT_DIR = COURSE_ROOT / "docs" / "pdf"
-TERMINOLOGY = COURSE_ROOT / "assets" / "i18n" / "ne" / "terminology.md"
+
+# 第 3 の言語 / the third language. ``configure_locale`` replaces these when ``--locale`` is given;
+# the internal language key stays ``"ne"`` so the renderer keeps a single third-language slot, but the
+# BCP 47 tag written into the PDF text layer is the locale's own tag (``ne-Latn`` or ``taj-Deva``).
+LOCALE: Locale = _locale("ne")
+REGION_RE = LOCALE.region_re()
+TERMINOLOGY = LOCALE.catalog_root / "terminology.md"
+COURSE_TITLE_THIRD = "Hiroshima Kasei — hapta 1: AI ra machine vision talim"
 
 BUILD_DATE = _dt.date.today().isoformat()
 REBUILD_COMMAND = r"python assets\scripts\export_trilingual_pdf.py"
 
 COURSE_TITLE_JA = "広島化成 第 1 週 AI・マシンビジョン研修"
 COURSE_TITLE_EN = "Hiroshima Kasei Week 1 AI & Machine Vision Training"
-COURSE_TITLE_NE = "Hiroshima Kasei — hapta 1: AI ra machine vision talim"
+COURSE_TITLE_NE = COURSE_TITLE_THIRD
 
 # 端末に入っている書体だけを使う（フォントは同梱しない / never ship a font binary）
 JA_STACK = '"Yu Gothic", "YuGothic", "Meiryo", "Noto Sans JP", "MS Gothic", sans-serif'
@@ -84,7 +99,24 @@ IMAGE_RE = re.compile(r"!\[([^\]]*)\]\(([^)\s]+)\)")
 # 目次に載せない見出し / headings kept out of the table of contents
 NOT_IN_TOC = ("実行結果の例", "Expected output", "natijako udaharan", "कोड उदाहरण", "コード例",
               "code example", "Nepali ma")
-LANG_ATTR = {"ja": "ja", "en": "en", "ne": "ne-Latn"}
+LANG_ATTR = {"ja": "ja", "en": "en", "ne": LOCALE.tag}
+
+
+def configure_locale(code: str) -> Locale:
+    """第 3 の言語を切り替える / switch the third language of the exporter.
+
+    Only the third slot changes: the Japanese and English sources, the figures and the layout are
+    untouched, so the existing bilingual booklets keep being built by the same code path.
+    """
+    global LOCALE, REGION_RE, TERMINOLOGY, COURSE_TITLE_NE, LANG_ATTR
+    LOCALE = _locale(code)
+    REGION_RE = LOCALE.region_re()
+    TERMINOLOGY = LOCALE.catalog_root / "terminology.md"
+    # Tamang has no approved title yet; inventing one would be exactly what this course forbids.
+    COURSE_TITLE_NE = (COURSE_TITLE_THIRD if code == "ne"
+                       else "Hiroshima Kasei Week 1 AI & Machine Vision Training")
+    LANG_ATTR = {"ja": "ja", "en": "en", "ne": LOCALE.tag}
+    return LOCALE
 
 # 本文の開始を示す見えにくい目印 / an invisible marker that survives into the PDF text layer.
 # 目次にも本文にも同じ文字列が現れないので、目次ページを飛ばして本文の 1 ページ目を確実に求める。
@@ -1448,31 +1480,56 @@ DOC_JOBS = [
 
 
 def main(argv=None) -> int:
-    parser = argparse.ArgumentParser(description="Export tri-language (ja, en, ne) PDFs.")
+    parser = argparse.ArgumentParser(description="Export tri-language PDFs (ja, en, third).")
     parser.add_argument("--only", default=None,
                         help="Day01 … Day05, Week1, Setup, Installation, Repository, Syllabus")
     parser.add_argument("--check", action="store_true", help="build into a temporary folder")
     parser.add_argument("--out", type=Path, default=OUTPUT_DIR)
-    parser.add_argument("--languages", default="ja,en,ne",
-                        help="accepted for symmetry with the ReportLab exporter; must name ne")
+    parser.add_argument("--locale", default="ne",
+                        help="third language: ne (legacy, ne-Latn) or taj (taj-Deva)")
+    parser.add_argument("--languages", default=None,
+                        help="accepted for symmetry with the ReportLab exporter; must name the "
+                             "third language")
     args = parser.parse_args(argv)
 
-    if "ne" not in [part.strip() for part in args.languages.split(",")]:
-        parser.error("the tri-language exporter needs 'ne' in --languages")
+    third = configure_locale(args.locale)
+    languages = [part.strip() for part in (args.languages or f"ja,en,{third.code}").split(",")]
+    if third.code not in languages:
+        parser.error(f"the tri-language exporter needs {third.code!r} in --languages")
 
+    if third.code != "ne":
+        # 承認されていない翻訳で冊子を作らない / never build a booklet from unreviewed translations.
+        import check_localization_coverage as coverage
+
+        report = coverage.run(third)
+        failures = coverage.gate_failures(report, third)
+        if failures:
+            print(f"[gate] BLOCKED — {third.tag} booklets are not built: the localization gate "
+                  "fails.")
+            for reason in failures:
+                print(f"   - {reason}")
+            print("承認済みの翻訳ができるまで、*_ja_en_" + third.code
+                  + ".pdf は作りません / no *_ja_en_" + third.code + ".pdf is produced yet.")
+            return 2
+        jobs = [{**job, "ne": ""} for job in JOBS]
+        doc_jobs = [{**job, "ne": ""} for job in DOC_JOBS]
+    else:
+        jobs, doc_jobs = JOBS, DOC_JOBS
+
+    suffix = third.pdf_suffix()
     results = {}
-    for name, keys, label in JOBS:
+    for name, keys, label in jobs:
         if args.only and args.only not in name:
             continue
-        out_path = args.out / f"{name}_explanation_ja_en_ne.pdf"
+        out_path = args.out / f"{name}_explanation_{suffix}.pdf"
         info = build_pdf(out_path, keys, label)
         results[name] = info
         print(f"[pdf] {out_path.name}  pages={info['pages']}  toc={info['toc_entries']}"
               f"  {out_path.stat().st_size / 1024:,.0f} KB")
-    for job in DOC_JOBS:
+    for job in doc_jobs:
         if args.only and args.only not in job["name"]:
             continue
-        out_path = args.out / f"{job['name']}_ja_en_ne.pdf"
+        out_path = args.out / f"{job['name']}_{suffix}.pdf"
         info = general_pdf(out_path, job)
         results[job["name"]] = info
         print(f"[pdf] {out_path.name}  pages={info['pages']}  toc={info['toc_entries']}"

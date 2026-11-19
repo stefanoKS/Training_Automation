@@ -1,0 +1,4464 @@
+{
+  "locale": {
+    "code": "taj",
+    "tag": "taj-Deva",
+    "label": "Tamang (provisional Eastern Tamang, Devanagari)",
+    "script": "devanagari",
+    "confirmed": false,
+    "variety": "Eastern Tamang, Devanagari; Western Tamang (tdg) is a separate language",
+    "learner_facing": true
+  },
+  "notebooks": [
+    {
+      "path": "notebooks/00_Setup/00_Environment_Setup.ipynb",
+      "catalog": "00_Environment_Setup.taj.md",
+      "cells": {
+        "1ac0141f": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "3f811cde": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "audit-learning-loop": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "79328757": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "fb740ebf": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "38425f35": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "d68aa961": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "f98449a1": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "fig-teach_setup_workflow": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "198db0a3": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "f4400f5e": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "d6b93483": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "8b3ad3d0": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "7f04b75d": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "da168b9c": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "f78f8416": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "8065152f": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "3da79c65": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "e0bd50ff": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "620ede80": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "319857e2": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "b6c87f4f": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "f774685d": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "60d3836e": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "c3d0cb90": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "1d7024f4": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "a1b2c3d4": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "2a2ca32e": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "54340dcc": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "audit-teach_code_cell_lifecycle": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "f839cd9f": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "c5ebf004": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "9bcfaf3c": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "cd8a9512": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "ea76d7d9": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "30045d5f": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "63c0e92f": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "fig-teach_execution_state": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "7246e348": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "ee452a19": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "d3a8869f": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "d18c02fb": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "fig-teach_nameerror_recovery": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "852eaaf2": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "f46ae2bd": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "acc65cdf": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "824933ca": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "68fda21f": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "66eb3a87": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "956099c4": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "f20a4d84": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "be1bb0f9": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "06c2fc5e": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "4014e0e9": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "a9e07e4c": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "6a2d7d09": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "982cca92": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "d153c5f9": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "6affad1b": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "9858a5a7": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "a5cf6274": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "df2df538": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "9c31642a": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "98c05d2e": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "235c801a": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        }
+      },
+      "counts": {
+        "approved": 0,
+        "draft": 0,
+        "pending": 54,
+        "missing": 0,
+        "exempt": 11
+      },
+      "translated_ids": []
+    },
+    {
+      "path": "notebooks/Day01_AI_Fundamentals/Day01_01_Introduction_to_AI.ipynb",
+      "catalog": "Day01_01_Introduction_to_AI.taj.md",
+      "cells": {
+        "21e8248a": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "f42a60b5": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "audit-learning-loop": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "9d91ba09": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "7b2d8b77": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "247d7a3d": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "458db013": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "1aaa2e69": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "e5f6279e": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "678fd258": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "b2dfbcca": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "836a01e2": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "b042214d": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "81b82546": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "2bbf0b0b": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "28db0d04": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "fig-teach_inspection_roles": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "7d23eed7": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "3a7aa970": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "943e94e6": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "b80511ca": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "0c67e262": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "74f143d9": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "1e0f9b0e": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "fig-teach_ai_ml_dl_nested": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "fig-teach_train_vs_inference": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "c0d79ed6": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "d0b8452e": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "6671ed4e": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "clarity-workflow-rule": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "10d61c4a": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "clarity-five-brightness-followup": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "clarity-optional-statistics": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "e6d3e3e3": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "fig-teach_gaussian_vs_skewed": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "cffec913": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "e14bfbfe": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "8a380704": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "clarity-optional-taxonomy": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "8d830d4e": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "656d0ff1": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "d17a6856": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "218477f8": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "1d1e4928": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "353f11fe": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "6adce078": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "b66a97de": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "117ecad5": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "c9768e29": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "4edd22fb": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "0e8f4450": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "3bf0f138": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "c6260d3b": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "2b838148": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "82dd44f4": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "abb6f3a6": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "d40c2add": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "99832686": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "9c628291": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        }
+      },
+      "counts": {
+        "approved": 0,
+        "draft": 0,
+        "pending": 49,
+        "missing": 0,
+        "exempt": 10
+      },
+      "translated_ids": []
+    },
+    {
+      "path": "notebooks/Day01_AI_Fundamentals/Day01_02_Pixels_and_Images.ipynb",
+      "catalog": "Day01_02_Pixels_and_Images.taj.md",
+      "cells": {
+        "324ebd08": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "efc6b5ea": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "audit-learning-loop": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "e6c44d91": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "ed9b3d3c": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "328beddc": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "04a762ae": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "6bf89cef": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "e4ad5e50": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "610c3045": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "c69e86d8": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "52019a53": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "0f48e9a7": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "efef174f": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "clarity-fixed-fov": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "f984e55f": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "6d88b3b1": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "ebf078d9": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "389b5529": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "77008bda": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "fig-chelsea": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "a067440a": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "c0f7ec40": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "710f8ada": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "fed2a6d9": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "c0b56d67": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "dda7bd81": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "11c4e389": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "a54f4513": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "fig-teach_array_indexing": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "clarity-pixel-predict": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "audit-teach_pixel_inspector": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "clarity-slice-predict": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "audit-teach_slice_walkthrough": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "clarity-slice-followup": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "0ef08f98": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "7e40a452": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "fef0e737": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "e313b7d9": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "d6f4780d": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "159783f0": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "f13119c2": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "4b00fec6": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "eff2d8cf": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "be892bb2": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "fig-teach_resize_profile": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "28884f36": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "23b71a6c": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "7381f04b": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "f9071fc7": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "e6e142e9": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "46ee1d4a": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "4d4d173d": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "50a7a817": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "c13aea22": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "b8228fc7": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "6850a83e": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "a6db32d1": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "b41ca058": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "4311af0c": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "caac07dd": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "5254066a": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "669d9fb1": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        }
+      },
+      "counts": {
+        "approved": 0,
+        "draft": 0,
+        "pending": 52,
+        "missing": 0,
+        "exempt": 11
+      },
+      "translated_ids": []
+    },
+    {
+      "path": "notebooks/Day01_AI_Fundamentals/Day01_03_Computer_Vision_Tasks.ipynb",
+      "catalog": "Day01_03_Computer_Vision_Tasks.taj.md",
+      "cells": {
+        "85059ad2": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "31addddb": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "audit-learning-loop": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "d436d9c5": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "a5157698": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "25ce99d9": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "4aa1c309": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "708af80b": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "6c945e72": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "audit-teach_cv_tasks_outputs": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "d7f165e1": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "ed68e4b2": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "ad31a913": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "803b0934": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "7390e751": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "866e2251": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "c5f9e59d": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "02bee1e7": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "fig-teach_segmentation_modes": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "c5df01d0": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "cb46752a": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "7ea5662a": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "9e24e09a": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "2db70af1": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "cd07386e": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "620867ac": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "fig-VisA_samples": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "b3725e7f": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "3545db8f": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "120c9c28": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "05049adb": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "68e42818": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "c2fe0d8c": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "cfac694c": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "e881aa20": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "16e4bbfc": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "1cd0cf63": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "b0601286": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "a309add6": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "55e10325": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "d51bb69f": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "ab02a78c": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "022c2c2b": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "45684e7a": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        }
+      },
+      "counts": {
+        "approved": 0,
+        "draft": 0,
+        "pending": 34,
+        "missing": 0,
+        "exempt": 10
+      },
+      "translated_ids": []
+    },
+    {
+      "path": "notebooks/Day02_Python_OpenCV/Day02_01_Python_Basics.ipynb",
+      "catalog": "Day02_01_Python_Basics.taj.md",
+      "cells": {
+        "79dc91db": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "fcc49434": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "audit-learning-loop": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "514aa7d3": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "289d22f2": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "0efc7c09": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "f2e7dc76": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "4c543e1a": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "864e596f": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "69fe312a": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "e18478f8": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "56698643": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "710318fa": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "2702d72d": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "f3ceb2ad": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "397ef12e": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "9fb383b4": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "fig-teach_units_conversion": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "acfe495e": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "8464d545": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "a1b4171f": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "d965f95e": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "fd0785c0": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "1bde6236": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "fig-teach_assign_vs_compare": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "6892283a": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "d81230b4": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "d919c78b": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "e9217fc0": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "8c309dcb": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "2713acd6": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "0f6a8f0a": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "fig-teach_traceback_annotated": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "7ed0594d": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "90a7e4fa": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "b1cd60d6": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "clarity-optional-operators": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "1b60ce34": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "31fc6d72": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "clarity-floor-notes": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "cc676dcd": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "7d48e791": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "audit-teach_mass_units_chain": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "clarity-mass-chain": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "3ab12dde": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "1ccd85ef": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "2050e9fe": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "95857ac2": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "b35da8fd": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "b791fe79": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "6111fb35": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "f428ef26": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        }
+      },
+      "counts": {
+        "approved": 0,
+        "draft": 0,
+        "pending": 42,
+        "missing": 0,
+        "exempt": 10
+      },
+      "translated_ids": []
+    },
+    {
+      "path": "notebooks/Day02_Python_OpenCV/Day02_02_Conditions_Loops_Functions.ipynb",
+      "catalog": "Day02_02_Conditions_Loops_Functions.taj.md",
+      "cells": {
+        "7f7e8a41": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "c09bb5e1": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "audit-learning-loop": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "f02e279d": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "59bedbb1": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "8199eb18": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "7f81201b": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "0c826365": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "clarity-independent-spec": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "fig-teach_tolerance_boundary": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "fig-teach_condition_branch": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "9058ead5": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "audit-teach_if_live_trace": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "clarity-main-spec": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "f831e7cd": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "9ca817a3": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "clarity-severity": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "f86492fe": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "44b61552": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "b0cf9283": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "7584722b": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "7d26f19c": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "c534d731": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "a0529062": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "audit-tolerance-policy": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "clarity-loop-predict": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "13daa786": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "ed488977": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "clarity-transfer-stepper": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "bc94f88f": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "83428140": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "clarity-function-transfer": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "c0809d54": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "0838864d": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "abe05345": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "fig-teach_definition_vs_call": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "335a1b26": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "7db46f59": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "8ab30612": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "77f645e0": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "ec5196af": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "5eff1e70": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "446e985d": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "749ab9ec": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "e16cecde": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "8f3eb327": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "fa5475bf": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "9d19737f": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "a2bec8d2": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "e1548d66": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "172094ac": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "25671959": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "3fb5a4bb": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "43c80070": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "b7cfa925": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "cbf93b2a": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "fae217f5": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "2dc30e46": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "07f8766d": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "1f203ca5": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "6278c669": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "0f28a584": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "22b083fc": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "84120fa4": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        }
+      },
+      "counts": {
+        "approved": 0,
+        "draft": 0,
+        "pending": 54,
+        "missing": 0,
+        "exempt": 10
+      },
+      "translated_ids": []
+    },
+    {
+      "path": "notebooks/Day02_Python_OpenCV/Day02_03_OpenCV_Image_Processing.ipynb",
+      "catalog": "Day02_03_OpenCV_Image_Processing.taj.md",
+      "cells": {
+        "f477b90d": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "061efcfb": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "audit-learning-loop": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "c55591ad": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "be632326": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "e15c580c": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "clarity-bgr-predict": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "clarity-bgr-interpret": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "c7f1ceb6": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "d0b1221a": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "a2bfa0aa": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "fcc102a2": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "a8bd8e49": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "7355da79": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "audit-teach_opencv_pixel_pipeline": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "be0db14f": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "clarity-mask-predict": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "clarity-mask-interpret": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "fbc7ce1c": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "eb10df2a": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "fdc17f13": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "fig-teach_threshold_sweep": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "fig-camera": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "fig-brick": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "c342c62c": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "1ca6a9f6": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "4a6c53f8": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "8af2cdb3": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "77680506": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "fig-teach_contour_merge": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "9a0fc6eb": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "5a58ab0d": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "3340cb70": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "fig-teach_distance_345": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "1c601d07": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "daed0037": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "6fa3f5d0": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "012b2dce": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "00f34871": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "b78a5571": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "b877b171": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "deffde3a": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "e3c33e34": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "3c3e557c": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "87c3a290": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "34010de1": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "5078b3fb": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "audit-same-plane-intro": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "clarity-scale-equations": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "audit-teach_calibration_same_plane": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "2e70399c": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "73d9d23e": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "e7f5ac65": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "72f2a044": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "79f73b1f": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "f6581222": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "5889e8ae": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "9abd1567": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "d0b2693d": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        }
+      },
+      "counts": {
+        "approved": 0,
+        "draft": 0,
+        "pending": 50,
+        "missing": 0,
+        "exempt": 9
+      },
+      "translated_ids": []
+    },
+    {
+      "path": "notebooks/Day03_YOLO_Basics/Day03_01_YOLO_Concepts.ipynb",
+      "catalog": "Day03_01_YOLO_Concepts.taj.md",
+      "cells": {
+        "fa4f448a": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "fig-teach_score_vs_correctness": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "audit-learning-loop": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "65c518c5": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "14d8efb6": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "f78a487c": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "6e36b163": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "05288d48": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "3423fdc1": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "fig-teach_bbox_coords": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "9bff031a": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "aaf95ec6": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "audit-teach_bbox_one_example": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "06fb8c28": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "b82b715c": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "clarity-bbox-predict": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "clarity-bbox-interpret": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "ea7a5e4f": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "2b02787b": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "797f53b6": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "d9094cfa": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "dd8128d0": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "d097f138": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "4dd6c2de": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "7805f6a4": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "5cde7a67": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "19f37833": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "27c2070a": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "5ae021d1": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "112b5bfa": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "clarity-optional-weight-formats": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "c82b89d9": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "edaa5543": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "0b071006": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "00ad41f6": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "cc2d6cd5": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "50f63c6d": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "8383b505": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "69ca863c": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "757984dd": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "67d928a3": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "60e5ea71": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "f9c29d7d": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        }
+      },
+      "counts": {
+        "approved": 0,
+        "draft": 0,
+        "pending": 35,
+        "missing": 0,
+        "exempt": 8
+      },
+      "translated_ids": []
+    },
+    {
+      "path": "notebooks/Day03_YOLO_Basics/Day03_02_YOLO_Inference.ipynb",
+      "catalog": "Day03_02_YOLO_Inference.taj.md",
+      "cells": {
+        "9dd6a5e7": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "8b3be722": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "audit-learning-loop": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "0cd065d0": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "f4b54286": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "222a13e8": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "60086395": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "audit-teach_yolo_result_object": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "907c6b68": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "b514e5ac": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "cdfa3e1d": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "b1bde3f5": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "ced84bb3": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "16326241": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "c1293292": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "8d4a9d1e": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "de1be408": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "cf0e60bc": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "674b1102": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "1a88508f": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "8ac97402": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "75c3644d": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "clarity-result-tree": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "541f0482": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "fig-ref_inference_boxes_table": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "18b85475": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "b21045a9": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "37628bc4": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "4635e510": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "7886dfe4": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "870b49f7": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "a82596f0": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "fbd218e2": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "744ed2c5": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "5759f10e": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "7c4ae18b": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "d60cb985": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "68831a26": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "3417c856": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "3f7ce62e": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "bceb7c93": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        }
+      },
+      "counts": {
+        "approved": 0,
+        "draft": 0,
+        "pending": 32,
+        "missing": 0,
+        "exempt": 9
+      },
+      "translated_ids": []
+    },
+    {
+      "path": "notebooks/Day03_YOLO_Basics/Day03_03_YOLO_Experiments.ipynb",
+      "catalog": "Day03_03_YOLO_Experiments.taj.md",
+      "cells": {
+        "60315362": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "5fdd18cf": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "audit-learning-loop": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "d8f0d728": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "ddb249df": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "c9ac8fed": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "e00d64c2": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "clarity-experiment-provenance": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "fig-teach_confidence_filter": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "fig-ref_confidence_counts": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "9082bf2f": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "2abea6c2": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "d87d261f": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "8aa62c20": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "8ff8f7be": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "f0a405bf": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "f9b7ab5c": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "9890093b": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "e502c791": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "83b790ef": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "d87bb599": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "cd7a6eeb": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "caae9118": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "92bbe170": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "73de97ad": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "fig-teach_score_vs_correctness": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "4a886707": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "4744b7e1": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "d3580c9b": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "fig-teach_resolution_effect": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "860a5fd3": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "1937768a": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "7e661f25": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "clarity-image-box-transfer": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "1e45eae2": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "23ef30f5": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "48325aa1": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "2aedccfa": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "b997c8bb": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "cc0a4b24": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "72c084ba": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "36d302d7": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "e3887914": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "987dc9d2": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        }
+      },
+      "counts": {
+        "approved": 0,
+        "draft": 0,
+        "pending": 35,
+        "missing": 0,
+        "exempt": 9
+      },
+      "translated_ids": []
+    },
+    {
+      "path": "notebooks/Day04_YOLO_Training/Day04_01_YOLO_Dataset_Annotation.ipynb",
+      "catalog": "Day04_01_YOLO_Dataset_Annotation.taj.md",
+      "cells": {
+        "36dbdec7": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "94c76861": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "audit-learning-loop": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "3a0e8d86": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "5c2e0f15": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "761c228b": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "a320498d": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "8e303ba0": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "ebd715a4": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "b2fcf17e": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "1016e1b1": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "e24b5fa4": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "111d802b": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "fe231231": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "d5f3cfe6": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "dafe08ab": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "ce6a81f7": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "clarity-label-bridge-predict": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "clarity-label-bridge-interpret": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "c892d3b2": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "400f5185": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "5dbe36b0": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "3354fe9c": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "7d972880": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "f937aad6": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "108f920a": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "fig-teach_dataset_contact_sheet": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "429bd23a": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "200e964b": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "396d4a73": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "fig-teach_leakage_split": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "audit-teach_group_split_vs_frame_split": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "bf3f7f93": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "585c7c08": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "a9d7688a": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "b82ec1c9": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "0fbbc7cb": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "6e75580a": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "27c8096a": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "a6a6bd8b": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "ac9204c6": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "1058cec3": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "16f8af21": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        }
+      },
+      "counts": {
+        "approved": 0,
+        "draft": 0,
+        "pending": 34,
+        "missing": 0,
+        "exempt": 9
+      },
+      "translated_ids": []
+    },
+    {
+      "path": "notebooks/Day04_YOLO_Training/Day04_02_YOLO_Training.ipynb",
+      "catalog": "Day04_02_YOLO_Training.taj.md",
+      "cells": {
+        "33aa7e73": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "7f0f9a1b": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "audit-learning-loop": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "642a1abd": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "d114d800": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "b2acff19": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "afa3760c": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "clarity-batch-predict": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "clarity-batch-static": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "clarity-batch-interpret": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "16c0469f": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "34a994aa": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "fig-teach_training_update": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "d7c70ee3": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "baf19a2b": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "ff1fcb01": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "16aa5ff6": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "c2cd53b9": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "a7af3b66": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "54800031": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "bad3dfd6": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "3261727b": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "clarity-run-checklist": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "b271f05f": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "audit-teach_epoch_batch_step": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "388c5d1c": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "f61a0caa": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "90708cf6": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "c0302cd9": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "fig-ref_train_val_curves": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "2a9855f8": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "f800c794": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "845f2d52": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "5861b59d": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "f412c790": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "4febd099": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "8273b533": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "75cf3328": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "ca2a29d4": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "8574a7d8": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "a98b52aa": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "a4a1e4b0": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "26b4b3d5": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "a1c69bf9": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        }
+      },
+      "counts": {
+        "approved": 0,
+        "draft": 0,
+        "pending": 36,
+        "missing": 0,
+        "exempt": 8
+      },
+      "translated_ids": []
+    },
+    {
+      "path": "notebooks/Day04_YOLO_Training/Day04_03_YOLO_Evaluation.ipynb",
+      "catalog": "Day04_03_YOLO_Evaluation.taj.md",
+      "cells": {
+        "7bb5e95c": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "09eb408e": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "audit-learning-loop": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "bb74f165": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "a79775e7": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "264f61b9": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "b66a8f92": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "b264ae84": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "clarity-evaluation-units": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "968ad99b": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "c479853d": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "85310d1a": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "6bcff7a5": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "612e7d6a": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "0fe77594": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "cdbaa1cb": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "7e5d1774": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "b116fb65": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "audit-teach_detection_matching": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "0c5dc209": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "826acaec": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "fig-teach_object_level_matching": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "bdd2037d": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "8a71da19": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "9768560a": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "4607c1f7": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "1838c3de": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "fig-ref_detections_label_vs_pred": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "17e80b20": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "64c7855e": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "00f4284f": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "f152c1d1": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "29056356": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "shared-sealed-test-intro": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "cecd885f": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "ba368ee2": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "68c27e48": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "83c679ee": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "cf0ad36e": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "360aa70d": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "e1f991d3": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "13bc3c9b": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "440278a7": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "9b6959aa": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "24754a39": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        }
+      },
+      "counts": {
+        "approved": 0,
+        "draft": 0,
+        "pending": 36,
+        "missing": 0,
+        "exempt": 9
+      },
+      "translated_ids": []
+    },
+    {
+      "path": "notebooks/Day05_PatchCore/Day05_01_Anomaly_Detection_Concepts.ipynb",
+      "catalog": "Day05_01_Anomaly_Detection_Concepts.taj.md",
+      "cells": {
+        "a62c030b": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "b071950f": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "audit-learning-loop": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "5652aeea": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "73b2d2a4": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "331c3ff1": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "68ece906": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "154bde87": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "fig-teach_normal_variation": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "ef2014d3": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "d863bda3": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "d5d90ce4": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "fig-VisA_samples": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "clarity-patch-data-roles": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "5e60e191": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "40ea8a9b": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "cf09f7d8": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "clarity-patch-overlap": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "429f99e1": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "f6726637": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "33f893ee": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "a85f80ca": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "c4d6ab80": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "61c7189b": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "47e11e57": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "e9df232d": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "c474e947": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "fig-teach_memory_bank": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "8c15705b": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "1aba9655": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "5c642a4a": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "fig-teach_score_levels": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "1f601e75": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "1784ecb1": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "b17afb8a": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "2b8faacc": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "074c9203": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "0cf76dd2": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "3c808d08": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "d7c5629a": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "93412cb6": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "106f3ad3": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "2fb637f4": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "f1c0d7cd": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "ea343d35": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        }
+      },
+      "counts": {
+        "approved": 0,
+        "draft": 0,
+        "pending": 36,
+        "missing": 0,
+        "exempt": 9
+      },
+      "translated_ids": []
+    },
+    {
+      "path": "notebooks/Day05_PatchCore/Day05_02_PatchCore_Training.ipynb",
+      "catalog": "Day05_02_PatchCore_Training.taj.md",
+      "cells": {
+        "43cbc7ba": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "01bf2bc9": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "audit-learning-loop": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "a89ea3f4": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "75d078b0": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "2fa75b5a": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "8f419564": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "15fc94d1": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "08e2ac7d": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "bc41a079": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "afbdd116": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "c7f73514": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "255b5b83": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "9e971153": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "f6b40399": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "audit-teach_patchcore_stages": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "ec1d7f54": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "90a03498": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "bf3d12fb": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "fig-teach_backbone_vs_memory": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "f5f00936": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "clarity-fit-state": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "29df63e7": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "0555a3e3": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "9aac8b7e": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "c452bff7": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "ba5da1ef": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "f4d5f377": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "e23369f4": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "28cb22c6": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "8cfeab62": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "clarity-score-card": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "fig-ref_anomaly_panels": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "cefba6c0": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "11a17ecf": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "748dffdf": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "b8ec6f1a": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "clarity-sealed-test": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "d5182901": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "d5e2bc6d": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "09b10a38": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "93a1ccd3": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "1fd52dc9": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "40d18179": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "c81c8cac": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "9ea9f264": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "2da75241": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "483ecbb0": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "d02d8a44": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        }
+      },
+      "counts": {
+        "approved": 0,
+        "draft": 0,
+        "pending": 40,
+        "missing": 0,
+        "exempt": 9
+      },
+      "translated_ids": []
+    },
+    {
+      "path": "notebooks/Day05_PatchCore/Day05_03_YOLO_vs_PatchCore.ipynb",
+      "catalog": "Day05_03_YOLO_vs_PatchCore.taj.md",
+      "cells": {
+        "ba87b991": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "1e496b72": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "audit-learning-loop": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "cfe0f93b": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "b1dbfcbd": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "5bf55559": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "c92bae7e": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "404278ad": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "7dbe36d4": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "c1bfc258": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "fig-teach_evaluation_sequence": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "be4aa133": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "415b6d88": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "ff4aa9d1": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "a0a1bf15": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "38cb927e": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "904252da": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "d8230d25": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "fig-ref_score_distribution": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "audit-teach_frozen_threshold_pipeline": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "c818bf0a": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "fig-teach_threshold_freeze": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "clarity-freeze-prompt": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "clarity-slider-before-freeze": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "clarity-sealed-test-read": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "3d343aab": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "ec601269": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "aa3a7737": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "bf9157ac": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "fig-ref_comparison_5col": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "clarity-calibration-boundary": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "29824f9c": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "5f26ab71": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "bb4b29d3": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "38937c33": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "b9498efe": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "09fc3b55": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "a4328131": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "9a48e17c": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "e885cf03": {
+          "status": "exempt",
+          "chars": 0,
+          "reason": ""
+        },
+        "30e783b7": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "dca7b3f3": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "e39fff93": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        }
+      },
+      "counts": {
+        "approved": 0,
+        "draft": 0,
+        "pending": 37,
+        "missing": 0,
+        "exempt": 6
+      },
+      "translated_ids": []
+    }
+  ],
+  "documents": [
+    {
+      "path": "START_HERE.md",
+      "exists": true,
+      "regions": 0,
+      "chars": 0,
+      "required_sections": 13,
+      "pending": 13,
+      "untranslated": [],
+      "counts": {
+        "approved": 0,
+        "draft": 0,
+        "pending": 13,
+        "missing": 0,
+        "exempt": 0
+      }
+    },
+    {
+      "path": "README.md",
+      "exists": true,
+      "regions": 0,
+      "chars": 0,
+      "required_sections": 16,
+      "pending": 16,
+      "untranslated": [],
+      "counts": {
+        "approved": 0,
+        "draft": 0,
+        "pending": 16,
+        "missing": 0,
+        "exempt": 0
+      }
+    },
+    {
+      "path": "COURSE_SYLLABUS.md",
+      "exists": true,
+      "regions": 0,
+      "chars": 0,
+      "required_sections": 15,
+      "pending": 15,
+      "untranslated": [],
+      "counts": {
+        "approved": 0,
+        "draft": 0,
+        "pending": 15,
+        "missing": 0,
+        "exempt": 0
+      }
+    },
+    {
+      "path": "docs/troubleshooting/installation.md",
+      "exists": true,
+      "regions": 0,
+      "chars": 0,
+      "required_sections": 17,
+      "pending": 17,
+      "untranslated": [],
+      "counts": {
+        "approved": 0,
+        "draft": 0,
+        "pending": 17,
+        "missing": 0,
+        "exempt": 0
+      }
+    },
+    {
+      "path": "docs/reference_materials.md",
+      "exists": true,
+      "regions": 0,
+      "chars": 0,
+      "required_sections": 10,
+      "pending": 10,
+      "untranslated": [],
+      "counts": {
+        "approved": 0,
+        "draft": 0,
+        "pending": 10,
+        "missing": 0,
+        "exempt": 0
+      }
+    },
+    {
+      "path": "docs/pdf/README.md",
+      "exists": true,
+      "regions": 0,
+      "chars": 0,
+      "required_sections": 16,
+      "pending": 16,
+      "untranslated": [],
+      "counts": {
+        "approved": 0,
+        "draft": 0,
+        "pending": 16,
+        "missing": 0,
+        "exempt": 0
+      }
+    },
+    {
+      "path": "requirements/tested_versions.md",
+      "exists": true,
+      "regions": 0,
+      "chars": 0,
+      "required_sections": 15,
+      "pending": 15,
+      "untranslated": [],
+      "counts": {
+        "approved": 0,
+        "draft": 0,
+        "pending": 15,
+        "missing": 0,
+        "exempt": 0
+      }
+    },
+    {
+      "path": "submissions/day01/Day01_Report_Template.md",
+      "exists": true,
+      "regions": 0,
+      "chars": 0,
+      "required_sections": 10,
+      "pending": 10,
+      "untranslated": [],
+      "counts": {
+        "approved": 0,
+        "draft": 0,
+        "pending": 10,
+        "missing": 0,
+        "exempt": 0
+      }
+    },
+    {
+      "path": "submissions/day02/Day02_Report_Template.md",
+      "exists": true,
+      "regions": 0,
+      "chars": 0,
+      "required_sections": 10,
+      "pending": 10,
+      "untranslated": [],
+      "counts": {
+        "approved": 0,
+        "draft": 0,
+        "pending": 10,
+        "missing": 0,
+        "exempt": 0
+      }
+    },
+    {
+      "path": "submissions/day03/Day03_Report_Template.md",
+      "exists": true,
+      "regions": 0,
+      "chars": 0,
+      "required_sections": 10,
+      "pending": 10,
+      "untranslated": [],
+      "counts": {
+        "approved": 0,
+        "draft": 0,
+        "pending": 10,
+        "missing": 0,
+        "exempt": 0
+      }
+    },
+    {
+      "path": "submissions/day04/Day04_Report_Template.md",
+      "exists": true,
+      "regions": 0,
+      "chars": 0,
+      "required_sections": 10,
+      "pending": 10,
+      "untranslated": [],
+      "counts": {
+        "approved": 0,
+        "draft": 0,
+        "pending": 10,
+        "missing": 0,
+        "exempt": 0
+      }
+    },
+    {
+      "path": "submissions/day05/Day05_Report_Template.md",
+      "exists": true,
+      "regions": 0,
+      "chars": 0,
+      "required_sections": 12,
+      "pending": 12,
+      "untranslated": [],
+      "counts": {
+        "approved": 0,
+        "draft": 0,
+        "pending": 12,
+        "missing": 0,
+        "exempt": 0
+      }
+    }
+  ],
+  "catalog_reviews": [
+    "pending-native-review"
+  ],
+  "totals": {
+    "approved": 0,
+    "draft": 0,
+    "pending": 656,
+    "missing": 0,
+    "exempt": 147
+  },
+  "document_totals": {
+    "approved": 0,
+    "draft": 0,
+    "pending": 154,
+    "missing": 0,
+    "exempt": 0
+  },
+  "catalogs_present": 16
+}

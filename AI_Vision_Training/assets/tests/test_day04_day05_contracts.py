@@ -728,3 +728,57 @@ def test_a_map_digest_mismatch_is_not_presented_as_this_experiments_output(tmp_p
 
     assert reader["numeric_maps_status"]["verified"] is False
     assert "do not match the sealed record" in capsys.readouterr().out
+
+
+# ---------------------------------------------------------------------------
+# GROUP J — the teaching text must not contradict the protocol
+# ---------------------------------------------------------------------------
+
+
+def test_the_datamodule_cell_hides_the_test_composition() -> None:
+    """Notebook 01 promises the test count and composition stay unseen until the freeze."""
+    source = cell_source("Day05_02", "f1a28c15")
+    assert "test_data.samples" not in source
+    assert "test composition" not in source
+    assert "固定するまで表示しません" in source
+
+
+def test_the_restart_message_matches_the_documented_recovery() -> None:
+    source = cell_source("Day05_02", "clarity-sealed-test-scoring")
+    assert "checkpoint" in source and "TEST_ALREADY_SEEN=True" in source
+    assert "新しい実験" in source or "NEW experiment" in source
+    # the old, contradictory instruction: refitting was offered as the way to resume
+    assert "re-run the fit cells from Part 3, then run this cell once" not in source
+
+
+def test_the_threshold_comes_from_the_canonical_helper() -> None:
+    source = cell_source("Day05_02", "1c4cd018")
+    assert "model.post_processor.adaptive_threshold" not in source
+    assert 'CALIBRATED_POSTPROCESSOR["adaptive_threshold"]' in source
+
+
+def test_the_wording_puts_test_inference_in_day4_and_day5_02() -> None:
+    source = cell_source("Day05_02", "6c5c2682")
+    assert "never runs TEST inference" in source
+    assert "Test metrics are produced in Day 5 Notebook 03" not in source
+    assert "shared-sealed-test" in source and "clarity-sealed-test-scoring" in source
+
+
+def test_the_six_step_table_names_the_right_owners() -> None:
+    text = cell_source("Day05_02", "clarity-sealed-test")
+    assert "6 ステップ" in text and "The order has six steps" in text
+    assert "shared-sealed-test" in text and "clarity-sealed-test-scoring" in text
+    # step 4 and step 5 are the two sealing cells, in that order
+    assert text.index("shared-sealed-test") < text.index("clarity-sealed-test-scoring")
+
+
+@pytest.mark.parametrize("stem,cell_id,owners", [
+    ("Day05_03", "clarity-sealed-test-read",
+     ("Day04_03_YOLO_Evaluation.ipynb", "Day05_02_PatchCore_Training.ipynb",
+      "shared-sealed-test", "clarity-sealed-test-scoring")),
+    ("Day04_03", "shared-sealed-test-intro", ("第 5 日ノートブック 03", "Part 5")),
+])
+def test_the_sealing_sections_name_their_notebooks(stem, cell_id, owners) -> None:
+    text = cell_source(stem, cell_id)
+    for owner in owners:
+        assert owner in text, f"{cell_id} no longer names {owner!r}"
