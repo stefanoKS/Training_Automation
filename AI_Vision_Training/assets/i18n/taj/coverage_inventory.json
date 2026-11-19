@@ -346,7 +346,9 @@
         "missing": 0,
         "exempt": 11
       },
-      "translated_ids": []
+      "translated_ids": [],
+      "review": "pending-native-review",
+      "issues": []
     },
     {
       "path": "notebooks/Day01_AI_Fundamentals/Day01_01_Introduction_to_AI.ipynb",
@@ -655,7 +657,9 @@
         "missing": 0,
         "exempt": 10
       },
-      "translated_ids": []
+      "translated_ids": [],
+      "review": "pending-native-review",
+      "issues": []
     },
     {
       "path": "notebooks/Day01_AI_Fundamentals/Day01_02_Pixels_and_Images.ipynb",
@@ -984,7 +988,9 @@
         "missing": 0,
         "exempt": 11
       },
-      "translated_ids": []
+      "translated_ids": [],
+      "review": "pending-native-review",
+      "issues": []
     },
     {
       "path": "notebooks/Day01_AI_Fundamentals/Day01_03_Computer_Vision_Tasks.ipynb",
@@ -1218,7 +1224,9 @@
         "missing": 0,
         "exempt": 10
       },
-      "translated_ids": []
+      "translated_ids": [],
+      "review": "pending-native-review",
+      "issues": []
     },
     {
       "path": "notebooks/Day02_Python_OpenCV/Day02_01_Python_Basics.ipynb",
@@ -1492,7 +1500,9 @@
         "missing": 0,
         "exempt": 10
       },
-      "translated_ids": []
+      "translated_ids": [],
+      "review": "pending-native-review",
+      "issues": []
     },
     {
       "path": "notebooks/Day02_Python_OpenCV/Day02_02_Conditions_Loops_Functions.ipynb",
@@ -1826,7 +1836,9 @@
         "missing": 0,
         "exempt": 10
       },
-      "translated_ids": []
+      "translated_ids": [],
+      "review": "pending-native-review",
+      "issues": []
     },
     {
       "path": "notebooks/Day02_Python_OpenCV/Day02_03_OpenCV_Image_Processing.ipynb",
@@ -2135,7 +2147,9 @@
         "missing": 0,
         "exempt": 9
       },
-      "translated_ids": []
+      "translated_ids": [],
+      "review": "pending-native-review",
+      "issues": []
     },
     {
       "path": "notebooks/Day03_YOLO_Basics/Day03_01_YOLO_Concepts.ipynb",
@@ -2364,7 +2378,9 @@
         "missing": 0,
         "exempt": 8
       },
-      "translated_ids": []
+      "translated_ids": [],
+      "review": "pending-native-review",
+      "issues": []
     },
     {
       "path": "notebooks/Day03_YOLO_Basics/Day03_02_YOLO_Inference.ipynb",
@@ -2583,7 +2599,9 @@
         "missing": 0,
         "exempt": 9
       },
-      "translated_ids": []
+      "translated_ids": [],
+      "review": "pending-native-review",
+      "issues": []
     },
     {
       "path": "notebooks/Day03_YOLO_Basics/Day03_03_YOLO_Experiments.ipynb",
@@ -2817,7 +2835,9 @@
         "missing": 0,
         "exempt": 9
       },
-      "translated_ids": []
+      "translated_ids": [],
+      "review": "pending-native-review",
+      "issues": []
     },
     {
       "path": "notebooks/Day04_YOLO_Training/Day04_01_YOLO_Dataset_Annotation.ipynb",
@@ -3046,7 +3066,9 @@
         "missing": 0,
         "exempt": 9
       },
-      "translated_ids": []
+      "translated_ids": [],
+      "review": "pending-native-review",
+      "issues": []
     },
     {
       "path": "notebooks/Day04_YOLO_Training/Day04_02_YOLO_Training.ipynb",
@@ -3280,7 +3302,9 @@
         "missing": 0,
         "exempt": 8
       },
-      "translated_ids": []
+      "translated_ids": [],
+      "review": "pending-native-review",
+      "issues": []
     },
     {
       "path": "notebooks/Day04_YOLO_Training/Day04_03_YOLO_Evaluation.ipynb",
@@ -3519,7 +3543,9 @@
         "missing": 0,
         "exempt": 9
       },
-      "translated_ids": []
+      "translated_ids": [],
+      "review": "pending-native-review",
+      "issues": []
     },
     {
       "path": "notebooks/Day05_PatchCore/Day05_01_Anomaly_Detection_Concepts.ipynb",
@@ -3758,7 +3784,9 @@
         "missing": 0,
         "exempt": 9
       },
-      "translated_ids": []
+      "translated_ids": [],
+      "review": "pending-native-review",
+      "issues": []
     },
     {
       "path": "notebooks/Day05_PatchCore/Day05_02_PatchCore_Training.ipynb",
@@ -4017,7 +4045,9 @@
         "missing": 0,
         "exempt": 9
       },
-      "translated_ids": []
+      "translated_ids": [],
+      "review": "pending-native-review",
+      "issues": []
     },
     {
       "path": "notebooks/Day05_PatchCore/Day05_03_YOLO_vs_PatchCore.ipynb",
@@ -4246,7 +4276,9 @@
         "missing": 0,
         "exempt": 6
       },
-      "translated_ids": []
+      "translated_ids": [],
+      "review": "pending-native-review",
+      "issues": []
     }
   ],
   "documents": [
@@ -4254,14 +4286,89 @@
       "path": "START_HERE.md",
       "exists": true,
       "regions": 0,
+      "catalog": "START_HERE.taj.md",
       "chars": 0,
-      "required_sections": 13,
-      "pending": 13,
+      "required_sections": 14,
+      "sections": {
+        "# はじめかた / START HERE": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## ステップ 1　取得してフォルダを開く / Download and open the folder": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## ステップ 2　Python 3.11 を確認する / Check Python 3.11": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## ステップ 3　基本環境を作る / Create the base environment": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## ステップ 4　Anomalib 環境を作る / Create the Anomalib environment": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## ステップ 5　両方のカーネルを登録する / Register both kernels": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## ステップ 6　教材とデータを作る / Generate teaching assets and datasets": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## ステップ 7　オフライン授業の素材を先に取得する / Preload offline lesson inputs": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## ステップ 8　環境と教材を確認する / Verify environments and assets": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## ステップ 9　JupyterLab を起動する / Launch JupyterLab": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## ステップ 10　準備完了を確認する / Complete preflight": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## ステップ 11　授業を始める / Start lessons": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "### 例外：第4日後の Anomalib 準備 / Alternative: Anomalib setup after Day 4": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "### 困ったとき / Troubleshooting": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        }
+      },
+      "issues": [],
+      "review": "pending-native-review",
+      "pending": 14,
       "untranslated": [],
       "counts": {
         "approved": 0,
         "draft": 0,
-        "pending": 13,
+        "pending": 14,
         "missing": 0,
         "exempt": 0
       }
@@ -4270,8 +4377,93 @@
       "path": "README.md",
       "exists": true,
       "regions": 0,
+      "catalog": "README.taj.md",
       "chars": 0,
       "required_sections": 16,
+      "sections": {
+        "# 広島化成 第1週 AI・マシンビジョン研修 / Hiroshima Kasei Week 1 AI & Machine Vision Training": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 1. 最初に読むもの / Read this first": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 1.1 時間の考え方 / How the time adds up": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 2. この研修で身につくこと / What you will be able to do": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 3. インストール / Installation": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 4. 素材（データ）の生成 / Generating the assets": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 4.1 解説 PDF / Explanation PDFs": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 5. 起動 / Starting JupyterLab": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "### 5.1 セルの指示 / Cell instructions": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "### 5.2 対話デモ / Interactive demos": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 6. 検証とテスト / Validation and tests": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 7. フォルダ構成 / Project structure": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 8. 提出物 / Submissions": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 9. 困ったとき / When something goes wrong": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 10. 既知の制限 / Known limitations": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 11. ライセンスと出所 / Licensing and provenance": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        }
+      },
+      "issues": [],
+      "review": "pending-native-review",
       "pending": 16,
       "untranslated": [],
       "counts": {
@@ -4286,14 +4478,144 @@
       "path": "COURSE_SYLLABUS.md",
       "exists": true,
       "regions": 0,
+      "catalog": "COURSE_SYLLABUS.taj.md",
       "chars": 0,
-      "required_sections": 15,
-      "pending": 15,
+      "required_sections": 25,
+      "sections": {
+        "# 研修シラバス / COURSE SYLLABUS": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 1. 1 日のリズム / The daily rhythm": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "### 時間割の記号 / Reading the timetable": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 2. 研修前の準備（第1日より前）/ Preflight, before Day 1": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "### 第1日の準備確認 / Day 1 readiness check": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "### 準備が終わらなかった場合 / If preflight is not finished": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 3. 第1日（11/16）AI の基礎 / Day 1 — AI fundamentals": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "# 研修シラバス / COURSE SYLLABUS > ## 3. 第1日（11/16）AI の基礎 / Day 1 — AI fundamentals > ### 午前の自習 / Morning self-study（09:00–12:00）": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "# 研修シラバス / COURSE SYLLABUS > ## 3. 第1日（11/16）AI の基礎 / Day 1 — AI fundamentals > ### 午後の自習 / Afternoon self-study（13:50–16:50）": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 4. 第2日（11/17）Python と OpenCV / Day 2 — Python and OpenCV": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "# 研修シラバス / COURSE SYLLABUS > ## 4. 第2日（11/17）Python と OpenCV / Day 2 — Python and OpenCV > ### 午前の自習 / Morning self-study（09:00–12:00）": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "# 研修シラバス / COURSE SYLLABUS > ## 4. 第2日（11/17）Python と OpenCV / Day 2 — Python and OpenCV > ### 午後の自習 / Afternoon self-study（13:50–16:50）": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 5. 第3日（11/18）YOLO の基礎 / Day 3 — YOLO basics": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "# 研修シラバス / COURSE SYLLABUS > ## 5. 第3日（11/18）YOLO の基礎 / Day 3 — YOLO basics > ### 午前の自習 / Morning self-study（09:00–12:00）": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "# 研修シラバス / COURSE SYLLABUS > ## 5. 第3日（11/18）YOLO の基礎 / Day 3 — YOLO basics > ### 午後の自習 / Afternoon self-study（13:50–16:50）": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 6. 第4日（11/19）YOLO の学習 / Day 4 — Training YOLO": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "# 研修シラバス / COURSE SYLLABUS > ## 6. 第4日（11/19）YOLO の学習 / Day 4 — Training YOLO > ### 午前の自習 / Morning self-study（09:00–12:00）": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "# 研修シラバス / COURSE SYLLABUS > ## 6. 第4日（11/19）YOLO の学習 / Day 4 — Training YOLO > ### 午後の自習 / Afternoon self-study（13:50–16:50）": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 7. 第5日（11/20）PatchCore と比較 / Day 5 — PatchCore and comparison": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "# 研修シラバス / COURSE SYLLABUS > ## 7. 第5日（11/20）PatchCore と比較 / Day 5 — PatchCore and comparison > ### 午前の自習 / Morning self-study（09:00–12:00）": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "# 研修シラバス / COURSE SYLLABUS > ## 7. 第5日（11/20）PatchCore と比較 / Day 5 — PatchCore and comparison > ### 午後の自習 / Afternoon self-study（13:50–16:50）": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 8. ノートブックの共通構成 / Structure of every notebook": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "### セルの指示 / Cell instructions": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 9. 評価 / Assessment": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 10. 第 2 週へのつながり / What Week 2 covers": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        }
+      },
+      "issues": [],
+      "review": "pending-native-review",
+      "pending": 25,
       "untranslated": [],
       "counts": {
         "approved": 0,
         "draft": 0,
-        "pending": 15,
+        "pending": 25,
         "missing": 0,
         "exempt": 0
       }
@@ -4302,8 +4624,98 @@
       "path": "docs/troubleshooting/installation.md",
       "exists": true,
       "regions": 0,
+      "catalog": "docs-troubleshooting-installation.taj.md",
       "chars": 0,
       "required_sections": 17,
+      "sections": {
+        "# インストール時のトラブル対処 / Installation troubleshooting": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 0. まずこれを実行する / Run this first": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 1. 仮想環境を有効化できない / Cannot activate the virtual environment": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 2. `python` と打つと Microsoft Store が開く / typing `python` opens the Store": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 3. `ModuleNotFoundError: No module named 'numpy'`（ノートブック内）/ inside a notebook": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "### 3.1 カーネルが違う / the wrong kernel (most common)": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "### 3.2 パッケージが本当に入っていない / the package really is missing": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 4. ダウンロードが `Read timed out` で止まる / downloads time out": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 5. OpenCV がおかしい / OpenCV behaves strangely": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 6. 画像やデータが見つからない / assets or datasets are missing": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "### 6.1 実写の参考画像が見つからない / the reference photographs are missing": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 7. モデルのダウンロードに失敗する / model download fails": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 8. `anomalib` が見つからない / `No module named 'anomalib'`": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 9. `OSError: Error loading \"...\\torch\\lib\\c10.dll\"`": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 10. メモリ不足 / out of memory": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 11. スライダーが動かない / the sliders do nothing": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 12. それでも解決しないとき / when nothing works": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        }
+      },
+      "issues": [],
+      "review": "pending-native-review",
       "pending": 17,
       "untranslated": [],
       "counts": {
@@ -4318,8 +4730,63 @@
       "path": "docs/reference_materials.md",
       "exists": true,
       "regions": 0,
+      "catalog": "docs-reference_materials.taj.md",
       "chars": 0,
       "required_sections": 10,
+      "sections": {
+        "# 参考資料 / Reference materials": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 0. この研修の解説資料 / This course's own explanations": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 1. コア（必須）/ Core (required reading)": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 2. OpenCV": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 3. PyTorch": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 4. Ultralytics YOLO": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 5. Anomalib": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 6. データセットと評価の考え方 / Datasets and evaluation": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 7. ライセンスの確認 / Licence checks": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 8. 実写の参考画像 / Reference photographs": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        }
+      },
+      "issues": [],
+      "review": "pending-native-review",
       "pending": 10,
       "untranslated": [],
       "counts": {
@@ -4334,14 +4801,54 @@
       "path": "docs/pdf/README.md",
       "exists": true,
       "regions": 0,
+      "catalog": "docs-pdf-README.taj.md",
       "chars": 0,
-      "required_sections": 16,
-      "pending": 16,
+      "required_sections": 7,
+      "sections": {
+        "# 解説 PDF / Explanation companions": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## ファイル / Files": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 作り直す方法 / Regenerating": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 何が入り、何が入らないか / What is in, and what is out": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 既知の限界 / Known limitations": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## タマン語（taj）版 / The Tamang (taj) booklets": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "### 有効にする条件 / What has to happen first": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        }
+      },
+      "issues": [],
+      "review": "pending-native-review",
+      "pending": 7,
       "untranslated": [],
       "counts": {
         "approved": 0,
         "draft": 0,
-        "pending": 16,
+        "pending": 7,
         "missing": 0,
         "exempt": 0
       }
@@ -4350,8 +4857,88 @@
       "path": "requirements/tested_versions.md",
       "exists": true,
       "regions": 0,
+      "catalog": "requirements-tested_versions.taj.md",
       "chars": 0,
       "required_sections": 15,
+      "sections": {
+        "# 検証済みバージョン / Tested versions": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 1. 検証した環境 / The verification environment": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 2. `.venv`（第0〜4日）/ Base + YOLO environment (Days 0-4)": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 3. `.venv-anomalib`（第5日）/ Anomalib environment (Day 5)": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 4. 重要な判断と、その理由 / Key decisions and why": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "### 4.1 なぜ環境を 2 つに分けたか / Why two environments": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "### 4.2 OpenCV を 4.12.0.88 に固定した理由 / Why OpenCV is pinned to 4.12": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "### 4.3 torch 2.10.0 を使わなかった理由 / Why not torch 2.10.0": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "### 4.4 バックボーンを ResNet-18 にした理由 / Why ResNet-18": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "### 4.5 Lightning の経過表示を切った理由 / Why the Lightning progress display is off": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 5. 実測した結果 / Measured results": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "### 5.1 YOLO（第4日）/ YOLO (Day 4)": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "### 5.2 PatchCore（第5日）/ PatchCore (Day 5)": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "### 5.3 YOLO と PatchCore の共通画像での比較 / Shared-set comparison": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 6. 既知の問題 / Known issues": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        }
+      },
+      "issues": [],
+      "review": "pending-native-review",
       "pending": 15,
       "untranslated": [],
       "counts": {
@@ -4366,14 +4953,74 @@
       "path": "submissions/day01/Day01_Report_Template.md",
       "exists": true,
       "regions": 0,
+      "catalog": "submissions-day01-Day01_Report_Template.taj.md",
       "chars": 0,
-      "required_sections": 10,
-      "pending": 10,
+      "required_sections": 11,
+      "sections": {
+        "# 第1日 学習レポート / Day 01 Learning Report": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 記入のルール / How to fill this in": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 1. 本日の学習内容 / Today's learning": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 2. 実施した作業 / Completed activities": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 3. 実行結果 / Results": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 4. 発生した問題 / Problems encountered": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 5. 試した解決方法 / Troubleshooting attempts": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 6. 理解できなかった内容 / Questions remaining": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 7. 化成品工程への応用 / Application to Kaseihin": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 8. 自己評価 / Self-assessment": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 提出物チェック / Submission checklist": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        }
+      },
+      "issues": [],
+      "review": "pending-native-review",
+      "pending": 11,
       "untranslated": [],
       "counts": {
         "approved": 0,
         "draft": 0,
-        "pending": 10,
+        "pending": 11,
         "missing": 0,
         "exempt": 0
       }
@@ -4382,14 +5029,74 @@
       "path": "submissions/day02/Day02_Report_Template.md",
       "exists": true,
       "regions": 0,
+      "catalog": "submissions-day02-Day02_Report_Template.taj.md",
       "chars": 0,
-      "required_sections": 10,
-      "pending": 10,
+      "required_sections": 11,
+      "sections": {
+        "# 第2日 学習レポート / Day 02 Learning Report": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 記入のルール / How to fill this in": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 1. 本日の学習内容 / Today's learning": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 2. 実施した作業 / Completed activities": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 3. 実行結果 / Results": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 4. 発生した問題 / Problems encountered": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 5. 試した解決方法 / Troubleshooting attempts": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 6. 理解できなかった内容 / Questions remaining": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 7. 化成品工程への応用 / Application to Kaseihin": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 8. 自己評価 / Self-assessment": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 提出物チェック / Submission checklist": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        }
+      },
+      "issues": [],
+      "review": "pending-native-review",
+      "pending": 11,
       "untranslated": [],
       "counts": {
         "approved": 0,
         "draft": 0,
-        "pending": 10,
+        "pending": 11,
         "missing": 0,
         "exempt": 0
       }
@@ -4398,14 +5105,74 @@
       "path": "submissions/day03/Day03_Report_Template.md",
       "exists": true,
       "regions": 0,
+      "catalog": "submissions-day03-Day03_Report_Template.taj.md",
       "chars": 0,
-      "required_sections": 10,
-      "pending": 10,
+      "required_sections": 11,
+      "sections": {
+        "# 第3日 学習レポート / Day 03 Learning Report": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 記入のルール / How to fill this in": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 1. 本日の学習内容 / Today's learning": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 2. 実施した作業 / Completed activities": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 3. 実行結果 / Results": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 4. 発生した問題 / Problems encountered": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 5. 試した解決方法 / Troubleshooting attempts": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 6. 理解できなかった内容 / Questions remaining": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 7. 化成品工程への応用 / Application to Kaseihin": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 8. 自己評価 / Self-assessment": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 提出物チェック / Submission checklist": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        }
+      },
+      "issues": [],
+      "review": "pending-native-review",
+      "pending": 11,
       "untranslated": [],
       "counts": {
         "approved": 0,
         "draft": 0,
-        "pending": 10,
+        "pending": 11,
         "missing": 0,
         "exempt": 0
       }
@@ -4414,14 +5181,74 @@
       "path": "submissions/day04/Day04_Report_Template.md",
       "exists": true,
       "regions": 0,
+      "catalog": "submissions-day04-Day04_Report_Template.taj.md",
       "chars": 0,
-      "required_sections": 10,
-      "pending": 10,
+      "required_sections": 11,
+      "sections": {
+        "# 第4日 学習レポート / Day 04 Learning Report": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 記入のルール / How to fill this in": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 1. 本日の学習内容 / Today's learning": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 2. 実施した作業 / Completed activities": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 3. 実行結果 / Results": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 4. 発生した問題 / Problems encountered": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 5. 試した解決方法 / Troubleshooting attempts": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 6. 理解できなかった内容 / Questions remaining": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 7. 化成品工程への応用 / Application to Kaseihin": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 8. 自己評価 / Self-assessment": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 提出物チェック / Submission checklist": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        }
+      },
+      "issues": [],
+      "review": "pending-native-review",
+      "pending": 11,
       "untranslated": [],
       "counts": {
         "approved": 0,
         "draft": 0,
-        "pending": 10,
+        "pending": 11,
         "missing": 0,
         "exempt": 0
       }
@@ -4430,14 +5257,84 @@
       "path": "submissions/day05/Day05_Report_Template.md",
       "exists": true,
       "regions": 0,
+      "catalog": "submissions-day05-Day05_Report_Template.taj.md",
       "chars": 0,
-      "required_sections": 12,
-      "pending": 12,
+      "required_sections": 13,
+      "sections": {
+        "# 第5日 学習レポート / Day 05 Learning Report": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 記入のルール / How to fill this in": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 1. 本日の学習内容 / Today's learning": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 2. 実施した作業 / Completed activities": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 3. 実行結果 / Results": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 4. YOLO と PatchCore の比較 / YOLO versus PatchCore": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 5. 塩ビ検査への推奨 / Recommendation for PVC inspection": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 4. 発生した問題 / Problems encountered": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 5. 試した解決方法 / Troubleshooting attempts": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 6. 理解できなかった内容 / Questions remaining": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 7. 化成品工程への応用 / Application to Kaseihin": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 8. 自己評価 / Self-assessment": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        },
+        "## 提出物チェック / Submission checklist": {
+          "status": "pending",
+          "chars": 0,
+          "reason": "no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text"
+        }
+      },
+      "issues": [],
+      "review": "pending-native-review",
+      "pending": 13,
       "untranslated": [],
       "counts": {
         "approved": 0,
         "draft": 0,
-        "pending": 12,
+        "pending": 13,
         "missing": 0,
         "exempt": 0
       }
@@ -4446,6 +5343,7 @@
   "catalog_reviews": [
     "pending-native-review"
   ],
+  "issues": [],
   "totals": {
     "approved": 0,
     "draft": 0,
@@ -4456,7 +5354,7 @@
   "document_totals": {
     "approved": 0,
     "draft": 0,
-    "pending": 154,
+    "pending": 161,
     "missing": 0,
     "exempt": 0
   },

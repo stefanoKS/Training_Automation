@@ -1,6 +1,6 @@
 """翻訳カバレッジの点検 / Report how much of each locale the course actually carries.
 
-Four states are counted separately, per notebook cell and per document section:
+Five states are counted separately, per notebook cell and per document section:
 
 ``approved``
     A translated region exists **and** a reviewer signed that block off
@@ -10,6 +10,8 @@ Four states are counted separately, per notebook cell and per document section:
 ``pending``
     The catalog records the block as untranslated (``<!-- <locale>-pending: <id> | reason -->``)
     because no dependable translation could be produced. Nothing is invented to fill it.
+``missing``
+    A required block has neither a usable insertion nor a pending entry.
 ``exempt``
     The cell deliberately stays untranslated: separators, empty scaffolding, "write your code here"
     placeholders.
@@ -33,14 +35,17 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
+from datetime import date
 from pathlib import Path
 
 import check_nepali_coverage as legacy
 import apply_docs
-from apply_translations import catalog_metadata, parse_catalog, parse_pending, parse_status
+import apply_translations
+from apply_translations import catalog_metadata, parse_catalog, parse_pending
 from course_notebooks import course_notebooks
-from i18n_locales import DEVANAGARI_RE, Locale, locale as get_locale
+from i18n_locales import DEVANAGARI_RE, LEGACY_REGION_RE, Locale, locale as get_locale, without_legacy
 
 COURSE_ROOT = Path(__file__).resolve().parents[2]
 DOCUMENTS = legacy.DOCUMENTS
@@ -68,55 +73,204 @@ def doc_catalog_stem(rel_path: str) -> str:
     return "-".join(Path(rel_path).with_suffix("").parts)
 
 
+def directives(path: Path, pattern: re.Pattern) -> dict[str, str]:
+    values = {}
+    if path.is_file():
+        for line in path.read_text(encoding="utf-8").splitlines():
+            match = pattern.fullmatch(line.strip())
+            if match:
+                key, value = match.groups()
+                if key in values:
+                    raise apply_translations.CatalogError(
+                        f"{path.name}: duplicate directive for {key!r}")
+                values[key] = value or ""
+    return values
+
+
+def has_review(metadata: dict[str, str], loc: Locale) -> bool:
+    def identified(value: str) -> bool:
+        return bool(any(character.isalpha() for character in value) and not re.match(
+            r"(?i)^[\s(]*(?:none|unknown|pending|n/?a|tbd|todo|unreviewed|anonymous|placeholder|"
+            r"machine|ai-generated)\b", value))
+
+    try:
+        reviewed_on = date.fromisoformat(metadata.get("reviewed-on", ""))
+    except ValueError:
+        return False
+    return (reviewed_on <= date.today()
+            and metadata.get("review") == "approved"
+            and metadata.get("locale") == loc.code and metadata.get("bcp47") == loc.tag
+            and metadata.get("script") == loc.script and metadata.get("variety") == loc.variety
+            and identified(metadata.get("reviewer", ""))
+            and identified(metadata.get("provenance", "")))
+
+
+def catalog_errors(keys, entries, pending, claimed) -> list[str]:
+    issues = []
+    unknown = (entries.keys() | pending.keys() | claimed.keys()) - keys
+    if unknown:
+        issues.append(f"stale or unknown catalog keys: {sorted(unknown)}")
+    conflict = pending.keys() & (entries.keys() | claimed.keys())
+    if conflict:
+        issues.append(f"pending entries conflict with text or review: {sorted(conflict)}")
+    without_text = claimed.keys() - entries.keys()
+    if without_text:
+        issues.append(f"review status without catalog text: {sorted(without_text)}")
+    return issues
+
+
+def outside_errors(text: str, loc: Locale) -> list[str]:
+    issues = []
+    if marker_remains(text, loc):
+        issues.append("unmatched or nested translation markers")
+    if DEVANAGARI_RE.search(text):
+        issues.append("untracked Devanagari outside a translation region")
+    return issues
+
+
+def marker_remains(text: str, loc: Locale) -> bool:
+    return bool(re.search(r"<!--\s*(?:" + re.escape(loc.code) + r"|ne):(?:begin|end)\b", text))
+
+
 def classify_notebook(path: Path, loc: Locale) -> dict:
     catalog = catalogue_path(loc, path.stem)
-    entries = parse_catalog(catalog, loc) if catalog.is_file() else {}
-    pending = parse_pending(catalog, loc)
-    claimed = parse_status(catalog, loc)
+    entries, pending, claimed, metadata = {}, {}, {}, {}
+    issues = []
+    try:
+        entries = parse_catalog(catalog, loc) if catalog.is_file() else {}
+        pending = directives(catalog, loc.pending_directive_re())
+        claimed = directives(catalog, loc.status_directive_re())
+        metadata = catalog_metadata(catalog)
+    except apply_translations.CatalogError as error:
+        issues.append(str(error))
     notebook = json.loads(path.read_text(encoding="utf-8"))
+    review = has_review(metadata, loc)
     report = {"path": path.relative_to(COURSE_ROOT).as_posix(), "catalog": catalog.name,
               "cells": {}, "counts": {label: 0 for label in STATUS_LABELS},
-              "translated_ids": sorted(entries)}
+              "translated_ids": sorted(entries), "review": metadata.get("review", ""),
+              "issues": issues}
     for cell in notebook["cells"]:
         if cell["cell_type"] != "markdown":
             continue
         cell_id = cell.get("id") or ""
         source = "".join(cell.get("source", []))
+        if not cell_id or cell_id in report["cells"]:
+            issues.append(f"missing or duplicate markdown cell ID: {cell_id!r}")
+        source = without_legacy(source)
         outside = loc.region_re().sub("", source)
-        bodies = [match.group("body") for match in loc.region_re().finditer(source)]
+        cell_issues = outside_errors(outside, loc)
+        bodies = {}
+        wanted = {block["at"]: block["text"] for block in entries.get(cell_id, [])}
+        try:
+            regions = apply_translations.parse_regions(source, loc)
+            bodies = {anchor: region["body"] for anchor, region in regions.items()}
+            for anchor, body in bodies.items():
+                apply_translations.validate_block(loc, body, f"cell {cell_id}, {anchor}")
+                if marker_remains(body, loc):
+                    cell_issues.append(f"{anchor}: nested translation markers")
+            for anchor, body in wanted.items():
+                if anchor != "end":
+                    apply_translations.apply_blocks(outside, [{"at": anchor, "text": body}], loc)
+        except apply_translations.CatalogError as error:
+            cell_issues.append(str(error))
+        if bodies != wanted:
+            cell_issues.append("inserted translation anchors or content differ from the catalog")
+        if claimed.get(cell_id) == "approved" and not review:
+            cell_issues.append("approved claim lacks matching human review provenance")
+        issues.extend(f"{cell_id}: {issue}" for issue in cell_issues)
         if bodies:
-            status = "approved" if claimed.get(cell_id) == "approved" else "draft"
-        elif legacy.is_exempt(outside):
+            status = "approved" if claimed.get(cell_id) == "approved" and review and not cell_issues else "draft"
+        elif legacy.is_exempt(outside) and cell_id not in (entries.keys() | pending.keys()):
             status = "exempt"
         elif cell_id in pending:
             status = "pending"
         else:
             status = "missing"
-        report["cells"][cell_id] = {"status": status, "chars": sum(len(b) for b in bodies),
+        report["cells"][cell_id] = {"status": status, "chars": sum(len(b) for b in bodies.values()),
                                     "reason": pending.get(cell_id, "")}
         report["counts"][status] += 1
+    issues.extend(catalog_errors(report["cells"].keys(), entries, pending, claimed))
     return report
+
+
+def document_source(text: str, loc: Locale) -> str:
+    blank = lambda match: "\n" * match.group().count("\n")
+    return loc.doc_region_re().sub(blank, LEGACY_REGION_RE.sub(blank, text))
+
+
+def document_sections(source: str) -> dict[str, tuple[int, int, bool]]:
+    lines = source.split("\n")
+    headings = apply_docs.section_anchors(lines)
+    sections = {}
+    for (start, heading), (end, _) in zip(headings, headings[1:] + [(len(lines), "")]):
+        if heading in sections:
+            raise apply_docs.CatalogError(f"duplicate document heading {heading!r}")
+        body = "\n".join(lines[start + 1:end]).strip()
+        # Exemptions are owned by the source, not claimed by a translation catalog.
+        sections[heading] = (start, end, body == "<!-- localization-exempt -->")
+    return sections
 
 
 def classify_document(rel_path: str, loc: Locale) -> dict:
     path = COURSE_ROOT / rel_path
     catalog = doc_catalogue_path(loc, rel_path)
-    pending = apply_docs.parse_pending(catalog, loc) if catalog.is_file() else {}
-    legacy_catalog = COURSE_ROOT / "assets" / "i18n" / "ne" / "docs" / f"{Path(rel_path).stem}.ne.md"
-    required = (sorted(apply_docs.parse_catalog(legacy_catalog, get_locale("ne"))[1])
-                if legacy_catalog.is_file() else [])
+    entries, pending, claimed, metadata, sections, regions = {}, {}, {}, {}, {}, {}
+    issues = []
     text = path.read_text(encoding="utf-8") if path.is_file() else ""
-    regions = [match.group("body") for match in loc.doc_region_re().finditer(text)]
+    text = without_legacy(text)
+    source = document_source(text, loc)
+    issues.extend(outside_errors(source, loc))
+    try:
+        sections = document_sections(source)
+        if catalog.is_file():
+            target, entries = apply_docs.parse_catalog(catalog, loc)
+            if target != rel_path:
+                issues.append(f"catalog target is {target!r}, expected {rel_path!r}")
+            pending = directives(catalog, loc.doc_pending_directive_re())
+            claimed = directives(catalog, loc.doc_status_directive_re())
+            metadata = catalog_metadata(catalog)
+        regions = apply_docs.region_spans(text, loc)
+    except (apply_docs.CatalogError, apply_translations.CatalogError) as error:
+        issues.append(str(error))
+    review = has_review(metadata, loc)
+    issues.extend(catalog_errors(sections.keys(), entries, pending, claimed))
+    unknown = regions.keys() - {apply_docs.slug_of(heading) for heading in sections}
+    if unknown:
+        issues.append(f"stale inserted document anchors: {sorted(unknown)}")
     report = {"path": rel_path, "exists": path.is_file(), "regions": len(regions),
-              "chars": sum(len(body) for body in regions), "required_sections": len(required),
-              "pending": len([heading for heading in required if heading in pending]),
-              "untranslated": sorted(heading for heading in required if heading not in pending),
-              "counts": {label: 0 for label in STATUS_LABELS}}
-    if not path.is_file():
-        report["counts"]["missing"] = len(required) or 1
-        return report
-    status = "draft" if regions else ("pending" if pending else "missing")
-    report["counts"][status] = len(required) or 1
+              "catalog": catalog.name, "chars": 0, "required_sections": 0,
+              "sections": {}, "issues": issues, "review": metadata.get("review", ""),
+              "pending": 0, "untranslated": [], "counts": {label: 0 for label in STATUS_LABELS}}
+    if not sections:
+        report["counts"]["missing"] = 1
+        issues.append("source has no addressable sections")
+    for heading, (start_line, end_line, exempt) in sections.items():
+        span = regions.get(apply_docs.slug_of(heading))
+        body = text[span[1]:span[2]] if span else ""
+        status = "missing"
+        if span:
+            line = text.count("\n", 0, span[0]) + 1
+            wanted = "\n".join(entries.get(heading, [])).strip("\n")
+            correct = (start_line < line < end_line and bool(wanted) and wanted == body
+                       and not marker_remains(body, loc))
+            if not correct:
+                issues.append(f"{heading}: inserted block is misplaced or differs from catalog")
+            status = ("approved" if correct and claimed.get(heading) == "approved" and review
+                      else "draft")
+        elif heading in pending:
+            status = "pending"
+        elif exempt and heading not in entries:
+            status = "exempt"
+        if claimed.get(heading) == "approved" and not review:
+            issues.append(f"{heading}: approved claim lacks matching human review provenance")
+        report["sections"][heading] = {"status": status, "chars": len(body),
+                                       "reason": pending.get(heading, "")}
+        report["counts"][status] += 1
+        report["chars"] += len(body)
+        report["required_sections"] += status != "exempt"
+        report["pending"] += status == "pending"
+        if status == "missing":
+            report["untranslated"].append(heading)
     return report
 
 
@@ -124,8 +278,13 @@ def run(loc: Locale) -> dict:
     notebooks = [classify_notebook(path, loc)
                  for path in course_notebooks(COURSE_ROOT / "notebooks")]
     documents = [classify_document(rel, loc) for rel in DOCUMENTS]
-    metadata = [catalog_metadata(catalogue_path(loc, Path(item["path"]).stem)) for item in notebooks]
-    reviews = {item.get("review", "") for item in metadata}
+    items = notebooks + documents
+    reviews = {item["review"] for item in items if item["review"]}
+    issues = [f"{item['path']}: {issue}" for item in items for issue in item["issues"]]
+    for kind, group in (("notebooks", notebooks), ("docs", documents)):
+        expected = {item["catalog"] for item in group}
+        actual = {path.name for path in loc.catalog_dir(kind).glob(f"*.{loc.code}.md")}
+        issues.extend(f"unknown {kind} catalog: {name}" for name in sorted(actual - expected))
     totals = {label: sum(item["counts"][label] for item in notebooks) for label in STATUS_LABELS}
     doc_totals = {label: sum(item["counts"][label] for item in documents) for label in STATUS_LABELS}
     return {
@@ -135,6 +294,7 @@ def run(loc: Locale) -> dict:
         "notebooks": notebooks,
         "documents": documents,
         "catalog_reviews": sorted(reviews),
+        "issues": issues,
         "totals": totals,
         "document_totals": doc_totals,
         "catalogs_present": sum(1 for item in notebooks
@@ -145,6 +305,7 @@ def run(loc: Locale) -> dict:
 def gate_failures(report: dict, loc: Locale) -> list[str]:
     """本番ゲート / why the production gate must fail (empty list = pass)."""
     failures = []
+    failures.extend(report.get("issues", []))
     totals = report["totals"]
     if totals["missing"]:
         failures.append(f"{totals['missing']} required notebook cells have no entry at all")
@@ -189,6 +350,8 @@ def emit_pending_catalogs(loc: Locale, write: bool) -> list[str]:
         ]
         existing = catalog.read_text(encoding="utf-8") if catalog.is_file() else ""
         translated = set(parse_catalog(catalog, loc)) if catalog.is_file() else set()
+        if translated or catalog_metadata(catalog).get("review") == "approved":
+            continue
         pending_now = parse_pending(catalog, loc) if catalog.is_file() else {}
         for cell in notebook["cells"]:
             if cell["cell_type"] != "markdown":
@@ -197,7 +360,7 @@ def emit_pending_catalogs(loc: Locale, write: bool) -> list[str]:
             source = "".join(cell.get("source", []))
             if loc.region_re().search(source) or cell_id in translated:
                 continue
-            if legacy.is_exempt(loc.region_re().sub("", source)):
+            if legacy.is_exempt(without_legacy(loc.region_re().sub("", source))):
                 continue
             # 既存の pending はそのまま残す（理由つきで書き直さない）
             # Keep an existing pending entry, including its reason, instead of dropping it.
@@ -205,7 +368,7 @@ def emit_pending_catalogs(loc: Locale, write: bool) -> list[str]:
             lines.append(f"<!-- {loc.code}-pending: {cell_id} | {reason} -->")
         text = "\n".join(lines).rstrip() + "\n"
         if text != existing:
-            written.append(str(catalog.relative_to(COURSE_ROOT)))
+            written.append(str(catalog))
             if write:
                 catalog.parent.mkdir(parents=True, exist_ok=True)
                 catalog.write_text(text, encoding="utf-8")
@@ -217,12 +380,16 @@ def emit_pending_doc_catalogs(loc: Locale, write: bool) -> list[str]:
     written = []
     for rel in DOCUMENTS:
         catalog = doc_catalogue_path(loc, rel)
-        legacy_catalog = (COURSE_ROOT / "assets" / "i18n" / "ne" / "docs"
-                          / f"{Path(rel).stem}.ne.md")
-        if not legacy_catalog.is_file():
+        path = COURSE_ROOT / rel
+        if not path.is_file():
             continue
-        required = sorted(apply_docs.parse_catalog(legacy_catalog, get_locale("ne"))[1])
+        required = sorted(heading for heading, (_, _, exempt) in document_sections(
+            document_source(path.read_text(encoding="utf-8"), loc)).items() if not exempt)
         existing = catalog.read_text(encoding="utf-8") if catalog.is_file() else ""
+        if catalog.is_file():
+            _, translated = apply_docs.parse_catalog(catalog, loc)
+            if translated or catalog_metadata(catalog).get("review") == "approved":
+                continue
         pending_now = apply_docs.parse_pending(catalog, loc) if catalog.is_file() else {}
         lines = [
             "<!--",
@@ -245,7 +412,7 @@ def emit_pending_doc_catalogs(loc: Locale, write: bool) -> list[str]:
             lines.append(f"<!-- {loc.code}-pending: {heading} | {reason} -->")
         text = "\n".join(lines).rstrip() + "\n"
         if text != existing:
-            written.append(str(catalog.relative_to(COURSE_ROOT)))
+            written.append(str(catalog))
             if write:
                 catalog.parent.mkdir(parents=True, exist_ok=True)
                 catalog.write_text(text, encoding="utf-8")

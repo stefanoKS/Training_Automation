@@ -58,7 +58,7 @@ from PIL import Image as PILImage
 
 from course_notebooks import course_notebooks
 from apply_nepali_translations import CAPTION_RE, image_captions
-from i18n_locales import Locale, locale as _locale
+from i18n_locales import Locale, locale as _locale, without_legacy
 
 COURSE_ROOT = Path(__file__).resolve().parents[2]
 NOTEBOOK_DIR = COURSE_ROOT / "notebooks"
@@ -113,8 +113,7 @@ def configure_locale(code: str) -> Locale:
     REGION_RE = LOCALE.region_re()
     TERMINOLOGY = LOCALE.catalog_root / "terminology.md"
     # Tamang has no approved title yet; inventing one would be exactly what this course forbids.
-    COURSE_TITLE_NE = (COURSE_TITLE_THIRD if code == "ne"
-                       else "Hiroshima Kasei Week 1 AI & Machine Vision Training")
+    COURSE_TITLE_NE = COURSE_TITLE_THIRD if code == "ne" else ""
     LANG_ATTR = {"ja": "ja", "en": "en", "ne": LOCALE.tag}
     return LOCALE
 
@@ -137,7 +136,7 @@ def glyph_language(text: str) -> str:
     ``nepali_lines``). Devanagari is still recognised so the notebooks that have not been migrated
     yet keep rendering correctly.
     """
-    if DEVANAGARI_RE.search(text):
+    if LOCALE.code == "ne" and DEVANAGARI_RE.search(text):
         return "ne"
     if JP_CHAR_RE.search(text):
         return "ja"
@@ -169,6 +168,27 @@ def language_at(text: str, index: int, covered: set[int], force: str | None = No
 
 def lang_attr(language: str) -> str:
     return LANG_ATTR.get(language, "en")
+
+
+def legacy_markup(markup: str) -> str:
+    """Keep legacy UI translations out of the selected locale's rendered chrome."""
+    if LOCALE.code == "ne":
+        return markup
+    return re.sub(r'(?:<br/>\s*)?<(p|li|span|div)\b[^>]*\bclass="[^"]*\bne\b[^"]*"[^>]*>'
+                  r'.*?</\1>', "", markup, flags=re.S)
+
+
+def rebuild_command() -> str:
+    return REBUILD_COMMAND if LOCALE.code == "ne" else f"{REBUILD_COMMAND} --locale {LOCALE.code}"
+
+
+def selected_source(text: str) -> str:
+    if LOCALE.code == "ne":
+        return text
+    text = without_legacy(text)
+    if re.search(r"<!--\s*ne:(?:begin|end)\b", text):
+        raise ValueError("unmatched legacy translation marker in PDF source")
+    return text
 
 
 def script_class(text: str) -> str:
@@ -294,7 +314,7 @@ def _heading_html(heading: Heading) -> str:
     if heading.en:
         parts.append(f'<span class="en" lang="en">{inline(heading.en)}</span>')
     if heading.ne:
-        parts.append(f'<span class="ne" lang="ne-Latn">{inline(heading.ne)}</span>')
+        parts.append(f'<span class="ne" lang="{lang_attr("ne")}">{inline(heading.ne)}</span>')
     inner = "<br/>".join(parts)
     ident = f' id="{heading.anchor}"' if heading.anchor else ""
     return f"<h{level}{ident}>{inner}</h{level}>"
@@ -375,7 +395,7 @@ def semantic_headings(lines: list[str], covered: set[int] | None = None,
         if not preceding:
             raise ValueError("after-heading translation has no source heading")
         body = match.group("body")
-        pair = re.search(r"^<!-- ne-pair: (.+) -->$", body, re.M)
+        pair = re.search(rf"^<!-- {LOCALE.marker}-pair: (.+) -->$", body, re.M)
         source_index = max(preceding)
         if pair and headings[source_index].en == pair.group(1):
             sources = [i for i in preceding if headings[i].ja
@@ -390,12 +410,11 @@ def semantic_headings(lines: list[str], covered: set[int] | None = None,
         if translated:
             source.ne = translated[0][1]
             suppressed.add(translated[0][0])
-        elif bold and (start + body[:bold.start()].count("\n") in covered
-                       or DEVANAGARI_RE.search(bold.group(1))):
+        elif bold and start + body[:bold.start()].count("\n") in covered:
             source.ne = bold.group(1)
             suppressed.add(start + body[:bold.start()].count("\n"))
         else:
-            raise ValueError("after-heading region needs a Nepali title")
+            raise ValueError("after-heading region needs a title from the selected locale")
         if pair:
             targets = [i for i, h in headings.items()
                        if h.en == pair.group(1) and h.level == source.level]
@@ -413,6 +432,7 @@ def markdown_cell_html(text: str, notebook_dir: Path, anchor_prefix: str,
     ``force_language`` is used for the body of a Nepali figure note, which is parsed on its own
     (without its ``ne:`` markers) after the figure markup has been produced.
     """
+    text = selected_source(text)
     visual_regions = {}
     for match in REGION_RE.finditer(text):
         anchor = match.group("anchor")
@@ -437,13 +457,16 @@ def markdown_cell_html(text: str, notebook_dir: Path, anchor_prefix: str,
     stripped = [line for line in lines if line.strip() and not line.strip().startswith("---")]
     if stripped and all(is_heading(line) for line in stripped):
         joined = " ".join(stripped)
-        if ("実行結果の例" in joined or "Expected output" in joined
-                or "natijako udaharan" in joined or "नतिजाको उदाहरण" in joined):
+        labels = ("実行結果の例", "Expected output")
+        if LOCALE.code == "ne":
+            labels += ("natijako udaharan", "नतिजाको उदाहरण")
+        if any(label in joined for label in labels):
             out.append(
                 '<div class="note"><span class="ja" lang="ja">この節の出力はノートブックで実行すると'
                 '表示されます。</span><br/><span class="en" lang="en">Run the notebook to see this '
-                'output.</span><br/><span class="ne" lang="ne-Latn">Yo bhaagko natija notebook '
-                'chalaunda dekHinchha.</span></div>')
+                'output.</span>' + legacy_markup(
+                    '<br/><span class="ne" lang="ne-Latn">Yo bhaagko natija notebook '
+                    'chalaunda dekHinchha.</span>') + '</div>')
             return "".join(out)
 
     while index < len(lines):
@@ -491,8 +514,10 @@ def markdown_cell_html(text: str, notebook_dir: Path, anchor_prefix: str,
                 caption_index = 0
                 if notes and re.fullmatch(r"\*\*[AB]: .+\*\*", notes[0]):
                     caption_index = 1
-                if len(notes) > caption_index and CAPTION_RE.match(notes[caption_index]):
-                    captions.append(" ".join(notes.pop(caption_index).splitlines()))
+                caption = notes[caption_index] if len(notes) > caption_index else ""
+                marker = f"<!-- {LOCALE.marker}-caption -->"
+                if caption.startswith(marker) or (LOCALE.code == "ne" and CAPTION_RE.match(caption)):
+                    captions.append(" ".join(notes.pop(caption_index).removeprefix(marker).split()))
                     caption_languages.append("ne")
                 notes_html = markdown_cell_html("\n\n".join(notes), notebook_dir,
                                                 anchor_prefix + "-visual", document,
@@ -618,7 +643,7 @@ def markdown_cell_html(text: str, notebook_dir: Path, anchor_prefix: str,
 
 
 def notebook_title(nb: dict) -> tuple[str, str, str]:
-    first = "".join(nb["cells"][0]["source"])
+    first = selected_source("".join(nb["cells"][0]["source"]))
     covered = nepali_lines(first)
     ja = en = ne = ""
     for index, line in enumerate(first.splitlines()):
@@ -626,7 +651,7 @@ def notebook_title(nb: dict) -> tuple[str, str, str]:
         if not match:
             continue
         text = match.group(1).strip()
-        if index in covered or DEVANAGARI_RE.search(text):
+        if index in covered or (LOCALE.code == "ne" and DEVANAGARI_RE.search(text)):
             language = "ne"
         elif JP_CHAR_RE.search(text):
             language = "ja"
@@ -671,18 +696,19 @@ def code_is_worth_showing(cell: dict, code: str) -> bool:
 
 def notebook_html(path: Path, document: Document, toc_level: int = 1) -> None:
     nb = json.loads(path.read_text(encoding="utf-8"))
-    ja, en, ne = notebook_title(nb)
-    title = Heading(level=toc_level, ja=ja, en=en or None, ne=ne or None,
-                    anchor=f"nb-{path.stem}-title")
-    document.toc.append(title)
-    document.add(_heading_html(title))
+    if LOCALE.code == "ne":
+        ja, en, ne = notebook_title(nb)
+        title = Heading(level=toc_level, ja=ja, en=en or None, ne=ne or None,
+                        anchor=f"nb-{path.stem}-title")
+        document.toc.append(title)
+        document.add(_heading_html(title))
     rel = path.relative_to(COURSE_ROOT).as_posix()
     document.add(f'<p class="path en">notebook: <code>{rel}</code></p>')
 
     for position, cell in enumerate(nb["cells"]):
         source = "".join(cell["source"])
         if cell["cell_type"] == "markdown":
-            if position == 0:
+            if position == 0 and LOCALE.code == "ne":
                 lines = source.splitlines()
                 while lines:
                     stripped = lines[0].strip()
@@ -708,13 +734,14 @@ def notebook_html(path: Path, document: Document, toc_level: int = 1) -> None:
                 '<div class="note warn"><span class="ja">この節はノートブック上での対話操作です。'
                 'PDF では前の静的図で代わりに示しています。</span><br/>'
                 '<span class="en">This section is interactive in the notebook only; the static '
-                'figure above stands in for it here.</span><br/>'
-                '<span class="ne" lang="ne-Latn">Yo bhaag notebook ma matra interactive chha. Yahan mathiko sthir '
-                'chitrale tyasko pratinidhitwa garchha.</span></div>')
+                'figure above stands in for it here.</span>' + legacy_markup(
+                    '<br/><span class="ne" lang="ne-Latn">Yo bhaag notebook ma matra interactive chha. '
+                    'Yahan mathiko sthir chitrale tyasko pratinidhitwa garchha.</span>') + '</div>')
             continue
         if not code_is_worth_showing(cell, code):
             continue
-        document.add('<p class="code-label en">コード例 / code example / code udaharan</p>')
+        label = " / code udaharan" if LOCALE.code == "ne" else ""
+        document.add(f'<p class="code-label en">コード例 / code example{label}</p>')
         document.add(_code_block(code))
 
 
@@ -855,7 +882,7 @@ body { font-family: %(NE)s; font-size: 9.6pt; line-height: 1.62; color: #24292f;
    makes the searchable text layer read "ता लि ममा" for "तालिममा". Turning abvm off keeps the
    rendered glyphs identical (measured: mean pixel difference 0.05/255 on a 20 pt sample) and lets
    the text layer carry the original code points, so the PDF stays searchable. */
-/* Romanized Nepali is Latin: inherit the body stack, keep the colour cue. The Devanagari
+/* Third-language text uses the body stack with a colour cue. The Devanagari
    families remain in the stack only for the notebooks that are not migrated yet. */
 .ne { font-family: inherit; font-feature-settings: "abvm" 0; color: #2f2f2f; }
 h1, h2, h3, h4 { break-after: avoid; page-break-after: avoid; margin: 0.55em 0 0.25em; }
@@ -922,7 +949,7 @@ tr { break-inside: avoid; }
 .section { break-before: page; }
 .sentinel { font-size: 1pt; line-height: 1pt; color: transparent; height: 1pt; margin: 0; }
 /* Chromium keeps the Devanagari text layer clean only when the type size is a multiple of 1.5 pt
-   (measured at 6, 7.5, 9, 10.5, 12, 13.5, 15, 16.5 and 18 pt). Every Nepali container is pinned
+   (measured at 6, 7.5, 9, 10.5, 12, 13.5, 15, 16.5 and 18 pt). Every third-language container is pinned
    here so a later style change cannot silently break searchability again. */
 .ne { font-size: 10.5pt; }
 h1 .ne { font-size: 13.5pt; }
@@ -945,7 +972,7 @@ def html_document(document: Document) -> str:
 
 
 def cover_html(document: Document, day_label: str, day_ja: str, day_en: str, day_ne: str) -> str:
-    return (
+    markup = (
         '<section class="cover">'
         f'<div class="t ja">{inline(COURSE_TITLE_JA)}</div>'
         f'<div class="m en">{inline(COURSE_TITLE_EN)}</div>'
@@ -965,8 +992,11 @@ def cover_html(document: Document, day_label: str, day_ja: str, day_en: str, day
         '<p class="ne" lang="ne-Latn">Yo pustika notebookkai byakhyabaat tayar bhaeko ho. Abhyas Jupyter mai '
         'garnuhos.</p>'
         f'<p class="m">作成日 / built: {BUILD_DATE}</p>'
-        f'<p class="m">再生成 / rebuild: {inline(REBUILD_COMMAND)}</p>'
+        f'<p class="m">再生成 / rebuild: {inline(rebuild_command())}</p>'
         '</div></section>')
+    if LOCALE.code != "ne":
+        markup = markup.replace("Nepali (Roman)", "Tamang").replace("then Nepali.", "then Tamang.")
+    return legacy_markup(markup)
 
 
 ABOUT_JA = "この資料について"
@@ -1051,7 +1081,13 @@ def about_html(day_keys: list[str]) -> str:
         rows.append(f'<li class="ja">{inline(info["ja"])}</li>'
                     f'<li class="en">{inline(info["en"])}</li>'
                     f'<li class="ne">{inline(info["ne"])}</li>')
-    return ABOUT_HTML.format(ja=ABOUT_JA, en=ABOUT_EN, ne=ABOUT_NE, day_list="".join(rows))
+    markup = ABOUT_HTML.format(ja=ABOUT_JA, en=ABOUT_EN, ne=ABOUT_NE, day_list="".join(rows))
+    if LOCALE.code != "ne":
+        markup = (markup.replace("ネパール語", "タマン語")
+                  .replace("Nepali (Romanized)", "Tamang")
+                  .replace("Learning objectives, prerequisites and explanations in all three languages",
+                           "Learning objectives, prerequisites and notebook explanations"))
+    return legacy_markup(markup)
 
 
 def toc_html(toc: list[Heading], pages: dict[str, int] | None = None,
@@ -1066,7 +1102,7 @@ def toc_html(toc: list[Heading], pages: dict[str, int] | None = None,
         if heading.en:
             parts.append(f'<span class="en" lang="en">{inline(heading.en)}</span>')
         if heading.ne:
-            parts.append(f'<span class="ne" lang="ne-Latn">{inline(heading.ne)}</span>')
+            parts.append(f'<span class="ne" lang="{lang_attr("ne")}">{inline(heading.ne)}</span>')
         label = " ".join(parts)
         items.append(f'<li class="l{level}"><a href="#{heading.anchor}">'
                      f'<span class="toc-label">{label}</span>'
@@ -1088,7 +1124,7 @@ def sources_html(day_keys: list[str]) -> str:
                 rows.append(f'<li class="en"><code>'
                             f'{matches[0].relative_to(COURSE_ROOT).as_posix()}</code></li>')
         rows.append("</ul>")
-    return (
+    return legacy_markup(
         '<section class="section">'
         '<h1><span class="ja">出典と参照</span><br/><span class="en">Sources and references</span>'
         '<br/><span class="ne" lang="ne-Latn">Srot ra sandarbha</span></h1>'
@@ -1128,17 +1164,18 @@ def sources_html(day_keys: list[str]) -> str:
 
 
 def build_document(day_keys: list[str], *, single: bool) -> tuple[Document, int]:
+    is_legacy = LOCALE.code == "ne"
     if single:
         info = DAYS[day_keys[0]]
-        document = Document(info["ja"], info["en"], info["ne"])
+        document = Document(info["ja"], info["en"], info["ne"] if is_legacy else "")
         label = f"{day_keys[0][:3]} {int(day_keys[0][3:])}"
-        document.add(cover_html(document, label, info["ja"], info["en"], info["ne"]))
+        document.add(cover_html(document, label, info["ja"], info["en"], document.title_ne))
     else:
         document = Document("第 1 週のまとめ", "the whole week in one document",
-                            "Hapta 1 ko saransh")
+                            "Hapta 1 ko saransh" if is_legacy else "")
         document.add(cover_html(document, "第 1 週（5 日間）/ Week 1 (five days)",
                                 "第 1 週のまとめ", "the whole week in one document",
-                                "Hapta 1 ko samagra samagri"))
+                                "Hapta 1 ko samagra samagri" if is_legacy else ""))
     document.add(about_html(day_keys))
     toc_marker = len(document.body)
     document.add("")            # 目次はあとで入れる / the TOC is filled in after pass 1
@@ -1146,7 +1183,8 @@ def build_document(day_keys: list[str], *, single: bool) -> tuple[Document, int]
     for position, key in enumerate(day_keys):
         info = DAYS[key]
         if len(day_keys) > 1:
-            heading = Heading(level=1, ja=info["ja"], en=info["en"], ne=info["ne"],
+            heading = Heading(level=1, ja=info["ja"], en=info["en"],
+                              ne=info["ne"] if is_legacy else None,
                               anchor=f"day-{key}")
             document.toc.append(heading)
             document.add(f'<section class="section">{_heading_html(heading)}')
@@ -1154,18 +1192,19 @@ def build_document(day_keys: list[str], *, single: bool) -> tuple[Document, int]
             document.add('<section class="section">')
         if position == 0:
             document.add(SENTINEL_HTML)
-        document.add('<h3><span class="ja">前提</span><br/><span class="en">Prerequisites</span>'
-                     '<br/><span class="ne" lang="ne-Latn">Poorwashart</span></h3>')
-        document.add(f'<p class="ja">{inline(info["prerequisites_ja"])}</p>'
-                     f'<p class="en">{inline(info["prerequisites_en"])}</p>'
-                     f'<p class="ne">{inline(info["prerequisites_ne"])}</p>')
-        document.add('<h3><span class="ja">この日の到達点</span><br/>'
-                     '<span class="en">Learning objectives</span><br/>'
-                     '<span class="ne" lang="ne-Latn">Yo dinko upalabdhi</span></h3><ol>')
+        document.add(legacy_markup(
+            '<h3><span class="ja">前提</span><br/><span class="en">Prerequisites</span>'
+            '<br/><span class="ne" lang="ne-Latn">Poorwashart</span></h3>'))
+        document.add(legacy_markup(f'<p class="ja">{inline(info["prerequisites_ja"])}</p>'
+                                   f'<p class="en">{inline(info["prerequisites_en"])}</p>'
+                                   f'<p class="ne">{inline(info["prerequisites_ne"])}</p>'))
+        document.add(legacy_markup('<h3><span class="ja">この日の到達点</span><br/>'
+                                   '<span class="en">Learning objectives</span><br/>'
+                                   '<span class="ne" lang="ne-Latn">Yo dinko upalabdhi</span></h3><ol>'))
         for ja, en, ne in info["objectives"]:
-            document.add(f'<li><span class="ja">{inline(ja)}</span><br/>'
+            document.add(legacy_markup(f'<li><span class="ja">{inline(ja)}</span><br/>'
                          f'<span class="en">{inline(en)}</span><br/>'
-                         f'<span class="ne">{inline(ne)}</span></li>')
+                         f'<span class="ne">{inline(ne)}</span></li>'))
         document.add("</ol>")
 
         for stem in info["notebooks"]:
@@ -1195,7 +1234,7 @@ def check_fonts(page, needs_devanagari: bool) -> dict:
             span.textContent = text;
             document.body.append(span);
         };
-        make('ne-latin-check', 'Pahile calibration datama threshold chhannuhos.');
+        make('ne-latin-check', 'Calibration threshold 0123456789');
         make('ne-devanagari-check', 'प्रशिक्षणक्षत्रज्ञश्रनिर्देशाङ्क');
         await document.fonts.ready;
         document.querySelectorAll('#ne-latin-check,#ne-devanagari-check')
@@ -1220,14 +1259,14 @@ def check_fonts(page, needs_devanagari: bool) -> dict:
 
     if not latin or any(family == "LastResort" for family in latin):
         raise RuntimeError(
-            "No verified font coverage for the Nepali text. Install Segoe UI (or another Latin "
+            "No verified Latin font coverage. Install Segoe UI (or another Latin "
             f"family). Chromium resolved: {latin!r}")
     if needs_devanagari:
         supported = {"Nirmala UI", "Noto Sans Devanagari", "Mangal", "Arial Unicode MS"}
         if not devanagari or any(family not in supported for family in devanagari):
             raise RuntimeError(
-                "No verified Devanagari font coverage. This booklet still contains Devanagari "
-                "Nepali; install Nirmala UI, Noto Sans Devanagari or Mangal before exporting. "
+                "No verified Devanagari font coverage. Install Nirmala UI, Noto Sans Devanagari "
+                "or Mangal before exporting. "
                 f"Chromium resolved: {devanagari!r}")
     return {"latin": latin, "devanagari": devanagari}
 
@@ -1245,7 +1284,7 @@ def render(html_path: Path, pdf_path: Path, footer_label: str) -> None:
         '<div style="font-size:7px;color:#57606a;width:100%;padding:0 18mm;'
         'display:flex;justify-content:space-between;">'
         '<span>p. <span class="pageNumber"></span> / <span class="totalPages"></span></span>'
-        f'<span>再生成 / rebuild: {html.escape(REBUILD_COMMAND)}</span>'
+        f'<span>再生成 / rebuild: {html.escape(rebuild_command())}</span>'
         "</div>")
     with sync_playwright() as pw:
         browser = pw.chromium.launch()
@@ -1338,13 +1377,14 @@ def add_bookmarks(pdf_path: Path, toc: list[Heading], pages: dict[str, int]) -> 
         title = re.sub(r"\s+", " ", heading.plain).strip()[:180] or "(untitled)"
         level = min(heading.level, 3)
         if level <= 1:
-            parents = {1: writer.add_outline_item(title, page - 1)}
+            parents = {1: writer.add_outline_item(title=title, page_number=page - 1)}
         else:
             parent = parents.get(level - 1) or parents.get(1)
-            parents[level] = writer.add_outline_item(title, page - 1, parent=parent)
+            parents[level] = writer.add_outline_item(title=title, page_number=page - 1, parent=parent)
+    third_label = "Nepali (Romanized, ne-Latn)" if LOCALE.code == "ne" else f"Tamang ({LOCALE.tag})"
     writer.add_metadata({"/Title": reader.metadata.get("/Title", "") if reader.metadata else "",
                          "/Author": "Training_Automation course",
-                         "/Subject": "Japanese / English / Nepali (Romanized, ne-Latn) companion"})
+                         "/Subject": f"Japanese / English / {third_label} companion"})
     with pdf_path.open("wb") as handle:
         writer.write(handle)
 
@@ -1381,15 +1421,17 @@ def general_pdf(out_path: Path, job: dict) -> dict:
     The general companion reuses the same two-pass render as a day booklet: the table of contents
     is laid out invisibly first so the page numbers can be looked up, then again with the numbers.
     """
-    document = Document(job["ja"], job["en"], job["ne"])
-    document.add(cover_html(document, job["label"], job["ja"], job["en"], job["ne"]))
+    document = Document(job["ja"], job["en"], job["ne"] if LOCALE.code == "ne" else "")
+    document.add(cover_html(document, job["label"], job["ja"], job["en"], document.title_ne))
     document.add(about_html([]))
     toc_marker = len(document.body)
     document.add("")
 
     document.add('<section class="section">')
     document.add(SENTINEL_HTML)
-    for number, (path, label) in enumerate(job["sources"], start=1):
+    for number, (path, label, legacy_label) in enumerate(job["sources"], start=1):
+        if LOCALE.code == "ne":
+            label += " / " + legacy_label
         heading = Heading(level=1, ja=label, anchor=f"src-{number}")
         document.toc.append(heading)
         document.add(_heading_html(heading))
@@ -1398,7 +1440,12 @@ def general_pdf(out_path: Path, job: dict) -> dict:
         else:
             document.add(f'<p class="path en">source: <code>'
                          f'{path.relative_to(COURSE_ROOT).as_posix()}</code></p>')
-            document.add(markdown_cell_html(path.read_text(encoding="utf-8"), path.parent,
+            text = selected_source(path.read_text(encoding="utf-8"))
+            if LOCALE.code != "ne":
+                text = LOCALE.doc_region_re().sub(
+                    lambda m: f"\n<!-- {LOCALE.marker}:begin end -->\n{m.group('body')}\n"
+                              f"<!-- {LOCALE.marker}:end -->\n", text)
+            document.add(markdown_cell_html(text, path.parent,
                                             path.stem, document))
     document.add("</section>")
     document.add(sources_html([]))
@@ -1436,7 +1483,7 @@ DOC_JOBS = [
         en="Day 0 — setting up the environment",
         ne="Din 0 — batabaran setup",
         sources=[(NOTEBOOK_DIR / "00_Setup" / "00_Environment_Setup.ipynb",
-                  "環境セットアップ / Environment setup / Batabaran setup")],
+                  "環境セットアップ / Environment setup", "Batabaran setup")],
     ),
     dict(
         name="Installation_Guide",
@@ -1446,9 +1493,9 @@ DOC_JOBS = [
         ne="Installation ra samasya samadhan",
         sources=[
             (COURSE_ROOT / "START_HERE.md",
-             "はじめかた / START HERE / Suru garne tarika"),
+             "はじめかた / START HERE", "Suru garne tarika"),
             (COURSE_ROOT / "docs" / "troubleshooting" / "installation.md",
-             "インストール時のトラブル対処 / Installation troubleshooting / "
+             "インストール時のトラブル対処 / Installation troubleshooting",
              "Installation ka samasya"),
         ],
     ),
@@ -1460,9 +1507,9 @@ DOC_JOBS = [
         ne="Talim repository ko parichay",
         sources=[
             (COURSE_ROOT / "README.md",
-             "README / リポジトリ概要 / Repository ko saransh"),
+             "README / リポジトリ概要", "Repository ko saransh"),
             (COURSE_ROOT / "requirements" / "tested_versions.md",
-             "検証済みバージョン / Tested versions / Janchieka sanskaran"),
+             "検証済みバージョン / Tested versions", "Janchieka sanskaran"),
         ],
     ),
     dict(
@@ -1473,7 +1520,7 @@ DOC_JOBS = [
         ne="Talimko samayatalika",
         sources=[
             (COURSE_ROOT / "COURSE_SYLLABUS.md",
-             "研修シラバス / COURSE SYLLABUS / Talimko samayatalika"),
+             "研修シラバス / COURSE SYLLABUS", "Talimko samayatalika"),
         ],
     ),
 ]
@@ -1494,8 +1541,8 @@ def main(argv=None) -> int:
 
     third = configure_locale(args.locale)
     languages = [part.strip() for part in (args.languages or f"ja,en,{third.code}").split(",")]
-    if third.code not in languages:
-        parser.error(f"the tri-language exporter needs {third.code!r} in --languages")
+    if sorted(languages) != sorted(["ja", "en", third.code]):
+        parser.error(f"--languages must contain exactly ja,en,{third.code}")
 
     if third.code != "ne":
         # 承認されていない翻訳で冊子を作らない / never build a booklet from unreviewed translations.
@@ -1511,14 +1558,9 @@ def main(argv=None) -> int:
             print("承認済みの翻訳ができるまで、*_ja_en_" + third.code
                   + ".pdf は作りません / no *_ja_en_" + third.code + ".pdf is produced yet.")
             return 2
-        jobs = [{**job, "ne": ""} for job in JOBS]
-        doc_jobs = [{**job, "ne": ""} for job in DOC_JOBS]
-    else:
-        jobs, doc_jobs = JOBS, DOC_JOBS
-
     suffix = third.pdf_suffix()
     results = {}
-    for name, keys, label in jobs:
+    for name, keys, label in JOBS:
         if args.only and args.only not in name:
             continue
         out_path = args.out / f"{name}_explanation_{suffix}.pdf"
@@ -1526,7 +1568,7 @@ def main(argv=None) -> int:
         results[name] = info
         print(f"[pdf] {out_path.name}  pages={info['pages']}  toc={info['toc_entries']}"
               f"  {out_path.stat().st_size / 1024:,.0f} KB")
-    for job in doc_jobs:
+    for job in DOC_JOBS:
         if args.only and args.only not in job["name"]:
             continue
         out_path = args.out / f"{job['name']}_{suffix}.pdf"

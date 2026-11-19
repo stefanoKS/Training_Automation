@@ -108,7 +108,7 @@ def test_the_pending_inventory_covers_every_cell_the_nepali_pass_translated() ->
     assert totals["exempt"] == nepali["totals"]["exempt"]
 
 
-def test_the_document_inventory_counts_every_legacy_section() -> None:
+def test_the_document_inventory_counts_every_current_section() -> None:
     report = coverage.run(TAJ)
     assert report["document_totals"]["missing"] == 0
     assert report["document_totals"]["pending"] == sum(
@@ -126,9 +126,11 @@ def _catalog(tmp_path: Path, body: str, name: str = "sample.taj.md") -> Path:
     return path
 
 
-def test_a_tamang_block_must_be_devanagari(tmp_path) -> None:
+@pytest.mark.parametrize("text", ["This is English text copied into the Tamang catalog.",
+                                  "This is English with Devanagari punctuation।"])
+def test_a_tamang_block_must_be_devanagari(tmp_path, text) -> None:
     latin = _catalog(tmp_path, "<!-- taj-cell: abc -->\n"
-                              "This is English text copied into the Tamang catalog.\n")
+                              f"{text}\n")
     with pytest.raises(apply_translations.CatalogError, match="must be written in Devanagari"):
         apply_translations.parse_catalog(latin, TAJ)
 
@@ -191,6 +193,114 @@ def test_document_pending_lines_are_keyed_by_heading(tmp_path) -> None:
     document.write_text("<!-- taj-doc: README.md -->\n"
                         "<!-- taj-pending: ## 2. Setup | no reviewer yet -->\n", encoding="utf-8")
     assert apply_docs.parse_pending(document, TAJ) == {"## 2. Setup": "no reviewer yet"}
+
+
+def review_header(loc) -> str:
+    """Synthetic provenance, written only to pytest's temporary catalogs."""
+    return (f"<!--\nlocale: {loc.code}\nbcp47: {loc.tag}\nscript: {loc.script}\n"
+            f"variety: {loc.variety}\nreview: approved\nreviewer: Fixture reviewer\n"
+            "provenance: Rendering fixture review record 1\nreviewed-on: 2020-01-01\n-->\n")
+
+
+@pytest.fixture
+def temporary_document(tmp_path, monkeypatch):
+    source = tmp_path / "example.md"
+    source.write_text("# First / 最初\n\nSource English and 日本語.\n\n"
+                      "```python\n# Not an anchor\n```\n\n"
+                      "## Unreviewed\n\nKeep me.\n\n## Waiting\n\n## Omitted\n\n"
+                      "## Separator\n\n<!-- localization-exempt -->\n", encoding="utf-8")
+    catalog = tmp_path / "example.taj.md"
+    monkeypatch.setattr(coverage, "COURSE_ROOT", tmp_path)
+    monkeypatch.setattr(coverage, "doc_catalogue_path", lambda *_: catalog)
+    monkeypatch.setattr(apply_docs, "COURSE_ROOT", tmp_path)
+    catalog.write_text(review_header(TAJ) + "<!-- taj-doc: example.md -->\n"
+                       "<!-- taj-section: # First / 最初 -->\nतामाङ\n"
+                       "<!-- taj-status: # First / 最初 | approved -->\n"
+                       "<!-- taj-section: ## Unreviewed -->\nतामाङ\n"
+                       "<!-- taj-pending: ## Waiting | no review -->\n", encoding="utf-8")
+    return source, catalog
+
+
+def test_document_approval_is_per_section_and_requires_the_inserted_text(temporary_document):
+    source, catalog = temporary_document
+    before = coverage.classify_document(source.name, TAJ)
+    assert before["sections"]["# First / 最初"]["status"] == "missing"
+    assert apply_docs.apply_catalog(catalog, True, TAJ)["changed"]
+    assert not apply_docs.apply_catalog(catalog, True, TAJ)["changed"]
+    report = coverage.classify_document(source.name, TAJ)
+    assert report["counts"] == dict(approved=1, draft=1, pending=1, missing=1, exempt=1)
+    assert report["issues"] == []
+    assert "Source English and 日本語." in source.read_text(encoding="utf-8")
+
+
+@pytest.mark.parametrize(("mutation", "message"), [
+    ("unknown", "stale or unknown"),
+    ("stale", "stale inserted"),
+    ("duplicate", "two blocks"),
+    ("duplicate-region", "duplicate taj document region"),
+    ("script", "written in Devanagari"),
+    ("reviewer", "human review provenance"),
+    ("provenance", "human review provenance"),
+    ("target", "expected 'example.md'"),
+])
+def test_document_coverage_blocks_invalid_approval(temporary_document, mutation, message):
+    source, catalog = temporary_document
+    apply_docs.apply_catalog(catalog, True, TAJ)
+    text = catalog.read_text(encoding="utf-8")
+    if mutation == "unknown":
+        text += "<!-- taj-pending: ## Old heading | renamed -->\n"
+    elif mutation == "stale":
+        source.write_text(source.read_text(encoding="utf-8").replace("## Unreviewed", "## Renamed"),
+                          encoding="utf-8")
+    elif mutation == "duplicate":
+        text += "<!-- taj-section: ## Unreviewed -->\nतामाङ\n"
+    elif mutation == "duplicate-region":
+        document = source.read_text(encoding="utf-8")
+        region = TAJ.doc_region_re().search(document).group()
+        source.write_text(document + region, encoding="utf-8")
+    elif mutation == "script":
+        text = text.replace("तामाङ", "copied English")
+    elif mutation == "reviewer":
+        text = text.replace("reviewer: Fixture reviewer\n", "")
+    elif mutation == "provenance":
+        text = text.replace("provenance: Rendering fixture review record 1", "provenance: none")
+    else:
+        text = text.replace("taj-doc: example.md", "taj-doc: wrong.md")
+    catalog.write_text(text, encoding="utf-8")
+    report = coverage.classify_document(source.name, TAJ)
+    assert any(message in issue for issue in report["issues"])
+
+
+def test_notebook_approval_requires_live_catalog_cells_and_figure_anchors(tmp_path, monkeypatch):
+    source = tmp_path / "figure.ipynb"
+    original = "![Diagram](figure.png)\n\n日本語。\n\nThe English text.\n"
+    translation = {"at": "after-image:figure.png", "text": "तामाङ"}
+    inserted = apply_translations.apply_blocks(original, [translation], TAJ)
+    cell = {"cell_type": "markdown", "id": "diagram", "source": inserted}
+
+    def write_cell(text):
+        source.write_text(json.dumps({"cells": [dict(cell, source=text)]}), encoding="utf-8")
+
+    write_cell(inserted)
+    catalog = _catalog(tmp_path, review_header(TAJ)
+                       + "<!-- taj-cell: diagram | after-image:figure.png -->\n"
+                       + "तामाङ\n<!-- taj-status: diagram approved -->\n")
+    monkeypatch.setattr(coverage, "COURSE_ROOT", tmp_path)
+    monkeypatch.setattr(coverage, "catalogue_path", lambda *_: catalog)
+    good = coverage.classify_notebook(source, TAJ)
+    assert good["cells"]["diagram"]["status"] == "approved"
+    assert not good["issues"]
+
+    write_cell(inserted.replace("](figure.png)", "](renamed.png)"))
+    stale = coverage.classify_notebook(source, TAJ)
+    assert any("expected one image, found 0" in issue for issue in stale["issues"])
+
+    write_cell(inserted)
+    with catalog.open("a", encoding="utf-8") as handle:
+        handle.write("<!-- taj-pending: deleted-cell | pending -->\n")
+    unknown = coverage.classify_notebook(source, TAJ)
+    assert any("stale or unknown" in issue and "deleted-cell" in issue
+               for issue in unknown["issues"])
 
 
 # ---------------------------------------------------------------------------

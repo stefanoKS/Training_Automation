@@ -12,6 +12,7 @@ note: every section below is recorded as pending; no text is supplied.
 
 <!-- taj-doc: START_HERE.md -->
 
+<!-- taj-pending: # はじめかた / START HERE | no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text -->
 <!-- taj-pending: ## ステップ 10　準備完了を確認する / Complete preflight | no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text -->
 <!-- taj-pending: ## ステップ 11　授業を始める / Start lessons | no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text -->
 <!-- taj-pending: ## ステップ 1　取得してフォルダを開く / Download and open the folder | no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text -->

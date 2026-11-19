@@ -12,13 +12,14 @@ note: every section below is recorded as pending; no text is supplied.
 
 <!-- taj-doc: submissions/day02/Day02_Report_Template.md -->
 
-<!-- taj-pending: ## 1. | no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text -->
-<!-- taj-pending: ## 2. | no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text -->
-<!-- taj-pending: ## 3. | no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text -->
-<!-- taj-pending: ## 4. | no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text -->
-<!-- taj-pending: ## 5. | no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text -->
-<!-- taj-pending: ## 6. | no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text -->
-<!-- taj-pending: ## 7. | no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text -->
-<!-- taj-pending: ## 8. | no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text -->
-<!-- taj-pending: ## 提出物チェック | no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text -->
-<!-- taj-pending: ## 記入のルール | no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text -->
+<!-- taj-pending: # 第2日 学習レポート / Day 02 Learning Report | no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text -->
+<!-- taj-pending: ## 1. 本日の学習内容 / Today's learning | no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text -->
+<!-- taj-pending: ## 2. 実施した作業 / Completed activities | no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text -->
+<!-- taj-pending: ## 3. 実行結果 / Results | no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text -->
+<!-- taj-pending: ## 4. 発生した問題 / Problems encountered | no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text -->
+<!-- taj-pending: ## 5. 試した解決方法 / Troubleshooting attempts | no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text -->
+<!-- taj-pending: ## 6. 理解できなかった内容 / Questions remaining | no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text -->
+<!-- taj-pending: ## 7. 化成品工程への応用 / Application to Kaseihin | no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text -->
+<!-- taj-pending: ## 8. 自己評価 / Self-assessment | no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text -->
+<!-- taj-pending: ## 提出物チェック / Submission checklist | no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text -->
+<!-- taj-pending: ## 記入のルール / How to fill this in | no dependable reference translation is available in this environment; a native/advanced Tamang reviewer must supply and sign off the text -->

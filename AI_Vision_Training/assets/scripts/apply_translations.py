@@ -43,7 +43,9 @@ import re
 from pathlib import Path
 
 from course_notebooks import course_notebooks
-from i18n_locales import DEVANAGARI_RE, Locale, locale as get_locale
+from i18n_locales import (
+    DEVANAGARI_RE, Locale, has_devanagari_letters, locale as get_locale, without_legacy,
+)
 from romanize_nepali import looks_like_nepali_latin
 
 COURSE_ROOT = Path(__file__).resolve().parents[2]
@@ -91,7 +93,7 @@ def validate_block(loc: Locale, body: str, where: str) -> None:
         if label in body:
             raise CatalogError(f"{where}: the forbidden label {label} is present")
     if loc.script == "devanagari":
-        if not DEVANAGARI_RE.search(body):
+        if not has_devanagari_letters(body):
             raise CatalogError(
                 f"{where}: a {loc.code} block must be written in Devanagari; "
                 "copied English or Latin transliteration cannot pass as Tamang")
@@ -200,6 +202,8 @@ def apply_blocks(source: str, blocks: list[dict], loc: Locale) -> str:
     """1 つのセルの領域を、あれば中身だけ書き換える / insert or rewrite."""
     wanted = {block["at"]: block["text"] for block in blocks}
     original = strip_regions(source, loc)
+    if loc.code != "ne":
+        original = without_legacy(original)
     for anchor in wanted:
         if not valid_anchor(anchor):
             raise CatalogError(f"unknown anchor: {anchor!r}")
@@ -326,6 +330,8 @@ def catalog_metadata(path: Path) -> dict[str, str]:
             key, _, value = line.partition(":")
             key = key.strip()
             if key and not key.startswith("#"):
+                if key in metadata and key != "note":
+                    raise CatalogError(f"{path.name}: repeated metadata field {key!r}")
                 metadata[key] = value.strip()
     return metadata
 
@@ -346,7 +352,10 @@ def apply_catalog(path: Path, entries: dict[str, list[dict]], write: bool, loc: 
             report["conflicts"].append(f"{cell_id}: not a markdown cell")
             continue
         current = "".join(cell["source"])
-        if DEVANAGARI_RE.search(loc.region_re().sub("", current)):
+        outside = loc.region_re().sub("", current)
+        if loc.code != "ne":
+            outside = without_legacy(outside)
+        if DEVANAGARI_RE.search(outside):
             report["untracked_devanagari"].append(cell_id)
             continue
         updated = apply_blocks(current, blocks, loc)
@@ -358,7 +367,10 @@ def apply_catalog(path: Path, entries: dict[str, list[dict]], write: bool, loc: 
     for cell in nb["cells"]:
         if cell["cell_type"] != "markdown" or cell.get("id") in entries:
             continue
-        if DEVANAGARI_RE.search(loc.region_re().sub("", "".join(cell["source"]))):
+        outside = loc.region_re().sub("", "".join(cell["source"]))
+        if loc.code != "ne":
+            outside = without_legacy(outside)
+        if DEVANAGARI_RE.search(outside):
             report["untracked_devanagari"].append(cell.get("id"))
 
     if write and report["changed"]:

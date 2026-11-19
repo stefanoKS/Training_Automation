@@ -12,8 +12,8 @@ One sidecar per document under ``assets/i18n/<locale>/docs/``::
     …translated block…
 
 The first directive names the target file (relative to the course root). Every ``<locale>-section``
-line must match exactly one existing heading line; an unmatched heading is an error, so a heading
-rename cannot silently drop a translation.
+line must match an existing heading key (qualified with parents if the heading occurs more than
+once); an unmatched heading is an error, so a heading rename cannot silently drop a translation.
 
 Each block is wrapped in a marker pair that names the section::
 
@@ -33,9 +33,10 @@ from __future__ import annotations
 import argparse
 import hashlib
 import re
+from collections import Counter
 from pathlib import Path
 
-from i18n_locales import DEVANAGARI_RE, Locale, locale as get_locale
+from i18n_locales import DEVANAGARI_RE, Locale, has_devanagari_letters, locale as get_locale
 from romanize_nepali import looks_like_nepali_latin
 
 COURSE_ROOT = Path(__file__).resolve().parents[2]
@@ -65,7 +66,7 @@ def validate_block(loc: Locale, body: str, where: str) -> None:
         if label in body:
             raise CatalogError(f"{where}: the forbidden label {label} is present")
     if loc.script == "devanagari":
-        if not DEVANAGARI_RE.search(body):
+        if not has_devanagari_letters(body):
             raise CatalogError(
                 f"{where}: a {loc.code} block must be written in Devanagari; copied English or "
                 "Latin transliteration cannot pass as Tamang")
@@ -99,10 +100,12 @@ def parse_catalog(path: Path, loc: Locale) -> tuple[str, dict[str, list[str]]]:
     for line in path.read_text(encoding="utf-8").splitlines():
         stripped = line.strip()
         doc_match = doc_re.match(stripped)
-        if doc_match and current is None:
+        if doc_match:
+            if target is not None or current is not None:
+                raise CatalogError(f"{path.name}: repeated or misplaced document target")
             target = doc_match.group("path")
             continue
-        if pending_re.match(stripped):
+        if pending_re.match(stripped) or loc.doc_status_directive_re().match(stripped):
             flush()
             continue
         section_match = section_re.match(stripped)
@@ -140,8 +143,50 @@ def parse_pending(path: Path, loc: Locale) -> dict[str, str]:
     return pending
 
 
-def section_bounds(lines: list[str], heading: str) -> tuple[int, int]:
-    if heading.strip().startswith("#"):
+def headings(lines: list[str]) -> list[tuple[int, str]]:
+    """Return ATX headings, ignoring fenced code and HTML comments."""
+    found = []
+    fence = ""
+    comment = False
+    for index, line in enumerate(lines):
+        line = line.strip()
+        if comment or (not fence and line.startswith("<!--")):
+            comment = "-->" not in line
+            continue
+        match = re.match(r"^(`{3,}|~{3,})(.*)$", line)
+        if match:
+            marker, tail = match.groups()
+            if not fence:
+                fence = marker
+            elif marker.startswith(fence) and not tail.strip():
+                fence = ""
+            continue
+        if not fence and re.match(r"^#{1,6}\s+\S", line):
+            found.append((index, line))
+    return found
+
+
+def section_anchors(lines: list[str]) -> list[tuple[int, str]]:
+    found = headings(lines)
+    counts = Counter(heading for _, heading in found)
+    parents: list[tuple[int, str]] = []
+    anchors = []
+    for index, heading in found:
+        level = len(heading.split(maxsplit=1)[0])
+        while parents and parents[-1][0] >= level:
+            parents.pop()
+        key = " > ".join([*(title for _, title in parents), heading]) if counts[heading] > 1 else heading
+        anchors.append((index, key))
+        parents.append((level, heading))
+    return anchors
+
+
+def section_bounds(lines: list[str], heading: str, *, exact: bool = False) -> tuple[int, int]:
+    if exact:
+        anchors = section_anchors(lines)
+        positions = [index for index, _ in anchors]
+        matches = [index for index, key in anchors if key == heading.strip()]
+    elif heading.strip().startswith("#"):
         matches = [i for i, line in enumerate(lines) if line.startswith(heading.strip())]
     else:
         matches = [i for i, line in enumerate(lines)
@@ -151,6 +196,8 @@ def section_bounds(lines: list[str], heading: str) -> tuple[int, int]:
     if len(matches) > 1:
         raise CatalogError(f"heading {heading!r} matches {len(matches)} headings; be more specific")
     start = matches[0]
+    if exact:
+        return start, next((index for index in positions if index > start), len(lines))
     for index in range(start + 1, len(lines)):
         if lines[index].startswith("#"):
             return start, index
@@ -160,6 +207,8 @@ def section_bounds(lines: list[str], heading: str) -> tuple[int, int]:
 def region_spans(text: str, loc: Locale) -> dict[str, tuple[int, int, int, int]]:
     spans = {}
     for match in loc.doc_region_re().finditer(text):
+        if match.group("slug") in spans:
+            raise CatalogError(f"duplicate {loc.code} document region: {match.group('slug')}")
         spans[match.group("slug")] = (
             match.start(), match.start("body"), match.end("body"), match.end())
     return spans
@@ -200,6 +249,13 @@ def apply_blocks(text: str, blocks: dict[str, list[str]], loc: Locale) -> str:
     wanted = {slug_of(heading): body for heading, body in blocks.items()}
     headings = {slug_of(heading): heading for heading in blocks}
     existing = region_spans(text, loc)
+    if loc.code != "ne":
+        source = text
+        for language in (loc, get_locale("ne")):
+            # Keep source line numbers while hiding headings inside any translation.
+            source = language.doc_region_re().sub(lambda m: "\n" * m.group().count("\n"), source)
+        for heading in blocks:
+            section_bounds(source.split("\n"), heading, exact=True)
 
     for slug, (_start, _body_start, _body_end, _end) in sorted(
             existing.items(), key=lambda item: -item[1][0]):
@@ -215,7 +271,14 @@ def apply_blocks(text: str, blocks: dict[str, list[str]], loc: Locale) -> str:
             text = text[:body_start] + body_text + text[body_end:]
             continue
         lines = text.split("\n")
-        _start, end = section_bounds(lines, headings[slug])
+        if loc.code == "ne":
+            _start, end = section_bounds(lines, headings[slug])
+        else:
+            source = text
+            for language in (loc, get_locale("ne")):
+                source = language.doc_region_re().sub(
+                    lambda m: "\n" * m.group().count("\n"), source)
+            _start, end = section_bounds(source.split("\n"), headings[slug], exact=True)
         while end > 0 and not lines[end - 1].strip():
             end -= 1
         head = "\n".join(lines[:end])
@@ -238,7 +301,10 @@ def apply_catalog(path: Path, write: bool, loc: Locale, reset: bool = False) -> 
     original = target.read_text(encoding="utf-8")
     if reset:
         original = strip_regions(original, loc)
-    if DEVANAGARI_RE.search(strip_regions(original, loc)):
+    remaining = strip_regions(original, loc)
+    if loc.code != "ne":
+        remaining = strip_regions(remaining, get_locale("ne"))
+    if DEVANAGARI_RE.search(remaining):
         raise CatalogError(
             f"{path.name}: {target_rel} already contains Devanagari outside a region")
     updated = apply_blocks(original, blocks, loc)

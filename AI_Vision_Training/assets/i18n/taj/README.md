@@ -45,17 +45,31 @@ python assets\scripts\check_localization_coverage.py --locale taj --strict   # e
    …Tamang text…
    ```
 
-   For documents the anchor is the exact heading line (`<!-- taj-section: ## 4. … -->`).
+   For documents, copy the exact key from the pending line (`<!-- taj-section: ## 4. … -->`).
+   Repeated headings are qualified with their parent headings, separated by ` > `. Code
+   fences and headings inside legacy translations do not define sections.
 2. A reviewer reads the block against the Japanese and English source and records the decision:
 
    ```
    <!-- taj-status: <cell id> approved -->
+   <!-- taj-status: ## 4. … | approved -->
    ```
 
-   Machine output stays `draft`; only a reviewer may write `approved`.
+   Machine output stays `draft`; only a reviewer may write `approved`. Set the catalog
+   header's `review: approved` and record the actual reviewer (`reviewer:`), traceable
+   translation/review record (`provenance:`), and ISO review date (`reviewed-on: YYYY-MM-DD`).
+   Keep the locale, BCP 47 tag, script, and variety aligned with the confirmed locale. The
+   header is not a substitute for approving every cell or section. A source-only
+   `<!-- localization-exempt -->` section body denotes intentionally untranslated scaffolding.
 3. `apply_translations.py --locale taj --write` inserts or rewrites the region;
    `apply_docs.py --locale taj --write` does the same for the twelve documents.
 4. `check_localization_coverage.py --locale taj --strict` must pass before a booklet is produced.
+
+The Tamang PDF takes its third-language text only from those reviewed blocks. Built-in cover
+and navigation labels remain Japanese/English; there is no fallback to Nepali. For a paired
+heading, use `after-heading` with `<!-- taj-pair: Exact English heading -->` and a translated
+Markdown heading. For a translated figure caption, start the first paragraph of an
+`after-image:` block with `<!-- taj-caption -->`, then put the caption on the next line.
 
 ## Files
 

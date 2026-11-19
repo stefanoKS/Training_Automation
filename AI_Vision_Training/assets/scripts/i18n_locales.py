@@ -30,6 +30,17 @@ COURSE_ROOT = Path(__file__).resolve().parents[2]
 I18N_ROOT = COURSE_ROOT / "assets" / "i18n"
 
 DEVANAGARI_RE = re.compile(r"[\u0900-\u097f]")
+LEGACY_REGION_RE = re.compile(
+    r"^[ \t]*<!--[ \t]*ne:begin[ \t]+[^\n]*?-->[ \t]*\n"
+    r".*?^[ \t]*<!--[ \t]*ne:end[ \t]*-->[ \t]*(?:\n|$)", re.M | re.S)
+
+
+def without_legacy(text: str) -> str:
+    return LEGACY_REGION_RE.sub("\n", text)
+
+
+def has_devanagari_letters(text: str) -> bool:
+    return any(character.isalpha() and DEVANAGARI_RE.fullmatch(character) for character in text)
 
 
 @dataclass(frozen=True)
@@ -75,6 +86,10 @@ class Locale:
     def status_directive_re(self) -> re.Pattern:
         return re.compile(r"^<!--\s*" + self.code + r"-status:\s*([A-Za-z0-9_\-]+)\s+"
                           r"(approved|draft)\s*-->$")
+
+    def doc_status_directive_re(self) -> re.Pattern:
+        return re.compile(r"^<!--\s*" + self.code
+                          + r"-status:\s*(?P<key>.+?)\s*\|\s*(?P<status>approved|draft)\s*-->$")
 
     def doc_re(self) -> re.Pattern:
         return re.compile(r"^<!--\s*" + self.code + r"-doc:\s*(?P<path>[^\s]+)\s*-->$")

@@ -15,7 +15,9 @@ fixture — it is not presented as a translation of any lesson.
 
 from __future__ import annotations
 
+import json
 import sys
+from dataclasses import replace
 from pathlib import Path
 
 import pytest
@@ -27,6 +29,11 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "assets" / "scripts"))
 
 import export_trilingual_pdf as exporter  # noqa: E402
+import apply_docs  # noqa: E402
+import apply_translations  # noqa: E402
+import check_localization_coverage as coverage  # noqa: E402
+import i18n_locales  # noqa: E402
+from test_tamang_localization import review_header  # noqa: E402
 
 SAMPLE = "तामाङ भाषा"
 
@@ -89,3 +96,117 @@ def test_switching_the_locale_does_not_relabel_the_nepali_booklets(tmp_path) -> 
     # the Tamang build must not borrow the Romanized Nepali course title
     assert "hapta" not in exporter.COURSE_TITLE_NE
     exporter.configure_locale("ne")
+
+
+def test_approved_fixture_exports_day_and_document_jobs(tmp_path, monkeypatch):
+    pypdf = pytest.importorskip("pypdf")
+    root = tmp_path / "course"
+    nb_dir = root / "notebooks" / "Day01_AI_Fundamentals"
+    nb_dir.mkdir(parents=True)
+    loc = replace(i18n_locales.locale("taj"), confirmed=True)
+    monkeypatch.setitem(i18n_locales.LOCALES, "taj", loc)
+    monkeypatch.setattr(i18n_locales, "I18N_ROOT", root / "catalogs")
+    for module in (coverage, exporter, apply_docs, apply_translations):
+        monkeypatch.setattr(module, "COURSE_ROOT", root)
+    monkeypatch.setattr(exporter, "NOTEBOOK_DIR", root / "notebooks")
+    monkeypatch.setattr(coverage, "DOCUMENTS", ["fixture.md"])
+    notebook = nb_dir / "Day01_01_Fixture.ipynb"
+    figure = ROOT / "assets" / "diagrams" / "diagram_dataset_split.png"
+    (nb_dir / "split.png").write_bytes(figure.read_bytes())
+    notebook.write_text(json.dumps({"cells": [
+        {"cell_type": "markdown", "id": "intro",
+         "source": "# 固定の記録\n\n# Freeze record\n\n"
+                   "日本語の説明。\n\nThe English explanation.\n\n"
+                   "<!-- ne:begin end -->\nPahile secret legacy prose.\n<!-- ne:end -->\n"},
+        {"cell_type": "markdown", "id": "figure",
+         "source": "![split](split.png)\n\n図：分割\n\nFigure: Split diagram\n\n"
+                   "<!-- ne:begin after-image:split.png -->\n"
+                   "Chitrama secret caption.\n<!-- ne:end -->\n"},
+        {"cell_type": "code", "id": "widget", "source": "import ipywidgets\n"},
+        {"cell_type": "code", "id": "code", "source": "value = 42\n"},
+    ]}, ensure_ascii=False), encoding="utf-8")
+    name = "fixture.md"
+    document = root / name
+    document.write_text("# 手順 / Directions\n\nJA/EN document text.\n\n"
+                        "<!-- ne:begin doc:abc -->\nLegacy document secret.\n<!-- ne:end -->\n",
+                        encoding="utf-8")
+    for kind in ("notebooks", "docs"):
+        loc.catalog_dir(kind).mkdir(parents=True)
+    notebook_catalog = coverage.catalogue_path(loc, notebook.stem)
+    notebook_catalog.write_text(
+        review_header(loc)
+        + "<!-- taj-cell: intro | after-heading -->\n"
+        + f"<!-- taj-pair: Freeze record -->\n# {SAMPLE}\n\n{SAMPLE}।\n"
+        + "<!-- taj-status: intro approved -->\n"
+        + f"<!-- taj-cell: figure | after-image:split.png -->\n<!-- taj-caption -->\n{SAMPLE}\n"
+        + "<!-- taj-status: figure approved -->\n", encoding="utf-8")
+    doc_catalog = coverage.doc_catalogue_path(loc, name)
+    doc_catalog.write_text(review_header(loc) + f"<!-- taj-doc: {name} -->\n"
+                           f"<!-- taj-section: # 手順 / Directions -->\n{SAMPLE}\n"
+                           "<!-- taj-status: # 手順 / Directions | approved -->\n", encoding="utf-8")
+    entries = apply_translations.parse_catalog(notebook_catalog, loc)
+    assert apply_translations.apply_catalog(notebook, entries, True, loc)["changed"] == 2
+    assert apply_translations.apply_catalog(notebook, entries, True, loc)["changed"] == 0
+    assert apply_docs.apply_catalog(doc_catalog, True, loc)["changed"]
+    assert not apply_docs.apply_catalog(doc_catalog, True, loc)["changed"]
+    report = coverage.run(loc)
+    assert coverage.gate_failures(report, loc) == []
+    assert coverage.emit_pending_catalogs(loc, True) == []
+    assert coverage.emit_pending_doc_catalogs(loc, True) == []
+    assert "secret legacy prose" in notebook.read_text(encoding="utf-8")
+
+    monkeypatch.setitem(exporter.DAYS, "Day01", dict(
+        exporter.DAYS["Day01"], notebooks=[notebook.stem]))
+    monkeypatch.setattr(exporter, "JOBS", [("Day01", ["Day01"], "Day01 fixture")])
+    monkeypatch.setattr(exporter, "DOC_JOBS", [dict(
+        exporter.DOC_JOBS[1], name="Fixture", sources=[
+            (document, "手順 / Directions", "Suru garne tarika")])])
+    rendered_html = []
+    original_render = exporter.render
+
+    def record_html(html_path, pdf_path, label):
+        rendered_html.append(html_path.read_text(encoding="utf-8"))
+        original_render(html_path, pdf_path, label)
+
+    monkeypatch.setattr(exporter, "render", record_html)
+    out = tmp_path / "pdf"
+    try:
+        assert exporter.main(["--locale", "taj", "--out", str(out)]) == 0
+        # Exercise the default example-output message too (no borrowed Nepali fallbacks).
+        example = exporter.markdown_cell_html(
+            "## 実行結果の例\n## Expected output", nb_dir, "example",
+            exporter.Document("", "", ""))
+        assert "Run the notebook to see this output." in example
+        assert "ne-Latn" not in example
+    finally:
+        exporter.configure_locale("ne")
+
+    banned = ("ne-Latn", "Nepali", "Hapta", "Poorwashart", "Bishayasoochi", "udaharan",
+              "Yo bhaag", "Suru garne tarika", "Pahile", "Chitrama", "Legacy document secret")
+    assert len(rendered_html) == 4  # each branch ran both layout passes
+    for markup in rendered_html:
+        assert f'lang="taj-Deva">{SAMPLE}' in markup
+        assert not (leaked := [token for token in banned if token in markup]), leaked
+    assert 'class="cap ne" lang="taj-Deva"' in rendered_html[1]
+    assert "interactive in the notebook only" in rendered_html[1]
+    assert "value = 42" in rendered_html[1]
+
+    for filename, content in (
+        ("Day01_explanation_ja_en_taj.pdf", ("Freeze record", "固定の記録", "Figure: Split diagram")),
+        ("Fixture_ja_en_taj.pdf", ("Directions", "手順", "JA/EN document text.")),
+    ):
+        pdf_path = out / filename
+        pdf = pypdf.PdfReader(pdf_path)
+        text = "\n".join(exporter.page_texts(pdf_path))
+        assert SAMPLE in text and "\ufffd" not in text
+        assert all(token in text for token in content)
+        assert not (leaked := [token for token in banned if token in text]), leaked
+        assert "Tamang (taj-Deva)" in pdf.metadata.subject
+        assert pdf.outline
+        fonts = {str(ref.get_object()["/BaseFont"])
+                 for page in pdf.pages
+                 for ref in page["/Resources"].get("/Font", {}).get_object().values()}
+        assert any(any(font in name for font in ("Nirmala", "Devanagari", "Mangal"))
+                   for name in fonts), fonts
+        if filename.startswith("Day"):
+            assert any(page.images for page in pdf.pages)
