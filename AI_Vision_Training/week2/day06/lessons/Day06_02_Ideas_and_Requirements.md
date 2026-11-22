@@ -1,0 +1,112 @@
+# 第6日 02：アイデアと要件 / Day 6 02: Ideas and requirements
+
+**目安：95分 / Estimated duration: 95 min.** [第6日時間割](../DAY06_SYLLABUS_ja_en.md)を参照。/ See the [sole Day 6 timetable](../DAY06_SYLLABUS_ja_en.md).
+
+**目標 / Objectives:** 現場の問題と解決策を区別し、目的・利用者・入力・出力・例外・受入基準を決める。/ Separate problems from solutions and define users, inputs, outputs, errors and acceptance checks.
+
+## 1. 問題から始める / Begin with the problem
+
+「不良記録を後から探しにくい」は問題です。「件数をすぐ調べたい」は望む結果です。「記録アプリを作る」は解決案です。まずこの3つを分けます。日報、治具の在庫、保全チェック、手作業CSV集計なども候補です。単純なフォームや表で解決するならAI判定は不要です。
+
+“Defect notes are hard to find later” is a problem. “Find defect counts quickly” is a desired outcome. “Build a record app” is a possible solution. Separate all three. Other examples include daily reports, jig inventory, maintenance checklists and manual CSV summaries. A simple form or table may suffice; not every problem needs AI.
+
+![問題から検証までの工程 / Problem through human verification and improvement](../assets/diagrams/D06-05.svg)
+
+**図 D06-05 / Figure D06-05:** 実装前に要件と計画を決めます。/ Define requirements and a plan before implementation. **問い / Reflect:** あなたの現場の問題は何ですか？ / What problem do you see in your workflow?
+
+## 2. ChatGPTで案を比較する / Compare ideas with ChatGPT
+
+架空の状況だけを使い「3つの方法を出し、利点・欠点・使う人・未確認の前提・成功の測り方を比べて。コードはまだ書かないで」と依頼します。例えば紙の改善、表計算、簡単なアプリを比較できます。提案されたものをすべて採用する必要はありません。アカウントがなければ下の例を紙で比較します。
+
+Using only fictional facts, ask: “Give me three approaches, with pros, cons, users, assumptions and success measures. Do not write code yet.” For example, compare improved paper forms, a spreadsheet and a small app. You need not accept every suggestion. Without an account, compare the examples on paper.
+
+**問い / Reflect:** 一番小さく試せる方法は？ / Which option is smallest to try?
+
+## 3. 継続例：塩ビシート不良記録アプリ / Continuous case: PVC Sheet Defect Recording Application
+
+以下は**架空・ローカルのみの学習用案**です。実在の工場データや設備とはつなぎません。紙の不良メモを探す手間を減らすため、検査担当者が記録を入力します。
+
+This is a **fictional, local-only teaching example**; it connects to no real data or equipment. An inspection operator enters records to replace hard-to-search handwritten notes.
+
+![塩ビシート不良記録アプリの架空画面 / Fictional educational UI with fields, list, messages and CSV button](../assets/diagrams/D06-08.svg)
+
+**図 D06-08 / Figure D06-08:** 実動する製品のスクリーンショットではありません。入力欄、表、エラー表示とCSVボタンを探してください。/ This is not a working product screenshot. Locate fields, table, error area and CSV button. **問い / Reflect:** ロット番号が空ならどうなるべきですか？ / What should happen if the lot number is empty?
+
+| 要件 / Requirement | 学習用仕様 / Teaching specification |
+|---|---|
+| 目的 / Purpose | 記録を探し件数を確認する / find records and count defects |
+| 利用者 / User | 検査担当者 / inspection operator |
+| 入力 / Inputs | ロット番号（必須）、検査日時（必須）、不良種別（必須：黒点・傷・すじ）、説明（任意）、備考（任意） / lot ID, inspection date/time, defect type (black spot, scratch, streak), optional description and remarks |
+| 処理 / Behavior | 必須項目を確認し、1件ずつ保存。重複入力も別記録として残す / validate required fields, save each entry; intentional duplicates remain separate records |
+| 出力 / Outputs | 一覧・種別/ロットの絞り込み・表示件数・CSV出力 / list, type/lot filters, count of displayed rows, CSV export |
+| 画面 / UI | 日本語ラベル、分かるエラー表示 / Japanese labels and understandable errors |
+| 制約 / Constraints | 架空データのみ、ローカル、設備/本番DB接続なし / fictional data only, local, no production DB or machinery |
+| エラー / Errors | ロット番号・日時・種別欠落なら保存せず日本語表示。CSV保存失敗も通知 / missing required fields prevent saving and show Japanese error; CSV failures are reported |
+| 永続化 / Persistence | アプリ終了と再起動後もローカル記録を保持。明示的な削除機能は作らない / retain local records across restart; no deletion feature |
+| 受入基準 / Acceptance | 保存・再起動・絞り込み・CSVの値を架空例で確認 / check save, restart, filters and CSV using fictional data |
+
+同じ「PVC-EX-001」「PVC-EX-002」を全教材で使います。どちらも架空です。前者は「黒点」、後者は「傷」です。件数は選択した絞り込み条件に合う**表示中の記録数**です。CSVは `lot_id,inspected_at,defect_type,description,remarks` の順に出します。実際の技術や保存形式は計画時に決め、ここでは限定しません。
+
+We reuse fictional lots “PVC-EX-001” (black spot) and “PVC-EX-002” (scratch) throughout. The count is the **number of visible records** after filtering. CSV columns are `lot_id,inspected_at,defect_type,description,remarks` in that order. Choose implementation technology and storage format at planning time, not here.
+
+![目的、利用者、入力、処理、出力、画面、制約、エラー、受入基準 / Requirements categories illustrated with this case](../assets/diagrams/D06-07.svg)
+
+**図 D06-07 / Figure D06-07:** 画面の見た目だけでなく挙動も決める。/ Specify behavior as well as appearance. **問い / Reflect:** CSV保存の失敗をどこへ書きますか？ / Where would you specify a failed CSV export?
+
+詳しい仕様は[サンプル仕様](../examples/inspection_app_spec_ja_en.md)を参照してください。/ See the [full sample specification](../examples/inspection_app_spec_ja_en.md).
+
+## 4. 曖昧な要件を改善する / Improve vague requirements
+
+悪い例：「検査アプリを作って」。利用者も保存方法も成功の判定も不明です。
+
+Weak: “Make an inspection app.” The user, storage and success checks are unspecified.
+
+改善例：「架空データだけを扱うローカル記録アプリ。日本語画面、必須項目の検査、一件ずつの保存、一覧、CSV出力を含めて」。さらに上の表で重複、再起動時、保存失敗、絞り込みと具体的な受入基準を追加します。詳細は誤解を減らしますが、正しさは保証しません。
+
+Better: “Build a local record app for fictional data, with Japanese labels, required-field validation, saving one entry at a time, a list and CSV export.” Then specify duplicates, restarts, failures, filters and acceptance checks as above. Detail reduces ambiguity but never guarantees correctness.
+
+![不足している短い指示と改善した指示 / Missing details versus structured request](../assets/diagrams/D06-06.svg)
+
+**図 D06-06 / Figure D06-06:** 何を補うべきか見つける。/ Find the missing information. **問い / Reflect:** まず確認したい質問は？ / What would you ask first?
+
+## 5. 最小限の製品 / Minimum viable product (MVP)
+
+最小実用版（Minimum Viable Product: MVP）は、最初に試して価値を確認できる小さな版です。「全部入り」ではありません。
+
+A Minimum Viable Product (MVP) is a small first version whose usefulness can be tested, not a feature-complete product.
+
+| 優先 / Priority | この例 / This example | 理由 / Why |
+|---|---|---|
+| 必須 / Must | 入力確認、保存・再起動保持、一覧・件数、絞り込み、CSV / validation, persistence, list/count, filters and CSV | 合意した仕事を満たす / fulfils the agreed task |
+| あるとよい / Nice | 印刷用レイアウト / printable layout | 後から検討 / can wait |
+| 将来 / Future | 画像判定との連携 / image-analysis integration | 別途承認と安全確認が必要 / needs separate approval and validation |
+
+**問い / Reflect:** CSVを外して「完成」としてよいですか？ / Can CSV be omitted yet called complete?
+
+## 6. ChatGPTへの会話例 / Example conversation with ChatGPT
+
+**学習者 / Learner:** 私は初心者ですが検査業務を知っています。架空の塩ビシート不良記録を管理したいです。不足する条件を質問し、要件を整理してください。まだコードを書かないでください。/ I am a beginner who knows inspection work. Help organize requirements for fictional PVC-sheet defect records. Ask me about missing details. Do not write code yet.
+
+**ChatGPT（架空の応答）/ ChatGPT (simulated):** 誰が入力しますか。必須項目は何ですか。再起動後も必要ですか。結果をどう使いますか。/ Who enters data? Which fields are required? Must records survive a restart? How will results be used?
+
+**学習者 / Learner:** 検査担当者です。ロット・日時・種別は必須。再起動後も残し、一覧、絞り込み、表示件数、CSVを使います。本番環境にはつながないでください。/ Inspection operators. Lot, date/time and type are required. Keep records after restart and provide list, filters, visible count and CSV. No production connection.
+
+**ChatGPT（架空の応答）/ ChatGPT (simulated):** 了解しました。前の表をたたき台にします。「画像の自動判定」は役立ちますか。/ I will draft the table above. Should we add automated image classification?
+
+**学習者 / Learner:** いいえ。今回は不要です。記録機能だけにしてください。/ No. That is not needed; keep only the record workflow.
+
+これは実際のChatGPT実行結果ではありません。人が不要な機能を断り、仕様を承認してから次へ進みます。全文は[会話例](../examples/example_agent_conversation_ja_en.md)。
+
+This is not a real ChatGPT result. The human rejects unwanted features and approves the specification before proceeding. See the [full simulated conversation](../examples/example_agent_conversation_ja_en.md).
+
+**問い / Reflect:** AIが提案した項目で、今回除外したものは？ / Which suggested feature was excluded?
+
+## 7. 演習（合計25分）/ Practice (25 min total)
+
+**B・C / Activities B and C (10 min):** 現場の問題と、解決できれば嬉しい結果を3文で書き、必須機能を3つ挙げます。例：紙の不良メモが探しにくい→検索・件数・CSV。**出力 / Output:** 問題1つ、結果3文、機能3つ。**間違い / Pitfall:** 問題の代わりに製品名だけを書く。/ State one problem, desired result in three sentences and three essentials. Example: hard-to-search notes → search, count, CSV. Pitfall: naming a product instead of the problem.
+
+**D / Activity D (7 min):** 入力・出力・欠けた入力の対応を表にします。**出力 / Output:** 3行以上の表。**間違い / Pitfall:** エラーを忘れる。/ List inputs, outputs and missing-input behavior in a table; include at least three rows. Pitfall: forgetting errors.
+
+**E / Activity E (8 min):** ChatGPTに改善を依頼するか、上の会話例を使い、追加された機能を承認・却下に分けます。**出力 / Output:** 改訂要件と却下理由。**間違い / Pitfall:** AI案を無審査で採用。/ Ask ChatGPT to improve the draft, or use the simulated conversation; approve or reject proposed changes. Output: revised requirements and a rejection reason. Pitfall: accepting AI additions without review.
+
+**完了チェック / Completion:** 問題と解決を区別し、少なくとも入力・出力・エラー・受入基準を書けた。/ Separate problem and solution; state inputs, outputs, errors and acceptance checks.
