@@ -33,5 +33,7 @@
     ________________________________________________________________________
 
 14. **人が確かめること / What the human must verify:** ________________________
+15. **安全上の危険を一つ / One security or privacy risk:** _____________________
+16. **AIエージェントに費用がかかる理由を一つ / One reason agent use may cost money:** ________________________________________________________________________
 
-**提出前の確認 / Before submitting:** 実データなし、コードなし、5つの具体的な確認あり。/ No real data, no code, five concrete checks.
+**提出前の確認 / Before submitting:** 実データ・APIキーなし、コードなし、5つの具体的な確認あり。価格の数字を書く必要はありません。/ No real data or API keys, no code, five concrete checks. No need to memorize prices.

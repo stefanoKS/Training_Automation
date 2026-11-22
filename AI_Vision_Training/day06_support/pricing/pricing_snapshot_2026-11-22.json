@@ -1,0 +1,186 @@
+{
+  "verified_on": "2026-11-22",
+  "currency": "USD",
+  "unit": "per 1 million tokens",
+  "scope": "Representative hosted API standard-rate examples; not a quote or universal comparison",
+  "entries": [
+    {
+      "provider": "OpenAI",
+      "model_id": "gpt-6-luna",
+      "tier": "lower-cost",
+      "input": 0.1,
+      "output": 0.5,
+      "cached_input": 0.01,
+      "condition": "Standard; short context",
+      "caveat": "Long-context, cache-write and Batch/Flex rates differ.",
+      "source": "https://developers.openai.com/api/docs/pricing.md"
+    },
+    {
+      "provider": "OpenAI",
+      "model_id": "gpt-6.2-astra",
+      "tier": "higher-capability",
+      "input": 8,
+      "output": 40,
+      "cached_input": 0.4,
+      "condition": "Standard; short context",
+      "caveat": "Long-context input $16 and output $60 per 1M; cache writes separately priced.",
+      "source": "https://developers.openai.com/api/docs/pricing.md"
+    },
+    {
+      "provider": "Google Gemini",
+      "model_id": "gemini-4-hydrogen",
+      "tier": "lower-cost example",
+      "input": 1.5,
+      "output": 7.5,
+      "cached_input": 0.075,
+      "condition": "Gemini Developer API paid standard tier",
+      "caveat": "Thinking tokens are included in output billing; free-tier availability and data terms differ.",
+      "source": "https://aistudio.google.com/docs/pricing"
+    },
+    {
+      "provider": "Google Gemini",
+      "model_id": "gemini-4-carbon",
+      "tier": "higher-capability",
+      "input": 2,
+      "output": 10,
+      "cached_input": 0.1,
+      "condition": "Paid standard tier through 2026-11-30",
+      "caveat": "From 2026-12-01: input $4, output $20, cached $0.20 per 1M; grounding may cost extra.",
+      "source": "https://aistudio.google.com/docs/pricing"
+    },
+    {
+      "provider": "Anthropic",
+      "model_id": "claude-haiku-5-5",
+      "tier": "lower-cost",
+      "input": 0.1,
+      "output": 0.5,
+      "cached_input": 0.01,
+      "condition": "Prompt up to 100,000 tokens",
+      "caveat": "Above 100K: input $0.50, output $2.50, cache read $0.05; cache writes cost extra.",
+      "source": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "model_id_source": "https://platform.claude.com/docs/en/models/overview"
+    },
+    {
+      "provider": "Anthropic",
+      "model_id": "claude-fable-5-2",
+      "tier": "higher-capability",
+      "input": 8,
+      "output": 40,
+      "cached_input": 0.2,
+      "condition": "Standard Claude API",
+      "caveat": "Five-minute cache writes $10 and one-hour writes $16 per 1M; partner cloud pricing may differ.",
+      "source": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "model_id_source": "https://platform.claude.com/docs/en/models/overview"
+    },
+    {
+      "provider": "DeepSeek",
+      "model_id": "deepseek-flash",
+      "tier": "lower-cost",
+      "input": 0.15,
+      "output": 0.6,
+      "cached_input": 0.003,
+      "condition": "Off-peak; input cache miss",
+      "caveat": "Peak: input $0.30, output $1.20, cached $0.006 per 1M; time windows are published in UTC.",
+      "source": "https://api-docs.deepseek.com/quick_start/pricing"
+    },
+    {
+      "provider": "DeepSeek",
+      "model_id": "deepseek-v4-pro",
+      "tier": "higher-capability",
+      "input": 0.66,
+      "output": 1.98,
+      "cached_input": 0.022,
+      "condition": "Off-peak; input cache miss",
+      "caveat": "Peak: input $1.32, output $3.96, cached $0.044 per 1M; vision not supported.",
+      "source": "https://api-docs.deepseek.com/quick_start/pricing"
+    },
+    {
+      "provider": "Mistral AI",
+      "model_id": "ministral-3-3b-25-12",
+      "tier": "lower-cost",
+      "input": 0.1,
+      "output": 0.1,
+      "cached_input": null,
+      "condition": "Official model page rate",
+      "caveat": "Cached input price not verified on this model page; model ID uses official page identifier.",
+      "source": "https://docs.mistral.ai/models/ministral-3-3b-25-12"
+    },
+    {
+      "provider": "Mistral AI",
+      "model_id": "mistral-large-4-0",
+      "tier": "higher-capability",
+      "input": 0.7,
+      "output": 2.1,
+      "cached_input": 0.07,
+      "condition": "Official model page rate",
+      "caveat": "Open-weight model; local deployment costs are not API charges; model ID uses official page identifier.",
+      "source": "https://docs.mistral.ai/models/mistral-large-4-0"
+    },
+    {
+      "provider": "xAI",
+      "model_id": "grok-build-0.1",
+      "tier": "coding-focused",
+      "input": 1,
+      "output": 2,
+      "cached_input": 0.2,
+      "condition": "Prompt below 200,000 tokens",
+      "caveat": "At or above 200K prompt tokens, all tokens in a request use input $2/output $4/cached $0.40 rates.",
+      "source": "https://docs.x.ai/developers/models"
+    },
+    {
+      "provider": "xAI",
+      "model_id": "grok-4.7",
+      "tier": "higher-capability",
+      "input": 2,
+      "output": 6,
+      "cached_input": 0.5,
+      "condition": "Prompt below 200,000 tokens",
+      "caveat": "At or above 200K prompt tokens, all tokens use input $4/output $12/cached $1 rates.",
+      "source": "https://docs.x.ai/developers/models"
+    },
+    {
+      "provider": "Alibaba Cloud Qwen",
+      "model_id": "qwen3.8-flash",
+      "tier": "lower-cost",
+      "input": 0.15,
+      "output": 0.47,
+      "cached_input": null,
+      "condition": "Model Studio International; 0 < input tokens <= 1M",
+      "caveat": "Regional prices differ; discounted cache rate mentioned but numeric cache-hit price not verified.",
+      "source": "https://www.alibabacloud.com/help/en/model-studio/model-pricing"
+    },
+    {
+      "provider": "Alibaba Cloud Qwen",
+      "model_id": "qwen3.8-max",
+      "tier": "higher-capability",
+      "input": 2,
+      "output": 6,
+      "cached_input": null,
+      "condition": "Model Studio International; 0 < input tokens <= 1M",
+      "caveat": "Regional prices differ; discounted cache rate mentioned but numeric cache-hit price not verified.",
+      "source": "https://www.alibabacloud.com/help/en/model-studio/model-pricing"
+    },
+    {
+      "provider": "Meta",
+      "model_id": "muse-ember-1.0",
+      "tier": "lower-cost",
+      "input": 0.1,
+      "output": 0.5,
+      "cached_input": 0.004,
+      "condition": "Meta Model API Standard; up to 200K input tokens",
+      "caveat": "Above 200K the whole request uses input $0.30/output $1.50/cached $0.012; Contributor mode changes data terms.",
+      "source": "https://dev.meta.ai/docs/pricing-rate-limits.md"
+    },
+    {
+      "provider": "Meta",
+      "model_id": "muse-wonder-1.0",
+      "tier": "higher-capability",
+      "input": 4,
+      "output": 20,
+      "cached_input": 0.2,
+      "condition": "Meta Model API Standard",
+      "caveat": "Hosted Muse pricing, not a price for open-weight Llama; other tool services may charge separately.",
+      "source": "https://dev.meta.ai/docs/pricing-rate-limits.md"
+    }
+  ]
+}

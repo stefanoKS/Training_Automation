@@ -1,31 +1,48 @@
-# 図の目録と資料 / Figure inventory and sources
+# 図と製品の出典 / Figure manifest and product sources
 
-図 D06-01〜14 は本教材のために作成したオリジナルの編集可能なSVGです。実製品画面や第三者の画像は含みません。D06-08は架空の学習用画面で、動作するアプリや実製品のスクリーンショットではありません。/ Figures D06-01 through D06-14 are original editable SVGs made for this course. No third-party artwork or authentic product screenshots. D06-08 is a fictional educational UI, not working software.
+図は本教材のために作成・改訂した編集可能なSVGです。実際の製品画面や第三者のイラストは含みません。架空の塩ビシート画面や会話は実行済みソフトウェア、製品の実画面、または試験記録ではありません。
 
-各図のノートブック内の説明文は代替テキストです。青＝人・指示、青緑＝モデル処理、灰＝ツール・支援、琥珀＝確認、赤＝危険・失敗（色だけで意味を伝えない）。/ Figure descriptions in the notebooks provide text alternatives. Blue=user/instructions, teal=model, gray=tools, amber=review, red=risk; labels also carry the meaning.
+All diagrams are original editable SVGs made or revised for this course. They do not reproduce third-party artwork or genuine product screenshots. Fictional PVC screens and conversations are not evidence of working software, a product UI or performed tests.
 
-| 図 / Figure | 使用章 / Module | 教育目的 / Educational objective |
+青＝人・指示、青緑＝モデルと作業の流れ、灰＝ツール・環境、琥珀＝確認、赤＝危険・失敗。ただし意味は文字でも示しています。各図のノートブックには日英の説明と代替テキストを付けます。/ Blue=user/instructions, teal=model/workflow, gray=tools/environment, amber=review, red=risk; text labels carry the same meaning. Notebooks include bilingual captions and text alternatives.
+
+| 図 / Figure | 使用章 / Lesson | 教育目的 / Educational objective |
 |---|---|---|
-| D06-01.svg | 01 | 第1〜5日から第6日へ / transition from vision foundations |
-| D06-02.svg | 01 | YOLO・PatchCore・LLMの入出力 / distinguish inputs/outputs |
-| D06-03.svg | 01 | モデル・アシスタント・エージェント・ハーネス / distinguish overlapping roles |
-| D06-04.svg | 01 | ツールの権限と観察 / permission and tool feedback |
-| D06-05.svg | 02 | 問題から人の受入まで / problem to human acceptance |
-| D06-06.svg | 02,03 | 曖昧な指示と構造化した指示 / compare prompts |
-| D06-07.svg | 02 | 要件の分類 / requirements categories |
-| D06-08.svg | 02,04 | 架空の検査記録画面 / fictional UI mockup |
-| D06-09.svg | 03 | 人・ChatGPT・実装担当の関係 / human, ChatGPT, agent |
-| D06-10.svg | 03 | 会話の段階と計画却下 / staged conversation and rejection |
-| D06-11.svg | 03 | 承認と検証のゲート / approval gates |
-| D06-12.svg | 04 | 見た目・動作・受入の証拠 / levels of evidence |
-| D06-13.svg | 03,04 | 次の担当への引き継ぎ / handover |
-| D06-14.svg | 04 | 機密と設備の境界 / privacy and industrial safety |
+| [D06-01.svg](../assets/diagrams/day06/D06-01.svg) | 01 | 第1〜6日の学び / Days 1–6 progression |
+| [D06-02.svg](../assets/diagrams/day06/D06-02.svg) | 01 | YOLO・PatchCore・LLMの入出力 / vision versus language outputs |
+| [D06-03.svg](../assets/diagrams/day06/D06-03.svg) | 01 | 指示・文脈・LLM・応答 / LLM context and output |
+| [D06-04.svg](../assets/diagrams/day06/D06-04.svg) | 01 | 概念としてのトークン / conceptual Japanese/English tokens |
+| [D06-05.svg](../assets/diagrams/day06/D06-05.svg) | 01 | 文脈窓と情報の累積 / context window inputs |
+| [D06-06.svg](../assets/diagrams/day06/D06-06.svg) | 01 | 提供元・モデル・製品 / publisher, model and product |
+| [D06-07.svg](../assets/diagrams/day06/D06-07.svg) | 02 | 会話支援と反復作業 / assistant versus agent |
+| [D06-08.svg](../assets/diagrams/day06/D06-08.svg) | 02 | ハーネスとモデルとツール / coding-agent architecture |
+| [D06-09.svg](../assets/diagrams/day06/D06-09.svg) | 02 | 権限とツール操作 / permission-checked tools |
+| [D06-10.svg](../assets/diagrams/day06/D06-10.svg) | 03 | 問題から人の受入まで / problem to verification |
+| [D06-11.svg](../assets/diagrams/day06/D06-11.svg) | 03 | 要件の分類 / requirements structure |
+| [D06-12.svg](../assets/diagrams/day06/D06-12.svg) | 04 | 曖昧な依頼と明確な依頼 / prompt comparison |
+| [D06-13.svg](../assets/diagrams/day06/D06-13.svg) | 03 | 架空の塩ビシート記録画面 / fictional PVC UI |
+| [D06-14.svg](../assets/diagrams/day06/D06-14.svg) | 04 | 人・ChatGPT・実装担当 / three-participant workflow |
+| [D06-15.svg](../assets/diagrams/day06/D06-15.svg) | 04 | 段階的な実装 / staged implementation |
+| [D06-16.svg](../assets/diagrams/day06/D06-16.svg) | 04 | 不具合と修正依頼 / corrective feedback |
+| [D06-17.svg](../assets/diagrams/day06/D06-17.svg) | 05 | 仮の入力・出力料金 / hypothetical input/output rates |
+| [D06-18.svg](../assets/diagrams/day06/D06-18.svg) | 05 | 多段階の費用の累積 / multi-step cost |
+| [D06-19.svg](../assets/diagrams/day06/D06-19.svg) | 05 | 見た目・動作・受入の証拠 / levels of verification |
+| [D06-20.svg](../assets/diagrams/day06/D06-20.svg) | 04 | 要件・計画・試験・受入のゲート / quality gates |
+| [D06-21.svg](../assets/diagrams/day06/D06-21.svg) | 05 | 次の担当への引き継ぎ / handover |
+| [D06-22.svg](../assets/diagrams/day06/D06-22.svg) | 05 | 情報と設備の安全境界 / privacy and operational safety |
 
-**公式資料（2026-11-22にアクセス）/ Official references (accessed 2026-11-22):**
+追加の架空画面：[会話](../assets/diagrams/day06/D06-M01-chat-mockup.svg)、[エージェント進捗](../assets/diagrams/day06/D06-M02-agent-progress.svg)、[日報](../assets/diagrams/day06/D06-M03-daily-report.svg)。/ Additional fictional mockups: [conversation](../assets/diagrams/day06/D06-M01-chat-mockup.svg), [agent progress](../assets/diagrams/day06/D06-M02-agent-progress.svg), [daily report](../assets/diagrams/day06/D06-M03-daily-report.svg). The three files are supplementary, not replacements for the 22 principal figures.
 
-- [GitHub: Copilot on GitHub.com and Mobile](https://docs.github.com/en/copilot/concepts/copilot-surfaces/copilot-on-github) — Copilotの会話、計画、変更などの提供形態。/ Surfaces and workflows; availability varies.
-- [VS Code: Use chat](https://code.visualstudio.com/docs/chat/chat-overview) — VS Codeでの自然言語によるエージェント操作。/ Editor chat and agents.
-- [Anthropic: Claude Code overview](https://code.claude.com/docs/en/overview) — コード操作用製品の概要。/ Agentic coding product terminology.
-- [OpenAI: ChatGPT Work](https://help.openai.com/en/articles/20001275) — ChatGPTの作業形態。/ ChatGPT workflow terminology; availability varies.
+**2026-11-22に確認した製品・モデルの公式資料 / Official product and model sources checked 2026-11-22:**
 
-製品の機能と権限は更新されます。この教材では特定の価格、順位、固定UI、すべてのモデルに共通するツール能力を主張しません。/ Products change; this course makes no pricing, ranking, fixed-UI or universal-tool claims.
+- [OpenAI model catalog](https://developers.openai.com/api/docs/models), [ChatGPT Work and Codex](https://help.openai.com/en/articles/20001275-chatgpt-work-and-codex).
+- [Google Gemini Developer API pricing/model listing](https://aistudio.google.com/docs/pricing).
+- [Anthropic model IDs](https://platform.claude.com/docs/en/models/overview), [Claude Code overview](https://code.claude.com/docs/en/overview).
+- [DeepSeek API model names](https://api-docs.deepseek.com/quick_start/pricing).
+- [Mistral models](https://docs.mistral.ai/models).
+- [xAI models](https://docs.x.ai/developers/models).
+- [Alibaba Cloud Model Studio](https://www.alibabacloud.com/help/en/model-studio/model-pricing).
+- [Meta Model API models](https://dev.meta.ai/docs/models.md).
+- [GitHub Copilot on GitHub.com and mobile](https://docs.github.com/en/copilot/concepts/copilot-surfaces/copilot-on-github), [VS Code chat](https://code.visualstudio.com/docs/chat/chat-overview).
+
+[料金スナップショットと一行ずつの公式出典](pricing/pricing_sources_2026-11-22.md)も参照。モデルの名前、提供範囲、権限、料金は更新されます。料金の一行からモデルの優劣は決まりません。/ See the [dated per-entry pricing sources](pricing/pricing_sources_2026-11-22.md). Names, availability, permissions and rates change; one price never determines overall quality.

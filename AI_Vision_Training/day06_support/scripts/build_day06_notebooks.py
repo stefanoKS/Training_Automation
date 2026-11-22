@@ -6,20 +6,32 @@ import hashlib
 import json
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
+from render_pricing import SOURCES, load_snapshot, render_lesson_table, render_source_document
+
+ROOT = Path(__file__).resolve().parents[2]
+LESSON_DIR = ROOT / "notebooks" / "Day06_LLM_Agents"
 LESSONS = (
-    "Day06_01_LLM_Agent_Harness",
-    "Day06_02_Ideas_and_Requirements",
-    "Day06_03_Prompting_and_Agents",
-    "Day06_04_Testing_and_Handover",
+    "Day06_01_LLM_Fundamentals",
+    "Day06_02_Agents_and_Harness",
+    "Day06_03_Idea_to_Specification",
+    "Day06_04_Prompting_and_Execution",
+    "Day06_05_Verification_and_Cost",
 )
 
 
 def build() -> None:
+    snapshot = load_snapshot()
+    SOURCES.write_text(render_source_document(snapshot), encoding="utf-8")
     for name in LESSONS:
-        manuscript = ROOT / "lessons" / f"{name}.md"
+        manuscript = LESSON_DIR / f"{name}.md"
         data = manuscript.read_bytes()
-        text = data.decode("utf-8")
+        text = data.decode("utf-8").replace("<!-- DAY06_PRICE_TABLE -->", render_lesson_table(snapshot))
+        text = text.replace(
+            "<!-- DAY06_PROMPT_LIBRARY -->",
+            (ROOT / "day06_support" / "examples" / "example_agent_prompts_ja_en.md").read_text(
+                encoding="utf-8"
+            ).replace("# コピーして調整する指示集 / Adaptable bilingual prompt library", ""),
+        )
         # A heading starts a new notebook cell; Markdown remains the sole lesson manuscript.
         sections = []
         for line in text.splitlines(keepends=True):
@@ -41,7 +53,7 @@ def build() -> None:
             "nbformat": 4,
             "nbformat_minor": 5,
         }
-        output = ROOT / "lessons" / f"{name}.ipynb"
+        output = LESSON_DIR / f"{name}.ipynb"
         output.write_text(
             json.dumps(notebook, ensure_ascii=False, indent=1) + "\n",
             encoding="utf-8",

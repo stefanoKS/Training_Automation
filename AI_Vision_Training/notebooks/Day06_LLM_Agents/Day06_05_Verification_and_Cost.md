@@ -1,85 +1,176 @@
-# 第6日 04：検証・安全・引き継ぎ / Day 6 04: Verification, safety and handover
+# 第6日 05：検証・費用・安全・引き継ぎ / Day 6 05: Verification, costs, safety and handover
 
-**目安：55分 / Estimated duration: 55 min.** [第6日時間割](../DAY06_SYLLABUS_ja_en.md)を参照。/ See the [sole Day 6 timetable](../DAY06_SYLLABUS_ja_en.md).
+**目安50分 / Estimated duration: 50 min.** [第6日時間割](../../COURSE_SYLLABUS_DAY06.md)を参照。料金は2026-11-22の調査時点の例で、契約の見積りではありません。/ See the [sole Day 6 timetable](../../COURSE_SYLLABUS_DAY06.md). Prices are dated examples, not a quotation for your account.
 
-**目標 / Objectives:** 完了の主張と証拠を区別し、受入条件で確認し、試作と本番を分け、次の担当へ引き継ぐ。/ Distinguish claims from evidence, perform acceptance checks, separate prototypes from production and hand over responsibly.
+**目標 / Objectives:** 「完成」の主張と証拠を区別し、利用料金の仕組みを説明し、架空アプリの受入・安全・引き継ぎを判断する。/ Separate completion claims from evidence, explain API costs, and assess acceptance, safety and handover for the fictional app.
 
-## 1. 「完成した」だけでは足りない / “Done” is not evidence
+## 1. エージェントの「終わった」は証拠ではない / “Done” is a claim, not evidence
 
-AIが要件を読み違えることがあります。画面が正しく見えても、保存に失敗したり、データが消えたりします。試験も全部の操作を試しているとは限りません。「エージェントの完了報告」「実際の試験記録」「人が仕様に沿って確認した結果」は異なる段階です。
+画面にCSVボタンが見えても、中身が違うことがあります。試験に通っても、試験していない手順が失敗することがあります。エージェントの報告、実際の試験記録、人が合意した作業手順を確認した結果を分けます。「試験した」とだけ書かれていたら、手順、結果、環境、未確認項目を聞いてください。
 
-AI can misunderstand requirements. A screen can look right while saves fail or data disappears. Automated tests may not cover every workflow. An agent's completion claim, actual test records and a human's acceptance review are different levels of evidence.
+A CSV button can be visible while its contents are wrong. Passing tests can miss untested workflows. Separate an agent's report, actual test evidence and the human's review of the agreed workflow. If a report merely says “tested,” ask which steps, results, environment and unverified items it means.
 
-![見た目、動作試験、人による受入確認 / Different evidence from screenshots, functional tests and human review](../assets/diagrams/D06-12.svg)
+![見た目、動作、人の判断は異なる証拠 / Screenshot, behavioral test and human acceptance are different evidence](../../assets/diagrams/day06/D06-19.svg)
 
-**図 D06-12 / Figure D06-12:** 画面写真は動作の証拠にはなりません。/ A screenshot alone cannot prove behavior. **問い / Reflect:** CSVの中身は画面写真から確認できますか？ / Can a screenshot prove CSV contents?
+**図 D06-19 / Figure D06-19:** どれか一つだけで本番利用を認めません。/ None alone authorizes production use. **問い / Reflect:** ボタンの写真からCSVの列順を確認できますか？ / Can a screenshot prove CSV column order?
 
-## 2. 観察できる受入基準 / Observable acceptance criteria
+## 2. 結果で判定する受入条件 / Observable acceptance checks
 
-架空データで次を確かめます。まず記録0件なら一覧と件数0が出る。ロット空欄なら保存されず日本語のエラーが出る。有効な「PVC-EX-001・黒点」と「PVC-EX-002・傷」を保存すると2件になり、再起動後も残る。黒点で絞ると前者だけが表示され件数1。CSV出力では `lot_id,inspected_at,defect_type,description,remarks` の順で2行の値が合う。エクスポートの失敗は通知され、既存の記録は消えない。
+架空の空データを開くと一覧と表示件数が0。ロット空欄なら保存されず、日本語のエラーを出す。有効な `PVC-EX-001`（黒点）と `PVC-EX-002`（傷）を保存すると2件になり、再起動後も残る。黒点で絞ると前者だけが表示され件数1。絞り込みを解除してCSVを作ると列は `lot_id,inspected_at,defect_type,description,remarks`、データは2行。出力に失敗しても元の記録は消えません。
 
-Use fictional data: an empty list shows count 0; a missing lot refuses the save and shows a Japanese error. Save “PVC-EX-001 / black spot” and “PVC-EX-002 / scratch”; count becomes 2 and survives restart. Filtering for black spot shows only the first and count 1. CSV has columns `lot_id,inspected_at,defect_type,description,remarks` and two correct data rows. Export failure is reported; existing records stay intact.
+With fictional empty storage, show an empty list and count 0. An empty lot must not save and must show a Japanese error. Saving `PVC-EX-001` (black spot) and `PVC-EX-002` (scratch) produces two entries retained after restart. Filtering for black spot shows only the first and visible count 1. Clear the filter; CSV has columns `lot_id,inspected_at,defect_type,description,remarks` and two data rows. A failed export must not destroy records.
 
-| 確認の種類 / Check | この例 / Example |
+| 確認の種類 / Check | この事例 / Example | 何はまだ分からないか / What remains unknown |
+|---|---|---|
+| 画面 / UI | 日本語のエラーとCSVボタン / Japanese error and CSV button | 保存の中身 / stored data |
+| 機能 / Functional | 2件を保存し再起動して確認 / save two and restart | 異なる環境の挙動 / other environments |
+| エラー / Error | 空欄、書き出し失敗 / missing field, export failure | 未試験の例外 / untested errors |
+| 回帰 / Regression | CSV追加後も保存・絞り込みが動く / save/filter after adding CSV | 今後の変更 / future changes |
+| 人の受入 / Human acceptance | 操作員の流れに合うか / matches operator workflow | 本番の安全性 / production safety |
+
+これは受講者がテストコードを書く活動ではありません。[受入表](../../day06_support/examples/example_test_cases_ja_en.md)を紙で読んでください。/ Students need not write test code. Use the [planned acceptance checklist](../../day06_support/examples/example_test_cases_ja_en.md) on paper.
+
+**問い / Reflect:** 自動試験が成功しても再起動を確認する理由は？ / Why check restart after an automated test passes?
+
+## 3. APIとトークン課金の基本 / API and token-based billing
+
+API（Application Programming Interface）は、別のソフトからモデルなどの機能を呼ぶ窓口です。APIキーは利用者を識別する秘密の文字列なので、指示文、ワークシート、公開ファイルには絶対に貼りません。画面で使う月額サブスクリプションと、開発者のAPI利用料金は**別の契約・請求**になりえます。どちらに含まれるかは各契約で確認します。
+
+An Application Programming Interface (API) lets software request a model service. An API key is a secret that identifies the customer: never paste it into prompts, worksheets or public files. A monthly chat subscription and developer API usage can have **separate terms and bills**; check the actual agreement rather than assuming one includes the other.
+
+トークン（token）はモデルが数える文章の単位で、単語と同じではありません。入力は指示、以前の会話、読んだファイル、ツール結果を含むことがあり、出力は応答や内部の思考に関わる場合もあります。料金表の「$2/100万入力トークン」は、100万トークンにつき2米ドルという単位です。利用回数や見えるチャットの件数とは違います。
+
+A token is a model-specific unit of text, not necessarily a word. Inputs may include instructions, history, file excerpts and tool results; output billing can also include reasoning tokens depending on the service. “$2 per million input tokens” states a rate, not the price of one chat or one project.
+
+![入力と出力のトークン課金（仮の単価）/ Input and output token charges at hypothetical rates](../../assets/diagrams/day06/D06-17.svg)
+
+**図 D06-17 / Figure D06-17:** キャッシュ済み入力はサービスによって条件と単価が違います。/ Cached input eligibility and price vary. **問い / Reflect:** 入力100,000と出力20,000を同じ単価で足してよいですか？ / Can input and output tokens be charged at the same rate without checking?
+
+## 4. 仮の単価で計算する / Calculate a hypothetical bill
+
+**これは実在モデルの価格ではありません。** 入力100万トークンにつき$2、出力100万トークンにつき$10と仮定します。入力100,000トークンは `100,000 ÷ 1,000,000 × $2 = $0.20`、出力20,000トークンは `20,000 ÷ 1,000,000 × $10 = $0.20`、合計は**$0.40**です。
+
+**These are invented teaching rates, not a current model quote.** Assume $2 per million input tokens and $10 per million output tokens. Then 100,000 input tokens cost $0.20, 20,000 output tokens cost $0.20, and total token charges are **$0.40**.
+
+この計算ではキャッシュ割引、ツール、画像・音声、税金、別のサブスクリプション料金を含めません。出力トークンが増えると合計も変わります。請求を確かめるときは実際の利用記録・単価・契約を使います。
+
+This example excludes cache discounts, tools, images/audio, taxes and separate subscriptions. More output changes the total. For real bills, use actual usage and contract terms.
+
+**問い / Reflect:** 入力だけでなく出力も請求されるなら、長い回答を何度も作るとどうなりますか？ / What happens when an agent repeatedly generates long answers?
+
+## 5. エージェントが何度も呼ぶと / Multi-step agent cost
+
+目に見える「一つの依頼」でも、実装担当はファイルを読む、計画を出す、修正する、試験結果を読む、と複数回モデルを呼び出す場合があります。前の会話や同じ資料が再び入力に含まれると、入力トークンが積み重なります。失敗を繰り返せば時間と費用も増えます。ツールや外部サービスは別の料金になる場合があります。
+
+One visible request may involve several model calls: read files, plan, edit, observe tests and revise. Repeated history or file contents add input tokens on later calls. Failed retries consume time and may add charges. External tools or services can be billed separately.
+
+| 仮の段階 / Hypothetical step | 入力 / Input tokens | 出力 / Output tokens | 仮の計算 / At $2 in and $10 out per 1M |
+|---|---:|---:|---:|
+| 調査 / Inspect | 20,000 | 2,000 | $0.06 |
+| 計画 / Plan | 30,000 | 3,000 | $0.09 |
+| 実装 / Implement | 40,000 | 10,000 | $0.18 |
+| 修正 / Correct | 25,000 | 5,000 | $0.10 |
+| **合計 / Total** | **115,000** | **20,000** | **$0.43** |
+
+この4回の合計は `115,000 ÷ 1,000,000 × $2 + 20,000 ÷ 1,000,000 × $10 = $0.43`。キャッシュなし、追加ツール・税金なしの**架空例**です。キャッシュは必ず効くわけではなく、キャッシュ作成と読込で単価が違う場合もあります。
+
+The four calls sum to `115,000 / 1,000,000 × $2 + 20,000 / 1,000,000 × $10 = $0.43`, **hypothetically**, with no cache discount, extra tools or taxes. Caching is not guaranteed; writes and reads may have different rates.
+
+![複数回の呼出しで入力と出力が積み重なる / Repeated model calls accumulate token costs](../../assets/diagrams/day06/D06-18.svg)
+
+**図 D06-18 / Figure D06-18:** 一つのチャット表示が一回のAPI呼出しとは限りません。/ One visible chat message need not equal one API request. **問い / Reflect:** 同じファイルを毎回読み込むと何が増えますか？ / What grows when a file is resent on every step?
+
+## 6. 2026-11-22に確認した公式API料金例 / Official API price examples checked 2026-11-22
+
+次は**標準のホスト型API**の代表例です。**単位：米ドル/100万トークン**。各行の「適用条件」以外では単価が変わる場合があります。現行価格や利用可能な地域・プランを利用前に必ず公式サイトで確認してください。`Not verified` は**無料という意味ではありません**。全行の出典・条件は[価格と出典一覧](../../day06_support/pricing/pricing_sources_2026-11-22.md)にあります。
+
+These are representative **hosted API standard-rate** examples, in **USD per million tokens**. Rates can change outside the listed condition. Recheck availability, region and current pricing with the provider before spending. `Not verified` does **not** mean free. See the [dated sources and billing caveats](../../day06_support/pricing/pricing_sources_2026-11-22.md) for every row.
+
+<!-- DAY06_PRICE_TABLE -->
+
+この表は[1つの機械可読の価格記録](../../day06_support/pricing/pricing_snapshot_2026-11-22.json)から、ノートブックと出典資料へ生成しています。表の1行を見ただけで総費用を比較しません。Gemini Carbonの掲載単価は2026-11-30までで、12月からの予定単価は出典資料に書いています。DeepSeekの掲載値はオフピーク。xAIやAnthropicの掲載値には文脈長の条件があり、Alibaba Cloudは地域により違います。キャッシュの作成・読込、外部検索、画像、税金にも注意します。
+
+The notebook table and source sheet come from [one structured pricing snapshot](../../day06_support/pricing/pricing_snapshot_2026-11-22.json). A single rate is not a total-cost comparison. Gemini Carbon's shown rates are scheduled through November 30; the subsequent published rates appear in the source sheet. DeepSeek rows are off-peak; xAI and Anthropic have context-length conditions; Alibaba Cloud varies by region. Cache creation/reads, external search, images and taxes may add charges.
+
+**問い / Reflect:** 価格表の数字だけで「この会社がいつでも最安」と言えますか？ / Can a single row prove one provider is always cheapest?
+
+## 7. クラウドとローカルは費用も責任も異なる / Hosted versus local models
+
+クラウドAPIは提供元の計算機で処理され、通信・契約・データの扱いと利用料を確認します。ローカルモデルは自分の機器で動かせる場合がありますが、必要なメモリ・処理能力、電気代、保守とモデルのライセンスを確認します。「重みを公開している」と「会社で自由に使える」は同じではありません。どちらも品質確認と情報管理は必要です。
+
+A hosted API runs on a provider's systems; check connectivity, contract, data handling and usage charges. A local model can run on your hardware where supported, but needs adequate memory and compute, power, maintenance and license review. “Open weights” does not guarantee unrestricted commercial use. Both options still need quality and privacy checks.
+
+**問い / Reflect:** ローカルなら費用や利用条件が一切ないと言えますか？ / Is a local model necessarily free of costs and license conditions?
+
+## 8. 安全、変更履歴、引き継ぎ / Safety, version history and handover
+
+顧客図面、製造条件、個人情報、APIキー、実際の映像や社内DBをAIへ渡さないでください。無関係なファイル削除や広い権限は認めず、破壊的な変更には人が承認します。この学習用アプリは設備、PLC、ロボット、本番ラインを操作しません。本番利用には別途技術検証、セキュリティ審査と人の承認が必要です。
+
+Never paste customer drawings, manufacturing parameters, personal details, API keys, live footage or internal databases into AI. Refuse unrelated deletion and broad access; require approval before destructive operations. This teaching prototype must not operate equipment, PLCs, robots or production lines. Real deployment requires separate technical validation, security review and human authorization.
+
+![架空データと機密・設備の境界 / Fictional data separated from confidential data and machinery](../../assets/diagrams/day06/D06-22.svg)
+
+**図 D06-22 / Figure D06-22:** 安全は「実装できた」後に付け足す機能ではありません。/ Safety is not an optional add-on after implementation. **問い / Reflect:** 本番カメラへ接続する提案は承認できますか？ / Should a production camera connection be approved for this lesson?
+
+Gitは変更の履歴を残す仕組み、コミットは変更時点の記録、チェックポイントは後戻りの目印です。コマンドを覚える必要はありません。READMEは使い方、仕様は合意した挙動、試験記録は実際に確認した範囲、引き継ぎメモは残る仕事を書きます。既存の機能を変えたら、前に動いていた保存・絞り込みももう一度試します（回帰確認）。
+
+Git records changes, a commit records a particular state, and a checkpoint is a place to resume or recover. Students need no commands. README explains use, requirements define agreed behavior, test records show what was actually checked, and handover notes list remaining work. After a change, recheck previously working saving and filtering (regression checks).
+
+**架空の引き継ぎ / SIMULATED handover:** 担当Aは入力・保存・一覧ができたと報告。CSVは未実装、試験記録は未提示。担当Bは元の要件、変更したファイル、残る仕事、既知の問題、試験の有無、変更禁止箇所を受け取ります。まず実際の状態を調べてから修正案を出します。[引き継ぎ全文](../../day06_support/examples/example_handover_ja_en.md)は架空の例です。
+
+**SIMULATED handover:** Agent A reports a form, save and list; CSV is missing and test details have not been supplied. Agent B receives the original requirements, changed files, remaining tasks, known issues, test evidence (or its absence) and protected scope, then inspects existing work before proposing a correction. The [full sample handover](../../day06_support/examples/example_handover_ja_en.md) is fictional.
+
+![仕様と試験の有無を含む引き継ぎ / Handover with original requirements and actual evidence](../../assets/diagrams/day06/D06-21.svg)
+
+**図 D06-21 / Figure D06-21:** 「完成と報告」と「確認済み」を分けて渡す。/ Separate reported completion from verified results. **問い / Reflect:** 試験結果がなければ次の担当は何を確認しますか？ / What must the receiving agent do without test evidence?
+
+## 9. 演習（合計18分）/ Practice (18 min total)
+
+**A / Activity A (4 min):** 仮の$2/100万入力、$10/100万出力で入力100,000・出力20,000を計算します。**出力 / Output:** 入力$0.20＋出力$0.20＝$0.40。**間違い / Pitfall:** 100万で割らない、または実モデル価格と呼ぶ。/ Calculate the hypothetical bill; do not present invented rates as actual.
+
+**B / Activity B (3 min):** 料金表の行を一つ読み、「この表から分かること」と「分からないこと」を各一つ書く。**出力 / Output:** 単価と、契約全体の請求額は不明。**間違い / Pitfall:** キャッシュ不明を無料扱い。/ Read one row; distinguish a rate from the unknown total bill.
+
+**C / Activity C (4 min):** [受入表](../../day06_support/examples/example_test_cases_ja_en.md)から5つを選び、期待する結果を説明します。**出力 / Output:** 空欄拒否、2件保存、再起動、黒点絞り込み1件、CSV列と2行など。**間違い / Pitfall:** 「動いた」だけ。/ Choose five observable checks and give expected values.
+
+**D / Activity D (3 min):** 「APIキーを貼って本番PLCにつなぐ」を安全でない理由とともに却下します。**出力 / Output:** 秘密保持、設備からの隔離、架空データの代案。**間違い / Pitfall:** 試作と本番を混同。/ Reject sharing a key and connecting a live PLC; use fictional offline data.
+
+**E / Activity E (4 min):** 「画面を作りました。次をお願いします」という報告から、次の担当に不足するものを三つ挙げます。**出力 / Output:** 元の仕様、変更ファイル、試験証拠、残作業など。**間違い / Pitfall:** 完了の主張を証拠とみなす。/ Identify three missing handover elements; do not treat a claim as evidence.
+
+**完了チェック / Completion:** 検証の段階を区別し、単価と合計を計算し、秘密と設備を守り、残作業を次の担当へ説明できる。/ Distinguish evidence levels, calculate hypothetical cost, protect secrets/equipment and explain remaining work.
+
+**参考 / References:** [図と公式製品資料](../../day06_support/SOURCES_AND_LICENSES.md)、[価格の公式出典](../../day06_support/pricing/pricing_sources_2026-11-22.md)。/ [Figure and product sources](../../day06_support/SOURCES_AND_LICENSES.md), [official pricing sources](../../day06_support/pricing/pricing_sources_2026-11-22.md).
+
+## 任意資料：用語を引く / Optional reference: bilingual glossary
+
+授業中にすべて暗記する必要はありません。分からない言葉を探すときに使います。/ There is no need to memorize every term; use this list when a word is unfamiliar.
+
+| 用語 / Term | 短い説明 / Short explanation |
 |---|---|
-| 機能 / Functional | 保存・絞り込み・CSVの値 / save, filter and CSV values |
-| 画面 / UI | 日本語ラベルとエラー位置 / Japanese labels and message location |
-| エラー / Error | 必須欄の欠落と出力失敗 / missing required fields and export failure |
-| 回帰 / Regression | CSV追加後も保存できる / saving still works after CSV is added |
-| 人の受入 / Human acceptance | 実際の記録手順に合うか / fits the intended inspection workflow |
-
-これらは受講者が試験コードを動かす指示ではありません。人が画面と結果を観察するための表です。詳しくは[受入例](../examples/example_test_cases_ja_en.md)。
-
-These are not instructions for students to run test code; they are observations a human can make. See [acceptance examples](../examples/example_test_cases_ja_en.md).
-
-**問い / Reflect:** テストが成功しても再起動確認を省いてよいですか？ / Does a passing test remove the need to check restart behavior?
-
-## 3. 不足した実装を見つける / Spot an incomplete result
-
-**架空のシミュレーション / SIMULATION — not a real run:** エージェントは「保存と一覧を作り、試験済み」と報告しました。しかし[画面案 D06-08](../assets/diagrams/D06-08.svg)と仕様を比べると、CSV出力ボタンがありません。試験の範囲も示されていません。「完成」ではなく「CSV追加・保存機能の回帰確認が必要」と記録します。
-
-**SIMULATION — not a real run:** An agent says “Save and list are implemented and tested.” But comparing [mockup D06-08](../assets/diagrams/D06-08.svg) with the specification shows no CSV button, and the test scope is unspecified. Record “CSV and regression check outstanding,” not “accepted.”
-
-**問い / Reflect:** 次の指示は「全部作り直して」ですか？ / Should the next request be “rewrite everything”?
-
-## 4. 安全と利用範囲 / Safety and permitted scope
-
-顧客図面、製造条件、個人情報、パスワード、実際の映像や社内DBをAIへ渡さないでください。関係ないファイルの削除や広い権限は認めず、破壊的な変更は人が事前に承認します。この学習用ソフトは設備・PLC・ロボット・本番環境を操作しません。本番利用には別途、技術的妥当性確認、セキュリティ審査と人の承認が必要です。
-
-Do not share customer drawings, manufacturing parameters, personal details, passwords, production footage or internal databases. Refuse unrelated deletion or broad access; require human approval before destructive operations. This educational prototype must not control equipment, PLCs, robots or production systems. Real deployment requires separate technical validation, security review and human authorization.
-
-![架空データ、機密情報、本番設備の境界 / Safe fictional training, restricted data and excluded equipment](../assets/diagrams/D06-14.svg)
-
-**図 D06-14 / Figure D06-14:** 機密資料と設備は学習アプリの外です。/ Sensitive data and machinery are outside the training scope. **問い / Reflect:** 本番カメラへ接続する提案はどう扱いますか？ / What should you do with a proposal to connect a production camera?
-
-## 5. チェックポイントと引き継ぎ / Checkpoints and handover
-
-Gitは変更の履歴を残す仕組み、コミットは変更時点の記録です。コマンドを覚える必要はありません。READMEは開き方、仕様書は合意した動作、試験報告は実際に確かめた範囲、引き継ぎメモは残る仕事を書きます。チェックポイントは「いつの状態へ戻れるか」の目印で、試験の代わりではありません。
-
-Git keeps change history; a commit records a particular change. No commands need memorizing. A README explains use, a specification states agreed behavior, a test report states what was actually checked, and handover notes state what remains. A checkpoint marks a recoverable state, not a substitute for testing.
-
-**架空の引き継ぎ / SIMULATED handover:** 担当Aは入力・保存・一覧まで作成。CSVは未実装。担当Bは元の要件、変更したファイル、試験結果と未確認項目、触れてはいけないファイルを読み、まず現状を確認します。「試験済み」とだけ書かれていても信じ込まず、詳細を求めます。[引き継ぎ例](../examples/example_handover_ja_en.md)を参照。
-
-**SIMULATED handover:** Agent A completed validation, saving and listing but not CSV. Agent B reads the original requirements, changed files, test evidence, unverified items and files to leave untouched, then inspects existing work. “Tested” without details is insufficient. See the [sample handover](../examples/example_handover_ja_en.md).
-
-![次の担当が受け取る資料 / Documents and evidence to hand over](../assets/diagrams/D06-13.svg)
-
-**図 D06-13 / Figure D06-13:** 受領した人は先に現状を調べる。/ The receiving agent inspects before editing. **問い / Reflect:** 引き継ぎに試験結果がなければ何を聞きますか？ / What would you ask if test evidence is missing?
-
-## 6. 演習（合計18分）/ Practice (18 min total)
-
-**G / Activity G (5 min):** 架空画面と仕様を比較して不足を見つける。例：CSV出力がない。**出力 / Output:** 不足箇所と要件への参照。**間違い / Pitfall:** 見た目の印象だけで受入。/ Compare mockup and specification; identify absent CSV. Output: missing feature and requirement. Pitfall: judging by appearance alone.
-
-**H / Activity H (5 min):** 空欄、保存、再起動、絞り込み、CSVなどについて少なくとも5つ、結果を観察できる基準を記入する。**出力 / Output:** 5項目以上。**間違い / Pitfall:** 「問題なく動く」だけを書く。/ Write at least five observable checks. Pitfall: “works fine” without expected results.
-
-**安全確認 / Safety check (3 min):** 「本番ラインのPLCをAIに接続して試す」は安全ですか？理由と代案を答える。**出力 / Output:** 却下と架空データの代案。**間違い / Pitfall:** 試作と本番を混同。/ Reject connecting a live PLC; propose fictional offline data instead. Pitfall: treating a prototype as production-ready.
-
-**I / Activity I (5 min):** 架空引き継ぎ「画面を作った。続きよろしく」を読み、不足する情報を3つ記入する。**出力 / Output:** 仕様、変更ファイル、試験など3点。**間違い / Pitfall:** 完了の主張を証拠とみなす。/ Find three missing handover items. Pitfall: accepting a claim as evidence.
-
-## 7. 最終提出 / Final submission
-
-[最終ワークシート](../worksheets/Day06_Student_Worksheet_ja_en.md)は16:20〜16:50に記入します。アプリの完成・有料ツール・プログラムの実行は不要です。/ Complete the [final worksheet](../worksheets/Day06_Student_Worksheet_ja_en.md) at 16:20–16:50; no working app, paid tool or code execution is required.
-
-**完了チェック / Completion:** 5つの確認を書き、機密と設備の境界を説明し、次の担当へ未完了事項を伝えられる。/ Write five checks, explain the privacy/industrial boundary and communicate remaining work.
-
-**参考 / References:** [確認した公式資料と図の出典](../assets/SOURCES_AND_LICENSES.md) / [Checked official references and figure authorship](../assets/SOURCES_AND_LICENSES.md).
+| 人工知能 / Artificial Intelligence (AI) | 判断や生成などを支える技術の広い呼び名 / broad field of machine intelligence |
+| 機械学習 / Machine Learning (ML) | 例から規則性を学ぶ方法 / learning patterns from examples |
+| 深層学習 / Deep Learning (DL) | 層の多いモデルを使う機械学習 / ML using multilayer models |
+| 大規模言語モデル / Large Language Model (LLM) | 与えた文脈から応答を生成するモデル / model generating a response from context |
+| モデル / Model | 入力から出力を作る学習済みの仕組み / trained input-output system |
+| プロンプト / Prompt | モデルへ与える指示や質問 / supplied instruction or question |
+| トークン / Token | モデルが文章を扱う単位 / model-specific text unit |
+| 文脈 / Context | 今の応答に渡された情報 / information supplied for this response |
+| 文脈窓 / Context window | 一度の処理に使える文脈の上限 / available context limit |
+| ハルシネーション / Hallucination | 根拠のないもっともらしい内容 / plausible unsupported output |
+| マルチモーダル / Multimodal | 文章以外の画像なども扱える場合 / handling text and other inputs |
+| アシスタント / Assistant | 人との会話を支える製品や仕組み / user-facing helper |
+| エージェント / Agent | 目標に向けて複数の判断と作業を行う流れ / multi-step goal workflow |
+| コーディングエージェント / Coding agent | ソフト開発を支援するエージェント / software-development agent |
+| ハーネス / Harness | モデル、ツール、権限、結果をつなぐ仕組み / orchestration around model and tools |
+| ツール / Tool | 許可の範囲でファイルなどを操作する機能 / authorized action mechanism |
+| 権限 / Permission | 操作してよい範囲 / allowed actions or resources |
+| API / Application Programming Interface | ソフトから別サービスを呼ぶ窓口 / software-to-service interface |
+| APIキー / API key | 利用者を識別する秘密 / secret service credential |
+| 入力 / Input | モデルやアプリへ渡す情報 / supplied data |
+| 出力 / Output | モデルやアプリが返す結果 / produced result |
+| キャッシュ / Cache | 条件に合う入力を再利用する仕組み / reuse of eligible input |
+| 仕様 / Specification | 合意した目的、挙動、制約 / agreed behavior and constraints |
+| MVP / Minimum Viable Product | 価値を確認できる小さな初版 / smallest testable first version |
+| 受入基準 / Acceptance criteria | 人が結果を判定する観察可能な条件 / observable acceptance checks |
+| 回帰確認 / Regression check | 修正後に以前の機能を再確認 / recheck previously working behavior |
+| チェックゲート / Checkgate | 次へ進む前の確認点 / approval checkpoint |
+| 引き継ぎ / Handover | 進捗、根拠、残作業を渡す記録 / transfer of progress and evidence |

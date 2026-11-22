@@ -1,4 +1,6 @@
-# 第6日 実装・検証報告 / Day 6 implementation and verification report
+# 第6日 初版の記録（改訂前）/ Original Day 6 report (superseded)
+
+**履歴資料 / Historical snapshot:** 以下は旧 `week2/day06/` 版の記録で、現在の5冊・22図・価格資料・PDFの状態を示しません。最新の結果は [Day06_Final_Review.md](Day06_Final_Review.md) を確認してください。/ The following describes the original four-module layout, not the current five-module revision. Use the final review for current evidence.
 
 ## 1. 基準 / Repository baseline
 
@@ -47,7 +49,7 @@
 | `pdf/Day06_explanation_ja_en.pdf` | 日本語・英語の図入り解説 / illustrated bilingual companion |
 | `DAY06_IMPLEMENTATION_REPORT.md` | 本報告 / this report |
 
-各SVGは本教材用のオリジナル作品です。図ごとの対応章・目的・出典は[図目録](assets/SOURCES_AND_LICENSES.md)を参照。14図ともXML解析、ローカル参照、PDFへの掲載を確認。/ All 14 figures are original course artwork; the [manifest](assets/SOURCES_AND_LICENSES.md) maps each to its objective and lesson. XML structure, local links and PDF inclusion were checked.
+各SVGは本教材用のオリジナル作品です。図ごとの対応章・目的・出典は[図目録](../../day06_support/SOURCES_AND_LICENSES.md)を参照。14図ともXML解析、ローカル参照、PDFへの掲載を確認。/ All 14 figures are original course artwork; the [manifest](../../day06_support/SOURCES_AND_LICENSES.md) maps each to its objective and lesson. XML structure, local links and PDF inclusion were checked.
 
 ## 3. 授業の構成と言語 / Course and language review
 
@@ -55,9 +57,9 @@
 
 01 (70 min) covers models and permission; 02 (95 min) defines a problem and specification; 03 (80 min) plans and corrects; 04 (55 min) verifies and hands over. The schedule totals 530 min including 120 instructor, 300 required learning, 30 breaks, 30 submission and 50 lunch. All activities can be done on paper without code.
 
-各節は日本語→英語→図や例→問いの順とし、架空の `PVC-EX-001`、`PVC-EX-002` と同じCSV列を照合しました。製品用語は[公式資料](assets/SOURCES_AND_LICENSES.md)で確認。学習者本人を交えた日本語の校正・所要時間の試行は未実施です。
+各節は日本語→英語→図や例→問いの順とし、架空の `PVC-EX-001`、`PVC-EX-002` と同じCSV列を照合しました。製品用語は[公式資料](../../day06_support/SOURCES_AND_LICENSES.md)で確認。学習者本人を交えた日本語の校正・所要時間の試行は未実施です。
 
-Sections pair Japanese then English, followed by a figure or example and reflection. Fictional lot IDs and CSV columns were checked across the case study. Product terminology was checked against [official sources](assets/SOURCES_AND_LICENSES.md). A beginner pilot and native-language editorial review have not yet been performed.
+Sections pair Japanese then English, followed by a figure or example and reflection. Fictional lot IDs and CSV columns were checked across the case study. Product terminology was checked against [official sources](../../day06_support/SOURCES_AND_LICENSES.md). A beginner pilot and native-language editorial review have not yet been performed.
 
 ## 4. 実際の検証 / Actual validation
 

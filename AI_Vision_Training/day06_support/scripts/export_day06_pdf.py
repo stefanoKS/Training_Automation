@@ -1,7 +1,7 @@
-"""Export the four Day 6 Markdown-only notebooks as an independent A4 PDF.
+"""Export the five Day 6 Markdown-only notebooks as an independent A4 PDF.
 
-Run from any directory: python AI_Vision_Training\\week2\\day06\\scripts\\export_day06_pdf.py
-Requires ReportLab, Pillow, Playwright and a locally installed Chrome browser.
+Run from any directory: python AI_Vision_Training\\day06_support\\scripts\\export_day06_pdf.py
+Requires ReportLab, Pillow, Playwright and a locally installed Chrome or Edge browser.
 """
 
 from __future__ import annotations
@@ -33,9 +33,10 @@ from reportlab.platypus import (
     TableStyle,
 )
 
-from build_day06_notebooks import LESSONS, ROOT
+from build_day06_notebooks import LESSONS, LESSON_DIR, ROOT
+from render_pricing import load_snapshot
 
-OUTPUT = ROOT / "pdf" / "Day06_explanation_ja_en.pdf"
+OUTPUT = ROOT / "docs" / "pdf" / "Day06_explanation_ja_en.pdf"
 IMAGE_RE = re.compile(r"!\[([^\]]*)\]\(([^)]+)\)")
 
 
@@ -64,7 +65,7 @@ def export() -> None:
     face = font()
     styles = {
         "body": ParagraphStyle(
-            "body", fontName=face, fontSize=9.6, leading=15, spaceAfter=6,
+            "body", fontName=face, fontSize=11, leading=18.5, spaceAfter=9,
             textColor=colors.HexColor("#223344"), wordWrap="CJK",
         ),
         "title": ParagraphStyle(
@@ -76,16 +77,20 @@ def export() -> None:
             spaceAfter=9, textColor=colors.HexColor("#164b79"), wordWrap="CJK",
         ),
         "small": ParagraphStyle(
-            "small", fontName=face, fontSize=8, leading=12, spaceAfter=5,
+            "small", fontName=face, fontSize=9, leading=13.5, spaceAfter=5,
+            wordWrap="CJK",
+        ),
+        "source": ParagraphStyle(
+            "source", fontName=face, fontSize=8.3, leading=11.8, spaceAfter=4,
             wordWrap="CJK",
         ),
     }
     doc = SimpleDocTemplate(
-        str(OUTPUT), pagesize=A4, leftMargin=17 * mm, rightMargin=17 * mm,
-        topMargin=17 * mm, bottomMargin=18 * mm,
+        str(OUTPUT), pagesize=A4, leftMargin=20 * mm, rightMargin=20 * mm,
+        topMargin=20 * mm, bottomMargin=20 * mm,
         title="第6日：AIエージェントによるソフトウェア開発入門 / Day 6",
     )
-    width = A4[0] - 34 * mm
+    width = A4[0] - 40 * mm
     story = []
     with tempfile.TemporaryDirectory(prefix="day06_pdf_") as temporary:
         temp = Path(temporary)
@@ -101,9 +106,9 @@ def export() -> None:
             try:
                 page = browser.new_page(viewport={"width": 1440, "height": 900}, device_scale_factor=1.5)
                 for index, name in enumerate(LESSONS):
-                    notebook_path = ROOT / "lessons" / f"{name}.ipynb"
+                    notebook_path = LESSON_DIR / f"{name}.ipynb"
                     notebook = json.loads(notebook_path.read_text(encoding="utf-8"))
-                    source = ROOT / "lessons" / f"{name}.md"
+                    source = LESSON_DIR / f"{name}.md"
                     digest = hashlib.sha256(source.read_bytes()).hexdigest()
                     if notebook["metadata"].get("day06_source_sha256") != digest:
                         raise RuntimeError(f"Stale notebook: rebuild {notebook_path.name} before exporting")
@@ -155,7 +160,12 @@ def export() -> None:
                                 if any(len(row) != columns for row in rows):
                                     raise ValueError(f"Malformed table in {name}")
                                 cells = [[Paragraph(rich(value), styles["small"]) for value in row] for row in rows]
-                                table = Table(cells, colWidths=[width / columns] * columns, repeatRows=1, hAlign="LEFT")
+                                column_widths = (
+                                    [width * fraction for fraction in (0.27, 0.12, 0.12, 0.17, 0.32)]
+                                    if columns == 5 and headers[0].startswith("提供元")
+                                    else [width / columns] * columns
+                                )
+                                table = Table(cells, colWidths=column_widths, repeatRows=1, hAlign="LEFT")
                                 table.setStyle(TableStyle([
                                     ("BACKGROUND", (0, 0), (-1, 0), colors.HexColor("#eaf1f8")),
                                     ("VALIGN", (0, 0), (-1, -1), "TOP"),
@@ -175,9 +185,9 @@ def export() -> None:
         story.append(PageBreak())
         story.append(Paragraph("参考資料・完了チェック / References and completion checklist", styles["heading"]))
         story.append(Paragraph(
-            "公式資料と各図の出典は assets/SOURCES_AND_LICENSES.md。"
+            "公式資料と各図の出典は day06_support/SOURCES_AND_LICENSES.md。"
             " 目的・要件・計画・実装・試験・人による受入を確認。"
-            " / Official references and figure authorship: assets/SOURCES_AND_LICENSES.md."
+            " / Official references and figure authorship: day06_support/SOURCES_AND_LICENSES.md."
             " Check purpose, requirements, plan, implementation, tests and human acceptance.",
             styles["body"],
         ))
@@ -188,6 +198,24 @@ def export() -> None:
             ("OpenAI ChatGPT Work and Codex", "https://help.openai.com/en/articles/20001275"),
         ):
             story.append(Paragraph(rich(f"{label}: {url}"), styles["small"]))
+        snapshot = load_snapshot()
+        story.append(Spacer(1, 8))
+        story.append(Paragraph(
+            f"API価格の公式出典（{snapshot['verified_on']}） / Official API pricing sources",
+            styles["heading"],
+        ))
+        story.append(Paragraph(
+            "以下のリンクは表の各モデルに対応します。料金単位は米ドル/100万トークン。"
+            "最新の単価と条件は使用前に公式サイトで確認してください。"
+            " / Links correspond to each model in the lesson table. Units: USD per million tokens."
+            " Recheck official rates and conditions before use.",
+            styles["body"],
+        ))
+        for row in snapshot["entries"]:
+            story.append(Paragraph(
+                rich(f"{row['provider']} — {row['model_id']} ({row['condition']}): {row['source']}"),
+                styles["source"],
+            ))
 
         def footer(canvas, pdf_doc):
             canvas.saveState()

@@ -1,69 +1,81 @@
 # 第6日 講師ガイド / Day 6 instructor guide
 
-**主題 / Message:** コードはエージェントが書けても、目的・承認・検証は人が担当します。/ Agents may write code; people own purpose, approval and verification. [唯一の時間割](../DAY06_SYLLABUS_ja_en.md) / [Sole timetable](../DAY06_SYLLABUS_ja_en.md). 時間は初学者との試行前の暫定値です。/ Durations are provisional until piloted.
+**主題 / Message:** AIがコードを書いても、課題、権限、費用、合否は人が管理します。/ AI may write code, but humans own the problem, permissions, budget and acceptance. 時刻は[第6日時間割](../../COURSE_SYLLABUS_DAY06.md)だけを参照。/ Use the [sole Day 6 timetable](../../COURSE_SYLLABUS_DAY06.md).
 
-## 午前 08:00–09:00 / Morning 08:00–09:00
+## 事前準備 / Preparation
 
-| 分 / Minutes | 話す順番・投影図 / Speaking sequence and diagrams | 質問・理解の目安 / Question and expected understanding |
+- [ ] 5冊のノートブックと[図の目録](../../day06_support/SOURCES_AND_LICENSES.md)をオフラインで開ける / Open five notebooks and the figure manifest offline.
+- [ ] 日本語・英語の図ラベルと[PDF](../pdf/Day06_explanation_ja_en.pdf)が読める / Check bilingual figures and PDF readability.
+- [ ] [架空の仕様](../../day06_support/examples/inspection_app_spec_ja_en.md)、[会話](../../day06_support/examples/example_agent_conversation_ja_en.md)、[受入表](../../day06_support/examples/example_test_cases_ja_en.md)を印刷する / Print fictional examples.
+- [ ] [価格と出典](../../day06_support/pricing/pricing_sources_2026-11-22.md)の確認日と条件を確認する / Check dated pricing sources and conditions; never promise current rates.
+- [ ] 顧客資料、実データ、鍵、本番機器を実演に使わない / No customer documents, real data, API keys or production equipment.
+- [ ] ライブAIが利用できなくても紙の代替実演を準備 / Prepare offline demonstration; no paid account is mandatory.
+
+## 午前 08:00–09:00 / Morning instructor session
+
+| 分 / Minutes | 話す順番と図 / Speaking sequence and figures | 質問・期待する答え / Question and expected answer |
 |---|---|---|
-| 0–10 | D06-01で第1〜5日との違い。/ D06-01: transition from vision lessons. | 「人が決める仕事は？」→目的と受入条件。/ Human defines goals and acceptance. |
-| 10–22 | D06-02でYOLO・PatchCore・LLMの入力と出力。/ Compare input and output. | 「LLMの文章は画像の判定結果？」→異なる。/ No. |
-| 22–35 | D06-03/04でモデル、会話支援、エージェント、ハーネス、許可。/ Explain components and permission. | 作業者の比喩：質問へ答える人／資料確認・許可済み作業・結果報告をする人。AIには人の責任はない。/ Worker analogy, with accountability limit. |
-| 35–45 | D06-06で曖昧な依頼と仕様を比較。/ Compare vague request and specification. | ロット番号が空ならどうする？/ What about an empty lot? |
-| 45–55 | [会話例](../examples/example_agent_conversation_ja_en.md)を紙で演じる。/ Role-play the simulated conversation. | ChatGPTの画像判定案を断らせる。/ Reject image AI. |
-| 55–60 | 質問と確認。/ Q&A. | 「完了」は証拠？→違う。/ “Done” is not proof. |
+| 0–10 | D06-01/02。第1〜5日の画像AIと第6日の「人が仕事を決める」をつなぐ / Connect vision AI with human-directed software work | YOLOの出力は？→クラスと囲み枠。/ Classes and bounding boxes. |
+| 10–22 | D06-03/04/05。LLM、概念上のトークン、文脈窓。具体的なトークン境界はモデル次第 / Explain LLM, conceptual tokens and context | 会話を長くすると？→文脈や費用が増える場合がある。/ Context and cost may grow. |
+| 22–32 | D06-06。出版社・モデル・製品を別の列に。ブランドを順位にしない / Separate publisher, model and product | ChatGPTはモデル名？→製品。/ A product, not one model ID. |
+| 32–45 | D06-07/08/09。質問に答える作業者と許可を得て複数作業をする作業者の比喩 / Worker analogy and permission diagram | 誰がファイルを実際に変える？→許可後のツール。AIに人の責任はない。/ Tool after permission; AI lacks human accountability. |
+| 45–55 | D06-10/11/13。紙の不良記録→目的→必須欄とエラー→架空画面 / Problem, requirements, fictional UI | 空欄なら？→保存を拒否して日本語エラー。/ Reject and explain. |
+| 55–60 | 誤解を尋ねる：「完成した」は証拠？ / Ask whether “done” is proof | いいえ。実物・試験・人の受入を確認。/ No; inspect evidence. |
 
-AIが使える場合も架空データだけを投影し、機密を入力しません。製品画面や権限の表示は環境で異なるため、固定の操作を必須にしません。/ If demonstrating a live agent, use fictional data only; interfaces and permissions vary, so no particular product is required.
+図 D06-08 はモデル単体がPCを操作する説明ではありません。ハーネスが文脈とツールを管理し、敏感な操作では人が許可します。モデルの違いとハーネスの違いを同一視させないでください。
 
-## 午後 12:50–13:50 / Afternoon 12:50–13:50
+D06-08 must never suggest the bare model controls a computer. The harness manages context and tools, and sensitive operations require a human decision. Changing models and changing harnesses are different decisions.
 
-| 分 / Minutes | 講師が行うこと / Instructor action |
+## 午後 12:50–13:50 / Afternoon follow-up and demonstration
+
+| 分 / Minutes | 講師の行動 / Instructor action |
 |---|---|
-| 0–12 | 学習者のアイデアから問題・望む結果・解決策を区別する。/ Separate student problems, outcomes and solutions. |
-| 12–25 | [仕様例](../examples/inspection_app_spec_ja_en.md)で入力、欠落、再起動、CSVを質問する。/ Use sample spec to ask about inputs, missing values, restart and CSV. |
-| 25–40 | D06-09/10：仕様を承認してから、**変更しない計画**を依頼。余計なクラウドDBを却下する。/ Approve specification; request plan-only; reject cloud DB. |
-| 40–50 | D06-08/11：架空の未完成結果でCSVがないと指摘し、保存機能を守る修正依頼を示す。/ Find absent CSV in simulated incomplete result; request focused correction. |
-| 50–60 | D06-12/14：受入の証拠と機密・設備の境界を話し、質問を受ける。/ Discuss evidence and privacy/equipment boundaries. |
+| 0–12 | 学習者の問題、原因の仮説、望む結果を区別。業務上の機密は架空の例に置き換える / Separate problems, causes and outcomes; fictionalize sensitive details. |
+| 12–25 | [仕様](../../day06_support/examples/inspection_app_spec_ja_en.md)の入力・保存・再起動・CSVを質問。D06-13でフォームを投影 / Review fields, persistence, CSV and mockup. |
+| 25–40 | D06-14/15/20。ChatGPTに仕様案を作らせ、人が承認した後、実装担当に**編集せず計画だけ**を求める / Approve specification, then request plan without editing. |
+| 40–50 | クラウドDB・本番データを含む危険な案を却下。D06-M02の架空進捗でCSVがないと指摘し、D06-16に沿って修正を依頼 / Reject cloud/live data; identify missing CSV and request focused correction. |
+| 50–60 | D06-17/18/19/22。架空の$0.40と$0.43の計算、受入と安全を確認 / Calculate fictional costs, then review evidence and safety. |
 
-## 実演できない場合の完全な代替 / Complete offline demonstration fallback
+価格は契約を勧めるためではなく、「AI作業は無料・一回のチャット＝一回の請求」という誤解を直すためです。実際の価格は[日付付き表](../../day06_support/pricing/pricing_sources_2026-11-22.md)の条件によります。**APIキーを貼る実演は絶対にしません。**
 
-1. **最初の依頼 / Request:** 「手書きの不良記録が探しにくい。質問して、コードは書かないで」。/ “Handwritten defect notes are hard to search. Ask questions; no code.”
-2. **確認 / Clarification:** 誰が使う？何を記録？再起動後？CSVは？/ Who uses it? What fields? Restart? CSV?
-3. **構造化仕様 / Specification:** [承認用仕様](../examples/inspection_app_spec_ja_en.md)。必須はロット・日時・種別、任意は説明・備考。/ Required lot, date/time, type; optional description, remarks.
-4. **計画 / Plan:** 日本語フォーム→検査/保存→絞り込み/CSV→確認。最初の案にクラウドを含めて却下させる。/ Japanese form → validation/save → filters/CSV → checks. Reject an initial cloud suggestion.
-5. **架空進捗 / Simulated progress:** 「保存・一覧・絞り込み完了。試験詳細なし」。本当に完了したと表現しない。/ “Save/list/filters done; test evidence missing.” Do not present as actual completion.
-6. **意図的な不足 / Intentional defect:** D06-08の画面からCSVボタンを紙で覆う。仕様との違いを探す。/ Cover the CSV button in D06-08; ask students to find the difference.
-7. **修正依頼 / Correction:** 「CSVが見当たりません。指定の列順・架空2件を出力し、既存の保存と絞り込みを守り、両方を再確認してください」。/ “CSV is absent. Export the specified columns and two fictional rows; preserve saving and filters and recheck both.”
-8. **確認表 / Verification:** [受入表](../examples/example_test_cases_ja_en.md)で空欄、再起動、件数、CSVを照合。紙上の予想と実測は分ける。/ Use the checklist for missing inputs, restart, counts and CSV; distinguish planned from observed results.
+Pricing teaches why agent usage may cost money, not which service to purchase. Actual rates are conditional and dated. **Never demonstrate by pasting an API key.**
 
-## 演習解答・指導の目安 / Exercise answer key and guidance
+## 通信やアカウントがない場合の全手順 / Complete offline fallback
 
-| 演習 / Activity | 目的・答えの例 / Objective and model answer | よくある間違い・指導 / Common mistake and guidance | 目安 / Time |
-|---|---|---|---:|
-| A 分類 / Classify | 言語生成＝モデル、会話画面＝アシスタント、反復作業＝エージェント、権限管理＝ハーネス、CSV保存＝ツール / model, assistant, agent, harness, tool respectively | 製品名だけで判断しない / Do not classify by brand | 6 |
-| B 発想 / Idea | 紙の記録が探しにくい→検索可能な記録 / hard-to-search notes → searchable records | 解決名を問題としない / Do not confuse product and problem | 5 |
-| C 要件 / Requirements | 利用者＝検査員、必須ロット等、空欄エラー、CSV / operator, required lot etc., missing-field error, CSV | エラーを加える / Include error behavior | 5 |
-| D 指示 / Agent command | 計画を先に、承認後にローカルのみ実装、試験を報告 / plan first; local-only after approval; report tests | 万能を要求しない / Avoid “make it perfect” | 5 |
-| E 弱い指示 / Missing guardrails | 利用者・入力・受入基準がない、全ファイル変更を許す / missing users, inputs, checks; broad file permissions | 3点以上特定 / Find at least three | 4 |
-| F 計画 / Plan review | クラウドDB・実データは範囲外。計画のみ再提出 / reject cloud and real data; request revised plan only | 実装前に止める / Stop before implementation | 4 |
-| G 画面 / Mockup review | CSV出力がないと仕様に反する / absent CSV violates spec | 見た目だけで判定しない / Compare to requirements | 5 |
-| H 受入 / Acceptance | 空欄拒否、2件保存、再起動、黒点絞り込み1件、CSV列と2行 / reject empty, save two, restart, filter one, CSV schema and rows | 観察できる値を書く / Include observable values | 5 |
-| I 引き継ぎ / Handover | 仕様、変更ファイル、試験結果、未完了、禁止事項 / requirements, files, evidence, remaining work, exclusions | 主張と証拠を区別 / Distinguish claim from evidence | 5 |
+1. **問題 / Problem:** 「紙の塩ビシート不良メモが探しにくい」。/ “Paper PVC defect notes are hard to find.”
+2. **質問 / Clarification:** 誰が使う？必須欄は？再起動後？CSVは？ 学習者の答え：検査員、ロット/日時/種別、保存保持、一覧/件数/絞り込み/CSV。/ Users, required fields, persistence and CSV.
+3. **仕様 / Specification:** [承認用仕様](../../day06_support/examples/inspection_app_spec_ja_en.md)を示す。`PVC-EX-001` 黒点と `PVC-EX-002` 傷は架空。/ Show approved fictional specification and sample lots.
+4. **指示 / Agent command:** [Hのテンプレート](../../day06_support/examples/example_agent_prompts_ja_en.md)を読む前に、Dの「計画だけ」を読み、変更を止める。/ Read plan-only instruction before implementation.
+5. **悪い計画 / Bad plan:** 「本番DB接続、クラウド、画像判定を追加」。学習者に却下させ、ローカル記録だけの計画へ戻す。/ Reject live DB, cloud and image inference.
+6. **承認した計画 / Approved plan:** 画面→検査→保存→絞り込みとCSV→試験。次の段階へは人の確認後。/ Form, validation, persistence, filters/CSV, tests; human approval between stages.
+7. **架空進捗 / Simulated progress:** 「保存と一覧を作りました」だが、D06-M02ではCSVが未実装、試験の証拠なし。これは**実際の実行報告ではない**。/ “Save/list done,” but simulated UI lacks CSV and evidence; not a real run.
+8. **修正 / Correction:** 「CSVが見当たりません。指定の列順、架空2件を確認し、保存・絞り込みを維持してください」。/ Add CSV only, preserve working features and verify two rows.
+9. **受入 / Verification:** [受入表](../../day06_support/examples/example_test_cases_ja_en.md)の空欄、再起動、件数、CSVを紙上で討議。実測したとは書かない。/ Discuss expected results on paper; never claim an actual test.
 
-モジュール01の追加問題：YOLOは画像→位置とクラス、LLMは指示→応答。D06-04で動くのは権限確認後のツール、無許可の削除は危険。モジュール03の修正演習：CSVなし→指定列順で追加、保存を維持、架空2件で確認。モジュール04の安全問題：PLCへの接続を拒否し、架空のオフライン例を使う。/ Additional answers: YOLO outputs classes/boxes, LLM responses; tools act only after permission; fix missing CSV without breaking saves; reject PLC access and use fictional offline data.
+講師はD06-13のCSVボタンを紙で覆って「ボタンがない」結果も作れます。現実のアプリをその場で作らなくても授業の到達点を満たします。/ Cover the CSV button in the fictional UI to stage an error; no live app is needed.
 
-## 誤解を直す / Misconceptions to correct
+## 演習の答え・指導 / Exercise answer guidance
 
-- **エージェントとLLM / Agent vs LLM:** モデルは応答を生成し、作業の反復はアプリ・ハーネスとツールによる。/ Model generates responses; workflow depends on harness and tools.
-- **プロンプトと要件 / Prompt vs requirements:** 指示文は依頼、仕様は合意した動作の基準。/ Instructions request work; requirements define agreed behavior.
-- **実装と検証 / Implementation vs verification:** 作ることと確かめることは別。/ Building differs from checking.
-- **計画と実行 / Plan vs execution:** 「変更します」は実際の変更ではない。/ “Will change” is not a change.
-- **見た目と正しさ / Appearance vs correctness:** ボタンが見えてもCSVの中身は未確認。/ A visible button does not prove CSV contents.
-- **試作と本番 / Prototype vs production:** 本番には別途安全・セキュリティ審査が必要。/ Production needs separate safety and security approval.
+| 章 / Module | 問題とよい答え / Exercise and model answer | よくある間違い / Pitfall |
+|---|---|---|
+| 01 | YOLO=位置と種類、PatchCore=正常との差、LLM=文脈から応答。トークンは単語と同じではない。大きい文脈窓も正解保証なし。簡単な分類なら低価格・短い応答の案も検討 / compare outputs, conceptual tokens/context, model choice | すべてのモデルが画像・ツールに対応すると思う / universal capabilities |
+| 02 | モデルが操作を提案、ハーネスが許可確認、ツールが実行。削除・ネットワーク送信は人に確認。モデルを変えても同じハーネスは同じ許可を持ちうる / distinguish harness/tool and approval | AIモデル単体が全ファイルを読めると考える / unlimited access |
+| 03 | 問題=記録が探しにくい、望む結果=検索、機能=絞り込み。検査員、必須ロット等、空欄拒否、CSV。画像判定は範囲外。日報の仮データは良品18/不良3 / problem, requirements and daily report | 解決名を問題と呼ぶ / product as problem |
+| 04 | 計画のみ→範囲・試験を確認→承認→段階実装。CSVがない場合は列順・架空2行と既存機能の回帰確認を具体的に依頼 / plan, scope and focused correction | 無許可の一括変更、無根拠な完了報告 / broad edits or unsupported “done” |
+| 05 | 仮の100,000入力×$2/100万＋20,000出力×$10/100万＝$0.40。4回の合計は$0.43（どちらも架空、追加料金なし）。黒点絞り込みは1件、CSVはヘッダー＋2行。APIキー・PLCは禁止 / calculate, verify and protect | 仮の値を実価格や見積と呼ぶ / invented rates as a quote |
 
-## 準備 / Instructor preparation
+すべての課題はオフラインでも解けます。答えは正しい日本語・英語の一方だけでも内容で評価し、プログラミング構文は評価しません。/ All tasks work offline; assess the content rather than coding syntax.
 
-- [ ] 4冊が開き、D06-01〜14がオフラインで見える / Four notebooks open; all figures work offline.
-- [ ] 日本語が表示でき、PDFの各章・表・図が読める / Japanese and PDF figures/tables are legible.
-- [ ] 架空の仕様、画面、会話、受入表、ワークシートを準備 / Have fictional spec, mockup, conversation, checklist and worksheet.
-- [ ] 実情報を使わず、アカウントがなくても代替実演ができる / No real data; offline fallback ready.
+## よくある誤解とトラブル対応 / Misconceptions and troubleshooting
+
+- モデルと製品は別。ChatGPTのプランがAPI料金を含むと推測しない。/ A product subscription is not proof of API credit.
+- プロンプトは依頼、仕様は合意した動作。計画は作業の提案、実装はファイル変更。/ Prompt vs requirements; plan vs execution.
+- 画面の見た目、試験結果、人による受入は別。本番システムへの接続は教材の範囲外。/ Appearance, evidence and acceptance differ; production integration is excluded.
+- 図が表示されない場合はローカルSVGとPDFで説明する。AIサービスが使えなければ前節の紙の会話を使う。/ Use PDF or local SVG when notebook figures fail; use offline conversation if services are unavailable.
+- 価格表と請求が違う場合は地域、長い文脈、キャッシュ、ツール、契約の条件を確認。推測で数字を埋めない。/ Investigate region, context tiers, caching, tools and contract; never guess missing prices.
+
+## まとめと提出 / Final review and submission
+
+16:20〜16:50は[最終ワークシート](../../day06_support/worksheets/Day06_Student_Worksheet_ja_en.md)だけを記入します。[評価表](../../day06_support/worksheets/Day06_Assessment_Rubric_ja_en.md)は目的・要件・修正・安全・費用を見ます。作動するアプリや有料ツールは不要です。
+
+At 16:20–16:50, complete only the [final worksheet](../../day06_support/worksheets/Day06_Student_Worksheet_ja_en.md). The [rubric](../../day06_support/worksheets/Day06_Assessment_Rubric_ja_en.md) evaluates purpose, requirements, corrections, safety and cost, not a running app or paid account.

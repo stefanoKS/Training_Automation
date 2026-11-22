@@ -1,89 +1,130 @@
-# 第6日 01：LLM・エージェント・ハーネス / Day 6 01: LLMs, agents and harnesses
+# 第6日 01：LLMの基礎 / Day 6 01: LLM Fundamentals
 
-**目安：70分 / Estimated duration: 70 min.** 全体の時間は[第6日時間割](../DAY06_SYLLABUS_ja_en.md)を参照。コードセルはありません。/ See the [sole Day 6 timetable](../DAY06_SYLLABUS_ja_en.md). There are no code cells.
+**所要時間：50分（説明35分、活動15分）/ Duration: 50 minutes (35 minutes of explanation, 15 minutes of activities).** [更新された第6日シラバス / Updated Day 6 syllabus](../../COURSE_SYLLABUS_DAY06.md)
 
-**目標 / Objectives:** 言語モデル、支援ツール、エージェント、ハーネスを区別し、画像AIとの違いとアクセス権の限界を説明する。/ Distinguish a language model, assistant, agent and harness; explain how they differ from vision AI and what permissions limit them.
+この教材は読む・話す・紙に書くだけで学べます。アカウント、有料ツール、コード、工場の実データは不要です。架空の製造現場の例を使い、後続のエージェントの授業で必要になる「モデルの能力と限界」をつかみます。
 
-## 1. 第1〜5日から第6日へ / From Days 1–5 to Day 6
+This lesson works through reading, discussion and writing on paper. No account, paid tool, code or real factory data is needed. Fictional manufacturing examples establish the capabilities and limits of a model needed for the next lesson about agents.
 
-第1〜5日は画像の扱いとAIの基礎を学びました。第6日は「何を作るか」を人が言葉で決め、AIが作ったものを人が確かめる練習です。
+**到達目標 / Objectives:** AI・機械学習・深層学習・画像AI・LLMの関係を説明し、入力と出力を比較する。プロンプト、学習、推論、トークン、文脈窓と不確実性を区別し、目的に合うモデルを安全に選ぶ。
 
-Days 1–5 introduced image processing and AI foundations. Today we practise stating what software should do, then checking what AI produces.
+**Objectives:** Explain how AI, machine learning, deep learning, vision AI and LLMs relate and compare their inputs and outputs. Distinguish prompts, training, inference, tokens, context windows and uncertainty, then select a model safely for a stated purpose.
 
-![第1〜5日の学びから第6日の要件・実装・検証への流れ / Progression from vision lessons to requirements and verification](../assets/diagrams/D06-01.svg)
+## 1. 画像AIから言語AIへ（6分）/ From vision AI to language AI (6 min)
 
-**図 D06-01 / Figure D06-01:** 基礎知識から人の監督へ。/ From technical foundations to human supervision. **問い / Reflect:** 画像を判定する仕事と、アプリの目的を決める仕事はどう違いますか？ / How does image detection differ from defining an application's purpose?
+人工知能（AI）は知的な作業を機械で支援する広い分野です。機械学習（machine learning, ML）は例から規則性を学ぶ方法、深層学習（deep learning, DL）は多層のニューラルネットワークを使うMLの一群です。YOLOやPatchCoreなどの画像AIと大規模言語モデル（large language model, LLM）は、この階層の中で異なる仕事をする例です。「LLMがAIのすべて」でも「画像AIが旧式」でもありません。
 
-## 2. 言語モデルとは / What is a language model?
+Artificial intelligence (AI) is the broad field of supporting intelligent work with machines. Machine learning (ML) learns patterns from examples; deep learning (DL) is a group of ML methods using multilayer neural networks. Vision systems such as YOLO and PatchCore and large language models (LLMs) do different jobs within this broad hierarchy. LLMs are not all of AI, and vision AI is not obsolete.
 
-大規模言語モデル（Large Language Model: LLM）は、大量の資料から言葉や情報の関係を学習し、入力された指示（プロンプト）と文脈に続く応答を生成するモデルです。「学習」はモデルを作る段階、「利用」は完成したモデルへ指示を送る段階です。文章の整理、説明、設計案、コード案に役立ちますが、もっともらしい誤答も作ります。応答は証拠ではありません。ツールで今調べた情報と、モデルが以前の学習から得た知識は区別しましょう。
+![画像AIの学びから人が目的を決める第6日へ / From vision AI to human-defined goals on Day 6](../../assets/diagrams/day06/D06-01.svg)
 
-A Large Language Model (LLM) learns patterns from large amounts of material and generates responses to a supplied prompt and context. Training builds the model; using it means sending instructions to a trained model. It can explain, organize, design and draft code, but may produce convincing errors. A response is not proof. Distinguish earlier learned knowledge from fresh information retrieved through a tool.
+**図 D06-01 / Figure D06-01 — 振り返り / Reflection:** 画像の欠陥を検出することと、「どの欠陥を記録すべきか」を決めることはどう違いますか？ / How does detecting a defect differ from deciding which defects should be recorded?
 
-| 方式 / System | 入力 / Typical input | 目的 / Purpose | 出力 / Typical output |
+YOLOは学習した対象の画像内での種類と位置を囲み枠などで示す物体検出の方式です。PatchCoreは主に正常画像の特徴とのずれを利用し、異常スコアや位置の目安を示す異常検知の方式です。LLMは指示と与えられた文脈から文章などを生成します。例えば架空の工場では、YOLOが箱を見つけ、PatchCoreが表面の違和感を示し、LLMが人の確認用の説明文を下書きできます。しかしLLMの説明だけでは、画像上の欠陥が実在する証拠にはなりません。
+
+YOLO is an object-detection approach that identifies learned classes and locations in images, often with boxes. PatchCore is an anomaly-detection approach that mainly compares image features with normal examples and returns an anomaly score and possible location. An LLM generates text or other output from instructions and supplied context. In a fictional factory, YOLO might locate boxes, PatchCore flag an unusual surface, and an LLM draft a note for human review. The LLM's prose alone does not prove a defect exists in the image.
+
+| 方式 / Approach | 主な入力 / Typical input | 主な出力 / Typical output | 注意 / Caution |
 |---|---|---|---|
-| YOLO | 画像 / image | 対応する物体クラスと位置の検出 / detect supported classes and locations | クラスと囲み枠 / classes and bounding boxes |
-| PatchCore | 画像 / image | 正常例の画像特徴との差の計測 / compare features with learned normal examples | 異常スコア・マップ / anomaly score and map |
-| LLM | 指示と文脈 / instructions and context | 応答生成 / generate a response | 文章・構造化出力 / text or structured output |
+| YOLO / YOLO | 画像 / image | 対象の種類・位置 / classes and locations | 対応クラスと学習条件に依存 / depends on supported classes and training |
+| PatchCore / PatchCore | 画像と学習済みの正常特徴 / image and learned normal features | 異常スコア・目安となる領域 / anomaly score and indicative region | スコアだけで原因は確定しない / score alone does not establish cause |
+| LLM / LLM | 指示と渡された文脈 / instructions and supplied context | 文章・表・コード案など / prose, tables or draft code | 流暢さは正確さの証明ではない / fluency is not evidence of accuracy |
 
-一部の製品は画像入力やツール操作にも対応しますが、すべてのLLMに共通ではありません。言語モデル単体にはローカルファイルを読む権限はありません。
+![YOLO・PatchCore・LLMの入出力 / Inputs and outputs of YOLO, PatchCore and LLMs](../../assets/diagrams/day06/D06-02.svg)
 
-Some products support images or tools, but not every LLM does. A language model by itself has no permission to read local files.
+**図 D06-02 / Figure D06-02 — 振り返り / Reflection:** 異常スコアと説明文のどちらを現物確認なしで合否の最終判断に使えますか？ / Which, if either, can determine final acceptance without checking the actual part?
 
-![YOLO・PatchCore・LLMの入力と出力の違い / Parallel input-process-output flows](../assets/diagrams/D06-02.svg)
+## 2. 学習・指示・推論と「知らない」こと（7分）/ Training, prompts, inference and unknowns (7 min)
 
-**図 D06-02 / Figure D06-02:** 出力の種類を比べる。/ Compare output types. **問い / Reflect:** YOLOの囲み枠とLLMの文章は同じ種類の「判定」ですか？ / Are YOLO boxes and LLM text the same kind of output?
+学習（training）は大量の例からモデルの内部パラメータを調整する工程です。プロンプト（prompt）は利用時に人が送る依頼で、通常は一回の依頼を書くだけでモデルの学習済みパラメータを更新しません。推論（inference）は学習済みモデルが入力に応じて次の表現を予測し、応答を作る利用時の処理です。例えば「架空の検査記録を三行に要約して」は指示であり、実際の検査データを新しく学習させる操作ではありません。
 
-## 3. 支援ツール・エージェント・ハーネス / Assistants, agents and harnesses
+Training adjusts a model's internal parameters using many examples. A prompt is a user's request at use time; writing one request does not normally update the trained parameters. Inference is the use-time process in which a trained model predicts successive pieces of output in response to input. “Summarize this fictional inspection record in three lines” is an instruction, not a way to train on new inspection data.
 
-AIアシスタント（AI assistant）は人が会話するための仕組みです。ツールを持つアシスタントもあります。AIエージェント（AI agent）は、目標へ向かって複数の判断・操作・確認を繰り返す**進め方**です。プログラム作成に特化すればコーディングエージェント（coding agent）と呼びます。名前だけで能力は決まりません。作業者の例なら、質問に答えることと、資料を確認して許可された作業を行い結果を報告することの違いです。ただしAIには人間の責任や独立した理解はありません。
+モデルは誤った内容も自信ありげに書けます。根拠がないのにもっともらしい値や出典を作ることを、ここではハルシネーション（hallucination）と呼びます。ただし「必要情報が渡されていない」場合と「渡された情報を読み違えた」場合は別です。製造番号も実測値もないのに「このロットの不良率は何％？」と聞かれたら、正しい対応は数字を推測せず、母数と不良数を求めることです。検索やファイル参照が許可されていないなら、今の現場情報を自分で見たかのように話してはいけません。
 
-An AI assistant is a user-facing conversation system; some assistants can use tools. An AI agent describes a **workflow** that pursues a goal through decisions, actions and checks. A coding agent specializes in software work. A worker answering a question differs from one checking documents, performing authorized steps and reporting findings; unlike a person, an AI agent does not have human accountability or independent understanding.
+A model can state errors confidently. We call plausible invented values or citations without evidence hallucinations here. But missing input is different from misreading supplied input. Asked “What is this lot's defect rate?” with no lot count or defect count, the right response is to request both numbers, not invent a percentage. Without authorized search or file access, it must not claim to have seen current factory records.
 
-ハーネス（agent harness）はモデルに文脈を渡し、ツール、許可、実行結果、次の操作を管理するソフトウェア側の仕組みです。モデルが「ファイルを修正したい」と出しても、実行するのは許可を確認したハーネスとツールです。人は重要な操作を承認し、結果を監督します。
+![LLMへの入力・文脈・処理・出力 / LLM input, context, processing and output](../../assets/diagrams/day06/D06-03.svg)
 
-An agent harness is the software that manages context, tools, permissions, execution results and subsequent steps. A model may propose an edit; an authorized harness and tool perform it. The human approves sensitive operations and monitors progress.
+**図 D06-03 / Figure D06-03 — 振り返り / Reflection:** 依頼にない検査表の数値をモデルはどこから得られますか？ / Where would a model get inspection figures that were not supplied in the request?
 
-![モデル、支援ツール、エージェント、ハーネスの関係 / Conceptual layers, not exclusive product types](../assets/diagrams/D06-03.svg)
+**短い確認 / Quick check:** 「昨日の検査表を読んだ」という返答に検査表が入力されていなければ、まず何を確認しますか？ / If a response says “I read yesterday's inspection sheet” but none was supplied, what would you check first?
 
-**図 D06-03 / Figure D06-03:** これらは排他的な製品分類ではありません。/ These are overlapping concepts, not mutually exclusive product types. **問い / Reflect:** 「モデルを変更した」だけでファイル権限は変わりますか？ / Does changing a model alone change file permissions?
+## 3. トークンと文脈窓（7分）/ Tokens and the context window (7 min)
 
-![ユーザーから権限確認、ツール実行、結果の観察まで / Proposed action, permission and observed result cycle](../assets/diagrams/D06-04.svg)
+トークン（token）はモデルが入力と出力を処理するための単位です。単語そのものとは限らず、文字の一部、単語の一部、記号などに分かれます。「inspection report」と「検査報告」のどちらも、モデルに届く前に処理単位へ変換されます。**この二つの文字列は概念例であり、ここには実際のトークン境界やトークン数を示していません。**分割はモデルのトークナイザー、表記、空白などによって異なり、日本語は常に一文字一トークン、英語は常に一単語一トークン、とは言えません。
 
-**図 D06-04 / Figure D06-04:** 提案と実行は別。機密操作は人に確認する。/ Proposal differs from execution; ask a human before sensitive operations. **問い / Reflect:** ファイルを実際に変更するのはどこですか？ / Which component actually changes a file?
+A token is a unit used to process input and output; it need not be a whole word and can be part of a word, characters or punctuation. Both “inspection report” and “検査報告” are converted to processing units before reaching a model. **These strings are conceptual examples, NOT exact token boundaries or token counts.** Segmentation depends on the model's tokenizer, spelling and spacing; Japanese is not always one character per token, nor English one word per token.
 
-モデルを変えると応答の傾向が変わる場合があります。アプリやハーネスを変えると作業の流れ、指示を変えると目標、ツールを変えると操作範囲、実行環境を変えると使えるファイルなどが変わります。どれも同じ変更ではありません。
+![日英の概念的なトークン化 / Conceptual Japanese and English tokenization, not exact boundaries](../../assets/diagrams/day06/D06-04.svg)
 
-Changing the model may affect answers; changing the application/harness affects workflow; instructions change the goal; tools change available actions; the execution environment changes accessible resources. These are different changes.
+**図 D06-04 / Figure D06-04 — 振り返り / Reflection:** 図の分割を別のモデルの正確なトークン数として使えますか？ / Can you use the diagram's split as an exact token count for another model?
 
-## 4. 製品名は役割と分けて読む / Product names are not roles
+文脈窓（context window）は一度の処理でモデルが参照できる入力と生成中の出力の容量上限です。現在の依頼だけでなく、含まれている会話履歴、貼り付けた文書、ツールが返した結果、対応する場合は画像などの入力も容量を使います。古い履歴は省略・要約されることがあり、長いファイルを指定しても全文が実際に渡ったとは限りません。履歴に書いたことをモデルが永久に覚えるわけでもなく、文脈に入った情報が必ず正しく使われるわけでもありません。重要な規格番号や検査条件は必要な場面で再提示し、実際に参照した箇所を確認します。
 
-ChatGPTは会話用の製品、CodexやClaude Codeはコーディング作業に使う製品、GitHub Copilotは複数の画面・作業形態で使われる製品です。OpenAI、Anthropic、Google、DeepSeekはモデル提供元の例です。製品、モデル、エディタ、ハーネスを同じものと呼ばないでください。利用できるツールと承認方法は製品・設定・契約で異なります。特定の画面や有料機能はこの授業に必要ありません。
+The context window limits how much input and generated output a model can consider in one processing pass. The current request, included conversation history, pasted documents, tool results and, where supported, images all consume capacity. Old history may be omitted or summarized; naming a long file does not prove its full contents were passed in. A model does not permanently remember every past turn, and information inside the window may still be used incorrectly. Restate critical specification numbers and inspection conditions when needed, and check which passages were actually consulted.
 
-ChatGPT is a conversation product; Codex and Claude Code are examples of coding tools; GitHub Copilot spans multiple surfaces and workflows. OpenAI, Anthropic, Google and DeepSeek are examples of model providers. Do not equate products, models, editors and harnesses. Tools and approval vary by product, configuration and access; no paid feature is mandatory here. [確認した公式資料 / Checked official references](../assets/SOURCES_AND_LICENSES.md).
+![指示・履歴・ファイル・ツール結果が占める文脈窓 / Context window occupied by instructions, history, files and tool results](../../assets/diagrams/day06/D06-05.svg)
 
-**問い / Reflect:** 製品名だけから「すべてのPCファイルが読める」と推測できますか？ / Can a product name alone establish that it can read every file?
+**図 D06-05 / Figure D06-05 — 振り返り / Reflection:** 200ページの手順書を「添付した」と言うだけで、モデルが全ページを読んだと判断できますか？ / Does saying you attached a 200-page procedure prove the model read every page?
 
-## 5. 誤解を解く / Correcting misconceptions
+## 4. できることと限界（6分）/ Capabilities and limitations (6 min)
 
-| よくある誤解 / Misconception | 実際 / Correction |
-|---|---|
-| エージェントは希望を正確に知っている / It knows exactly what I want | 曖昧な点を質問させる / Ask it to clarify ambiguity |
-| 「完了」は正しさの証明 / “Done” proves correctness | 基準と実物を比べる / Compare the result with acceptance criteria |
-| モデルはPC上の何でも読める / A model can read everything | ツール・権限・環境による / Access depends on tools, permissions and environment |
-| モデルを替えるとハーネスも替わる / Changing the model changes the harness | 別の仕組み / They are separate components |
-| 詳細に書けば必ず正しい / More detail guarantees success | 指示を改善しても検証は必要 / Better instructions still need verification |
-| AI製ソフトは試さなくてよい / No testing is needed | 人が受入条件を確かめる / Humans still verify acceptance |
-| エージェントが全判断を代行する / An agent replaces all decisions | 目的・リスク・許可は人が決める / Humans own purpose, risk and approval |
+文章や表の整理に加え、対応するモデルや製品は画像と文章を組み合わせるマルチモーダル（multimodal）入力、コードの下書き、複数段階の推論（reasoning）を支援します。例えば欠陥写真と検査表から確認事項を列挙したり、架空のCSVをまとめる処理案を作ったりできます。ただし画像の取り違え、実行できないコード、途中の論理の飛躍は起こります。多段階の説明が書けることは、その推論が正しい証明ではありません。実ファイルを読んだりプログラムを実行したりできるかは、モデルそのものではなく製品の入力方法・ツール・権限にも依存します。
 
-**問い / Reflect:** 「終わりました」と言われたら、何を確認しますか？ / If it says “finished,” what would you check?
+Besides organizing prose and tables, supported models or products can help with multimodal inputs combining images and text, draft code and multistep reasoning. They might list checks from a defect photo and inspection sheet or propose a process for a fictional CSV. They can still misread images, write code that fails, or skip a logical step. A detailed chain of explanation is not proof of correct reasoning. Reading actual files or running programs also depends on the product's inputs, tools and permissions, not the model alone.
 
-## 6. 演習（合計15分）/ Practice (15 min total)
+公開重み（open weights）とは、利用条件の下でモデルの重みを入手できる形態です。必ずしも学習データ・学習コードが公開された「完全なオープンソース（open source）」を意味しません。自前で動かせる場合も、計算機、ライセンス、更新、安全性、機密データ管理が必要です。クラウド型ならデータ送信先、契約、保持設定を確認します。どちらも「安全」や「無料」を名前だけで断定できません。
 
-**演習 A / Activity A (6 min):** 「言語を生成するモデル」「会話画面」「許可を管理する仕組み」「CSVを保存する操作」「計画→編集→確認を繰り返す流れ」を、モデル・アシスタント・ハーネス・ツール・エージェントに分けてください。/ Classify a response-generating model, chat interface, permission manager, CSV-save action, and iterative plan–edit–check workflow. **提出 / Output:** 5組の対応 / five matches. **よくある間違い / Pitfall:** 製品名だけで決める / classifying by brand alone.
+Open weights means model weights are available under stated terms; it does not necessarily mean the training data and code are available as fully open source. Self-hosting, where feasible, still needs compute, license review, updates, safety controls and confidential-data handling. For cloud use, check where data is sent, contractual terms and retention settings. Neither route is automatically safe or free.
 
-**演習 B / Activity B (4 min):** YOLOとLLMの入力・出力を各1文で比べる。/ Compare YOLO and an LLM in one sentence each. **提出 / Output:** 2文 / two sentences. **間違い / Pitfall:** LLMが直接PCを動かすと書く / claiming a standalone LLM controls the PC.
+**振り返り / Reflection:** 写真を扱えるモデルでも、実測値を写真から確定してよいでしょうか？ / Can a model that accepts photos establish a measured value from a photo alone?
 
-**演習 C / Activity C (5 min):** 図 D06-04 の「実行する部品」を示し、許可なしの操作の危険を一つ書く。/ Identify the executing component in D06-04 and one risk of acting without approval. **提出 / Output:** 部品と危険 / component and risk. **間違い / Pitfall:** 提案と実行を混同する / confusing a proposed action with execution. [講師の解答](../instructor/day06_instructor_guide_ja_en.md) / [Instructor answers](../instructor/day06_instructor_guide_ja_en.md).
+## 5. 提供元と選び方（9分）/ Publishers and choosing a model (9 min)
 
-**完了チェック / Completion:** 違いを説明できる、図で権限を示せる、成功宣言と証拠を区別できる。/ Explain the distinctions, locate permission checks and separate claims from evidence.
+次は**2026年11月22日時点の各社公式案内にあるモデル系列と例**です。同じ企業のすべての製品・版に同じ機能があるという表ではありません。例は「最新・最良」の推奨ではなく、製品名や画面名とも異なります。利用前にリンク先で対象の版、対応入力、提供形態と条件を再確認してください。価格や性能順位は扱いません。
+
+These are **model families and examples from publisher information as of 22 November 2026**, not a claim that every release or product from a company has the same capabilities. Examples are not recommendations of the “latest or best”; they also differ from products and interfaces. Recheck the linked sources for the exact release, supported inputs, delivery mode and terms before use. No prices or performance rankings are given.
+
+| 提供元 / Publisher | 系列と公式掲載例 / Family and officially listed examples | 公式案内 / Official information |
+|---|---|---|
+| OpenAI | GPT系列 / GPT family: `gpt-6.2-astra`, `gpt-6-luna` | [OpenAI API pricing（モデル一覧の確認用・価格は扱わない / model listing only; no prices discussed）](https://openai.com/api/pricing/) |
+| Google DeepMind | Gemini系列 / Gemini family: Gemini 4 Hydrogen, Gemini 4 Carbon | [Gemini models](https://ai.google.dev/gemini-api/docs/models) |
+| Anthropic | Claude系列 / Claude family: `claude-haiku-5-5`, `claude-fable-5-2` | [Claude models overview](https://platform.claude.com/docs/en/models/overview) |
+| DeepSeek | DeepSeek系列 / DeepSeek family: `deepseek-v4-flash`, `deepseek-v4-pro` | [DeepSeek API documentation](https://api-docs.deepseek.com/) |
+| Mistral AI | Mistral系列 / Mistral family: Mistral Large 4, Ministral 3 | [Mistral models](https://docs.mistral.ai/models/) |
+| xAI | Grok系列 / Grok family: `grok-4.7` | [xAI models](https://docs.x.ai/developers/models) |
+| Alibaba Qwen | Qwen系列 / Qwen family: `qwen3.8-flash`, `qwen3.8-max` | [Alibaba Cloud Model Studio model list](https://help.aliyun.com/zh/model-studio/models) |
+| Meta | 現行のMetaホスト型Muse系列 / Current Meta-hosted Muse family: Muse Ember, Muse Spark, Muse Wonder。Llamaは別の歴史ある公開重み系列で、現行のMeta Model APIのホスト型モデルと同一ではない。/ Llama is a separate historical open-weight family, **not** the current Meta-hosted API family. | [Meta models](https://dev.meta.ai/docs/models.md) |
+
+![提供元・モデル系列・製品の区別 / Publisher, model family and product are different](../../assets/diagrams/day06/D06-06.svg)
+
+**図 D06-06 / Figure D06-06 — 振り返り / Reflection:** 同じ提供元のモデル系列名と会話製品名を同一視できますか？ / Is a publisher's model family the same as its conversation product?
+
+選択は人気投票ではありません。①何を出したいか（説明文、画像の確認補助、コード案）、②機密情報を送ってよいか・利用条件は何か、③必要な入力形式・言語・文脈量をその**版と提供形態**が支えるか、④許容できる時間・費用・運用負荷は何か、⑤小さな架空または許可済みの例で精度と誤答を比較できるか、の順で考えます。どれかが不明なら実データを入れずに条件を確認します。画像上の位置を確かめたいならまず画像AIを検討し、説明文が必要ならLLMを検討し、両方必要なら人による照合を設計します。
+
+Do not choose by popularity. Ask in order: (1) What output is needed—prose, assistance with images, or draft code? (2) May confidential information be transmitted, and under what terms? (3) Does the **specific release and delivery mode** support the required input, language and context size? (4) What time, cost and operational effort are acceptable? (5) Can you compare accuracy and errors on a small fictional or authorized example? If any answer is unknown, withhold real data and check the conditions. For locating something in an image, consider vision AI first; for drafting an explanation, consider an LLM; when both are needed, plan human cross-checking.
+
+**振り返り / Reflection:** 機密図面がある場合、比較テストの前に確認する条件は何ですか？ / With a confidential drawing, what must be checked before a comparison test?
+
+## 6. 理解確認：机上演習（5問・15分）/ Comprehension checks: offline activities (5 questions, 15 min)
+
+実際のAIは使いません。二人で話すか、一人で紙に答えてから下の「自己確認」と比べてください。数字は架空です。
+
+Do not use a live AI. Discuss in pairs or answer on paper and then compare with the self-check below. All numbers are fictional.
+
+1. **分類（3分）/ Classify (3 min):** 「人工知能」「機械学習」「深層学習」を広い順に並べ、YOLOとLLMの主な出力を各一つ挙げる。/ Order AI, ML and DL from broadest to narrowest, and name one typical output each for YOLO and an LLM.
+2. **不足情報（3分）/ Missing information (3 min):** 「このロットの不良率は？」という質問に、検査総数も不良数もない場合、返すべき一文を書く。/ Write one sentence answering “What is the lot defect rate?” when neither inspected count nor defect count is provided.
+3. **トークンと履歴（3分）/ Tokens and history (3 min):** 「検査報告」は必ず4トークンか、古い会話が必ず残るかを、それぞれ理由とともに答える。/ Say whether “検査報告” is necessarily four tokens and whether old conversation always remains available; give a reason for each.
+4. **能力と証拠（3分）/ Capability and evidence (3 min):** AIが「写真に傷がある、検査表も確認済み」と述べたが写真しか渡していない。何を信じず、何を確認するか。/ An AI says “The photo shows a scratch; I also checked the inspection sheet,” but only a photo was supplied. What claim should not be trusted, and what should be checked?
+5. **選択（3分）/ Choice (3 min):** 架空の箱の位置検出と、検査員向け説明文の下書きに、それぞれ最初に検討する方式を挙げ、実データ投入前の条件を一つ書く。/ Name the first approach to consider for locating fictional boxes and for drafting an inspector note, plus one condition to check before using real data.
+
+**自己確認（活動の後に読む）/ Self-check (read after the activities):** 1. AI ⊃ ML ⊃ DL、YOLOは種類と位置、LLMは文章など。2. 検査総数と不良数を尋ねる。3. どちらも「必ず」ではない。分割はトークナイザーによって異なり、履歴は省略・要約されうる。4. 表を確認したという主張は未確認。写真の読み取りも人が照合する。5. 位置はYOLOなどの画像AI、文案はLLM。機密・送信先・利用条件を先に確認する。
+
+**Self-check (read after the activities):** 1. AI ⊃ ML ⊃ DL; YOLO returns classes and locations, an LLM prose or similar output. 2. Request inspected and defect counts. 3. Neither is guaranteed: tokenization varies and history may be dropped or summarized. 4. The claim about the sheet is unsupported; a human should also check the photo interpretation. 5. Consider vision AI such as YOLO for location and an LLM for a draft; first check confidentiality, transmission and terms.
+
+**最後の振り返り / Final reflection:** 「モデルの回答」と「現物・記録による証拠」を分けて言えますか？ / Can you distinguish a model's answer from evidence in the part or record?
+
+**次の授業 / Next lesson:** モデルが単独でファイルを読んだり設備を動かしたりするわけではありません。次はアシスタント、エージェント、ハーネス、権限の関係を学びます。/ A model alone does not read files or operate equipment. Next we examine assistants, agents, harnesses and permissions.
+
+**追加資料（任意）/ Optional further reading:** [出典とライセンス / Sources and licenses](../../day06_support/SOURCES_AND_LICENSES.md). / [Sources and licenses](../../day06_support/SOURCES_AND_LICENSES.md).
