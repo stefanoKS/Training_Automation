@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="840" viewBox="0 0 1440 840" role="img" aria-labelledby="title desc"><title id="title">オン遅延タイマの動作 / ON-delay timer timing chart</title><desc id="desc">オン遅延タイマの動作 / ON-delay timer timing chart — editable bilingual training diagram for DAY 08 / TIMERS.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#2563A6"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#A32B2B"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#1B7A4B"/></marker></defs><rect x="0" y="0" width="1440" height="840" fill="#F5F8FC"/><rect x="0" y="0" width="1440" height="12" fill="#2563A6"/>
+<text x="56.0" y="56.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#2563A6" font-weight="700" text-anchor="start">DAY 08 / TIMERS</text>
+<text x="56.0" y="104.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="32" fill="#142B3F" font-weight="700" text-anchor="start">オン遅延タイマの動作</text>
+<text x="56.0" y="144.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="26" fill="#526378" font-weight="400" text-anchor="start">ON-delay timer timing chart</text>
+<path d="M140.0 200.0 L1300.0 200.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<text x="100.0" y="206.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="10" fill="#142B3F" font-weight="400" text-anchor="start"></text>
+<text x="140.0" y="190.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start">時間 / time</text>
+<text x="90.0" y="280.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#2563A6" font-weight="700" text-anchor="start">X0</text>
+<path d="M160.0 300.0 L1280.0 300.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<polyline points="200.0,288.0 200.0,288.0 200.0,288.0 400.0,288.0 400.0,240.0 800.0,240.0 800.0,288.0 1200.0,288.0" fill="none" stroke="#2563A6" stroke-width="2.6"/>
+<text x="700.0" y="226.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#526378" font-weight="400" text-anchor="middle">入力ONの時間が設定値に達すると完了</text>
+<text x="90.0" y="420.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#1B7A4B" font-weight="700" text-anchor="start">T0</text>
+<path d="M160.0 440.0 L1280.0 440.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<polyline points="200.0,428.0 200.0,428.0 200.0,428.0 600.0,428.0 600.0,380.0 800.0,380.0 800.0,428.0 1200.0,428.0" fill="none" stroke="#2563A6" stroke-width="2.6"/>
+<text x="400.0" y="366.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#1B7A4B" font-weight="700" text-anchor="middle">設定時間 / preset</text>
+<text x="600.0" y="470.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="middle">蓄積が完了すると接点が変化 / contact changes on completion</text>
+<text x="90.0" y="560.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#B4541E" font-weight="700" text-anchor="start">Y0</text>
+<path d="M160.0 580.0 L1280.0 580.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<polyline points="200.0,568.0 200.0,568.0 200.0,568.0 600.0,568.0 600.0,520.0 800.0,520.0 800.0,568.0 1200.0,568.0" fill="none" stroke="#B4541E" stroke-width="2.6"/>
+<text x="500.0" y="508.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#B4541E" font-weight="700" text-anchor="middle">出力ON / output ON</text>
+<rect x="80.0" y="616.0" width="1280.0" height="60.0" rx="8" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
+<text x="100.0" y="640.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#142B3F" font-weight="700" text-anchor="start">時間の単位と基準（100 ms・10 msなど）はCPUと命令で異なります。</text>
+<text x="100.0" y="662.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start">Time base (100 ms, 10 ms, ...) depends on the CPU and instruction; check the manual.</text>
+<rect x="56.0" y="724.0" width="1328.0" height="60.0" rx="10" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
+<text x="76.0" y="758.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#142B3F" font-weight="700" text-anchor="start">「T0 K50＝必ず5秒」とは限りません。</text>
+<text x="76.0" y="780.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14.5" fill="#526378" font-weight="400" text-anchor="start">“T0 K50 equals 5 s” is not universal.</text>
+<text x="1400" y="832" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" text-anchor="end">D08-08 • 編集可能な図 / editable SVG</text>
+</svg>

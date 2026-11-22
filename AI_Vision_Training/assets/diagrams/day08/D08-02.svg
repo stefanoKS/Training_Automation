@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="820" viewBox="0 0 1440 820" role="img" aria-labelledby="title desc"><title id="title">センサからアクチュエータまでの信号経路 / Sensor → input → PLC → output → driver → actuator</title><desc id="desc">センサからアクチュエータまでの信号経路 / Sensor → input → PLC → output → driver → actuator — editable bilingual training diagram for DAY 08 / SIGNAL PATH.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#2563A6"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#A32B2B"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#1B7A4B"/></marker></defs><rect x="0" y="0" width="1440" height="820" fill="#F5F8FC"/><rect x="0" y="0" width="1440" height="12" fill="#2563A6"/>
+<text x="56.0" y="56.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#2563A6" font-weight="700" text-anchor="start">DAY 08 / SIGNAL PATH</text>
+<text x="56.0" y="104.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="32" fill="#142B3F" font-weight="700" text-anchor="start">センサからアクチュエータまでの信号経路</text>
+<text x="56.0" y="144.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="26" fill="#526378" font-weight="400" text-anchor="start">Sensor → input → PLC → output → driver → actuator</text>
+<rect x="80.0" y="210.0" width="190.0" height="130.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<rect x="80.0" y="220.0" width="7.0" height="110.0" rx="3" fill="#2563A6" stroke="#2563A6" stroke-width="0"/>
+<text x="102.0" y="274.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">センサ</text>
+<text x="102.0" y="296.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">Sensor</text>
+<path d="M274.0 275.0 L296.0 275.0" fill="none" stroke="#2563A6" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="298.0" y="210.0" width="190.0" height="130.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<rect x="298.0" y="220.0" width="7.0" height="110.0" rx="3" fill="#2563A6" stroke="#2563A6" stroke-width="0"/>
+<text x="320.0" y="274.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">PLC入力</text>
+<text x="320.0" y="296.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">PLC input</text>
+<path d="M492.0 275.0 L514.0 275.0" fill="none" stroke="#2563A6" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="516.0" y="210.0" width="190.0" height="130.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<rect x="516.0" y="220.0" width="7.0" height="110.0" rx="3" fill="#2563A6" stroke="#2563A6" stroke-width="0"/>
+<text x="538.0" y="274.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">プログラム</text>
+<text x="538.0" y="296.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">Program</text>
+<path d="M710.0 275.0 L732.0 275.0" fill="none" stroke="#2563A6" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="734.0" y="210.0" width="190.0" height="130.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<rect x="734.0" y="220.0" width="7.0" height="110.0" rx="3" fill="#2563A6" stroke="#2563A6" stroke-width="0"/>
+<text x="756.0" y="274.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">PLC出力</text>
+<text x="756.0" y="296.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">PLC output</text>
+<path d="M928.0 275.0 L950.0 275.0" fill="none" stroke="#2563A6" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="952.0" y="210.0" width="190.0" height="130.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<rect x="952.0" y="220.0" width="7.0" height="110.0" rx="3" fill="#2563A6" stroke="#2563A6" stroke-width="0"/>
+<text x="974.0" y="274.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">ドライバ</text>
+<text x="974.0" y="296.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">Driver</text>
+<path d="M1146.0 275.0 L1168.0 275.0" fill="none" stroke="#2563A6" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="1170.0" y="210.0" width="190.0" height="130.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<rect x="1170.0" y="220.0" width="7.0" height="110.0" rx="3" fill="#2563A6" stroke="#2563A6" stroke-width="0"/>
+<text x="1192.0" y="274.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">アクチュエータ</text>
+<text x="1192.0" y="296.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">Actuator</text>
+<text x="80.0" y="378.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#2563A6" font-weight="700" text-anchor="start">信号（小さい電力）/ signal (low power)</text>
+<text x="80.0" y="404.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#142B3F" font-weight="700" text-anchor="start">プログラムは入力の状態から出力の状態を決めます。</text>
+<text x="80.0" y="430.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#526378" font-weight="400" text-anchor="start">The program decides output states from input states.</text>
+<rect x="80.0" y="466.0" width="620.0" height="130.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<text x="104.0" y="502.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#2563A6" font-weight="700" text-anchor="start">信号側 / signal side</text>
+<text x="104.0" y="536.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="start">24 V DC の入力・出力、通信</text>
+<text x="104.0" y="560.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start">24 V DC I/O and communications</text>
+<rect x="732.0" y="466.0" width="628.0" height="130.0" rx="12" fill="#F2E7D2" stroke="#B4541E" stroke-width="2"/>
+<text x="756.0" y="502.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#B4541E" font-weight="700" text-anchor="start">動力側 / power side</text>
+<text x="756.0" y="536.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="start">ドライバ・接触器が大きな電力を供給</text>
+<text x="756.0" y="560.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start">drivers and contactors supply the large power</text>
+<text x="80.0" y="646.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#A32B2B" font-weight="700" text-anchor="start">PLC出力はモータの運転電力を直接作るものではありません。</text>
+<text x="80.0" y="672.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start">A PLC output does not by itself provide a motor&#x27;s operating power.</text>
+<rect x="56.0" y="704.0" width="1328.0" height="60.0" rx="10" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
+<text x="76.0" y="738.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#142B3F" font-weight="700" text-anchor="start">信号の経路と動力の経路を分けて描くと、故障の切り分けができます。</text>
+<text x="76.0" y="760.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14.5" fill="#526378" font-weight="400" text-anchor="start">Drawing signal and power paths separately makes fault isolation possible.</text>
+<text x="1400" y="812" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" text-anchor="end">D08-02 • 編集可能な図 / editable SVG</text>
+</svg>

@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="860" viewBox="0 0 1440 860" role="img" aria-labelledby="title desc"><title id="title">照明方式による見え方の違い / Inspection lighting comparisons</title><desc id="desc">照明方式による見え方の違い / Inspection lighting comparisons — editable bilingual training diagram for DAY 09 / ILLUMINATION.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#2563A6"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#A32B2B"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#1B7A4B"/></marker></defs><rect x="0" y="0" width="1440" height="860" fill="#F5F8FC"/><rect x="0" y="0" width="1440" height="12" fill="#2563A6"/>
+<text x="56.0" y="56.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#2563A6" font-weight="700" text-anchor="start">DAY 09 / ILLUMINATION</text>
+<text x="56.0" y="104.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="32" fill="#142B3F" font-weight="700" text-anchor="start">照明方式による見え方の違い</text>
+<text x="56.0" y="144.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="26" fill="#526378" font-weight="400" text-anchor="start">Inspection lighting comparisons</text>
+<rect x="80.0" y="190.0" width="290.0" height="340.0" rx="12" fill="#FFFFFF" stroke="#1B7A4B" stroke-width="2"/>
+<text x="96.0" y="226.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#1B7A4B" font-weight="700" text-anchor="start">拡散照明</text>
+<text x="96.0" y="250.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">Diffuse</text>
+<rect x="100.0" y="268.0" width="250.0" height="160.0" rx="6" fill="#EDEDE3" stroke="#C9C9B8" stroke-width="2"/>
+<ellipse cx="210" cy="350" rx="34" ry="12" fill="#6E6E5A" opacity="0.75"/>
+<text x="270.0" y="354.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#526378" font-weight="700" text-anchor="start">きず / defect</text>
+<text x="96.0" y="462.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="700" text-anchor="start">反射を抑え表面の色むらを見る</text>
+<text x="96.0" y="492.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">soft light shows surface tones</text>
+<rect x="390.0" y="190.0" width="290.0" height="340.0" rx="12" fill="#FFFFFF" stroke="#B4541E" stroke-width="2"/>
+<text x="406.0" y="226.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#B4541E" font-weight="700" text-anchor="start">直接照明</text>
+<text x="406.0" y="250.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">Direct</text>
+<rect x="410.0" y="268.0" width="250.0" height="160.0" rx="6" fill="#EDEDE3" stroke="#C9C9B8" stroke-width="2"/>
+<ellipse cx="520" cy="350" rx="34" ry="12" fill="#8A2B2B" opacity="0.75"/>
+<text x="580.0" y="354.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#526378" font-weight="700" text-anchor="start">きず / defect</text>
+<text x="406.0" y="462.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="700" text-anchor="start">きずの陰影を強調・光沢は苦手</text>
+<text x="406.0" y="492.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">emphasises shadows; glare risk</text>
+<rect x="700.0" y="190.0" width="290.0" height="340.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<text x="716.0" y="226.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#2563A6" font-weight="700" text-anchor="start">バックライト</text>
+<text x="716.0" y="250.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">Backlight</text>
+<rect x="720.0" y="268.0" width="250.0" height="160.0" rx="6" fill="#EDEDE3" stroke="#C9C9B8" stroke-width="2"/>
+<rect x="760.0" y="310.0" width="170.0" height="76.0" rx="6" fill="#0F2536" stroke="#0F2536" stroke-width="2"/>
+<text x="845.0" y="368.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#F2F6FA" font-weight="700" text-anchor="middle">輪郭のみ / silhouette</text>
+<text x="716.0" y="462.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="700" text-anchor="start">輪郭・穴・欠けの silhouette</text>
+<text x="716.0" y="492.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">silhouette of edges and holes</text>
+<rect x="1010.0" y="190.0" width="290.0" height="340.0" rx="12" fill="#FFFFFF" stroke="#6B3FA0" stroke-width="2"/>
+<text x="1026.0" y="226.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#6B3FA0" font-weight="700" text-anchor="start">暗視野</text>
+<text x="1026.0" y="250.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">Dark field</text>
+<rect x="1030.0" y="268.0" width="250.0" height="160.0" rx="6" fill="#EDEDE3" stroke="#C9C9B8" stroke-width="2"/>
+<ellipse cx="1140" cy="350" rx="34" ry="12" fill="#8A2B2B" opacity="0.75"/>
+<text x="1200.0" y="354.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#526378" font-weight="700" text-anchor="start">きず / defect</text>
+<text x="1026.0" y="462.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="700" text-anchor="start">微細な凹凸・傷を光らせる</text>
+<text x="1026.0" y="492.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">makes fine scratches bright</text>
+<text x="80.0" y="572.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#142B3F" font-weight="700" text-anchor="start">照明は「AIの前」の品質を決めます。照明が不安定ならモデルも不安定になります。</text>
+<text x="80.0" y="598.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#526378" font-weight="400" text-anchor="start">Lighting sets the quality before the AI runs; unstable lighting makes models unstable.</text>
+<rect x="80.0" y="628.0" width="1280.0" height="60.0" rx="8" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
+<text x="100.0" y="652.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#142B3F" font-weight="700" text-anchor="start">照度・色温度・反射・経時変化を記録し、定期的に確認します（教育用の例示）。</text>
+<text x="100.0" y="674.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">Record intensity, colour, reflection and drift, and check them periodically.</text>
+<rect x="56.0" y="744.0" width="1328.0" height="60.0" rx="10" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
+<text x="76.0" y="778.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#142B3F" font-weight="700" text-anchor="start">照明の変更はモデル性能を変えます。変更は再評価が必要です。</text>
+<text x="76.0" y="800.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14.5" fill="#526378" font-weight="400" text-anchor="start">A lighting change changes model performance and requires re-evaluation.</text>
+<text x="1400" y="852" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" text-anchor="end">D09-04 • 編集可能な図 / editable SVG</text>
+</svg>

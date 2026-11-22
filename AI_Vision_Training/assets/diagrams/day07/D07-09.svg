@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="880" viewBox="0 0 1440 880" role="img" aria-labelledby="title desc"><title id="title">デジタル信号とアナログ信号 / Digital versus analog signals</title><desc id="desc">デジタル信号とアナログ信号 / Digital versus analog signals — editable bilingual training diagram for DAY 07 / SIGNALS.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#2563A6"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#A32B2B"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#1B7A4B"/></marker></defs><rect x="0" y="0" width="1440" height="880" fill="#F5F8FC"/><rect x="0" y="0" width="1440" height="12" fill="#2563A6"/>
+<text x="56.0" y="56.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#2563A6" font-weight="700" text-anchor="start">DAY 07 / SIGNALS</text>
+<text x="56.0" y="104.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="32" fill="#142B3F" font-weight="700" text-anchor="start">デジタル信号とアナログ信号</text>
+<text x="56.0" y="144.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="26" fill="#526378" font-weight="400" text-anchor="start">Digital versus analog signals</text>
+<rect x="80.0" y="186.0" width="610.0" height="340.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<text x="104.0" y="222.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21" fill="#2563A6" font-weight="700" text-anchor="start">デジタル / digital: ON/OFF</text>
+<path d="M120.0 400.0 L660.0 400.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<text x="104.0" y="390.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#526378" font-weight="700" text-anchor="start">1</text>
+<text x="104.0" y="262.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#526378" font-weight="700" text-anchor="start">0</text>
+<polyline points="130.0,260.0 181.0,260.0 181.0,260.0 293.2,260.0 293.2,396.0 410.5,396.0 410.5,260.0 527.8,260.0 527.8,396.0 640.0,396.0" fill="none" stroke="#2563A6" stroke-width="2.6"/>
+<text x="104.0" y="440.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#526378" font-weight="400" text-anchor="start">検出 / detected = 1、非検出 / not detected = 0</text>
+<text x="104.0" y="472.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="700" text-anchor="start">PLC入力はビット（TRUE/FALSE）で扱います</text>
+<text x="104.0" y="496.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start">the PLC handles the input as one bit</text>
+<rect x="750.0" y="186.0" width="610.0" height="340.0" rx="12" fill="#FFFFFF" stroke="#1B7A4B" stroke-width="2"/>
+<text x="774.0" y="222.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21" fill="#1B7A4B" font-weight="700" text-anchor="start">アナログ / analog: 連続値</text>
+<path d="M790.0 400.0 L1330.0 400.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<path d="M790.0 400.0 L790.0 250.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<path d="M790 380 C 880 380, 900 270, 1000 280 S 1180 380, 1330 300" fill="none" stroke="#1B7A4B" stroke-width="3"/>
+<text x="794.0" y="242.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start">電圧/電流 / voltage or current</text>
+<text x="774.0" y="440.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#526378" font-weight="400" text-anchor="start">例：0–10 V、4–20 mA（機器により異なる）</text>
+<text x="774.0" y="472.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="700" text-anchor="start">アナログ入力モジュールで数値に変換します</text>
+<text x="774.0" y="496.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start">an analog input module converts it to a number</text>
+<rect x="80.0" y="570.0" width="426.0" height="40.0" rx="3" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
+<text x="293.0" y="597.2" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="700" text-anchor="middle">項目 / item</text>
+<rect x="506.0" y="570.0" width="426.0" height="40.0" rx="3" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
+<text x="719.0" y="597.2" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="700" text-anchor="middle">デジタル / digital</text>
+<rect x="932.0" y="570.0" width="426.0" height="40.0" rx="3" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
+<text x="1145.0" y="597.2" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="700" text-anchor="middle">アナログ / analog</text>
+<rect x="80.0" y="610.0" width="426.0" height="40.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
+<text x="293.0" y="637.2" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">表現 / value</text>
+<rect x="506.0" y="610.0" width="426.0" height="40.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
+<text x="719.0" y="637.2" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">0 か 1</text>
+<rect x="932.0" y="610.0" width="426.0" height="40.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
+<text x="1145.0" y="637.2" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">連続した数値 / continuous</text>
+<rect x="80.0" y="650.0" width="426.0" height="40.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
+<text x="293.0" y="677.2" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">用途 / use</text>
+<rect x="506.0" y="650.0" width="426.0" height="40.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
+<text x="719.0" y="677.2" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">有無・位置</text>
+<rect x="932.0" y="650.0" width="426.0" height="40.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
+<text x="1145.0" y="677.2" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">距離・圧力・張力</text>
+<rect x="80.0" y="690.0" width="426.0" height="40.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
+<text x="293.0" y="717.2" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">注意 / caution</text>
+<rect x="506.0" y="690.0" width="426.0" height="40.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
+<text x="719.0" y="717.2" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">チャタリング・ノイズ</text>
+<rect x="932.0" y="690.0" width="426.0" height="40.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
+<text x="1145.0" y="717.2" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">スケーリング・校正</text>
+<rect x="56.0" y="764.0" width="1328.0" height="60.0" rx="10" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
+<text x="76.0" y="798.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#142B3F" font-weight="700" text-anchor="start">信号の種類は選んだ機器の仕様で確認します。</text>
+<text x="76.0" y="820.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14.5" fill="#526378" font-weight="400" text-anchor="start">Confirm signal types in the selected device&#x27;s specification.</text>
+<text x="1400" y="872" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" text-anchor="end">D07-09 • 編集可能な図 / editable SVG</text>
+</svg>

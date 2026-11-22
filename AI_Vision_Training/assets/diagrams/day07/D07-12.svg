@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="880" viewBox="0 0 1440 880" role="img" aria-labelledby="title desc"><title id="title">機械の危険源と保護境界 / Machinery hazards and protective boundaries</title><desc id="desc">機械の危険源と保護境界 / Machinery hazards and protective boundaries — editable bilingual training diagram for DAY 07 / SAFETY BOUNDARIES.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#2563A6"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#A32B2B"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#1B7A4B"/></marker></defs><rect x="0" y="0" width="1440" height="880" fill="#F5F8FC"/><rect x="0" y="0" width="1440" height="12" fill="#2563A6"/>
+<text x="56.0" y="56.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#2563A6" font-weight="700" text-anchor="start">DAY 07 / SAFETY BOUNDARIES</text>
+<text x="56.0" y="104.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="32" fill="#142B3F" font-weight="700" text-anchor="start">機械の危険源と保護境界</text>
+<text x="56.0" y="144.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="26" fill="#526378" font-weight="400" text-anchor="start">Machinery hazards and protective boundaries</text>
+<rect x="80.0" y="186.0" width="1280.0" height="340.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<rect x="140.0" y="220.0" width="1160.0" height="270.0" rx="16" fill="none" stroke="#6B3FA0" stroke-width="4" stroke-dasharray="14 8"/>
+<text x="150.0" y="250.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#6B3FA0" font-weight="700" text-anchor="start">保護範囲 / guarded boundary（設計・検証された安全系）</text>
+<rect x="210.0" y="300.0" width="240.0" height="120.0" rx="12" fill="#E8F1FA" stroke="#2563A6" stroke-width="2"/>
+<text x="330.0" y="344.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#142B3F" font-weight="700" text-anchor="middle">ローラ</text>
+<text x="330.0" y="368.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="middle">roller</text>
+<rect x="480.0" y="300.0" width="240.0" height="120.0" rx="12" fill="#E8F1FA" stroke="#2563A6" stroke-width="2"/>
+<text x="600.0" y="344.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#142B3F" font-weight="700" text-anchor="middle">カメラ</text>
+<text x="600.0" y="368.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="middle">camera</text>
+<rect x="750.0" y="300.0" width="240.0" height="120.0" rx="12" fill="#E8F1FA" stroke="#2563A6" stroke-width="2"/>
+<text x="870.0" y="344.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#142B3F" font-weight="700" text-anchor="middle">制御盤</text>
+<text x="870.0" y="368.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="middle">control cabinet</text>
+<rect x="1020.0" y="300.0" width="220.0" height="120.0" rx="12" fill="#F2E7D2" stroke="#B4541E" stroke-width="2"/>
+<text x="1130.0" y="344.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#B4541E" font-weight="700" text-anchor="middle">駆動部</text>
+<text x="1130.0" y="368.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="middle">drive</text>
+<text x="330.0" y="452.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#A32B2B" font-weight="700" text-anchor="middle">⚠ 巻き込み</text>
+<text x="330.0" y="474.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="middle">nip point</text>
+<text x="600.0" y="452.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#A32B2B" font-weight="700" text-anchor="middle">⚠ 落下物</text>
+<text x="600.0" y="474.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="middle">falling parts</text>
+<text x="870.0" y="452.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#A32B2B" font-weight="700" text-anchor="middle">⚠ 感電</text>
+<text x="870.0" y="474.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="middle">electric shock</text>
+<text x="1130.0" y="452.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#A32B2B" font-weight="700" text-anchor="middle">⚠ 突然の起動</text>
+<text x="1130.0" y="474.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="middle">unexpected start</text>
+<text x="80.0" y="570.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#142B3F" font-weight="700" text-anchor="start">機械安全はリスクアセスメントに基づき、AIや通常のラダーとは独立して設計されます。</text>
+<text x="80.0" y="596.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#526378" font-weight="400" text-anchor="start">Machine safety is engineered from a risk assessment, independently of AI and ordinary ladder logic.</text>
+<rect x="80.0" y="630.0" width="299.0" height="104.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<rect x="80.0" y="640.0" width="7.0" height="84.0" rx="3" fill="#2563A6" stroke="#2563A6" stroke-width="0"/>
+<text x="102.0" y="681.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">ガード</text>
+<text x="102.0" y="703.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">Guarding</text>
+<path d="M383.0 682.0 L405.0 682.0" fill="none" stroke="#2563A6" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="407.0" y="630.0" width="299.0" height="104.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<rect x="407.0" y="640.0" width="7.0" height="84.0" rx="3" fill="#2563A6" stroke="#2563A6" stroke-width="0"/>
+<text x="429.0" y="681.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">インターロック</text>
+<text x="429.0" y="703.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">Interlock</text>
+<path d="M710.0 682.0 L732.0 682.0" fill="none" stroke="#2563A6" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="734.0" y="630.0" width="299.0" height="104.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<rect x="734.0" y="640.0" width="7.0" height="84.0" rx="3" fill="#2563A6" stroke="#2563A6" stroke-width="0"/>
+<text x="756.0" y="681.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">非常停止</text>
+<text x="756.0" y="703.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">Emergency stop</text>
+<path d="M1037.0 682.0 L1059.0 682.0" fill="none" stroke="#2563A6" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="1061.0" y="630.0" width="299.0" height="104.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<rect x="1061.0" y="640.0" width="7.0" height="84.0" rx="3" fill="#2563A6" stroke="#2563A6" stroke-width="0"/>
+<text x="1083.0" y="681.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">作業手順</text>
+<text x="1083.0" y="703.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">Safe procedure</text>
+<rect x="56.0" y="764.0" width="1328.0" height="60.0" rx="10" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
+<text x="76.0" y="798.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#142B3F" font-weight="700" text-anchor="start">本教材は安全回路を設計・生成しません。実務は有資格者と現地手順に従います。</text>
+<text x="76.0" y="820.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14.5" fill="#526378" font-weight="400" text-anchor="start">This course never designs or deploys safety circuits.</text>
+<text x="1400" y="872" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" text-anchor="end">D07-12 • 編集可能な図 / editable SVG</text>
+</svg>

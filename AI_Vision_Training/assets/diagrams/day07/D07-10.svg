@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="880" viewBox="0 0 1440 880" role="img" aria-labelledby="title desc"><title id="title">インクリメンタルエンコーダとパルス / Incremental encoder and pulse interpretation</title><desc id="desc">インクリメンタルエンコーダとパルス / Incremental encoder and pulse interpretation — editable bilingual training diagram for DAY 07 / ENCODERS.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#2563A6"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#A32B2B"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#1B7A4B"/></marker></defs><rect x="0" y="0" width="1440" height="880" fill="#F5F8FC"/><rect x="0" y="0" width="1440" height="12" fill="#2563A6"/>
+<text x="56.0" y="56.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#2563A6" font-weight="700" text-anchor="start">DAY 07 / ENCODERS</text>
+<text x="56.0" y="104.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="32" fill="#142B3F" font-weight="700" text-anchor="start">インクリメンタルエンコーダとパルス</text>
+<text x="56.0" y="144.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="26" fill="#526378" font-weight="400" text-anchor="start">Incremental encoder and pulse interpretation</text>
+<text x="80.0" y="200.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="20" fill="#2563A6" font-weight="700" text-anchor="start">A相・B相のパルス / A and B channel pulses</text>
+<path d="M120.0 330.0 L700.0 330.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<polyline points="130.0,232.0 130.0,232.0 130.0,232.0 265.0,232.0 265.0,300.0 400.0,300.0 400.0,232.0 535.0,232.0 535.0,300.0 670.0,300.0" fill="none" stroke="#2563A6" stroke-width="2.6"/>
+<text x="96.0" y="240.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#2563A6" font-weight="700" text-anchor="start">A</text>
+<path d="M120.0 400.0 L700.0 400.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<polyline points="130.0,332.0 197.5,332.0 197.5,332.0 332.5,332.0 332.5,400.0 467.5,400.0 467.5,332.0 602.5,332.0 602.5,400.0 670.0,400.0" fill="none" stroke="#1B7A4B" stroke-width="2.6"/>
+<text x="96.0" y="340.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#1B7A4B" font-weight="700" text-anchor="start">B</text>
+<text x="96.0" y="412.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="10" fill="#142B3F" font-weight="400" text-anchor="start"></text>
+<text x="130.0" y="444.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#526378" font-weight="400" text-anchor="start">AとBのずれで回転方向が分かります / the A-B phase difference gives direction</text>
+<rect x="760.0" y="190.0" width="600.0" height="200.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<text x="784.0" y="226.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="20" fill="#2563A6" font-weight="700" text-anchor="start">用語 / terms</text>
+<text x="784.0" y="262.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="start">PPR: 1回転あたりのパルス数 / pulses per revolution</text>
+<text x="784.0" y="292.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="700" text-anchor="start">分解能: 方式によりカウント数が変わる</text>
+<text x="784.0" y="316.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start">resolution: decoded counts depend on the mode</text>
+<text x="784.0" y="352.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start">（1倍・2倍・4倍の逓倍 / x1, x2, x4 decoding）</text>
+<rect x="80.0" y="500.0" width="420.0" height="42.0" rx="3" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
+<text x="290.0" y="528.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="700" text-anchor="middle">項目 / item</text>
+<rect x="500.0" y="500.0" width="420.0" height="42.0" rx="3" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
+<text x="710.0" y="528.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="700" text-anchor="middle">値の例 / example</text>
+<rect x="920.0" y="500.0" width="420.0" height="42.0" rx="3" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
+<text x="1130.0" y="528.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="700" text-anchor="middle">意味 / meaning</text>
+<rect x="80.0" y="542.0" width="420.0" height="42.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
+<text x="290.0" y="570.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">PPR</text>
+<rect x="500.0" y="542.0" width="420.0" height="42.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
+<text x="710.0" y="570.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">1,000</text>
+<rect x="920.0" y="542.0" width="420.0" height="42.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
+<text x="1130.0" y="570.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">1回転のA相パルス / A pulses per turn</text>
+<rect x="80.0" y="584.0" width="420.0" height="42.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
+<text x="290.0" y="612.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">4倍カウント</text>
+<rect x="500.0" y="584.0" width="420.0" height="42.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
+<text x="710.0" y="612.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">4,000</text>
+<rect x="920.0" y="584.0" width="420.0" height="42.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
+<text x="1130.0" y="612.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">1回転の分解カウント / decoded counts per turn</text>
+<rect x="80.0" y="626.0" width="420.0" height="42.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
+<text x="290.0" y="654.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">移動量</text>
+<rect x="500.0" y="626.0" width="420.0" height="42.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
+<text x="710.0" y="654.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">カウント × 1カウントの距離</text>
+<rect x="920.0" y="626.0" width="420.0" height="42.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
+<text x="1130.0" y="654.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">位置の計算 / position calculation</text>
+<text x="80.0" y="700.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#A32B2B" font-weight="700" text-anchor="start">PPRとカウント数を混同すると、位置計算が4倍ずれることがあります。</text>
+<text x="80.0" y="726.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start">Confusing PPR with decoded counts can make position wrong by a factor of four.</text>
+<rect x="56.0" y="764.0" width="1328.0" height="60.0" rx="10" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
+<text x="76.0" y="798.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#142B3F" font-weight="700" text-anchor="start">エンコーダの取付位置と分解能の定義を先に確認します。</text>
+<text x="76.0" y="820.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14.5" fill="#526378" font-weight="400" text-anchor="start">Confirm mounting position and resolution definition first.</text>
+<text x="1400" y="872" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" text-anchor="end">D07-10 • 編集可能な図 / editable SVG</text>
+</svg>

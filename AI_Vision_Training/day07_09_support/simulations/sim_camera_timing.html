@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>カメラのタイミング / Camera timing — オフライン学習シミュレータ</title>
+<style>
+  body { font-family: "Yu Gothic", Meiryo, Arial, sans-serif; margin: 0; background: #f5f8fc; color: #142b3f; }
+  main { max-width: 1000px; margin: 0 auto; padding: 24px; }
+  h1 { font-size: 1.5rem; color: #2563a6; margin-bottom: 4px; }
+  h2 { font-size: 1.05rem; margin: 0 0 8px; }
+  .sub { color: #526378; margin-top: 0; }
+  .panel { background: #fff; border: 2px solid #2563a6; border-radius: 12px; padding: 18px; margin: 14px 0; }
+  .panel.warn { border-color: #b4541e; background: #fdf6f0; }
+  label { display: block; margin: 8px 0 2px; font-weight: 700; }
+  input[type=range] { width: 100%; }
+  table { border-collapse: collapse; width: 100%; margin-top: 8px; }
+  td, th { border: 1px solid #c1d0dd; padding: 8px; text-align: left; }
+  th { background: #eaf1f8; }
+  .note { color: #526378; font-size: 0.92rem; }
+  .big { font-size: 1.4rem; font-weight: 700; color: #1b7a4b; }
+  .warnText { color: #b4541e; font-weight: 700; }
+</style>
+</head>
+<body>
+<main>
+  <h1>カメラのタイミングシミュレータ</h1>
+  <p class="sub">Camera timing simulator — 完全オフライン / fully offline. すべて仮定値 / all values hypothetical.</p>
+
+  <section class="panel">
+    <h2>入力 / Inputs</h2>
+    <label for="speed">材料速度 / Material speed (m/min): <output id="speedOut">30</output></label>
+    <input id="speed" type="range" min="1" max="120" step="1" value="30">
+    <label for="fov">検査幅（視野）/ Inspection width, FOV (mm): <output id="fovOut">600</output></label>
+    <input id="fov" type="range" min="100" max="2000" step="10" value="600">
+    <label for="pixels">横画素数 / Horizontal pixels: <output id="pixelsOut">4096</output></label>
+    <input id="pixels" type="range" min="512" max="8192" step="256" value="4096">
+    <label for="sample">移動方向のサンプル間隔 / Travel sampling (mm/line): <output id="sampleOut">0.2</output></label>
+    <input id="sample" type="range" min="0.05" max="2" step="0.05" value="0.2">
+    <label for="exposure">露光時間 / Exposure time (ms): <output id="exposureOut">1.0</output></label>
+    <input id="exposure" type="range" min="0.05" max="10" step="0.05" value="1">
+  </section>
+
+  <section class="panel">
+    <h2>計算結果 / Calculated results</h2>
+    <table>
+      <tr><th>量 / quantity</th><th>値 / value</th><th>注意 / caution</th></tr>
+      <tr><td>画素スケール / pixel scale</td><td class="big" id="mmpx">0.1465 mm/px</td><td>FOV ÷ 横画素数 / FOV ÷ pixels</td></tr>
+      <tr><td>材料速度 / material speed</td><td id="mms">500.0 mm/s</td><td>m/min を mm/s に換算 / converted</td></tr>
+      <tr><td>必要ライン周波数 / required line rate</td><td class="big" id="liner">2500 lines/s</td><td>速度 ÷ サンプル間隔 / speed ÷ sampling</td></tr>
+      <tr><td>露光中の移動 / travel during exposure</td><td id="blur">0.50 mm</td><td>速度 × 露光時間 / speed × exposure</td></tr>
+      <tr><td>露光に含まれるライン数 / lines per exposure</td><td id="linespx">2.5 lines</td><td>目安 / indicative</td></tr>
+    </table>
+    <p class="warnText" id="blurWarn"></p>
+  </section>
+
+  <section class="panel warn">
+    <h2>注意 / Cautions</h2>
+    <ul class="note">
+      <li>カメラのフレームレート（fps）とライン周波数（lines/s）は別物です。/ Camera fps and line rate are different.</li>
+      <li>1画素未満の欠陥が必ず検出できるわけではありません。/ Defects smaller than a pixel are not guaranteed detectable.</li>
+      <li>露光を短くすると暗くなるため、光量とゲインの調整が必要です。/ Shorter exposure needs more light or gain.</li>
+      <li>実際の設計は、エンコーダ倍率・カメラのタイミング・転送能力を確認します。/ Verify encoder scaling, camera timing and transfer capacity.</li>
+    </ul>
+  </section>
+
+  <noscript>
+    <section class="panel">
+      <h2>JavaScriptが無効の場合 / If JavaScript is disabled</h2>
+      <p>例：FOV 600 mm・4,096画素 → 0.146484 mm/px。30 m/min（500 mm/s）・0.2 mm/line → 2,500 lines/s。500 mm/s・1.0 ms → 0.5 mm の移動。</p>
+      <p>Example: 600 mm FOV at 4,096 px → 0.146484 mm/px; 30 m/min (500 mm/s) at 0.2 mm/line → 2,500 lines/s; 500 mm/s with 1.0 ms → 0.5 mm travel.</p>
+    </section>
+  </noscript>
+</main>
+<script>
+/* LOGIC-START */
+function cameraMath(speedMpm, fovMm, pixels, sampleMm, exposureMs) {
+  if (!(speedMpm > 0) || !(fovMm > 0) || !(pixels > 0) || !(sampleMm > 0) || !(exposureMs > 0)) {
+    throw new Error("all inputs must be positive");
+  }
+  const mmPerPixel = fovMm / pixels;
+  const mmPerS = (speedMpm * 1000) / 60;
+  const lineRate = mmPerS / sampleMm;
+  const travelPerExposureMm = mmPerS * (exposureMs / 1000);
+  const linesPerExposure = travelPerExposureMm / sampleMm;
+  return {
+    mmPerPixel: mmPerPixel,
+    mmPerS: mmPerS,
+    lineRate: lineRate,
+    travelPerExposureMm: travelPerExposureMm,
+    linesPerExposure: linesPerExposure
+  };
+}
+/* LOGIC-END */
+
+if (typeof module !== "undefined") { module.exports = { cameraMath }; }
+if (typeof document !== "undefined") {
+  const ids = ["speed", "fov", "pixels", "sample", "exposure"];
+  function update() {
+    const speed = Number(document.getElementById("speed").value);
+    const fov = Number(document.getElementById("fov").value);
+    const pixels = Number(document.getElementById("pixels").value);
+    const sample = Number(document.getElementById("sample").value);
+    const exposure = Number(document.getElementById("exposure").value);
+
+    document.getElementById("speedOut").value = speed;
+    document.getElementById("fovOut").value = fov;
+    document.getElementById("pixelsOut").value = pixels;
+    document.getElementById("sampleOut").value = sample.toFixed(2);
+    document.getElementById("exposureOut").value = exposure.toFixed(2);
+
+    const r = cameraMath(speed, fov, pixels, sample, exposure);
+    document.getElementById("mmpx").textContent = r.mmPerPixel.toFixed(4) + " mm/px";
+    document.getElementById("mms").textContent = r.mmPerS.toFixed(1) + " mm/s";
+    document.getElementById("liner").textContent = Math.round(r.lineRate) + " lines/s";
+    document.getElementById("blur").textContent = r.travelPerExposureMm.toFixed(2) + " mm";
+    document.getElementById("linespx").textContent = r.linesPerExposure.toFixed(2) + " lines";
+    document.getElementById("blurWarn").textContent = r.travelPerExposureMm > r.mmPerPixel
+      ? "露光中の移動が1画素より大きいため、ぼけが目立ちます。/ Travel during exposure exceeds one pixel, so blur is significant."
+      : "露光中の移動は1画素程度です。ただし欠陥コントラストは別に評価します。/ Travel is about one pixel, but defect contrast still needs evaluation.";
+  }
+  ids.forEach(id => document.getElementById(id).addEventListener("input", update));
+  update();
+}
+</script>
+</body>
+</html>

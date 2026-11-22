@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="840" viewBox="0 0 1440 840" role="img" aria-labelledby="title desc"><title id="title">自己保持（保持回路） / Self-holding virtual indicator circuit</title><desc id="desc">自己保持（保持回路） / Self-holding virtual indicator circuit — editable bilingual training diagram for DAY 08 / SELF-HOLDING.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#2563A6"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#A32B2B"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#1B7A4B"/></marker></defs><rect x="0" y="0" width="1440" height="840" fill="#F5F8FC"/><rect x="0" y="0" width="1440" height="12" fill="#2563A6"/>
+<text x="56.0" y="56.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#2563A6" font-weight="700" text-anchor="start">DAY 08 / SELF-HOLDING</text>
+<text x="56.0" y="104.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="32" fill="#142B3F" font-weight="700" text-anchor="start">自己保持（保持回路）</text>
+<text x="56.0" y="144.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="26" fill="#526378" font-weight="400" text-anchor="start">Self-holding virtual indicator circuit</text>
+<rect x="80.0" y="190.0" width="1280.0" height="260.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<text x="104.0" y="226.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#2563A6" font-weight="700" text-anchor="start">起動は押しボタン、保持は内部ビット、停止はNC接点</text>
+<text x="104.0" y="250.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start">Start from a momentary button, hold with an internal bit, stop with an NC contact</text>
+<path d="M140.0 350.0 L1200.0 350.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<path d="M236.0 350.0 L250.0 350.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<path d="M250.0 332.0 L250.0 368.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<path d="M270.0 332.0 L270.0 368.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<path d="M270.0 350.0 L284.0 350.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<text x="260.0" y="392.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#2563A6" font-weight="700" text-anchor="middle">X0 起動 / start</text>
+<path d="M284.0 350.0 L340.0 350.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<path d="M300.0 320.0 L300.0 350.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<path d="M300.0 320.0 L400.0 320.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<path d="M376.0 320.0 L390.0 320.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<path d="M390.0 302.0 L390.0 338.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<path d="M410.0 302.0 L410.0 338.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<path d="M410.0 320.0 L424.0 320.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<text x="400.0" y="362.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#2563A6" font-weight="700" text-anchor="middle">M0</text>
+<path d="M424.0 320.0 L470.0 320.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<path d="M470.0 320.0 L470.0 350.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<path d="M616.0 350.0 L630.0 350.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<path d="M630.0 332.0 L630.0 368.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<path d="M650.0 332.0 L650.0 368.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<path d="M650.0 350.0 L664.0 350.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<path d="M626.0 366.0 L654.0 334.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<text x="640.0" y="392.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#2563A6" font-weight="700" text-anchor="middle">X1 停止 / stop</text>
+<path d="M882 332 Q866 350 882 368" fill="none" stroke="#2563A6" stroke-width="2.4"/><path d="M918 332 Q902 350 918 368" fill="none" stroke="#2563A6" stroke-width="2.4"/>
+<path d="M854.0 350.0 L868.0 350.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<path d="M918.0 350.0 L962.0 350.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<text x="900.0" y="394.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#2563A6" font-weight="700" text-anchor="middle">M0 / Y0</text>
+<text x="80.0" y="490.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#142B3F" font-weight="700" text-anchor="start">1. X0を短く押す → M0がON</text>
+<text x="80.0" y="516.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#526378" font-weight="400" text-anchor="start">2. M0の接点がX0と並列に閉じ、指を離してもM0はON</text>
+<text x="80.0" y="542.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#142B3F" font-weight="700" text-anchor="start">3. X1（停止要求）がON → NC接点が開きM0はOFF</text>
+<text x="80.0" y="576.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#526378" font-weight="400" text-anchor="start">1. A short X0 press turns M0 ON. 2. The M0 contact holds it ON after release.</text>
+<text x="80.0" y="600.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#526378" font-weight="400" text-anchor="start">3. X1 (stop request) turns ON, the NC contact opens and M0 goes OFF.</text>
+<rect x="80.0" y="630.0" width="1280.0" height="56.0" rx="8" fill="#E8F1FA" stroke="#B4541E" stroke-width="1"/>
+<text x="100.0" y="664.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#B4541E" font-weight="700" text-anchor="start">停止要求を最優先にし、非常停止や安全回路の代用にはしません。 / Stop request has priority; never used as an emergency stop.</text>
+<rect x="56.0" y="724.0" width="1328.0" height="60.0" rx="10" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
+<text x="76.0" y="758.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#142B3F" font-weight="700" text-anchor="start">保持は「覚えている状態」であり、安全を保証する機能ではありません。</text>
+<text x="76.0" y="780.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14.5" fill="#526378" font-weight="400" text-anchor="start">Holding is remembered state, not a safety function.</text>
+<text x="1400" y="832" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" text-anchor="end">D08-07 • 編集可能な図 / editable SVG</text>
+</svg>

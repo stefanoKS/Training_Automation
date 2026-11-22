@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="920" viewBox="0 0 1440 920" role="img" aria-labelledby="title desc"><title id="title">エリアスキャンとラインスキャン / Area scan versus line scan</title><desc id="desc">エリアスキャンとラインスキャン / Area scan versus line scan — editable bilingual training diagram for DAY 09 / CAMERA TYPES.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#2563A6"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#A32B2B"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#1B7A4B"/></marker></defs><rect x="0" y="0" width="1440" height="920" fill="#F5F8FC"/><rect x="0" y="0" width="1440" height="12" fill="#2563A6"/>
+<text x="56.0" y="56.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#2563A6" font-weight="700" text-anchor="start">DAY 09 / CAMERA TYPES</text>
+<text x="56.0" y="104.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="32" fill="#142B3F" font-weight="700" text-anchor="start">エリアスキャンとラインスキャン</text>
+<text x="56.0" y="144.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="26" fill="#526378" font-weight="400" text-anchor="start">Area scan versus line scan</text>
+<rect x="80.0" y="190.0" width="610.0" height="350.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<text x="104.0" y="226.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="20" fill="#2563A6" font-weight="700" text-anchor="start">エリアスキャン</text>
+<text x="104.0" y="250.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start">Area scan: one 2-D image per exposure</text>
+<rect x="160.0" y="280.0" width="450.0" height="230.0" rx="6" fill="#DCE4EC" stroke="#8497A8" stroke-width="2"/>
+<rect x="180.0" y="300.0" width="62.0" height="60.0" rx="3" fill="#EFF4F9" stroke="#9FB2C4" stroke-width="1"/>
+<rect x="252.0" y="300.0" width="62.0" height="60.0" rx="3" fill="#EFF4F9" stroke="#9FB2C4" stroke-width="1"/>
+<rect x="324.0" y="300.0" width="62.0" height="60.0" rx="3" fill="#EFF4F9" stroke="#9FB2C4" stroke-width="1"/>
+<rect x="396.0" y="300.0" width="62.0" height="60.0" rx="3" fill="#EFF4F9" stroke="#9FB2C4" stroke-width="1"/>
+<rect x="468.0" y="300.0" width="62.0" height="60.0" rx="3" fill="#EFF4F9" stroke="#9FB2C4" stroke-width="1"/>
+<rect x="540.0" y="300.0" width="62.0" height="60.0" rx="3" fill="#EFF4F9" stroke="#9FB2C4" stroke-width="1"/>
+<rect x="180.0" y="370.0" width="62.0" height="60.0" rx="3" fill="#EFF4F9" stroke="#9FB2C4" stroke-width="1"/>
+<rect x="252.0" y="370.0" width="62.0" height="60.0" rx="3" fill="#EFF4F9" stroke="#9FB2C4" stroke-width="1"/>
+<rect x="324.0" y="370.0" width="62.0" height="60.0" rx="3" fill="#EFF4F9" stroke="#9FB2C4" stroke-width="1"/>
+<rect x="396.0" y="370.0" width="62.0" height="60.0" rx="3" fill="#EFF4F9" stroke="#9FB2C4" stroke-width="1"/>
+<rect x="468.0" y="370.0" width="62.0" height="60.0" rx="3" fill="#EFF4F9" stroke="#9FB2C4" stroke-width="1"/>
+<rect x="540.0" y="370.0" width="62.0" height="60.0" rx="3" fill="#EFF4F9" stroke="#9FB2C4" stroke-width="1"/>
+<rect x="180.0" y="440.0" width="62.0" height="60.0" rx="3" fill="#EFF4F9" stroke="#9FB2C4" stroke-width="1"/>
+<rect x="252.0" y="440.0" width="62.0" height="60.0" rx="3" fill="#EFF4F9" stroke="#9FB2C4" stroke-width="1"/>
+<rect x="324.0" y="440.0" width="62.0" height="60.0" rx="3" fill="#EFF4F9" stroke="#9FB2C4" stroke-width="1"/>
+<rect x="396.0" y="440.0" width="62.0" height="60.0" rx="3" fill="#EFF4F9" stroke="#9FB2C4" stroke-width="1"/>
+<rect x="468.0" y="440.0" width="62.0" height="60.0" rx="3" fill="#EFF4F9" stroke="#9FB2C4" stroke-width="1"/>
+<rect x="540.0" y="440.0" width="62.0" height="60.0" rx="3" fill="#EFF4F9" stroke="#9FB2C4" stroke-width="1"/>
+<text x="385.0" y="548.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="middle">1回の露光で2次元 / a full 2-D frame</text>
+<rect x="750.0" y="190.0" width="610.0" height="350.0" rx="12" fill="#FFFFFF" stroke="#1B7A4B" stroke-width="2"/>
+<text x="774.0" y="226.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="20" fill="#1B7A4B" font-weight="700" text-anchor="start">ラインスキャン</text>
+<text x="774.0" y="250.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start">Line scan: lines assembled using relative motion</text>
+<rect x="790.0" y="330.0" width="530.0" height="22.0" rx="2" fill="#D9C9A8" stroke="#B9A57C" stroke-width="1"/>
+<path d="M800.0 310.0 L1300.0 310.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<rect x="930.0" y="280.0" width="200.0" height="34.0" rx="4" fill="#E8F1FA" stroke="#1B7A4B" stroke-width="2"/>
+<text x="1030.0" y="303.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#1B7A4B" font-weight="700" text-anchor="middle">1ラインずつ取得</text>
+<path d="M1030.0 318.0 L1030.0 330.0" fill="none" stroke="#1B7A4B" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="800.0" y="360.0" width="530.0" height="8.0" rx="12" fill="#C7DBEA" stroke="#9FB2C4" stroke-width="1"/>
+<rect x="858.0" y="372.0" width="472.0" height="8.0" rx="12" fill="#C7DBEA" stroke="#9FB2C4" stroke-width="1"/>
+<rect x="916.0" y="384.0" width="414.0" height="8.0" rx="12" fill="#C7DBEA" stroke="#9FB2C4" stroke-width="1"/>
+<rect x="974.0" y="396.0" width="356.0" height="8.0" rx="12" fill="#C7DBEA" stroke="#9FB2C4" stroke-width="1"/>
+<rect x="1032.0" y="408.0" width="298.0" height="8.0" rx="12" fill="#C7DBEA" stroke="#9FB2C4" stroke-width="1"/>
+<rect x="1090.0" y="420.0" width="240.0" height="8.0" rx="12" fill="#C7DBEA" stroke="#9FB2C4" stroke-width="1"/>
+<rect x="1148.0" y="432.0" width="182.0" height="8.0" rx="12" fill="#C7DBEA" stroke="#9FB2C4" stroke-width="1"/>
+<rect x="1206.0" y="444.0" width="124.0" height="8.0" rx="12" fill="#C7DBEA" stroke="#9FB2C4" stroke-width="1"/>
+<rect x="1264.0" y="456.0" width="66.0" height="8.0" rx="12" fill="#C7DBEA" stroke="#9FB2C4" stroke-width="1"/>
+<text x="1030.0" y="548.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="middle">移動しながら積み上げる / assembled while the web moves</text>
+<rect x="80.0" y="580.0" width="426.0" height="40.0" rx="3" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
+<text x="293.0" y="607.2" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="700" text-anchor="middle">観点 / aspect</text>
+<rect x="506.0" y="580.0" width="426.0" height="40.0" rx="3" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
+<text x="719.0" y="607.2" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="700" text-anchor="middle">エリア / area</text>
+<rect x="932.0" y="580.0" width="426.0" height="40.0" rx="3" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
+<text x="1145.0" y="607.2" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="700" text-anchor="middle">ライン / line</text>
+<rect x="80.0" y="620.0" width="426.0" height="40.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
+<text x="293.0" y="647.2" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">対象 / target</text>
+<rect x="506.0" y="620.0" width="426.0" height="40.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
+<text x="719.0" y="647.2" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">停止・間欠</text>
+<rect x="932.0" y="620.0" width="426.0" height="40.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
+<text x="1145.0" y="647.2" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">連続搬送</text>
+<rect x="80.0" y="660.0" width="426.0" height="40.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
+<text x="293.0" y="687.2" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">画像 / image</text>
+<rect x="506.0" y="660.0" width="426.0" height="40.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
+<text x="719.0" y="687.2" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">2次元フレーム</text>
+<rect x="932.0" y="660.0" width="426.0" height="40.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
+<text x="1145.0" y="687.2" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">ラインの連結</text>
+<rect x="80.0" y="700.0" width="426.0" height="40.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
+<text x="293.0" y="727.2" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">同期 / sync</text>
+<rect x="506.0" y="700.0" width="426.0" height="40.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
+<text x="719.0" y="727.2" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">トリガ</text>
+<rect x="932.0" y="700.0" width="426.0" height="40.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
+<text x="1145.0" y="727.2" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">移動と露光の同期</text>
+<text x="80.0" y="756.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#A32B2B" font-weight="700" text-anchor="start">ラインスキャンが常に優れているわけではありません。速度・照明・対象で選びます。</text>
+<rect x="56.0" y="804.0" width="1328.0" height="60.0" rx="10" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
+<text x="76.0" y="838.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#142B3F" font-weight="700" text-anchor="start">連続シートではラインスキャンが候補になりますが、万能ではありません。</text>
+<text x="76.0" y="860.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14.5" fill="#526378" font-weight="400" text-anchor="start">Line scan is a candidate for continuous webs, not a universal answer.</text>
+<text x="1400" y="912" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" text-anchor="end">D09-02 • 編集可能な図 / editable SVG</text>
+</svg>

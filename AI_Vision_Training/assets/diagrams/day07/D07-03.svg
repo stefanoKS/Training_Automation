@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="880" viewBox="0 0 1440 880" role="img" aria-labelledby="title desc"><title id="title">回転運動と直線運動 / Linear versus rotational motion</title><desc id="desc">回転運動と直線運動 / Linear versus rotational motion — editable bilingual training diagram for DAY 07 / MOTION.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#2563A6"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#A32B2B"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#1B7A4B"/></marker></defs><rect x="0" y="0" width="1440" height="880" fill="#F5F8FC"/><rect x="0" y="0" width="1440" height="12" fill="#2563A6"/>
+<text x="56.0" y="56.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#2563A6" font-weight="700" text-anchor="start">DAY 07 / MOTION</text>
+<text x="56.0" y="104.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="32" fill="#142B3F" font-weight="700" text-anchor="start">回転運動と直線運動</text>
+<text x="56.0" y="144.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="26" fill="#526378" font-weight="400" text-anchor="start">Linear versus rotational motion</text>
+<rect x="80.0" y="186.0" width="610.0" height="300.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<text x="110.0" y="224.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21" fill="#2563A6" font-weight="700" text-anchor="start">回転運動 / rotational motion</text>
+<circle cx="250.0" cy="340.0" r="86.0" fill="#E8F1FA" stroke="#2563A6" stroke-width="3"/>
+<circle cx="250.0" cy="340.0" r="8.0" fill="#2563A6" stroke="#2563A6" stroke-width="1"/>
+<path d="M250 240 A100 100 0 0 1 344 330" fill="none" stroke="#B4541E" stroke-width="4" marker-end="url(#arrow)"/>
+<text x="250.0" y="462.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#526378" font-weight="400" text-anchor="middle">角度 θ・回転数 rpm / angle and rpm</text>
+<path d="M268.0 340.0 L330.0 340.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<text x="334.0" y="334.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="20" fill="#142B3F" font-weight="700" text-anchor="start">r</text>
+<text x="360.0" y="250.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="700" text-anchor="start">同じ点が円を描く</text>
+<text x="360.0" y="274.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start">a point traces a circle</text>
+<text x="360.0" y="306.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="700" text-anchor="start">単位：度・回転/分</text>
+<text x="360.0" y="330.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start">units: degrees, rpm</text>
+<rect x="710.0" y="186.0" width="650.0" height="300.0" rx="12" fill="#FFFFFF" stroke="#1B7A4B" stroke-width="2"/>
+<text x="740.0" y="224.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21" fill="#1B7A4B" font-weight="700" text-anchor="start">直線運動 / linear motion</text>
+<rect x="780.0" y="330.0" width="500.0" height="20.0" rx="2" fill="#B9C8D6" stroke="#8497A8" stroke-width="1"/>
+<rect x="830.0" y="300.0" width="90.0" height="80.0" rx="12" fill="#E8F1FA" stroke="#1B7A4B" stroke-width="3"/>
+<path d="M950.0 340.0 L1240.0 340.0" fill="none" stroke="#1B7A4B" stroke-width="4" marker-end="url(#arrow)"/>
+<text x="1090.0" y="318.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#1B7A4B" font-weight="700" text-anchor="middle">変位 d / displacement</text>
+<text x="800.0" y="462.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#526378" font-weight="400" text-anchor="start">速度 = 変位 ÷ 時間 / speed = displacement ÷ time</text>
+<text x="740.0" y="262.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="700" text-anchor="start">まっすぐ動く</text>
+<text x="740.0" y="286.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start">moves in a straight line</text>
+<text x="80.0" y="528.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="20" fill="#142B3F" font-weight="700" text-anchor="start">比較 / comparison</text>
+<rect x="80.0" y="556.0" width="400.0" height="42.0" rx="3" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
+<text x="280.0" y="584.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="700" text-anchor="middle">量 / quantity</text>
+<rect x="480.0" y="556.0" width="400.0" height="42.0" rx="3" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
+<text x="680.0" y="584.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="700" text-anchor="middle">回転 / rotation</text>
+<rect x="880.0" y="556.0" width="400.0" height="42.0" rx="3" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
+<text x="1080.0" y="584.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="700" text-anchor="middle">直線 / linear</text>
+<rect x="80.0" y="598.0" width="400.0" height="42.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
+<text x="280.0" y="626.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">位置 / position</text>
+<rect x="480.0" y="598.0" width="400.0" height="42.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
+<text x="680.0" y="626.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">角度 θ / angle</text>
+<rect x="880.0" y="598.0" width="400.0" height="42.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
+<text x="1080.0" y="626.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">距離 d / distance</text>
+<rect x="80.0" y="640.0" width="400.0" height="42.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
+<text x="280.0" y="668.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">速さ / rate</text>
+<rect x="480.0" y="640.0" width="400.0" height="42.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
+<text x="680.0" y="668.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">rpm・rad/s</text>
+<rect x="880.0" y="640.0" width="400.0" height="42.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
+<text x="1080.0" y="668.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">mm/s・m/min</text>
+<rect x="80.0" y="682.0" width="400.0" height="42.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
+<text x="280.0" y="710.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">加速度 / acceleration</text>
+<rect x="480.0" y="682.0" width="400.0" height="42.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
+<text x="680.0" y="710.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">角加速度</text>
+<rect x="880.0" y="682.0" width="400.0" height="42.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
+<text x="1080.0" y="710.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">m/s² / linear</text>
+<rect x="56.0" y="764.0" width="1328.0" height="60.0" rx="10" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
+<text x="76.0" y="798.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#142B3F" font-weight="700" text-anchor="start">回転はローラで直線のシート移動に変換されます。</text>
+<text x="76.0" y="820.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14.5" fill="#526378" font-weight="400" text-anchor="start">Rotation becomes straight sheet travel through rollers.</text>
+<text x="1400" y="872" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" text-anchor="end">D07-03 • 編集可能な図 / editable SVG</text>
+</svg>

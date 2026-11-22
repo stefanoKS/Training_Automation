@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="960" viewBox="0 0 1440 960" role="img" aria-labelledby="title desc"><title id="title">センサの分類 / Sensor taxonomy</title><desc id="desc">センサの分類 / Sensor taxonomy — editable bilingual training diagram for DAY 07 / SENSORS.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#2563A6"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#A32B2B"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#1B7A4B"/></marker></defs><rect x="0" y="0" width="1440" height="960" fill="#F5F8FC"/><rect x="0" y="0" width="1440" height="12" fill="#2563A6"/>
+<text x="56.0" y="56.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#2563A6" font-weight="700" text-anchor="start">DAY 07 / SENSORS</text>
+<text x="56.0" y="104.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="32" fill="#142B3F" font-weight="700" text-anchor="start">センサの分類</text>
+<text x="56.0" y="144.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="26" fill="#526378" font-weight="400" text-anchor="start">Sensor taxonomy</text>
+<rect x="80.0" y="186.0" width="1280.0" height="96.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<rect x="80.0" y="196.0" width="7.0" height="76.0" rx="3" fill="#2563A6" stroke="#2563A6" stroke-width="0"/>
+<text x="102.0" y="233.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">物理量を情報に変える / a sensor converts a physical condition into usable information</text>
+<text x="102.0" y="255.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">検出（あり/なし）と計測（連続値）を区別します / separate detection from measurement</text>
+<rect x="80.0" y="312.0" width="610.0" height="120.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<rect x="80.0" y="322.0" width="7.0" height="100.0" rx="3" fill="#2563A6" stroke="#2563A6" stroke-width="0"/>
+<text x="102.0" y="361.7" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">接触式</text>
+<text x="102.0" y="383.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">Contact type</text>
+<text x="102.0" y="401.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">機械スイッチ・リミットスイッチ / mechanical and limit switches</text>
+<rect x="750.0" y="312.0" width="610.0" height="120.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<rect x="750.0" y="322.0" width="7.0" height="100.0" rx="3" fill="#2563A6" stroke="#2563A6" stroke-width="0"/>
+<text x="772.0" y="351.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">非接触式</text>
+<text x="772.0" y="373.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">Non-contact type</text>
+<text x="772.0" y="391.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">光・磁気・静電・超音波・回転 / optical, magnetic, capacitive,</text>
+<text x="772.0" y="409.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">ultrasonic, rotary</text>
+<rect x="80.0" y="456.0" width="290.0" height="130.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<rect x="80.0" y="466.0" width="7.0" height="110.0" rx="3" fill="#1B7A4B" stroke="#1B7A4B" stroke-width="0"/>
+<text x="102.0" y="500.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">光電センサ</text>
+<text x="102.0" y="522.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">Photoelectric</text>
+<text x="102.0" y="540.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">透過・反射・拡散 / through,</text>
+<text x="102.0" y="558.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">retro, diffuse</text>
+<rect x="410.0" y="456.0" width="290.0" height="130.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<rect x="410.0" y="466.0" width="7.0" height="110.0" rx="3" fill="#1B7A4B" stroke="#1B7A4B" stroke-width="0"/>
+<text x="432.0" y="500.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">誘導形近接</text>
+<text x="432.0" y="522.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">Inductive</text>
+<text x="432.0" y="540.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">主に金属を検出 / mainly metal</text>
+<text x="432.0" y="558.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">targets</text>
+<rect x="740.0" y="456.0" width="290.0" height="130.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<rect x="740.0" y="466.0" width="7.0" height="110.0" rx="3" fill="#1B7A4B" stroke="#1B7A4B" stroke-width="0"/>
+<text x="762.0" y="500.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">静電容量形</text>
+<text x="762.0" y="522.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">Capacitive</text>
+<text x="762.0" y="540.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">材質を選びにくい / less</text>
+<text x="762.0" y="558.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">material-specific</text>
+<rect x="1070.0" y="456.0" width="290.0" height="130.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<rect x="1070.0" y="466.0" width="7.0" height="110.0" rx="3" fill="#1B7A4B" stroke="#1B7A4B" stroke-width="0"/>
+<text x="1092.0" y="491.2" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">超音波</text>
+<text x="1092.0" y="512.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">Ultrasonic</text>
+<text x="1092.0" y="530.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">距離・透明物に有効な場合 /</text>
+<text x="1092.0" y="548.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">distance and some transparent</text>
+<text x="1092.0" y="566.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">targets</text>
+<rect x="80.0" y="610.0" width="290.0" height="130.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<rect x="80.0" y="620.0" width="7.0" height="110.0" rx="3" fill="#B4541E" stroke="#B4541E" stroke-width="0"/>
+<text x="102.0" y="654.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">ロータリエンコーダ</text>
+<text x="102.0" y="676.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">Rotary encoder</text>
+<text x="102.0" y="694.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">回転量・位置 / rotation and</text>
+<text x="102.0" y="712.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">position</text>
+<rect x="410.0" y="610.0" width="290.0" height="130.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<rect x="410.0" y="620.0" width="7.0" height="110.0" rx="3" fill="#B4541E" stroke="#B4541E" stroke-width="0"/>
+<text x="432.0" y="664.7" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">リニアスケール</text>
+<text x="432.0" y="686.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">Linear scale</text>
+<text x="432.0" y="704.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">直線位置 / linear position</text>
+<rect x="740.0" y="610.0" width="290.0" height="130.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<rect x="740.0" y="620.0" width="7.0" height="110.0" rx="3" fill="#B4541E" stroke="#B4541E" stroke-width="0"/>
+<text x="762.0" y="664.7" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">温度センサ</text>
+<text x="762.0" y="686.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">Temperature sensor</text>
+<text x="762.0" y="704.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">熱の監視 / thermal monitoring</text>
+<rect x="1070.0" y="610.0" width="290.0" height="130.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<rect x="1070.0" y="620.0" width="7.0" height="110.0" rx="3" fill="#B4541E" stroke="#B4541E" stroke-width="0"/>
+<text x="1092.0" y="654.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">圧力・荷重</text>
+<text x="1092.0" y="676.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">Pressure and load</text>
+<text x="1092.0" y="694.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">張力の目安 / tension</text>
+<text x="1092.0" y="712.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">indication</text>
+<text x="80.0" y="776.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#142B3F" font-weight="700" text-anchor="start">センサは対象材質・環境・必要精度・PLCの入力方式で選びます。</text>
+<text x="80.0" y="800.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start">Select sensors by target material, environment, required precision and the PLC input type.</text>
+<rect x="56.0" y="844.0" width="1328.0" height="60.0" rx="10" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
+<text x="76.0" y="878.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#142B3F" font-weight="700" text-anchor="start">「どのセンサでも同じように検出できる」とは限りません。</text>
+<text x="76.0" y="900.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14.5" fill="#526378" font-weight="400" text-anchor="start">No single sensor detects every material equally well.</text>
+<text x="1400" y="952" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" text-anchor="end">D07-08 • 編集可能な図 / editable SVG</text>
+</svg>

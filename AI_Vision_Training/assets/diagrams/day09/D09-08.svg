@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="940" viewBox="0 0 1440 940" role="img" aria-labelledby="title desc"><title id="title">YOLOとPatchCoreの出力の違い / YOLO versus PatchCore inference outputs</title><desc id="desc">YOLOとPatchCoreの出力の違い / YOLO versus PatchCore inference outputs — editable bilingual training diagram for DAY 09 / MODEL OUTPUTS.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#2563A6"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#A32B2B"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#1B7A4B"/></marker></defs><rect x="0" y="0" width="1440" height="940" fill="#F5F8FC"/><rect x="0" y="0" width="1440" height="12" fill="#2563A6"/>
+<text x="56.0" y="56.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#2563A6" font-weight="700" text-anchor="start">DAY 09 / MODEL OUTPUTS</text>
+<text x="56.0" y="104.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="32" fill="#142B3F" font-weight="700" text-anchor="start">YOLOとPatchCoreの出力の違い</text>
+<text x="56.0" y="144.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="26" fill="#526378" font-weight="400" text-anchor="start">YOLO versus PatchCore inference outputs</text>
+<rect x="80.0" y="190.0" width="610.0" height="340.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<text x="104.0" y="226.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#2563A6" font-weight="700" text-anchor="start">YOLO：学習した種類の検出</text>
+<text x="104.0" y="250.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start">YOLO: detection of learned classes</text>
+<rect x="120.0" y="272.0" width="530.0" height="190.0" rx="6" fill="#EDEDE3" stroke="#C9C9B8" stroke-width="2"/>
+<rect x="210.0" y="316.0" width="150.0" height="110.0" rx="12" fill="none" stroke="#1B7A4B" stroke-width="3"/>
+<text x="214.0" y="306.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#1B7A4B" font-weight="700" text-anchor="start">scratch 0.91</text>
+<rect x="400.0" y="340.0" width="120.0" height="80.0" rx="12" fill="none" stroke="#B4541E" stroke-width="3"/>
+<text x="404.0" y="330.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#B4541E" font-weight="700" text-anchor="start">spot 0.77</text>
+<text x="120.0" y="486.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#142B3F" font-weight="700" text-anchor="start">クラス・枠・信頼度 / class, box, score</text>
+<text x="120.0" y="510.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start">未知の欠陥は検出できないことがあります</text>
+<rect x="750.0" y="190.0" width="610.0" height="340.0" rx="12" fill="#FFFFFF" stroke="#B4541E" stroke-width="2"/>
+<text x="774.0" y="226.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#B4541E" font-weight="700" text-anchor="start">PatchCore：正常との差分</text>
+<text x="774.0" y="250.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start">PatchCore: difference from normal examples</text>
+<rect x="790.0" y="272.0" width="530.0" height="190.0" rx="6" fill="#EDEDE3" stroke="#C9C9B8" stroke-width="2"/>
+<circle cx="880.0" cy="340.0" r="60.0" fill="#F3C08A" stroke="#C97B3B" stroke-width="2"/>
+<circle cx="1030.0" cy="400.0" r="46.0" fill="#E38E5A" stroke="#C97B3B" stroke-width="2"/>
+<circle cx="1180.0" cy="330.0" r="70.0" fill="#F7D9B4" stroke="#C97B3B" stroke-width="2"/>
+<text x="790.0" y="486.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#142B3F" font-weight="700" text-anchor="start">異常スコア・異常マップ / score and anomaly map</text>
+<text x="790.0" y="510.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start">原因や欠陥名は直接は示しません</text>
+<rect x="80.0" y="560.0" width="426.0" height="40.0" rx="3" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
+<text x="293.0" y="587.2" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="700" text-anchor="middle">観点 / aspect</text>
+<rect x="506.0" y="560.0" width="426.0" height="40.0" rx="3" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
+<text x="719.0" y="587.2" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="700" text-anchor="middle">YOLO</text>
+<rect x="932.0" y="560.0" width="426.0" height="40.0" rx="3" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
+<text x="1145.0" y="587.2" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="700" text-anchor="middle">PatchCore</text>
+<rect x="80.0" y="600.0" width="426.0" height="40.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
+<text x="293.0" y="627.2" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">学習 / training</text>
+<rect x="506.0" y="600.0" width="426.0" height="40.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
+<text x="719.0" y="627.2" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">ラベル付き画像</text>
+<rect x="932.0" y="600.0" width="426.0" height="40.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
+<text x="1145.0" y="627.2" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">正常画像のみ</text>
+<rect x="80.0" y="640.0" width="426.0" height="40.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
+<text x="293.0" y="667.2" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">出力 / output</text>
+<rect x="506.0" y="640.0" width="426.0" height="40.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
+<text x="719.0" y="667.2" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">種類・位置・信頼度</text>
+<rect x="932.0" y="640.0" width="426.0" height="40.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
+<text x="1145.0" y="667.2" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">スコア・位置の目安</text>
+<rect x="80.0" y="680.0" width="426.0" height="40.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
+<text x="293.0" y="707.2" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">閾値 / threshold</text>
+<rect x="506.0" y="680.0" width="426.0" height="40.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
+<text x="719.0" y="707.2" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">検出閾値</text>
+<rect x="932.0" y="680.0" width="426.0" height="40.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
+<text x="1145.0" y="707.2" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">異常閾値</text>
+<rect x="80.0" y="720.0" width="426.0" height="40.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
+<text x="293.0" y="747.2" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">限界 / limit</text>
+<rect x="506.0" y="720.0" width="426.0" height="40.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
+<text x="719.0" y="747.2" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">未知クラス</text>
+<rect x="932.0" y="720.0" width="426.0" height="40.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
+<text x="1145.0" y="747.2" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">原因の説明</text>
+<text x="80.0" y="776.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#A32B2B" font-weight="700" text-anchor="start">スコアは校正済みの確率ではありません。合格判定には別の基準が必要です。</text>
+<rect x="56.0" y="824.0" width="1328.0" height="60.0" rx="10" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
+<text x="76.0" y="858.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#142B3F" font-weight="700" text-anchor="start">2つのモデルを併用するときは、判定方針を文書で決めます。</text>
+<text x="76.0" y="880.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14.5" fill="#526378" font-weight="400" text-anchor="start">When combining models, define the decision policy in writing.</text>
+<text x="1400" y="932" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" text-anchor="end">D09-08 • 編集可能な図 / editable SVG</text>
+</svg>

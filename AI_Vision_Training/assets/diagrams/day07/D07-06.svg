@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="840" viewBox="0 0 1440 840" role="img" aria-labelledby="title desc"><title id="title">機械式の動力伝達 / Mechanical power transmission</title><desc id="desc">機械式の動力伝達 / Mechanical power transmission — editable bilingual training diagram for DAY 07 / POWER TRANSMISSION.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#2563A6"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#A32B2B"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#1B7A4B"/></marker></defs><rect x="0" y="0" width="1440" height="840" fill="#F5F8FC"/><rect x="0" y="0" width="1440" height="12" fill="#2563A6"/>
+<text x="56.0" y="56.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#2563A6" font-weight="700" text-anchor="start">DAY 07 / POWER TRANSMISSION</text>
+<text x="56.0" y="104.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="32" fill="#142B3F" font-weight="700" text-anchor="start">機械式の動力伝達</text>
+<text x="56.0" y="144.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="26" fill="#526378" font-weight="400" text-anchor="start">Mechanical power transmission</text>
+<rect x="80.0" y="190.0" width="190.0" height="116.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<rect x="80.0" y="200.0" width="7.0" height="96.0" rx="3" fill="#2563A6" stroke="#2563A6" stroke-width="0"/>
+<text x="102.0" y="247.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">モータ</text>
+<text x="102.0" y="269.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">Motor</text>
+<path d="M274.0 248.0 L296.0 248.0" fill="none" stroke="#2563A6" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="298.0" y="190.0" width="190.0" height="116.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<rect x="298.0" y="200.0" width="7.0" height="96.0" rx="3" fill="#2563A6" stroke="#2563A6" stroke-width="0"/>
+<text x="320.0" y="247.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">カップリング</text>
+<text x="320.0" y="269.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">Coupling</text>
+<path d="M492.0 248.0 L514.0 248.0" fill="none" stroke="#2563A6" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="516.0" y="190.0" width="190.0" height="116.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<rect x="516.0" y="200.0" width="7.0" height="96.0" rx="3" fill="#2563A6" stroke="#2563A6" stroke-width="0"/>
+<text x="538.0" y="247.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">軸</text>
+<text x="538.0" y="269.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">Shaft</text>
+<path d="M710.0 248.0 L732.0 248.0" fill="none" stroke="#2563A6" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="734.0" y="190.0" width="190.0" height="116.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<rect x="734.0" y="200.0" width="7.0" height="96.0" rx="3" fill="#2563A6" stroke="#2563A6" stroke-width="0"/>
+<text x="756.0" y="247.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">プーリ</text>
+<text x="756.0" y="269.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">Pulley</text>
+<path d="M928.0 248.0 L950.0 248.0" fill="none" stroke="#2563A6" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="952.0" y="190.0" width="190.0" height="116.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<rect x="952.0" y="200.0" width="7.0" height="96.0" rx="3" fill="#2563A6" stroke="#2563A6" stroke-width="0"/>
+<text x="974.0" y="247.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">ベルト</text>
+<text x="974.0" y="269.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">Belt</text>
+<path d="M1146.0 248.0 L1168.0 248.0" fill="none" stroke="#2563A6" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="1170.0" y="190.0" width="190.0" height="116.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<rect x="1170.0" y="200.0" width="7.0" height="96.0" rx="3" fill="#2563A6" stroke="#2563A6" stroke-width="0"/>
+<text x="1192.0" y="247.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">ローラ</text>
+<text x="1192.0" y="269.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">Roller</text>
+<text x="80.0" y="352.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#2563A6" font-weight="700" text-anchor="start">動力の流れ / power flow</text>
+<text x="150.0" y="382.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#142B3F" font-weight="700" text-anchor="middle">回転を作る</text>
+<text x="150.0" y="404.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="middle">creates rotation</text>
+<text x="365.0" y="382.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#142B3F" font-weight="700" text-anchor="middle">心を合わせて伝える</text>
+<text x="365.0" y="404.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="middle">aligns and transmits</text>
+<text x="580.0" y="382.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#142B3F" font-weight="700" text-anchor="middle">回転を運ぶ</text>
+<text x="580.0" y="404.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="middle">carries rotation</text>
+<text x="795.0" y="382.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#142B3F" font-weight="700" text-anchor="middle">径の比で速度を変える</text>
+<text x="795.0" y="404.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="middle">changes speed by radius ratio</text>
+<text x="1010.0" y="382.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#142B3F" font-weight="700" text-anchor="middle">摩擦で伝える</text>
+<text x="1010.0" y="404.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="middle">transmits by friction</text>
+<text x="1225.0" y="382.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#142B3F" font-weight="700" text-anchor="middle">シートに接触する</text>
+<text x="1225.0" y="404.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="middle">contacts the sheet</text>
+<rect x="80.0" y="440.0" width="600.0" height="190.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<text x="104.0" y="476.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#2563A6" font-weight="700" text-anchor="start">速度比 / speed ratio</text>
+<text x="104.0" y="514.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="24" fill="#142B3F" font-weight="700" text-anchor="start">n2 / n1 = D1 / D2</text>
+<text x="104.0" y="550.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#526378" font-weight="400" text-anchor="start">大きいプーリが駆動なら従動側は速くなる</text>
+<text x="104.0" y="578.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start">a larger driving pulley speeds up the driven one</text>
+<text x="104.0" y="610.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start">（滑りのない仮定 / assuming no slip）</text>
+<rect x="712.0" y="440.0" width="648.0" height="190.0" rx="12" fill="#E8F1FA" stroke="#2563A6" stroke-width="2"/>
+<text x="736.0" y="476.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#2563A6" font-weight="700" text-anchor="start">点検の観点 / what to inspect</text>
+<text x="736.0" y="510.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#142B3F" font-weight="400" text-anchor="start">・ベルト張力 / belt tension</text>
+<text x="736.0" y="538.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#142B3F" font-weight="400" text-anchor="start">・芯合わせ / alignment</text>
+<text x="736.0" y="566.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#142B3F" font-weight="400" text-anchor="start">・異音・発熱 / noise and heat</text>
+<text x="736.0" y="594.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#142B3F" font-weight="400" text-anchor="start">・潤滑と摩耗 / lubrication and wear</text>
+<text x="80.0" y="668.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#142B3F" font-weight="700" text-anchor="start">機械式伝達は簡単ですが、滑り・伸び・摩耗で速度が変わります。</text>
+<text x="80.0" y="694.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#526378" font-weight="400" text-anchor="start">Mechanical drives are simple, but slip, stretch and wear change the actual speed.</text>
+<rect x="56.0" y="724.0" width="1328.0" height="60.0" rx="10" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
+<text x="76.0" y="758.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#142B3F" font-weight="700" text-anchor="start">指令した回転数と実際のシート速度は別に確認します。</text>
+<text x="76.0" y="780.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14.5" fill="#526378" font-weight="400" text-anchor="start">Commanded rpm and actual sheet speed are checked separately.</text>
+<text x="1400" y="832" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" text-anchor="end">D07-06 • 編集可能な図 / editable SVG</text>
+</svg>

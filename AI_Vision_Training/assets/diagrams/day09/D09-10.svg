@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900" role="img" aria-labelledby="title desc"><title id="title">欠陥位置とマーキングの同期 / Defect-position and marking synchronization</title><desc id="desc">欠陥位置とマーキングの同期 / Defect-position and marking synchronization — editable bilingual training diagram for DAY 09 / POSITION TRACKING.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#2563A6"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#A32B2B"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#1B7A4B"/></marker></defs><rect x="0" y="0" width="1440" height="900" fill="#F5F8FC"/><rect x="0" y="0" width="1440" height="12" fill="#2563A6"/>
+<text x="56.0" y="56.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#2563A6" font-weight="700" text-anchor="start">DAY 09 / POSITION TRACKING</text>
+<text x="56.0" y="104.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="32" fill="#142B3F" font-weight="700" text-anchor="start">欠陥位置とマーキングの同期</text>
+<text x="56.0" y="144.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="26" fill="#526378" font-weight="400" text-anchor="start">Defect-position and marking synchronization</text>
+<rect x="80.0" y="212.0" width="1280.0" height="26.0" rx="2" fill="#D9C9A8" stroke="#B9A57C" stroke-width="1"/>
+<path d="M100.0 198.0 L1320.0 198.0" fill="none" stroke="#526378" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="120.0" y="188.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#526378" font-weight="700" text-anchor="start">材料の移動方向 / web travel</text>
+<rect x="240.0" y="262.0" width="240.0" height="90.0" rx="8" fill="#E8F1FA" stroke="#1B7A4B" stroke-width="2"/>
+<text x="360.0" y="298.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#1B7A4B" font-weight="700" text-anchor="middle">検査点</text>
+<text x="360.0" y="322.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="middle">inspection point</text>
+<path d="M360.0 238.0 L360.0 258.0" fill="none" stroke="#1B7A4B" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="820.0" y="262.0" width="240.0" height="90.0" rx="8" fill="#F2E7D2" stroke="#B4541E" stroke-width="2"/>
+<text x="940.0" y="298.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#B4541E" font-weight="700" text-anchor="middle">マーキング点</text>
+<text x="940.0" y="322.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="middle">marking station</text>
+<path d="M940.0 238.0 L940.0 258.0" fill="none" stroke="#B4541E" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M360.0 412.0 L940.0 412.0" fill="none" stroke="#A32B2B" stroke-width="3"/>
+<text x="650.0" y="400.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#A32B2B" font-weight="700" text-anchor="middle">既知の距離 L（仮定）/ known distance L (hypothetical)</text>
+<rect x="360.0" y="442.0" width="16.0" height="26.0" rx="12" fill="#A32B2B" stroke="#A32B2B" stroke-width="1"/>
+<text x="388.0" y="460.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#142B3F" font-weight="400" text-anchor="start">欠陥発生位置（エンコーダ値で記録）</text>
+<rect x="80.0" y="502.0" width="620.0" height="160.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<text x="104.0" y="536.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#2563A6" font-weight="700" text-anchor="start">計算の例 / calculation example</text>
+<text x="104.0" y="568.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="start">速度 0.5 m/s、結果遅延 0.12 s → 60 mm 移動</text>
+<text x="104.0" y="596.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="700" text-anchor="start">0.5 × 0.12 = 0.06 m = 60 mm</text>
+<text x="104.0" y="628.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#A32B2B" font-weight="700" text-anchor="start">移動量は「位置ずれ誤差」と同じではありません</text>
+<rect x="732.0" y="502.0" width="628.0" height="160.0" rx="12" fill="#E8F1FA" stroke="#2563A6" stroke-width="2"/>
+<text x="756.0" y="536.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#2563A6" font-weight="700" text-anchor="start">同期に必要な情報 / what sync needs</text>
+<text x="756.0" y="568.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="400" text-anchor="start">・エンコーダ位置 / encoder position</text>
+<text x="756.0" y="594.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="400" text-anchor="start">・可変速度 / variable speed</text>
+<text x="756.0" y="620.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="400" text-anchor="start">・処理遅延 / processing delay</text>
+<text x="756.0" y="646.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="400" text-anchor="start">・動作遅延 / actuation delay</text>
+<text x="80.0" y="710.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#B4541E" font-weight="700" text-anchor="start">一定速度だけで設計すると、加減速時に位置がずれます。</text>
+<text x="80.0" y="736.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start">Designing for constant speed alone causes position error during acceleration.</text>
+<rect x="56.0" y="784.0" width="1328.0" height="60.0" rx="10" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
+<text x="76.0" y="818.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#142B3F" font-weight="700" text-anchor="start">位置追跡・処理遅延・判断可能時刻・動作時刻を分けて扱います。</text>
+<text x="76.0" y="840.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14.5" fill="#526378" font-weight="400" text-anchor="start">Treat tracking, delay, decision time and action time separately.</text>
+<text x="1400" y="892" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" text-anchor="end">D09-10 • 編集可能な図 / editable SVG</text>
+</svg>

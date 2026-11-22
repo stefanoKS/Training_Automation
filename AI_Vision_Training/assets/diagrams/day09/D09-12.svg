@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="960" viewBox="0 0 1440 960" role="img" aria-labelledby="title desc"><title id="title">故障時の品質判断と受入確認 / Fault handling, quality decision and acceptance checks</title><desc id="desc">故障時の品質判断と受入確認 / Fault handling, quality decision and acceptance checks — editable bilingual training diagram for DAY 09 / FAULT HANDLING.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#2563A6"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#A32B2B"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#1B7A4B"/></marker></defs><rect x="0" y="0" width="1440" height="960" fill="#F5F8FC"/><rect x="0" y="0" width="1440" height="12" fill="#2563A6"/>
+<text x="56.0" y="56.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#2563A6" font-weight="700" text-anchor="start">DAY 09 / FAULT HANDLING</text>
+<text x="56.0" y="104.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="32" fill="#142B3F" font-weight="700" text-anchor="start">故障時の品質判断と受入確認</text>
+<text x="56.0" y="144.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="26" fill="#526378" font-weight="400" text-anchor="start">Fault handling, quality decision and acceptance checks</text>
+<rect x="420.0" y="186.0" width="600.0" height="84.0" rx="10" fill="#E8F1FA" stroke="#2563A6" stroke-width="2"/>
+<text x="720.0" y="222.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#2563A6" font-weight="700" text-anchor="middle">検査ユニットの結果</text>
+<text x="720.0" y="248.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="middle">inspection unit result</text>
+<path d="M720.0 270.0 L720.0 300.0" fill="none" stroke="#2563A6" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M720.0 300.0 L720.0 320.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<path d="M220.0 320.0 L220.0 348.0" fill="none" stroke="#2563A6" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M720.0 320.0 L220.0 320.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<rect x="80.0" y="348.0" width="280.0" height="130.0" rx="12" fill="#FFFFFF" stroke="#1B7A4B" stroke-width="3"/>
+<text x="100.0" y="384.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#1B7A4B" font-weight="700" text-anchor="start">有効・OK</text>
+<text x="100.0" y="408.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">valid OK</text>
+<text x="100.0" y="440.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="700" text-anchor="start">記録して次へ</text>
+<text x="100.0" y="462.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#526378" font-weight="400" text-anchor="start">record and continue</text>
+<path d="M720.0 300.0 L720.0 320.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<path d="M530.0 320.0 L530.0 348.0" fill="none" stroke="#2563A6" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M720.0 320.0 L530.0 320.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<rect x="390.0" y="348.0" width="280.0" height="130.0" rx="12" fill="#FFFFFF" stroke="#B4541E" stroke-width="3"/>
+<text x="410.0" y="384.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#B4541E" font-weight="700" text-anchor="start">有効・NG</text>
+<text x="410.0" y="408.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">valid NG</text>
+<text x="410.0" y="440.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="700" text-anchor="start">記録・通知・下流対応</text>
+<text x="410.0" y="462.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#526378" font-weight="400" text-anchor="start">record, notify, downstream action</text>
+<path d="M720.0 300.0 L720.0 320.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<path d="M840.0 320.0 L840.0 348.0" fill="none" stroke="#2563A6" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M720.0 320.0 L840.0 320.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<rect x="700.0" y="348.0" width="280.0" height="130.0" rx="12" fill="#FFFFFF" stroke="#A32B2B" stroke-width="3"/>
+<text x="720.0" y="384.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#A32B2B" font-weight="700" text-anchor="start">無効</text>
+<text x="720.0" y="408.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">invalid</text>
+<text x="720.0" y="440.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="700" text-anchor="start">保留・人による確認</text>
+<text x="720.0" y="462.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#526378" font-weight="400" text-anchor="start">hold and human review</text>
+<path d="M720.0 300.0 L720.0 320.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<path d="M1150.0 320.0 L1150.0 348.0" fill="none" stroke="#2563A6" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M720.0 320.0 L1150.0 320.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<rect x="1010.0" y="348.0" width="280.0" height="130.0" rx="12" fill="#FFFFFF" stroke="#6B3FA0" stroke-width="3"/>
+<text x="1030.0" y="384.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#6B3FA0" font-weight="700" text-anchor="start">タイムアウト／通信断</text>
+<text x="1030.0" y="408.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">timeout / comm. loss</text>
+<text x="1030.0" y="440.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="700" text-anchor="start">良品にしない・原因確認</text>
+<text x="1030.0" y="462.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#526378" font-weight="400" text-anchor="start">never OK; find the cause</text>
+<rect x="80.0" y="506.0" width="1280.0" height="120.0" rx="8" fill="#E8F1FA" stroke="#A32B2B" stroke-width="2"/>
+<text x="104.0" y="540.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="20" fill="#A32B2B" font-weight="700" text-anchor="start">必須の原則：有効でないAI結果を、黙って良品にしてはいけません。</text>
+<text x="104.0" y="568.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#526378" font-weight="400" text-anchor="start">Mandatory rule: never silently convert an invalid AI result into product OK.</text>
+<text x="104.0" y="600.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#142B3F" font-weight="700" text-anchor="start">タイムアウト・画像なし・通信断・古いIDは、すべて「保留」として扱います。</text>
+<text x="80.0" y="664.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#2563A6" font-weight="700" text-anchor="start">受入確認の例 / acceptance checks (examples)</text>
+<text x="80.0" y="698.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="400" text-anchor="start">☐ 既知の良品・不良品で正しく判定 / known good and bad samples judged correctly</text>
+<text x="80.0" y="724.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="400" text-anchor="start">☐ 無効結果がOKにならない / invalid results never become OK</text>
+<text x="80.0" y="750.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="400" text-anchor="start">☐ 再起動後に古い結果を使わない / old results not reused after restart</text>
+<text x="80.0" y="776.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="400" text-anchor="start">☐ 故障注入で検出できる / fault injection is detected</text>
+<text x="80.0" y="802.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="400" text-anchor="start">☐ 安全系がAIと独立している / safety functions independent of AI</text>
+<rect x="56.0" y="844.0" width="1328.0" height="60.0" rx="10" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
+<text x="76.0" y="878.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#142B3F" font-weight="700" text-anchor="start">故障を想定した試験が、システムの信頼性を決めます。</text>
+<text x="76.0" y="900.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14.5" fill="#526378" font-weight="400" text-anchor="start">Fault-injection testing is what establishes trustworthiness.</text>
+<text x="1400" y="952" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" text-anchor="end">D09-12 • 編集可能な図 / editable SVG</text>
+</svg>

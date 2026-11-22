@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="860" viewBox="0 0 1440 860" role="img" aria-labelledby="title desc"><title id="title">PLCのスキャン（タスク実行）周期 / Simplified PLC scan/task cycle</title><desc id="desc">PLCのスキャン（タスク実行）周期 / Simplified PLC scan/task cycle — editable bilingual training diagram for DAY 08 / SCAN CYCLE.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#2563A6"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#A32B2B"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#1B7A4B"/></marker></defs><rect x="0" y="0" width="1440" height="860" fill="#F5F8FC"/><rect x="0" y="0" width="1440" height="12" fill="#2563A6"/>
+<text x="56.0" y="56.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#2563A6" font-weight="700" text-anchor="start">DAY 08 / SCAN CYCLE</text>
+<text x="56.0" y="104.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="32" fill="#142B3F" font-weight="700" text-anchor="start">PLCのスキャン（タスク実行）周期</text>
+<text x="56.0" y="144.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="26" fill="#526378" font-weight="400" text-anchor="start">Simplified PLC scan/task cycle</text>
+<rect x="420.0" y="210.0" width="280.0" height="120.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="3"/>
+<text x="560.0" y="258.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="20" fill="#2563A6" font-weight="700" text-anchor="middle">入力の取り込み</text>
+<text x="560.0" y="284.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#526378" font-weight="400" text-anchor="middle">input refresh</text>
+<rect x="420.0" y="400.0" width="280.0" height="120.0" rx="12" fill="#FFFFFF" stroke="#1B7A4B" stroke-width="3"/>
+<text x="560.0" y="448.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="20" fill="#1B7A4B" font-weight="700" text-anchor="middle">プログラム実行</text>
+<text x="560.0" y="474.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#526378" font-weight="400" text-anchor="middle">program execution</text>
+<rect x="420.0" y="590.0" width="280.0" height="110.0" rx="12" fill="#FFFFFF" stroke="#B4541E" stroke-width="3"/>
+<text x="560.0" y="636.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="20" fill="#B4541E" font-weight="700" text-anchor="middle">出力の更新</text>
+<text x="560.0" y="662.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#526378" font-weight="400" text-anchor="middle">output update</text>
+<path d="M570.0 334.0 L570.0 392.0" fill="none" stroke="#2563A6" stroke-width="3" marker-end="url(#arrow)"/>
+<path d="M570.0 524.0 L570.0 582.0" fill="none" stroke="#1B7A4B" stroke-width="3" marker-end="url(#arrow)"/>
+<path d="M420 645 C 240 645 240 270 412 270" fill="none" stroke="#B4541E" stroke-width="3" marker-end="url(#arrow)"/>
+<text x="250.0" y="452.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#B4541E" font-weight="700" text-anchor="start">繰り返し</text>
+<text x="250.0" y="476.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start">repeat</text>
+<rect x="780.0" y="240.0" width="580.0" height="200.0" rx="12" fill="#E8F1FA" stroke="#2563A6" stroke-width="2"/>
+<text x="804.0" y="276.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#2563A6" font-weight="700" text-anchor="start">重要な注意 / important caution</text>
+<text x="804.0" y="310.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#142B3F" font-weight="400" text-anchor="start">・周期の長さはCPU・設定・通信で変わります</text>
+<text x="804.0" y="336.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#142B3F" font-weight="400" text-anchor="start">・全てのPLCが同じ順序とは限りません</text>
+<text x="804.0" y="362.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#142B3F" font-weight="400" text-anchor="start">・通信の更新は別のタイミングの場合があります</text>
+<text x="804.0" y="388.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#142B3F" font-weight="400" text-anchor="start">・実際の順序はマニュアルで確認します</text>
+<text x="780.0" y="482.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#142B3F" font-weight="700" text-anchor="start">入力の変化が出力に反映されるまでに時間がかかります。</text>
+<text x="780.0" y="508.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#526378" font-weight="400" text-anchor="start">A change at an input takes time to appear at an output.</text>
+<text x="780.0" y="544.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#B4541E" font-weight="700" text-anchor="start">速い現象（欠陥通過・パルス）は取りこぼしに注意します。</text>
+<text x="780.0" y="570.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start">Fast events (defects passing, pulses) can be missed between scans.</text>
+<rect x="56.0" y="744.0" width="1328.0" height="60.0" rx="10" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
+<text x="76.0" y="778.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#142B3F" font-weight="700" text-anchor="start">スキャン時間は「応答時間」の一部です。</text>
+<text x="76.0" y="800.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14.5" fill="#526378" font-weight="400" text-anchor="start">Scan time is only part of total response time.</text>
+<text x="1400" y="852" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" text-anchor="end">D08-03 • 編集可能な図 / editable SVG</text>
+</svg>

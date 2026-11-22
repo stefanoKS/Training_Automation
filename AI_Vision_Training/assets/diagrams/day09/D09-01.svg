@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1080" viewBox="0 0 1440 1080" role="img" aria-labelledby="title desc"><title id="title">検査システムの全体アーキテクチャ / Complete inspection-system architecture</title><desc id="desc">検査システムの全体アーキテクチャ / Complete inspection-system architecture — editable bilingual training diagram for DAY 09 / SYSTEM ARCHITECTURE.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#2563A6"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#A32B2B"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#1B7A4B"/></marker></defs><rect x="0" y="0" width="1440" height="1080" fill="#F5F8FC"/><rect x="0" y="0" width="1440" height="12" fill="#2563A6"/>
+<text x="56.0" y="56.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#2563A6" font-weight="700" text-anchor="start">DAY 09 / SYSTEM ARCHITECTURE</text>
+<text x="56.0" y="104.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="32" fill="#142B3F" font-weight="700" text-anchor="start">検査システムの全体アーキテクチャ</text>
+<text x="56.0" y="144.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="26" fill="#526378" font-weight="400" text-anchor="start">Complete inspection-system architecture</text>
+<rect x="80.0" y="186.0" width="250.0" height="100.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<text x="104.0" y="228.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#2563A6" font-weight="700" text-anchor="start">機械</text>
+<text x="104.0" y="252.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">mechanics</text>
+<rect x="360.0" y="186.0" width="330.0" height="100.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<rect x="360.0" y="196.0" width="7.0" height="80.0" rx="3" fill="#2563A6" stroke="#2563A6" stroke-width="0"/>
+<text x="382.0" y="235.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">シート搬送</text>
+<text x="382.0" y="257.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">web transport</text>
+<rect x="710.0" y="186.0" width="330.0" height="100.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<rect x="710.0" y="196.0" width="7.0" height="80.0" rx="3" fill="#2563A6" stroke="#2563A6" stroke-width="0"/>
+<text x="732.0" y="235.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">ローラ</text>
+<text x="732.0" y="257.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">rollers</text>
+<rect x="1060.0" y="186.0" width="330.0" height="100.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<rect x="1060.0" y="196.0" width="7.0" height="80.0" rx="3" fill="#2563A6" stroke="#2563A6" stroke-width="0"/>
+<text x="1082.0" y="235.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">駆動</text>
+<text x="1082.0" y="257.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">drive</text>
+<rect x="80.0" y="302.0" width="250.0" height="100.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<text x="104.0" y="344.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#2563A6" font-weight="700" text-anchor="start">センサ</text>
+<text x="104.0" y="368.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">sensors</text>
+<rect x="360.0" y="302.0" width="330.0" height="100.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<rect x="360.0" y="312.0" width="7.0" height="80.0" rx="3" fill="#2563A6" stroke="#2563A6" stroke-width="0"/>
+<text x="382.0" y="351.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">材料有無</text>
+<text x="382.0" y="373.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">material presence</text>
+<rect x="710.0" y="302.0" width="330.0" height="100.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<rect x="710.0" y="312.0" width="7.0" height="80.0" rx="3" fill="#2563A6" stroke="#2563A6" stroke-width="0"/>
+<text x="732.0" y="351.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">エンコーダ</text>
+<text x="732.0" y="373.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">encoder</text>
+<rect x="1060.0" y="302.0" width="330.0" height="100.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<rect x="1060.0" y="312.0" width="7.0" height="80.0" rx="3" fill="#2563A6" stroke="#2563A6" stroke-width="0"/>
+<text x="1082.0" y="351.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">エッジ</text>
+<text x="1082.0" y="373.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">edge</text>
+<rect x="80.0" y="418.0" width="250.0" height="100.0" rx="12" fill="#FFFFFF" stroke="#1B7A4B" stroke-width="2"/>
+<text x="104.0" y="460.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#1B7A4B" font-weight="700" text-anchor="start">制御</text>
+<text x="104.0" y="484.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">control</text>
+<rect x="360.0" y="418.0" width="330.0" height="100.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<rect x="360.0" y="428.0" width="7.0" height="80.0" rx="3" fill="#1B7A4B" stroke="#1B7A4B" stroke-width="0"/>
+<text x="382.0" y="467.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">PLC</text>
+<text x="382.0" y="489.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">PLC</text>
+<rect x="710.0" y="418.0" width="330.0" height="100.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<rect x="710.0" y="428.0" width="7.0" height="80.0" rx="3" fill="#1B7A4B" stroke="#1B7A4B" stroke-width="0"/>
+<text x="732.0" y="467.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">HMI</text>
+<text x="732.0" y="489.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">HMI</text>
+<rect x="1060.0" y="418.0" width="330.0" height="100.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<rect x="1060.0" y="428.0" width="7.0" height="80.0" rx="3" fill="#1B7A4B" stroke="#1B7A4B" stroke-width="0"/>
+<text x="1082.0" y="467.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">安全系</text>
+<text x="1082.0" y="489.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">safety system</text>
+<rect x="80.0" y="534.0" width="250.0" height="100.0" rx="12" fill="#FFFFFF" stroke="#B4541E" stroke-width="2"/>
+<text x="104.0" y="576.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#B4541E" font-weight="700" text-anchor="start">画像</text>
+<text x="104.0" y="600.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">imaging</text>
+<rect x="360.0" y="534.0" width="330.0" height="100.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<rect x="360.0" y="544.0" width="7.0" height="80.0" rx="3" fill="#B4541E" stroke="#B4541E" stroke-width="0"/>
+<text x="382.0" y="583.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">カメラ</text>
+<text x="382.0" y="605.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">camera</text>
+<rect x="710.0" y="534.0" width="330.0" height="100.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<rect x="710.0" y="544.0" width="7.0" height="80.0" rx="3" fill="#B4541E" stroke="#B4541E" stroke-width="0"/>
+<text x="732.0" y="583.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">照明</text>
+<text x="732.0" y="605.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">illumination</text>
+<rect x="1060.0" y="534.0" width="330.0" height="100.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<rect x="1060.0" y="544.0" width="7.0" height="80.0" rx="3" fill="#B4541E" stroke="#B4541E" stroke-width="0"/>
+<text x="1082.0" y="583.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">トリガ</text>
+<text x="1082.0" y="605.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">trigger</text>
+<rect x="80.0" y="650.0" width="250.0" height="100.0" rx="12" fill="#FFFFFF" stroke="#B4541E" stroke-width="2"/>
+<text x="104.0" y="692.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#B4541E" font-weight="700" text-anchor="start">AI</text>
+<text x="104.0" y="716.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">AI</text>
+<rect x="360.0" y="650.0" width="330.0" height="100.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<rect x="360.0" y="660.0" width="7.0" height="80.0" rx="3" fill="#B4541E" stroke="#B4541E" stroke-width="0"/>
+<text x="382.0" y="699.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">産業用PC</text>
+<text x="382.0" y="721.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">industrial PC</text>
+<rect x="710.0" y="650.0" width="330.0" height="100.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<rect x="710.0" y="660.0" width="7.0" height="80.0" rx="3" fill="#B4541E" stroke="#B4541E" stroke-width="0"/>
+<text x="732.0" y="699.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">YOLO/PatchCore</text>
+<text x="732.0" y="721.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">models</text>
+<rect x="1060.0" y="650.0" width="330.0" height="100.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<rect x="1060.0" y="660.0" width="7.0" height="80.0" rx="3" fill="#B4541E" stroke="#B4541E" stroke-width="0"/>
+<text x="1082.0" y="699.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">結果有効性</text>
+<text x="1082.0" y="721.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">validity</text>
+<rect x="80.0" y="766.0" width="250.0" height="100.0" rx="12" fill="#FFFFFF" stroke="#6B3FA0" stroke-width="2"/>
+<text x="104.0" y="808.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#6B3FA0" font-weight="700" text-anchor="start">記録・人</text>
+<text x="104.0" y="832.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">records</text>
+<rect x="360.0" y="766.0" width="330.0" height="100.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<rect x="360.0" y="776.0" width="7.0" height="80.0" rx="3" fill="#6B3FA0" stroke="#6B3FA0" stroke-width="0"/>
+<text x="382.0" y="815.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">保存</text>
+<text x="382.0" y="837.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">storage</text>
+<rect x="710.0" y="766.0" width="330.0" height="100.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<rect x="710.0" y="776.0" width="7.0" height="80.0" rx="3" fill="#6B3FA0" stroke="#6B3FA0" stroke-width="0"/>
+<text x="732.0" y="815.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">警報</text>
+<text x="732.0" y="837.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">alerts</text>
+<rect x="1060.0" y="766.0" width="330.0" height="100.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<rect x="1060.0" y="776.0" width="7.0" height="80.0" rx="3" fill="#6B3FA0" stroke="#6B3FA0" stroke-width="0"/>
+<text x="1082.0" y="815.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">人による確認</text>
+<text x="1082.0" y="837.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">human review</text>
+<text x="80.0" y="892.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="700" text-anchor="start">各層は別の種類の情報を運びます。すべてを同じ線で描くと誤解を生みます。</text>
+<text x="80.0" y="918.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start">Each layer carries a different kind of information; drawing them all as one line causes misunderstanding.</text>
+<rect x="56.0" y="964.0" width="1328.0" height="60.0" rx="10" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
+<text x="76.0" y="998.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#142B3F" font-weight="700" text-anchor="start">機械・信号・制御・画像・AI・人・安全を層として分けます。</text>
+<text x="76.0" y="1020.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14.5" fill="#526378" font-weight="400" text-anchor="start">Separate mechanics, signals, control, imaging, AI, people and safety into layers.</text>
+<text x="1400" y="1072" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" text-anchor="end">D09-01 • 編集可能な図 / editable SVG</text>
+</svg>

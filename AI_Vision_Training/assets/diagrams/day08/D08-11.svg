@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="880" viewBox="0 0 1440 880" role="img" aria-labelledby="title desc"><title id="title">HMI・PLC・診断情報 / HMI, PLC and diagnostics</title><desc id="desc">HMI・PLC・診断情報 / HMI, PLC and diagnostics — editable bilingual training diagram for DAY 08 / HMI AND DIAGNOSTICS.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#2563A6"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#A32B2B"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#1B7A4B"/></marker></defs><rect x="0" y="0" width="1440" height="880" fill="#F5F8FC"/><rect x="0" y="0" width="1440" height="12" fill="#2563A6"/>
+<text x="56.0" y="56.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#2563A6" font-weight="700" text-anchor="start">DAY 08 / HMI AND DIAGNOSTICS</text>
+<text x="56.0" y="104.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="32" fill="#142B3F" font-weight="700" text-anchor="start">HMI・PLC・診断情報</text>
+<text x="56.0" y="144.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="26" fill="#526378" font-weight="400" text-anchor="start">HMI, PLC and diagnostics</text>
+<rect x="80.0" y="190.0" width="560.0" height="330.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<text x="104.0" y="226.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#2563A6" font-weight="700" text-anchor="start">HMI画面の例（架空）</text>
+<text x="104.0" y="250.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start">Example HMI screen (fictional)</text>
+<rect x="104.0" y="268.0" width="512.0" height="220.0" rx="8" fill="#0F2536" stroke="#0F2536" stroke-width="2"/>
+<text x="124.0" y="300.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#7FD1A8" font-weight="700" text-anchor="start">状態 / status: 運転中</text>
+<text x="124.0" y="330.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#DDE8F2" font-weight="400" text-anchor="start">速度 / speed: (仮想) 0.50 m/s</text>
+<text x="124.0" y="358.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#DDE8F2" font-weight="400" text-anchor="start">カメラ / camera: 正常</text>
+<text x="124.0" y="386.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#DDE8F2" font-weight="400" text-anchor="start">AI: 正常</text>
+<rect x="124.0" y="404.0" width="200.0" height="42.0" rx="6" fill="#1B7A4B" stroke="#1B7A4B" stroke-width="1"/>
+<text x="224.0" y="431.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="white" font-weight="700" text-anchor="middle">起動 / START</text>
+<rect x="340.0" y="404.0" width="240.0" height="42.0" rx="6" fill="#8A2B2B" stroke="#8A2B2B" stroke-width="1"/>
+<text x="460.0" y="431.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="white" font-weight="700" text-anchor="middle">停止 / STOP</text>
+<rect x="680.0" y="190.0" width="680.0" height="330.0" rx="12" fill="#FFFFFF" stroke="#1B7A4B" stroke-width="2"/>
+<text x="704.0" y="226.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#1B7A4B" font-weight="700" text-anchor="start">HMIの役割 / role of the HMI</text>
+<text x="704.0" y="264.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#142B3F" font-weight="400" text-anchor="start">・状態の表示 / show machine state</text>
+<text x="704.0" y="294.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#142B3F" font-weight="400" text-anchor="start">・警報と原因の表示 / alarms and causes</text>
+<text x="704.0" y="324.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#142B3F" font-weight="400" text-anchor="start">・操作（権限内） / operations within permission</text>
+<text x="704.0" y="354.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#142B3F" font-weight="400" text-anchor="start">・読み取り専用の診断 / read-only diagnostics</text>
+<text x="704.0" y="384.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#142B3F" font-weight="400" text-anchor="start">・パラメータ変更の制限 / restricted parameter changes</text>
+<text x="704.0" y="434.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#A32B2B" font-weight="700" text-anchor="start">HMIは安全条件を無効にする画面ではありません。</text>
+<text x="704.0" y="458.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start">The HMI is not a screen that disables safety conditions.</text>
+<text x="704.0" y="490.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#142B3F" font-weight="700" text-anchor="start">操作権限と記録（誰が何をしたか）を決めます。</text>
+<text x="80.0" y="570.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#142B3F" font-weight="700" text-anchor="start">警報は「何が起きたか」「何を確認するか」「誰が対応するか」まで表示します。</text>
+<text x="80.0" y="596.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#526378" font-weight="400" text-anchor="start">An alarm should state what happened, what to check and who responds.</text>
+<rect x="80.0" y="628.0" width="299.0" height="104.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<rect x="80.0" y="638.0" width="7.0" height="84.0" rx="3" fill="#2563A6" stroke="#2563A6" stroke-width="0"/>
+<text x="102.0" y="679.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">PLC</text>
+<text x="102.0" y="701.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">control</text>
+<path d="M383.0 680.0 L405.0 680.0" fill="none" stroke="#2563A6" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="407.0" y="628.0" width="299.0" height="104.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<rect x="407.0" y="638.0" width="7.0" height="84.0" rx="3" fill="#2563A6" stroke="#2563A6" stroke-width="0"/>
+<text x="429.0" y="679.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">HMI</text>
+<text x="429.0" y="701.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">display</text>
+<path d="M710.0 680.0 L732.0 680.0" fill="none" stroke="#2563A6" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="734.0" y="628.0" width="299.0" height="104.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<rect x="734.0" y="638.0" width="7.0" height="84.0" rx="3" fill="#2563A6" stroke="#2563A6" stroke-width="0"/>
+<text x="756.0" y="679.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">記録</text>
+<text x="756.0" y="701.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">records</text>
+<path d="M1037.0 680.0 L1059.0 680.0" fill="none" stroke="#2563A6" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="1061.0" y="628.0" width="299.0" height="104.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<rect x="1061.0" y="638.0" width="7.0" height="84.0" rx="3" fill="#2563A6" stroke="#2563A6" stroke-width="0"/>
+<text x="1083.0" y="679.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">人の判断</text>
+<text x="1083.0" y="701.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">human decision</text>
+<rect x="56.0" y="764.0" width="1328.0" height="60.0" rx="10" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
+<text x="76.0" y="798.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#142B3F" font-weight="700" text-anchor="start">診断情報は原因究明のために残し、安全判断の代用にしません。</text>
+<text x="76.0" y="820.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14.5" fill="#526378" font-weight="400" text-anchor="start">Diagnostics support investigation; they do not replace safety judgement.</text>
+<text x="1400" y="872" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" text-anchor="end">D08-11 • 編集可能な図 / editable SVG</text>
+</svg>

@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="820" viewBox="0 0 1440 820" role="img" aria-labelledby="title desc"><title id="title">画像取得からPC処理まで / Image acquisition and industrial PC processing</title><desc id="desc">画像取得からPC処理まで / Image acquisition and industrial PC processing — editable bilingual training diagram for DAY 09 / PROCESSING PIPELINE.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#2563A6"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#A32B2B"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#1B7A4B"/></marker></defs><rect x="0" y="0" width="1440" height="820" fill="#F5F8FC"/><rect x="0" y="0" width="1440" height="12" fill="#2563A6"/>
+<text x="56.0" y="56.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#2563A6" font-weight="700" text-anchor="start">DAY 09 / PROCESSING PIPELINE</text>
+<text x="56.0" y="104.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="32" fill="#142B3F" font-weight="700" text-anchor="start">画像取得からPC処理まで</text>
+<text x="56.0" y="144.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="26" fill="#526378" font-weight="400" text-anchor="start">Image acquisition and industrial PC processing</text>
+<rect x="80.0" y="200.0" width="299.0" height="120.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<rect x="80.0" y="210.0" width="7.0" height="100.0" rx="3" fill="#2563A6" stroke="#2563A6" stroke-width="0"/>
+<text x="102.0" y="259.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">カメラ</text>
+<text x="102.0" y="281.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">Camera</text>
+<path d="M383.0 260.0 L405.0 260.0" fill="none" stroke="#2563A6" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="407.0" y="200.0" width="299.0" height="120.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<rect x="407.0" y="210.0" width="7.0" height="100.0" rx="3" fill="#2563A6" stroke="#2563A6" stroke-width="0"/>
+<text x="429.0" y="259.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">転送</text>
+<text x="429.0" y="281.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">Transfer</text>
+<path d="M710.0 260.0 L732.0 260.0" fill="none" stroke="#2563A6" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="734.0" y="200.0" width="299.0" height="120.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<rect x="734.0" y="210.0" width="7.0" height="100.0" rx="3" fill="#2563A6" stroke="#2563A6" stroke-width="0"/>
+<text x="756.0" y="259.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">バッファ</text>
+<text x="756.0" y="281.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">Buffer</text>
+<path d="M1037.0 260.0 L1059.0 260.0" fill="none" stroke="#2563A6" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="1061.0" y="200.0" width="299.0" height="120.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<rect x="1061.0" y="210.0" width="7.0" height="100.0" rx="3" fill="#2563A6" stroke="#2563A6" stroke-width="0"/>
+<text x="1083.0" y="259.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">前処理</text>
+<text x="1083.0" y="281.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">Preprocess</text>
+<rect x="80.0" y="380.0" width="299.0" height="120.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<rect x="80.0" y="390.0" width="7.0" height="100.0" rx="3" fill="#2563A6" stroke="#2563A6" stroke-width="0"/>
+<text x="102.0" y="439.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">AI推論</text>
+<text x="102.0" y="461.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">AI inference</text>
+<path d="M383.0 440.0 L405.0 440.0" fill="none" stroke="#2563A6" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="407.0" y="380.0" width="299.0" height="120.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<rect x="407.0" y="390.0" width="7.0" height="100.0" rx="3" fill="#2563A6" stroke="#2563A6" stroke-width="0"/>
+<text x="429.0" y="439.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">後処理</text>
+<text x="429.0" y="461.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">Postprocess</text>
+<path d="M710.0 440.0 L732.0 440.0" fill="none" stroke="#2563A6" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="734.0" y="380.0" width="299.0" height="120.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<rect x="734.0" y="390.0" width="7.0" height="100.0" rx="3" fill="#2563A6" stroke="#2563A6" stroke-width="0"/>
+<text x="756.0" y="439.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">結果</text>
+<text x="756.0" y="461.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">Result</text>
+<path d="M1037.0 440.0 L1059.0 440.0" fill="none" stroke="#2563A6" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="1061.0" y="380.0" width="299.0" height="120.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<rect x="1061.0" y="390.0" width="7.0" height="100.0" rx="3" fill="#2563A6" stroke="#2563A6" stroke-width="0"/>
+<text x="1083.0" y="439.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">記録</text>
+<text x="1083.0" y="461.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">Record</text>
+<path d="M1310 320 L1310 345 L130 345 L130 376" fill="none" stroke="#2563A6" stroke-width="2.4" marker-end="url(#arrow)"/>
+<text x="80.0" y="520.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#142B3F" font-weight="700" text-anchor="start">各段階に時間があり、合計が「結果が出るまでの時間」になります。</text>
+<text x="80.0" y="546.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#526378" font-weight="400" text-anchor="start">Every stage takes time; the total is the time until a result is available.</text>
+<text x="80.0" y="582.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#B4541E" font-weight="700" text-anchor="start">バッファがいっぱいになると画像を取りこぼす可能性があります。</text>
+<text x="80.0" y="608.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start">A full buffer can cause images to be dropped.</text>
+<text x="80.0" y="644.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="700" text-anchor="start">産業用PCとAIモデルは別の概念です。PCは実行環境、モデルは計算手法です。</text>
+<text x="80.0" y="670.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start">An industrial PC and an AI model are different: the PC is a platform, the model is a computation.</text>
+<rect x="56.0" y="704.0" width="1328.0" height="60.0" rx="10" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
+<text x="76.0" y="738.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#142B3F" font-weight="700" text-anchor="start">処理のどの段階が遅いかを測ることが、性能改善の第一歩です。</text>
+<text x="76.0" y="760.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14.5" fill="#526378" font-weight="400" text-anchor="start">Measure which stage is slow before optimising.</text>
+<text x="1400" y="812" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" text-anchor="end">D09-07 • 編集可能な図 / editable SVG</text>
+</svg>

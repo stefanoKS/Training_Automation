@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="840" viewBox="0 0 1440 840" role="img" aria-labelledby="title desc"><title id="title">レンズ・視野・画素スケール / Lens, field of view and pixel scale</title><desc id="desc">レンズ・視野・画素スケール / Lens, field of view and pixel scale — editable bilingual training diagram for DAY 09 / OPTICS.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#2563A6"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#A32B2B"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#1B7A4B"/></marker></defs><rect x="0" y="0" width="1440" height="840" fill="#F5F8FC"/><rect x="0" y="0" width="1440" height="12" fill="#2563A6"/>
+<text x="56.0" y="56.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#2563A6" font-weight="700" text-anchor="start">DAY 09 / OPTICS</text>
+<text x="56.0" y="104.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="32" fill="#142B3F" font-weight="700" text-anchor="start">レンズ・視野・画素スケール</text>
+<text x="56.0" y="144.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="26" fill="#526378" font-weight="400" text-anchor="start">Lens, field of view and pixel scale</text>
+<rect x="80.0" y="190.0" width="640.0" height="360.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<text x="104.0" y="226.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#2563A6" font-weight="700" text-anchor="start">視野（FOV）と作動距離</text>
+<text x="104.0" y="250.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start">Field of view and working distance</text>
+<rect x="300.0" y="276.0" width="90.0" height="56.0" rx="6" fill="#E8F1FA" stroke="#2563A6" stroke-width="2"/>
+<text x="345.0" y="310.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#142B3F" font-weight="700" text-anchor="middle">カメラ</text>
+<polyline points="345.0,332.0 160.0,500.0 530.0,500.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<path d="M345.0 332.0 L345.0 500.0" fill="none" stroke="#526378" stroke-width="1" stroke-dasharray="6 5"/>
+<text x="354.0" y="420.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="700" text-anchor="start">作動距離 WD</text>
+<path d="M160.0 514.0 L530.0 514.0" fill="none" stroke="#A32B2B" stroke-width="3"/>
+<text x="345.0" y="540.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#A32B2B" font-weight="700" text-anchor="middle">視野 FOV / field of view</text>
+<rect x="760.0" y="190.0" width="600.0" height="200.0" rx="12" fill="#EAF6EE" stroke="#1B7A4B" stroke-width="2"/>
+<text x="784.0" y="226.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#1B7A4B" font-weight="700" text-anchor="start">画素スケール / pixel scale</text>
+<text x="784.0" y="266.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21" fill="#142B3F" font-weight="700" text-anchor="start">mm/画素 = FOV ÷ 横画素数</text>
+<text x="784.0" y="294.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#526378" font-weight="400" text-anchor="start">mm/px = FOV ÷ horizontal pixels</text>
+<text x="784.0" y="330.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="700" text-anchor="start">仮定：FOV 600 mm、4096画素</text>
+<text x="784.0" y="356.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#1B7A4B" font-weight="700" text-anchor="start">600 ÷ 4096 ≈ 0.1465 mm/px</text>
+<rect x="760.0" y="412.0" width="600.0" height="138.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<text x="784.0" y="446.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#2563A6" font-weight="700" text-anchor="start">注意 / caution</text>
+<text x="784.0" y="478.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#142B3F" font-weight="400" text-anchor="start">1画素より小さい欠陥が必ず検出できる、</text>
+<text x="784.0" y="502.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#142B3F" font-weight="400" text-anchor="start">という意味ではありません。</text>
+<text x="784.0" y="528.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start">コントラスト・光学・ノイズ・動き・モデルに依存します。</text>
+<text x="80.0" y="588.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#A32B2B" font-weight="700" text-anchor="start">画素数を増やせば必ず良くなる、とは限りません。</text>
+<text x="80.0" y="614.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#526378" font-weight="400" text-anchor="start">More pixels do not automatically mean better inspection.</text>
+<text x="80.0" y="650.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="700" text-anchor="start">被写界深度・歪み・照明ムラも検査能力に影響します。</text>
+<text x="80.0" y="676.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start">Depth of field, distortion and uneven lighting also affect capability.</text>
+<rect x="56.0" y="724.0" width="1328.0" height="60.0" rx="10" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
+<text x="76.0" y="758.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#142B3F" font-weight="700" text-anchor="start">スケールは仮定値です。実機は校正して確認します。</text>
+<text x="76.0" y="780.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14.5" fill="#526378" font-weight="400" text-anchor="start">The scale is hypothetical; real systems are calibrated and verified.</text>
+<text x="1400" y="832" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" text-anchor="end">D09-03 • 編集可能な図 / editable SVG</text>
+</svg>

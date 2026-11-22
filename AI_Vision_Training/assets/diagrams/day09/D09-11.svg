@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="860" viewBox="0 0 1440 860" role="img" aria-labelledby="title desc"><title id="title">システム全体の遅延とバッファ / Complete system latency and buffering</title><desc id="desc">システム全体の遅延とバッファ / Complete system latency and buffering — editable bilingual training diagram for DAY 09 / REAL-TIME PERFORMANCE.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#2563A6"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#A32B2B"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#1B7A4B"/></marker></defs><rect x="0" y="0" width="1440" height="860" fill="#F5F8FC"/><rect x="0" y="0" width="1440" height="12" fill="#2563A6"/>
+<text x="56.0" y="56.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#2563A6" font-weight="700" text-anchor="start">DAY 09 / REAL-TIME PERFORMANCE</text>
+<text x="56.0" y="104.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="32" fill="#142B3F" font-weight="700" text-anchor="start">システム全体の遅延とバッファ</text>
+<text x="56.0" y="144.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="26" fill="#526378" font-weight="400" text-anchor="start">Complete system latency and buffering</text>
+<text x="80.0" y="200.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#142B3F" font-weight="700" text-anchor="start">遅延の内訳（仮定の割合）/ latency breakdown (illustrative proportions)</text>
+<rect x="120.0" y="226.0" width="180.0" height="90.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<text x="210.0" y="264.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#2563A6" font-weight="700" text-anchor="middle">取得</text>
+<text x="210.0" y="286.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#526378" font-weight="400" text-anchor="middle">acquire</text>
+<text x="210.0" y="308.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#526378" font-weight="400" text-anchor="middle">18</text>
+<rect x="300.0" y="226.0" width="100.0" height="90.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<text x="350.0" y="264.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#2563A6" font-weight="700" text-anchor="middle">転送</text>
+<text x="350.0" y="286.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#526378" font-weight="400" text-anchor="middle">transfer</text>
+<text x="350.0" y="308.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#526378" font-weight="400" text-anchor="middle">10</text>
+<rect x="400.0" y="226.0" width="220.0" height="90.0" rx="12" fill="#FFFFFF" stroke="#B4541E" stroke-width="2"/>
+<text x="510.0" y="264.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#B4541E" font-weight="700" text-anchor="middle">待ち</text>
+<text x="510.0" y="286.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#526378" font-weight="400" text-anchor="middle">queue</text>
+<text x="510.0" y="308.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#526378" font-weight="400" text-anchor="middle">22</text>
+<rect x="620.0" y="226.0" width="120.0" height="90.0" rx="12" fill="#FFFFFF" stroke="#1B7A4B" stroke-width="2"/>
+<text x="680.0" y="264.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#1B7A4B" font-weight="700" text-anchor="middle">前処理</text>
+<text x="680.0" y="286.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#526378" font-weight="400" text-anchor="middle">preprocess</text>
+<text x="680.0" y="308.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#526378" font-weight="400" text-anchor="middle">12</text>
+<rect x="740.0" y="226.0" width="300.0" height="90.0" rx="12" fill="#FFFFFF" stroke="#1B7A4B" stroke-width="2"/>
+<text x="890.0" y="264.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#1B7A4B" font-weight="700" text-anchor="middle">推論</text>
+<text x="890.0" y="286.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#526378" font-weight="400" text-anchor="middle">inference</text>
+<text x="890.0" y="308.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#526378" font-weight="400" text-anchor="middle">30</text>
+<rect x="1040.0" y="226.0" width="100.0" height="90.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<text x="1090.0" y="264.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#2563A6" font-weight="700" text-anchor="middle">後処理</text>
+<text x="1090.0" y="286.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#526378" font-weight="400" text-anchor="middle">postprocess</text>
+<text x="1090.0" y="308.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#526378" font-weight="400" text-anchor="middle">10</text>
+<rect x="1140.0" y="226.0" width="140.0" height="90.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<text x="1210.0" y="264.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#2563A6" font-weight="700" text-anchor="middle">通信</text>
+<text x="1210.0" y="286.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#526378" font-weight="400" text-anchor="middle">comm.</text>
+<text x="1210.0" y="308.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#526378" font-weight="400" text-anchor="middle">14</text>
+<text x="80.0" y="356.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#142B3F" font-weight="700" text-anchor="start">平均値だけでは不十分です。最大値（ワーストケース）とばらつき（ジッタ）を見ます。</text>
+<text x="80.0" y="382.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#526378" font-weight="400" text-anchor="start">Averages are not enough; examine worst-case values and jitter.</text>
+<rect x="80.0" y="420.0" width="300.0" height="110.0" rx="12" fill="#FFFFFF" stroke="#1B7A4B" stroke-width="2"/>
+<text x="100.0" y="456.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#1B7A4B" font-weight="700" text-anchor="start">空き</text>
+<text x="100.0" y="480.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">empty</text>
+<rect x="100.0" y="496.0" width="44.0" height="20.0" rx="3" fill="#1B7A4B" stroke="#1B7A4B" stroke-width="1"/>
+<rect x="152.0" y="496.0" width="44.0" height="20.0" rx="3" fill="#E6ECF2" stroke="#1B7A4B" stroke-width="1"/>
+<rect x="204.0" y="496.0" width="44.0" height="20.0" rx="3" fill="#E6ECF2" stroke="#1B7A4B" stroke-width="1"/>
+<rect x="256.0" y="496.0" width="44.0" height="20.0" rx="3" fill="#E6ECF2" stroke="#1B7A4B" stroke-width="1"/>
+<rect x="308.0" y="496.0" width="44.0" height="20.0" rx="3" fill="#E6ECF2" stroke="#1B7A4B" stroke-width="1"/>
+<rect x="400.0" y="420.0" width="300.0" height="110.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<text x="420.0" y="456.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#2563A6" font-weight="700" text-anchor="start">処理中</text>
+<text x="420.0" y="480.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">processing</text>
+<rect x="420.0" y="496.0" width="44.0" height="20.0" rx="3" fill="#2563A6" stroke="#2563A6" stroke-width="1"/>
+<rect x="472.0" y="496.0" width="44.0" height="20.0" rx="3" fill="#2563A6" stroke="#2563A6" stroke-width="1"/>
+<rect x="524.0" y="496.0" width="44.0" height="20.0" rx="3" fill="#E6ECF2" stroke="#2563A6" stroke-width="1"/>
+<rect x="576.0" y="496.0" width="44.0" height="20.0" rx="3" fill="#E6ECF2" stroke="#2563A6" stroke-width="1"/>
+<rect x="628.0" y="496.0" width="44.0" height="20.0" rx="3" fill="#E6ECF2" stroke="#2563A6" stroke-width="1"/>
+<rect x="720.0" y="420.0" width="300.0" height="110.0" rx="12" fill="#FFFFFF" stroke="#B4541E" stroke-width="2"/>
+<text x="740.0" y="456.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#B4541E" font-weight="700" text-anchor="start">待ち</text>
+<text x="740.0" y="480.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">waiting</text>
+<rect x="740.0" y="496.0" width="44.0" height="20.0" rx="3" fill="#B4541E" stroke="#B4541E" stroke-width="1"/>
+<rect x="792.0" y="496.0" width="44.0" height="20.0" rx="3" fill="#B4541E" stroke="#B4541E" stroke-width="1"/>
+<rect x="844.0" y="496.0" width="44.0" height="20.0" rx="3" fill="#B4541E" stroke="#B4541E" stroke-width="1"/>
+<rect x="896.0" y="496.0" width="44.0" height="20.0" rx="3" fill="#E6ECF2" stroke="#B4541E" stroke-width="1"/>
+<rect x="948.0" y="496.0" width="44.0" height="20.0" rx="3" fill="#E6ECF2" stroke="#B4541E" stroke-width="1"/>
+<rect x="1040.0" y="420.0" width="300.0" height="110.0" rx="12" fill="#FFFFFF" stroke="#A32B2B" stroke-width="2"/>
+<text x="1060.0" y="456.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#A32B2B" font-weight="700" text-anchor="start">満杯（喪失リスク）</text>
+<text x="1060.0" y="480.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">full: drop risk</text>
+<rect x="1060.0" y="496.0" width="44.0" height="20.0" rx="3" fill="#A32B2B" stroke="#A32B2B" stroke-width="1"/>
+<rect x="1112.0" y="496.0" width="44.0" height="20.0" rx="3" fill="#A32B2B" stroke="#A32B2B" stroke-width="1"/>
+<rect x="1164.0" y="496.0" width="44.0" height="20.0" rx="3" fill="#A32B2B" stroke="#A32B2B" stroke-width="1"/>
+<rect x="1216.0" y="496.0" width="44.0" height="20.0" rx="3" fill="#A32B2B" stroke="#A32B2B" stroke-width="1"/>
+<rect x="1268.0" y="496.0" width="44.0" height="20.0" rx="3" fill="#E6ECF2" stroke="#A32B2B" stroke-width="1"/>
+<text x="80.0" y="588.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="700" text-anchor="start">バッファ容量は「遅延の許容」と「取りこぼしの許容」の trade-off です。</text>
+<text x="80.0" y="614.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start">Buffer size trades acceptable latency against acceptable dropped images.</text>
+<text x="80.0" y="650.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#A32B2B" font-weight="700" text-anchor="start">推論時間だけを全体の応答時間と考えてはいけません。</text>
+<text x="80.0" y="676.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start">Do not treat inference time as the whole machine response time.</text>
+<text x="80.0" y="712.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#B4541E" font-weight="700" text-anchor="start">遅い結果が後から届くと、古い位置に誤って対応付ける危険があります。</text>
+<rect x="56.0" y="744.0" width="1328.0" height="60.0" rx="10" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
+<text x="76.0" y="778.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#142B3F" font-weight="700" text-anchor="start">遅延・順序・取りこぼしを測ってから能力を判断します。</text>
+<text x="76.0" y="800.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14.5" fill="#526378" font-weight="400" text-anchor="start">Measure latency, ordering and drops before judging capacity.</text>
+<text x="1400" y="852" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" text-anchor="end">D09-11 • 編集可能な図 / editable SVG</text>
+</svg>

@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="880" viewBox="0 0 1440 880" role="img" aria-labelledby="title desc"><title id="title">フレーム・軸・ベアリング・ローラ / Frame, rollers, shafts and bearings</title><desc id="desc">フレーム・軸・ベアリング・ローラ / Frame, rollers, shafts and bearings — editable bilingual training diagram for DAY 07 / MECHANICAL COMPONENTS.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#2563A6"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#A32B2B"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#1B7A4B"/></marker></defs><rect x="0" y="0" width="1440" height="880" fill="#F5F8FC"/><rect x="0" y="0" width="1440" height="12" fill="#2563A6"/>
+<text x="56.0" y="56.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#2563A6" font-weight="700" text-anchor="start">DAY 07 / MECHANICAL COMPONENTS</text>
+<text x="56.0" y="104.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="32" fill="#142B3F" font-weight="700" text-anchor="start">フレーム・軸・ベアリング・ローラ</text>
+<text x="56.0" y="144.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="26" fill="#526378" font-weight="400" text-anchor="start">Frame, rollers, shafts and bearings</text>
+<rect x="80.0" y="186.0" width="303.5" height="168.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<rect x="80.0" y="196.0" width="7.0" height="148.0" rx="3" fill="#2563A6" stroke="#2563A6" stroke-width="0"/>
+<text x="102.0" y="249.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">フレーム</text>
+<text x="102.0" y="271.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">Frame</text>
+<text x="102.0" y="289.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">すべての部品を支える構造 /</text>
+<text x="102.0" y="307.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">carries the structure</text>
+<rect x="405.5" y="186.0" width="303.5" height="168.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<rect x="405.5" y="196.0" width="7.0" height="148.0" rx="3" fill="#2563A6" stroke="#2563A6" stroke-width="0"/>
+<text x="427.5" y="249.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">シャフト</text>
+<text x="427.5" y="271.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">Shaft</text>
+<text x="427.5" y="289.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">回転を伝える軸 / transmits</text>
+<text x="427.5" y="307.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">rotation</text>
+<rect x="731.0" y="186.0" width="303.5" height="168.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<rect x="731.0" y="196.0" width="7.0" height="148.0" rx="3" fill="#2563A6" stroke="#2563A6" stroke-width="0"/>
+<text x="753.0" y="249.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">ベアリング</text>
+<text x="753.0" y="271.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">Bearing</text>
+<text x="753.0" y="289.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">摩擦を減らして支える / supports</text>
+<text x="753.0" y="307.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">with low friction</text>
+<rect x="1056.5" y="186.0" width="303.5" height="168.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<rect x="1056.5" y="196.0" width="7.0" height="148.0" rx="3" fill="#2563A6" stroke="#2563A6" stroke-width="0"/>
+<text x="1078.5" y="249.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">ローラ</text>
+<text x="1078.5" y="271.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">Roller</text>
+<text x="1078.5" y="289.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">シートに接触する回転体 /</text>
+<text x="1078.5" y="307.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">rotating contact surface</text>
+<text x="80.0" y="404.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="20" fill="#142B3F" font-weight="700" text-anchor="start">組立の関係 / how the parts fit together</text>
+<rect x="96.0" y="430.0" width="1248.0" height="240.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
+<rect x="120.0" y="470.0" width="120.0" height="170.0" rx="12" fill="#E8F1FA" stroke="#2563A6" stroke-width="2"/>
+<text x="180.0" y="500.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#142B3F" font-weight="700" text-anchor="middle">フレーム</text>
+<text x="180.0" y="524.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="middle">frame</text>
+<rect x="280.0" y="548.0" width="720.0" height="26.0" rx="12" fill="#B9C8D6" stroke="#8497A8" stroke-width="2"/>
+<text x="640.0" y="542.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#455A6C" font-weight="700" text-anchor="middle">シャフト / shaft</text>
+<circle cx="360.0" cy="561.0" r="34.0" fill="#EDF2F8" stroke="#6B3FA0" stroke-width="3"/>
+<circle cx="360.0" cy="561.0" r="10.0" fill="#FFFFFF" stroke="#6B3FA0" stroke-width="2"/>
+<circle cx="920.0" cy="561.0" r="34.0" fill="#EDF2F8" stroke="#6B3FA0" stroke-width="3"/>
+<circle cx="920.0" cy="561.0" r="10.0" fill="#FFFFFF" stroke="#6B3FA0" stroke-width="2"/>
+<text x="360.0" y="628.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#6B3FA0" font-weight="700" text-anchor="middle">ベアリング / bearing</text>
+<text x="920.0" y="628.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#6B3FA0" font-weight="700" text-anchor="middle">ベアリング / bearing</text>
+<circle cx="640.0" cy="561.0" r="62.0" fill="#F2E7D2" stroke="#B4541E" stroke-width="3"/>
+<circle cx="640.0" cy="561.0" r="14.0" fill="#FFFFFF" stroke="#B4541E" stroke-width="2"/>
+<text x="640.0" y="650.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#B4541E" font-weight="700" text-anchor="middle">ローラ / roller</text>
+<path d="M1030.0 561.0 L1150.0 561.0" fill="none" stroke="#2563A6" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1160.0" y="548.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#2563A6" font-weight="700" text-anchor="start">回転方向</text>
+<text x="1160.0" y="570.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start">rotation</text>
+<text x="80.0" y="700.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#142B3F" font-weight="700" text-anchor="start">ベアリングの摩耗は振動と位置ずれを生み、検査画像のぼけや位置ずれにつながります。</text>
+<text x="80.0" y="726.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#526378" font-weight="400" text-anchor="start">Worn bearings add vibration and misalignment, which blur images and shift their position.</text>
+<rect x="56.0" y="764.0" width="1328.0" height="60.0" rx="10" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
+<text x="76.0" y="798.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#142B3F" font-weight="700" text-anchor="start">軸・ベアリング・ローラは一組で剛性と回転精度を決めます。</text>
+<text x="76.0" y="820.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14.5" fill="#526378" font-weight="400" text-anchor="start">Shaft, bearing and roller together set stiffness and rotation accuracy.</text>
+<text x="1400" y="872" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" text-anchor="end">D07-02 • 編集可能な図 / editable SVG</text>
+</svg>

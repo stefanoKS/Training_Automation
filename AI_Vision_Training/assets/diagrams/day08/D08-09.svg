@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="840" viewBox="0 0 1440 840" role="img" aria-labelledby="title desc"><title id="title">カウンタと立ち上がりエッジ / Counter and rising-edge behaviour</title><desc id="desc">カウンタと立ち上がりエッジ / Counter and rising-edge behaviour — editable bilingual training diagram for DAY 08 / COUNTERS.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#2563A6"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#A32B2B"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#1B7A4B"/></marker></defs><rect x="0" y="0" width="1440" height="840" fill="#F5F8FC"/><rect x="0" y="0" width="1440" height="12" fill="#2563A6"/>
+<text x="56.0" y="56.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#2563A6" font-weight="700" text-anchor="start">DAY 08 / COUNTERS</text>
+<text x="56.0" y="104.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="32" fill="#142B3F" font-weight="700" text-anchor="start">カウンタと立ち上がりエッジ</text>
+<text x="56.0" y="144.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="26" fill="#526378" font-weight="400" text-anchor="start">Counter and rising-edge behaviour</text>
+<text x="80.0" y="196.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="20" fill="#142B3F" font-weight="700" text-anchor="start">連続ONは何度も数えません。数えるのは「変化」です。</text>
+<text x="80.0" y="222.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#526378" font-weight="400" text-anchor="start">A continuous ON condition is not counted repeatedly; the counter counts transitions.</text>
+<text x="90.0" y="290.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#2563A6" font-weight="700" text-anchor="start">X0</text>
+<path d="M160.0 312.0 L1280.0 312.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<polyline points="200.0,300.0 200.0,300.0 200.0,300.0 300.0,300.0 300.0,248.0 420.0,248.0 420.0,300.0 550.0,300.0 550.0,248.0 670.0,248.0 670.0,300.0 800.0,300.0 800.0,248.0 1050.0,248.0 1050.0,300.0 1200.0,300.0" fill="none" stroke="#2563A6" stroke-width="2.6"/>
+<path d="M300.0 236.0 L300.0 320.0" fill="none" stroke="#1B7A4B" stroke-width="2" stroke-dasharray="5 5"/>
+<text x="300.0" y="224.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#1B7A4B" font-weight="700" text-anchor="middle">↑ 1</text>
+<path d="M550.0 236.0 L550.0 320.0" fill="none" stroke="#1B7A4B" stroke-width="2" stroke-dasharray="5 5"/>
+<text x="550.0" y="224.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#1B7A4B" font-weight="700" text-anchor="middle">↑ 2</text>
+<path d="M800.0 236.0 L800.0 320.0" fill="none" stroke="#1B7A4B" stroke-width="2" stroke-dasharray="5 5"/>
+<text x="800.0" y="224.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#1B7A4B" font-weight="700" text-anchor="middle">↑ 3</text>
+<rect x="80.0" y="360.0" width="420.0" height="42.0" rx="3" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
+<text x="290.0" y="388.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="700" text-anchor="middle">項目 / item</text>
+<rect x="500.0" y="360.0" width="420.0" height="42.0" rx="3" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
+<text x="710.0" y="388.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="700" text-anchor="middle">値 / value</text>
+<rect x="920.0" y="360.0" width="420.0" height="42.0" rx="3" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
+<text x="1130.0" y="388.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="700" text-anchor="middle">説明 / explanation</text>
+<rect x="80.0" y="402.0" width="420.0" height="42.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
+<text x="290.0" y="430.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">カウント</text>
+<rect x="500.0" y="402.0" width="420.0" height="42.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
+<text x="710.0" y="430.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">1 → 2 → 3</text>
+<rect x="920.0" y="402.0" width="420.0" height="42.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
+<text x="1130.0" y="430.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">立ち上がりごとに+1 / +1 per rising edge</text>
+<rect x="80.0" y="444.0" width="420.0" height="42.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
+<text x="290.0" y="472.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">連続ON</text>
+<rect x="500.0" y="444.0" width="420.0" height="42.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
+<text x="710.0" y="472.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">変化なし</text>
+<rect x="920.0" y="444.0" width="420.0" height="42.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
+<text x="1130.0" y="472.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">ONのままでは増えない / no count while held</text>
+<rect x="80.0" y="486.0" width="420.0" height="42.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
+<text x="290.0" y="514.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">プリセット</text>
+<rect x="500.0" y="486.0" width="420.0" height="42.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
+<text x="710.0" y="514.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">3に到達</text>
+<rect x="920.0" y="486.0" width="420.0" height="42.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
+<text x="1130.0" y="514.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">出力ON・自己保持の場合あり</text>
+<rect x="80.0" y="528.0" width="420.0" height="42.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
+<text x="290.0" y="556.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">リセット</text>
+<rect x="500.0" y="528.0" width="420.0" height="42.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
+<text x="710.0" y="556.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">0に戻る</text>
+<rect x="920.0" y="528.0" width="420.0" height="42.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
+<text x="1130.0" y="556.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">RST命令・入力で初期化</text>
+<text x="80.0" y="600.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#142B3F" font-weight="700" text-anchor="start">カウント値の保持・リセット条件・応答は、実装ごとに確認が必要です。</text>
+<text x="80.0" y="626.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start">Retention, reset conditions and response of counters must be checked for each implementation.</text>
+<text x="80.0" y="664.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#B4541E" font-weight="700" text-anchor="start">ノイズによる短いパルスも数えることがあります。入力フィルタを検討します。</text>
+<text x="80.0" y="690.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start">Short noise pulses can also be counted; consider input filtering.</text>
+<rect x="56.0" y="724.0" width="1328.0" height="60.0" rx="10" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
+<text x="76.0" y="758.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#142B3F" font-weight="700" text-anchor="start">数える対象は「回数」か「位置」かを先に決めます。</text>
+<text x="76.0" y="780.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14.5" fill="#526378" font-weight="400" text-anchor="start">Decide first whether you count events or measure position.</text>
+<text x="1400" y="832" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" text-anchor="end">D08-09 • 編集可能な図 / editable SVG</text>
+</svg>
