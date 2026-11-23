@@ -1,5 +1,31 @@
 # 解説 PDF / Explanation companions
 
+## 第7日〜第9日 / Days 7–9
+
+第7日〜第9日のPDFは、第1週とは別のパイプラインで生成します。正本は `notebooks/Day07_…`、`Day08_…`、`Day09_…` の `.md` と `day07_09_support/lesson_manifest.json` です。
+
+The Day 7–9 PDFs use a separate pipeline. Canonical sources are the `.md` manuscripts in the Day 7–9 notebook folders and `day07_09_support/lesson_manifest.json`.
+
+| ファイル / File | 内容 / Contents | 生成 / build |
+|---|---|---|
+| `Day07_explanation_ja_en.pdf` | 第7日：構想・機械設計 / Day 7: planning and mechanical design | `python day07_09_support/scripts/export_day07_09_pdf.py` |
+| `Day08_explanation_ja_en.pdf` | 第8日：電気・PLC / Day 8: electrical and PLC | 同上 / same |
+| `Day09_explanation_ja_en.pdf` | 第9日：通信・試運転・提案 / Day 9: communication, commissioning, proposal | 同上 / same |
+
+```powershell
+# AI_Vision_Training フォルダで / in the AI_Vision_Training folder
+.\.venv\Scripts\python.exe day07_09_support\scripts\build_day07_09_notebooks.py
+.\.venv\Scripts\python.exe day07_09_support\scripts\generate_reference_outputs.py
+.\.venv\Scripts\python.exe day07_09_support\scripts\export_day07_09_pdf.py
+.\.venv\Scripts\python.exe day07_09_support\scripts\check_day07_09_pdfs.py
+```
+
+第7日〜第9日のPDFは、実行可能セルのコードと参考出力、図、公式カード、用語集、参考文献を含みます。PDF生成時にノートブックのコードは実行しません（参考出力は別スクリプトで事前に取得します）。全ページをPNGに描画して点検します。
+
+The Day 7–9 PDFs contain code cells with reference outputs, diagrams, formula cards, the glossary and references. The exporter does not execute notebook code (reference outputs are captured beforehand). Every page is rendered to PNG for inspection.
+
+---
+
 このフォルダの PDF は、**ノートブックの Markdown から自動で組んだ**冊子です。
 別々に書いた原稿ではないので、ノートブックを直せば PDF も同じ手順で作り直せます。
 The PDFs here are typeset **from the notebooks' own Markdown**. They are not a second manuscript,

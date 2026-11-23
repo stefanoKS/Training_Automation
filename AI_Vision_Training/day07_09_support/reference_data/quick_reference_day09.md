@@ -1,85 +1,70 @@
 # 第9日 公式・確認カード / Day 9 formula and check card
 
-**すべて仮定の例です。/ All examples are hypothetical.**
+> このカードは学習用です。実ネットワークの変更や投資判断を承認するものではありません。
+> This card is for learning. It does not approve a real network change or an investment decision.
 
-## 1. 画素スケール / Pixel scale
+## 1. IPv4とサブネット / IPv4 and subnets
 
-**mm/px = FOV ÷ horizontal pixels**
+| 項目 / Item | /24 例 / example | /25 例 / example |
+|---|---|---|
+| IP | 192.168.10.10 | 192.168.10.130 |
+| マスク / mask | 255.255.255.0 | 255.255.255.128 |
+| ネットワーク / network | 192.168.10.0 | 192.168.10.128 |
+| ブロードキャスト / broadcast | 192.168.10.255 | 192.168.10.255 |
+| 割当可能 / assignable | .1–.254 (254) | .129–.254 (126) |
 
-| FOV | pixels | mm/px |
-|---:|---:|---:|
-| 600 mm | 4,096 | ≈ 0.146484 |
-| 400 mm | 2,048 | ≈ 0.195313 |
-| 300 mm | 2,448 | ≈ 0.122549 |
+- 同一サブネットは、同じマスクで計算したネットワークアドレスが一致するかで判定 / same subnet = equal network addresses under the same mask.
+- /31はRFC 3021のポイントツーポイント、/32は単一ホスト / /31 is RFC 3021 point-to-point; /32 is a single host.
+- 同じ第3オクテットでも、/25では別サブネットになり得る / the same third octet can be a different /25 subnet.
 
-**1画素未満の欠陥が必ず検出できる意味ではありません。 / Not a guarantee that sub-pixel defects are detectable.**
+## 2. 通信の層 / communication layers
 
-## 2. ライン周波数 / Line rate
-
-**mm/s = m/min × 1,000 ÷ 60**
-**lines/s = mm/s ÷ (mm/line)**
-
-| speed | mm/s | mm/line | lines/s |
-|---:|---:|---:|---:|
-| 30 m/min | 500 | 0.2 | 2,500 |
-| 60 m/min | 1,000 | 0.1 | 10,000 |
-| 15 m/min | 250 | 0.25 | 1,000 |
-
-## 3. 露光中の移動 / Travel during exposure
-
-**travel = velocity × exposure time**
-
-| speed | exposure | travel |
-|---:|---:|---:|
-| 0.5 m/s | 1.0 ms | 0.5 mm |
-| 1.0 m/s | 0.2 ms | 0.2 mm |
-| 0.5 m/s | 0.1 ms | 0.05 mm |
-
-## 4. 画像データ量 / Image data volume
-
-**bytes/s = pixels/line × lines/s × bytes/pixel**
-
-4,096 × 2,500 × 1 = **10,240,000 B/s ≈ 10.24 MB/s**（10進 / decimal）。
-**10.24 MB/s ≈ 81.92 Mb/s**（1 byte = 8 bits）。**MB/s と Mb/s を混同しない / never confuse them.**
-
-## 5. 遅延と移動 / Latency and travel
-
-**travel = velocity × latency**
-
-| speed | latency | travel |
-|---:|---:|---:|
-| 0.5 m/s | 0.12 s | 60 mm |
-| 0.4 m/s | 0.15 s | 60 mm |
-| 1.0 m/s | 0.05 s | 50 mm |
-
-移動量は**位置ずれ誤差と同じではない**。位置追跡・処理遅延・判断可能時刻・動作時刻を分ける。
-Travel is **not the same as positioning error**; separate tracking, processing delay, decision time and action time.
-
-## 6. 判定の6状態 / Six decision states
-
-| 状態 / state | 自動OK / auto OK |
+| 層 / Layer | 決めること / Decides |
 |---|---|
-| 有効OK / valid OK | 可（方針による） / yes, per policy |
-| 有効NG / valid NG | 不可 / no |
-| 無効 / invalid | 不可 / no |
-| タイムアウト / timeout | 不可 / no |
-| 画像なし / no image | 不可 / no |
-| 通信失敗 / comms failure | 不可 / no |
+| IP | どの機器へ / which device |
+| ポート / port | どのサービスへ / which service |
+| TCP / UDP | どう運ぶか / how data is carried |
+| アプリ / application | データの意味 / meaning of the data |
 
-## 7. 受入確認 / Acceptance check
+- リンクOK ≠ IP OK ≠ アプリOK / link OK does not imply IP or application success.
+- ping成功はModbus成功を保証しない / ping success does not guarantee Modbus success.
+- 通信喪失時の機械動作を設計する / design machine behaviour on communication loss.
 
-- ☐ 既知の良品・不良品で正しく判定 / known good and bad samples judged correctly
-- ☐ 無効・タイムアウトがOKにならない / invalid and timeout never become OK
-- ☐ 古いID・重複IDを拒否する / stale and duplicate IDs rejected
-- ☐ 再起動後に古い結果を使わない / no stale result after restart
-- ☐ 故障注入で検出できる / fault injection detected
-- ☐ 平均値ではなく最大値とジッタを測る / measure worst case and jitter, not averages
-- ☐ 安全系がAIと独立 / safety independent of AI
+## 3. 段階ゲート / staged gates
 
-## 8. よくある誤解 / Common misunderstandings
+G0 文書 → G1 機械 → G2 電気（隔離）→ G3 オフライン → G4 監督下準備 → G5 通電（任意）→ G6 受入
 
-1. 画素数を増やせば必ず良くなる → 光学・照明・コントラスト次第 / more pixels always better → depends on optics, lighting, contrast.
-2. ラインスキャンは万能 → 同期と照明が難しい / line scan is always better → harder sync and lighting.
-3. 推論時間＝応答時間 → 取得・転送・待ち・通信が加わる / inference time equals response → add acquisition, transfer, queue, comms.
-4. 通信成功＝結果が正しい → 別の情報 / communication success equals correctness → different facts.
-5. AIのスコア＝校正済み確率 → そうではない / AI score equals calibrated probability → it does not.
+- G5は課程の必須ではない / G5 is not required for this course.
+- 未実施はBLOCKEDまたはNOT TESTED / unperformed tests are BLOCKED or NOT TESTED.
+- BLOCKEDをPASSにしない / never turn BLOCKED into PASS.
+- リセットは動作開始ではない / reset is not a start.
+
+## 4. 試験記録 / test record fields
+
+試験ID、要求ID、前提、手順、期待、実測、合否、証跡、実施者、日付、是正処置
+Test ID, requirement ID, preconditions, procedure, expected, actual, status, evidence, operator, date, corrective action.
+
+## 5. 費用対効果 / cost and benefit
+
+```text
+年間効果 = 削減時間/日 × 稼働日 × 時間単価
+回収期間 = 投資 ÷ (年間効果 − 年間運用費)
+```
+
+**例 / example**: 12 s × 180回/日 = 36 min/日 → 0.6 h/日 × 220日 × 2,400円 = **316,800円/年**。
+設備450,000円 → **約1.42年**（単純回収、運用費0の仮定）。
+**Example**: 12 s × 180/day = 36 min/day → **316,800 JPY/year**; 450,000 JPY → **about 1.42 years** (simple payback, zero operating cost assumption).
+
+> 316,800円は労務時間の仮換算であり、実現する利益とは限りません。運用費・停止損失・品質・教育・税金・減価償却は別に評価します。
+> 316,800 JPY is a hypothetical labour-time conversion, not guaranteed profit. Evaluate operating cost, downtime, quality, training, tax and depreciation separately.
+
+## 6. 提出前チェック / pre-submission checks
+
+- [ ] IP割当表と構成図を作った / built the IP allocation table and network diagram
+- [ ] 同一/別サブネットを判定した / judged same/different subnet
+- [ ] 通信喪失時の動作を書いた / wrote behaviour on communication loss
+- [ ] ゲートと試験記録を作った / built gates and test records
+- [ ] BLOCKEDをPASSにしなかった / did not record BLOCKED as PASS
+- [ ] 投資・運用費・効果・回収を分けた / separated investment, operating cost, benefit and payback
+- [ ] 危険源と専門レビュー項目を書いた / wrote hazards and expert-review items
+- [ ] 次のステップに責任者と期限を書いた / wrote next steps with owners and dates

@@ -1,28 +1,83 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="840" viewBox="0 0 1440 840" role="img" aria-labelledby="title desc"><title id="title">オン遅延タイマの動作 / ON-delay timer timing chart</title><desc id="desc">オン遅延タイマの動作 / ON-delay timer timing chart — editable bilingual training diagram for DAY 08 / TIMERS.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#2563A6"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#A32B2B"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#1B7A4B"/></marker></defs><rect x="0" y="0" width="1440" height="840" fill="#F5F8FC"/><rect x="0" y="0" width="1440" height="12" fill="#2563A6"/>
-<text x="56.0" y="56.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#2563A6" font-weight="700" text-anchor="start">DAY 08 / TIMERS</text>
-<text x="56.0" y="104.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="32" fill="#142B3F" font-weight="700" text-anchor="start">オン遅延タイマの動作</text>
-<text x="56.0" y="144.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="26" fill="#526378" font-weight="400" text-anchor="start">ON-delay timer timing chart</text>
-<path d="M140.0 200.0 L1300.0 200.0" fill="none" stroke="#2563A6" stroke-width="2"/>
-<text x="100.0" y="206.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="10" fill="#142B3F" font-weight="400" text-anchor="start"></text>
-<text x="140.0" y="190.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start">時間 / time</text>
-<text x="90.0" y="280.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#2563A6" font-weight="700" text-anchor="start">X0</text>
-<path d="M160.0 300.0 L1280.0 300.0" fill="none" stroke="#2563A6" stroke-width="2"/>
-<polyline points="200.0,288.0 200.0,288.0 200.0,288.0 400.0,288.0 400.0,240.0 800.0,240.0 800.0,288.0 1200.0,288.0" fill="none" stroke="#2563A6" stroke-width="2.6"/>
-<text x="700.0" y="226.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#526378" font-weight="400" text-anchor="middle">入力ONの時間が設定値に達すると完了</text>
-<text x="90.0" y="420.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#1B7A4B" font-weight="700" text-anchor="start">T0</text>
-<path d="M160.0 440.0 L1280.0 440.0" fill="none" stroke="#2563A6" stroke-width="2"/>
-<polyline points="200.0,428.0 200.0,428.0 200.0,428.0 600.0,428.0 600.0,380.0 800.0,380.0 800.0,428.0 1200.0,428.0" fill="none" stroke="#2563A6" stroke-width="2.6"/>
-<text x="400.0" y="366.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#1B7A4B" font-weight="700" text-anchor="middle">設定時間 / preset</text>
-<text x="600.0" y="470.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="middle">蓄積が完了すると接点が変化 / contact changes on completion</text>
-<text x="90.0" y="560.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#B4541E" font-weight="700" text-anchor="start">Y0</text>
-<path d="M160.0 580.0 L1280.0 580.0" fill="none" stroke="#2563A6" stroke-width="2"/>
-<polyline points="200.0,568.0 200.0,568.0 200.0,568.0 600.0,568.0 600.0,520.0 800.0,520.0 800.0,568.0 1200.0,568.0" fill="none" stroke="#B4541E" stroke-width="2.6"/>
-<text x="500.0" y="508.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#B4541E" font-weight="700" text-anchor="middle">出力ON / output ON</text>
-<rect x="80.0" y="616.0" width="1280.0" height="60.0" rx="8" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
-<text x="100.0" y="640.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#142B3F" font-weight="700" text-anchor="start">時間の単位と基準（100 ms・10 msなど）はCPUと命令で異なります。</text>
-<text x="100.0" y="662.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start">Time base (100 ms, 10 ms, ...) depends on the CPU and instruction; check the manual.</text>
-<rect x="56.0" y="724.0" width="1328.0" height="60.0" rx="10" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
-<text x="76.0" y="758.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#142B3F" font-weight="700" text-anchor="start">「T0 K50＝必ず5秒」とは限りません。</text>
-<text x="76.0" y="780.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14.5" fill="#526378" font-weight="400" text-anchor="start">“T0 K50 equals 5 s” is not universal.</text>
-<text x="1400" y="832" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" text-anchor="end">D08-08 • 編集可能な図 / editable SVG</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1000" viewBox="0 0 1440 1000" role="img" aria-labelledby="title desc"><title id="title">正しい自己保持回路 / Correct self-holding circuit</title><desc id="desc">正しい自己保持回路 / Correct self-holding circuit — editable bilingual training diagram for 第8日 / Day 8.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#2563A6"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#A32B2B"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#1B7A4B"/></marker></defs><rect x="0" y="0" width="1440" height="1000" fill="#F5F8FC"/><rect x="0" y="0" width="1440" height="12" fill="#2563A6"/>
+<text x="56.0" y="56.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#2563A6" font-weight="700" text-anchor="start">第8日 / Day 8</text>
+<text x="56.0" y="104.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="32" fill="#142B3F" font-weight="700" text-anchor="start">正しい自己保持回路</text>
+<text x="56.0" y="144.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="26" fill="#526378" font-weight="400" text-anchor="start">Correct self-holding circuit</text>
+<path d="M150.0 230.0 L150.0 600.0" fill="none" stroke="#142B3F" stroke-width="3"/>
+<path d="M1290.0 230.0 L1290.0 600.0" fill="none" stroke="#142B3F" stroke-width="3"/>
+<text x="150.0" y="215.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#142B3F" font-weight="700" text-anchor="middle">L</text>
+<text x="1290.0" y="215.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#142B3F" font-weight="700" text-anchor="middle">N</text>
+<path d="M150.0 320.0 L300.0 320.0" fill="none" stroke="#142B3F" stroke-width="2"/>
+<path d="M300.0 320.0 L300.0 250.0" fill="none" stroke="#142B3F" stroke-width="2"/>
+<path d="M300.0 320.0 L300.0 390.0" fill="none" stroke="#142B3F" stroke-width="2"/>
+<path d="M300.0 250.0 L370.0 250.0" fill="none" stroke="#142B3F" stroke-width="2"/>
+<path d="M300.0 390.0 L370.0 390.0" fill="none" stroke="#142B3F" stroke-width="2"/>
+<path d="M370.0 250.0 L389.0 250.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<path d="M389.0 232.0 L389.0 268.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<path d="M411.0 232.0 L411.0 268.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<path d="M411.0 250.0 L430.0 250.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<text x="400.0" y="292.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#2563A6" font-weight="700" text-anchor="middle">X0</text>
+<text x="400.0" y="222.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#526378" font-weight="400" text-anchor="middle">START / 押している間ON</text>
+<path d="M510.0 250.0 L529.0 250.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<path d="M529.0 232.0 L529.0 268.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<path d="M551.0 232.0 L551.0 268.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<path d="M551.0 250.0 L570.0 250.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<text x="540.0" y="292.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#2563A6" font-weight="700" text-anchor="middle">X2</text>
+<text x="540.0" y="222.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#526378" font-weight="400" text-anchor="middle">後退端 / start only</text>
+<path d="M370.0 390.0 L389.0 390.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<path d="M389.0 372.0 L389.0 408.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<path d="M411.0 372.0 L411.0 408.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<path d="M411.0 390.0 L430.0 390.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<text x="400.0" y="432.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#2563A6" font-weight="700" text-anchor="middle">M0</text>
+<text x="400.0" y="362.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#526378" font-weight="400" text-anchor="middle">保持 / seal-in</text>
+<path d="M430.0 250.0 L510.0 250.0" fill="none" stroke="#142B3F" stroke-width="2"/>
+<path d="M570.0 250.0 L700.0 250.0" fill="none" stroke="#142B3F" stroke-width="2"/>
+<path d="M430.0 390.0 L700.0 390.0" fill="none" stroke="#142B3F" stroke-width="2"/>
+<path d="M700.0 250.0 L700.0 390.0" fill="none" stroke="#142B3F" stroke-width="2"/>
+<path d="M700.0 320.0 L880.0 320.0" fill="none" stroke="#142B3F" stroke-width="2"/>
+<path d="M920.0 320.0 L939.0 320.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<path d="M939.0 302.0 L939.0 338.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<path d="M961.0 302.0 L961.0 338.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<path d="M961.0 320.0 L980.0 320.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<text x="950.0" y="362.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#2563A6" font-weight="700" text-anchor="middle">X1</text>
+<text x="950.0" y="292.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#526378" font-weight="400" text-anchor="middle">停止許可 / stop permission</text>
+<path d="M880.0 320.0 L920.0 320.0" fill="none" stroke="#142B3F" stroke-width="2"/>
+<path d="M980.0 320.0 L1072.0 320.0" fill="none" stroke="#142B3F" stroke-width="2"/>
+<path d="M1102 301 Q1084 320 1102 339" fill="none" stroke="#2563A6" stroke-width="2.4"/><path d="M1138 301 Q1121 320 1138 339" fill="none" stroke="#2563A6" stroke-width="2.4"/>
+<path d="M1072.0 320.0 L1086.0 320.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<path d="M1138.0 320.0 L1182.0 320.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<text x="1120.0" y="364.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#2563A6" font-weight="700" text-anchor="middle">M0</text>
+<text x="1120.0" y="292.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#526378" font-weight="400" text-anchor="middle">RUN state</text>
+<path d="M1182.0 320.0 L1290.0 320.0" fill="none" stroke="#142B3F" stroke-width="2"/>
+<path d="M150.0 500.0 L370.0 500.0" fill="none" stroke="#142B3F" stroke-width="2"/>
+<path d="M370.0 500.0 L389.0 500.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<path d="M389.0 482.0 L389.0 518.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<path d="M411.0 482.0 L411.0 518.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<path d="M411.0 500.0 L430.0 500.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<text x="400.0" y="542.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#2563A6" font-weight="700" text-anchor="middle">M0</text>
+<text x="400.0" y="472.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#526378" font-weight="400" text-anchor="middle">RUN</text>
+<path d="M430.0 500.0 L980.0 500.0" fill="none" stroke="#142B3F" stroke-width="2"/>
+<path d="M980.0 500.0 L999.0 500.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<path d="M999.0 482.0 L999.0 518.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<path d="M1021.0 482.0 L1021.0 518.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<path d="M1021.0 500.0 L1040.0 500.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<text x="1010.0" y="542.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#2563A6" font-weight="700" text-anchor="middle">T0.DN</text>
+<text x="1010.0" y="472.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#526378" font-weight="400" text-anchor="middle">3 s done</text>
+<path d="M1040.0 500.0 L1092.0 500.0" fill="none" stroke="#142B3F" stroke-width="2"/>
+<path d="M1122 481 Q1104 500 1122 519" fill="none" stroke="#2563A6" stroke-width="2.4"/><path d="M1158 481 Q1141 500 1158 519" fill="none" stroke="#2563A6" stroke-width="2.4"/>
+<path d="M1092.0 500.0 L1106.0 500.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<path d="M1158.0 500.0 L1202.0 500.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<text x="1140.0" y="544.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#2563A6" font-weight="700" text-anchor="middle">Y1</text>
+<text x="1140.0" y="472.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#526378" font-weight="400" text-anchor="middle">delayed lamp</text>
+<path d="M1202.0 500.0 L1290.0 500.0" fill="none" stroke="#142B3F" stroke-width="2"/>
+<rect x="70.0" y="620.0" width="1300.0" height="110.0" rx="8" fill="#E8F1FA" stroke="#2563A6" stroke-width="1.2"/>
+<text x="90.0" y="652.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#142B3F" font-weight="700" text-anchor="start">並列枝: (X0 AND X2) OR M0   直列: X1（停止許可）</text>
+<text x="90.0" y="678.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#142B3F" font-weight="400" text-anchor="start">M0の保持枝はX2を通らない。だから前進してX2がOFFになってもRUNを維持できる。</text>
+<text x="90.0" y="702.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#526378" font-weight="400" text-anchor="start">The M0 seal-in branch does not pass through X2, so RUN survives X2 turning OFF.</text>
+<rect x="70.0" y="760.0" width="1300.0" height="80.0" rx="8" fill="#F8E7E7" stroke="#A32B2B" stroke-width="1.3"/>
+<text x="90.0" y="792.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#A32B2B" font-weight="700" text-anchor="start">元PDFの31ページには、この並列保持接点がない。STARTを離すとRUNが消える。</text>
+<text x="90.0" y="815.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#526378" font-weight="400" text-anchor="start">The source PDF page 31 lacks this parallel holding contact, so RUN would drop when START is released.</text>
+<rect x="56.0" y="884.0" width="1328.0" height="60.0" rx="10" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
+<text x="76.0" y="918.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#142B3F" font-weight="700" text-anchor="start">STARTを離してもRUNが続く。STOP許可がOFFになるとRUNが落ち、T0もリセットされる。</text>
+<text x="76.0" y="940.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14.5" fill="#526378" font-weight="400" text-anchor="start">RUN survives START release. When stop permission goes OFF, RUN drops and T0 resets.</text>
+<text x="1400" y="992" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" text-anchor="end">D08-08 • 編集可能な図 / editable SVG</text>
 </svg>

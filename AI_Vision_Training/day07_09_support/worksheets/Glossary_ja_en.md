@@ -1,97 +1,104 @@
-# 技術用語集 / Technical Glossary (Day 7–9)
+# 技術用語集 / Technical glossary (Japanese–English)
 
-第7〜9日で使う用語の対訳と短い説明です。数値や仕様は含みません。
-Bilingual terms with short explanations; no numbers or specifications are asserted.
+> この用語集は、第7〜9日の教材で使う意味に限定しています。実機・規格・メーカー資料では、より狭い、または異なる定義が使われる場合があります。必ず出典を確認してください。
+> This glossary gives the meaning used in Days 7–9. Real equipment, standards and manufacturer documents may use narrower or different definitions. Always check the source.
 
-| 用語 / term | 英語 / English | 説明 / explanation |
+| 日本語 / Japanese | English | 意味 / Meaning in this course |
 |---|---|---|
-| 機構 | mechanism | 動きを伝える部品の組合せ / a combination of parts that transmits motion |
-| 機械 | machine | 動力・制御・安全を含む仕事をする全体 / the whole system with power, control and safety |
-| フレーム | frame | 部品を支える構造 / the structure that supports the parts |
-| ブラケット | bracket | 部品を固定する金具 / a fitting that holds a part |
-| シャフト（軸） | shaft | 回転を伝える棒 / a bar that transmits rotation |
-| ベアリング | bearing | 軸を支え摩擦を減らす部品 / supports a shaft with low friction |
-| カップリング | coupling | 二つの軸をつなぐ部品 / joins two shafts |
-| プーリ | pulley | ベルトで回転を伝える円盤 / a wheel that transmits rotation through a belt |
-| ベルト | belt | プーリ間で動力を伝える帯 / a band that carries power between pulleys |
-| チェーン | chain | 歯車間で動力を伝える鎖 / a chain that carries power between sprockets |
-| ギア | gear | 歯で回転を伝え速度を変える部品 / toothed wheel that transmits rotation and changes speed |
-| ガイドレール | guide rail | 直線運動を案内するレール / a rail that guides linear motion |
-| リニアガイド | linear guide | 直線運動を精度よく案内する機構 / a mechanism for precise linear guidance |
-| ローラ | roller | 材料に接触する回転体 / a rotating body that contacts the material |
-| 駆動ローラ | driven roller | 動力を受けて材料を送るローラ / a roller that moves material using power |
-| アイドラローラ | idler roller | 動力を持たず案内するローラ / a non-driven roller that guides |
-| ウェブ | web | 連続したシート状の材料 / continuous sheet material |
-| 張力 | tension | シートを引く力 / the pulling force on the web |
-| しわ | wrinkle | シートの折れ・波打ち / a fold or wave in the sheet |
-| 蛇行 | lateral drift | 横方向の位置ずれ / sideways position error |
-| 振動 | vibration | 周期的な揺れ / periodic movement |
-| トルク | torque | 回転を起こす力のモーメント / the turning effect of a force |
-| 加速度 | acceleration | 速度の変化の割合 / rate of change of speed |
-| エンコーダ | encoder | 回転や位置を信号に変えるセンサ / a sensor that converts rotation or position into a signal |
-| 増分形エンコーダ | incremental encoder | パルスで移動量を出す方式 / outputs pulses for movement |
-| 絶対形エンコーダ | absolute encoder | 位置をコードで出す方式 / outputs a coded position |
-| PPR | pulses per revolution | 1回転あたりのA相パルス数 / A-channel pulses per turn |
-| デコード | decoding | パルスをカウントに変える方式 / converting pulses to counts |
-| 光電センサ | photoelectric sensor | 光で物体を検出するセンサ / detects objects with light |
-| 透過形 | through-beam | 投受光の遮光を検出 / detects interruption between emitter and receiver |
-| 回帰反射形 | retroreflective | 反射板からの光の遮断を検出 / detects interruption of light returned from a reflector |
-| 拡散反射形 | diffuse-reflective | 物体自身の反射を検出 / detects light reflected by the object |
-| 誘導形近接センサ | inductive proximity sensor | 主に金属を非接触で検出 / mainly detects metal without contact |
-| 静電容量形センサ | capacitive sensor | 誘電体の変化を検出 / detects dielectric change |
-| 超音波センサ | ultrasonic sensor | 音波で距離や有無を検出 / uses sound waves for distance or presence |
-| デジタル信号 | digital signal | ON/OFF の二状態 / two states, ON/OFF |
-| アナログ信号 | analog signal | 連続した量を表す信号 / a signal representing a continuous quantity |
-| アクティブハイ | active-high | ONで真とする約束 / true when ON |
-| アクティブロー | active-low | OFFで真とする約束 / true when OFF |
-| スケーリング | scaling | 電気値と物理量を対応付ける計算 / mapping electrical values to physical quantities |
-| 校正 | calibration | 表示値と実量の関係を決める作業 / establishing the relation between indication and true value |
-| PLC | programmable logic controller | 産業用の制御装置 / an industrial controller |
-| CPU | central processing unit | PLCの演算部 / the processing unit of a PLC |
-| 入力モジュール | input module | 現場信号を受け取る / receives field signals |
-| 出力モジュール | output module | 現場へ信号を出す / drives field signals |
-| スキャン周期 | scan cycle | 入力・実行・出力の繰り返し / the input-execute-output repetition |
-| ラダー図 | ladder diagram | 接点とコイルで論理を表す図 / a logic diagram of contacts and coils |
-| ネットワーク（rung） | rung | ラダーの一行 / one line of a ladder program |
-| 接点 | contact | 条件を評価する命令 / an instruction that evaluates a condition |
-| コイル | coil | 結果を書き込む命令 / an instruction that writes a result |
-| NO接点 | normally open contact | ビット1で導通 / conducts when the bit is 1 |
-| NC接点 | normally closed contact | ビット0で導通 / conducts when the bit is 0 |
-| 内部リレー | internal relay | プログラム内のビット / a bit used inside the program |
-| 自己保持 | self-holding | 短い操作を記憶する回路 / a circuit that remembers a brief command |
-| オン遅延タイマ | ON-delay timer | 入力ON後に時間で動作 / acts after the input has been ON for a set time |
-| カウンタ | counter | 立ち上がり回数を数える / counts rising edges |
-| 立ち上がりエッジ | rising edge | 0から1への変化 / a change from 0 to 1 |
-| インターロック | interlock | 条件を満たさない動作を禁止する仕組み / prevents an action unless conditions hold |
-| プロセスインターロック | process interlock | 工程を守る条件 / protects the process |
-| 品質インターロック | quality interlock | 品質判断を守る条件 / protects the quality decision |
-| 安全関連インターロック | safety-related interlock | 危害を防ぐ条件 / prevents harm |
-| リスクアセスメント | risk assessment | 危険源と対策を体系的に評価する作業 / systematic evaluation of hazards and measures |
-| ガード | guard | 危険源への接近を防ぐ防護 / physical protection from hazards |
-| 非常停止 | emergency stop | 安全系による緊急停止機能 / an emergency-stop function of the safety system |
-| エリアスキャン | area scan | 2次元画像を1回で撮る方式 / captures a 2-D image per exposure |
-| ラインスキャン | line scan | 線を連結して画像を作る方式 / assembles an image from lines |
-| 視野（FOV） | field of view | カメラが写せる範囲 / the observable area |
-| 作動距離（WD） | working distance | レンズから対象までの距離 / lens-to-target distance |
-| 被写界深度 | depth of field | ピントが合って見える範囲 / the range that appears in focus |
-| 露光 | exposure | 光をためる時間 / the light-collection time |
-| ゲイン | gain | 信号の増幅率 / signal amplification |
-| モーションブラー | motion blur | 露光中の動きによるぶれ / blur from movement during exposure |
-| ライン周波数 | line rate | 1秒あたりのライン数 / lines per second |
-| GenICam | GenICam | カメラ制御の共通ソフト枠組み / a generic camera control framework |
-| GigE Vision | GigE Vision | Ethernet ベースの転送規格 / an Ethernet-based transport standard |
-| USB3 Vision | USB3 Vision | USB3 ベースの転送規格 / a USB3-based transport standard |
-| CoaXPress | CoaXPress | 高速同軸転送の規格 / a high-speed coaxial transport standard |
-| YOLO | YOLO | 物体検出の手法 / an object-detection method |
-| PatchCore | PatchCore | 異常検知の手法 / an anomaly-detection method |
-| 信頼度 | confidence | 検出の確からしさの指標 / an indicator of detection certainty |
-| 異常スコア | anomaly score | 正常との差分の大きさ / magnitude of difference from normal |
-| メモリバンク | memory bank | 正常特徴の蓄積 / stored normal features |
-| 閾値 | threshold | 判定の境界値 / the decision boundary |
-| 推論 | inference | 学習済みモデルで結果を出す処理 / producing results with a trained model |
-| 遅延 | latency | 結果が出るまでの時間 / time until a result is available |
-| ジッタ | jitter | 遅延のばらつき / variation in latency |
-| ハンドシェイク | handshake | 機器間の受け渡し手順 / a device-to-device exchange procedure |
-| トレーサビリティ | traceability | 結果と条件を追跡できること / the ability to trace results and conditions |
-| 古い結果 | stale result | 以前のIDの結果 / a result from an earlier ID |
-| HMI | human-machine interface | 操作と表示の窓口 / the operation and display interface |
+| 自動化 / 自動化設備 | automation / automated equipment | 検知・判断・動作を機械が行うこと。単なる機械化とは区別する。 / machine sensing, deciding and acting, distinct from simple mechanisation |
+| 機械化 | mechanisation | 人の動作を機械で置き換えること。 / replacing a human motion with a machine |
+| タクトタイム | takt time | 生産時間 ÷ 必要数量。目標ペース。 / available time ÷ required quantity; the target pace |
+| サイクルタイム | cycle time | 設備が1個を処理する実時間。 / actual machine time per piece |
+| 実力能力 | effective capacity | 理論能力 × 稼働率 × 良品率の概算。 / theoretical capacity × availability × good yield |
+| 稼働率 | availability | 計画時間のうち実際に動けた割合。 / share of planned time the machine can run |
+| 良品率 | good yield | 生産数のうち良品の割合。 / share of output that is good |
+| 要求仕様 | requirements specification | 達成すべき能力・品質・安全・運転条件。 / required capacity, quality, safety and operating conditions |
+| 受入基準 | acceptance criterion | 測定方法・条件・合格範囲・回試行数を定めた合否条件。 / measurable pass condition with method, condition and sample size |
+| ECRS | ECRS | Eliminate, Combine, Rearrange, Simplify。 / eliminate, combine, rearrange, simplify |
+| 現状分析 | current-state analysis | 事実と測定値で現状を記録すること。 / recording the current state with facts and measurements |
+| ワーク | workpiece | 加工・搬送・検査の対象物。 / the object being handled, moved or inspected |
+| 押出し装置 | pusher machine | ワークを所定位置へ押す装置。本教材の共通題材。 / the running example that pushes a workpiece |
+| シリンダ | cylinder | 圧縮空気で直線運動を得るアクチュエータ。 / actuator producing linear motion from compressed air |
+| 複動シリンダ | double-acting cylinder | 押し側・戻り側の両方に圧力をかけるシリンダ。 / cylinder powered in both directions |
+| 単動シリンダ | single-acting cylinder | 一方向をばね等で戻すシリンダ。 / cylinder returned by a spring or similar |
+| 内径（ボア） | bore | シリンダの内側の直径。 / inside diameter of the cylinder |
+| ロッド | rod | シリンダの往復する軸。横荷重を受ける部品ではない。 / the moving shaft; not a side-load bearing |
+| ストローク | stroke | ロッドの移動距離。 / travel of the rod |
+| 推力 | thrust / force | シリンダが出す力。圧力×受圧面積。 / cylinder force = pressure × effective area |
+| 受圧面積 | effective area | 圧力を受ける面積。戻り側はロッド断面積を差し引く。 / area under pressure; the rod area is excluded on the pull side |
+| ゲージ圧 | gauge pressure | 大気圧を基準にした圧力。 / pressure relative to atmosphere |
+| 電磁弁 | solenoid valve | 電気信号で空気の流れを切り替える弁。 / valve switching air flow by an electrical signal |
+| 5/2弁 | 5-port 2-position valve | 5ポート2位置の方向切替弁。 / five-port, two-position directional valve |
+| 速度制御弁 | flow control valve | シリンダの速度を調整する絞り。 / restrictor for cylinder speed |
+| メータイン | meter-in | シリンダへ入る空気を絞る方式。 / throttling air entering the cylinder |
+| メータアウト | meter-out | シリンダから出る空気を絞る方式。 / throttling air leaving the cylinder |
+| 空気準備 | air preparation | フィルタ・レギュレータなどで空気を整えること。 / filtering and regulating the air |
+| 残圧 | residual pressure | 遮断後も配管内に残る圧力。 / pressure remaining after isolation |
+| ガイド | guide | 運動の方向を案内し、横荷重を受ける要素。 / element that guides motion and carries side load |
+| 偏荷重 | side load / offset load | 軸からずれた荷重。モーメントを生む。 / load offset from the axis, producing a moment |
+| モーメント | moment | 力 × 距離。回転を生む作用。 / force × distance; a turning effect |
+| 減速機 | reducer / gearbox | 回転数を下げ、トルクを上げる装置。 / device that reduces speed and increases torque |
+| 減速比 | reduction ratio | 入力回転数 ÷ 出力回転数。 / input speed ÷ output speed |
+| 効率 | efficiency | 出力 ÷ 入力。損失の割合を示す。 / output ÷ input |
+| 慣性 | inertia | 回転・加速のしにくさ。 / resistance to changes in motion |
+| 定格 | rating | メーカーが保証する使用条件。 / manufacturer-specified operating limit |
+| 負荷率 | load factor | 定格に対する実際の負荷の割合。 / actual load relative to rating |
+| 電圧 | voltage | 電位差。単位V。 / potential difference, in volts |
+| 電流 | current | 電荷の流れ。単位A。 / flow of charge, in amperes |
+| 抵抗 | resistance | 電流の流れにくさ。単位Ω。 / opposition to current, in ohms |
+| 電力 | power | 単位時間当たりのエネルギー。単位W。 / energy per time, in watts |
+| オームの法則 | Ohm's law | V = I × R。 / V = I × R |
+| 直流 / 交流 | DC / AC | 向きが一定 / 周期的に変化する電流。 / constant direction / periodically changing current |
+| 電源 | power supply | 機器に電力を供給する装置。 / device supplying electrical power |
+| 遮断器 | circuit breaker | 過電流から電線・機器を守る装置。 / device protecting wiring and equipment from overcurrent |
+| ヒューズ | fuse | 過電流で溶断する保護素子。 / protective element that melts on overcurrent |
+| 保護接地 | protective earth (PE) | 故障時に筐体を安全な電位に保つ接地。 / earthing that keeps enclosures at a safe potential |
+| 絶縁 | insulation | 導体を他の導体・人から隔離すること。 / separating conductors from each other and from people |
+| 無電圧確認 | verification of de-energisation | 電気が来ていないことを測定で確認すること。 / measuring to confirm absence of voltage |
+| ロックアウト・タグアウト | lockout / tagout | 遮断状態を固定し、表示する手順。 / securing and labelling an isolated state |
+| リレー | relay | コイルで接点を切り替える部品。 / device switching contacts via a coil |
+| PLC | programmable logic controller | 入力・論理・出力を繰り返す制御装置。 / controller that scans inputs, logic and outputs |
+| ラダー | ladder diagram | 接点とコイルで論理を表す図。 / contact-and-coil logic diagram |
+| 自己保持 | self-holding / seal-in | 操作が離れても状態を保持する回路。 / circuit that keeps a state after the operator releases |
+| 接点 | contact | 回路を開閉する要素。物理接点と論理接点を区別する。 / switching element; physical and logical contacts differ |
+| NO / NC | normally open / normally closed | 通常時開 / 通常時閉。 / open in the normal state / closed in the normal state |
+| 内部ビット | internal bit | プログラム内の状態記憶。 / stored state inside the program |
+| タイマー | timer | 条件が続いた時間を扱う機能。 / function measuring the duration of a condition |
+| オン遅延 | on-delay | 入力が続いてから出力する。 / output after the input has been true for a set time |
+| スキャン | scan | 入力読取・プログラム実行・出力更新の繰り返し。 / repeated input, program and output cycle |
+| 状態遷移 | state transition | 状態と、次へ進む条件。 / a state and the condition that moves to the next state |
+| インターロック | interlock | 条件が満たされないと動作を許さない仕組み。 / prevents an action unless conditions are met |
+| タイムアウト | timeout | 設定時間内に条件が成立しないことの検出。 / detection that a condition did not occur within a set time |
+| リセット | reset | 故障状態を解除する操作。動作開始ではない。 / clearing a fault; not a start command |
+| 再起動防止 | restart prevention | 復電・復旧時に自動で動かさない設計。 / design that prevents automatic restart |
+| 安全機能 | safety function | リスク低減のための機能。通常のPLC制御とは別に設計・検証する。 / risk-reduction function designed and validated separately from ordinary control |
+| リスクアセスメント | risk assessment | 危険源を特定し、リスクを見積もり、対策を決める過程。 / process of identifying hazards, estimating risk and deciding measures |
+| ガード | guard | 人を危険源から隔離する物理的な防護。 / physical barrier separating people from hazards |
+| ロックアウト | lockout | エネルギーを遮断し、再投入できないようにする。 / isolating energy and preventing reconnection |
+| 残留エネルギー | stored energy | 遮断後も残る圧力・重力・慣性・ばねなど。 / pressure, gravity, inertia or springs remaining after isolation |
+| LAN | local area network | 限られた範囲のネットワーク。 / network within a limited area |
+| スイッチ（ネットワーク） | network switch | 同一LAN内の通信を中継する装置。 / forwards traffic within a LAN |
+| ルータ | router | 別ネットワークへ通信を転送する装置。 / forwards traffic between networks |
+| IPアドレス | IP address | ネットワーク上の機器を識別する論理アドレス。 / logical address identifying a device |
+| サブネットマスク | subnet mask | ネットワーク部とホスト部の境界。 / boundary between network and host bits |
+| プレフィックス長 | prefix length | マスクの1のビット数（/24など）。 / number of leading mask bits, e.g. /24 |
+| ネットワークアドレス | network address | ホスト部がすべて0のアドレス。 / address with all host bits zero |
+| ブロードキャストアドレス | broadcast address | ホスト部がすべて1のアドレス。 / address with all host bits one |
+| デフォルトゲートウェイ | default gateway | 別ネットワークへ出る次の通信先。 / next hop to another network |
+| TCP | Transmission Control Protocol | 接続・順序・再送を持つトランスポート。 / connection-oriented transport with ordering and retransmission |
+| UDP | User Datagram Protocol | 接続確立を前提としないトランスポート。 / connectionless transport |
+| ポート番号 | port number | 機器内のサービスを識別する番号。 / number identifying a service on a device |
+| Modbus TCP | Modbus TCP | レジスタ・コイルを読み書きする産業用プロトコルの例。 / example industrial protocol for registers and coils |
+| 産業用Ethernet | industrial Ethernet | 工場向けEthernet規格の総称。 / family of factory Ethernet protocols |
+| 試運転 | commissioning | 設備を段階的に確認し、使える状態にすること。 / staged verification of equipment to a usable state |
+| 受入試験 | acceptance test | 要求仕様を満たすか確認する試験。 / test confirming the requirements are met |
+| PASS / FAIL | pass / fail | 期待と一致 / 不一致。 / matched / did not match the expected result |
+| NOT TESTED | not tested | まだ実施していない。 / not yet performed |
+| BLOCKED | blocked | 前提・許可・設備がなく実施できない。合格ではない。 / cannot be performed; not a pass |
+| 証跡 | evidence | 結果を裏付けるログ・画面・写真など。 / log, screen or photo supporting a result |
+| 変更履歴 | change history | 何を、いつ、なぜ変え、何を再試験したか。 / what changed, when, why and what was re-tested |
+| 引継ぎ | handover | 次の担当者が状態を理解できるようにする文書・説明。 / documents and explanation that let the next person understand the state |
+| 投資回収 | payback | 投資を何年で回収するかの目安。 / time to recover an investment |
+| 単純回収期間 | simple payback | 投資 ÷ 年間純効果。 / investment ÷ annual net benefit |
+| 運用費 | operating cost | 電気・エア・保守・消耗品など。 / power, air, maintenance and consumables |
+| 机上効果 | paper benefit | 計算上の効果。実現する利益とは限らない。 / calculated benefit, not necessarily realised profit |

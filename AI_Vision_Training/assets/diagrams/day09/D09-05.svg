@@ -1,36 +1,39 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="860" viewBox="0 0 1440 860" role="img" aria-labelledby="title desc"><title id="title">材料の移動とモーションブラー / Material movement and motion blur</title><desc id="desc">材料の移動とモーションブラー / Material movement and motion blur — editable bilingual training diagram for DAY 09 / MOTION BLUR.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#2563A6"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#A32B2B"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#1B7A4B"/></marker></defs><rect x="0" y="0" width="1440" height="860" fill="#F5F8FC"/><rect x="0" y="0" width="1440" height="12" fill="#2563A6"/>
-<text x="56.0" y="56.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#2563A6" font-weight="700" text-anchor="start">DAY 09 / MOTION BLUR</text>
-<text x="56.0" y="104.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="32" fill="#142B3F" font-weight="700" text-anchor="start">材料の移動とモーションブラー</text>
-<text x="56.0" y="144.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="26" fill="#526378" font-weight="400" text-anchor="start">Material movement and motion blur</text>
-<text x="80.0" y="196.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="24" fill="#142B3F" font-weight="700" text-anchor="start">移動距離 = 速度 × 露光時間</text>
-<text x="80.0" y="226.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#526378" font-weight="400" text-anchor="start">distance moved = velocity × exposure time</text>
-<rect x="80.0" y="268.0" width="390.0" height="300.0" rx="12" fill="#FFFFFF" stroke="#1B7A4B" stroke-width="2"/>
-<text x="96.0" y="302.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#1B7A4B" font-weight="700" text-anchor="start">短い露光</text>
-<text x="96.0" y="326.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">short exposure</text>
-<rect x="100.0" y="344.0" width="350.0" height="140.0" rx="6" fill="#EDEDE3" stroke="#C9C9B8" stroke-width="2"/>
-<ellipse cx="275" cy="414" rx="20" ry="16" fill="#8A2B2B" opacity="0.7"/>
-<text x="96.0" y="516.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#142B3F" font-weight="700" text-anchor="start">露光 0.1 ms / exposure</text>
-<text x="96.0" y="544.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#526378" font-weight="400" text-anchor="start">鮮明 / sharp</text>
-<rect x="500.0" y="268.0" width="390.0" height="300.0" rx="12" fill="#FFFFFF" stroke="#B4541E" stroke-width="2"/>
-<text x="516.0" y="302.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#B4541E" font-weight="700" text-anchor="start">中程度</text>
-<text x="516.0" y="326.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">medium</text>
-<rect x="520.0" y="344.0" width="350.0" height="140.0" rx="6" fill="#EDEDE3" stroke="#C9C9B8" stroke-width="2"/>
-<ellipse cx="695" cy="414" rx="90" ry="16" fill="#8A2B2B" opacity="0.7"/>
-<text x="516.0" y="516.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#142B3F" font-weight="700" text-anchor="start">露光 1.0 ms / exposure</text>
-<text x="516.0" y="544.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#526378" font-weight="400" text-anchor="start">軽いぼけ / slight blur</text>
-<rect x="920.0" y="268.0" width="390.0" height="300.0" rx="12" fill="#FFFFFF" stroke="#A32B2B" stroke-width="2"/>
-<text x="936.0" y="302.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#A32B2B" font-weight="700" text-anchor="start">長い露光</text>
-<text x="936.0" y="326.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">long exposure</text>
-<rect x="940.0" y="344.0" width="350.0" height="140.0" rx="6" fill="#EDEDE3" stroke="#C9C9B8" stroke-width="2"/>
-<ellipse cx="1115" cy="414" rx="280" ry="16" fill="#8A2B2B" opacity="0.7"/>
-<text x="936.0" y="516.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#142B3F" font-weight="700" text-anchor="start">露光 5.0 ms / exposure</text>
-<text x="936.0" y="544.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#526378" font-weight="400" text-anchor="start">大きなぼけ / strong blur</text>
-<text x="80.0" y="610.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#142B3F" font-weight="700" text-anchor="start">仮定：材料速度 0.5 m/s。0.5 m/s × 0.001 s = 0.5 mm の移動（中程度の例）。</text>
-<text x="80.0" y="636.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start">Example: 0.5 m/s × 0.001 s = 0.5 mm of travel during exposure.</text>
-<text x="80.0" y="672.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#B4541E" font-weight="700" text-anchor="start">短い露光だけでは暗くなるため、十分な光量が必要です。</text>
-<text x="80.0" y="698.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start">Short exposure needs enough light; otherwise the image is dark and noisy.</text>
-<rect x="56.0" y="744.0" width="1328.0" height="60.0" rx="10" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
-<text x="76.0" y="778.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#142B3F" font-weight="700" text-anchor="start">ぼけは欠陥コントラストを下げ、検出を不安定にします。</text>
-<text x="76.0" y="800.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14.5" fill="#526378" font-weight="400" text-anchor="start">Blur lowers defect contrast and destabilises detection.</text>
-<text x="1400" y="852" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" text-anchor="end">D09-05 • 編集可能な図 / editable SVG</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1000" viewBox="0 0 1440 1000" role="img" aria-labelledby="title desc"><title id="title">ネットワーク構成と通信設定 / Network block diagram and configuration record</title><desc id="desc">ネットワーク構成と通信設定 / Network block diagram and configuration record — editable bilingual training diagram for 第9日 / Day 9.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#2563A6"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#A32B2B"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#1B7A4B"/></marker></defs><rect x="0" y="0" width="1440" height="1000" fill="#F5F8FC"/><rect x="0" y="0" width="1440" height="12" fill="#2563A6"/>
+<text x="56.0" y="56.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#2563A6" font-weight="700" text-anchor="start">第9日 / Day 9</text>
+<text x="56.0" y="104.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="32" fill="#142B3F" font-weight="700" text-anchor="start">ネットワーク構成と通信設定</text>
+<text x="56.0" y="144.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="26" fill="#526378" font-weight="400" text-anchor="start">Network block diagram and configuration record</text>
+<rect x="600.0" y="380.0" width="240.0" height="100.0" rx="8" fill="#E6F4F7" stroke="#0E7490" stroke-width="2.2"/>
+<text x="720.0" y="420.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#0E7490" font-weight="700" text-anchor="middle">スイッチ / switch</text>
+<text x="720.0" y="445.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#526378" font-weight="400" text-anchor="middle">192.168.10.0/24</text>
+<rect x="120.0" y="220.0" width="250.0" height="80.0" rx="6" fill="#FFFFFF" stroke="#0E7490" stroke-width="2"/>
+<text x="245.0" y="250.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#0E7490" font-weight="700" text-anchor="middle">PC</text>
+<text x="245.0" y="272.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#526378" font-weight="400" text-anchor="middle">192.168.10.10</text>
+<rect x="1080.0" y="220.0" width="250.0" height="80.0" rx="6" fill="#FFFFFF" stroke="#6B3FA0" stroke-width="2"/>
+<text x="1205.0" y="250.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#6B3FA0" font-weight="700" text-anchor="middle">PLC</text>
+<text x="1205.0" y="272.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#526378" font-weight="400" text-anchor="middle">192.168.10.20</text>
+<rect x="120.0" y="600.0" width="250.0" height="80.0" rx="6" fill="#FFFFFF" stroke="#B4541E" stroke-width="2"/>
+<text x="245.0" y="630.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#B4541E" font-weight="700" text-anchor="middle">カメラ</text>
+<text x="245.0" y="652.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#526378" font-weight="400" text-anchor="middle">192.168.10.30</text>
+<rect x="1080.0" y="600.0" width="250.0" height="80.0" rx="6" fill="#FFFFFF" stroke="#1B7A4B" stroke-width="2"/>
+<text x="1205.0" y="630.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#1B7A4B" font-weight="700" text-anchor="middle">HMI</text>
+<text x="1205.0" y="652.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#526378" font-weight="400" text-anchor="middle">192.168.10.40</text>
+<path d="M372.0 260.0 L640.0 380.0" fill="none" stroke="#0E7490" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M1080.0 260.0 L800.0 380.0" fill="none" stroke="#6B3FA0" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M372.0 640.0 L640.0 480.0" fill="none" stroke="#B4541E" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M1080.0 640.0 L800.0 480.0" fill="none" stroke="#1B7A4B" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="470.0" y="300.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#6B3FA0" font-weight="700" text-anchor="start">Modbus TCP :502</text>
+<text x="820.0" y="300.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#6B3FA0" font-weight="600" text-anchor="start">state / result</text>
+<text x="470.0" y="620.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#B4541E" font-weight="700" text-anchor="start">images</text>
+<text x="820.0" y="620.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#1B7A4B" font-weight="600" text-anchor="start">HMI data</text>
+<rect x="640.0" y="680.0" width="200.0" height="70.0" rx="6" fill="#FFFFFF" stroke="#B4541E" stroke-width="2"/>
+<text x="740.0" y="708.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#B4541E" font-weight="700" text-anchor="middle">GW 192.168.10.1</text>
+<text x="740.0" y="728.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="10" fill="#526378" font-weight="400" text-anchor="middle">to other networks</text>
+<path d="M720.0 480.0 L720.0 678.0" fill="none" stroke="#B4541E" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arrow)"/>
+<rect x="70.0" y="780.0" width="1300.0" height="60.0" rx="6" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
+<text x="90.0" y="807.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#142B3F" font-weight="700" text-anchor="start">記録: 機器 / IP / マスク / GW / プロトコル / ポート / 版 / 変更日 / 復旧手順</text>
+<text x="90.0" y="828.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="10" fill="#526378" font-weight="400" text-anchor="start">Record: device, IP, mask, gateway, protocol, port, revision, change date and recovery procedure.</text>
+<rect x="56.0" y="884.0" width="1328.0" height="60.0" rx="10" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
+<text x="76.0" y="918.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15.5" fill="#142B3F" font-weight="700" text-anchor="start">設定を変更する前に構成を記録する。記録がなければ復旧できない。 / Record the configuration before changing it; without a record, recovery is not possible.</text>
+<text x="76.0" y="940.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14.5" fill="#526378" font-weight="400" text-anchor="start">All addresses are fictional training values.</text>
+<text x="1400" y="992" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" text-anchor="end">D09-05 • 編集可能な図 / editable SVG</text>
 </svg>

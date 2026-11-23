@@ -23,6 +23,10 @@ yo talim ma herieka adhikarik kagajat ra thap sikaika samagri hun.
 | 第 1 週まとめ PDF / the whole week | `docs/pdf/Week1_explanation_ja_en.pdf` | 復習と印刷 / revision and printing |
 | PDF の作り直し方 / how to rebuild | `docs/pdf/README.md` | `python assets\scripts\export_explanations_pdf.py` |
 | 図の出所 / figure provenance | `assets/reference_outputs/README.md` | 実測図と模式図の区別 / measured versus schematic |
+| 第7〜9日の解説PDF / explanation PDFs for Days 7–9 | `docs/pdf/Day07_explanation_ja_en.pdf`, Day08, Day09 | 3日間コースの復習・印刷 / revision and printing for the three-day course |
+| 第7〜9日の教材一覧 / Days 7–9 materials | `day07_09_support/README_ja_en.md` | ノートブック・ワークシート・図・シミュレーション / notebooks, worksheets, diagrams and simulations |
+| 第7〜9日の時間割 / Days 7–9 timetable | `COURSE_SYLLABUS_DAY07_09.md` | 08:00–16:50、80/85/135分 / 08:00–16:50, 80/85/135 min |
+| 元PDFの正誤表 / source PDF errata | `docs/reference/Automation_Equipment_PDF_Errata_ja_en.md` | 技術的な修正点 / technical corrections |
 
 PDF は Markdown から自動生成しているので、ノートブックを直せば同じコマンドで追随できます。
 The PDFs are generated from the notebooks' Markdown, so correcting a notebook and re-running the

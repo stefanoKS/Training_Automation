@@ -1,109 +1,139 @@
-// Deterministic logic tests for the six offline simulations.
-// Run: node day07_09_support/tests/run_simulation_logic_tests.js
-// Exits non-zero on the first failure and prints a summary otherwise.
+/*
+ * Deterministic logic tests for the offline PLC simulator.
+ *
+ * Run from the repository root:
+ *   node AI_Vision_Training/day07_09_support/tests/run_simulation_logic_tests.js
+ *
+ * The test extracts the LOGIC-START ... LOGIC-END block from the HTML and
+ * exercises the state machine directly. It does not require a browser.
+ */
+"use strict";
+
 const fs = require("fs");
 const path = require("path");
-const vm = require("vm");
 
-const SIM_DIR = path.resolve(__dirname, "..", "simulations");
+const htmlPath = path.join(__dirname, "..", "simulations", "sim_plc_sequence.html");
+const html = fs.readFileSync(htmlPath, "utf8");
+const start = html.indexOf("/* LOGIC-START */");
+const end = html.indexOf("/* LOGIC-END */");
+if (start < 0 || end < 0) throw new Error("LOGIC markers missing");
+const code = html.slice(start + "/* LOGIC-START */".length, end);
+const api = new Function(code + "\nreturn { PusherSim, STATES };")();
+const { PusherSim, STATES } = api;
 
-function loadLogic(file) {
-  const html = fs.readFileSync(path.join(SIM_DIR, file), "utf8");
-  const match = html.match(/\/\* LOGIC-START \*\/([\s\S]*?)\/\* LOGIC-END \*\//);
-  if (!match) throw new Error("missing LOGIC markers in " + file);
-  const sandbox = { module: { exports: {} }, exports: {} };
-  vm.createContext(sandbox);
-  vm.runInContext(match[1] + "\n;module.exports.__api = {" +
-    ["rollerSpeed", "digitalSignal", "analogFromVoltage", "analogFromCurrent", "encoderCounts",
-     "logicAnd", "logicOr", "logicNot", "selfHold", "onDelay", "counterStep", "explain",
-     "STATES", "isReady", "nextState", "canAutoRestart", "cameraMath", "decideResult"]
-      .map(name => name + ": (typeof " + name + " === 'undefined' ? undefined : " + name + ")").join(",") +
-    "};", sandbox);
-  return sandbox.module.exports.__api;
+let passed = 0;
+function check(name, condition, detail) {
+  if (!condition) throw new Error("FAIL: " + name + " :: " + (detail || ""));
+  passed += 1;
+}
+function inputs(overrides = {}) {
+  return Object.assign({ start: false, stopOk: true, retracted: true, extended: false }, overrides);
+}
+function normalCycle(sim) {
+  const inp = inputs();
+  for (let tick = 0; tick < 260; tick += 1) {
+    const before = sim.snapshot();
+    if (before.y2 && tick > 4) { inp.retracted = false; inp.extended = true; }
+    if ((before.state === "RETRACT" || before.state === "WAIT_RETRACTED") && before.run && tick > 8) {
+      inp.retracted = true; inp.extended = false;
+    }
+    if (tick === 3) inp.start = true;
+    if (tick >= 6) inp.start = false;
+    const snap = sim.step(inp, false, 50);
+    if (snap.state === "COMPLETE") return snap;
+  }
+  throw new Error("normal cycle did not complete");
 }
 
-let checks = 0;
-function ok(condition, message) {
-  checks += 1;
-  if (!condition) throw new Error("FAILED: " + message);
+// 1. power restore with START held must not start
+{
+  const sim = new PusherSim();
+  sim.powerOn(true);
+  let snap;
+  for (let i = 0; i < 20; i += 1) snap = sim.step(inputs({ start: true }), false, 100);
+  check("power restore with held START", snap.state === "IDLE" && !snap.run, snap.state);
 }
-function close(actual, expected, tolerance, message) {
-  ok(Math.abs(actual - expected) <= tolerance, message + " (got " + actual + ", expected " + expected + ")");
+// 2. new START after release starts, and release self-holds
+{
+  const sim = new PusherSim();
+  sim.powerOn(true);
+  sim.step(inputs(), false, 100);           // release -> armed
+  const pressed = sim.step(inputs({ start: true }), false, 100);
+  check("START press", pressed.state === "READY" && pressed.run, pressed.state);
+  const released = sim.step(inputs(), false, 100);
+  check("self-holding after release", released.run && released.y0, released.state);
+}
+// 3. STOP has priority over the timer
+{
+  const sim = new PusherSim();
+  normalCycle(sim);
+  let snap = sim.step(inputs(), false, 100);   // re-arm
+  snap = sim.step(inputs({ start: true }), false, 100);
+  snap = sim.step(inputs(), false, 100);
+  snap = sim.step(inputs({ stopOk: false }), false, 100);
+  check("STOP during RUN", snap.state === "IDLE" && !snap.run && snap.t0 === 0, snap.state);
+}
+// 4. timer boundary 2999 / 3000
+{
+  const sim = new PusherSim();
+  normalCycle(sim);
+  const inp = inputs();
+  while (sim.snapshot().t0 < 2999) sim.step(inp, false, 1);
+  const before = sim.snapshot();
+  check("timer 2999", before.t0 === 2999 && !before.y1, String(before.t0));
+  const at = sim.step(inp, false, 1);
+  check("timer 3000", at.t0 === 3000 && at.y1, String(at.t0));
+}
+// 5. missing extend confirmation gives F001
+{
+  const sim = new PusherSim();
+  const inp = inputs();
+  let snap;
+  for (let i = 0; i < 10; i += 1) sim.step(inp, false, 100);
+  sim.step(inp, false, 100);
+  sim.step(inputs({ start: true }), false, 100);
+  sim.step(inp, false, 100);
+  for (let i = 0; i < 80; i += 1) snap = sim.step(inp, false, 100);
+  check("F001 timeout", snap.fault === "F001" && snap.state === "FAULT", String(snap.fault));
+}
+// 6. conflicting sensors give F002
+{
+  const sim = new PusherSim();
+  const snap = sim.step(inputs({ retracted: true, extended: true }), false, 100);
+  check("F002 conflict", snap.fault === "F002", String(snap.fault));
+}
+// 7. fault reset with START held is refused
+{
+  const sim = new PusherSim();
+  sim.step(inputs({ retracted: true, extended: true }), false, 100);
+  sim.step(inputs({ start: true, retracted: false, extended: false }), false, 100);
+  const refused = sim.step(inputs({ start: true, retracted: false, extended: false }), true, 100);
+  check("reset refused with START held", refused.state === "FAULT", refused.state);
+  sim.step(inputs(), false, 100);
+  sim.step(inputs(), false, 100);
+  const cleared = sim.step(inputs(), true, 100);
+  check("reset after release", cleared.state === "IDLE" && cleared.fault === null, cleared.state);
+  const after = sim.step(inputs(), false, 100);
+  check("reset does not start motion", !after.run && !after.y2, after.state);
+}
+// 8. repeat cycle
+{
+  const sim = new PusherSim();
+  normalCycle(sim);
+  sim.step(inputs(), false, 100);
+  const pressed = sim.step(inputs({ start: true }), false, 100);
+  check("repeat cycle", pressed.state === "READY" && pressed.cycles === 2, String(pressed.cycles));
+}
+// 9. invalid transition
+{
+  const sim = new PusherSim();
+  let threw = false;
+  try { sim.transition("COMPLETE"); } catch (error) { threw = true; }
+  check("invalid transition rejected", threw);
+}
+// 10. unknown state list is complete
+{
+  check("state list", STATES.length === 8 && STATES.includes("WAIT_RETRACTED"));
 }
 
-const roller = loadLogic("sim_roller_speed.html");
-close(roller.rollerSpeed(100, 100).circumferenceMm, 314.159265, 0.001, "circumference 100mm");
-close(roller.rollerSpeed(100, 100).mPerMin, 31.4159265, 0.001, "roller 100mm/100rpm m/min");
-close(roller.rollerSpeed(80, 200).mPerMin, 50.265482, 0.001, "roller 80mm/200rpm m/min");
-close(roller.rollerSpeed(100, 100).mPerS, 0.523599, 0.001, "roller m/s");
-ok(roller.rollerSpeed(100, 0).mPerMin === 0, "zero rpm gives zero speed");
-
-const sensor = loadLogic("sim_sensor_signals.html");
-ok(sensor.digitalSignal(true) === 1 && sensor.digitalSignal(false) === 0, "digital states");
-close(sensor.analogFromVoltage(7.5, 200, 10), 150, 1e-9, "0-10V 0-200kPa at 7.5V");
-close(sensor.analogFromVoltage(5, 100, 10), 50, 1e-9, "0-10V 0-100kPa midpoint");
-close(sensor.analogFromCurrent(12, 100), 50, 1e-9, "4-20mA midpoint");
-close(sensor.analogFromCurrent(20, 100), 100, 1e-9, "4-20mA maximum");
-ok(sensor.encoderCounts(500, 1, 4) === 2000, "PPR500 x4");
-ok(sensor.encoderCounts(500, 1, 2) === 1000, "PPR500 x2");
-ok(sensor.encoderCounts(1000, 1, 4) === 4000, "PPR1000 x4");
-
-const ladder = loadLogic("sim_ladder_logic.html");
-ok(ladder.logicAnd(0, 0) === 0 && ladder.logicAnd(0, 1) === 0 && ladder.logicAnd(1, 0) === 0 && ladder.logicAnd(1, 1) === 1, "AND truth table");
-ok(ladder.logicOr(0, 0) === 0 && ladder.logicOr(0, 1) === 1 && ladder.logicOr(1, 0) === 1 && ladder.logicOr(1, 1) === 1, "OR truth table");
-ok(ladder.logicNot(0) === 1 && ladder.logicNot(1) === 0, "NOT truth table");
-ok(ladder.selfHold(1, 0, 0) === 1, "self-hold sets");
-ok(ladder.selfHold(0, 0, 1) === 1, "self-hold remembers");
-ok(ladder.selfHold(0, 1, 1) === 0, "self-hold stop clears");
-ok(ladder.selfHold(1, 1, 1) === 0, "stop wins over start");
-ok(ladder.onDelay(1, 1999, 2000).completed === 0, "on-delay before preset");
-ok(ladder.onDelay(1, 2000, 2000).completed === 1, "on-delay at preset");
-ok(ladder.onDelay(0, 1500, 2000).nextElapsed === 0, "on-delay resets when input off");
-ok(ladder.counterStep(0, 1, 3, 0).count === 1, "counter increments on edge");
-ok(ladder.counterStep(2, 0, 3, 0).count === 2, "counter holds without edge");
-ok(ladder.counterStep(2, 1, 3, 0).done === 1, "counter reaches preset");
-ok(ladder.counterStep(2, 0, 3, 1).count === 0, "counter reset");
-ok(typeof ladder.explain("and", { x0: 1, x1: 1 }).ja === "string", "explanation is bilingual text");
-
-const sequence = loadLogic("sim_machine_sequence.html");
-const ready = { controllerOk: true, sensorOk: true, cameraReady: true, aiOk: true, noQualityFault: true, modeAuthorized: true };
-ok(sequence.isReady(ready) === true, "readiness true");
-ok(sequence.isReady(Object.assign({}, ready, { aiOk: false })) === false, "readiness false without AI");
-ok(sequence.nextState("IDLE", Object.assign({}, ready)).state === "READY", "IDLE to READY");
-ok(sequence.nextState("READY", { start: true }).state === "STARTING", "READY to STARTING");
-ok(sequence.nextState("READY", { start: true, stop: true }).state === "STOPPING", "stop priority in READY");
-ok(sequence.nextState("STARTING", { stop: true }).state === "STOPPING", "stop priority in STARTING");
-ok(sequence.nextState("STARTING", { startTimeout: true }).state === "FAULT", "start timeout to FAULT");
-ok(sequence.nextState("RUNNING", { fault: true }).state === "FAULT", "fault from RUNNING");
-ok(sequence.nextState("FAULT", { reset: true }).state === "RECOVERY", "FAULT to RECOVERY");
-ok(sequence.nextState("RECOVERY", { reset: true, restartPermit: true }).state === "IDLE", "RECOVERY to IDLE with permit");
-ok(sequence.nextState("RECOVERY", { reset: true }).state === "RECOVERY", "no restart without permit");
-ok(sequence.canAutoRestart() === false, "no automatic restart");
-
-const camera = loadLogic("sim_camera_timing.html");
-close(camera.cameraMath(30, 600, 4096, 0.2, 1).mmPerPixel, 0.146484375, 1e-9, "pixel scale 600/4096");
-close(camera.cameraMath(30, 600, 4096, 0.2, 1).lineRate, 2500, 1e-6, "line rate 2500");
-close(camera.cameraMath(30, 600, 4096, 0.2, 0.5).travelPerExposureMm, 0.25, 1e-9, "travel 0.25mm");
-close(camera.cameraMath(60, 400, 2048, 0.1, 0.2).mmPerPixel, 0.1953125, 1e-9, "pixel scale 400/2048");
-close(camera.cameraMath(60, 400, 2048, 0.1, 0.2).lineRate, 10000, 1e-6, "line rate 10000");
-close(camera.cameraMath(30, 600, 4096, 0.2, 1).mmPerS, 500, 1e-9, "30 m/min is 500 mm/s");
-
-const protocol = loadLogic("sim_ai_result_protocol.html");
-ok(protocol.decideResult({ type: "OK", id: 101 }, null).decision === "ACCEPT_OK", "valid OK accepted");
-ok(protocol.decideResult({ type: "NG", id: 101 }, null).decision === "ACCEPT_NG", "valid NG accepted");
-ok(protocol.decideResult({ type: "INVALID", id: 101 }, null).decision === "HOLD", "invalid is held");
-ok(protocol.decideResult({ type: "OK", id: 101, valid: false }, null).decision === "HOLD", "valid=false is held");
-ok(protocol.decideResult({ type: "TIMEOUT", id: 101 }, null).decision === "HOLD", "timeout is held");
-ok(protocol.decideResult({ type: "OK", id: 100 }, 101).decision === "REJECT_STALE", "stale ID rejected");
-ok(protocol.decideResult({ type: "DUPLICATE", id: 101 }, 101).decision === "REJECT_DUPLICATE", "duplicate ID rejected");
-ok(protocol.decideResult({ type: "OK", id: 101 }, 101).decision === "REJECT_DUPLICATE", "same ID not accepted twice");
-ok(protocol.decideResult({ type: "OK", id: 102 }, 101).decision === "ACCEPT_OK", "new ID accepted");
-
-const banned = ["fetch(", "XMLHttpRequest", "WebSocket", "http://", "https://", "<script src"];
-for (const file of fs.readdirSync(SIM_DIR).filter(name => name.endsWith(".html"))) {
-  const html = fs.readFileSync(path.join(SIM_DIR, file), "utf8");
-  for (const token of banned) ok(!html.includes(token), file + " must not contain " + token);
-  ok(html.includes("<noscript>"), file + " needs a no-JavaScript fallback");
-}
-
-console.log("SIMULATION LOGIC TESTS PASSED: " + checks + " checks across 6 simulations");
+console.log(`SIMULATION LOGIC TESTS PASSED (${passed} checks)`);

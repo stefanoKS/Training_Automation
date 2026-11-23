@@ -1,78 +1,79 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="940" viewBox="0 0 1440 940" role="img" aria-labelledby="title desc"><title id="title">連続シート検査機の全体構成 / Full physical inspection machine overview</title><desc id="desc">連続シート検査機の全体構成 / Full physical inspection machine overview — editable bilingual training diagram for DAY 07 / MECHANICAL STRUCTURE.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#2563A6"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#A32B2B"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#1B7A4B"/></marker></defs><rect x="0" y="0" width="1440" height="940" fill="#F5F8FC"/><rect x="0" y="0" width="1440" height="12" fill="#2563A6"/>
-<text x="56.0" y="56.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#2563A6" font-weight="700" text-anchor="start">DAY 07 / MECHANICAL STRUCTURE</text>
-<text x="56.0" y="104.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="32" fill="#142B3F" font-weight="700" text-anchor="start">連続シート検査機の全体構成</text>
-<text x="56.0" y="144.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="26" fill="#526378" font-weight="400" text-anchor="start">Full physical inspection machine overview</text>
-<rect x="80.0" y="300.0" width="1280.0" height="26.0" rx="2" fill="#D9C9A8" stroke="#B9A57C" stroke-width="1"/>
-<text x="80.0" y="356.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#7A6533" font-weight="700" text-anchor="start">材料の流れ → / material flow</text>
-<rect x="96.0" y="196.0" width="220.0" height="132.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
-<rect x="96.0" y="206.0" width="7.0" height="112.0" rx="3" fill="#2563A6" stroke="#2563A6" stroke-width="0"/>
-<text x="118.0" y="261.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">供給ロール</text>
-<text x="118.0" y="283.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">Unwinder roll</text>
-<path d="M196.0 334.0 L196.0 298.0" fill="none" stroke="#2563A6" stroke-width="2" marker-end="url(#arrow)"/>
-<rect x="352.0" y="196.0" width="220.0" height="132.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
-<rect x="352.0" y="206.0" width="7.0" height="112.0" rx="3" fill="#2563A6" stroke="#2563A6" stroke-width="0"/>
-<text x="374.0" y="261.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">ガイドローラ</text>
-<text x="374.0" y="283.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">Guide rollers</text>
-<path d="M452.0 334.0 L452.0 298.0" fill="none" stroke="#2563A6" stroke-width="2" marker-end="url(#arrow)"/>
-<rect x="608.0" y="196.0" width="220.0" height="132.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
-<rect x="608.0" y="206.0" width="7.0" height="112.0" rx="3" fill="#1B7A4B" stroke="#1B7A4B" stroke-width="0"/>
-<text x="630.0" y="261.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">検査ステーション</text>
-<text x="630.0" y="283.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">Inspection station</text>
-<path d="M708.0 334.0 L708.0 298.0" fill="none" stroke="#1B7A4B" stroke-width="2" marker-end="url(#arrow)"/>
-<rect x="864.0" y="196.0" width="220.0" height="132.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
-<rect x="864.0" y="206.0" width="7.0" height="112.0" rx="3" fill="#B4541E" stroke="#B4541E" stroke-width="0"/>
-<text x="886.0" y="261.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">駆動ローラ</text>
-<text x="886.0" y="283.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">Driven roller</text>
-<path d="M964.0 334.0 L964.0 298.0" fill="none" stroke="#B4541E" stroke-width="2" marker-end="url(#arrow)"/>
-<rect x="1120.0" y="196.0" width="220.0" height="132.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
-<rect x="1120.0" y="206.0" width="7.0" height="112.0" rx="3" fill="#2563A6" stroke="#2563A6" stroke-width="0"/>
-<text x="1142.0" y="261.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">巻取り</text>
-<text x="1142.0" y="283.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">Winder</text>
-<path d="M1220.0 334.0 L1220.0 298.0" fill="none" stroke="#2563A6" stroke-width="2" marker-end="url(#arrow)"/>
-<path d="M1120.0 300.0 L1320.0 300.0" fill="none" stroke="#2563A6" stroke-width="2"/>
-<rect x="608.0" y="372.0" width="240.0" height="120.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
-<rect x="608.0" y="382.0" width="7.0" height="100.0" rx="3" fill="#1B7A4B" stroke="#1B7A4B" stroke-width="0"/>
-<text x="630.0" y="420.5" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">カメラと照明</text>
-<text x="630.0" y="442.2" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">Camera and</text>
-<text x="630.0" y="462.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">illumination</text>
-<path d="M728.0 300.0 L728.0 368.0" fill="none" stroke="#1B7A4B" stroke-width="2" marker-end="url(#arrow)"/>
-<rect x="352.0" y="372.0" width="220.0" height="120.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
-<rect x="352.0" y="382.0" width="7.0" height="100.0" rx="3" fill="#2563A6" stroke="#2563A6" stroke-width="0"/>
-<text x="374.0" y="420.5" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">材料の位置決め</text>
-<text x="374.0" y="442.2" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">Material</text>
-<text x="374.0" y="462.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">positioning</text>
-<path d="M462.0 300.0 L462.0 368.0" fill="none" stroke="#2563A6" stroke-width="2" marker-end="url(#arrow)"/>
-<rect x="864.0" y="372.0" width="240.0" height="120.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
-<rect x="864.0" y="382.0" width="7.0" height="100.0" rx="3" fill="#B4541E" stroke="#B4541E" stroke-width="0"/>
-<text x="886.0" y="420.5" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">搬送速度の管理</text>
-<text x="886.0" y="442.2" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">Transport speed</text>
-<text x="886.0" y="462.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">control</text>
-<path d="M984.0 300.0 L984.0 368.0" fill="none" stroke="#B4541E" stroke-width="2" marker-end="url(#arrow)"/>
-<text x="80.0" y="540.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="20" fill="#142B3F" font-weight="700" text-anchor="start">制御・計算・表示の構成要素 / control, computing and display elements</text>
-<rect x="80.0" y="566.0" width="236.8" height="112.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
-<rect x="80.0" y="576.0" width="7.0" height="92.0" rx="3" fill="#2563A6" stroke="#2563A6" stroke-width="0"/>
-<text x="102.0" y="621.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">PLC</text>
-<text x="102.0" y="643.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">配線された制御</text>
-<rect x="340.8" y="566.0" width="236.8" height="112.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
-<rect x="340.8" y="576.0" width="7.0" height="92.0" rx="3" fill="#2563A6" stroke="#2563A6" stroke-width="0"/>
-<text x="362.8" y="621.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">産業用PC</text>
-<text x="362.8" y="643.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">画像とAI</text>
-<rect x="601.6" y="566.0" width="236.8" height="112.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
-<rect x="601.6" y="576.0" width="7.0" height="92.0" rx="3" fill="#2563A6" stroke="#2563A6" stroke-width="0"/>
-<text x="623.6" y="621.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">HMI</text>
-<text x="623.6" y="643.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">操作と表示</text>
-<rect x="862.4" y="566.0" width="236.8" height="112.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
-<rect x="862.4" y="576.0" width="7.0" height="92.0" rx="3" fill="#6B3FA0" stroke="#6B3FA0" stroke-width="0"/>
-<text x="884.4" y="621.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">安全系</text>
-<text x="884.4" y="643.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">独立した保護</text>
-<rect x="1123.2" y="566.0" width="236.8" height="112.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
-<rect x="1123.2" y="576.0" width="7.0" height="92.0" rx="3" fill="#2563A6" stroke="#2563A6" stroke-width="0"/>
-<text x="1145.2" y="621.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">記録</text>
-<text x="1145.2" y="643.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">結果の保存</text>
-<text x="80.0" y="724.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#142B3F" font-weight="700" text-anchor="start">機械・センサ・制御・AI・安全は別々の役割を持ち、一つの検査結果を作ります。</text>
-<text x="80.0" y="752.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#526378" font-weight="400" text-anchor="start">Mechanics, sensors, control, AI and safety keep separate roles and together produce one inspection result.</text>
-<rect x="56.0" y="824.0" width="1328.0" height="60.0" rx="10" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
-<text x="76.0" y="858.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#142B3F" font-weight="700" text-anchor="start">材料は連続して流れ、検査結果は位置と結び付けて記録します。</text>
-<text x="76.0" y="880.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14.5" fill="#526378" font-weight="400" text-anchor="start">The web flows continuously; results are recorded with position.</text>
-<text x="1400" y="932" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" text-anchor="end">D07-01 • 編集可能な図 / editable SVG</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1100" viewBox="0 0 1440 1100" role="img" aria-labelledby="title desc"><title id="title">設備開発の8段階 / Eight stages of equipment development</title><desc id="desc">設備開発の8段階 / Eight stages of equipment development — editable bilingual training diagram for 第7日 / Day 7.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#2563A6"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#A32B2B"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#1B7A4B"/></marker></defs><rect x="0" y="0" width="1440" height="1100" fill="#F5F8FC"/><rect x="0" y="0" width="1440" height="12" fill="#2563A6"/>
+<text x="56.0" y="56.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#2563A6" font-weight="700" text-anchor="start">第7日 / Day 7</text>
+<text x="56.0" y="104.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="32" fill="#142B3F" font-weight="700" text-anchor="start">設備開発の8段階</text>
+<text x="56.0" y="144.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="26" fill="#526378" font-weight="400" text-anchor="start">Eight stages of equipment development</text>
+<rect x="70.0" y="230.0" width="300.0" height="170.0" rx="12" fill="#FFFFFF" stroke="#1F5C99" stroke-width="2"/>
+<rect x="70.0" y="240.0" width="7.0" height="150.0" rx="3" fill="#1F5C99" stroke="#1F5C99" stroke-width="0"/>
+<text x="92.0" y="304.7" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">① 課題抽出</text>
+<text x="92.0" y="326.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">Problem finding</text>
+<text x="92.0" y="344.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">困りごと一覧 / problem list</text>
+<path d="M374.0 315.0 L396.0 315.0" fill="none" stroke="#1F5C99" stroke-width="2.4" marker-end="url(#arrow)"/>
+<rect x="400.0" y="230.0" width="300.0" height="170.0" rx="12" fill="#FFFFFF" stroke="#1F5C99" stroke-width="2"/>
+<rect x="400.0" y="240.0" width="7.0" height="150.0" rx="3" fill="#1F5C99" stroke="#1F5C99" stroke-width="0"/>
+<text x="422.0" y="294.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">② 現状把握</text>
+<text x="422.0" y="316.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">Observation</text>
+<text x="422.0" y="334.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">時間・数量・不良 / time,</text>
+<text x="422.0" y="352.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">quantity, defects</text>
+<path d="M704.0 315.0 L726.0 315.0" fill="none" stroke="#1F5C99" stroke-width="2.4" marker-end="url(#arrow)"/>
+<rect x="730.0" y="230.0" width="300.0" height="170.0" rx="12" fill="#FFFFFF" stroke="#6B3FA0" stroke-width="2"/>
+<rect x="730.0" y="240.0" width="7.0" height="150.0" rx="3" fill="#6B3FA0" stroke="#6B3FA0" stroke-width="0"/>
+<text x="752.0" y="304.7" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">③ 構想・要求</text>
+<text x="752.0" y="326.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">Concept and requirements</text>
+<text x="752.0" y="344.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">要求仕様書 / requirements</text>
+<path d="M1034.0 315.0 L1056.0 315.0" fill="none" stroke="#6B3FA0" stroke-width="2.4" marker-end="url(#arrow)"/>
+<rect x="1060.0" y="230.0" width="300.0" height="170.0" rx="12" fill="#FFFFFF" stroke="#6B3FA0" stroke-width="2"/>
+<rect x="1060.0" y="240.0" width="7.0" height="150.0" rx="3" fill="#6B3FA0" stroke="#6B3FA0" stroke-width="0"/>
+<text x="1082.0" y="294.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">④ 比較・見積</text>
+<text x="1082.0" y="316.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">Comparison and estimate</text>
+<text x="1082.0" y="334.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">方式比較・概算 / options and</text>
+<text x="1082.0" y="352.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">estimate</text>
+<path d="M1370.0 405.0 L1370.0 470.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<path d="M1370.0 470.0 L70.0 470.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<path d="M70.0 470.0 L70.0 520.0" fill="none" stroke="#2563A6" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="720.0" y="500.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#2563A6" font-weight="600" text-anchor="middle">次の段階へ / to the next stage</text>
+<rect x="70.0" y="520.0" width="300.0" height="170.0" rx="12" fill="#FFFFFF" stroke="#1B7A4B" stroke-width="2"/>
+<rect x="70.0" y="530.0" width="7.0" height="150.0" rx="3" fill="#1B7A4B" stroke="#1B7A4B" stroke-width="0"/>
+<text x="92.0" y="584.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">⑤ 詳細設計</text>
+<text x="92.0" y="606.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">Detailed design</text>
+<text x="92.0" y="624.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">図面・BOM・ラダー / drawings,</text>
+<text x="92.0" y="642.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">BOM, ladder</text>
+<path d="M374.0 605.0 L396.0 605.0" fill="none" stroke="#1B7A4B" stroke-width="2.4" marker-end="url(#arrow)"/>
+<rect x="400.0" y="520.0" width="300.0" height="170.0" rx="12" fill="#FFFFFF" stroke="#1B7A4B" stroke-width="2"/>
+<rect x="400.0" y="530.0" width="7.0" height="150.0" rx="3" fill="#1B7A4B" stroke="#1B7A4B" stroke-width="0"/>
+<text x="422.0" y="594.7" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">⑥ 調達・製作</text>
+<text x="422.0" y="616.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">Procurement and build</text>
+<text x="422.0" y="634.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">製作記録 / build record</text>
+<path d="M704.0 605.0 L726.0 605.0" fill="none" stroke="#1B7A4B" stroke-width="2.4" marker-end="url(#arrow)"/>
+<rect x="730.0" y="520.0" width="300.0" height="170.0" rx="12" fill="#FFFFFF" stroke="#B4541E" stroke-width="2"/>
+<rect x="730.0" y="530.0" width="7.0" height="150.0" rx="3" fill="#B4541E" stroke="#B4541E" stroke-width="0"/>
+<text x="752.0" y="584.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">⑦ 試験・評価</text>
+<text x="752.0" y="606.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">Test and evaluation</text>
+<text x="752.0" y="624.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">試運転記録 / commissioning</text>
+<text x="752.0" y="642.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">record</text>
+<path d="M1034.0 605.0 L1056.0 605.0" fill="none" stroke="#B4541E" stroke-width="2.4" marker-end="url(#arrow)"/>
+<rect x="1060.0" y="520.0" width="300.0" height="170.0" rx="12" fill="#FFFFFF" stroke="#B4541E" stroke-width="2"/>
+<rect x="1060.0" y="530.0" width="7.0" height="150.0" rx="3" fill="#B4541E" stroke="#B4541E" stroke-width="0"/>
+<text x="1082.0" y="574.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">⑧ 導入・保全</text>
+<text x="1082.0" y="595.8" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">Introduction and</text>
+<text x="1082.0" y="615.5" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">maintenance</text>
+<text x="1082.0" y="633.5" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">標準書・保全計画 / standards</text>
+<text x="1082.0" y="651.5" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">and plan</text>
+<path d="M140.0 620.0 L140.0 700.0" fill="none" stroke="#A32B2B" stroke-width="2" stroke-dasharray="8 6" marker-end="url(#arrow)"/>
+<path d="M140.0 700.0 L500.0 700.0" fill="none" stroke="#A32B2B" stroke-width="2" stroke-dasharray="8 6" marker-end="url(#arrow)"/>
+<path d="M500.0 700.0 L500.0 620.0" fill="none" stroke="#A32B2B" stroke-width="2" stroke-dasharray="8 6" marker-end="url(#arrow)"/>
+<text x="320.0" y="728.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#A32B2B" font-weight="700" text-anchor="middle">戻り（設計の成熟）/ iteration is how the design matures</text>
+<rect x="70.0" y="790.0" width="26.0" height="18.0" rx="3" fill="#1F5C99" stroke="#1F5C99" stroke-width="1"/>
+<text x="106.0" y="805.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">機械・構想 / mechanics and concept</text>
+<rect x="70.0" y="822.0" width="26.0" height="18.0" rx="3" fill="#6B3FA0" stroke="#6B3FA0" stroke-width="1"/>
+<text x="106.0" y="837.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">要求・比較 / requirements and comparison</text>
+<rect x="70.0" y="854.0" width="26.0" height="18.0" rx="3" fill="#1B7A4B" stroke="#1B7A4B" stroke-width="1"/>
+<text x="106.0" y="869.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">設計・製作 / design and build</text>
+<rect x="70.0" y="886.0" width="26.0" height="18.0" rx="3" fill="#B4541E" stroke="#B4541E" stroke-width="1"/>
+<text x="106.0" y="901.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">試験・運用 / test and operation</text>
+<rect x="70.0" y="918.0" width="26.0" height="18.0" rx="3" fill="#A32B2B" stroke="#A32B2B" stroke-width="1"/>
+<text x="106.0" y="933.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">戻り・危険 / iteration and hazard</text>
+<rect x="56.0" y="984.0" width="1328.0" height="60.0" rx="10" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
+<text x="76.0" y="1018.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#142B3F" font-weight="700" text-anchor="start">各段階の成果物が次段階の入力になる。成果物なしで進むと手戻りが大きい。</text>
+<text x="76.0" y="1040.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14.5" fill="#526378" font-weight="400" text-anchor="start">Each stage output feeds the next. Skipping a deliverable makes later rework larger.</text>
+<text x="1400" y="1092" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" text-anchor="end">D07-01 • 編集可能な図 / editable SVG</text>
 </svg>

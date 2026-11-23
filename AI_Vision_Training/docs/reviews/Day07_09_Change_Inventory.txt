@@ -1,0 +1,232 @@
+﻿ D AI_Vision_Training/assets/diagrams/day07/D07-10.svg
+ D AI_Vision_Training/assets/diagrams/day07/D07-11.svg
+ D AI_Vision_Training/assets/diagrams/day07/D07-12.svg
+ D AI_Vision_Training/assets/diagrams/day08/D08-12.svg
+ D AI_Vision_Training/assets/diagrams/day09/D09-10.svg
+ D AI_Vision_Training/assets/diagrams/day09/D09-11.svg
+ D AI_Vision_Training/assets/diagrams/day09/D09-12.svg
+ D AI_Vision_Training/day07_09_support/examples/example_machine_component_map_ja_en.md
+ D AI_Vision_Training/day07_09_support/examples/example_plc_io_table_ja_en.md
+ D AI_Vision_Training/day07_09_support/examples/example_result_record_ja_en.md
+ D AI_Vision_Training/day07_09_support/scripts/engineering_examples.py
+ D AI_Vision_Training/day07_09_support/scripts/inspect_day07_09_pdf.py
+ D AI_Vision_Training/day07_09_support/scripts/render_simulation_fallbacks.py
+ D AI_Vision_Training/day07_09_support/simulations/fallback/sim_ai_result_protocol.png
+ D AI_Vision_Training/day07_09_support/simulations/fallback/sim_camera_timing.png
+ D AI_Vision_Training/day07_09_support/simulations/fallback/sim_ladder_logic.png
+ D AI_Vision_Training/day07_09_support/simulations/fallback/sim_machine_sequence.png
+ D AI_Vision_Training/day07_09_support/simulations/fallback/sim_roller_speed.png
+ D AI_Vision_Training/day07_09_support/simulations/fallback/sim_sensor_signals.png
+ D AI_Vision_Training/day07_09_support/simulations/sim_ai_result_protocol.html
+ D AI_Vision_Training/day07_09_support/simulations/sim_camera_timing.html
+ D AI_Vision_Training/day07_09_support/simulations/sim_ladder_logic.html
+ D AI_Vision_Training/day07_09_support/simulations/sim_machine_sequence.html
+ D AI_Vision_Training/day07_09_support/simulations/sim_roller_speed.html
+ D AI_Vision_Training/day07_09_support/simulations/sim_sensor_signals.html
+ D AI_Vision_Training/day07_09_support/tests/test_day07_09_contracts.py
+ D AI_Vision_Training/docs/reviews/Day07_09_Final_Review.md
+ D AI_Vision_Training/docs/reviews/Day07_09_PreImplementation_Audit.md
+ D AI_Vision_Training/notebooks/Day07_Machine_Fundamentals/Day07_01_Mechanical_Fundamentals.ipynb
+ D AI_Vision_Training/notebooks/Day07_Machine_Fundamentals/Day07_01_Mechanical_Fundamentals.md
+ D AI_Vision_Training/notebooks/Day07_Machine_Fundamentals/Day07_02_Sensors_and_Signals.ipynb
+ D AI_Vision_Training/notebooks/Day07_Machine_Fundamentals/Day07_02_Sensors_and_Signals.md
+ D AI_Vision_Training/notebooks/Day07_Machine_Fundamentals/Day07_03_Actuators_and_Machine.ipynb
+ D AI_Vision_Training/notebooks/Day07_Machine_Fundamentals/Day07_03_Actuators_and_Machine.md
+ D AI_Vision_Training/notebooks/Day08_PLC_Control/Day08_01_PLC_Fundamentals.ipynb
+ D AI_Vision_Training/notebooks/Day08_PLC_Control/Day08_01_PLC_Fundamentals.md
+ D AI_Vision_Training/notebooks/Day08_PLC_Control/Day08_02_Ladder_Basics.ipynb
+ D AI_Vision_Training/notebooks/Day08_PLC_Control/Day08_02_Ladder_Basics.md
+ D AI_Vision_Training/notebooks/Day08_PLC_Control/Day08_03_Sequence_Control.ipynb
+ D AI_Vision_Training/notebooks/Day08_PLC_Control/Day08_03_Sequence_Control.md
+ D AI_Vision_Training/notebooks/Day09_System_Integration/Day09_01_Vision_Hardware.ipynb
+ D AI_Vision_Training/notebooks/Day09_System_Integration/Day09_01_Vision_Hardware.md
+ D AI_Vision_Training/notebooks/Day09_System_Integration/Day09_02_PC_AI_Processing.ipynb
+ D AI_Vision_Training/notebooks/Day09_System_Integration/Day09_02_PC_AI_Processing.md
+ D AI_Vision_Training/notebooks/Day09_System_Integration/Day09_03_Complete_Integration.ipynb
+ D AI_Vision_Training/notebooks/Day09_System_Integration/Day09_03_Complete_Integration.md
+ M AI_Vision_Training/assets/diagrams/day07/D07-01.svg
+ M AI_Vision_Training/assets/diagrams/day07/D07-02.svg
+ M AI_Vision_Training/assets/diagrams/day07/D07-03.svg
+ M AI_Vision_Training/assets/diagrams/day07/D07-04.svg
+ M AI_Vision_Training/assets/diagrams/day07/D07-05.svg
+ M AI_Vision_Training/assets/diagrams/day07/D07-06.svg
+ M AI_Vision_Training/assets/diagrams/day07/D07-07.svg
+ M AI_Vision_Training/assets/diagrams/day07/D07-08.svg
+ M AI_Vision_Training/assets/diagrams/day07/D07-09.svg
+ M AI_Vision_Training/assets/diagrams/day08/D08-01.svg
+ M AI_Vision_Training/assets/diagrams/day08/D08-02.svg
+ M AI_Vision_Training/assets/diagrams/day08/D08-03.svg
+ M AI_Vision_Training/assets/diagrams/day08/D08-04.svg
+ M AI_Vision_Training/assets/diagrams/day08/D08-05.svg
+ M AI_Vision_Training/assets/diagrams/day08/D08-06.svg
+ M AI_Vision_Training/assets/diagrams/day08/D08-07.svg
+ M AI_Vision_Training/assets/diagrams/day08/D08-08.svg
+ M AI_Vision_Training/assets/diagrams/day08/D08-09.svg
+ M AI_Vision_Training/assets/diagrams/day08/D08-10.svg
+ M AI_Vision_Training/assets/diagrams/day08/D08-11.svg
+ M AI_Vision_Training/assets/diagrams/day09/D09-01.svg
+ M AI_Vision_Training/assets/diagrams/day09/D09-02.svg
+ M AI_Vision_Training/assets/diagrams/day09/D09-03.svg
+ M AI_Vision_Training/assets/diagrams/day09/D09-04.svg
+ M AI_Vision_Training/assets/diagrams/day09/D09-05.svg
+ M AI_Vision_Training/assets/diagrams/day09/D09-06.svg
+ M AI_Vision_Training/assets/diagrams/day09/D09-07.svg
+ M AI_Vision_Training/assets/diagrams/day09/D09-08.svg
+ M AI_Vision_Training/assets/diagrams/day09/D09-09.svg
+ M AI_Vision_Training/COURSE_SYLLABUS_DAY07_09.md
+ M AI_Vision_Training/day06_support/tests/test_day06_contracts.py
+ M AI_Vision_Training/day07_09_support/README_ja_en.md
+ M AI_Vision_Training/day07_09_support/reference_data/protected_baseline_hashes.txt
+ M AI_Vision_Training/day07_09_support/reference_data/quick_reference_day07.md
+ M AI_Vision_Training/day07_09_support/reference_data/quick_reference_day08.md
+ M AI_Vision_Training/day07_09_support/reference_data/quick_reference_day09.md
+ M AI_Vision_Training/day07_09_support/scripts/build_day07_09_notebooks.py
+ M AI_Vision_Training/day07_09_support/scripts/export_day07_09_pdf.py
+ M AI_Vision_Training/day07_09_support/scripts/generate_day07_09_diagrams.py
+ M AI_Vision_Training/day07_09_support/SOURCES_AND_LICENSES.md
+ M AI_Vision_Training/day07_09_support/tests/run_simulation_logic_tests.js
+ M AI_Vision_Training/day07_09_support/worksheets/Day07_09_Assessment_Rubric_ja_en.md
+ M AI_Vision_Training/day07_09_support/worksheets/Day07_Answer_Key_ja_en.md
+ M AI_Vision_Training/day07_09_support/worksheets/Day07_Student_Worksheet_ja_en.md
+ M AI_Vision_Training/day07_09_support/worksheets/Day08_Answer_Key_ja_en.md
+ M AI_Vision_Training/day07_09_support/worksheets/Day08_Student_Worksheet_ja_en.md
+ M AI_Vision_Training/day07_09_support/worksheets/Day09_Answer_Key_ja_en.md
+ M AI_Vision_Training/day07_09_support/worksheets/Day09_Student_Worksheet_ja_en.md
+ M AI_Vision_Training/day07_09_support/worksheets/Glossary_ja_en.md
+ M AI_Vision_Training/docs/instructor/day07_instructor_guide.md
+ M AI_Vision_Training/docs/instructor/day08_instructor_guide.md
+ M AI_Vision_Training/docs/instructor/day09_instructor_guide.md
+ M AI_Vision_Training/docs/pdf/Day07_explanation_ja_en.pdf
+ M AI_Vision_Training/docs/pdf/Day08_explanation_ja_en.pdf
+ M AI_Vision_Training/docs/pdf/Day09_explanation_ja_en.pdf
+ M AI_Vision_Training/docs/pdf/README.md
+ M AI_Vision_Training/docs/reference_materials.md
+ M AI_Vision_Training/README.md
+ M AI_Vision_Training/START_HERE.md
+?? AI_Vision_Training/day07_09_support/curriculum_source_map.csv
+?? AI_Vision_Training/day07_09_support/examples/automation_models.py
+?? AI_Vision_Training/day07_09_support/lesson_manifest.json
+?? AI_Vision_Training/day07_09_support/reference_data/diagram_png/day07/D07-01.png
+?? AI_Vision_Training/day07_09_support/reference_data/diagram_png/day07/D07-02.png
+?? AI_Vision_Training/day07_09_support/reference_data/diagram_png/day07/D07-03.png
+?? AI_Vision_Training/day07_09_support/reference_data/diagram_png/day07/D07-04.png
+?? AI_Vision_Training/day07_09_support/reference_data/diagram_png/day07/D07-05.png
+?? AI_Vision_Training/day07_09_support/reference_data/diagram_png/day07/D07-06.png
+?? AI_Vision_Training/day07_09_support/reference_data/diagram_png/day07/D07-07.png
+?? AI_Vision_Training/day07_09_support/reference_data/diagram_png/day07/D07-08.png
+?? AI_Vision_Training/day07_09_support/reference_data/diagram_png/day07/D07-09.png
+?? AI_Vision_Training/day07_09_support/reference_data/diagram_png/day07/D07-10.png
+?? AI_Vision_Training/day07_09_support/reference_data/diagram_png/day07/D07-11.png
+?? AI_Vision_Training/day07_09_support/reference_data/diagram_png/day07/D07-12.png
+?? AI_Vision_Training/day07_09_support/reference_data/diagram_png/day08/D08-01.png
+?? AI_Vision_Training/day07_09_support/reference_data/diagram_png/day08/D08-02.png
+?? AI_Vision_Training/day07_09_support/reference_data/diagram_png/day08/D08-03.png
+?? AI_Vision_Training/day07_09_support/reference_data/diagram_png/day08/D08-04.png
+?? AI_Vision_Training/day07_09_support/reference_data/diagram_png/day08/D08-05.png
+?? AI_Vision_Training/day07_09_support/reference_data/diagram_png/day08/D08-06.png
+?? AI_Vision_Training/day07_09_support/reference_data/diagram_png/day08/D08-07.png
+?? AI_Vision_Training/day07_09_support/reference_data/diagram_png/day08/D08-08.png
+?? AI_Vision_Training/day07_09_support/reference_data/diagram_png/day08/D08-09.png
+?? AI_Vision_Training/day07_09_support/reference_data/diagram_png/day08/D08-10.png
+?? AI_Vision_Training/day07_09_support/reference_data/diagram_png/day08/D08-11.png
+?? AI_Vision_Training/day07_09_support/reference_data/diagram_png/day08/D08-12.png
+?? AI_Vision_Training/day07_09_support/reference_data/diagram_png/day09/D09-01.png
+?? AI_Vision_Training/day07_09_support/reference_data/diagram_png/day09/D09-02.png
+?? AI_Vision_Training/day07_09_support/reference_data/diagram_png/day09/D09-03.png
+?? AI_Vision_Training/day07_09_support/reference_data/diagram_png/day09/D09-04.png
+?? AI_Vision_Training/day07_09_support/reference_data/diagram_png/day09/D09-05.png
+?? AI_Vision_Training/day07_09_support/reference_data/diagram_png/day09/D09-06.png
+?? AI_Vision_Training/day07_09_support/reference_data/diagram_png/day09/D09-07.png
+?? AI_Vision_Training/day07_09_support/reference_data/diagram_png/day09/D09-08.png
+?? AI_Vision_Training/day07_09_support/reference_data/diagram_png/day09/D09-09.png
+?? AI_Vision_Training/day07_09_support/reference_data/diagram_png/day09/D09-10.png
+?? AI_Vision_Training/day07_09_support/reference_data/diagram_png/day09/D09-11.png
+?? AI_Vision_Training/day07_09_support/reference_data/diagram_png/day09/D09-12.png
+?? AI_Vision_Training/day07_09_support/reference_data/notebook_outputs.txt
+?? AI_Vision_Training/day07_09_support/reference_data/pdf_extract/inspection_report.json
+?? AI_Vision_Training/day07_09_support/reference_data/pdf_extract/pages/page-001.png
+?? AI_Vision_Training/day07_09_support/reference_data/pdf_extract/pages/page-002.png
+?? AI_Vision_Training/day07_09_support/reference_data/pdf_extract/pages/page-003.png
+?? AI_Vision_Training/day07_09_support/reference_data/pdf_extract/pages/page-004.png
+?? AI_Vision_Training/day07_09_support/reference_data/pdf_extract/pages/page-005.png
+?? AI_Vision_Training/day07_09_support/reference_data/pdf_extract/pages/page-006.png
+?? AI_Vision_Training/day07_09_support/reference_data/pdf_extract/pages/page-007.png
+?? AI_Vision_Training/day07_09_support/reference_data/pdf_extract/pages/page-008.png
+?? AI_Vision_Training/day07_09_support/reference_data/pdf_extract/pages/page-009.png
+?? AI_Vision_Training/day07_09_support/reference_data/pdf_extract/pages/page-010.png
+?? AI_Vision_Training/day07_09_support/reference_data/pdf_extract/pages/page-011.png
+?? AI_Vision_Training/day07_09_support/reference_data/pdf_extract/pages/page-012.png
+?? AI_Vision_Training/day07_09_support/reference_data/pdf_extract/pages/page-013.png
+?? AI_Vision_Training/day07_09_support/reference_data/pdf_extract/pages/page-014.png
+?? AI_Vision_Training/day07_09_support/reference_data/pdf_extract/pages/page-015.png
+?? AI_Vision_Training/day07_09_support/reference_data/pdf_extract/pages/page-016.png
+?? AI_Vision_Training/day07_09_support/reference_data/pdf_extract/pages/page-017.png
+?? AI_Vision_Training/day07_09_support/reference_data/pdf_extract/pages/page-018.png
+?? AI_Vision_Training/day07_09_support/reference_data/pdf_extract/pages/page-019.png
+?? AI_Vision_Training/day07_09_support/reference_data/pdf_extract/pages/page-020.png
+?? AI_Vision_Training/day07_09_support/reference_data/pdf_extract/pages/page-021.png
+?? AI_Vision_Training/day07_09_support/reference_data/pdf_extract/pages/page-022.png
+?? AI_Vision_Training/day07_09_support/reference_data/pdf_extract/pages/page-023.png
+?? AI_Vision_Training/day07_09_support/reference_data/pdf_extract/pages/page-024.png
+?? AI_Vision_Training/day07_09_support/reference_data/pdf_extract/pages/page-025.png
+?? AI_Vision_Training/day07_09_support/reference_data/pdf_extract/pages/page-026.png
+?? AI_Vision_Training/day07_09_support/reference_data/pdf_extract/pages/page-027.png
+?? AI_Vision_Training/day07_09_support/reference_data/pdf_extract/pages/page-028.png
+?? AI_Vision_Training/day07_09_support/reference_data/pdf_extract/pages/page-029.png
+?? AI_Vision_Training/day07_09_support/reference_data/pdf_extract/pages/page-030.png
+?? AI_Vision_Training/day07_09_support/reference_data/pdf_extract/pages/page-031.png
+?? AI_Vision_Training/day07_09_support/reference_data/pdf_extract/pages/page-032.png
+?? AI_Vision_Training/day07_09_support/reference_data/pdf_extract/pages/page-033.png
+?? AI_Vision_Training/day07_09_support/reference_data/pdf_extract/pages/page-034.png
+?? AI_Vision_Training/day07_09_support/reference_data/pdf_extract/pages/page-035.png
+?? AI_Vision_Training/day07_09_support/reference_data/pdf_extract/pages/page-036.png
+?? AI_Vision_Training/day07_09_support/reference_data/pdf_extract/pages/page-037.png
+?? AI_Vision_Training/day07_09_support/reference_data/pdf_extract/pages/page-038.png
+?? AI_Vision_Training/day07_09_support/reference_data/pdf_extract/pages/page-039.png
+?? AI_Vision_Training/day07_09_support/reference_data/pdf_extract/pages/page-040.png
+?? AI_Vision_Training/day07_09_support/reference_data/pdf_extract/pages/page-041.png
+?? AI_Vision_Training/day07_09_support/reference_data/pdf_extract/pages/page-042.png
+?? AI_Vision_Training/day07_09_support/reference_data/pdf_extract/pages/page-043.png
+?? AI_Vision_Training/day07_09_support/reference_data/pdf_extract/pages/page-044.png
+?? AI_Vision_Training/day07_09_support/reference_data/pdf_extract/pages/page-045.png
+?? AI_Vision_Training/day07_09_support/reference_data/pdf_extract/pages/page-046.png
+?? AI_Vision_Training/day07_09_support/reference_data/pdf_extract/pages/page-047.png
+?? AI_Vision_Training/day07_09_support/reference_data/pdf_extract/pages/page-048.png
+?? AI_Vision_Training/day07_09_support/reference_data/pdf_extract/pages/page-049.png
+?? AI_Vision_Training/day07_09_support/reference_data/pdf_extract/pages/page-050.png
+?? AI_Vision_Training/day07_09_support/reference_data/pdf_extract/pages/page-051.png
+?? AI_Vision_Training/day07_09_support/reference_data/pdf_extract/source_text.txt
+?? AI_Vision_Training/day07_09_support/reference_data/reference_outputs.json
+?? AI_Vision_Training/day07_09_support/scripts/_check_models.py
+?? AI_Vision_Training/day07_09_support/scripts/build_protected_baseline.py
+?? AI_Vision_Training/day07_09_support/scripts/check_day07_09_pdfs.py
+?? AI_Vision_Training/day07_09_support/scripts/generate_reference_outputs.py
+?? AI_Vision_Training/day07_09_support/scripts/inspect_source_pdf.py
+?? AI_Vision_Training/day07_09_support/scripts/render_diagrams.py
+?? AI_Vision_Training/day07_09_support/scripts/run_notebook_cells.py
+?? AI_Vision_Training/day07_09_support/simulations/fallback/sim_commissioning.png
+?? AI_Vision_Training/day07_09_support/simulations/fallback/sim_plc_sequence.png
+?? AI_Vision_Training/day07_09_support/simulations/sim_plc_sequence.html
+?? AI_Vision_Training/day07_09_support/tests/test_day07_09_course.py
+?? AI_Vision_Training/docs/reference/Automation_Equipment_PDF_Errata_ja_en.md
+?? AI_Vision_Training/docs/reviews/Day07_09_Change_Inventory.txt
+?? AI_Vision_Training/docs/reviews/Day07_09_PDF_Migration_Audit.md
+?? AI_Vision_Training/docs/reviews/Day07_09_Release_Review.md
+?? AI_Vision_Training/notebooks/Day07_Automation_Concept_Mechanics/Day07_01_Requirements.ipynb
+?? AI_Vision_Training/notebooks/Day07_Automation_Concept_Mechanics/Day07_01_Requirements.md
+?? AI_Vision_Training/notebooks/Day07_Automation_Concept_Mechanics/Day07_02_Mechanical_Architecture.ipynb
+?? AI_Vision_Training/notebooks/Day07_Automation_Concept_Mechanics/Day07_02_Mechanical_Architecture.md
+?? AI_Vision_Training/notebooks/Day07_Automation_Concept_Mechanics/Day07_03_Equipment_Selection.ipynb
+?? AI_Vision_Training/notebooks/Day07_Automation_Concept_Mechanics/Day07_03_Equipment_Selection.md
+?? AI_Vision_Training/notebooks/Day08_Electrical_PLC/Day08_01_Electrical_Fundamentals.ipynb
+?? AI_Vision_Training/notebooks/Day08_Electrical_PLC/Day08_01_Electrical_Fundamentals.md
+?? AI_Vision_Training/notebooks/Day08_Electrical_PLC/Day08_02_Sensors_and_IO.ipynb
+?? AI_Vision_Training/notebooks/Day08_Electrical_PLC/Day08_02_Sensors_and_IO.md
+?? AI_Vision_Training/notebooks/Day08_Electrical_PLC/Day08_03_Ladder_Sequence.ipynb
+?? AI_Vision_Training/notebooks/Day08_Electrical_PLC/Day08_03_Ladder_Sequence.md
+?? AI_Vision_Training/notebooks/Day09_Communication_Commissioning/Day09_01_Industrial_Networking.ipynb
+?? AI_Vision_Training/notebooks/Day09_Communication_Commissioning/Day09_01_Industrial_Networking.md
+?? AI_Vision_Training/notebooks/Day09_Communication_Commissioning/Day09_02_Commissioning.ipynb
+?? AI_Vision_Training/notebooks/Day09_Communication_Commissioning/Day09_02_Commissioning.md
+?? AI_Vision_Training/notebooks/Day09_Communication_Commissioning/Day09_03_Automation_Proposal.ipynb
+?? AI_Vision_Training/notebooks/Day09_Communication_Commissioning/Day09_03_Automation_Proposal.md

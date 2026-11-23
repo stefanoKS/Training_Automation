@@ -1,54 +1,60 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="880" viewBox="0 0 1440 880" role="img" aria-labelledby="title desc"><title id="title">フレーム・軸・ベアリング・ローラ / Frame, rollers, shafts and bearings</title><desc id="desc">フレーム・軸・ベアリング・ローラ / Frame, rollers, shafts and bearings — editable bilingual training diagram for DAY 07 / MECHANICAL COMPONENTS.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#2563A6"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#A32B2B"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#1B7A4B"/></marker></defs><rect x="0" y="0" width="1440" height="880" fill="#F5F8FC"/><rect x="0" y="0" width="1440" height="12" fill="#2563A6"/>
-<text x="56.0" y="56.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#2563A6" font-weight="700" text-anchor="start">DAY 07 / MECHANICAL COMPONENTS</text>
-<text x="56.0" y="104.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="32" fill="#142B3F" font-weight="700" text-anchor="start">フレーム・軸・ベアリング・ローラ</text>
-<text x="56.0" y="144.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="26" fill="#526378" font-weight="400" text-anchor="start">Frame, rollers, shafts and bearings</text>
-<rect x="80.0" y="186.0" width="303.5" height="168.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
-<rect x="80.0" y="196.0" width="7.0" height="148.0" rx="3" fill="#2563A6" stroke="#2563A6" stroke-width="0"/>
-<text x="102.0" y="249.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">フレーム</text>
-<text x="102.0" y="271.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">Frame</text>
-<text x="102.0" y="289.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">すべての部品を支える構造 /</text>
-<text x="102.0" y="307.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">carries the structure</text>
-<rect x="405.5" y="186.0" width="303.5" height="168.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
-<rect x="405.5" y="196.0" width="7.0" height="148.0" rx="3" fill="#2563A6" stroke="#2563A6" stroke-width="0"/>
-<text x="427.5" y="249.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">シャフト</text>
-<text x="427.5" y="271.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">Shaft</text>
-<text x="427.5" y="289.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">回転を伝える軸 / transmits</text>
-<text x="427.5" y="307.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">rotation</text>
-<rect x="731.0" y="186.0" width="303.5" height="168.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
-<rect x="731.0" y="196.0" width="7.0" height="148.0" rx="3" fill="#2563A6" stroke="#2563A6" stroke-width="0"/>
-<text x="753.0" y="249.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">ベアリング</text>
-<text x="753.0" y="271.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">Bearing</text>
-<text x="753.0" y="289.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">摩擦を減らして支える / supports</text>
-<text x="753.0" y="307.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">with low friction</text>
-<rect x="1056.5" y="186.0" width="303.5" height="168.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
-<rect x="1056.5" y="196.0" width="7.0" height="148.0" rx="3" fill="#2563A6" stroke="#2563A6" stroke-width="0"/>
-<text x="1078.5" y="249.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">ローラ</text>
-<text x="1078.5" y="271.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">Roller</text>
-<text x="1078.5" y="289.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">シートに接触する回転体 /</text>
-<text x="1078.5" y="307.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">rotating contact surface</text>
-<text x="80.0" y="404.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="20" fill="#142B3F" font-weight="700" text-anchor="start">組立の関係 / how the parts fit together</text>
-<rect x="96.0" y="430.0" width="1248.0" height="240.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
-<rect x="120.0" y="470.0" width="120.0" height="170.0" rx="12" fill="#E8F1FA" stroke="#2563A6" stroke-width="2"/>
-<text x="180.0" y="500.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#142B3F" font-weight="700" text-anchor="middle">フレーム</text>
-<text x="180.0" y="524.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="middle">frame</text>
-<rect x="280.0" y="548.0" width="720.0" height="26.0" rx="12" fill="#B9C8D6" stroke="#8497A8" stroke-width="2"/>
-<text x="640.0" y="542.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#455A6C" font-weight="700" text-anchor="middle">シャフト / shaft</text>
-<circle cx="360.0" cy="561.0" r="34.0" fill="#EDF2F8" stroke="#6B3FA0" stroke-width="3"/>
-<circle cx="360.0" cy="561.0" r="10.0" fill="#FFFFFF" stroke="#6B3FA0" stroke-width="2"/>
-<circle cx="920.0" cy="561.0" r="34.0" fill="#EDF2F8" stroke="#6B3FA0" stroke-width="3"/>
-<circle cx="920.0" cy="561.0" r="10.0" fill="#FFFFFF" stroke="#6B3FA0" stroke-width="2"/>
-<text x="360.0" y="628.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#6B3FA0" font-weight="700" text-anchor="middle">ベアリング / bearing</text>
-<text x="920.0" y="628.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#6B3FA0" font-weight="700" text-anchor="middle">ベアリング / bearing</text>
-<circle cx="640.0" cy="561.0" r="62.0" fill="#F2E7D2" stroke="#B4541E" stroke-width="3"/>
-<circle cx="640.0" cy="561.0" r="14.0" fill="#FFFFFF" stroke="#B4541E" stroke-width="2"/>
-<text x="640.0" y="650.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#B4541E" font-weight="700" text-anchor="middle">ローラ / roller</text>
-<path d="M1030.0 561.0 L1150.0 561.0" fill="none" stroke="#2563A6" stroke-width="2" marker-end="url(#arrow)"/>
-<text x="1160.0" y="548.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#2563A6" font-weight="700" text-anchor="start">回転方向</text>
-<text x="1160.0" y="570.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start">rotation</text>
-<text x="80.0" y="700.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#142B3F" font-weight="700" text-anchor="start">ベアリングの摩耗は振動と位置ずれを生み、検査画像のぼけや位置ずれにつながります。</text>
-<text x="80.0" y="726.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#526378" font-weight="400" text-anchor="start">Worn bearings add vibration and misalignment, which blur images and shift their position.</text>
-<rect x="56.0" y="764.0" width="1328.0" height="60.0" rx="10" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
-<text x="76.0" y="798.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#142B3F" font-weight="700" text-anchor="start">軸・ベアリング・ローラは一組で剛性と回転精度を決めます。</text>
-<text x="76.0" y="820.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14.5" fill="#526378" font-weight="400" text-anchor="start">Shaft, bearing and roller together set stiffness and rotation accuracy.</text>
-<text x="1400" y="872" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" text-anchor="end">D07-02 • 編集可能な図 / editable SVG</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="820" viewBox="0 0 1440 820" role="img" aria-labelledby="title desc"><title id="title">ECRSで押出し作業を見直す / Re-examining the push task with ECRS</title><desc id="desc">ECRSで押出し作業を見直す / Re-examining the push task with ECRS — editable bilingual training diagram for 第7日 / Day 7.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#2563A6"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#A32B2B"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#1B7A4B"/></marker></defs><rect x="0" y="0" width="1440" height="820" fill="#F5F8FC"/><rect x="0" y="0" width="1440" height="12" fill="#2563A6"/>
+<text x="56.0" y="56.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#2563A6" font-weight="700" text-anchor="start">第7日 / Day 7</text>
+<text x="56.0" y="104.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="32" fill="#142B3F" font-weight="700" text-anchor="start">ECRSで押出し作業を見直す</text>
+<text x="56.0" y="144.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="26" fill="#526378" font-weight="400" text-anchor="start">Re-examining the push task with ECRS</text>
+<rect x="70.0" y="220.0" width="300.0" height="200.0" rx="12" fill="#FFFFFF" stroke="#1F5C99" stroke-width="2"/>
+<rect x="70.0" y="230.0" width="7.0" height="180.0" rx="3" fill="#1F5C99" stroke="#1F5C99" stroke-width="0"/>
+<text x="92.0" y="299.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">E なくす</text>
+<text x="92.0" y="321.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">Eliminate</text>
+<text x="92.0" y="339.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">レイアウト変更で押す必要を消す /</text>
+<text x="92.0" y="357.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">remove the need to push</text>
+<path d="M370.0 320.0 L396.0 320.0" fill="none" stroke="#1F5C99" stroke-width="2.4" marker-end="url(#arrow)"/>
+<rect x="400.0" y="220.0" width="300.0" height="200.0" rx="12" fill="#FFFFFF" stroke="#6B3FA0" stroke-width="2"/>
+<rect x="400.0" y="230.0" width="7.0" height="180.0" rx="3" fill="#6B3FA0" stroke="#6B3FA0" stroke-width="0"/>
+<text x="422.0" y="299.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">C まとめる</text>
+<text x="422.0" y="321.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">Combine</text>
+<text x="422.0" y="339.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">押出しと検査を同じ動作にする /</text>
+<text x="422.0" y="357.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">combine push and inspection</text>
+<path d="M700.0 320.0 L726.0 320.0" fill="none" stroke="#6B3FA0" stroke-width="2.4" marker-end="url(#arrow)"/>
+<rect x="730.0" y="220.0" width="300.0" height="200.0" rx="12" fill="#FFFFFF" stroke="#1B7A4B" stroke-width="2"/>
+<rect x="730.0" y="230.0" width="7.0" height="180.0" rx="3" fill="#1B7A4B" stroke="#1B7A4B" stroke-width="0"/>
+<text x="752.0" y="290.2" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">R 順序・配置</text>
+<text x="752.0" y="311.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">Rearrange</text>
+<text x="752.0" y="329.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">投入口を押出し位置の真上へ /</text>
+<text x="752.0" y="347.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">place the feed above the push</text>
+<text x="752.0" y="365.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">point</text>
+<path d="M1030.0 320.0 L1056.0 320.0" fill="none" stroke="#1B7A4B" stroke-width="2.4" marker-end="url(#arrow)"/>
+<rect x="1060.0" y="220.0" width="300.0" height="200.0" rx="12" fill="#FFFFFF" stroke="#B4541E" stroke-width="2"/>
+<rect x="1060.0" y="230.0" width="7.0" height="180.0" rx="3" fill="#B4541E" stroke="#B4541E" stroke-width="0"/>
+<text x="1082.0" y="290.2" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">S 簡単にする</text>
+<text x="1082.0" y="311.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">Simplify</text>
+<text x="1082.0" y="329.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">ガイドとストッパで位置決め /</text>
+<text x="1082.0" y="347.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">guide and stopper instead of</text>
+<text x="1082.0" y="365.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">skill</text>
+<text x="70.0" y="490.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="20" fill="#142B3F" font-weight="700" text-anchor="start">設備投資の前に / before capital investment</text>
+<rect x="70.0" y="520.0" width="360.0" height="120.0" rx="12" fill="#FFFFFF" stroke="#1F5C99" stroke-width="2"/>
+<rect x="70.0" y="530.0" width="7.0" height="100.0" rx="3" fill="#1F5C99" stroke="#1F5C99" stroke-width="0"/>
+<text x="92.0" y="579.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">現状 / current</text>
+<text x="92.0" y="601.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">人が毎回押す / manual push</text>
+<path d="M432.0 580.0 L468.0 580.0" fill="none" stroke="#1F5C99" stroke-width="2.2" marker-end="url(#arrow)"/>
+<rect x="470.0" y="520.0" width="360.0" height="120.0" rx="12" fill="#FFFFFF" stroke="#1F5C99" stroke-width="2"/>
+<rect x="470.0" y="530.0" width="7.0" height="100.0" rx="3" fill="#1F5C99" stroke="#1F5C99" stroke-width="0"/>
+<text x="492.0" y="566.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">E・C・R / eliminate,</text>
+<text x="492.0" y="589.7" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">combine, rearrange</text>
+<text x="492.0" y="611.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">押す回数を減らす / fewer pushes</text>
+<path d="M832.0 580.0 L868.0 580.0" fill="none" stroke="#1F5C99" stroke-width="2.2" marker-end="url(#arrow)"/>
+<rect x="870.0" y="520.0" width="360.0" height="120.0" rx="12" fill="#FFFFFF" stroke="#1F5C99" stroke-width="2"/>
+<rect x="870.0" y="530.0" width="7.0" height="100.0" rx="3" fill="#1F5C99" stroke="#1F5C99" stroke-width="0"/>
+<text x="892.0" y="555.7" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">S・設備 / simplify,</text>
+<text x="892.0" y="578.8" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">equipment</text>
+<text x="892.0" y="600.5" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">残った動作だけ自動化 / automate</text>
+<text x="892.0" y="620.3" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">what remains</text>
+<rect x="1260.0" y="520.0" width="110.0" height="120.0" rx="8" fill="#F8E7E7" stroke="#A32B2B" stroke-width="1.6"/>
+<text x="1315.0" y="565.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#A32B2B" font-weight="700" text-anchor="middle">投資</text>
+<text x="1315.0" y="588.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#A32B2B" font-weight="400" text-anchor="middle">invest</text>
+<text x="1315.0" y="615.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#A32B2B" font-weight="400" text-anchor="middle">最後</text>
+<rect x="56.0" y="704.0" width="1328.0" height="60.0" rx="10" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
+<text x="76.0" y="738.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#142B3F" font-weight="700" text-anchor="start">E・C・Rを先に検討すると、設備費と工数を減らせる場合がある。 / E, C and R first can reduce both cost and effort.</text>
+<text x="76.0" y="760.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14.5" fill="#526378" font-weight="400" text-anchor="start">Eliminate, combine and rearrange before buying equipment.</text>
+<text x="1400" y="812" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" text-anchor="end">D07-02 • 編集可能な図 / editable SVG</text>
 </svg>

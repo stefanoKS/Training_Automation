@@ -31,6 +31,26 @@ Python, AI ra chitra prashodhanako anubhab nabhaeka manisalai lakshit garera ban
 | dayara | **hapta 1 matra**. bastabik nirikshan pranali nirman hapta 2 ma hunchha. |
 <!-- ne:end -->
 
+## 0. 第7日〜第9日（自動化設備研修）/ Days 7–9 (automation course)
+
+第1週とは別に、**第7日〜第9日**の「自動化設備の構想から試運転まで」の3日間コースがあります。第1週の16ノートブックとは独立しており、Day 1〜6の教材は変更していません。
+
+Separately from Week 1, there is a **three-day Days 7–9 course** on automation equipment, from concept to commissioning. It is independent of the Week 1 set of 16 notebooks, and the Day 1–6 materials are unchanged.
+
+- 時間割 / timetable: [`COURSE_SYLLABUS_DAY07_09.md`](COURSE_SYLLABUS_DAY07_09.md)
+- 入口・教材一覧 / entry point and materials: [`day07_09_support/README_ja_en.md`](day07_09_support/README_ja_en.md)
+- ノートブック / notebooks: [`notebooks/Day07_Automation_Concept_Mechanics/`](notebooks/Day07_Automation_Concept_Mechanics/), [`Day08_Electrical_PLC/`](notebooks/Day08_Electrical_PLC/), [`Day09_Communication_Commissioning/`](notebooks/Day09_Communication_Commissioning/)
+- ワークシート / worksheets: [`day07_09_support/worksheets/`](day07_09_support/worksheets/)
+- 解説PDF / explanation PDFs: [`docs/pdf/Day07_explanation_ja_en.pdf`](docs/pdf/Day07_explanation_ja_en.pdf), Day08, Day09
+- 講師ガイド / instructor guides: [`docs/instructor/day07_instructor_guide.md`](docs/instructor/day07_instructor_guide.md), day08, day09
+- 元PDFの正誤表 / source-PDF errata: [`docs/reference/Automation_Equipment_PDF_Errata_ja_en.md`](docs/reference/Automation_Equipment_PDF_Errata_ja_en.md)
+
+第7日〜第9日は、実機の配線・通電・空圧・安全検証を行いません。教育用のオフライン教材です。
+
+Days 7–9 do not perform real wiring, energisation, pneumatics or safety validation. They are offline teaching materials.
+
+---
+
 ## 1. 最初に読むもの / Read this first
 
 次の順番で進めてください。

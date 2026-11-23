@@ -1,0 +1,266 @@
+{
+  "source_pdf": "docs/reference/自動化設備製作研修_5日間_詳細版_受講者用.pdf",
+  "sha256": "3380c2b67e148cd9a71b0f9071963744f3b0acba7491b309708b0f31183707ae",
+  "expected_sha256": "3380c2b67e148cd9a71b0f9071963744f3b0acba7491b309708b0f31183707ae",
+  "sha256_matches_expected": true,
+  "bytes": 157435,
+  "page_count": 51,
+  "pages": [
+    {
+      "pdf_page": 1,
+      "characters": 480,
+      "rendered_png": "day07_09_support/reference_data/pdf_extract/pages/page-001.png"
+    },
+    {
+      "pdf_page": 2,
+      "characters": 637,
+      "rendered_png": "day07_09_support/reference_data/pdf_extract/pages/page-002.png"
+    },
+    {
+      "pdf_page": 3,
+      "characters": 791,
+      "rendered_png": "day07_09_support/reference_data/pdf_extract/pages/page-003.png"
+    },
+    {
+      "pdf_page": 4,
+      "characters": 637,
+      "rendered_png": "day07_09_support/reference_data/pdf_extract/pages/page-004.png"
+    },
+    {
+      "pdf_page": 5,
+      "characters": 683,
+      "rendered_png": "day07_09_support/reference_data/pdf_extract/pages/page-005.png"
+    },
+    {
+      "pdf_page": 6,
+      "characters": 595,
+      "rendered_png": "day07_09_support/reference_data/pdf_extract/pages/page-006.png"
+    },
+    {
+      "pdf_page": 7,
+      "characters": 545,
+      "rendered_png": "day07_09_support/reference_data/pdf_extract/pages/page-007.png"
+    },
+    {
+      "pdf_page": 8,
+      "characters": 555,
+      "rendered_png": "day07_09_support/reference_data/pdf_extract/pages/page-008.png"
+    },
+    {
+      "pdf_page": 9,
+      "characters": 581,
+      "rendered_png": "day07_09_support/reference_data/pdf_extract/pages/page-009.png"
+    },
+    {
+      "pdf_page": 10,
+      "characters": 594,
+      "rendered_png": "day07_09_support/reference_data/pdf_extract/pages/page-010.png"
+    },
+    {
+      "pdf_page": 11,
+      "characters": 450,
+      "rendered_png": "day07_09_support/reference_data/pdf_extract/pages/page-011.png"
+    },
+    {
+      "pdf_page": 12,
+      "characters": 616,
+      "rendered_png": "day07_09_support/reference_data/pdf_extract/pages/page-012.png"
+    },
+    {
+      "pdf_page": 13,
+      "characters": 646,
+      "rendered_png": "day07_09_support/reference_data/pdf_extract/pages/page-013.png"
+    },
+    {
+      "pdf_page": 14,
+      "characters": 615,
+      "rendered_png": "day07_09_support/reference_data/pdf_extract/pages/page-014.png"
+    },
+    {
+      "pdf_page": 15,
+      "characters": 699,
+      "rendered_png": "day07_09_support/reference_data/pdf_extract/pages/page-015.png"
+    },
+    {
+      "pdf_page": 16,
+      "characters": 612,
+      "rendered_png": "day07_09_support/reference_data/pdf_extract/pages/page-016.png"
+    },
+    {
+      "pdf_page": 17,
+      "characters": 632,
+      "rendered_png": "day07_09_support/reference_data/pdf_extract/pages/page-017.png"
+    },
+    {
+      "pdf_page": 18,
+      "characters": 586,
+      "rendered_png": "day07_09_support/reference_data/pdf_extract/pages/page-018.png"
+    },
+    {
+      "pdf_page": 19,
+      "characters": 561,
+      "rendered_png": "day07_09_support/reference_data/pdf_extract/pages/page-019.png"
+    },
+    {
+      "pdf_page": 20,
+      "characters": 606,
+      "rendered_png": "day07_09_support/reference_data/pdf_extract/pages/page-020.png"
+    },
+    {
+      "pdf_page": 21,
+      "characters": 592,
+      "rendered_png": "day07_09_support/reference_data/pdf_extract/pages/page-021.png"
+    },
+    {
+      "pdf_page": 22,
+      "characters": 626,
+      "rendered_png": "day07_09_support/reference_data/pdf_extract/pages/page-022.png"
+    },
+    {
+      "pdf_page": 23,
+      "characters": 664,
+      "rendered_png": "day07_09_support/reference_data/pdf_extract/pages/page-023.png"
+    },
+    {
+      "pdf_page": 24,
+      "characters": 603,
+      "rendered_png": "day07_09_support/reference_data/pdf_extract/pages/page-024.png"
+    },
+    {
+      "pdf_page": 25,
+      "characters": 691,
+      "rendered_png": "day07_09_support/reference_data/pdf_extract/pages/page-025.png"
+    },
+    {
+      "pdf_page": 26,
+      "characters": 573,
+      "rendered_png": "day07_09_support/reference_data/pdf_extract/pages/page-026.png"
+    },
+    {
+      "pdf_page": 27,
+      "characters": 571,
+      "rendered_png": "day07_09_support/reference_data/pdf_extract/pages/page-027.png"
+    },
+    {
+      "pdf_page": 28,
+      "characters": 556,
+      "rendered_png": "day07_09_support/reference_data/pdf_extract/pages/page-028.png"
+    },
+    {
+      "pdf_page": 29,
+      "characters": 489,
+      "rendered_png": "day07_09_support/reference_data/pdf_extract/pages/page-029.png"
+    },
+    {
+      "pdf_page": 30,
+      "characters": 667,
+      "rendered_png": "day07_09_support/reference_data/pdf_extract/pages/page-030.png"
+    },
+    {
+      "pdf_page": 31,
+      "characters": 603,
+      "rendered_png": "day07_09_support/reference_data/pdf_extract/pages/page-031.png"
+    },
+    {
+      "pdf_page": 32,
+      "characters": 546,
+      "rendered_png": "day07_09_support/reference_data/pdf_extract/pages/page-032.png"
+    },
+    {
+      "pdf_page": 33,
+      "characters": 582,
+      "rendered_png": "day07_09_support/reference_data/pdf_extract/pages/page-033.png"
+    },
+    {
+      "pdf_page": 34,
+      "characters": 678,
+      "rendered_png": "day07_09_support/reference_data/pdf_extract/pages/page-034.png"
+    },
+    {
+      "pdf_page": 35,
+      "characters": 722,
+      "rendered_png": "day07_09_support/reference_data/pdf_extract/pages/page-035.png"
+    },
+    {
+      "pdf_page": 36,
+      "characters": 659,
+      "rendered_png": "day07_09_support/reference_data/pdf_extract/pages/page-036.png"
+    },
+    {
+      "pdf_page": 37,
+      "characters": 649,
+      "rendered_png": "day07_09_support/reference_data/pdf_extract/pages/page-037.png"
+    },
+    {
+      "pdf_page": 38,
+      "characters": 488,
+      "rendered_png": "day07_09_support/reference_data/pdf_extract/pages/page-038.png"
+    },
+    {
+      "pdf_page": 39,
+      "characters": 448,
+      "rendered_png": "day07_09_support/reference_data/pdf_extract/pages/page-039.png"
+    },
+    {
+      "pdf_page": 40,
+      "characters": 526,
+      "rendered_png": "day07_09_support/reference_data/pdf_extract/pages/page-040.png"
+    },
+    {
+      "pdf_page": 41,
+      "characters": 502,
+      "rendered_png": "day07_09_support/reference_data/pdf_extract/pages/page-041.png"
+    },
+    {
+      "pdf_page": 42,
+      "characters": 620,
+      "rendered_png": "day07_09_support/reference_data/pdf_extract/pages/page-042.png"
+    },
+    {
+      "pdf_page": 43,
+      "characters": 517,
+      "rendered_png": "day07_09_support/reference_data/pdf_extract/pages/page-043.png"
+    },
+    {
+      "pdf_page": 44,
+      "characters": 507,
+      "rendered_png": "day07_09_support/reference_data/pdf_extract/pages/page-044.png"
+    },
+    {
+      "pdf_page": 45,
+      "characters": 434,
+      "rendered_png": "day07_09_support/reference_data/pdf_extract/pages/page-045.png"
+    },
+    {
+      "pdf_page": 46,
+      "characters": 314,
+      "rendered_png": "day07_09_support/reference_data/pdf_extract/pages/page-046.png"
+    },
+    {
+      "pdf_page": 47,
+      "characters": 673,
+      "rendered_png": "day07_09_support/reference_data/pdf_extract/pages/page-047.png"
+    },
+    {
+      "pdf_page": 48,
+      "characters": 772,
+      "rendered_png": "day07_09_support/reference_data/pdf_extract/pages/page-048.png"
+    },
+    {
+      "pdf_page": 49,
+      "characters": 538,
+      "rendered_png": "day07_09_support/reference_data/pdf_extract/pages/page-049.png"
+    },
+    {
+      "pdf_page": 50,
+      "characters": 776,
+      "rendered_png": "day07_09_support/reference_data/pdf_extract/pages/page-050.png"
+    },
+    {
+      "pdf_page": 51,
+      "characters": 770,
+      "rendered_png": "day07_09_support/reference_data/pdf_extract/pages/page-051.png"
+    }
+  ],
+  "note": "Text extraction is a navigation aid only. Ladder diagrams, pneumatic circuits and wiring drawings were inspected as rendered images because text extraction cannot verify graphical symbol semantics."
+}

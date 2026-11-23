@@ -1,0 +1,118 @@
+{
+  "schema_version": 2,
+  "course_id": "day07_09_automation_2026",
+  "title_ja": "自動化設備の構想から試運転まで 3日間研修",
+  "title_en": "From Automation Concept to Commissioning: a three-day course",
+  "notes_ja": "このマニフェストは Day 7-9 のノートブック順序・時間枠・図・PDF 章の唯一の正である。",
+  "notes_en": "This manifest is the single source of truth for Day 7-9 notebook order, time slots, figures and PDF chapters.",
+  "days": [
+    {
+      "id": "day07",
+      "folder": "Day07_Automation_Concept_Mechanics",
+      "diagram_folder": "day07",
+      "title_ja": "第7日：自動化設備の構想・機械設計",
+      "title_en": "Day 7: Automation Planning and Mechanical Design",
+      "lessons": [
+        {
+          "order": 1,
+          "name": "Day07_01_Requirements",
+          "duration_min": 80,
+          "title_ja": "要求仕様と構想の作り方",
+          "title_en": "Requirements and Concept Development",
+          "pdf_pages": "4-11",
+          "diagrams": ["D07-01", "D07-02", "D07-03", "D07-04", "D07-05"]
+        },
+        {
+          "order": 2,
+          "name": "Day07_02_Mechanical_Architecture",
+          "duration_min": 85,
+          "title_ja": "機械構成と空圧システム",
+          "title_en": "Mechanical Architecture and Pneumatics",
+          "pdf_pages": "12-14, 16",
+          "diagrams": ["D07-06", "D07-07", "D07-08"]
+        },
+        {
+          "order": 3,
+          "name": "Day07_03_Equipment_Selection",
+          "duration_min": 135,
+          "title_ja": "シリンダ・モーター・機器選定",
+          "title_en": "Cylinder, Motor and Equipment Selection",
+          "pdf_pages": "15, 17-20, 47",
+          "diagrams": ["D07-09"]
+        }
+      ]
+    },
+    {
+      "id": "day08",
+      "folder": "Day08_Electrical_PLC",
+      "diagram_folder": "day08",
+      "title_ja": "第8日：電気設計・センサー・PLC・ラダー制御",
+      "title_en": "Day 8: Electrical Design, Sensors and PLC Control",
+      "lessons": [
+        {
+          "order": 1,
+          "name": "Day08_01_Electrical_Fundamentals",
+          "duration_min": 80,
+          "title_ja": "電気の基礎と DC24V 制御",
+          "title_en": "Electrical Fundamentals and DC24V Control",
+          "pdf_pages": "21-23",
+          "diagrams": ["D08-01", "D08-02", "D08-03", "D08-04"]
+        },
+        {
+          "order": 2,
+          "name": "Day08_02_Sensors_and_IO",
+          "duration_min": 85,
+          "title_ja": "センサー・I/O・電気インターフェース",
+          "title_en": "Sensors, I/O and Electrical Interfaces",
+          "pdf_pages": "24-29, 48",
+          "diagrams": ["D08-05", "D08-06", "D08-07"]
+        },
+        {
+          "order": 3,
+          "name": "Day08_03_Ladder_Sequence",
+          "duration_min": 135,
+          "title_ja": "PLC・ラダー・シーケンス制御",
+          "title_en": "PLC, Ladder and Sequence Control",
+          "pdf_pages": "30-33",
+          "diagrams": ["D08-08", "D08-09", "D08-10", "D08-11"]
+        }
+      ]
+    },
+    {
+      "id": "day09",
+      "folder": "Day09_Communication_Commissioning",
+      "diagram_folder": "day09",
+      "title_ja": "第9日：通信・試運転・改善提案",
+      "title_en": "Day 9: Industrial Communication, Commissioning and Automation Proposal",
+      "lessons": [
+        {
+          "order": 1,
+          "name": "Day09_01_Industrial_Networking",
+          "duration_min": 80,
+          "title_ja": "産業用ネットワークと通信設定",
+          "title_en": "Industrial Networking and Communication Settings",
+          "pdf_pages": "34-38, 49",
+          "diagrams": ["D09-01", "D09-02", "D09-03", "D09-04", "D09-05"]
+        },
+        {
+          "order": 2,
+          "name": "Day09_02_Commissioning",
+          "duration_min": 85,
+          "title_ja": "試運転・異常試験・引継ぎ",
+          "title_en": "Commissioning, Abnormal Testing and Handover",
+          "pdf_pages": "39-43, 50",
+          "diagrams": ["D09-06", "D09-07"]
+        },
+        {
+          "order": 3,
+          "name": "Day09_03_Automation_Proposal",
+          "duration_min": 135,
+          "title_ja": "自動化提案と最終レビュー",
+          "title_en": "Automation Proposal and Final Review",
+          "pdf_pages": "9, 44-46, 51",
+          "diagrams": ["D09-08", "D09-09"]
+        }
+      ]
+    }
+  ]
+}

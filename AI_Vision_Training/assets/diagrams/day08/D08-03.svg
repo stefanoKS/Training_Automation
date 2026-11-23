@@ -1,33 +1,66 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="860" viewBox="0 0 1440 860" role="img" aria-labelledby="title desc"><title id="title">PLCのスキャン（タスク実行）周期 / Simplified PLC scan/task cycle</title><desc id="desc">PLCのスキャン（タスク実行）周期 / Simplified PLC scan/task cycle — editable bilingual training diagram for DAY 08 / SCAN CYCLE.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#2563A6"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#A32B2B"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#1B7A4B"/></marker></defs><rect x="0" y="0" width="1440" height="860" fill="#F5F8FC"/><rect x="0" y="0" width="1440" height="12" fill="#2563A6"/>
-<text x="56.0" y="56.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#2563A6" font-weight="700" text-anchor="start">DAY 08 / SCAN CYCLE</text>
-<text x="56.0" y="104.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="32" fill="#142B3F" font-weight="700" text-anchor="start">PLCのスキャン（タスク実行）周期</text>
-<text x="56.0" y="144.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="26" fill="#526378" font-weight="400" text-anchor="start">Simplified PLC scan/task cycle</text>
-<rect x="420.0" y="210.0" width="280.0" height="120.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="3"/>
-<text x="560.0" y="258.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="20" fill="#2563A6" font-weight="700" text-anchor="middle">入力の取り込み</text>
-<text x="560.0" y="284.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#526378" font-weight="400" text-anchor="middle">input refresh</text>
-<rect x="420.0" y="400.0" width="280.0" height="120.0" rx="12" fill="#FFFFFF" stroke="#1B7A4B" stroke-width="3"/>
-<text x="560.0" y="448.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="20" fill="#1B7A4B" font-weight="700" text-anchor="middle">プログラム実行</text>
-<text x="560.0" y="474.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#526378" font-weight="400" text-anchor="middle">program execution</text>
-<rect x="420.0" y="590.0" width="280.0" height="110.0" rx="12" fill="#FFFFFF" stroke="#B4541E" stroke-width="3"/>
-<text x="560.0" y="636.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="20" fill="#B4541E" font-weight="700" text-anchor="middle">出力の更新</text>
-<text x="560.0" y="662.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#526378" font-weight="400" text-anchor="middle">output update</text>
-<path d="M570.0 334.0 L570.0 392.0" fill="none" stroke="#2563A6" stroke-width="3" marker-end="url(#arrow)"/>
-<path d="M570.0 524.0 L570.0 582.0" fill="none" stroke="#1B7A4B" stroke-width="3" marker-end="url(#arrow)"/>
-<path d="M420 645 C 240 645 240 270 412 270" fill="none" stroke="#B4541E" stroke-width="3" marker-end="url(#arrow)"/>
-<text x="250.0" y="452.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#B4541E" font-weight="700" text-anchor="start">繰り返し</text>
-<text x="250.0" y="476.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start">repeat</text>
-<rect x="780.0" y="240.0" width="580.0" height="200.0" rx="12" fill="#E8F1FA" stroke="#2563A6" stroke-width="2"/>
-<text x="804.0" y="276.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#2563A6" font-weight="700" text-anchor="start">重要な注意 / important caution</text>
-<text x="804.0" y="310.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#142B3F" font-weight="400" text-anchor="start">・周期の長さはCPU・設定・通信で変わります</text>
-<text x="804.0" y="336.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#142B3F" font-weight="400" text-anchor="start">・全てのPLCが同じ順序とは限りません</text>
-<text x="804.0" y="362.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#142B3F" font-weight="400" text-anchor="start">・通信の更新は別のタイミングの場合があります</text>
-<text x="804.0" y="388.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#142B3F" font-weight="400" text-anchor="start">・実際の順序はマニュアルで確認します</text>
-<text x="780.0" y="482.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#142B3F" font-weight="700" text-anchor="start">入力の変化が出力に反映されるまでに時間がかかります。</text>
-<text x="780.0" y="508.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#526378" font-weight="400" text-anchor="start">A change at an input takes time to appear at an output.</text>
-<text x="780.0" y="544.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#B4541E" font-weight="700" text-anchor="start">速い現象（欠陥通過・パルス）は取りこぼしに注意します。</text>
-<text x="780.0" y="570.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start">Fast events (defects passing, pulses) can be missed between scans.</text>
-<rect x="56.0" y="744.0" width="1328.0" height="60.0" rx="10" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
-<text x="76.0" y="778.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#142B3F" font-weight="700" text-anchor="start">スキャン時間は「応答時間」の一部です。</text>
-<text x="76.0" y="800.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14.5" fill="#526378" font-weight="400" text-anchor="start">Scan time is only part of total response time.</text>
-<text x="1400" y="852" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" text-anchor="end">D08-03 • 編集可能な図 / editable SVG</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="830" viewBox="0 0 1440 830" role="img" aria-labelledby="title desc"><title id="title">スイッチとリレーの違い / Switch versus relay</title><desc id="desc">スイッチとリレーの違い / Switch versus relay — editable bilingual training diagram for 第8日 / Day 8.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#2563A6"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#A32B2B"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#1B7A4B"/></marker></defs><rect x="0" y="0" width="1440" height="830" fill="#F5F8FC"/><rect x="0" y="0" width="1440" height="12" fill="#2563A6"/>
+<text x="56.0" y="56.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#2563A6" font-weight="700" text-anchor="start">第8日 / Day 8</text>
+<text x="56.0" y="104.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="32" fill="#142B3F" font-weight="700" text-anchor="start">スイッチとリレーの違い</text>
+<text x="56.0" y="144.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="26" fill="#526378" font-weight="400" text-anchor="start">Switch versus relay</text>
+<rect x="70.0" y="190.0" width="620.0" height="330.0" rx="10" fill="#FFFFFF" stroke="#C1D0DD" stroke-width="1.4"/>
+<text x="86.0" y="220.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#142B3F" font-weight="700" text-anchor="start">スイッチ: 人が接点を操作</text>
+<text x="86.0" y="242.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">switch: a person operates the contact</text>
+<path d="M130.0 270.0 L530.0 270.0" fill="none" stroke="#B4541E" stroke-width="3" marker-end="url(#arrow)"/>
+<text x="150.0" y="255.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#B4541E" font-weight="700" text-anchor="start">+24V</text>
+<path d="M300.0 270.0 L300.0 310.0" fill="none" stroke="#B4541E" stroke-width="2"/>
+<path d="M300.0 310.0 L380.0 350.0" fill="none" stroke="#1F5C99" stroke-width="2.4"/>
+<path d="M380.0 310.0 L300.0 350.0" fill="none" stroke="#1F5C99" stroke-width="2.4"/>
+<text x="340.0" y="390.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#1F5C99" font-weight="700" text-anchor="middle">スイッチ / switch</text>
+<circle cx="480.0" cy="320.0" r="30.0" fill="#E8F1FA" stroke="#1F5C99" stroke-width="2"/>
+<text x="480.0" y="325.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#1F5C99" font-weight="700" text-anchor="middle">負荷</text>
+<path d="M530.0 270.0 L530.0 320.0" fill="none" stroke="#B4541E" stroke-width="2"/>
+<path d="M480.0 350.0 L480.0 420.0" fill="none" stroke="#526378" stroke-width="2"/>
+<text x="480.0" y="440.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#526378" font-weight="700" text-anchor="middle">0V</text>
+<text x="130.0" y="490.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#142B3F" font-weight="400" text-anchor="start">接点定格・操作頻度・負荷種別を確認する。</text>
+<rect x="710.0" y="190.0" width="660.0" height="330.0" rx="10" fill="#FFFFFF" stroke="#C1D0DD" stroke-width="1.4"/>
+<text x="726.0" y="220.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#142B3F" font-weight="700" text-anchor="start">リレー: コイルで接点を操作</text>
+<text x="726.0" y="242.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">relay: a coil operates the contact</text>
+<path d="M760.0 260.0 L1160.0 260.0" fill="none" stroke="#B4541E" stroke-width="3" marker-end="url(#arrow)"/>
+<text x="775.0" y="245.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#B4541E" font-weight="700" text-anchor="start">+24V</text>
+<rect x="850.0" y="285.0" width="120.0" height="70.0" rx="4" fill="#F1ECF8" stroke="#6B3FA0" stroke-width="2"/>
+<text x="910.0" y="315.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#6B3FA0" font-weight="700" text-anchor="middle">コイル</text>
+<text x="910.0" y="335.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#526378" font-weight="400" text-anchor="middle">coil</text>
+<path d="M910.0 260.0 L910.0 285.0" fill="none" stroke="#B4541E" stroke-width="2"/>
+<path d="M910.0 355.0 L910.0 420.0" fill="none" stroke="#526378" stroke-width="2"/>
+<text x="910.0" y="440.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#526378" font-weight="700" text-anchor="middle">0V</text>
+<path d="M1040.0 320.0 L1130.0 320.0" fill="none" stroke="#6B3FA0" stroke-width="2" stroke-dasharray="4 4" marker-end="url(#arrow)"/>
+<text x="1080.0" y="305.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#6B3FA0" font-weight="600" text-anchor="middle">電磁力</text>
+<path d="M1180.0 260.0 L1280.0 260.0" fill="none" stroke="#B4541E" stroke-width="2"/>
+<path d="M1180.0 350.0 L1280.0 350.0" fill="none" stroke="#B4541E" stroke-width="2"/>
+<path d="M1180.0 260.0 L1180.0 285.0" fill="none" stroke="#B4541E" stroke-width="2"/>
+<path d="M1180.0 350.0 L1180.0 325.0" fill="none" stroke="#B4541E" stroke-width="2"/>
+<text x="1230.0" y="390.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#1F5C99" font-weight="600" text-anchor="middle">接点 / contact</text>
+<text x="760.0" y="490.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#142B3F" font-weight="400" text-anchor="start">小さな信号で大きな負荷を間接操作できる。</text>
+<rect x="70.0" y="560.0" width="360.0" height="38.0" rx="2" fill="#E8F1FA" stroke="#C1D0DD" stroke-width="1"/>
+<text x="250.0" y="585.8" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#142B3F" font-weight="700" text-anchor="middle">物理接点 / contact</text>
+<rect x="430.0" y="560.0" width="250.0" height="38.0" rx="2" fill="#E8F1FA" stroke="#C1D0DD" stroke-width="1"/>
+<text x="555.0" y="585.8" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#142B3F" font-weight="700" text-anchor="middle">通常 / normal</text>
+<rect x="680.0" y="560.0" width="250.0" height="38.0" rx="2" fill="#E8F1FA" stroke="#C1D0DD" stroke-width="1"/>
+<text x="805.0" y="585.8" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#142B3F" font-weight="700" text-anchor="middle">操作 / operated</text>
+<rect x="70.0" y="598.0" width="360.0" height="38.0" rx="2" fill="#FFFFFF" stroke="#C1D0DD" stroke-width="1"/>
+<text x="82.0" y="623.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#142B3F" font-weight="400" text-anchor="start">NO</text>
+<rect x="430.0" y="598.0" width="250.0" height="38.0" rx="2" fill="#FFFFFF" stroke="#C1D0DD" stroke-width="1"/>
+<text x="442.0" y="623.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#142B3F" font-weight="400" text-anchor="start">開 / open</text>
+<rect x="680.0" y="598.0" width="250.0" height="38.0" rx="2" fill="#FFFFFF" stroke="#C1D0DD" stroke-width="1"/>
+<text x="692.0" y="623.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#142B3F" font-weight="400" text-anchor="start">閉 / closed</text>
+<rect x="70.0" y="636.0" width="360.0" height="38.0" rx="2" fill="#FFFFFF" stroke="#C1D0DD" stroke-width="1"/>
+<text x="82.0" y="661.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#142B3F" font-weight="400" text-anchor="start">NC</text>
+<rect x="430.0" y="636.0" width="250.0" height="38.0" rx="2" fill="#FFFFFF" stroke="#C1D0DD" stroke-width="1"/>
+<text x="442.0" y="661.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#142B3F" font-weight="400" text-anchor="start">閉 / closed</text>
+<rect x="680.0" y="636.0" width="250.0" height="38.0" rx="2" fill="#FFFFFF" stroke="#C1D0DD" stroke-width="1"/>
+<text x="692.0" y="661.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#142B3F" font-weight="400" text-anchor="start">開 / open</text>
+<rect x="980.0" y="560.0" width="390.0" height="120.0" rx="8" fill="#F8E7E7" stroke="#A32B2B" stroke-width="1.2"/>
+<text x="1000.0" y="592.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#A32B2B" font-weight="700" text-anchor="start">物理NC ≠ ラダーのNC命令</text>
+<text x="1000.0" y="616.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#526378" font-weight="400" text-anchor="start">physical NC is not automatically</text>
+<text x="1000.0" y="636.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#526378" font-weight="400" text-anchor="start">a logical NC instruction.</text>
+<text x="1000.0" y="660.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#142B3F" font-weight="600" text-anchor="start">入力のON/OFFで論理を組み立てる。</text>
+<rect x="56.0" y="714.0" width="1328.0" height="60.0" rx="10" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
+<text x="76.0" y="748.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#142B3F" font-weight="700" text-anchor="start">スイッチは直接、リレーはコイルを介して接点を動かす。どちらも接点定格と負荷種別を確認する。</text>
+<text x="76.0" y="770.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14.5" fill="#526378" font-weight="400" text-anchor="start">A switch operates a contact directly; a relay uses a coil. Both require contact ratings and load-type checks.</text>
+<text x="1400" y="822" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" text-anchor="end">D08-03 • 編集可能な図 / editable SVG</text>
 </svg>

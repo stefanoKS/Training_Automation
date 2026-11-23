@@ -1,140 +1,69 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="920" viewBox="0 0 1440 920" role="img" aria-labelledby="title desc"><title id="title">AND・OR・NOTのラダーと真理値表 / Ladder AND/OR/NOT with truth tables</title><desc id="desc">AND・OR・NOTのラダーと真理値表 / Ladder AND/OR/NOT with truth tables — editable bilingual training diagram for DAY 08 / BOOLEAN LOGIC.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#2563A6"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#A32B2B"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#1B7A4B"/></marker></defs><rect x="0" y="0" width="1440" height="920" fill="#F5F8FC"/><rect x="0" y="0" width="1440" height="12" fill="#2563A6"/>
-<text x="56.0" y="56.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#2563A6" font-weight="700" text-anchor="start">DAY 08 / BOOLEAN LOGIC</text>
-<text x="56.0" y="104.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="32" fill="#142B3F" font-weight="700" text-anchor="start">AND・OR・NOTのラダーと真理値表</text>
-<text x="56.0" y="144.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="26" fill="#526378" font-weight="400" text-anchor="start">Ladder AND/OR/NOT with truth tables</text>
-<rect x="60.0" y="186.0" width="440.0" height="450.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
-<text x="80.0" y="222.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#2563A6" font-weight="700" text-anchor="start">AND（直列）</text>
-<text x="80.0" y="246.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start">AND (series)</text>
-<path d="M100.0 330.0 L470.0 330.0" fill="none" stroke="#2563A6" stroke-width="2"/>
-<path d="M136.0 330.0 L150.0 330.0" fill="none" stroke="#2563A6" stroke-width="2"/>
-<path d="M150.0 312.0 L150.0 348.0" fill="none" stroke="#2563A6" stroke-width="2"/>
-<path d="M170.0 312.0 L170.0 348.0" fill="none" stroke="#2563A6" stroke-width="2"/>
-<path d="M170.0 330.0 L184.0 330.0" fill="none" stroke="#2563A6" stroke-width="2"/>
-<text x="160.0" y="372.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#2563A6" font-weight="700" text-anchor="middle">X0</text>
-<path d="M246.0 330.0 L260.0 330.0" fill="none" stroke="#2563A6" stroke-width="2"/>
-<path d="M260.0 312.0 L260.0 348.0" fill="none" stroke="#2563A6" stroke-width="2"/>
-<path d="M280.0 312.0 L280.0 348.0" fill="none" stroke="#2563A6" stroke-width="2"/>
-<path d="M280.0 330.0 L294.0 330.0" fill="none" stroke="#2563A6" stroke-width="2"/>
-<text x="270.0" y="372.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#2563A6" font-weight="700" text-anchor="middle">X1</text>
-<path d="M412 312 Q396 330 412 348" fill="none" stroke="#2563A6" stroke-width="2.4"/><path d="M448 312 Q432 330 448 348" fill="none" stroke="#2563A6" stroke-width="2.4"/>
-<path d="M384.0 330.0 L398.0 330.0" fill="none" stroke="#2563A6" stroke-width="2"/>
-<path d="M448.0 330.0 L492.0 330.0" fill="none" stroke="#2563A6" stroke-width="2"/>
-<text x="430.0" y="374.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#2563A6" font-weight="700" text-anchor="middle">Y0</text>
-<rect x="100.0" y="442.0" width="110.0" height="34.0" rx="3" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
-<text x="155.0" y="465.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="700" text-anchor="middle">X0</text>
-<rect x="210.0" y="442.0" width="110.0" height="34.0" rx="3" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
-<text x="265.0" y="465.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="700" text-anchor="middle">X1</text>
-<rect x="320.0" y="442.0" width="110.0" height="34.0" rx="3" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
-<text x="375.0" y="465.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="700" text-anchor="middle">Y0</text>
-<rect x="100.0" y="476.0" width="110.0" height="34.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
-<text x="155.0" y="499.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">0</text>
-<rect x="210.0" y="476.0" width="110.0" height="34.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
-<text x="265.0" y="499.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">0</text>
-<rect x="320.0" y="476.0" width="110.0" height="34.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
-<text x="375.0" y="499.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">0</text>
-<rect x="100.0" y="510.0" width="110.0" height="34.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
-<text x="155.0" y="533.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">0</text>
-<rect x="210.0" y="510.0" width="110.0" height="34.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
-<text x="265.0" y="533.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">1</text>
-<rect x="320.0" y="510.0" width="110.0" height="34.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
-<text x="375.0" y="533.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">0</text>
-<rect x="100.0" y="544.0" width="110.0" height="34.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
-<text x="155.0" y="567.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">1</text>
-<rect x="210.0" y="544.0" width="110.0" height="34.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
-<text x="265.0" y="567.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">0</text>
-<rect x="320.0" y="544.0" width="110.0" height="34.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
-<text x="375.0" y="567.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">0</text>
-<rect x="100.0" y="578.0" width="110.0" height="34.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
-<text x="155.0" y="601.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">1</text>
-<rect x="210.0" y="578.0" width="110.0" height="34.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
-<text x="265.0" y="601.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">1</text>
-<rect x="320.0" y="578.0" width="110.0" height="34.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
-<text x="375.0" y="601.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">1</text>
-<rect x="500.0" y="186.0" width="440.0" height="450.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
-<text x="520.0" y="222.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#2563A6" font-weight="700" text-anchor="start">OR（並列）</text>
-<text x="520.0" y="246.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start">OR (parallel)</text>
-<path d="M540.0 330.0 L800.0 330.0" fill="none" stroke="#2563A6" stroke-width="2"/>
-<path d="M540.0 280.0 L540.0 380.0" fill="none" stroke="#2563A6" stroke-width="2"/>
-<path d="M540.0 280.0 L800.0 280.0" fill="none" stroke="#2563A6" stroke-width="2"/>
-<path d="M540.0 380.0 L800.0 380.0" fill="none" stroke="#2563A6" stroke-width="2"/>
-<path d="M800.0 280.0 L800.0 380.0" fill="none" stroke="#2563A6" stroke-width="2"/>
-<path d="M646.0 280.0 L660.0 280.0" fill="none" stroke="#2563A6" stroke-width="2"/>
-<path d="M660.0 262.0 L660.0 298.0" fill="none" stroke="#2563A6" stroke-width="2"/>
-<path d="M680.0 262.0 L680.0 298.0" fill="none" stroke="#2563A6" stroke-width="2"/>
-<path d="M680.0 280.0 L694.0 280.0" fill="none" stroke="#2563A6" stroke-width="2"/>
-<text x="670.0" y="256.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#2563A6" font-weight="700" text-anchor="middle">X1</text>
-<path d="M646.0 380.0 L660.0 380.0" fill="none" stroke="#2563A6" stroke-width="2"/>
-<path d="M660.0 362.0 L660.0 398.0" fill="none" stroke="#2563A6" stroke-width="2"/>
-<path d="M680.0 362.0 L680.0 398.0" fill="none" stroke="#2563A6" stroke-width="2"/>
-<path d="M680.0 380.0 L694.0 380.0" fill="none" stroke="#2563A6" stroke-width="2"/>
-<text x="670.0" y="420.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#2563A6" font-weight="700" text-anchor="middle">X2</text>
-<path d="M800.0 330.0 L910.0 330.0" fill="none" stroke="#2563A6" stroke-width="2"/>
-<path d="M852 312 Q836 330 852 348" fill="none" stroke="#2563A6" stroke-width="2.4"/><path d="M888 312 Q872 330 888 348" fill="none" stroke="#2563A6" stroke-width="2.4"/>
-<path d="M824.0 330.0 L838.0 330.0" fill="none" stroke="#2563A6" stroke-width="2"/>
-<path d="M888.0 330.0 L932.0 330.0" fill="none" stroke="#2563A6" stroke-width="2"/>
-<text x="870.0" y="374.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#2563A6" font-weight="700" text-anchor="middle">Y0</text>
-<rect x="540.0" y="442.0" width="110.0" height="34.0" rx="3" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
-<text x="595.0" y="465.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="700" text-anchor="middle">X0</text>
-<rect x="650.0" y="442.0" width="110.0" height="34.0" rx="3" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
-<text x="705.0" y="465.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="700" text-anchor="middle">X1</text>
-<rect x="760.0" y="442.0" width="110.0" height="34.0" rx="3" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
-<text x="815.0" y="465.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="700" text-anchor="middle">Y0</text>
-<rect x="540.0" y="476.0" width="110.0" height="34.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
-<text x="595.0" y="499.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">0</text>
-<rect x="650.0" y="476.0" width="110.0" height="34.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
-<text x="705.0" y="499.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">0</text>
-<rect x="760.0" y="476.0" width="110.0" height="34.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
-<text x="815.0" y="499.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">0</text>
-<rect x="540.0" y="510.0" width="110.0" height="34.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
-<text x="595.0" y="533.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">0</text>
-<rect x="650.0" y="510.0" width="110.0" height="34.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
-<text x="705.0" y="533.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">1</text>
-<rect x="760.0" y="510.0" width="110.0" height="34.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
-<text x="815.0" y="533.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">1</text>
-<rect x="540.0" y="544.0" width="110.0" height="34.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
-<text x="595.0" y="567.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">1</text>
-<rect x="650.0" y="544.0" width="110.0" height="34.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
-<text x="705.0" y="567.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">0</text>
-<rect x="760.0" y="544.0" width="110.0" height="34.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
-<text x="815.0" y="567.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">1</text>
-<rect x="540.0" y="578.0" width="110.0" height="34.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
-<text x="595.0" y="601.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">1</text>
-<rect x="650.0" y="578.0" width="110.0" height="34.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
-<text x="705.0" y="601.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">1</text>
-<rect x="760.0" y="578.0" width="110.0" height="34.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
-<text x="815.0" y="601.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">1</text>
-<rect x="940.0" y="186.0" width="440.0" height="450.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
-<text x="960.0" y="222.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#2563A6" font-weight="700" text-anchor="start">NOT（反転）</text>
-<text x="960.0" y="246.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start">NOT (invert)</text>
-<path d="M980.0 330.0 L1350.0 330.0" fill="none" stroke="#2563A6" stroke-width="2"/>
-<path d="M1096.0 330.0 L1110.0 330.0" fill="none" stroke="#2563A6" stroke-width="2"/>
-<path d="M1110.0 312.0 L1110.0 348.0" fill="none" stroke="#2563A6" stroke-width="2"/>
-<path d="M1130.0 312.0 L1130.0 348.0" fill="none" stroke="#2563A6" stroke-width="2"/>
-<path d="M1130.0 330.0 L1144.0 330.0" fill="none" stroke="#2563A6" stroke-width="2"/>
-<path d="M1106.0 346.0 L1134.0 314.0" fill="none" stroke="#2563A6" stroke-width="2"/>
-<text x="1120.0" y="372.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#2563A6" font-weight="700" text-anchor="middle">X0</text>
-<path d="M1292 312 Q1276 330 1292 348" fill="none" stroke="#2563A6" stroke-width="2.4"/><path d="M1328 312 Q1312 330 1328 348" fill="none" stroke="#2563A6" stroke-width="2.4"/>
-<path d="M1264.0 330.0 L1278.0 330.0" fill="none" stroke="#2563A6" stroke-width="2"/>
-<path d="M1328.0 330.0 L1372.0 330.0" fill="none" stroke="#2563A6" stroke-width="2"/>
-<text x="1310.0" y="374.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#2563A6" font-weight="700" text-anchor="middle">Y0</text>
-<rect x="1000.0" y="442.0" width="150.0" height="34.0" rx="3" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
-<text x="1075.0" y="465.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="700" text-anchor="middle">X0</text>
-<rect x="1150.0" y="442.0" width="150.0" height="34.0" rx="3" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
-<text x="1225.0" y="465.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="700" text-anchor="middle">Y0</text>
-<rect x="1000.0" y="476.0" width="150.0" height="34.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
-<text x="1075.0" y="499.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">0</text>
-<rect x="1150.0" y="476.0" width="150.0" height="34.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
-<text x="1225.0" y="499.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">1</text>
-<rect x="1000.0" y="510.0" width="150.0" height="34.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
-<text x="1075.0" y="533.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">1</text>
-<rect x="1150.0" y="510.0" width="150.0" height="34.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
-<text x="1225.0" y="533.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">0</text>
-<text x="80.0" y="676.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#142B3F" font-weight="700" text-anchor="start">直列＝すべて真で導通、並列＝どれか真で導通、反転＝真偽を入れ替えます。</text>
-<text x="80.0" y="702.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start">Series means all true; parallel means any true; invert swaps true and false.</text>
-<text x="80.0" y="740.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#A32B2B" font-weight="700" text-anchor="start">すべてシミュレーション用の仮想入出力です。 / All inputs and outputs here are simulated training signals.</text>
-<text x="80.0" y="766.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start">実機の安全停止をこの論理だけで構成することはできません。 / This logic alone cannot form a real safety stop.</text>
-<rect x="56.0" y="804.0" width="1328.0" height="60.0" rx="10" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
-<text x="76.0" y="838.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#142B3F" font-weight="700" text-anchor="start">真理値表とラダーを必ず突き合わせて確認します。</text>
-<text x="76.0" y="860.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14.5" fill="#526378" font-weight="400" text-anchor="start">Always check the ladder against its truth table.</text>
-<text x="1400" y="912" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" text-anchor="end">D08-06 • 編集可能な図 / editable SVG</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="980" viewBox="0 0 1440 980" role="img" aria-labelledby="title desc"><title id="title">NPN・PNPとPLC入力の電流経路 / NPN and PNP current paths through PLC inputs</title><desc id="desc">NPN・PNPとPLC入力の電流経路 / NPN and PNP current paths through PLC inputs — editable bilingual training diagram for 第8日 / Day 8.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#2563A6"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#A32B2B"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#1B7A4B"/></marker></defs><rect x="0" y="0" width="1440" height="980" fill="#F5F8FC"/><rect x="0" y="0" width="1440" height="12" fill="#2563A6"/>
+<text x="56.0" y="56.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#2563A6" font-weight="700" text-anchor="start">第8日 / Day 8</text>
+<text x="56.0" y="104.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="32" fill="#142B3F" font-weight="700" text-anchor="start">NPN・PNPとPLC入力の電流経路</text>
+<text x="56.0" y="144.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="26" fill="#526378" font-weight="400" text-anchor="start">NPN and PNP current paths through PLC inputs</text>
+<rect x="60.0" y="180.0" width="640.0" height="560.0" rx="10" fill="#FFFFFF" stroke="#C1D0DD" stroke-width="1.4"/>
+<text x="76.0" y="210.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#142B3F" font-weight="700" text-anchor="start">PNP + シンク入力（共通0V）</text>
+<text x="76.0" y="232.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start"></text>
+<text x="100.0" y="252.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#A32B2B" font-weight="700" text-anchor="start">+24V rail</text>
+<path d="M100.0 265.0 L650.0 265.0" fill="none" stroke="#A32B2B" stroke-width="3"/>
+<path d="M100.0 690.0 L650.0 690.0" fill="none" stroke="#526378" stroke-width="3"/>
+<text x="110.0" y="715.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#526378" font-weight="700" text-anchor="start">0V</text>
+<rect x="150.0" y="310.0" width="180.0" height="210.0" rx="8" fill="#EAF6EE" stroke="#1B7A4B" stroke-width="2"/>
+<text x="240.0" y="342.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="20" fill="#1B7A4B" font-weight="700" text-anchor="middle">PNP</text>
+<text x="240.0" y="366.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#526378" font-weight="400" text-anchor="middle">sensor</text>
+<path d="M200.0 265.0 L200.0 310.0" fill="none" stroke="#A32B2B" stroke-width="2"/>
+<text x="210.0" y="292.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#A32B2B" font-weight="700" text-anchor="start">+</text>
+<path d="M200.0 520.0 L200.0 690.0" fill="none" stroke="#526378" stroke-width="2"/>
+<text x="210.0" y="560.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#526378" font-weight="700" text-anchor="start">0V</text>
+<path d="M330.0 410.0 L430.0 410.0" fill="none" stroke="#1B7A4B" stroke-width="3" marker-end="url(#arrow)"/>
+<text x="352.0" y="392.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#1B7A4B" font-weight="700" text-anchor="start">OUT</text>
+<rect x="430.0" y="310.0" width="220.0" height="200.0" rx="8" fill="#F1ECF8" stroke="#6B3FA0" stroke-width="2"/>
+<text x="540.0" y="344.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#6B3FA0" font-weight="700" text-anchor="middle">PLC入力</text>
+<text x="540.0" y="366.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#526378" font-weight="400" text-anchor="middle">sinking input</text>
+<circle cx="500.0" cy="420.0" r="14.0" fill="#FFFFFF" stroke="#6B3FA0" stroke-width="1.6"/>
+<path d="M492 414 L508 414 L500 426 Z" fill="#6B3FA0"/>
+<text x="500.0" y="455.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#6B3FA0" font-weight="400" text-anchor="middle">入力回路</text>
+<path d="M650.0 470.0 L650.0 690.0" fill="none" stroke="#526378" stroke-width="2.4"/>
+<text x="600.0" y="500.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#526378" font-weight="700" text-anchor="middle">COM → 0V</text>
+<path d="M240 270 q0 35 0 35" fill="none" stroke="#A32B2B" stroke-width="2.4" marker-end="url(#arrow-red)"/>
+<path d="M340 400 q40 0 70 0" fill="none" stroke="#A32B2B" stroke-width="2.4" marker-end="url(#arrow-red)"/>
+<path d="M590 460 q30 0 55 0" fill="none" stroke="#A32B2B" stroke-width="2.4" marker-end="url(#arrow-red)"/>
+<path d="M650 540 q0 60 0 60" fill="none" stroke="#A32B2B" stroke-width="2.4" marker-end="url(#arrow-red)"/>
+<text x="150.0" y="600.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#A32B2B" font-weight="700" text-anchor="start">電流: +24V → センサー → 出力 → 入力 → COM(0V)</text>
+<text x="150.0" y="622.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#526378" font-weight="400" text-anchor="start">Current: +24 V → sensor → output → input → COM (0 V)</text>
+<rect x="740.0" y="180.0" width="640.0" height="560.0" rx="10" fill="#FFFFFF" stroke="#C1D0DD" stroke-width="1.4"/>
+<text x="756.0" y="210.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#142B3F" font-weight="700" text-anchor="start">NPN + ソース入力（共通+24V）</text>
+<text x="756.0" y="232.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start"></text>
+<text x="780.0" y="252.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#A32B2B" font-weight="700" text-anchor="start">+24V rail</text>
+<path d="M780.0 265.0 L1330.0 265.0" fill="none" stroke="#A32B2B" stroke-width="3"/>
+<path d="M780.0 690.0 L1330.0 690.0" fill="none" stroke="#526378" stroke-width="3"/>
+<text x="790.0" y="715.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#526378" font-weight="700" text-anchor="start">0V</text>
+<rect x="830.0" y="310.0" width="220.0" height="200.0" rx="8" fill="#F1ECF8" stroke="#6B3FA0" stroke-width="2"/>
+<text x="940.0" y="344.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#6B3FA0" font-weight="700" text-anchor="middle">PLC入力</text>
+<text x="940.0" y="366.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#526378" font-weight="400" text-anchor="middle">sourcing input</text>
+<circle cx="900.0" cy="420.0" r="14.0" fill="#FFFFFF" stroke="#6B3FA0" stroke-width="1.6"/>
+<path d="M892 414 L908 414 L900 426 Z" fill="#6B3FA0"/>
+<path d="M830.0 470.0 L830.0 265.0" fill="none" stroke="#A32B2B" stroke-width="2.4"/>
+<text x="780.0" y="300.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#A32B2B" font-weight="700" text-anchor="start">COM → +24V</text>
+<rect x="1110.0" y="310.0" width="180.0" height="210.0" rx="8" fill="#EAF6EE" stroke="#1B7A4B" stroke-width="2"/>
+<text x="1200.0" y="342.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="20" fill="#1B7A4B" font-weight="700" text-anchor="middle">NPN</text>
+<text x="1200.0" y="366.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#526378" font-weight="400" text-anchor="middle">sensor</text>
+<path d="M1240.0 265.0 L1240.0 310.0" fill="none" stroke="#A32B2B" stroke-width="2"/>
+<text x="1250.0" y="292.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#A32B2B" font-weight="700" text-anchor="start">+</text>
+<path d="M1200.0 520.0 L1200.0 690.0" fill="none" stroke="#526378" stroke-width="2"/>
+<path d="M1050.0 410.0 L1110.0 410.0" fill="none" stroke="#1B7A4B" stroke-width="3" marker-end="url(#arrow)"/>
+<text x="1078.0" y="392.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#1B7A4B" font-weight="700" text-anchor="start">OUT</text>
+<path d="M900 270 q0 35 0 35" fill="none" stroke="#A32B2B" stroke-width="2.4" marker-end="url(#arrow-red)"/>
+<path d="M990 400 q40 0 55 0" fill="none" stroke="#A32B2B" stroke-width="2.4" marker-end="url(#arrow-red)"/>
+<path d="M1180 540 q0 60 0 60" fill="none" stroke="#A32B2B" stroke-width="2.4" marker-end="url(#arrow-red)"/>
+<text x="780.0" y="600.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#A32B2B" font-weight="700" text-anchor="start">電流: +24V → COM → 入力 → 出力 → 0V</text>
+<text x="780.0" y="622.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#526378" font-weight="400" text-anchor="start">Current: +24 V → COM → input → output → 0 V</text>
+<rect x="60.0" y="770.0" width="1320.0" height="70.0" rx="8" fill="#F8E7E7" stroke="#A32B2B" stroke-width="1.4"/>
+<text x="80.0" y="800.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#A32B2B" font-weight="700" text-anchor="start">どちらも入力共通端子までの閉回路で考える。端子配置はPLCのハードウェアマニュアルで確認する。</text>
+<text x="80.0" y="822.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#526378" font-weight="400" text-anchor="start">Think in a closed circuit through the input common. Confirm terminal arrangement in the PLC hardware manual.</text>
+<rect x="56.0" y="864.0" width="1328.0" height="60.0" rx="10" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
+<text x="76.0" y="898.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#142B3F" font-weight="700" text-anchor="start">PNPはソース、NPNはシンク。PLC入力の共通端子の電位と入力方式で適合が決まる。</text>
+<text x="76.0" y="920.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14.5" fill="#526378" font-weight="400" text-anchor="start">PNP sources; NPN sinks. Compatibility depends on the input common potential and input circuit type.</text>
+<text x="1400" y="972" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" text-anchor="end">D08-06 • 編集可能な図 / editable SVG</text>
 </svg>

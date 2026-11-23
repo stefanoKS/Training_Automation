@@ -6,6 +6,22 @@
 This is the **authoritative Windows 11 / Command Prompt (cmd.exe) preflight sequence**. Complete it before
 Day 1, outside lesson hours. Open the preparatory notebook after installation.
 
+## 第7日〜第9日について / About Days 7–9
+
+第7日〜第9日は、第1週とは別の3日間コースです。第1週の準備が終わったあと、次を開いてください。
+
+Days 7–9 are a separate three-day course. After the Week 1 preflight, open:
+
+- 時間割 / timetable: [`COURSE_SYLLABUS_DAY07_09.md`](COURSE_SYLLABUS_DAY07_09.md)
+- 教材の入口 / materials entry point: [`day07_09_support/README_ja_en.md`](day07_09_support/README_ja_en.md)
+- 最初のノートブック / first notebook: [`notebooks/Day07_Automation_Concept_Mechanics/Day07_01_Requirements.ipynb`](notebooks/Day07_Automation_Concept_Mechanics/Day07_01_Requirements.ipynb)
+
+第7日〜第9日は、実機の配線・通電・空圧・安全検証を行いません。ノートブックのコードはオフラインで動きます。
+
+Days 7–9 do not perform real wiring, energisation, pneumatics or safety validation. The notebook code runs offline.
+
+---
+
 ## ステップ 1　取得してフォルダを開く / Download and open the folder
 
 Windows の検索で「コマンド プロンプト」または `cmd` を開きます。

@@ -1,53 +1,42 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="880" viewBox="0 0 1440 880" role="img" aria-labelledby="title desc"><title id="title">物理的なセンサ状態とPLC入力ビット / Input state versus physical sensor state</title><desc id="desc">物理的なセンサ状態とPLC入力ビット / Input state versus physical sensor state — editable bilingual training diagram for DAY 08 / LOGICAL VERSUS PHYSICAL.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#2563A6"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#A32B2B"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#1B7A4B"/></marker></defs><rect x="0" y="0" width="1440" height="880" fill="#F5F8FC"/><rect x="0" y="0" width="1440" height="12" fill="#2563A6"/>
-<text x="56.0" y="56.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#2563A6" font-weight="700" text-anchor="start">DAY 08 / LOGICAL VERSUS PHYSICAL</text>
-<text x="56.0" y="104.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="32" fill="#142B3F" font-weight="700" text-anchor="start">物理的なセンサ状態とPLC入力ビット</text>
-<text x="56.0" y="144.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="26" fill="#526378" font-weight="400" text-anchor="start">Input state versus physical sensor state</text>
-<text x="80.0" y="196.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="20" fill="#142B3F" font-weight="700" text-anchor="start">同じ「停止」でも、配線・ビット・接点評価は別の話です。</text>
-<text x="80.0" y="222.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#526378" font-weight="400" text-anchor="start">The same “stop” involves separate questions of wiring, bit state and contact evaluation.</text>
-<rect x="80.0" y="258.0" width="400.0" height="44.0" rx="3" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
-<text x="280.0" y="287.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="700" text-anchor="middle">項目 / item</text>
-<rect x="480.0" y="258.0" width="400.0" height="44.0" rx="3" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
-<text x="680.0" y="287.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="700" text-anchor="middle">例A / example A</text>
-<rect x="880.0" y="258.0" width="400.0" height="44.0" rx="3" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
-<text x="1080.0" y="287.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="700" text-anchor="middle">例B / example B</text>
-<rect x="80.0" y="302.0" width="400.0" height="44.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
-<text x="280.0" y="331.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">現場の状態 / field condition</text>
-<rect x="480.0" y="302.0" width="400.0" height="44.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
-<text x="680.0" y="331.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">押されていない / not pressed</text>
-<rect x="880.0" y="302.0" width="400.0" height="44.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
-<text x="1080.0" y="331.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">押されている / pressed</text>
-<rect x="80.0" y="346.0" width="400.0" height="44.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
-<text x="280.0" y="375.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">接点の物理配線 / wiring</text>
-<rect x="480.0" y="346.0" width="400.0" height="44.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
-<text x="680.0" y="375.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">NO（閉でON）</text>
-<rect x="880.0" y="346.0" width="400.0" height="44.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
-<text x="1080.0" y="375.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">NO</text>
-<rect x="80.0" y="390.0" width="400.0" height="44.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
-<text x="280.0" y="419.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">PLC入力ビット X0</text>
-<rect x="480.0" y="390.0" width="400.0" height="44.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
-<text x="680.0" y="419.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">0（OFF）</text>
-<rect x="880.0" y="390.0" width="400.0" height="44.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
-<text x="1080.0" y="419.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">1（ON）</text>
-<rect x="80.0" y="434.0" width="400.0" height="44.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
-<text x="280.0" y="463.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">NO論理接点の評価</text>
-<rect x="480.0" y="434.0" width="400.0" height="44.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
-<text x="680.0" y="463.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">偽 / false</text>
-<rect x="880.0" y="434.0" width="400.0" height="44.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
-<text x="1080.0" y="463.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">真 / true</text>
-<rect x="80.0" y="478.0" width="400.0" height="44.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
-<text x="280.0" y="507.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">NC論理接点の評価</text>
-<rect x="480.0" y="478.0" width="400.0" height="44.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
-<text x="680.0" y="507.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">真 / true</text>
-<rect x="880.0" y="478.0" width="400.0" height="44.0" rx="3" fill="#FFFFFF" stroke="#2563A6" stroke-width="1"/>
-<text x="1080.0" y="507.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="400" text-anchor="middle">偽 / false</text>
-<rect x="80.0" y="542.0" width="1280.0" height="120.0" rx="12" fill="#E8F1FA" stroke="#2563A6" stroke-width="2"/>
-<text x="104.0" y="578.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#2563A6" font-weight="700" text-anchor="start">ラダーのNC接点は「参照ビットが0のときに導通」と評価されます。</text>
-<text x="104.0" y="606.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#526378" font-weight="400" text-anchor="start">A ladder NC instruction conducts when the referenced bit is 0.</text>
-<text x="104.0" y="638.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#A32B2B" font-weight="700" text-anchor="start">これは現場スイッチの物理配線がNCであることを意味しません。</text>
-<text x="80.0" y="700.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#142B3F" font-weight="700" text-anchor="start">配線（NO/NC）と論理（NO/NC）を混同すると、停止条件の誤解につながります。</text>
-<text x="80.0" y="726.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start">Confusing physical wiring with logical contact type leads to wrong stop-condition reasoning.</text>
-<rect x="56.0" y="764.0" width="1328.0" height="60.0" rx="10" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
-<text x="76.0" y="798.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#142B3F" font-weight="700" text-anchor="start">「ビットが0」と「スイッチが押されていない」は別の情報です。</text>
-<text x="76.0" y="820.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14.5" fill="#526378" font-weight="400" text-anchor="start">“Bit is 0” and “switch not pressed” are different facts.</text>
-<text x="1400" y="872" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" text-anchor="end">D08-04 • 編集可能な図 / editable SVG</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="850" viewBox="0 0 1440 850" role="img" aria-labelledby="title desc"><title id="title">PLC出力から負荷まで / From PLC output to load</title><desc id="desc">PLC出力から負荷まで / From PLC output to load — editable bilingual training diagram for 第8日 / Day 8.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#2563A6"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#A32B2B"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#1B7A4B"/></marker></defs><rect x="0" y="0" width="1440" height="850" fill="#F5F8FC"/><rect x="0" y="0" width="1440" height="12" fill="#2563A6"/>
+<text x="56.0" y="56.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#2563A6" font-weight="700" text-anchor="start">第8日 / Day 8</text>
+<text x="56.0" y="104.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="32" fill="#142B3F" font-weight="700" text-anchor="start">PLC出力から負荷まで</text>
+<text x="56.0" y="144.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="26" fill="#526378" font-weight="400" text-anchor="start">From PLC output to load</text>
+<rect x="120.0" y="250.0" width="300.0" height="300.0" rx="10" fill="#F1ECF8" stroke="#6B3FA0" stroke-width="2.2"/>
+<text x="270.0" y="290.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="24" fill="#6B3FA0" font-weight="700" text-anchor="middle">PLC</text>
+<text x="270.0" y="316.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#526378" font-weight="400" text-anchor="middle">program</text>
+<rect x="170.0" y="360.0" width="200.0" height="60.0" rx="4" fill="#FFFFFF" stroke="#6B3FA0" stroke-width="1.6"/>
+<text x="270.0" y="388.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#6B3FA0" font-weight="700" text-anchor="middle">出力ユニット</text>
+<text x="270.0" y="407.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#526378" font-weight="400" text-anchor="middle">relay or transistor</text>
+<text x="150.0" y="470.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#6B3FA0" font-weight="700" text-anchor="start">Y0 / Y1 / Y2</text>
+<rect x="520.0" y="230.0" width="300.0" height="130.0" rx="8" fill="#FFFFFF" stroke="#1F5C99" stroke-width="2"/>
+<text x="670.0" y="262.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#1F5C99" font-weight="700" text-anchor="middle">リレー出力</text>
+<text x="670.0" y="282.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#526378" font-weight="400" text-anchor="middle">relay output</text>
+<text x="670.0" y="315.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#142B3F" font-weight="400" text-anchor="middle">接点で負荷回路を開閉</text>
+<text x="670.0" y="338.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#526378" font-weight="400" text-anchor="middle">AC/DC, slower, contact life</text>
+<rect x="520.0" y="400.0" width="300.0" height="130.0" rx="8" fill="#FFFFFF" stroke="#1B7A4B" stroke-width="2"/>
+<text x="670.0" y="432.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#1B7A4B" font-weight="700" text-anchor="middle">トランジスタ出力</text>
+<text x="670.0" y="452.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#526378" font-weight="400" text-anchor="middle">transistor output</text>
+<text x="670.0" y="485.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#142B3F" font-weight="400" text-anchor="middle">DC負荷, 速い, 漏れ電流</text>
+<text x="670.0" y="508.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#526378" font-weight="400" text-anchor="middle">DC load, fast, leakage</text>
+<rect x="900.0" y="215.0" width="260.0" height="100.0" rx="8" fill="#FFFFFF" stroke="#B4541E" stroke-width="2"/>
+<text x="1030.0" y="250.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#B4541E" font-weight="700" text-anchor="middle">ランプ / lamp</text>
+<text x="1030.0" y="273.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#526378" font-weight="400" text-anchor="middle">Y0, Y1</text>
+<path d="M826.0 265.0 L896.0 265.0" fill="none" stroke="#B4541E" stroke-width="2.4" marker-end="url(#arrow)"/>
+<rect x="900.0" y="385.0" width="260.0" height="100.0" rx="8" fill="#FFFFFF" stroke="#B4541E" stroke-width="2"/>
+<text x="1030.0" y="420.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#B4541E" font-weight="700" text-anchor="middle">電磁弁 / solenoid</text>
+<text x="1030.0" y="443.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#526378" font-weight="400" text-anchor="middle">Y2 + suppression</text>
+<path d="M826.0 435.0 L896.0 435.0" fill="none" stroke="#B4541E" stroke-width="2.4" marker-end="url(#arrow)"/>
+<path d="M420.0 320.0 L516.0 295.0" fill="none" stroke="#6B3FA0" stroke-width="2" stroke-dasharray="4 5" marker-end="url(#arrow)"/>
+<text x="468.0" y="300.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#6B3FA0" font-weight="600" text-anchor="middle">信号</text>
+<path d="M1220.0 175.0 L1220.0 245.0" fill="none" stroke="#B4541E" stroke-width="2.4" stroke-dasharray="8 6" marker-end="url(#arrow)"/>
+<path d="M1220.0 245.0 L1160.0 245.0" fill="none" stroke="#B4541E" stroke-width="2.4" stroke-dasharray="8 6" marker-end="url(#arrow)"/>
+<text x="1240.0" y="210.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#B4541E" font-weight="600" text-anchor="start">負荷電源</text>
+<rect x="120.0" y="610.0" width="1200.0" height="90.0" rx="8" fill="#F8E7E7" stroke="#A32B2B" stroke-width="1.4"/>
+<text x="140.0" y="645.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#A32B2B" font-weight="700" text-anchor="start">PLC出力は信号であり、無制限の電源ではない。定格を超える負荷はリレー等で間接操作する。</text>
+<text x="140.0" y="670.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#526378" font-weight="400" text-anchor="start">A PLC output is a signal, not an unrestricted supply. Use a relay for loads above the rating.</text>
+<rect x="56.0" y="734.0" width="1328.0" height="60.0" rx="10" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
+<text x="76.0" y="768.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#142B3F" font-weight="700" text-anchor="start">信号の経路と、負荷に電力を届ける経路を分けて考える。 / Separate the signal path from the power path.</text>
+<text x="76.0" y="790.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14.5" fill="#526378" font-weight="400" text-anchor="start">Check per-point and per-common ratings, inrush, surge and leakage.</text>
+<text x="1400" y="842" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" text-anchor="end">D08-04 • 編集可能な図 / editable SVG</text>
 </svg>

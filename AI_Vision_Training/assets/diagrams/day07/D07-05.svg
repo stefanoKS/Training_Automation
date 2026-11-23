@@ -1,59 +1,48 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="860" viewBox="0 0 1440 860" role="img" aria-labelledby="title desc"><title id="title">張力・しわ・蛇行と位置合わせ / Web tension, wrinkles and alignment</title><desc id="desc">張力・しわ・蛇行と位置合わせ / Web tension, wrinkles and alignment — editable bilingual training diagram for DAY 07 / WEB HANDLING.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#2563A6"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#A32B2B"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#1B7A4B"/></marker></defs><rect x="0" y="0" width="1440" height="860" fill="#F5F8FC"/><rect x="0" y="0" width="1440" height="12" fill="#2563A6"/>
-<text x="56.0" y="56.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#2563A6" font-weight="700" text-anchor="start">DAY 07 / WEB HANDLING</text>
-<text x="56.0" y="104.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="32" fill="#142B3F" font-weight="700" text-anchor="start">張力・しわ・蛇行と位置合わせ</text>
-<text x="56.0" y="144.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="26" fill="#526378" font-weight="400" text-anchor="start">Web tension, wrinkles and alignment</text>
-<rect x="80.0" y="186.0" width="390.0" height="300.0" rx="12" fill="#FFFFFF" stroke="#1B7A4B" stroke-width="2"/>
-<text x="100.0" y="222.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="20" fill="#1B7A4B" font-weight="700" text-anchor="start">適正な張力</text>
-<text x="100.0" y="246.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#526378" font-weight="400" text-anchor="start">Correct tension</text>
-<rect x="525.0" y="186.0" width="390.0" height="300.0" rx="12" fill="#FFFFFF" stroke="#B4541E" stroke-width="2"/>
-<text x="545.0" y="222.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="20" fill="#B4541E" font-weight="700" text-anchor="start">張力不足としわ</text>
-<text x="545.0" y="246.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#526378" font-weight="400" text-anchor="start">Low tension and wrinkles</text>
-<rect x="970.0" y="186.0" width="390.0" height="300.0" rx="12" fill="#FFFFFF" stroke="#A32B2B" stroke-width="2"/>
-<text x="990.0" y="222.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="20" fill="#A32B2B" font-weight="700" text-anchor="start">蛇行と位置ずれ</text>
-<text x="990.0" y="246.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#526378" font-weight="400" text-anchor="start">Lateral drift and misalignment</text>
-<rect x="100.0" y="322.0" width="350.0" height="16.0" rx="2" fill="#D9C9A8" stroke="#B9A57C" stroke-width="1"/>
-<path d="M110.0 306.0 L440.0 306.0" fill="none" stroke="#2563A6" stroke-width="2" marker-end="url(#arrow)"/>
-<text x="275.0" y="290.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#1B7A4B" font-weight="700" text-anchor="middle">張力 T / tension</text>
-<text x="100.0" y="372.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="700" text-anchor="start">しわなし・平行に流れる</text>
-<text x="100.0" y="396.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start">no wrinkles, parallel travel</text>
-<text x="100.0" y="430.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="700" text-anchor="start">検査画像が安定する</text>
-<text x="100.0" y="454.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start">inspection images stay stable</text>
-<path d="M545 330 q 40 -26 80 0 q 40 26 80 0 q 40 -26 80 0 q 40 26 80 0" fill="none" stroke="#D9C9A8" stroke-width="16"/>
-<text x="545.0" y="372.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="700" text-anchor="start">しわが明暗を作る</text>
-<text x="545.0" y="396.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start">wrinkles create light and shadow</text>
-<text x="545.0" y="430.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#A32B2B" font-weight="700" text-anchor="start">正常品を異常に見せる</text>
-<text x="545.0" y="454.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start">makes good material look defective</text>
-<rect x="990.0" y="306.0" width="350.0" height="16.0" rx="2" fill="#D9C9A8" stroke="#B9A57C" stroke-width="1"/>
-<path d="M990 314 L1340 314" stroke="#A32B2B" stroke-width="2" stroke-dasharray="8 6"/>
-<path d="M990 250 L990 306" fill="none" stroke="#A32B2B" stroke-width="3" marker-end="url(#arrow-red)"/>
-<text x="1000.0" y="244.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#A32B2B" font-weight="700" text-anchor="start">横方向のずれ / lateral offset</text>
-<text x="990.0" y="372.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="700" text-anchor="start">エッジ位置が変化する</text>
-<text x="990.0" y="396.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start">edge position changes</text>
-<text x="990.0" y="430.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#A32B2B" font-weight="700" text-anchor="start">画角から外れる危険</text>
-<text x="990.0" y="454.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start">risk of leaving the field of view</text>
-<text x="80.0" y="530.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="20" fill="#142B3F" font-weight="700" text-anchor="start">張力・しわ・蛇行は「見え方」を変えます。照明と機械の安定がAIの前提です。</text>
-<text x="80.0" y="558.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#526378" font-weight="400" text-anchor="start">Tension, wrinkles and drift change appearance. Stable mechanics and lighting are prerequisites for AI.</text>
-<rect x="80.0" y="606.0" width="299.0" height="104.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
-<rect x="80.0" y="616.0" width="7.0" height="84.0" rx="3" fill="#2563A6" stroke="#2563A6" stroke-width="0"/>
-<text x="102.0" y="657.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">張力制御</text>
-<text x="102.0" y="679.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">Tension control</text>
-<path d="M383.0 658.0 L405.0 658.0" fill="none" stroke="#2563A6" stroke-width="2" marker-end="url(#arrow)"/>
-<rect x="407.0" y="606.0" width="299.0" height="104.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
-<rect x="407.0" y="616.0" width="7.0" height="84.0" rx="3" fill="#2563A6" stroke="#2563A6" stroke-width="0"/>
-<text x="429.0" y="657.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">ガイド</text>
-<text x="429.0" y="679.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">Edge guide</text>
-<path d="M710.0 658.0 L732.0 658.0" fill="none" stroke="#2563A6" stroke-width="2" marker-end="url(#arrow)"/>
-<rect x="734.0" y="606.0" width="299.0" height="104.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
-<rect x="734.0" y="616.0" width="7.0" height="84.0" rx="3" fill="#2563A6" stroke="#2563A6" stroke-width="0"/>
-<text x="756.0" y="657.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">振動の抑制</text>
-<text x="756.0" y="679.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">Vibration control</text>
-<path d="M1037.0 658.0 L1059.0 658.0" fill="none" stroke="#2563A6" stroke-width="2" marker-end="url(#arrow)"/>
-<rect x="1061.0" y="606.0" width="299.0" height="104.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
-<rect x="1061.0" y="616.0" width="7.0" height="84.0" rx="3" fill="#2563A6" stroke="#2563A6" stroke-width="0"/>
-<text x="1083.0" y="657.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">照明の固定</text>
-<text x="1083.0" y="679.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">Fixed illumination</text>
-<rect x="56.0" y="744.0" width="1328.0" height="60.0" rx="10" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
-<text x="76.0" y="778.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#142B3F" font-weight="700" text-anchor="start">機械の安定が保証できないと、AIの判定根拠も安定しません。</text>
-<text x="76.0" y="800.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14.5" fill="#526378" font-weight="400" text-anchor="start">Without mechanical stability, AI decisions have no stable basis.</text>
-<text x="1400" y="852" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" text-anchor="end">D07-05 • 編集可能な図 / editable SVG</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="820" viewBox="0 0 1440 820" role="img" aria-labelledby="title desc"><title id="title">要求から受入までの流れ / From requirement to acceptance</title><desc id="desc">要求から受入までの流れ / From requirement to acceptance — editable bilingual training diagram for 第7日 / Day 7.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#2563A6"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#A32B2B"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#1B7A4B"/></marker></defs><rect x="0" y="0" width="1440" height="820" fill="#F5F8FC"/><rect x="0" y="0" width="1440" height="12" fill="#2563A6"/>
+<text x="56.0" y="56.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#2563A6" font-weight="700" text-anchor="start">第7日 / Day 7</text>
+<text x="56.0" y="104.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="32" fill="#142B3F" font-weight="700" text-anchor="start">要求から受入までの流れ</text>
+<text x="56.0" y="144.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="26" fill="#526378" font-weight="400" text-anchor="start">From requirement to acceptance</text>
+<rect x="70.0" y="230.0" width="299.5" height="170.0" rx="12" fill="#FFFFFF" stroke="#1F5C99" stroke-width="2"/>
+<rect x="70.0" y="240.0" width="7.0" height="150.0" rx="3" fill="#1F5C99" stroke="#1F5C99" stroke-width="0"/>
+<text x="92.0" y="294.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">現場の困りごと</text>
+<text x="92.0" y="316.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">shop-floor problem</text>
+<text x="92.0" y="334.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">事実と測定値 / facts and</text>
+<text x="92.0" y="352.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">measurements</text>
+<path d="M371.5 315.0 L401.5 315.0" fill="none" stroke="#2563A6" stroke-width="2.2" marker-end="url(#arrow)"/>
+<rect x="403.5" y="230.0" width="299.5" height="170.0" rx="12" fill="#FFFFFF" stroke="#6B3FA0" stroke-width="2"/>
+<rect x="403.5" y="240.0" width="7.0" height="150.0" rx="3" fill="#6B3FA0" stroke="#6B3FA0" stroke-width="0"/>
+<text x="425.5" y="294.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">要求</text>
+<text x="425.5" y="316.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">requirement</text>
+<text x="425.5" y="334.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">何を達成するか / what must be</text>
+<text x="425.5" y="352.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">achieved</text>
+<path d="M705.0 315.0 L735.0 315.0" fill="none" stroke="#2563A6" stroke-width="2.2" marker-end="url(#arrow)"/>
+<rect x="737.0" y="230.0" width="299.5" height="170.0" rx="12" fill="#FFFFFF" stroke="#1B7A4B" stroke-width="2"/>
+<rect x="737.0" y="240.0" width="7.0" height="150.0" rx="3" fill="#1B7A4B" stroke="#1B7A4B" stroke-width="0"/>
+<text x="759.0" y="294.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">測定方法</text>
+<text x="759.0" y="316.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">measurement method</text>
+<text x="759.0" y="334.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">何を、どの条件で測るか / what</text>
+<text x="759.0" y="352.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">and under which condition</text>
+<path d="M1038.5 315.0 L1068.5 315.0" fill="none" stroke="#2563A6" stroke-width="2.2" marker-end="url(#arrow)"/>
+<rect x="1070.5" y="230.0" width="299.5" height="170.0" rx="12" fill="#FFFFFF" stroke="#B4541E" stroke-width="2"/>
+<rect x="1070.5" y="240.0" width="7.0" height="150.0" rx="3" fill="#B4541E" stroke="#B4541E" stroke-width="0"/>
+<text x="1092.5" y="294.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">合格条件</text>
+<text x="1092.5" y="316.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">acceptance criterion</text>
+<text x="1092.5" y="334.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">誰が見ても合否を判断できる /</text>
+<text x="1092.5" y="352.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">another person can judge</text>
+<rect x="70.0" y="470.0" width="620.0" height="210.0" rx="10" fill="#EAF6EE" stroke="#1B7A4B" stroke-width="1.6"/>
+<text x="90.0" y="505.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#1B7A4B" font-weight="700" text-anchor="start">良い受入基準 / a good criterion</text>
+<text x="90.0" y="545.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="400" text-anchor="start">後退端で停止したとき、押出し面の位置が</text>
+<text x="90.0" y="570.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="400" text-anchor="start">基準面から ±2 mm 以内。10回連続で測り、</text>
+<text x="90.0" y="595.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="400" text-anchor="start">10回すべて合格。</text>
+<text x="90.0" y="635.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#526378" font-weight="400" text-anchor="start">Measurand + condition + range + sample size</text>
+<rect x="710.0" y="470.0" width="660.0" height="210.0" rx="10" fill="#F8E7E7" stroke="#A32B2B" stroke-width="1.6"/>
+<text x="730.0" y="505.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#A32B2B" font-weight="700" text-anchor="start">悪い要求 / a weak requirement</text>
+<text x="730.0" y="545.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#142B3F" font-weight="400" text-anchor="start">「速く動く」「安全」「簡単に交換」</text>
+<text x="730.0" y="575.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#142B3F" font-weight="400" text-anchor="start">これでは合否を判断できない。</text>
+<text x="730.0" y="615.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#A32B2B" font-weight="600" text-anchor="start">測定方法・条件・回数・合格範囲を決める。</text>
+<text x="730.0" y="640.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#526378" font-weight="400" text-anchor="start">Define method, condition, sample size and pass range.</text>
+<rect x="56.0" y="704.0" width="1328.0" height="60.0" rx="10" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
+<text x="76.0" y="738.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#142B3F" font-weight="700" text-anchor="start">要求は、測定方法と合格条件が決まって初めて検証できる。 / A requirement is verifiable only when its measurement and pass condition are defined.</text>
+<text x="76.0" y="760.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14.5" fill="#526378" font-weight="400" text-anchor="start">Write requirements so that another person can judge pass or fail.</text>
+<text x="1400" y="812" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" text-anchor="end">D07-05 • 編集可能な図 / editable SVG</text>
 </svg>

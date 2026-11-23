@@ -1,64 +1,109 @@
-# 第7〜9日 出典とライセンス / Day 7–9 Sources and Licenses
+# 出典・ライセンス・作成方法 / Sources, licences and authorship
 
-最終確認日 / Last checked: **2026-11-22**（この日付でURLと概要を確認 / URLs and summaries checked on this date）
+## 1. 一次資料 / primary source
 
-本教材の説明・図・シミュレータは**オリジナルの教育用著作物**です。以下の資料は、技術的な記述を確認するために参照した出典です。規格の本文・図表を転載していません。
-The explanations, diagrams and simulations in this course are **original educational work**. The sources below were consulted to verify technical statements. No standard text or figures are reproduced.
+| 項目 / Item | 内容 / Content |
+|---|---|
+| ファイル / file | `docs/reference/自動化設備製作研修_5日間_詳細版_受講者用.pdf` |
+| SHA-256 | `3380c2b67e148cd9a71b0f9071963744f3b0acba7491b309708b0f31183707ae` |
+| ページ数 / pages | 51 |
+| 用途 / use | 第7〜9日のカリキュラムの一次資料 / primary curriculum source |
+| 変更 / modification | なし。リポジトリ内のファイルは変更しない。 / none; the repository copy is not modified. |
 
-## 1. 参照した出典 / Consulted sources
+このPDFは研修用の受講者テキストとして提供されたものです。著作権と利用条件は、提供元の指示に従います。本リポジトリでは、学習目的の派生教材を作成しています。
 
-| 分類 / class | 出典 / source | URL | 使い方 / how it is used |
-|---|---|---|---|
-| PLC言語 / PLC languages | IEC 61131-3:2025 | https://webstore.iec.ch/en/publication/68533 | ラダーがIECで定義される言語の一つであることの確認 / confirms LD is one language defined in IEC |
-| PLC / PLC | Mitsubishi Electric FA | https://www.mitsubishielectric.com/fa/ | デバイス表記とマニュアル確認の必要性 / device naming and manual verification |
-| 機械安全 / machinery safety | ISO 12100:2010 | https://www.iso.org/standard/51528.html | リスクアセスメントの位置づけ / role of risk assessment |
-| 機械安全 / machinery safety | ISO 13849-1:2023 | https://www.iso.org/standard/73481.html | 安全関連の設計概念 / safety-related design concepts |
-| 機械安全 / machinery safety | ISO 13850:2015 | https://www.iso.org/standard/59970.html | 非常停止の扱い / emergency-stop treatment |
-| 電気安全 / electrical | IEC 60204-1:2016+A1:2021 | https://webstore.iec.ch/en/publication/71256 | 機械の電気設備の一般的枠組み / general electrical equipment framework |
-| マシンビジョン / vision | EMVA GenICam | https://www.emva.org/standards-technology/genicam/ | GenICamが共通のソフト枠組みであること / GenICam as a generic software framework |
-| マシンビジョン / vision | Basler documentation | https://docs.baslerweb.com/ | トリガ・露光・ラインスキャンの一般説明 / general trigger, exposure and line-scan explanations |
-| 通信 / communications | OPC Foundation reference | https://reference.opcfoundation.org/ | OPC UAの一般的説明 / general OPC UA description |
-| 通信 / communications | Modbus specifications | https://www.modbus.org/modbus-specifications | Modbus TCPの一般的説明 / general Modbus TCP description |
-| AI / AI | Ultralytics YOLO detect docs | https://docs.ultralytics.com/tasks/detect/ | 物体検出の出力（クラス・枠・信頼度） / detection outputs |
-| AI / AI | Anomalib PatchCore (lib-v2.7.0) | https://anomalib.readthedocs.io/en/lib-v2.7.0/markdown/guides/reference/models/image/patchcore.html | PatchCoreの異常スコアとメモリバンク / anomaly score and memory bank |
+The PDF was provided as a trainee text. Copyright and reuse terms follow the provider's instructions. This repository creates derivative teaching material for learning purposes.
 
-**版・適用範囲は変わります。 / Editions and applicability change.** 本教材は特定の版の要件を断定しません。実務では最新の公式資料と有資格のレビューを確認してください。
-This course does not assert the requirements of any specific edition. In practice, confirm current official documents and obtain competent review.
+## 2. 元PDFの利用方針 / how the source is used
 
-## 2. 図 / Diagrams
+- 元PDFの学習目標、例、計算の流れを尊重する。
+- 技術的な誤りは [`docs/reference/Automation_Equipment_PDF_Errata_ja_en.md`](../docs/reference/Automation_Equipment_PDF_Errata_ja_en.md) に記録し、新教材で修正する。
+- 原文の全文コピーではなく、3日間のコースに再構成する。
+- 元PDFの図をそのまま再配布せず、必要な図は自作のSVGとして描き直す。
+- ページ単位の対応は [`curriculum_source_map.csv`](curriculum_source_map.csv) に記録する。
 
-- 36点のSVG（`assets/diagrams/day07|day08|day09/`）はすべて本教材のために新規作成しました。 / All 36 SVGs were created for this course.
-- 生成スクリプト: `day07_09_support/scripts/generate_day07_09_diagrams.py`（`svgkit.py` を使用）。 / Generator scripts are listed.
-- SVGは編集可能で、`<title>` と `<desc>`、日英ラベルを持ちます。 / SVGs are editable with title, desc and bilingual labels.
-- 外部画像・写真・アイコン素材は使用していません。 / No external images, photographs or icon assets are used.
+- Respect the source's learning objectives, examples and calculation flow.
+- Record technical errors in the errata and correct them in the new materials.
+- Reorganise into a three-day course rather than copying the whole text.
+- Do not redistribute the source figures; redraw the required figures as original SVGs.
+- Record page-level mapping in `curriculum_source_map.csv`.
 
-## 3. シミュレータ / Simulations
+## 3. 図 / figures
 
-- `simulations/*.html` は本教材のために新規作成したオフライン教材です。 / The six HTML simulators were written for this course.
-- 外部JavaScriptライブラリ、CDN、ネットワーク通信はありません。 / No external JS libraries, CDNs or network calls.
-- 外部フォントは埋め込まず、OSの日本語フォントを参照するCSS指定のみです。 / No external fonts are embedded; CSS references system Japanese fonts.
+すべてのSVG図は、このリポジトリのために自作した編集可能な図です。元PDFの図のトレースではありません。教育用の概念図であり、製作図・安全設計図・規格準拠を証明する図ではありません。
 
-## 4. PDF / PDFs
+All SVG figures were created for this repository and are editable. They are not tracings of the source figures. They are teaching concepts, not construction drawings, safety-design drawings or proof of standards compliance.
 
-- PDFはReportLabで、教材原稿（Markdown）から生成しています。 / PDFs are built with ReportLab from the Markdown manuscripts.
-- 日本語表示には、作成環境にインストール済みのフォント（Meiryo等）を**PDF生成時のみ**使用します。フォントファイル自体は再配布しません。 / A locally installed Japanese font is used **only during generation**; the font file is not redistributed.
-- SVG図はブラウザ（Chrome/Edge）で描画しPNG化してPDFに埋め込みます。 / SVGs are rendered in a local browser, rasterised and embedded.
-- ページ画像（`docs/pdf/_pages/`）は点検用で、リポジトリには含めません（`.gitignore`）。 / Page renders are for inspection and are not committed.
+- 生成: `scripts/generate_day07_09_diagrams.py`
+- 構成部品: `scripts/svgkit.py`
+- PNG描画: `scripts/render_diagrams.py`（Inkscape）
+- 色は役割（機械・センサー・制御・エネルギー・危険）を示すが、色だけに依存しない。
 
-## 5. データ / Data
+- Generated by `scripts/generate_day07_09_diagrams.py`.
+- Built with `scripts/svgkit.py`.
+- Rasterised by `scripts/render_diagrams.py` (Inkscape).
+- Colours indicate roles (mechanical, sensing, control, energy, hazard), but meaning never relies on colour alone.
 
-- 数値例（ローラ径、速度、画素数、遅延など）はすべて**仮定**です。 / All numeric examples are hypothetical.
-- 検査結果・ロット・画像IDは架空です。 / Inspection results, lots and image IDs are fictional.
-- 実在の工場、装置、ネットワーク、顧客データは含みません。 / No real factory, equipment, network or customer data is included.
+## 4. シミュレーション / simulations
 
-## 6. 著作権と利用 / Copyright and use
+`simulations/sim_plc_sequence.html` は、この教材用に自作したオフラインのJavaScriptシミュレータです。ブラウザの外部通信、実機接続、PLCソフトウェアを使用しません。`automation_models.py` のPythonモデルと同じ状態機械を、教育用に簡略化して実装しています。
 
-- 本教材の文章・図・シミュレータは、リポジトリの利用条件に従います。 / Text, diagrams and simulators follow the repository's terms.
-- 引用した規格・製品名は各権利者の商標または著作物です。 / Quoted standards and product names belong to their owners.
-- 規格の本文、図表、有料文書の転載は行っていません。 / No standard text, figures or paid documents are reproduced.
-- 画像の利用権が確認できない写真は使用していません。 / No photographs with unverified rights are used.
+`simulations/sim_plc_sequence.html` is an original offline JavaScript simulator for this course. It makes no external network calls and connects to no hardware or PLC software. It implements a teaching simplification of the same state machine as the Python model in `automation_models.py`.
 
-## 7. 免責 / Disclaimer
+フォールバックPNGは、JavaScriptが使えない場合の静的説明図です。シミュレーションの実行結果ではありません。
 
-本教材は教育用の概念説明です。実機の設計・製作・設置・運転・保守・安全認証を代替しません。実際の機械安全は、危険源・要求性能・適用規格・選定機器・有資格のレビューに基づいて決定されます。
-This is conceptual training material. It does not replace real design, construction, installation, operation, maintenance or safety certification. Real machinery safety depends on hazards, required performance, applicable standards, selected equipment and competent review.
+The fallback PNG is a static explanation for environments without JavaScript. It is not a simulation result.
+
+## 5. 参考規格・公式資料 / referenced standards and official material
+
+以下は、教育上の説明のための入口です。URLの内容や版を保証するものではありません。実機の設計・安全・適合性は、最新の公式規格・メーカー資料・有資格者のレビューで確認してください。
+
+The following are entry points for teaching. They do not guarantee the content or revision of a URL. Real design, safety and compliance require current official standards, manufacturer documents and qualified review.
+
+| 分野 / Area | 資料 / Material | URL |
+|---|---|---|
+| リスクアセスメント / risk assessment | ISO 12100:2010 | https://www.iso.org/standard/51528.html |
+| 安全関連制御 / safety-related control | ISO 13849-1:2023 | https://www.iso.org/standard/73481.html |
+| 非常停止 / emergency stop | ISO 13850:2015 | https://www.iso.org/standard/59970.html |
+| 機械の電気設備 / electrical equipment of machines | IEC 60204-1:2016+A1:2021 | https://webstore.iec.ch/en/publication/71256 |
+| PLCプログラミング / PLC programming | IEC 61131-3 | https://webstore.iec.ch/en/publication/68533 |
+| 空圧選定 / pneumatic selection | SMC cylinder selection | https://www.smcworld.com/select/air/en-jp/ |
+| PLCマニュアル / PLC manuals | Mitsubishi Electric FA | https://www.mitsubishielectric.co.jp/fa/download/search.page |
+| センサー技術 / sensor technology | Omron proximity sensor guide | https://www.fa.omron.co.jp/guide/technicalguide/41/17/ |
+| Modbus | Modbus specifications | https://www.modbus.org/modbus-specifications |
+| /31サブネット / /31 subnet | RFC 3021 | https://www.rfc-editor.org/rfc/rfc3021 |
+
+**確認日 / checked:** 2026-11-23（研修資料作成時 / course build date）
+
+## 6. 数値・仮定 / numbers and assumptions
+
+- 数値は、元PDFの例と、この教材で明示した仮定に基づく。
+- 摩擦係数、余裕係数、効率、稼働率、良品率、タイムアウト、投資額、労務費は、教育用の仮定であり、実機の値ではない。
+- 実機の型式・部品番号は割り当てていない。候補は仕様クラスとして扱う。
+- シミュレーション結果は、決定論的なモデルの出力であり、実機の測定値ではない。
+
+- Values come from the source examples and the assumptions stated in this course.
+- Friction, margin, efficiency, availability, yield, timeout, investment and labour rate are teaching assumptions, not real-machine values.
+- No real part numbers are assigned; candidates are treated as specification classes.
+- Simulation results are deterministic model outputs, not real measurements.
+
+## 7. 生成物 / generated artefacts
+
+| 生成物 / artefact | 生成方法 / generated by |
+|---|---|
+| `notebooks/*/*.ipynb` | `scripts/build_day07_09_notebooks.py` |
+| `assets/diagrams/day0*/*.svg` | `scripts/generate_day07_09_diagrams.py` |
+| `reference_data/diagram_png/` | `scripts/render_diagrams.py` |
+| `reference_data/reference_outputs.json` | `scripts/generate_reference_outputs.py` |
+| `docs/pdf/Day0*_explanation_ja_en.pdf` | `scripts/export_day07_09_pdf.py` |
+| `docs/pdf/_pages/` | `scripts/check_day07_09_pdfs.py` |
+
+生成物は再生成可能です。`.ipynb` とPDFを直接編集しないでください。
+
+Generated artefacts are reproducible. Do not edit `.ipynb` or PDFs directly.
+
+## 8. 免責 / disclaimer
+
+本教材は教育用です。実機の設計、製作、配線、通電、空圧、安全機能の妥当性を保証しません。実機の選定・設計・施工・試運転・安全検証は、適切な資格・経験を持つ人と、最新の規格・メーカー資料・社内ルールに従って行ってください。
+
+This material is educational. It does not guarantee the design, build, wiring, energisation, pneumatics or safety functions of a real machine. Real selection, design, installation, commissioning and safety validation must be performed by suitably qualified and experienced people, following current standards, manufacturer documents and company rules.

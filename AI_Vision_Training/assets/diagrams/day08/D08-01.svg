@@ -1,82 +1,45 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="860" viewBox="0 0 1440 860" role="img" aria-labelledby="title desc"><title id="title">PLCの構成と入出力 / PLC components and I/O modules</title><desc id="desc">PLCの構成と入出力 / PLC components and I/O modules — editable bilingual training diagram for DAY 08 / PLC ARCHITECTURE.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#2563A6"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#A32B2B"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#1B7A4B"/></marker></defs><rect x="0" y="0" width="1440" height="860" fill="#F5F8FC"/><rect x="0" y="0" width="1440" height="12" fill="#2563A6"/>
-<text x="56.0" y="56.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#2563A6" font-weight="700" text-anchor="start">DAY 08 / PLC ARCHITECTURE</text>
-<text x="56.0" y="104.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="32" fill="#142B3F" font-weight="700" text-anchor="start">PLCの構成と入出力</text>
-<text x="56.0" y="144.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="26" fill="#526378" font-weight="400" text-anchor="start">PLC components and I/O modules</text>
-<text x="80.0" y="200.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#526378" font-weight="700" text-anchor="start">架空のMELSEC風ラック / fictional MELSEC-style rack (not the installed hardware)</text>
-<rect x="80.0" y="218.0" width="1280.0" height="170.0" rx="10" fill="#DCE4EC" stroke="#8497A8" stroke-width="3"/>
-<rect x="100.0" y="238.0" width="196.7" height="130.0" rx="8" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
-<text x="198.3" y="286.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#2563A6" font-weight="700" text-anchor="middle">電源</text>
-<text x="198.3" y="310.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="middle">Power supply</text>
-<circle cx="122.0" cy="342.0" r="6.0" fill="#BFD3E4" stroke="#8497A8" stroke-width="1"/>
-<circle cx="142.0" cy="342.0" r="6.0" fill="#BFD3E4" stroke="#8497A8" stroke-width="1"/>
-<circle cx="162.0" cy="342.0" r="6.0" fill="#BFD3E4" stroke="#8497A8" stroke-width="1"/>
-<circle cx="182.0" cy="342.0" r="6.0" fill="#BFD3E4" stroke="#8497A8" stroke-width="1"/>
-<rect x="308.7" y="238.0" width="196.7" height="130.0" rx="8" fill="#FFFFFF" stroke="#1B7A4B" stroke-width="2"/>
-<text x="407.0" y="286.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#1B7A4B" font-weight="700" text-anchor="middle">CPU</text>
-<text x="407.0" y="310.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="middle">CPU</text>
-<circle cx="330.7" cy="342.0" r="6.0" fill="#BFD3E4" stroke="#8497A8" stroke-width="1"/>
-<circle cx="350.7" cy="342.0" r="6.0" fill="#BFD3E4" stroke="#8497A8" stroke-width="1"/>
-<circle cx="370.7" cy="342.0" r="6.0" fill="#BFD3E4" stroke="#8497A8" stroke-width="1"/>
-<circle cx="390.7" cy="342.0" r="6.0" fill="#BFD3E4" stroke="#8497A8" stroke-width="1"/>
-<rect x="517.3" y="238.0" width="196.7" height="130.0" rx="8" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
-<text x="615.7" y="286.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#2563A6" font-weight="700" text-anchor="middle">入力</text>
-<text x="615.7" y="310.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="middle">Digital input</text>
-<circle cx="539.3" cy="342.0" r="6.0" fill="#BFD3E4" stroke="#8497A8" stroke-width="1"/>
-<circle cx="559.3" cy="342.0" r="6.0" fill="#BFD3E4" stroke="#8497A8" stroke-width="1"/>
-<circle cx="579.3" cy="342.0" r="6.0" fill="#BFD3E4" stroke="#8497A8" stroke-width="1"/>
-<circle cx="599.3" cy="342.0" r="6.0" fill="#BFD3E4" stroke="#8497A8" stroke-width="1"/>
-<rect x="726.0" y="238.0" width="196.7" height="130.0" rx="8" fill="#FFFFFF" stroke="#B4541E" stroke-width="2"/>
-<text x="824.3" y="286.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#B4541E" font-weight="700" text-anchor="middle">出力</text>
-<text x="824.3" y="310.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="middle">Digital output</text>
-<circle cx="748.0" cy="342.0" r="6.0" fill="#BFD3E4" stroke="#8497A8" stroke-width="1"/>
-<circle cx="768.0" cy="342.0" r="6.0" fill="#BFD3E4" stroke="#8497A8" stroke-width="1"/>
-<circle cx="788.0" cy="342.0" r="6.0" fill="#BFD3E4" stroke="#8497A8" stroke-width="1"/>
-<circle cx="808.0" cy="342.0" r="6.0" fill="#BFD3E4" stroke="#8497A8" stroke-width="1"/>
-<rect x="934.7" y="238.0" width="196.7" height="130.0" rx="8" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
-<text x="1033.0" y="286.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#2563A6" font-weight="700" text-anchor="middle">アナログ</text>
-<text x="1033.0" y="310.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="middle">Analog</text>
-<circle cx="956.7" cy="342.0" r="6.0" fill="#BFD3E4" stroke="#8497A8" stroke-width="1"/>
-<circle cx="976.7" cy="342.0" r="6.0" fill="#BFD3E4" stroke="#8497A8" stroke-width="1"/>
-<circle cx="996.7" cy="342.0" r="6.0" fill="#BFD3E4" stroke="#8497A8" stroke-width="1"/>
-<circle cx="1016.7" cy="342.0" r="6.0" fill="#BFD3E4" stroke="#8497A8" stroke-width="1"/>
-<rect x="1143.3" y="238.0" width="196.7" height="130.0" rx="8" fill="#FFFFFF" stroke="#6B3FA0" stroke-width="2"/>
-<text x="1241.7" y="286.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#6B3FA0" font-weight="700" text-anchor="middle">通信</text>
-<text x="1241.7" y="310.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="middle">Comm.</text>
-<circle cx="1165.3" cy="342.0" r="6.0" fill="#BFD3E4" stroke="#8497A8" stroke-width="1"/>
-<circle cx="1185.3" cy="342.0" r="6.0" fill="#BFD3E4" stroke="#8497A8" stroke-width="1"/>
-<circle cx="1205.3" cy="342.0" r="6.0" fill="#BFD3E4" stroke="#8497A8" stroke-width="1"/>
-<circle cx="1225.3" cy="342.0" r="6.0" fill="#BFD3E4" stroke="#8497A8" stroke-width="1"/>
-<text x="80.0" y="442.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="20" fill="#2563A6" font-weight="700" text-anchor="start">信号の種類 / signal types</text>
-<rect x="80.0" y="474.0" width="233.6" height="112.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
-<rect x="80.0" y="484.0" width="7.0" height="92.0" rx="3" fill="#2563A6" stroke="#2563A6" stroke-width="0"/>
-<text x="102.0" y="529.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">デジタル入力</text>
-<text x="102.0" y="551.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">Digital input</text>
-<path d="M317.6 530.0 L339.6 530.0" fill="none" stroke="#2563A6" stroke-width="2" marker-end="url(#arrow)"/>
-<rect x="341.6" y="474.0" width="233.6" height="112.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
-<rect x="341.6" y="484.0" width="7.0" height="92.0" rx="3" fill="#2563A6" stroke="#2563A6" stroke-width="0"/>
-<text x="363.6" y="529.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">デジタル出力</text>
-<text x="363.6" y="551.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">Digital output</text>
-<path d="M579.2 530.0 L601.2 530.0" fill="none" stroke="#2563A6" stroke-width="2" marker-end="url(#arrow)"/>
-<rect x="603.2" y="474.0" width="233.6" height="112.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
-<rect x="603.2" y="484.0" width="7.0" height="92.0" rx="3" fill="#2563A6" stroke="#2563A6" stroke-width="0"/>
-<text x="625.2" y="529.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">アナログ入力</text>
-<text x="625.2" y="551.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">Analog input</text>
-<path d="M840.8 530.0 L862.8 530.0" fill="none" stroke="#2563A6" stroke-width="2" marker-end="url(#arrow)"/>
-<rect x="864.8" y="474.0" width="233.6" height="112.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
-<rect x="864.8" y="484.0" width="7.0" height="92.0" rx="3" fill="#2563A6" stroke="#2563A6" stroke-width="0"/>
-<text x="886.8" y="529.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">アナログ出力</text>
-<text x="886.8" y="551.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">Analog output</text>
-<path d="M1102.4 530.0 L1124.4 530.0" fill="none" stroke="#2563A6" stroke-width="2" marker-end="url(#arrow)"/>
-<rect x="1126.4" y="474.0" width="233.6" height="112.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
-<rect x="1126.4" y="484.0" width="7.0" height="92.0" rx="3" fill="#2563A6" stroke="#2563A6" stroke-width="0"/>
-<text x="1148.4" y="529.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">通信データ</text>
-<text x="1148.4" y="551.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">Comm. data</text>
-<text x="80.0" y="626.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#142B3F" font-weight="700" text-anchor="start">PLC内部では、ビット（X/Y/M）と数値レジスタ（Dなど）を使い分けます。</text>
-<text x="80.0" y="652.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#526378" font-weight="400" text-anchor="start">Inside the PLC, bits (X/Y/M) and numeric registers (such as D) serve different purposes.</text>
-<text x="80.0" y="686.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#A32B2B" font-weight="700" text-anchor="start">装置名・番号・命令の意味はCPUとソフトの版で必ず確認します。</text>
-<text x="80.0" y="712.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start">Always confirm device names, numbers and instructions for the actual CPU and software version.</text>
-<rect x="56.0" y="744.0" width="1328.0" height="60.0" rx="10" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
-<text x="76.0" y="778.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#142B3F" font-weight="700" text-anchor="start">PLCは入力・判断・出力を繰り返す産業用の制御装置です。</text>
-<text x="76.0" y="800.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14.5" fill="#526378" font-weight="400" text-anchor="start">A PLC repeatedly samples inputs, evaluates logic and updates outputs.</text>
-<text x="1400" y="852" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" text-anchor="end">D08-01 • 編集可能な図 / editable SVG</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="840" viewBox="0 0 1440 840" role="img" aria-labelledby="title desc"><title id="title">電圧・電流・抵抗のアナロジー / Voltage, current and resistance analogy</title><desc id="desc">電圧・電流・抵抗のアナロジー / Voltage, current and resistance analogy — editable bilingual training diagram for 第8日 / Day 8.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#2563A6"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#A32B2B"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#1B7A4B"/></marker></defs><rect x="0" y="0" width="1440" height="840" fill="#F5F8FC"/><rect x="0" y="0" width="1440" height="12" fill="#2563A6"/>
+<text x="56.0" y="56.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#2563A6" font-weight="700" text-anchor="start">第8日 / Day 8</text>
+<text x="56.0" y="104.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="32" fill="#142B3F" font-weight="700" text-anchor="start">電圧・電流・抵抗のアナロジー</text>
+<text x="56.0" y="144.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="26" fill="#526378" font-weight="400" text-anchor="start">Voltage, current and resistance analogy</text>
+<rect x="70.0" y="190.0" width="600.0" height="380.0" rx="10" fill="#FFFFFF" stroke="#C1D0DD" stroke-width="1.4"/>
+<text x="86.0" y="220.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#142B3F" font-weight="700" text-anchor="start">水路 / water circuit</text>
+<text x="86.0" y="242.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">head, flow and restriction</text>
+<rect x="120.0" y="250.0" width="180.0" height="130.0" rx="4" fill="#E6F4F7" stroke="#0E7490" stroke-width="2"/>
+<rect x="120.0" y="250.0" width="180.0" height="70.0" rx="12" fill="#BEE3EA" stroke="#0E7490" stroke-width="1"/>
+<text x="210.0" y="290.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#0E7490" font-weight="700" text-anchor="middle">水位差 h</text>
+<text x="210.0" y="312.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#526378" font-weight="400" text-anchor="middle">head</text>
+<path d="M300.0 340.0 L420.0 340.0" fill="none" stroke="#0E7490" stroke-width="8" marker-end="url(#arrow)"/>
+<path d="M420.0 340.0 L420.0 420.0" fill="none" stroke="#0E7490" stroke-width="8" marker-end="url(#arrow)"/>
+<path d="M420.0 420.0 L300.0 420.0" fill="none" stroke="#0E7490" stroke-width="8" marker-end="url(#arrow)"/>
+<rect x="380.0" y="360.0" width="30.0" height="40.0" rx="3" fill="#FFFFFF" stroke="#0E7490" stroke-width="1.6"/>
+<text x="440.0" y="370.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#0E7490" font-weight="700" text-anchor="start">流量 Q</text>
+<text x="440.0" y="390.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#526378" font-weight="400" text-anchor="start">flow</text>
+<text x="340.0" y="462.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#142B3F" font-weight="600" text-anchor="middle">管の狭さ = 抵抗 / restriction</text>
+<text x="210.0" y="500.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#142B3F" font-weight="400" text-anchor="middle">水位差 → 電圧、流量 → 電流、狭さ → 抵抗</text>
+<rect x="710.0" y="190.0" width="660.0" height="380.0" rx="10" fill="#FFFFFF" stroke="#C1D0DD" stroke-width="1.4"/>
+<text x="726.0" y="220.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#142B3F" font-weight="700" text-anchor="start">電気回路 / electrical circuit</text>
+<text x="726.0" y="242.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">battery, lamp and current</text>
+<rect x="760.0" y="270.0" width="80.0" height="150.0" rx="3" fill="#FFFFFF" stroke="#B4541E" stroke-width="2"/>
+<text x="800.0" y="320.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#B4541E" font-weight="700" text-anchor="middle">24 V</text>
+<text x="800.0" y="342.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#B4541E" font-weight="700" text-anchor="middle">電源</text>
+<path d="M840.0 285.0 L1180.0 285.0" fill="none" stroke="#B4541E" stroke-width="3" marker-end="url(#arrow)"/>
+<path d="M840.0 405.0 L1180.0 405.0" fill="none" stroke="#B4541E" stroke-width="3" marker-end="url(#arrow)"/>
+<circle cx="1180.0" cy="345.0" r="58.0" fill="#E8F1FA" stroke="#1F5C99" stroke-width="2"/>
+<text x="1180.0" y="340.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#1F5C99" font-weight="700" text-anchor="middle">負荷</text>
+<text x="1180.0" y="360.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#526378" font-weight="400" text-anchor="middle">lamp</text>
+<path d="M1180.0 285.0 L1180.0 287.0" fill="none" stroke="#B4541E" stroke-width="2"/>
+<text x="900.0" y="268.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#0E7490" font-weight="700" text-anchor="start">I = 0.25 A →</text>
+<text x="760.0" y="470.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#142B3F" font-weight="700" text-anchor="start">V = I × R        P = V × I</text>
+<text x="760.0" y="498.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">24 V × 0.25 A = 6 W</text>
+<rect x="760.0" y="520.0" width="560.0" height="42.0" rx="4" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
+<text x="775.0" y="539.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#142B3F" font-weight="400" text-anchor="start">アナロジーは直感用。電流は閉回路を流れて戻る。</text>
+<text x="775.0" y="555.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="10" fill="#526378" font-weight="400" text-anchor="start">Analogy only; current returns in a closed loop.</text>
+<rect x="70.0" y="610.0" width="1300.0" height="80.0" rx="8" fill="#F8E7E7" stroke="#A32B2B" stroke-width="1.4"/>
+<text x="90.0" y="642.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#A32B2B" font-weight="600" text-anchor="start">アナロジーの限界: 電圧は2点間の差、交流は向きが変わる、コイルは逆起電力を生む。</text>
+<text x="90.0" y="666.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#526378" font-weight="400" text-anchor="start">Limits: voltage is a difference between two points; AC changes direction; coils produce back-EMF.</text>
+<rect x="56.0" y="724.0" width="1328.0" height="60.0" rx="10" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
+<text x="76.0" y="758.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#142B3F" font-weight="700" text-anchor="start">電圧は電位差、電流は電荷の流れ、抵抗は流れにくさ、電力はエネルギーの移動速度。</text>
+<text x="76.0" y="780.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14.5" fill="#526378" font-weight="400" text-anchor="start">Voltage is a potential difference, current is charge flow, resistance opposes flow and power is the rate of energy transfer.</text>
+<text x="1400" y="832" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" text-anchor="end">D08-01 • 編集可能な図 / editable SVG</text>
 </svg>

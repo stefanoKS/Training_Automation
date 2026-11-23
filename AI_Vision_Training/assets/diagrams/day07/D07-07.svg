@@ -1,61 +1,77 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="880" viewBox="0 0 1440 880" role="img" aria-labelledby="title desc"><title id="title">モータとアクチュエータの種類 / Motor and actuator types</title><desc id="desc">モータとアクチュエータの種類 / Motor and actuator types — editable bilingual training diagram for DAY 07 / ACTUATORS.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#2563A6"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#A32B2B"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#1B7A4B"/></marker></defs><rect x="0" y="0" width="1440" height="880" fill="#F5F8FC"/><rect x="0" y="0" width="1440" height="12" fill="#2563A6"/>
-<text x="56.0" y="56.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#2563A6" font-weight="700" text-anchor="start">DAY 07 / ACTUATORS</text>
-<text x="56.0" y="104.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="32" fill="#142B3F" font-weight="700" text-anchor="start">モータとアクチュエータの種類</text>
-<text x="56.0" y="144.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="26" fill="#526378" font-weight="400" text-anchor="start">Motor and actuator types</text>
-<rect x="80.0" y="186.0" width="303.5" height="210.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
-<rect x="80.0" y="196.0" width="7.0" height="190.0" rx="3" fill="#2563A6" stroke="#2563A6" stroke-width="0"/>
-<text x="102.0" y="261.2" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">直流モータ</text>
-<text x="102.0" y="282.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">DC motor</text>
-<text x="102.0" y="300.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">簡単な速度制御・ブラシ摩耗に注意</text>
-<text x="102.0" y="318.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">/ simple speed control; brush</text>
-<text x="102.0" y="336.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">wear</text>
-<rect x="405.5" y="186.0" width="303.5" height="210.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
-<rect x="405.5" y="196.0" width="7.0" height="190.0" rx="3" fill="#2563A6" stroke="#2563A6" stroke-width="0"/>
-<text x="427.5" y="261.2" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">誘導モータ</text>
-<text x="427.5" y="282.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">AC induction motor</text>
-<text x="427.5" y="300.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">丈夫で連続運転向き・速度はVFDで調</text>
-<text x="427.5" y="318.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">整 / rugged for continuous</text>
-<text x="427.5" y="336.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">duty; VFD sets speed</text>
-<rect x="731.0" y="186.0" width="303.5" height="210.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
-<rect x="731.0" y="196.0" width="7.0" height="190.0" rx="3" fill="#2563A6" stroke="#2563A6" stroke-width="0"/>
-<text x="753.0" y="261.2" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">サーボモータ</text>
-<text x="753.0" y="282.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">Servomotor</text>
-<text x="753.0" y="300.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">位置と速度を高精度に制御・フィード</text>
-<text x="753.0" y="318.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">バック必須 / precise position</text>
-<text x="753.0" y="336.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">and speed; needs feedback</text>
-<rect x="1056.5" y="186.0" width="303.5" height="210.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
-<rect x="1056.5" y="196.0" width="7.0" height="190.0" rx="3" fill="#2563A6" stroke="#2563A6" stroke-width="0"/>
-<text x="1078.5" y="261.2" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">ステッピングモータ</text>
-<text x="1078.5" y="282.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">Stepper motor</text>
-<text x="1078.5" y="300.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">開ループで段階的に動く・脱調に注意</text>
-<text x="1078.5" y="318.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic"> / open-loop steps; watch for</text>
-<text x="1078.5" y="336.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">lost steps</text>
-<text x="80.0" y="442.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="20" fill="#2563A6" font-weight="700" text-anchor="start">指令と動力は別 / command versus power</text>
-<rect x="80.0" y="474.0" width="299.0" height="108.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
-<rect x="80.0" y="484.0" width="7.0" height="88.0" rx="3" fill="#2563A6" stroke="#2563A6" stroke-width="0"/>
-<text x="102.0" y="527.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">PLC出力</text>
-<text x="102.0" y="549.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">PLC output</text>
-<path d="M383.0 528.0 L405.0 528.0" fill="none" stroke="#2563A6" stroke-width="2" marker-end="url(#arrow)"/>
-<rect x="407.0" y="474.0" width="299.0" height="108.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
-<rect x="407.0" y="484.0" width="7.0" height="88.0" rx="3" fill="#2563A6" stroke="#2563A6" stroke-width="0"/>
-<text x="429.0" y="527.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">ドライバ</text>
-<text x="429.0" y="549.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">Driver</text>
-<path d="M710.0 528.0 L732.0 528.0" fill="none" stroke="#2563A6" stroke-width="2" marker-end="url(#arrow)"/>
-<rect x="734.0" y="474.0" width="299.0" height="108.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
-<rect x="734.0" y="484.0" width="7.0" height="88.0" rx="3" fill="#2563A6" stroke="#2563A6" stroke-width="0"/>
-<text x="756.0" y="527.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">モータ</text>
-<text x="756.0" y="549.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">Motor</text>
-<path d="M1037.0 528.0 L1059.0 528.0" fill="none" stroke="#2563A6" stroke-width="2" marker-end="url(#arrow)"/>
-<rect x="1061.0" y="474.0" width="299.0" height="108.0" rx="12" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
-<rect x="1061.0" y="484.0" width="7.0" height="88.0" rx="3" fill="#2563A6" stroke="#2563A6" stroke-width="0"/>
-<text x="1083.0" y="527.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">機械</text>
-<text x="1083.0" y="549.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">Machine</text>
-<text x="80.0" y="622.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#142B3F" font-weight="700" text-anchor="start">PLCは小さな信号を出し、ドライバが大きな電力を供給します。</text>
-<text x="80.0" y="648.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#526378" font-weight="400" text-anchor="start">The PLC issues a small signal; the driver supplies the large electrical power.</text>
-<rect x="80.0" y="672.0" width="1280.0" height="62.0" rx="8" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
-<text x="100.0" y="712.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="700" text-anchor="start">空気圧シリンダ・電動シリンダもアクチュエータです。動力の種類が違うだけで役割は同じです。</text>
-<rect x="56.0" y="764.0" width="1328.0" height="60.0" rx="10" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
-<text x="76.0" y="798.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#142B3F" font-weight="700" text-anchor="start">アクチュエータは「指令」と「エネルギー」の両方が必要です。</text>
-<text x="76.0" y="820.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14.5" fill="#526378" font-weight="400" text-anchor="start">An actuator needs both a command and energy.</text>
-<text x="1400" y="872" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" text-anchor="end">D07-07 • 編集可能な図 / editable SVG</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="980" viewBox="0 0 1440 980" role="img" aria-labelledby="title desc"><title id="title">機能的な空圧回路（概念） / Functional pneumatic circuit (concept)</title><desc id="desc">機能的な空圧回路（概念） / Functional pneumatic circuit (concept) — editable bilingual training diagram for 第7日 / Day 7.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#2563A6"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#A32B2B"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#1B7A4B"/></marker></defs><rect x="0" y="0" width="1440" height="980" fill="#F5F8FC"/><rect x="0" y="0" width="1440" height="12" fill="#2563A6"/>
+<text x="56.0" y="56.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#2563A6" font-weight="700" text-anchor="start">第7日 / Day 7</text>
+<text x="56.0" y="104.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="32" fill="#142B3F" font-weight="700" text-anchor="start">機能的な空圧回路（概念）</text>
+<text x="56.0" y="144.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="26" fill="#526378" font-weight="400" text-anchor="start">Functional pneumatic circuit (concept)</text>
+<circle cx="130.0" cy="330.0" r="46.0" fill="#FBEEE6" stroke="#B4541E" stroke-width="2.4"/>
+<text x="130.0" y="325.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#B4541E" font-weight="700" text-anchor="middle">空気源</text>
+<text x="130.0" y="345.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#B4541E" font-weight="400" text-anchor="middle">air source</text>
+<rect x="230.0" y="300.0" width="80.0" height="60.0" rx="4" fill="#FFFFFF" stroke="#B4541E" stroke-width="2"/>
+<path d="M245.0 330.0 L295.0 330.0" fill="none" stroke="#B4541E" stroke-width="2"/>
+<path d="M245.0 345.0 L295.0 315.0" fill="none" stroke="#B4541E" stroke-width="2"/>
+<text x="270.0" y="388.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#B4541E" font-weight="700" text-anchor="middle">遮断・ロック</text>
+<text x="270.0" y="406.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#526378" font-weight="400" text-anchor="middle">isolation</text>
+<rect x="360.0" y="280.0" width="150.0" height="100.0" rx="4" fill="#FFFFFF" stroke="#B4541E" stroke-width="2"/>
+<text x="435.0" y="315.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#B4541E" font-weight="700" text-anchor="middle">フィルタ</text>
+<text x="435.0" y="335.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#B4541E" font-weight="700" text-anchor="middle">レギュレータ</text>
+<text x="435.0" y="355.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#B4541E" font-weight="700" text-anchor="middle">FRL</text>
+<circle cx="435.0" cy="365.0" r="0.1" fill="white" stroke="#2563A6" stroke-width="2"/>
+<circle cx="435.0" cy="405.0" r="18.0" fill="#FFFFFF" stroke="#B4541E" stroke-width="1.6"/>
+<text x="435.0" y="410.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#B4541E" font-weight="700" text-anchor="middle">P</text>
+<rect x="640.0" y="280.0" width="105.0" height="110.0" rx="2" fill="#FBEEE6" stroke="#B4541E" stroke-width="2"/>
+<rect x="745.0" y="280.0" width="105.0" height="110.0" rx="2" fill="#FBEEE6" stroke="#B4541E" stroke-width="2"/>
+<path d="M658.0 310.0 L718.0 310.0" fill="none" stroke="#B4541E" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M658.0 360.0 L718.0 360.0" fill="none" stroke="#B4541E" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M763.0 310.0 L823.0 360.0" fill="none" stroke="#B4541E" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M763.0 360.0 L823.0 310.0" fill="none" stroke="#B4541E" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="598.0" y="310.0" width="34.0" height="50.0" rx="3" fill="#FFFFFF" stroke="#6B3FA0" stroke-width="1.8"/>
+<text x="615.0" y="340.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#6B3FA0" font-weight="700" text-anchor="middle">SOL</text>
+<path d="M854 320 q12 15 0 30 q12 15 0 30" fill="none" stroke="#B4541E" stroke-width="1.8"/>
+<text x="745.0" y="416.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#142B3F" font-weight="700" text-anchor="middle">方向切替弁 / directional valve</text>
+<text x="745.0" y="436.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#526378" font-weight="400" text-anchor="middle"></text>
+<text x="654.0" y="270.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#B4541E" font-weight="700" text-anchor="start">P</text>
+<text x="696.0" y="270.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#B4541E" font-weight="700" text-anchor="start">A</text>
+<text x="738.0" y="270.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#B4541E" font-weight="700" text-anchor="start">B</text>
+<text x="780.0" y="270.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#B4541E" font-weight="700" text-anchor="start">R1</text>
+<text x="822.0" y="270.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#B4541E" font-weight="700" text-anchor="start">R2</text>
+<text x="745.0" y="440.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#B4541E" font-weight="600" text-anchor="middle">5/2 単一ソレノイド・ばね戻り（機能表現）</text>
+<text x="745.0" y="458.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="10" fill="#526378" font-weight="400" text-anchor="middle">functional representation, not ISO 1219-1</text>
+<rect x="1030.0" y="250.0" width="330.0" height="110.0" rx="8" fill="#E8F1FA" stroke="#1F5C99" stroke-width="2.4"/>
+<rect x="1213.4" y="258.0" width="16.0" height="94.0" rx="12" fill="#1F5C99" stroke="#1F5C99" stroke-width="1"/>
+<rect x="1221.4" y="296.0" width="178.6" height="18.0" rx="3" fill="#B9C9D9" stroke="#1F5C99" stroke-width="1.4"/>
+<text x="1195.0" y="386.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#142B3F" font-weight="700" text-anchor="middle"></text>
+<text x="1195.0" y="406.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#526378" font-weight="400" text-anchor="middle"></text>
+<text x="1195.0" y="236.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#142B3F" font-weight="700" text-anchor="middle">複動シリンダ / double-acting cylinder</text>
+<path d="M176.0 330.0 L230.0 330.0" fill="none" stroke="#B4541E" stroke-width="2.4" marker-end="url(#arrow)"/>
+<path d="M310.0 330.0 L360.0 330.0" fill="none" stroke="#B4541E" stroke-width="2.4" marker-end="url(#arrow)"/>
+<path d="M510.0 330.0 L640.0 330.0" fill="none" stroke="#B4541E" stroke-width="2.4" marker-end="url(#arrow)"/>
+<path d="M850.0 290.0 L1030.0 290.0" fill="none" stroke="#B4541E" stroke-width="2.4" marker-end="url(#arrow)"/>
+<path d="M850.0 340.0 L1030.0 340.0" fill="none" stroke="#B4541E" stroke-width="2.4" marker-end="url(#arrow)"/>
+<rect x="895.0" y="278.0" width="40.0" height="24.0" rx="2" fill="#FFFFFF" stroke="#B4541E" stroke-width="1.6"/>
+<path d="M905 284 L925 296" stroke="#B4541E" stroke-width="1.6"/><path d="M905 296 L925 284" stroke="#B4541E" stroke-width="1.6"/>
+<text x="915.0" y="272.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="10" fill="#B4541E" font-weight="600" text-anchor="middle">FC-A</text>
+<rect x="895.0" y="328.0" width="40.0" height="24.0" rx="2" fill="#FFFFFF" stroke="#B4541E" stroke-width="1.6"/>
+<path d="M905 334 L925 346" stroke="#B4541E" stroke-width="1.6"/><path d="M905 346 L925 334" stroke="#B4541E" stroke-width="1.6"/>
+<text x="915.0" y="322.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="10" fill="#B4541E" font-weight="600" text-anchor="middle">FC-B</text>
+<path d="M745.0 390.0 L745.0 455.0" fill="none" stroke="#B4541E" stroke-width="2" stroke-dasharray="7 5" marker-end="url(#arrow)"/>
+<text x="765.0" y="478.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#B4541E" font-weight="600" text-anchor="start">排気 / exhaust</text>
+<rect x="1080.0" y="400.0" width="80.0" height="30.0" rx="3" fill="#EAF6EE" stroke="#1B7A4B" stroke-width="1.8"/>
+<text x="1120.0" y="420.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#1B7A4B" font-weight="700" text-anchor="middle">S</text>
+<text x="1120.0" y="455.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#1B7A4B" font-weight="600" text-anchor="middle">前進端 / extended</text>
+<rect x="1250.0" y="400.0" width="80.0" height="30.0" rx="3" fill="#EAF6EE" stroke="#1B7A4B" stroke-width="1.8"/>
+<text x="1290.0" y="420.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#1B7A4B" font-weight="700" text-anchor="middle">S</text>
+<text x="1290.0" y="455.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#1B7A4B" font-weight="600" text-anchor="middle">後退端 / retracted</text>
+<path d="M310.0 360.0 L310.0 500.0" fill="none" stroke="#B4541E" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#arrow)"/>
+<circle cx="310.0" cy="508.0" r="8.0" fill="#FFFFFF" stroke="#B4541E" stroke-width="1.6"/>
+<text x="325.0" y="514.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#B4541E" font-weight="600" text-anchor="start">残圧排気 / bleed</text>
+<rect x="70.0" y="560.0" width="1300.0" height="210.0" rx="10" fill="#F8E7E7" stroke="#A32B2B" stroke-width="1.4"/>
+<text x="90.0" y="595.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#A32B2B" font-weight="700" text-anchor="start">この図は概念です。実配管・弁型式・安全設計を確定するものではありません。</text>
+<text x="90.0" y="622.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#526378" font-weight="400" text-anchor="start">This is a concept. It does not define piping, valve model or safety design.</text>
+<text x="90.0" y="655.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#142B3F" font-weight="400" text-anchor="start">・無通電の弁位置は機種で異なる。負荷・配管・トラップ空気で動き方が変わる。</text>
+<text x="90.0" y="680.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#142B3F" font-weight="400" text-anchor="start">・遮断しただけでは残圧は抜けない。排気と零確認が必要。</text>
+<text x="90.0" y="705.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#A32B2B" font-weight="600" text-anchor="start">・電磁弁をOFFにしても、シリンダが安全な状態になる保証はない。</text>
+<text x="90.0" y="730.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#526378" font-weight="400" text-anchor="start">De-energising a solenoid does not guarantee a safe cylinder state.</text>
+<rect x="56.0" y="864.0" width="1328.0" height="60.0" rx="10" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
+<text x="76.0" y="898.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#142B3F" font-weight="700" text-anchor="start">空気は 発生→遮断→空気準備→方向切替→速度制御→シリンダ の順に流れる。遮断・排気・零確認は別の対策。</text>
+<text x="76.0" y="920.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14.5" fill="#526378" font-weight="400" text-anchor="start">Air flows source, isolation, preparation, directional valve, flow control, cylinder. Isolation, bleed and zero verification are separate measures.</text>
+<text x="1400" y="972" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" text-anchor="end">D07-07 • 編集可能な図 / editable SVG</text>
 </svg>
