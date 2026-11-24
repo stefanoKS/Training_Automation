@@ -8,9 +8,9 @@ This folder contains the canonical sources, generated outputs and verification f
 
 | 日 / Day | テーマ / Theme | ノートブック / Notebooks |
 |---|---|---|
-| 7 | 自動化設備の構想・機械設計 / Automation planning and mechanical design | 07-01 要求仕様と構想 / Requirements and Concept · 07-02 機械構成と空圧 / Mechanical Architecture and Pneumatics · 07-03 シリンダ・モーター・機器選定 / Equipment Selection |
-| 8 | 電気設計・センサー・PLC・ラダー制御 / Electrical design, sensors and PLC control | 08-01 電気の基礎 / Electrical Fundamentals · 08-02 センサー・I/O / Sensors and I/O · 08-03 PLC・ラダー・シーケンス / PLC, Ladder and Sequence |
-| 9 | 通信・試運転・改善提案 / Communication, commissioning and proposal | 09-01 産業用ネットワーク / Industrial Networking · 09-02 試運転 / Commissioning · 09-03 自動化提案 / Automation Proposal |
+| 7 | 自動化設備の基礎・動力・アクチュエータ選定 / Automation fundamentals, power sources and actuator selection | 07-01 生産能力と効果金額 / Capacity and Economic Effect · 07-02 動力とアクチュエータ / Power Sources and Actuators · 07-03 選定の仕様と計算 / Selection Specifications |
+| 8 | 電気制御の基礎・センサー・PLC・ラダー / Electrical control, sensors, PLC and ladder | 08-01 電気と制御盤 / Electrical Fundamentals · 08-02 センサーと入出力 / Sensors and I/O · 08-03 ラダーとインターロック / Ladder and Interlocks |
+| 9 | AI検査カメラの自作・カメラ選定・撮像環境 / Building an AI inspection camera | 09-01 カメラとレンズ / Camera Fundamentals · 09-02 照明と撮像環境 / Lighting and Environment · 09-03 AI検査システム / AI Camera System |
 
 公式の時間割は [`COURSE_SYLLABUS_DAY07_09.md`](../COURSE_SYLLABUS_DAY07_09.md) だけです。1日は08:00–16:50（530分）で、ノートブック01が80分、02が85分、03が135分です。
 
@@ -20,7 +20,7 @@ The only authoritative timetable is [`COURSE_SYLLABUS_DAY07_09.md`](../COURSE_SY
 
 | 種類 / Kind | 場所 / Location |
 |---|---|
-| 正本の講義原稿 / canonical manuscripts | [`notebooks/Day07_Automation_Concept_Mechanics/`](../notebooks/Day07_Automation_Concept_Mechanics/), [`Day08_Electrical_PLC/`](../notebooks/Day08_Electrical_PLC/), [`Day09_Communication_Commissioning/`](../notebooks/Day09_Communication_Commissioning/) |
+| 正本の講義原稿 / canonical manuscripts | [`notebooks/Day07_Automation_Concept_Mechanics/`](../notebooks/Day07_Automation_Concept_Mechanics/), [`Day08_Electrical_PLC/`](../notebooks/Day08_Electrical_PLC/), [`Day09_AI_Camera_Imaging/`](../notebooks/Day09_AI_Camera_Imaging/) |
 | ノートブック / notebooks | 同じフォルダの `.ipynb`（原稿から生成 / generated from the manuscripts） |
 | 図 / diagrams | [`assets/diagrams/day07/`](../assets/diagrams/day07/), [`day08/`](../assets/diagrams/day08/), [`day09/`](../assets/diagrams/day09/) |
 | シミュレーション / simulations | [`simulations/`](simulations/) |
@@ -36,8 +36,8 @@ The only authoritative timetable is [`COURSE_SYLLABUS_DAY07_09.md`](../COURSE_SY
 
 1. 公式時間割を確認する / check the official timetable.
 2. その日のノートブック01を開く / open notebook 01 of the day.
-3. 最初の「実行環境」セルを実行する / run the "executable environment" cell first.
-4. 本文→図→計算→演習→理解チェック→期待結果の順に進む / explanation → figure → calculation → exercise → check → expected result.
+3. **第7日は実行するセルがありません。** 紙と電卓で計算します。第8日・第9日は、最初の「実行環境」セルを実行してください / Day 7 has no executable cells: use paper and a calculator. Days 8 and 9 start with the executable environment cell.
+4. 本文→図→計算→演習→まとめ→完了チェックリストの順に進む / explanation → figure → calculation → exercise → summary → checklist.
 5. ワークシートに、数値・単位・仮定・未確認事項を書く / write values, units, assumptions and open items in the worksheet.
 6. 完了チェックリストを確認する / check the completion checklist.
 
@@ -96,9 +96,9 @@ python -m pytest day07_09_support/tests -q
 node day07_09_support/tests/run_simulation_logic_tests.js
 ```
 
-テストは、元PDFの不変性、9ノートブックの実行、計算、PLC状態、通信、図、PDF、時間割、保護ベースラインを確認します。
+テストは、元PDFの不変性、9ノートブックの実行、計算、PLCの再起動防止とインターロック、カメラの計算、図、PDF（第9日は19ページ以内）、時間割、保護ベースラインを確認します。
 
-The tests verify source-PDF immutability, nine notebook executions, calculations, PLC states, networking, diagrams, PDFs, the timetable and the protected baseline.
+The tests verify source-PDF immutability, nine notebook executions, calculations, PLC restart prevention and interlocks, camera calculations, diagrams, PDFs (Day 9 within 19 pages), the timetable and the protected baseline.
 
 ## 7. 主要な不変条件 / Critical invariants
 
@@ -106,25 +106,28 @@ The tests verify source-PDF immutability, nine notebook executions, calculations
 
 If you change these values, update the lessons, tests, PDFs and worksheets together.
 
-- タクト **42 s/個**（420分・600個）
-- 実力能力 **199.92 個/時**（240×0.85×0.98）
-- 摩擦力 **19.62 N**、設計力 **39.24 N**、理論内径 **11.18 mm**
+- タクト **42 s/個**（420分・600個）、必要能力 **約85.71 個/時**、理論能力 **240 個/時**（15秒・1個/サイクル）
+- 労務費換算額 **316,800 円/年**、運用費0で回収 **約1.42年**、運用費50,000円で **約1.69年**
+- 摩擦力 **19.62 N**、設計力 **39.24 N**、理論内径 **11.18 mm**（8 kg・μ0.25・0.4 MPa）
+- 押し側 **157.08 N**、引き側 **131.95 N**（D20・d8・0.5 MPa）
 - モーター軸トルク **0.477 N·m**、出力 **60 rpm**、理想トルク **9.55 N·m**、η=0.90で **8.59 N·m**
-- 電気負荷 **0.73 A**
-- 回収期間 **約1.42年**（316,800円/年、投資450,000円、運用費0の仮定）
-- 統一I/O: X0–X3、M0、Y0、Y1（遅延ランプ）、Y2（電磁弁）、T0
-- 自己保持は `(X0 AND X2) OR M0`、直列X1
-- リセットは動作開始ではない。復電時に自動再起動しない。
+- 電気負荷 **0.80 A / 19.2 W**、計画 **1.00 A**（余裕25%は教材の仮定）
+- 統一I/O: X0〜X4、M0、M1（アーム）、Y0、Y2
+- 基本の自己保持は `X1 AND (X0 OR M0)`。再起動防止は別ロジック（アーム・立ち上がり・STOP優先・位置確認・リセット分離）
+- 同時要求は**両方OFF**（競合として拒否）
+- 1ピクセル **0.125 mm/px**、0.5 mm 欠陥 **4 px**、ぶれ **1 mm / 8 px**、露光 **0.125 ms**、ライン速度 **8,000 line/s**、30 FPS で **約33.33 mm**
+- 無効（INVALID）をOKにしない。 / INVALID is never OK.
 
-- Takt **42 s/piece** (420 min, 600 pieces)
-- Effective capacity **199.92 pieces/h** (240 × 0.85 × 0.98)
-- Friction **19.62 N**, design force **39.24 N**, theoretical bore **11.18 mm**
-- Motor torque **0.477 N·m**, output **60 rpm**, ideal torque **9.55 N·m**, **8.59 N·m** at η=0.90
-- Electrical load **0.73 A**
-- Payback **about 1.42 years** (316,800 JPY/year, 450,000 JPY investment, zero operating cost assumption)
-- Canonical I/O: X0–X3, M0, Y0, Y1 (delayed lamp), Y2 (solenoid), T0
-- Self-holding is `(X0 AND X2) OR M0`, with X1 in series
-- Reset is not a start; power restoration does not restart automatically.
+- Takt **42 s/piece** (420 min, 600 pieces); required **about 85.71 pieces/h**; theoretical **240 pieces/h** (15 s, one per cycle)
+- Labour-time value **316,800 JPY/year**; payback **about 1.42 years** at zero operating cost and **about 1.69 years** with 50,000 JPY
+- Friction **19.62 N**, design force **39.24 N**, theoretical bore **11.18 mm** (8 kg, mu 0.25, 0.4 MPa)
+- Extension **157.08 N**, retraction **131.95 N** (20 mm bore, 8 mm rod, 0.5 MPa)
+- Motor torque **0.477 N.m**, output **60 rpm**, ideal **9.55 N.m**, **8.59 N.m** at eta 0.90
+- Electrical load **0.80 A / 19.2 W**, planning **1.00 A** (a 25% training assumption)
+- Canonical I/O: X0-X4, M0, M1 (armed), Y0, Y2
+- Basic seal-in is `X1 AND (X0 OR M0)`; restart prevention is separate logic (arming, rising edge, STOP precedence, position confirmation, separate reset)
+- Simultaneous requests give **both OFF**
+- Sampling **0.125 mm/px**, a 0.5 mm defect is **4 px**, blur **1 mm / 8 px**, exposure **0.125 ms**, line rate **8,000 lines/s**, **about 33.33 mm** between frames at 30 FPS
 
 ## 8. 教材の位置づけ / Status of the material
 

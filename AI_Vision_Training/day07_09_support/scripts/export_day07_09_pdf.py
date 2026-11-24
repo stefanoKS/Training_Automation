@@ -33,6 +33,7 @@ from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.platypus import (
     BaseDocTemplate,
+    Flowable,
     Frame,
     HRFlowable,
     Image,
@@ -46,6 +47,8 @@ from reportlab.platypus import (
     TableStyle,
 )
 from reportlab.platypus.tableofcontents import TableOfContents
+
+from pypdf import PdfReader
 
 ROOT = Path(__file__).resolve().parents[2]
 NOTEBOOKS = ROOT / "notebooks"
@@ -62,24 +65,24 @@ IMAGE_RE = re.compile(r"!\[([^\]]*)\]\(([^)]+)\)")
 
 DAY_INFO = {
     "day07": {
-        "title": "第7日：自動化設備の構想・機械設計",
-        "title_en": "Day 7: Automation Planning and Mechanical Design",
-        "intro_ja": "要求仕様、ECRS、生産能力、方式比較、機械構成、空圧、シリンダとモーターの選定を学びます。",
-        "intro_en": "Requirements, ECRS, capacity, concept comparison, machine architecture, pneumatics and cylinder/motor selection.",
+        "title": "第7日：自動化設備の基礎・動力・アクチュエータ選定",
+        "title_en": "Day 7: Automation Fundamentals, Power Sources and Actuator Selection",
+        "intro_ja": "自動化の目的、生産能力と効果金額、空圧・油圧・電気の動力、アクチュエータの使い道、選定に必要な仕様と基本計算を学びます。",
+        "intro_en": "Automation objectives, capacity and economic effect, pneumatic/hydraulic/electrical power, actuator applications, selection specifications and basic calculations.",
         "accent": "#1F5C99",
     },
     "day08": {
-        "title": "第8日：電気設計・センサー・PLC・ラダー制御",
-        "title_en": "Day 8: Electrical Design, Sensors and PLC Control",
-        "intro_ja": "DC24Vの電気、センサーとNPN/PNP、I/O、自己保持、タイマー、状態シーケンス、異常処理と再起動防止を学びます。",
-        "intro_en": "DC24V electricity, sensors and NPN/PNP, I/O, self-holding, timers, state sequences, fault handling and restart prevention.",
+        "title": "第8日：電気制御の基礎・センサー・PLC・ラダー",
+        "title_en": "Day 8: Electrical Control Fundamentals, Sensors, PLCs and Ladder Logic",
+        "intro_ja": "電圧の使い分け、制御盤の機器、消費電力、センサーと入出力、NPN/PNP、PLCとラダー、自己保持とインターロックを学びます。",
+        "intro_en": "Voltage applications, control panel components, power consumption, sensors and I/O, NPN/PNP, PLC and ladder logic, self-holding and interlocks.",
         "accent": "#6B3FA0",
     },
     "day09": {
-        "title": "第9日：通信・試運転・改善提案",
-        "title_en": "Day 9: Industrial Communication, Commissioning and Automation Proposal",
-        "intro_ja": "IPとサブネット、TCP/UDP、産業用通信、段階ゲート、試験記録、費用対効果、最終提案を学びます。",
-        "intro_en": "IP and subnets, TCP/UDP, industrial protocols, staged gates, test records, cost-benefit and the final proposal.",
+        "title": "第9日：AI検査カメラの自作・カメラ選定・撮像環境",
+        "title_en": "Day 9: Building an AI Inspection Camera, Camera Selection and Imaging Environment",
+        "intro_ja": "カメラとレンズ、解像度と視野、シャッターと露光、エリア／ラインセンサ、照明と撮像環境、AI検査システムの構成を学びます。",
+        "intro_en": "Cameras and lenses, resolution and field of view, shutter and exposure, area and line scan, lighting and imaging environment, and the AI inspection system architecture.",
         "accent": "#1B7A4B",
     },
 }
@@ -89,12 +92,20 @@ REFERENCES = (
     ("ISO 13850:2015 — emergency stop", "https://www.iso.org/standard/59970.html"),
     ("IEC 60204-1:2016+A1:2021 — electrical equipment of machines", "https://webstore.iec.ch/en/publication/71256"),
     ("IEC 61131-3 — PLC programming languages", "https://webstore.iec.ch/en/publication/68533"),
-    ("SMC cylinder selection (entry point)", "https://www.smcworld.com/select/air/en-jp/"),
+    ("SMC pneumatic technology (entry point)", "https://www.smcworld.com/en-jp/"),
+    ("CKD pneumatic and hydraulic components (entry point)", "https://www.ckd.co.jp/en/"),
     ("Mitsubishi Electric FA manuals (entry point)", "https://www.mitsubishielectric.co.jp/fa/download/search.page"),
-    ("Omron proximity sensor technical guide (entry point)", "https://www.fa.omron.co.jp/guide/technicalguide/41/17/"),
-    ("Modbus specifications", "https://www.modbus.org/modbus-specifications"),
-    ("RFC 3021 — 31-bit prefixes", "https://www.rfc-editor.org/rfc/rfc3021"),
+    ("Omron sensors and PLC technical guides (entry point)", "https://www.fa.omron.co.jp/"),
+    ("Oriental Motor motor selection guide (entry point)", "https://www.orientalmotor.co.jp/en/"),
+    ("Basler camera and lens documentation (entry point)", "https://docs.baslerweb.com/"),
+    ("CCS lighting technology (entry point)", "https://www.ccs-grp.com/en/"),
+    ("Edmund Optics imaging resource guide (entry point)", "https://www.edmundoptics.com/knowledge-center/"),
 )
+IMAGE_MAX_MM = 128.0
+COMPACT_DAYS = {"day09"}
+COMPACT_GLOSSARY = {"day09": SUPPORT / "worksheets" / "Glossary_day09_ja_en.md"}
+PDF_APPENDIX_A_SECTIONS = {"day09": 5}
+PDF_PAGE_LIMITS = {"day09": 19}
 
 
 def register_font() -> str:
@@ -116,34 +127,39 @@ def rich(text: str) -> str:
     return text
 
 
-def styles_for(face: str) -> dict[str, ParagraphStyle]:
+def styles_for(face: str, compact: bool = False) -> dict[str, ParagraphStyle]:
     common = dict(fontName=face, wordWrap="CJK", splitLongWords=0)
+    s = 0.83 if compact else 1.0      # font scale
+    l = 0.77 if compact else 1.0      # leading scale
+    g = 0.50 if compact else 1.0      # space-after / space-before scale
+    small_size = max(7.8, 8.6 * s) if compact else 8.6
+    caption_size = max(7.8, 8.8 * s) if compact else 8.8
     return {
-        "body": ParagraphStyle("body", fontSize=10.6, leading=18.0, spaceAfter=7,
+        "body": ParagraphStyle("body", fontSize=10.6 * s, leading=18.0 * l, spaceAfter=7 * g,
                                textColor=colors.HexColor("#22313F"), **common),
-        "bullet": ParagraphStyle("bullet", fontSize=10.4, leading=17.0, spaceAfter=4,
+        "bullet": ParagraphStyle("bullet", fontSize=10.4 * s, leading=17.0 * l, spaceAfter=4 * g,
                                  leftIndent=12, firstLineIndent=-12,
                                  textColor=colors.HexColor("#22313F"), **common),
-        "h1": ParagraphStyle("h1", fontSize=17, leading=24, spaceBefore=10, spaceAfter=12,
+        "h1": ParagraphStyle("h1", fontSize=17 * s, leading=24 * l, spaceBefore=10 * g, spaceAfter=12 * g,
                              textColor=colors.HexColor("#164B79"), **common),
-        "h2": ParagraphStyle("h2", fontSize=13, leading=19, spaceBefore=14, spaceAfter=7,
+        "h2": ParagraphStyle("h2", fontSize=13 * s, leading=19 * l, spaceBefore=14 * g, spaceAfter=7 * g,
                              textColor=colors.HexColor("#164B79"), **common),
-        "h3": ParagraphStyle("h3", fontSize=11.4, leading=16, spaceBefore=9, spaceAfter=5,
+        "h3": ParagraphStyle("h3", fontSize=11.4 * s, leading=16 * l, spaceBefore=9 * g, spaceAfter=5 * g,
                              textColor=colors.HexColor("#1F5C99"), **common),
-        "small": ParagraphStyle("small", fontSize=8.6, leading=12.4, spaceAfter=3,
+        "small": ParagraphStyle("small", fontSize=small_size, leading=12.4 * l, spaceAfter=3 * g,
                                 textColor=colors.HexColor("#22313F"), **common),
-        "caption": ParagraphStyle("caption", fontSize=8.8, leading=12.6, spaceAfter=9,
+        "caption": ParagraphStyle("caption", fontSize=caption_size, leading=12.6 * l, spaceAfter=9 * g,
                                   textColor=colors.HexColor("#526378"), **common),
-        "code": ParagraphStyle("code", fontName=face, fontSize=8.3, leading=11.8,
+        "code": ParagraphStyle("code", fontName=face, fontSize=8.3 * s, leading=11.8 * l,
                                textColor=colors.HexColor("#142B3F"), backColor=colors.HexColor("#F2F6FA"),
-                               borderPadding=5, spaceBefore=4, spaceAfter=7),
-        "quote": ParagraphStyle("quote", fontSize=10.0, leading=16.6, spaceAfter=7,
+                               borderPadding=5, spaceBefore=4 * g, spaceAfter=7 * g),
+        "quote": ParagraphStyle("quote", fontSize=10.0 * s, leading=16.6 * l, spaceAfter=7 * g,
                                 leftIndent=10, rightIndent=6, backColor=colors.HexColor("#FDF2F2"),
                                 borderColor=colors.HexColor("#A32B2B"), borderWidth=2,
                                 borderPadding=7, textColor=colors.HexColor("#4A2020"), **common),
-        "toc0": ParagraphStyle("toc0", fontName=face, fontSize=9.6, leading=14.0,
+        "toc0": ParagraphStyle("toc0", fontName=face, fontSize=9.6 * s, leading=14.0 * l,
                                leftIndent=0, firstLineIndent=0),
-        "toc1": ParagraphStyle("toc1", fontName=face, fontSize=8.8, leading=12.4,
+        "toc1": ParagraphStyle("toc1", fontName=face, fontSize=8.8 * s, leading=12.4 * l,
                                leftIndent=14, firstLineIndent=0),
     }
 
@@ -174,6 +190,23 @@ class BilingualDoc(BaseDocTemplate):
             if level is not None:
                 text = getattr(flowable, "_toc_text", "")
                 self.notify("TOCEntry", (level, text, self.page))
+
+
+class _PageMark(Flowable):
+    """Zero-size flowable that records the page number of a milestone."""
+
+    def __init__(self, label: str):
+        super().__init__()
+        self.label = label
+
+    def wrap(self, available_width, available_height):
+        return (0, 0)
+
+    def draw(self):
+        PAGE_MARKS.append((self.label, self.canv.getPageNumber()))
+
+
+PAGE_MARKS: list[tuple[str, int]] = []
 
 
 def split_table_row(line: str) -> list[str]:
@@ -252,10 +285,10 @@ def wrap_code(text: str, face: str, size: float, max_width: float) -> str:
 def add_image(story, target: Path, width: float) -> None:
     with PILImage.open(target) as picture:
         iw, ih = picture.size
-    figure_width = min(width, 168 * mm)
+    figure_width = min(width, 178 * mm)
     figure_height = figure_width * ih / iw
-    if figure_height > 128 * mm:
-        figure_height = 128 * mm
+    if figure_height > IMAGE_MAX_MM * mm:
+        figure_height = IMAGE_MAX_MM * mm
         figure_width = figure_height * iw / ih
     story.append(KeepTogether([Image(str(target), width=figure_width, height=figure_height)]))
     story.append(Spacer(1, 5))
@@ -405,30 +438,45 @@ def cover(day: dict, lessons: list[dict], styles, face: str) -> list:
     return story
 
 
-def appendix(story, title_ja: str, title_en: str, path: Path, styles, width: float, face: str) -> None:
-    story.append(PageBreak())
+def appendix(story, title_ja: str, title_en: str, path: Path, styles, width: float, face: str,
+             page_break: bool = True, keep_sections: int | None = None) -> None:
+    if page_break:
+        story.append(PageBreak())
     story.append(Paragraph(rich(f"{title_ja} / {title_en}"), styles["h1"]))
-    flow_markdown(story, path.read_text(encoding="utf-8"), path.parent, styles, width, face)
+    text = path.read_text(encoding="utf-8")
+    if keep_sections:
+        parts = re.split(r"(?m)^(?=## )", text)
+        head, sections = parts[0], parts[1:]
+        text = head + "".join(sections[:keep_sections])
+    flow_markdown(story, text, path.parent, styles, width, face)
 
 
 def render_day(day_id: str, manifest: dict, outputs: dict, face: str) -> Path:
+    global IMAGE_MAX_MM
+    IMAGE_MAX_MM = 66.0 if day_id == "day09" else 128.0
     day = next(item for item in manifest["days"] if item["id"] == day_id)
     info = DAY_INFO[day_id]
-    styles = styles_for(face)
+    styles = styles_for(face, compact=day_id in COMPACT_DAYS)
     output = PDF_DIR / f"{day_id.capitalize()}_explanation_ja_en.pdf"
     doc = BilingualDoc(
-        str(output), pagesize=A4, leftMargin=18 * mm, rightMargin=18 * mm,
-        topMargin=16 * mm, bottomMargin=18 * mm, title=info["title"],
-        author="Training_Automation", subject=info["title_en"],
+        str(output), pagesize=A4,
+        leftMargin=(12 * mm if day_id in COMPACT_DAYS else 18 * mm),
+        rightMargin=(12 * mm if day_id in COMPACT_DAYS else 18 * mm),
+        topMargin=(12 * mm if day_id in COMPACT_DAYS else 16 * mm),
+        bottomMargin=(14 * mm if day_id in COMPACT_DAYS else 18 * mm),
+        title=info["title"], author="Training_Automation", subject=info["title_en"],
     )
-    doc._day_label = f"{day_id[:3].upper()} {day_id[3:]} / Day {int(day_id[3:])}"
-    width = A4[0] - 36 * mm
+    doc._day_label = f"Day {int(day_id[3:])}"
+    width = A4[0] - doc.leftMargin - doc.rightMargin
 
     toc = TableOfContents()
     toc.levelStyles = [styles["toc0"], styles["toc1"]]
 
     story: list = cover(info, day["lessons"], styles, face)
-    story += [PageBreak(), Paragraph("目次 / Contents", styles["h1"]), toc, PageBreak()]
+    if day_id in COMPACT_DAYS:
+        story += [Paragraph("目次 / Contents", styles["h1"]), toc, PageBreak()]
+    else:
+        story += [PageBreak(), Paragraph("目次 / Contents", styles["h1"]), toc, PageBreak()]
 
     for lesson_index, lesson in enumerate(day["lessons"]):
         notebook_path = NOTEBOOKS / day["folder"] / f"{lesson['name']}.ipynb"
@@ -457,13 +505,19 @@ def render_day(day_id: str, manifest: dict, outputs: dict, face: str) -> Path:
                 else:
                     story.append(Paragraph("このセルは図を生成します。 / this cell generates a figure.",
                                            styles["caption"]))
+        story.append(_PageMark(lesson["name"]))
 
     appendix(story, "付録A 公式・確認カード", "Appendix A: formula and check card",
-             SUPPORT / "reference_data" / f"quick_reference_{day_id}.md", styles, width, face)
+             SUPPORT / "reference_data" / f"quick_reference_{day_id}.md", styles, width, face,
+             keep_sections=PDF_APPENDIX_A_SECTIONS.get(day_id))
     appendix(story, "付録B 技術用語集", "Appendix B: technical glossary",
-             SUPPORT / "worksheets" / "Glossary_ja_en.md", styles, width, face)
-    story.append(PageBreak())
-    story.append(Paragraph("付録C 参考資料 / Appendix C: references", styles["h1"]))
+             COMPACT_GLOSSARY.get(day_id, SUPPORT / "worksheets" / "Glossary_ja_en.md"), styles, width, face,
+             page_break=day_id not in COMPACT_DAYS)
+    if day_id in COMPACT_DAYS:
+        story.append(Paragraph("付録C 参考資料 / Appendix C: references", styles["h1"]))
+    else:
+        story.append(PageBreak())
+        story.append(Paragraph("付録C 参考資料 / Appendix C: references", styles["h1"]))
     story.append(Paragraph(
         "以下は公式資料への入口です。URLの内容を保証するものではありません。使用する版・確認日を記録してください。"
         " / Entry points to official material. A URL is not a guarantee of content; record the revision and date you checked.",
@@ -478,6 +532,13 @@ def render_day(day_id: str, manifest: dict, outputs: dict, face: str) -> Path:
         styles["small"]))
 
     doc.multiBuild(story)
+    pages = len(PdfReader(str(output)).pages)
+    marks = ", ".join(f"{label}@{page}" for label, page in PAGE_MARKS)
+    print(f"{day_id}: {pages} pages (marks: {marks})")
+    limit = PDF_PAGE_LIMITS.get(day_id)
+    if limit and pages > limit:
+        raise RuntimeError(f"{day_id}: exported {pages} pages, limit is {limit}")
+    print(f"{day_id}: {pages} pages, limit {limit or 'none'}")
     return output
 
 
@@ -487,6 +548,7 @@ def main() -> int:
     outputs = json.loads(REFERENCE_OUTPUTS.read_text(encoding="utf-8"))
     PDF_DIR.mkdir(parents=True, exist_ok=True)
     for day in manifest["days"]:
+        PAGE_MARKS.clear()
         path = render_day(day["id"], manifest, outputs, face)
         print(f"Exported {path.relative_to(ROOT)}")
     return 0

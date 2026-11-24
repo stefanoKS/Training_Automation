@@ -1,8 +1,8 @@
-"""Deterministic engineering models for the Day 7-9 automation course.
+"""Deterministic engineering models for the Day 7-9 training course.
 
 This module is the executable reference used by the lesson notebooks, the
-offline simulations and the test suite.  Every function is deliberately small,
-validates its inputs and states its assumptions.  Nothing here constitutes a
+offline demonstrations and the test suite.  Every function is deliberately
+small, validates its inputs and states its assumptions.  Nothing here is a
 machine design, a safety validation or a manufacturer's selection.
 
 Units
@@ -11,15 +11,22 @@ Units
 * length: millimetres (mm) except where a name says ``_m``
 * mass: kilograms (kg)
 * force: newtons (N)
-* pressure: megapascals (MPa) in the teaching API; 1 MPa = 1e6 Pa
-* torque: newton-metres (N·m)
-* electrical: volts (V), amperes (A), watts (W)
+* pressure: megapascals (MPa) in the teaching API; 1 MPa = 1 N/mm^2
+* torque: newton-metres (N.m)
+* electrical: volts (V), amperes (A), watts (W), kilowatt-hours (kWh)
 * money: Japanese yen (JPY), a hypothetical training value
+
+Scope note
+----------
+Days 7-9 were simplified by management.  Availability/OEE models, subnet
+arithmetic, commissioning test matrices and proposal scoring are deliberately
+absent: they are no longer part of the active curriculum.  They remain
+recoverable from Git history.
 """
 
 from __future__ import annotations
 
-from dataclasses import asdict, dataclass, field
+from dataclasses import asdict, dataclass
 from math import pi, sqrt
 
 GRAVITY = 9.81  # m/s^2, teaching value
@@ -41,224 +48,218 @@ def _positive(name: str, value: float, *, allow_zero: bool = False) -> float:
     return float(value)
 
 
-def _fraction(name: str, value: float, *, allow_zero: bool = True) -> float:
-    _positive(name, value, allow_zero=allow_zero)
+def _fraction(name: str, value: float) -> float:
+    _positive(name, value)
     if value > 1.0:
         raise ValueError(f"{name} must be between 0 and 1 (a fraction, not a percentage), got {value!r}")
     return float(value)
 
 
 # --------------------------------------------------------------------------- #
-# 1. production capacity
+# 1. production capacity (Day 7-01)
 # --------------------------------------------------------------------------- #
 def takt_time_s(available_min: float, required_pieces: float) -> float:
     """Target pace = available production time / required quantity.
 
     ``available_min`` is *net available* production time in minutes, excluding
-    planned breaks and lunch.  The result is seconds per piece.
+    breaks and lunch.  The result is seconds per piece: the pace the line has
+    to keep to finish the required quantity in the available time.
     """
     _positive("available_min", available_min)
     _positive("required_pieces", required_pieces)
     return available_min * 60.0 / required_pieces
 
 
-def theoretical_capacity_per_h(cycle_s: float) -> float:
-    """Machine-limited capacity with no downtime and no defects."""
-    _positive("cycle_s", cycle_s)
-    return SECONDS_PER_HOUR / cycle_s
+def capacity_per_h(cycle_s: float, pieces_per_cycle: float = 1.0) -> float:
+    """Theoretical capacity: pieces finished per hour at a defined cycle time.
 
-
-def effective_capacity_per_h(cycle_s: float, availability: float, good_yield: float) -> float:
-    """Approximate good-piece output: theoretical x availability x good yield.
-
-    ``availability`` and ``good_yield`` are fractions (0.85, not 85).
-    This is a planning estimate, not a guarantee; it does not model ramp-up,
-    changeover loss in detail, or lot-size effects.
+    ``pieces_per_cycle`` must be stated, because 15 s per *cycle* is 240
+    cycles/hour but only 240 pieces/hour when one piece leaves per cycle.
+    This is an upper bound with no stoppage, no defect and no ramp-up.
     """
-    return theoretical_capacity_per_h(cycle_s) * _fraction("availability", availability) * _fraction(
-        "good_yield", good_yield
-    )
+    _positive("cycle_s", cycle_s)
+    _positive("pieces_per_cycle", pieces_per_cycle)
+    return SECONDS_PER_HOUR / cycle_s * pieces_per_cycle
+
+
+def required_rate_per_h(required_pieces: float, available_min: float) -> float:
+    """Required production rate in pieces/hour over the available time."""
+    _positive("required_pieces", required_pieces)
+    _positive("available_min", available_min)
+    return required_pieces / (available_min / 60.0)
 
 
 def capacity_report(
     available_min: float = 420.0,
     required_pieces: float = 600.0,
     cycle_s: float = 15.0,
-    availability: float = 0.85,
-    good_yield: float = 0.98,
+    pieces_per_cycle: float = 1.0,
 ) -> dict:
-    """All capacity numbers used by lesson 07-01, with the formula inputs."""
+    """All capacity numbers used by lesson 07-01, with their inputs."""
     takt = takt_time_s(available_min, required_pieces)
-    theoretical = theoretical_capacity_per_h(cycle_s)
-    effective = effective_capacity_per_h(cycle_s, availability, good_yield)
-    required_per_h = required_pieces / (available_min / 60.0)
     return {
         "available_min": available_min,
         "required_pieces": required_pieces,
         "takt_s": takt,
         "cycle_s": cycle_s,
+        "pieces_per_cycle": pieces_per_cycle,
         "cycle_meets_takt": cycle_s <= takt,
-        "required_pieces_per_h": required_per_h,
-        "theoretical_per_h": theoretical,
-        "availability": availability,
-        "good_yield": good_yield,
-        "effective_per_h": effective,
-        "effective_meets_required": effective >= required_per_h,
-        "cycle_utilisation": cycle_s / takt,
+        "required_pieces_per_h": required_rate_per_h(required_pieces, available_min),
+        "theoretical_per_h": capacity_per_h(cycle_s, pieces_per_cycle),
     }
 
 
-def capacity_table(cycle_values: list[float], availability: float, good_yield: float) -> list[dict]:
-    """Rows for the interactive capacity chart/table."""
+def capacity_table(cycle_values: list[float], pieces_per_cycle: float = 1.0) -> list[dict]:
+    """Rows for the capacity chart: cycle time against theoretical capacity."""
     rows = []
     for cycle in cycle_values:
         _positive("cycle_s", cycle)
         rows.append(
             {
                 "cycle_s": float(cycle),
-                "theoretical_per_h": theoretical_capacity_per_h(cycle),
-                "effective_per_h": effective_capacity_per_h(cycle, availability, good_yield),
+                "theoretical_per_h": capacity_per_h(cycle, pieces_per_cycle),
             }
         )
     return rows
 
 
 # --------------------------------------------------------------------------- #
-# 2. mechanics: friction, cylinder, motor
+# 2. mechanics: friction, cylinder, motor (Day 7-03)
 # --------------------------------------------------------------------------- #
 def friction_force_n(mass_kg: float, friction_coefficient: float, gravity: float = GRAVITY) -> float:
     """Sliding friction estimate F = mu * m * g on a horizontal surface.
 
-    This is the force needed to keep a workpiece sliding at constant speed.
-    It ignores acceleration, impact, guide resistance, misalignment and the
-    difference between static and sliding friction.
+    Static friction can be higher than sliding friction for many interfaces,
+    so this is a starting estimate, not a design value.
     """
     _positive("mass_kg", mass_kg)
     _positive("friction_coefficient", friction_coefficient, allow_zero=True)
     _positive("gravity", gravity)
-    return friction_coefficient * mass_kg * gravity
+    return mass_kg * gravity * friction_coefficient
 
 
 def design_force_n(friction_n: float, factor: float) -> float:
-    """Apply an explicit teaching safety factor to a friction estimate."""
+    """Illustrative design force = estimated load * a teaching margin factor.
+
+    The factor is an example (2 here), not a universal design rule.
+    """
     _positive("friction_n", friction_n, allow_zero=True)
-    if factor < 1.0:
-        raise ValueError("factor must be >= 1.0; a value below 1 removes margin instead of adding it")
+    if not isinstance(factor, (int, float)) or isinstance(factor, bool) or factor < 1:
+        raise ValueError(f"factor must be a number >= 1, got {factor!r}")
     return friction_n * float(factor)
 
 
 def theoretical_bore_mm(force_n: float, pressure_mpa: float) -> float:
-    """Minimum theoretical bore for F = P * pi * D^2 / 4 (push side).
+    """Bore that just produces ``force_n`` at ``pressure_mpa``: D = sqrt(4F/(pi P)).
 
-    This is a lower bound under one simplified assumption.  It is NOT a
-    catalogue selection: the pressure at the piston, load factor, speed,
-    side load, cushioning and manufacturer rules must still be checked.
+    Pressure is a gauge pressure and the result ignores friction, load ratio,
+    rod-side area, back pressure and dynamic effects.
     """
-    _positive("force_n", force_n)
+    _positive("force_n", force_n, allow_zero=True)
     _positive("pressure_mpa", pressure_mpa)
-    pressure_pa = pressure_mpa * 1e6
-    diameter_m = sqrt(4.0 * force_n / (pi * pressure_pa))
-    return diameter_m * 1000.0
+    return sqrt(4.0 * force_n / (pi * pressure_mpa))
 
 
 def cylinder_force_n(bore_mm: float, pressure_mpa: float, rod_mm: float = 0.0) -> float:
-    """Theoretical push (rod_mm=0) or pull force of a double-acting cylinder."""
+    """Theoretical cylinder force in newtons.
+
+    Extension uses the piston area pi*D^2/4.  Retraction uses the annulus
+    pi*(D^2-d^2)/4.  ``pressure_mpa`` is the effective gauge pressure; opposing
+    gauge pressure, friction, dynamic loads and losses are not modelled.
+    """
     _positive("bore_mm", bore_mm)
     _positive("pressure_mpa", pressure_mpa)
     _positive("rod_mm", rod_mm, allow_zero=True)
     if rod_mm >= bore_mm:
-        raise ValueError("rod_mm must be smaller than bore_mm")
-    bore_m = bore_mm / 1000.0
-    rod_m = rod_mm / 1000.0
-    area = pi * (bore_m**2 - rod_m**2) / 4.0
-    return pressure_mpa * 1e6 * area
+        raise ValueError(f"rod diameter {rod_mm} must be smaller than bore {bore_mm}")
+    if rod_mm:
+        area = pi * (bore_mm ** 2 - rod_mm ** 2) / 4.0
+    else:
+        area = pi * bore_mm ** 2 / 4.0
+    return pressure_mpa * area
 
 
-def cylinder_report(
-    mass_kg: float = 8.0,
-    friction_coefficient: float = 0.25,
-    force_factor: float = 2.0,
-    pressure_mpa: float = 0.4,
-    stroke_mm: float = 100.0,
-    rod_mm: float = 6.0,
-    catalog_bore_mm: float = 16.0,
-) -> dict:
-    """Cylinder sizing report with the theoretical minimum kept separate."""
-    friction = friction_force_n(mass_kg, friction_coefficient)
-    design = design_force_n(friction, force_factor)
-    bore = theoretical_bore_mm(design, pressure_mpa)
-    report = {
-        "mass_kg": mass_kg,
-        "friction_coefficient": friction_coefficient,
-        "friction_n": friction,
-        "force_factor": force_factor,
-        "design_force_n": design,
-        "pressure_mpa": pressure_mpa,
-        "theoretical_bore_mm": bore,
-        "stroke_mm": stroke_mm,
+def cylinder_report(bore_mm: float = 20.0, rod_mm: float = 8.0, pressure_mpa: float = 0.5) -> dict:
+    """Extension and retraction force for one simplified cylinder example."""
+    return {
+        "bore_mm": bore_mm,
         "rod_mm": rod_mm,
-        "catalog_bore_mm": catalog_bore_mm,
-        "catalog_is_example_only": True,
+        "pressure_mpa": pressure_mpa,
+        "extension_force_n": cylinder_force_n(bore_mm, pressure_mpa),
+        "retraction_force_n": cylinder_force_n(bore_mm, pressure_mpa, rod_mm) if rod_mm else None,
+        "assumptions": [
+            "gauge pressure at the cylinder is uniform",
+            "opposing gauge pressure is negligible",
+            "friction and dynamic loads are ignored",
+            "values are theoretical, not a catalogue selection",
+        ],
     }
-    if catalog_bore_mm:
-        report["catalog_push_force_n"] = cylinder_force_n(catalog_bore_mm, pressure_mpa)
-        report["catalog_pull_force_n"] = cylinder_force_n(catalog_bore_mm, pressure_mpa, rod_mm)
-        report["catalog_margin"] = report["catalog_push_force_n"] / design
-    return report
+
+
+def angular_speed_rad_s(speed_rpm: float) -> float:
+    """Angular speed omega = 2*pi*rpm/60 in rad/s."""
+    _positive("speed_rpm", speed_rpm)
+    return 2.0 * pi * speed_rpm / 60.0
 
 
 def motor_torque_nm(power_w: float, speed_rpm: float) -> float:
-    """Shaft torque from mechanical power: P = T * omega, omega = 2*pi*n/60."""
+    """Shaft torque from *mechanical* output power: T = P / omega.
+
+    Mechanical output power is not electrical input power; motor efficiency
+    and drive losses are separate.
+    """
     _positive("power_w", power_w)
-    _positive("speed_rpm", speed_rpm)
-    omega = 2.0 * pi * speed_rpm / 60.0
-    return power_w / omega
+    return power_w / angular_speed_rad_s(speed_rpm)
 
 
 def reducer_output_speed_rpm(input_rpm: float, ratio: float) -> float:
-    """Ideal reducer output speed (ignoring slip and efficiency)."""
+    """Output speed of an ideal reduction gearbox."""
     _positive("input_rpm", input_rpm)
     _positive("ratio", ratio)
     return input_rpm / ratio
 
 
 def reducer_output_torque_nm(input_torque_nm: float, ratio: float, efficiency: float = 1.0) -> float:
-    """Output torque = input torque x ratio x efficiency.
+    """Output torque of a reduction gearbox including its own efficiency.
 
-    ``efficiency`` is an explicit assumption.  The PDF example gives no
-    efficiency, so 1.0 is the ideal case; lesson 07-03 also shows 0.90 as an
-    added, clearly labelled assumption.
+    Reducer efficiency is not motor efficiency; both losses exist.
     """
     _positive("input_torque_nm", input_torque_nm)
     _positive("ratio", ratio)
-    _fraction("efficiency", efficiency, allow_zero=False)
+    _fraction("efficiency", efficiency)
     return input_torque_nm * ratio * efficiency
 
 
-def motor_report(
-    power_w: float = 60.0,
-    speed_rpm: float = 1200.0,
-    ratio: float = 20.0,
-    efficiency: float = 0.90,
-) -> dict:
+def motor_report(power_w: float = 60.0, speed_rpm: float = 1200.0, ratio: float = 20.0,
+                 efficiency: float = 0.90) -> dict:
+    """Worked motor/reducer example for lesson 07-03."""
     torque = motor_torque_nm(power_w, speed_rpm)
-    ideal_torque = reducer_output_torque_nm(torque, ratio, 1.0)
     return {
-        "power_w": power_w,
+        "mechanical_power_w": power_w,
         "speed_rpm": speed_rpm,
-        "ratio": ratio,
         "motor_torque_nm": torque,
+        "ratio": ratio,
         "output_speed_rpm": reducer_output_speed_rpm(speed_rpm, ratio),
-        "ideal_output_torque_nm": ideal_torque,
-        "efficiency": efficiency,
-        "delivered_output_torque_nm": reducer_output_torque_nm(torque, ratio, efficiency),
-        "efficiency_is_added_assumption": True,
+        "ideal_output_torque_nm": reducer_output_torque_nm(torque, ratio, 1.0),
+        "estimated_output_torque_nm": reducer_output_torque_nm(torque, ratio, efficiency),
+        "assumptions": [
+            "60 W is mechanical output power at the motor shaft",
+            "the load is steady; starting and acceleration torque are not modelled",
+            "reducer efficiency does not replace motor efficiency",
+        ],
     }
 
 
 # --------------------------------------------------------------------------- #
-# 3. electrical loads
+# 3. electrical power, current and energy (Day 8-01)
 # --------------------------------------------------------------------------- #
+def dc_power_w(voltage_v: float, current_a: float) -> float:
+    """Steady DC power P = V * I (watts)."""
+    _positive("voltage_v", voltage_v)
+    _positive("current_a", current_a, allow_zero=True)
+    return voltage_v * current_a
+
+
 @dataclass
 class Load:
     """One DC load group.  Give either current_a or power_w, not both."""
@@ -285,13 +286,16 @@ class Load:
     def total_current_a(self) -> float:
         return self.unit_current_a() * self.quantity
 
+    def total_power_w(self) -> float:
+        return self.total_current_a() * self.voltage_v
+
 
 def total_load_current_a(loads: list[Load]) -> float:
     return sum(load.total_current_a() for load in loads)
 
 
 def load_report(loads: list[Load], supply_margin: float = 0.25) -> dict:
-    """Steady-state load budget with an explicitly separate sizing margin.
+    """Steady-state load budget with an explicitly separate planning margin.
 
     The margin is a planning allowance, not a substitute for checking inrush,
     derating, terminal ratings, wire ampacity and protective-device coordination.
@@ -303,33 +307,51 @@ def load_report(loads: list[Load], supply_margin: float = 0.25) -> dict:
             "voltage_v": load.voltage_v,
             "unit_current_a": load.unit_current_a(),
             "total_current_a": load.total_current_a(),
+            "total_power_w": load.total_power_w(),
         }
         for load in loads
     ]
     _positive("supply_margin", supply_margin, allow_zero=True)
+    voltage = rows[0]["voltage_v"] if rows else 24.0
     steady = sum(row["total_current_a"] for row in rows)
     return {
         "rows": rows,
         "steady_total_a": steady,
+        "total_power_w": steady * voltage,
         "margin_fraction": supply_margin,
         "planning_current_a": steady * (1.0 + supply_margin),
         "is_sizing_approval": False,
     }
 
 
-def pdf_electrical_example() -> list[Load]:
-    """The source PDF page 21 exercise: 3 W x 2 lamps, 0.06 A x 3 sensors, 0.15 A x 2 valves."""
+def training_power_budget() -> list[Load]:
+    """The Day 8-01 budget: PLC, four sensors, two valves and one lamp on DC24V."""
     return [
-        Load("lamp", 2, 24.0, power_w=3.0),
-        Load("sensor", 3, 24.0, current_a=0.06),
+        Load("PLC", 1, 24.0, current_a=0.35),
+        Load("sensor", 4, 24.0, current_a=0.025),
         Load("solenoid valve", 2, 24.0, current_a=0.15),
+        Load("indicator lamp", 1, 24.0, current_a=0.05),
     ]
 
 
+def energy_kwh(power_w: float, hours: float) -> float:
+    """Electrical energy in kWh = power in kW * time in hours."""
+    _positive("power_w", power_w, allow_zero=True)
+    _positive("hours", hours, allow_zero=True)
+    return power_w / 1000.0 * hours
+
+
+def energy_cost_jpy(kwh: float, rate_jpy_per_kwh: float) -> float:
+    """Cost estimate; the rate is an illustrative training value."""
+    _positive("kwh", kwh, allow_zero=True)
+    _positive("rate_jpy_per_kwh", rate_jpy_per_kwh, allow_zero=True)
+    return kwh * rate_jpy_per_kwh
+
+
 # --------------------------------------------------------------------------- #
-# 4. cost and payback
+# 4. cost and payback (Day 7-01)
 # --------------------------------------------------------------------------- #
-def annual_labour_saving_jpy(
+def labour_time_report(
     seconds_saved_per_occurrence: float,
     occurrences_per_day: float,
     working_days_per_year: float,
@@ -337,15 +359,15 @@ def annual_labour_saving_jpy(
 ) -> dict:
     """Hypothetical labour-time value of a time reduction.
 
-    It is not realised cash unless the freed time is actually redeployed or
-    overtime is reduced.  Maintenance, energy and consumables are excluded.
+    It is not realised cash unless the freed time is redeployed or overtime is
+    actually reduced.  Maintenance, energy and consumables are excluded.
     """
     _positive("seconds_saved_per_occurrence", seconds_saved_per_occurrence, allow_zero=True)
     _positive("occurrences_per_day", occurrences_per_day, allow_zero=True)
     _positive("working_days_per_year", working_days_per_year, allow_zero=True)
     _positive("hourly_rate_jpy", hourly_rate_jpy, allow_zero=True)
     seconds_per_day = seconds_saved_per_occurrence * occurrences_per_day
-    hours_per_day = seconds_per_day / 3600.0
+    hours_per_day = seconds_per_day / SECONDS_PER_HOUR
     hours_per_year = hours_per_day * working_days_per_year
     return {
         "seconds_per_day": seconds_per_day,
@@ -356,10 +378,24 @@ def annual_labour_saving_jpy(
     }
 
 
-def payback_years(investment_jpy: float, annual_net_saving_jpy: float) -> float:
+def annual_net_benefit_jpy(annual_value_jpy: float, annual_operating_cost_jpy: float = 0.0) -> float:
+    """Annual net benefit = annual value - annual incremental operating cost."""
+    _positive("annual_value_jpy", annual_value_jpy, allow_zero=True)
+    _positive("annual_operating_cost_jpy", annual_operating_cost_jpy, allow_zero=True)
+    return annual_value_jpy - annual_operating_cost_jpy
+
+
+def payback_years(investment_jpy: float, annual_net_benefit_jpy: float) -> float:
+    """Simple payback = investment / annual net benefit.
+
+    Undefined (infinite) when the annual net benefit is zero or negative.
+    """
     _positive("investment_jpy", investment_jpy)
-    _positive("annual_net_saving_jpy", annual_net_saving_jpy)
-    return investment_jpy / annual_net_saving_jpy
+    if not isinstance(annual_net_benefit_jpy, (int, float)) or isinstance(annual_net_benefit_jpy, bool):
+        raise ValueError("annual_net_benefit_jpy must be a number")
+    if annual_net_benefit_jpy <= 0:
+        return float("inf")
+    return investment_jpy / float(annual_net_benefit_jpy)
 
 
 def payback_report(
@@ -370,27 +406,75 @@ def payback_report(
     investment_jpy: float = 450_000.0,
     annual_operating_cost_jpy: float = 0.0,
 ) -> dict:
-    saving = annual_labour_saving_jpy(seconds_saved, occurrences_per_day, days_per_year, hourly_rate_jpy)
-    net = saving["annual_value_jpy"] - annual_operating_cost_jpy
-    report = {**saving, "investment_jpy": investment_jpy, "annual_operating_cost_jpy": annual_operating_cost_jpy,
-              "annual_net_value_jpy": net}
-    report["payback_years"] = payback_years(investment_jpy, net) if net > 0 else float("inf")
-    return report
+    """Worked financial example used by lesson 07-01."""
+    labour = labour_time_report(seconds_saved, occurrences_per_day, days_per_year, hourly_rate_jpy)
+    net = annual_net_benefit_jpy(labour["annual_value_jpy"], annual_operating_cost_jpy)
+    return {
+        **labour,
+        "investment_jpy": investment_jpy,
+        "annual_operating_cost_jpy": annual_operating_cost_jpy,
+        "annual_net_benefit_jpy": net,
+        "payback_years": payback_years(investment_jpy, net),
+    }
 
 
 # --------------------------------------------------------------------------- #
-# 4b. canonical fictional I/O assignment (single source for Days 8 and 9)
+# 5. sensors, NPN/PNP and PLC input compatibility (Day 8-02)
+# --------------------------------------------------------------------------- #
+def plc_input_compatibility(output_type: str, plc_common: str) -> dict:
+    """Describe the conventional current path for a 3-wire sensor and a PLC input.
+
+    ``output_type`` is "PNP" (sources current when active) or "NPN" (sinks
+    current when active).  ``plc_common`` is where the PLC input common
+    terminal is connected: "0V" (sinking input) or "+24V" (sourcing input).
+
+    Returns the compatibility result and a conceptual current path.  This is a
+    teaching model; actual wiring follows the sensor and PLC datasheets.
+    """
+    kind = str(output_type).upper()
+    common = str(plc_common).upper().replace(" ", "")
+    if kind not in ("PNP", "NPN"):
+        raise ValueError(f"output_type must be PNP or NPN, got {output_type!r}")
+    if common not in ("0V", "+24V", "24V"):
+        raise ValueError(f"plc_common must be '0V' or '+24V', got {plc_common!r}")
+    common = "0V" if common == "0V" else "+24V"
+    compatible = (kind == "PNP" and common == "0V") or (kind == "NPN" and common == "+24V")
+    if kind == "PNP":
+        path = "+24V -> PNP sensor output -> PLC input circuit -> 0V (common)"
+        note = "PNP sources current into a sinking input whose common is 0V."
+    else:
+        path = "+24V (common) -> PLC input circuit -> NPN sensor output -> 0V"
+        note = "NPN sinks current from a sourcing input whose common is +24V."
+    return {
+        "output_type": kind,
+        "plc_common": common,
+        "compatible": compatible,
+        "current_path": path,
+        "note": note,
+        "is_detection_principle": False,
+    }
+
+
+def sensor_output_state(sensor_normally_closed: bool, target_present: bool) -> bool:
+    """Physical NO/NC behaviour of a sensor output, separate from NPN/PNP."""
+    if not isinstance(sensor_normally_closed, bool) or not isinstance(target_present, bool):
+        raise ValueError("arguments must be booleans")
+    return (not target_present) if sensor_normally_closed else target_present
+
+
+# --------------------------------------------------------------------------- #
+# 6. PLC models (Day 8-03)
 # --------------------------------------------------------------------------- #
 CANONICAL_IO = (
     {"address": "X0", "kind": "input", "device": "START pushbutton", "normal": "OFF; momentary ON when pressed"},
-    {"address": "X1", "kind": "input", "device": "STOP_OK permission from physical NC STOP", "normal": "ON while healthy"},
-    {"address": "X2", "kind": "input", "device": "retracted position confirmation", "normal": "ON at retracted end"},
-    {"address": "X3", "kind": "input", "device": "extended position confirmation", "normal": "ON at extended end"},
+    {"address": "X1", "kind": "input", "device": "STOP_OK permission from a physical NC STOP", "normal": "ON while healthy"},
+    {"address": "X2", "kind": "input", "device": "retracted position confirmation", "normal": "ON at the retracted end"},
+    {"address": "X3", "kind": "input", "device": "extended position confirmation", "normal": "ON at the extended end"},
+    {"address": "X4", "kind": "input", "device": "product present at the inspection position", "normal": "ON while a product is present"},
     {"address": "M0", "kind": "internal", "device": "RUN internal state bit", "normal": "OFF at power-up"},
+    {"address": "M1", "kind": "internal", "device": "START armed (a fresh press is accepted)", "normal": "OFF after each accepted start"},
     {"address": "Y0", "kind": "output", "device": "RUN indicator lamp", "normal": "OFF when not running"},
-    {"address": "Y1", "kind": "output", "device": "delayed indicator lamp (T0 done)", "normal": "OFF until 3 s of RUN"},
     {"address": "Y2", "kind": "output", "device": "EXTEND solenoid command", "normal": "OFF = spring-return retract (training valve)"},
-    {"address": "T0", "kind": "timer", "device": "3 s on-delay timer for Y1", "normal": "0 ms when RUN is off"},
 )
 
 CANONICAL_IO_DEVICE_NAMES = {row["address"]: row["device"] for row in CANONICAL_IO}
@@ -399,8 +483,8 @@ CANONICAL_IO_DEVICE_NAMES = {row["address"]: row["device"] for row in CANONICAL_
 def validate_io(rows) -> list[str]:
     """Return consistency problems in an I/O table.
 
-    Checks duplicate addresses and the two classic mistakes in this course:
-    reusing Y1 for a solenoid and describing X1 as a normal OFF pushbutton.
+    Checks duplicate addresses, a missing address and the classic mistake of
+    describing X1 (a healthy-NC permission) as normally OFF.
     """
     problems: list[str] = []
     addresses = [row["address"] for row in rows]
@@ -410,8 +494,8 @@ def validate_io(rows) -> list[str]:
     for row in rows:
         address = row["address"]
         device = str(row["device"]).lower()
-        if address == "Y1" and ("solenoid" in device or "valve" in device or "電磁弁" in str(row["device"])):
-            problems.append("Y1 is reserved for the delayed indicator lamp; use Y2 for the extend solenoid")
+        if address in ("Y1", "Y0") and ("solenoid" in device or "valve" in device or "電磁弁" in str(row["device"])):
+            problems.append(f"{address} is an indicator output; use Y2 for the extend solenoid")
         if address == "X1" and str(row["normal"]).lower().startswith("off"):
             problems.append("X1 STOP_OK is ON while the physical NC stop is healthy; its normal state is ON")
     expected = {row["address"] for row in CANONICAL_IO}
@@ -421,132 +505,59 @@ def validate_io(rows) -> list[str]:
     return problems
 
 
-# --------------------------------------------------------------------------- #
-# 5. IPv4 and subnets
-# --------------------------------------------------------------------------- #
-def parse_ipv4(text: str) -> int:
-    """Parse dotted-decimal IPv4 into an integer, rejecting leading zeros."""
-    if not isinstance(text, str):
-        raise ValueError(f"IPv4 address must be a string, got {text!r}")
-    parts = text.strip().split(".")
-    if len(parts) != 4:
-        raise ValueError(f"IPv4 address needs four octets: {text!r}")
-    value = 0
-    for part in parts:
-        if not part.isdigit() or (len(part) > 1 and part.startswith("0")):
-            raise ValueError(f"invalid IPv4 octet {part!r} in {text!r}")
-        octet = int(part)
-        if octet > 255:
-            raise ValueError(f"IPv4 octet out of range: {text!r}")
-        value = (value << 8) | octet
-    return value
+@dataclass
+class BasicSealIn:
+    """The *basic* seal-in rung only: M0 = X1 AND (X0 OR M0).
 
-
-def format_ipv4(value: int) -> str:
-    if not 0 <= value <= 0xFFFFFFFF:
-        raise ValueError("IPv4 integer out of range")
-    return ".".join(str((value >> shift) & 0xFF) for shift in (24, 16, 8, 0))
-
-
-def prefix_from_mask(mask: str) -> int:
-    value = parse_ipv4(mask)
-    bits = f"{value:032b}"
-    if "01" in bits:
-        raise ValueError(f"subnet mask is not contiguous: {mask!r}")
-    return bits.count("1")
-
-
-def mask_from_prefix(prefix: int) -> str:
-    if not isinstance(prefix, int) or isinstance(prefix, bool) or not 0 <= prefix <= 32:
-        raise ValueError("prefix must be an integer from 0 to 32")
-    value = (0xFFFFFFFF << (32 - prefix)) & 0xFFFFFFFF if prefix else 0
-    return format_ipv4(value)
-
-
-def network_address(ip: str, prefix: int) -> int:
-    mask = (0xFFFFFFFF << (32 - prefix)) & 0xFFFFFFFF if prefix else 0
-    return parse_ipv4(ip) & mask
-
-
-def broadcast_address(ip: str, prefix: int) -> int:
-    mask = (0xFFFFFFFF << (32 - prefix)) & 0xFFFFFFFF if prefix else 0
-    return network_address(ip, prefix) | (~mask & 0xFFFFFFFF)
-
-
-def host_range(ip: str, prefix: int) -> tuple[str | None, str | None, int, str]:
-    """Return (first, last, usable_count, exclusion_rule) for the subnet.
-
-    /31 is handled per RFC 3021 (point-to-point, both addresses usable) and
-    /32 is a single host.  For /0-/30 the network and broadcast addresses are
-    excluded in the conventional way.
+    It demonstrates the memory principle and nothing else.  It has no start
+    arming, no edge detection and no restart prevention: if STOP permission is
+    restored while START is still held, RUN returns.  Lesson 08-03 uses this
+    to show why the extended logic exists.
     """
-    if not isinstance(prefix, int) or isinstance(prefix, bool) or not 0 <= prefix <= 32:
-        raise ValueError("prefix must be an integer from 0 to 32")
-    network = network_address(ip, prefix)
-    broadcast = broadcast_address(ip, prefix)
-    if prefix == 32:
-        text = format_ipv4(network)
-        return text, text, 1, "/32 is a single host; there is no network/broadcast pair to exclude."
-    if prefix == 31:
-        return (
-            format_ipv4(network),
-            format_ipv4(broadcast),
-            2,
-            "/31 uses RFC 3021 point-to-point addressing: both addresses are usable.",
-        )
-    first = network + 1
-    last = broadcast - 1
-    count = max(0, last - first + 1)
-    return (
-        format_ipv4(first),
-        format_ipv4(last),
-        count,
-        "Conventional subnet: the all-zeros network address and the all-ones broadcast address are excluded.",
-    )
+
+    run: bool = False
+
+    def step(self, start: bool, stop_ok: bool = True) -> bool:
+        self.run = bool(stop_ok) and (bool(start) or self.run)
+        return self.run
 
 
-def describe_subnet(ip: str, prefix: int) -> dict:
-    first, last, count, rule = host_range(ip, prefix)
-    network = network_address(ip, prefix)
-    broadcast = broadcast_address(ip, prefix)
-    return {
-        "ip": ip,
-        "prefix": prefix,
-        "mask": mask_from_prefix(prefix),
-        "network": format_ipv4(network),
-        "broadcast": format_ipv4(broadcast),
-        "first_host": first,
-        "last_host": last,
-        "usable_hosts": count,
-        "exclusion_rule": rule,
-        "is_host_address": first is not None and parse_ipv4(first) <= parse_ipv4(ip) <= parse_ipv4(last),
-        "cidr": f"{format_ipv4(network)}/{prefix}",
-    }
+@dataclass
+class StartGate:
+    """Extended start logic: fresh edge, arming, stop priority, confirmed position.
+
+    The armed bit becomes true only after START is seen released while the
+    machine is idle and the retracted position is confirmed.  A rising edge of
+    START while armed starts the cycle.  STOP, a fault and power-up clear it.
+    """
+
+    run: bool = False
+    armed: bool = False
+    start_prev: bool = True  # conservative: a held START at power-up is not an edge
+    fault: bool = False
+
+    def power_on(self) -> None:
+        self.run = False
+        self.armed = False
+        self.start_prev = True
+
+    def step(self, start: bool, stop_ok: bool = True, retracted: bool = True,
+             extended: bool = False, reset: bool = False) -> dict:
+        if self.fault and reset and not start and stop_ok:
+            self.fault = False
+        if self.fault or not stop_ok:
+            self.run = False
+            self.armed = False
+        elif not start and retracted and not extended:
+            self.armed = True
+        edge = bool(start) and not self.start_prev
+        if edge and self.armed and retracted and not extended:
+            self.run = True
+            self.armed = False
+        self.start_prev = bool(start)
+        return {"run": self.run, "armed": self.armed, "start_edge": edge, "fault": self.fault}
 
 
-def same_subnet(ip_a: str, ip_b: str, prefix: int) -> bool:
-    return network_address(ip_a, prefix) == network_address(ip_b, prefix)
-
-
-def subnet_pair_report(ip_a: str, ip_b: str, prefix: int) -> dict:
-    a = describe_subnet(ip_a, prefix)
-    b = describe_subnet(ip_b, prefix)
-    return {
-        "a": a,
-        "b": b,
-        "same_subnet": a["cidr"] == b["cidr"],
-        "explanation": (
-            f"{ip_a}/{prefix} is in {a['cidr']} and {ip_b}/{prefix} is in {b['cidr']}."
-            + (" They share the same network, so they can communicate directly if the physical link, "
-               "VLAN and host configuration also allow it." if a["cidr"] == b["cidr"] else
-               " They are in different networks, so a router or routing configuration is normally required.")
-        ),
-    }
-
-
-# --------------------------------------------------------------------------- #
-# 6. PLC sequence simulation
-# --------------------------------------------------------------------------- #
 STATES = ("IDLE", "READY", "EXTEND", "WAIT_EXTENDED", "RETRACT", "WAIT_RETRACTED", "COMPLETE", "FAULT")
 
 ALLOWED_TRANSITIONS = {
@@ -576,9 +587,7 @@ class PlcSnapshot:
     state: str
     run: bool
     y0_run_lamp: bool
-    y1_delayed_lamp: bool
     y2_extend_solenoid: bool
-    t0_ms: int
     motion_ms: int
     fault_code: str | None
     cycle_count: int
@@ -606,33 +615,26 @@ class PusherSequence:
     X3          extended position confirmation
     M0          RUN internal state
     Y0          RUN indicator
-    Y1          delayed indicator (T0 done)
     Y2          extend solenoid command (OFF = spring-return retract)
-    T0          3 s on-delay timer for Y1
     ==========  ==========================================
 
     Restart rule: a RUN state is never resumed automatically.  After power-up,
-    a STOP or a fault reset the program requires the START input to be released
-    and pressed again while the retracted position is confirmed.
+    a STOP or a fault reset, the program requires START to be released and
+    pressed again while the retracted position is confirmed.
     """
 
-    timer_ms: int = 3000
     motion_timeout_ms: int = 3000
     max_cycles: int = 10_000
 
     def __post_init__(self) -> None:
-        for name in ("timer_ms", "motion_timeout_ms"):
-            value = getattr(self, name)
-            if not isinstance(value, int) or value <= 0:
-                raise ValueError(f"{name} must be a positive integer number of milliseconds")
+        if not isinstance(self.motion_timeout_ms, int) or self.motion_timeout_ms <= 0:
+            raise ValueError("motion_timeout_ms must be a positive integer")
         self.power_on()
 
-    # ------------------------------------------------------------------ setup
     def power_on(self) -> PlcSnapshot:
         """Initialise as a cold power-up with START treated as possibly held."""
         self.state = "IDLE"
         self.run = False
-        self.t0_ms = 0
         self.motion_ms = 0
         self.fault_code: str | None = None
         self.cycle_count = 0
@@ -651,7 +653,6 @@ class PusherSequence:
             raise ValueError(f"invalid transition {self.state} -> {new_state}")
         self.state = new_state
 
-    # ------------------------------------------------------------------ core
     def step(self, inputs: PlcInputs, dt_ms: int = 100, reset: bool = False) -> PlcSnapshot:
         if not isinstance(inputs, PlcInputs):
             raise ValueError("inputs must be a PlcInputs instance")
@@ -666,7 +667,6 @@ class PusherSequence:
 
         if self.state == "FAULT":
             self.run = False
-            self.t0_ms = 0
             self.motion_ms = 0
             reset_edge = bool(reset) and not self.reset_prev
             if reset_edge and not inputs.start and inputs.stop_ok:
@@ -683,7 +683,6 @@ class PusherSequence:
             if self.state != "IDLE":
                 self.transition_to("IDLE")
             self.run = False
-            self.t0_ms = 0
             self.motion_ms = 0
             self.fresh_start_required = True
             self.start_armed = False
@@ -695,22 +694,14 @@ class PusherSequence:
         if not inputs.start and self.state in ("IDLE", "COMPLETE"):
             self.start_armed = True
 
-        # Self-holding timer T0 runs with the RUN state.
-        if self.run:
-            self.t0_ms = min(self.t0_ms + dt_ms, self.timer_ms)
-        else:
-            self.t0_ms = 0
-
         started_this_step = False
         start_edge = inputs.start and not self.start_prev
         if start_edge and self.start_armed and self.state in ("IDLE", "COMPLETE"):
             if not inputs.retracted or inputs.extended:
-                # Not at a confirmed safe starting position: refuse the start.
-                self.start_armed = False
+                self.start_armed = False  # not at a confirmed starting position
             else:
                 self.transition_to("READY")
                 self.run = True
-                self.t0_ms = 0
                 self.motion_ms = 0
                 self.fresh_start_required = False
                 self.start_armed = False
@@ -750,14 +741,12 @@ class PusherSequence:
     def _enter_fault(self, code: str, reason: str) -> None:
         self.state = "FAULT"
         self.run = False
-        self.t0_ms = 0
         self.motion_ms = 0
         self.fault_code = code
         self.fresh_start_required = True
         self.start_armed = False
         self.fault_reason = reason
 
-    # ------------------------------------------------------------- reporting
     @property
     def y2_extend_solenoid(self) -> bool:
         return self.state in ("EXTEND", "WAIT_EXTENDED")
@@ -766,18 +755,12 @@ class PusherSequence:
     def y0_run_lamp(self) -> bool:
         return self.run
 
-    @property
-    def y1_delayed_lamp(self) -> bool:
-        return self.run and self.t0_ms >= self.timer_ms
-
     def snapshot(self) -> PlcSnapshot:
         return PlcSnapshot(
             state=self.state,
             run=self.run,
             y0_run_lamp=self.y0_run_lamp,
-            y1_delayed_lamp=self.y1_delayed_lamp,
             y2_extend_solenoid=self.y2_extend_solenoid,
-            t0_ms=self.t0_ms,
             motion_ms=self.motion_ms,
             fault_code=self.fault_code,
             cycle_count=self.cycle_count,
@@ -795,341 +778,155 @@ def snapshot_line(snapshot: PlcSnapshot) -> str:
     fault = snapshot.fault_code or "-"
     return (
         f"{snapshot.elapsed_ms:6d} ms | {snapshot.state:<14} | RUN={int(snapshot.run)} "
-        f"Y0={int(snapshot.y0_run_lamp)} Y1={int(snapshot.y1_delayed_lamp)} "
-        f"Y2={int(snapshot.y2_extend_solenoid)} | T0={snapshot.t0_ms:4d} ms | fault={fault}"
+        f"Y0={int(snapshot.y0_run_lamp)} Y2={int(snapshot.y2_extend_solenoid)} | fault={fault}"
     )
-
-
-# --------------------------------------------------------------------------- #
-# 7. commissioning test simulation
-# --------------------------------------------------------------------------- #
-TEST_STATUSES = ("PASS", "FAIL", "NOT TESTED", "BLOCKED")
-
-
-@dataclass
-class TestSpec:
-    test_id: str
-    requirement_id: str
-    title_ja: str
-    title_en: str
-    gate: str
-    preconditions: str
-    procedure: str
-    expected: str
-    scenario: str
-    evaluator: str
-
-
-@dataclass
-class TestRecord:
-    test_id: str
-    requirement_id: str
-    preconditions: str
-    procedure: str
-    expected: str
-    actual: str
-    status: str
-    evidence: str
-    operator: str
-    date: str
-    corrective_action: str = ""
-
-    def __post_init__(self) -> None:
-        if self.status not in TEST_STATUSES:
-            raise ValueError(f"invalid test status {self.status!r}")
-
-    def as_row(self) -> list[str]:
-        return [
-            self.test_id,
-            self.requirement_id,
-            self.expected,
-            self.actual,
-            self.status,
-            self.evidence,
-        ]
-
-
-TRAINING_DATE = "2026-11-23"  # build/session date; simulation evidence, not a real measurement
-
-
-def _drive_normal(plc: PusherSequence, *, stop_at_ms: int | None = None, stop_hold: bool = False) -> dict:
-    """Drive one normal cycle by feeding position feedback after each command."""
-    inputs = PlcInputs(start=False, stop_ok=True, retracted=True, extended=False)
-    visited = [plc.state]
-    for tick in range(200):
-        elapsed = tick * 50
-        # position feedback follows the last command with a small delay
-        if plc.y2_extend_solenoid and plc.state in ("EXTEND", "WAIT_EXTENDED") and tick > 4:
-            inputs.retracted, inputs.extended = False, True
-        if plc.state in ("RETRACT", "WAIT_RETRACTED") and plc.run and tick > 8:
-            inputs.retracted, inputs.extended = True, False
-        if stop_at_ms is not None and elapsed >= stop_at_ms and stop_hold:
-            inputs.stop_ok = False
-        if elapsed == 150:
-            inputs.start = True
-        if elapsed >= 300:
-            inputs.start = False
-        snapshot = plc.step(inputs, 50)
-        visited.append(snapshot.state)
-        if snapshot.state == "COMPLETE":
-            break
-    return {"final": plc.snapshot(), "visited": visited}
-
-
-def _drive_timeout(plc: PusherSequence, *, conflict: bool = False, slow: bool = False) -> dict:
-    inputs = PlcInputs(start=False, stop_ok=True, retracted=True, extended=False)
-    visited = [plc.state]
-    for tick in range(300):
-        elapsed = tick * 50
-        if conflict and tick > 10:
-            inputs.retracted, inputs.extended = True, True
-        elif plc.y2_extend_solenoid and plc.state == "WAIT_EXTENDED" and tick > 4:
-            if slow:
-                inputs.retracted, inputs.extended = False, elapsed > 4000
-            else:
-                inputs.retracted, inputs.extended = False, False  # sensor never confirms
-        if elapsed == 150:
-            inputs.start = True
-        if elapsed >= 300:
-            inputs.start = False
-        snapshot = plc.step(inputs, 50)
-        visited.append(snapshot.state)
-        if snapshot.state == "FAULT":
-            break
-    return {"final": plc.snapshot(), "visited": visited}
-
-
-def _drive_power_restore(plc: PusherSequence) -> dict:
-    # START is physically held while power is restored.  The expected result is
-    # that nothing starts; a subsequent release and press is a separate event.
-    inputs = PlcInputs(start=True, stop_ok=True, retracted=True, extended=False)
-    plc.power_on()
-    for _ in range(20):
-        plc.step(inputs, 100)
-    held = plc.snapshot()
-    inputs.start = False
-    plc.step(inputs, 100)
-    inputs.start = True
-    after_release_press = plc.step(inputs, 100)
-    return {"final": held, "after_release_press": after_release_press,
-            "visited": ["POWER_ON", held.state, after_release_press.state]}
-
-
-def run_scenario(name: str) -> dict:
-    plc = PusherSequence()
-    if name == "normal_cycle":
-        return _drive_normal(plc)
-    if name == "timer_only":
-        inputs = PlcInputs(start=False, stop_ok=True, retracted=True, extended=False)
-        trace = [plc.step(inputs, 50) for _ in range(3)]
-        inputs.start = True
-        trace.append(plc.step(inputs, 50))       # READY
-        inputs.start = False
-        for _ in range(3):                        # EXTEND, WAIT_EXTENDED
-            trace.append(plc.step(inputs, 50))
-        for _ in range(70):                       # keep RUN, timer accumulates
-            trace.append(plc.step(inputs, 50))
-        return {"final": plc.snapshot(), "trace": trace, "visited": [s.state for s in trace]}
-    if name == "stop_during_timer":
-        inputs = PlcInputs(start=False, stop_ok=True, retracted=True, extended=False)
-        for _ in range(2):
-            plc.step(inputs, 100)
-        inputs.start = True
-        plc.step(inputs, 100)
-        inputs.start = False
-        for _ in range(15):
-            plc.step(inputs, 100)
-        inputs.stop_ok = False
-        snap = plc.step(inputs, 100)
-        return {"final": snap, "visited": [snap.state]}
-    if name == "sensor_stuck_off":
-        return _drive_timeout(plc)
-    if name == "retract_stuck":
-        return _drive_retract_timeout(plc)
-    if name == "sensor_conflict":
-        return _drive_timeout(plc, conflict=True)
-    if name == "motion_slow":
-        return _drive_timeout(plc, slow=True)
-    if name == "power_restore_start_held":
-        return _drive_power_restore(plc)
-    if name == "fault_reset":
-        result = _drive_timeout(plc)
-        inputs = PlcInputs(start=False, stop_ok=True, retracted=True, extended=False)
-        plc.step(inputs, 100, reset=False)
-        plc.step(inputs, 100, reset=True)
-        plc.step(inputs, 100, reset=False)
-        return {"final": plc.snapshot(), "visited": result["visited"] + ["RESET"]}
-    raise ValueError(f"unknown scenario {name!r}")
-
-
-def _drive_retract_timeout(plc: PusherSequence) -> dict:
-    """Drive a normal extend, then keep X2 OFF so the retract confirmation never arrives."""
-    inputs = PlcInputs(start=False, stop_ok=True, retracted=True, extended=False)
-    visited = [plc.state]
-    for tick in range(300):
-        elapsed = tick * 50
-        if plc.state in ("EXTEND", "WAIT_EXTENDED") and tick > 4:
-            inputs.retracted, inputs.extended = False, True
-        if plc.state in ("RETRACT", "WAIT_RETRACTED"):
-            inputs.retracted, inputs.extended = False, False  # X2 stuck OFF
-        if elapsed == 150:
-            inputs.start = True
-        if elapsed >= 300:
-            inputs.start = False
-        snapshot = plc.step(inputs, 50)
-        visited.append(snapshot.state)
-        if snapshot.state == "FAULT":
-            break
-    return {"final": plc.snapshot(), "visited": visited}
 
 
 def normal_cycle(plc: PusherSequence | None = None) -> dict:
-    """Run one normal cycle with position feedback and return the trace.
+    """Drive one complete teaching cycle with confirmation sensors."""
+    plc = plc or PusherSequence()
+    released = PlcInputs()
+    plc.step(released, 100)
+    visited = [plc.state]
+    inputs = PlcInputs(start=True)
+    plc.step(inputs, 100)
+    visited.append(plc.state)
+    inputs.start = False
+    for _ in range(2):
+        plc.step(inputs, 100)
+        visited.append(plc.state)
+    inputs.extended, inputs.retracted = True, False
+    for _ in range(2):
+        plc.step(inputs, 100)
+        visited.append(plc.state)
+    inputs.extended, inputs.retracted = False, True
+    for _ in range(2):
+        plc.step(inputs, 100)
+        visited.append(plc.state)
+    return {"final": plc.snapshot(), "visited": visited}
 
-    Public wrapper used by the lesson notebook; the driving logic is the same
-    deterministic code used by the commissioning test matrix.
+
+@dataclass
+class MotorInterlock:
+    """Mutually exclusive forward/reverse commands with conflict rejection.
+
+    Both requests at the same time are rejected (both outputs OFF) instead of
+    depending on scan order.  Real reversing contactors also need electrical
+    and/or mechanical interlocking and a suitable safety design.
     """
-    return _drive_normal(plc or PusherSequence())
 
+    forward: bool = False
+    reverse: bool = False
+    conflict: bool = False
 
-def _eval(record: TestRecord, scenario_result: dict, name: str) -> TestRecord:
-    final = scenario_result["final"]
-    if name == "normal_cycle":
-        ok = final.state == "COMPLETE" and final.cycle_count == 1
-        record.actual = f"final state={final.state}, cycles={final.cycle_count}"
-    elif name == "timer_only":
-        trace = scenario_result["trace"]
-        y1_at = next((s.t0_ms for s in trace if s.y1_delayed_lamp), None)
-        at_one_second = next((s for s in trace if s.elapsed_ms >= 1000), final)
-        if record.test_id == "T02":
-            ok = (
-                final.cycle_count == 1
-                and at_one_second.run
-                and at_one_second.y0_run_lamp
-                and not at_one_second.y1_delayed_lamp
-            )
-            record.actual = (
-                f"at {at_one_second.elapsed_ms} ms: RUN={at_one_second.run}, "
-                f"Y0={at_one_second.y0_run_lamp}, Y1={at_one_second.y1_delayed_lamp}"
-            )
-        elif record.test_id == "T03":
-            at_two_seconds = next((s for s in trace if s.elapsed_ms >= 2000), final)
-            ok = (
-                at_one_second.run and at_one_second.y0_run_lamp
-                and at_two_seconds.run and at_two_seconds.y0_run_lamp
-                and at_two_seconds.cycle_count == 1
-            )
-            record.actual = (
-                f"START released; RUN={at_two_seconds.run}, Y0={at_two_seconds.y0_run_lamp} "
-                f"at {at_two_seconds.elapsed_ms} ms"
-            )
+    def step(self, forward_req: bool, reverse_req: bool, stop_ok: bool = True) -> dict:
+        if not stop_ok:
+            self.forward = self.reverse = self.conflict = False
+        elif forward_req and reverse_req:
+            self.forward = self.reverse = False
+            self.conflict = True
         else:
-            ok = y1_at == 3000 and final.cycle_count == 1
-            record.actual = f"first Y1 at T0={y1_at} ms; timer stays latched while RUN is held"
-    elif name == "stop_during_timer":
-        ok = final.state == "IDLE" and not final.run and final.t0_ms == 0
-        record.actual = f"state={final.state}, run={final.run}, T0={final.t0_ms} ms"
-    elif name == "sensor_stuck_off":
-        ok = final.fault_code == "F001"
-        record.actual = f"fault={final.fault_code}, state={final.state}"
-    elif name == "sensor_conflict":
-        ok = final.fault_code == "F002"
-        record.actual = f"fault={final.fault_code}, state={final.state}"
-    elif name == "motion_slow":
-        ok = final.fault_code == "F001"
-        record.actual = f"fault={final.fault_code} after timeout"
-    elif name == "power_restore_start_held":
-        after = scenario_result.get("after_release_press")
-        ok = (
-            final.state == "IDLE"
-            and not final.run
-            and after is not None
-            and after.state == "READY"
-            and after.run
-        )
-        record.actual = (
-            f"held START: state={final.state}, run={final.run}; "
-            f"new press after release: state={after.state if after else 'n/a'}, run={after.run if after else 'n/a'}"
-        )
-    elif name == "fault_reset":
-        ok = final.state == "IDLE" and final.fault_code is None and not final.run
-        record.actual = f"state={final.state}, fault={final.fault_code}, run={final.run}"
-    else:
-        ok = False
-        record.actual = "not evaluated"
-    record.status = "PASS" if ok else "FAIL"
-    return record
+            self.forward = bool(forward_req)
+            self.reverse = bool(reverse_req)
+            self.conflict = False
+        return {"forward": self.forward, "reverse": self.reverse, "conflict": self.conflict}
 
 
-TEST_SPECS = [
-    TestSpec("T01", "R-01", "電源投入時に自動起動しない", "No automatic start at power-up", "G3",
-             "Power available; START may be held.", "Apply power with START held for 1 s.",
-             "IDLE, RUN off, no motion output.", "power_restore_start_held", "power restore"),
-    TestSpec("T02", "R-02", "STARTで運転状態になる", "START establishes RUN", "G3",
-             "Retracted confirmed; STOP_OK on.", "Press and release START.",
-             "RUN on, Y0 on, Y1 off before 3 s.", "timer_only", "timer"),
-    TestSpec("T03", "R-03", "STARTを離しても自己保持する", "RUN is self-held after START release", "G3",
-             "RUN established.", "Release START and scan for 1 s.",
-             "RUN remains on until STOP or fault.", "timer_only", "timer"),
-    TestSpec("T04", "R-04", "3秒タイマーでY1点灯", "Y1 turns on at 3 s", "G3",
-             "RUN established.", "Hold RUN for 3 s.", "Y1 on exactly at T0 = 3000 ms.",
-             "timer_only", "timer"),
-    TestSpec("T05", "R-05", "停止要求がタイマーより優先", "STOP has priority over the timer", "G3",
-             "RUN and T0 running.", "Turn STOP_OK off before 3 s.",
-             "RUN off, Y0/Y1 off, T0 reset to 0.", "stop_during_timer", "stop"),
-    TestSpec("T06", "R-06", "前進端確認で後退へ移る", "Extended confirmation advances the sequence", "G3",
-             "START accepted.", "Feed X3 ON and X2 OFF after extend command.",
-             "RETRACT then COMPLETE after X2 returns.", "normal_cycle", "sequence"),
-    TestSpec("T07", "R-07", "前進端未確認はタイムアウト異常", "Missing extend confirmation times out", "G3",
-             "START accepted.", "Keep X3 OFF beyond 3 s.", "FAULT F001; Y2 off.",
-             "sensor_stuck_off", "fault"),
-    TestSpec("T08", "R-08", "前後端同時ONは異常", "Conflicting position sensors are a fault", "G3",
-             "Power on.", "Force X2 and X3 ON together.", "FAULT F002; outputs off.",
-             "sensor_conflict", "fault"),
-    TestSpec("T09", "R-09", "故障リセットで動作しない", "Fault reset does not move the machine", "G3",
-             "FAULT active; START released.", "Reset the fault.", "IDLE, all outputs off, START still required.",
-             "fault_reset", "fault"),
-    TestSpec("T10", "R-10", "動作遅れもタイムアウトで検出", "Slow motion is caught by the timeout", "G3",
-             "START accepted.", "Confirm X3 after 4 s.", "FAULT F001 at the timeout.",
-             "motion_slow", "fault"),
-    TestSpec("T11", "R-11", "実機の通電試験は未実施", "Energised hardware test not performed", "G5",
-             "Requires approved equipment, isolation procedure and qualified supervision.",
-             "Perform an approved energised functional test.", "Only a supervised, approved test can pass.",
-             "blocked", "hardware"),
-    TestSpec("T12", "R-12", "安全機能の検証は対象外", "Safety-function validation is out of scope", "G5",
-             "Requires a risk assessment and a validated safety system.",
-             "Validate the protective stop function.", "Out of scope for this course.",
-             "blocked", "safety"),
-]
+def interlock_allows(required_conditions: dict[str, bool], command: bool) -> bool:
+    """A command is only issued when every interlock condition is true."""
+    if not isinstance(required_conditions, dict) or not required_conditions:
+        raise ValueError("required_conditions must be a non-empty dict")
+    return bool(command) and all(bool(value) for value in required_conditions.values())
 
 
-def run_test_spec(spec: TestSpec) -> TestRecord:
-    record = TestRecord(
-        test_id=spec.test_id,
-        requirement_id=spec.requirement_id,
-        preconditions=spec.preconditions,
-        procedure=spec.procedure,
-        expected=spec.expected,
-        actual="",
-        status="NOT TESTED",
-        evidence="offline deterministic simulation" if spec.scenario != "blocked" else "no hardware / no approval",
-        operator="training simulator",
-        date=TRAINING_DATE,
-    )
-    if spec.scenario == "blocked":
-        record.status = "BLOCKED"
-        record.actual = "Not performed in the classroom; requires supervised hardware and approval."
-        return record
-    result = run_scenario(spec.scenario)
-    return _eval(record, result, spec.scenario)
+# --------------------------------------------------------------------------- #
+# 7. camera optics and inspection timing (Day 9)
+# --------------------------------------------------------------------------- #
+def object_space_sampling_mm_per_px(field_of_view_mm: float, image_pixels: float) -> float:
+    """Object-space size of one pixel: FOV across the sensor / pixels across it."""
+    _positive("field_of_view_mm", field_of_view_mm)
+    _positive("image_pixels", image_pixels)
+    return field_of_view_mm / image_pixels
 
 
-def commissioning_matrix() -> list[TestRecord]:
-    return [run_test_spec(spec) for spec in TEST_SPECS]
+def defect_size_px(defect_mm: float, sampling_mm_per_px: float) -> float:
+    """Approximate number of pixels covered by a defect (ignores optics and blur)."""
+    _positive("defect_mm", defect_mm)
+    _positive("sampling_mm_per_px", sampling_mm_per_px)
+    return defect_mm / sampling_mm_per_px
 
 
-def matrix_markdown(records: list[TestRecord]) -> str:
-    lines = ["| Test | Req | Expected | Actual | Status | Evidence |", "|---|---|---|---|---|---|"]
-    for record in records:
-        lines.append("| " + " | ".join(record.as_row()) + " |")
-    return "\n".join(lines)
+def motion_blur_mm(speed_mm_s: float, exposure_s: float) -> float:
+    """Object movement during one exposure: distance = speed * time."""
+    _positive("speed_mm_s", speed_mm_s, allow_zero=True)
+    _positive("exposure_s", exposure_s, allow_zero=True)
+    return speed_mm_s * exposure_s
+
+
+def motion_blur_px(speed_mm_s: float, exposure_s: float, sampling_mm_per_px: float) -> float:
+    """Motion blur expressed in object-space pixels."""
+    _positive("sampling_mm_per_px", sampling_mm_per_px)
+    return motion_blur_mm(speed_mm_s, exposure_s) / sampling_mm_per_px
+
+
+def exposure_time_s(target_blur_px: float, speed_mm_s: float, sampling_mm_per_px: float) -> float:
+    """Exposure that limits blur on the object to ``target_blur_px`` pixels.
+
+    Illustrative engineering target, not a guarantee of inspection performance.
+    """
+    _positive("target_blur_px", target_blur_px)
+    _positive("speed_mm_s", speed_mm_s)
+    _positive("sampling_mm_per_px", sampling_mm_per_px)
+    return target_blur_px * sampling_mm_per_px / speed_mm_s
+
+
+def line_rate_lps(speed_mm_s: float, sampling_mm_per_line: float) -> float:
+    """Ideal line rate for a line-scan camera: speed / sampling along motion."""
+    _positive("speed_mm_s", speed_mm_s)
+    _positive("sampling_mm_per_line", sampling_mm_per_line)
+    return speed_mm_s / sampling_mm_per_line
+
+
+def frame_interval_move_mm(speed_mm_s: float, fps: float) -> float:
+    """Material movement between consecutive nominal frames."""
+    _positive("speed_mm_s", speed_mm_s)
+    _positive("fps", fps)
+    return speed_mm_s / fps
+
+
+INSPECTION_RESULTS = ("OK", "NG", "INVALID")
+
+
+def inspection_decision(result: str | None, *, image_available: bool = True,
+                        inference_ok: bool = True, communication_ok: bool = True) -> str:
+    """Map an inference result to an inspection decision.
+
+    A missing image, a failed inference or a failed communication link yields
+    INVALID.  INVALID must never be treated as OK; the machine response has to
+    be designed and validated for the real equipment.
+    """
+    if not image_available or not inference_ok or not communication_ok:
+        return "INVALID"
+    if result not in ("OK", "NG"):
+        return "INVALID"
+    return result
+
+
+def imaging_checklist() -> list[dict]:
+    """Items that must be recorded to reproduce an imaging condition."""
+    return [
+        {"item_ja": "カメラ機種", "item_en": "camera model"},
+        {"item_ja": "レンズ", "item_en": "lens"},
+        {"item_ja": "作動距離", "item_en": "working distance"},
+        {"item_ja": "視野", "item_en": "field of view"},
+        {"item_ja": "カメラ角度", "item_en": "camera angle"},
+        {"item_ja": "照明の種類", "item_en": "light type"},
+        {"item_ja": "照明の位置", "item_en": "light position"},
+        {"item_ja": "露光時間", "item_en": "exposure time"},
+        {"item_ja": "ゲイン", "item_en": "gain"},
+        {"item_ja": "フレームレート／ライン速度", "item_en": "frame rate or line rate"},
+        {"item_ja": "材料速度", "item_en": "material speed"},
+        {"item_ja": "画像解像度", "item_en": "image resolution"},
+        {"item_ja": "代表的な欠陥サンプル", "item_en": "representative defect samples"},
+        {"item_ja": "環境条件", "item_en": "environmental conditions"},
+    ]

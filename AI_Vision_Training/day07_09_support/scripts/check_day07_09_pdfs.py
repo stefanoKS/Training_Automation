@@ -54,8 +54,11 @@ def main() -> int:
                     "no_raw_markdown_bold", "no_raw_markdown_link", "no_broken_ip", "no_html_tag"):
             if not checks[key]:
                 failures.append(f"{day}: {key}")
-        if pages < 15:
+        minimum_pages = 12 if day == "Day09" else 15
+        if pages < minimum_pages:
             failures.append(f"{day}: too few pages ({pages})")
+        if day == "Day09" and pages > 19:
+            failures.append(f"{day}: {pages} pages exceeds the 19-page limit")
         if images < 4:
             failures.append(f"{day}: too few images ({images})")
 

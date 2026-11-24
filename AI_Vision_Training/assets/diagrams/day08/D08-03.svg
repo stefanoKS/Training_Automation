@@ -1,66 +1,95 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="830" viewBox="0 0 1440 830" role="img" aria-labelledby="title desc"><title id="title">スイッチとリレーの違い / Switch versus relay</title><desc id="desc">スイッチとリレーの違い / Switch versus relay — editable bilingual training diagram for 第8日 / Day 8.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#2563A6"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#A32B2B"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#1B7A4B"/></marker></defs><rect x="0" y="0" width="1440" height="830" fill="#F5F8FC"/><rect x="0" y="0" width="1440" height="12" fill="#2563A6"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1200" viewBox="0 0 1440 1200" role="img" aria-labelledby="title desc"><title id="title">制御盤の機器 / Control panel components</title><desc id="desc">制御盤の機器 / Control panel components — editable bilingual training diagram for 第8日 / Day 8.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#2563A6"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#A32B2B"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#1B7A4B"/></marker></defs><rect x="0" y="0" width="1440" height="1200" fill="#F5F8FC"/><rect x="0" y="0" width="1440" height="12" fill="#2563A6"/>
 <text x="56.0" y="56.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#2563A6" font-weight="700" text-anchor="start">第8日 / Day 8</text>
-<text x="56.0" y="104.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="32" fill="#142B3F" font-weight="700" text-anchor="start">スイッチとリレーの違い</text>
-<text x="56.0" y="144.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="26" fill="#526378" font-weight="400" text-anchor="start">Switch versus relay</text>
-<rect x="70.0" y="190.0" width="620.0" height="330.0" rx="10" fill="#FFFFFF" stroke="#C1D0DD" stroke-width="1.4"/>
-<text x="86.0" y="220.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#142B3F" font-weight="700" text-anchor="start">スイッチ: 人が接点を操作</text>
-<text x="86.0" y="242.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">switch: a person operates the contact</text>
-<path d="M130.0 270.0 L530.0 270.0" fill="none" stroke="#B4541E" stroke-width="3" marker-end="url(#arrow)"/>
-<text x="150.0" y="255.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#B4541E" font-weight="700" text-anchor="start">+24V</text>
-<path d="M300.0 270.0 L300.0 310.0" fill="none" stroke="#B4541E" stroke-width="2"/>
-<path d="M300.0 310.0 L380.0 350.0" fill="none" stroke="#1F5C99" stroke-width="2.4"/>
-<path d="M380.0 310.0 L300.0 350.0" fill="none" stroke="#1F5C99" stroke-width="2.4"/>
-<text x="340.0" y="390.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#1F5C99" font-weight="700" text-anchor="middle">スイッチ / switch</text>
-<circle cx="480.0" cy="320.0" r="30.0" fill="#E8F1FA" stroke="#1F5C99" stroke-width="2"/>
-<text x="480.0" y="325.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#1F5C99" font-weight="700" text-anchor="middle">負荷</text>
-<path d="M530.0 270.0 L530.0 320.0" fill="none" stroke="#B4541E" stroke-width="2"/>
-<path d="M480.0 350.0 L480.0 420.0" fill="none" stroke="#526378" stroke-width="2"/>
-<text x="480.0" y="440.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#526378" font-weight="700" text-anchor="middle">0V</text>
-<text x="130.0" y="490.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#142B3F" font-weight="400" text-anchor="start">接点定格・操作頻度・負荷種別を確認する。</text>
-<rect x="710.0" y="190.0" width="660.0" height="330.0" rx="10" fill="#FFFFFF" stroke="#C1D0DD" stroke-width="1.4"/>
-<text x="726.0" y="220.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#142B3F" font-weight="700" text-anchor="start">リレー: コイルで接点を操作</text>
-<text x="726.0" y="242.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">relay: a coil operates the contact</text>
-<path d="M760.0 260.0 L1160.0 260.0" fill="none" stroke="#B4541E" stroke-width="3" marker-end="url(#arrow)"/>
-<text x="775.0" y="245.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#B4541E" font-weight="700" text-anchor="start">+24V</text>
-<rect x="850.0" y="285.0" width="120.0" height="70.0" rx="4" fill="#F1ECF8" stroke="#6B3FA0" stroke-width="2"/>
-<text x="910.0" y="315.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#6B3FA0" font-weight="700" text-anchor="middle">コイル</text>
-<text x="910.0" y="335.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#526378" font-weight="400" text-anchor="middle">coil</text>
-<path d="M910.0 260.0 L910.0 285.0" fill="none" stroke="#B4541E" stroke-width="2"/>
-<path d="M910.0 355.0 L910.0 420.0" fill="none" stroke="#526378" stroke-width="2"/>
-<text x="910.0" y="440.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#526378" font-weight="700" text-anchor="middle">0V</text>
-<path d="M1040.0 320.0 L1130.0 320.0" fill="none" stroke="#6B3FA0" stroke-width="2" stroke-dasharray="4 4" marker-end="url(#arrow)"/>
-<text x="1080.0" y="305.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#6B3FA0" font-weight="600" text-anchor="middle">電磁力</text>
-<path d="M1180.0 260.0 L1280.0 260.0" fill="none" stroke="#B4541E" stroke-width="2"/>
-<path d="M1180.0 350.0 L1280.0 350.0" fill="none" stroke="#B4541E" stroke-width="2"/>
-<path d="M1180.0 260.0 L1180.0 285.0" fill="none" stroke="#B4541E" stroke-width="2"/>
-<path d="M1180.0 350.0 L1180.0 325.0" fill="none" stroke="#B4541E" stroke-width="2"/>
-<text x="1230.0" y="390.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#1F5C99" font-weight="600" text-anchor="middle">接点 / contact</text>
-<text x="760.0" y="490.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#142B3F" font-weight="400" text-anchor="start">小さな信号で大きな負荷を間接操作できる。</text>
-<rect x="70.0" y="560.0" width="360.0" height="38.0" rx="2" fill="#E8F1FA" stroke="#C1D0DD" stroke-width="1"/>
-<text x="250.0" y="585.8" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#142B3F" font-weight="700" text-anchor="middle">物理接点 / contact</text>
-<rect x="430.0" y="560.0" width="250.0" height="38.0" rx="2" fill="#E8F1FA" stroke="#C1D0DD" stroke-width="1"/>
-<text x="555.0" y="585.8" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#142B3F" font-weight="700" text-anchor="middle">通常 / normal</text>
-<rect x="680.0" y="560.0" width="250.0" height="38.0" rx="2" fill="#E8F1FA" stroke="#C1D0DD" stroke-width="1"/>
-<text x="805.0" y="585.8" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#142B3F" font-weight="700" text-anchor="middle">操作 / operated</text>
-<rect x="70.0" y="598.0" width="360.0" height="38.0" rx="2" fill="#FFFFFF" stroke="#C1D0DD" stroke-width="1"/>
-<text x="82.0" y="623.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#142B3F" font-weight="400" text-anchor="start">NO</text>
-<rect x="430.0" y="598.0" width="250.0" height="38.0" rx="2" fill="#FFFFFF" stroke="#C1D0DD" stroke-width="1"/>
-<text x="442.0" y="623.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#142B3F" font-weight="400" text-anchor="start">開 / open</text>
-<rect x="680.0" y="598.0" width="250.0" height="38.0" rx="2" fill="#FFFFFF" stroke="#C1D0DD" stroke-width="1"/>
-<text x="692.0" y="623.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#142B3F" font-weight="400" text-anchor="start">閉 / closed</text>
-<rect x="70.0" y="636.0" width="360.0" height="38.0" rx="2" fill="#FFFFFF" stroke="#C1D0DD" stroke-width="1"/>
-<text x="82.0" y="661.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#142B3F" font-weight="400" text-anchor="start">NC</text>
-<rect x="430.0" y="636.0" width="250.0" height="38.0" rx="2" fill="#FFFFFF" stroke="#C1D0DD" stroke-width="1"/>
-<text x="442.0" y="661.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#142B3F" font-weight="400" text-anchor="start">閉 / closed</text>
-<rect x="680.0" y="636.0" width="250.0" height="38.0" rx="2" fill="#FFFFFF" stroke="#C1D0DD" stroke-width="1"/>
-<text x="692.0" y="661.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#142B3F" font-weight="400" text-anchor="start">開 / open</text>
-<rect x="980.0" y="560.0" width="390.0" height="120.0" rx="8" fill="#F8E7E7" stroke="#A32B2B" stroke-width="1.2"/>
-<text x="1000.0" y="592.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#A32B2B" font-weight="700" text-anchor="start">物理NC ≠ ラダーのNC命令</text>
-<text x="1000.0" y="616.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#526378" font-weight="400" text-anchor="start">physical NC is not automatically</text>
-<text x="1000.0" y="636.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#526378" font-weight="400" text-anchor="start">a logical NC instruction.</text>
-<text x="1000.0" y="660.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#142B3F" font-weight="600" text-anchor="start">入力のON/OFFで論理を組み立てる。</text>
-<rect x="56.0" y="714.0" width="1328.0" height="60.0" rx="10" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
-<text x="76.0" y="748.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#142B3F" font-weight="700" text-anchor="start">スイッチは直接、リレーはコイルを介して接点を動かす。どちらも接点定格と負荷種別を確認する。</text>
-<text x="76.0" y="770.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14.5" fill="#526378" font-weight="400" text-anchor="start">A switch operates a contact directly; a relay uses a coil. Both require contact ratings and load-type checks.</text>
-<text x="1400" y="822" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" text-anchor="end">D08-03 • 編集可能な図 / editable SVG</text>
+<text x="56.0" y="104.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="32" fill="#142B3F" font-weight="700" text-anchor="start">制御盤の機器</text>
+<text x="56.0" y="144.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="26" fill="#526378" font-weight="400" text-anchor="start">Control panel components</text>
+<rect x="70.0" y="180.0" width="295.0" height="165.0" rx="12" fill="#FFFFFF" stroke="#1F5C99" stroke-width="2"/>
+<rect x="70.0" y="190.0" width="7.0" height="145.0" rx="3" fill="#1F5C99" stroke="#1F5C99" stroke-width="0"/>
+<text x="92.0" y="252.2" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">配線用遮断器</text>
+<text x="92.0" y="273.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">circuit breaker</text>
+<text x="92.0" y="291.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">過電流保護 / overcurrent</text>
+<rect x="385.0" y="180.0" width="295.0" height="165.0" rx="12" fill="#FFFFFF" stroke="#6B3FA0" stroke-width="2"/>
+<rect x="385.0" y="190.0" width="7.0" height="145.0" rx="3" fill="#6B3FA0" stroke="#6B3FA0" stroke-width="0"/>
+<text x="407.0" y="252.2" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">漏電遮断器</text>
+<text x="407.0" y="273.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">earth-leakage device</text>
+<text x="407.0" y="291.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">漏れ電流 / leakage</text>
+<rect x="700.0" y="180.0" width="295.0" height="165.0" rx="12" fill="#FFFFFF" stroke="#1F5C99" stroke-width="2"/>
+<rect x="700.0" y="190.0" width="7.0" height="145.0" rx="3" fill="#1F5C99" stroke="#1F5C99" stroke-width="0"/>
+<text x="722.0" y="242.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">ヒューズ</text>
+<text x="722.0" y="264.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">fuse</text>
+<text x="722.0" y="282.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">規定特性で溶断 / opens on</text>
+<text x="722.0" y="300.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">overcurrent</text>
+<rect x="1015.0" y="180.0" width="295.0" height="165.0" rx="12" fill="#FFFFFF" stroke="#6B3FA0" stroke-width="2"/>
+<rect x="1015.0" y="190.0" width="7.0" height="145.0" rx="3" fill="#6B3FA0" stroke="#6B3FA0" stroke-width="0"/>
+<text x="1037.0" y="252.2" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">スイッチング電源</text>
+<text x="1037.0" y="273.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">switching power supply</text>
+<text x="1037.0" y="291.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">AC → DC</text>
+<rect x="70.0" y="370.0" width="295.0" height="165.0" rx="12" fill="#FFFFFF" stroke="#1F5C99" stroke-width="2"/>
+<rect x="70.0" y="380.0" width="7.0" height="145.0" rx="3" fill="#1F5C99" stroke="#1F5C99" stroke-width="0"/>
+<text x="92.0" y="442.2" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">DC/DCコンバータ</text>
+<text x="92.0" y="463.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">DC/DC converter</text>
+<text x="92.0" y="481.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">DC → DC</text>
+<rect x="385.0" y="370.0" width="295.0" height="165.0" rx="12" fill="#FFFFFF" stroke="#6B3FA0" stroke-width="2"/>
+<rect x="385.0" y="380.0" width="7.0" height="145.0" rx="3" fill="#6B3FA0" stroke="#6B3FA0" stroke-width="0"/>
+<text x="407.0" y="442.2" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">リレー</text>
+<text x="407.0" y="463.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">relay</text>
+<text x="407.0" y="481.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">信号で接点 / switches contacts</text>
+<rect x="700.0" y="370.0" width="295.0" height="165.0" rx="12" fill="#FFFFFF" stroke="#1F5C99" stroke-width="2"/>
+<rect x="700.0" y="380.0" width="7.0" height="145.0" rx="3" fill="#1F5C99" stroke="#1F5C99" stroke-width="0"/>
+<text x="722.0" y="442.2" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">電磁接触器</text>
+<text x="722.0" y="463.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">contactor</text>
+<text x="722.0" y="481.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">動力負荷 / power loads</text>
+<rect x="1015.0" y="370.0" width="295.0" height="165.0" rx="12" fill="#FFFFFF" stroke="#6B3FA0" stroke-width="2"/>
+<rect x="1015.0" y="380.0" width="7.0" height="145.0" rx="3" fill="#6B3FA0" stroke="#6B3FA0" stroke-width="0"/>
+<text x="1037.0" y="442.2" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">サーマルリレー</text>
+<text x="1037.0" y="463.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">overload relay</text>
+<text x="1037.0" y="481.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">モーター保護 / motor overload</text>
+<rect x="70.0" y="560.0" width="295.0" height="165.0" rx="12" fill="#FFFFFF" stroke="#1F5C99" stroke-width="2"/>
+<rect x="70.0" y="570.0" width="7.0" height="145.0" rx="3" fill="#1F5C99" stroke="#1F5C99" stroke-width="0"/>
+<text x="92.0" y="632.2" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">端子台</text>
+<text x="92.0" y="653.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">terminal block</text>
+<text x="92.0" y="671.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">接続点 / connection points</text>
+<rect x="385.0" y="560.0" width="295.0" height="165.0" rx="12" fill="#FFFFFF" stroke="#6B3FA0" stroke-width="2"/>
+<rect x="385.0" y="570.0" width="7.0" height="145.0" rx="3" fill="#6B3FA0" stroke="#6B3FA0" stroke-width="0"/>
+<text x="407.0" y="632.2" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">押しボタン</text>
+<text x="407.0" y="653.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">pushbutton</text>
+<text x="407.0" y="671.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">作業者の指令 / operator input</text>
+<rect x="700.0" y="560.0" width="295.0" height="165.0" rx="12" fill="#FFFFFF" stroke="#1F5C99" stroke-width="2"/>
+<rect x="700.0" y="570.0" width="7.0" height="145.0" rx="3" fill="#1F5C99" stroke="#1F5C99" stroke-width="0"/>
+<text x="722.0" y="632.2" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">表示灯</text>
+<text x="722.0" y="653.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">indicator lamp</text>
+<text x="722.0" y="671.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">状態表示 / state display</text>
+<rect x="1015.0" y="560.0" width="295.0" height="165.0" rx="12" fill="#FFFFFF" stroke="#6B3FA0" stroke-width="2"/>
+<rect x="1015.0" y="570.0" width="7.0" height="145.0" rx="3" fill="#6B3FA0" stroke="#6B3FA0" stroke-width="0"/>
+<text x="1037.0" y="622.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">非常停止</text>
+<text x="1037.0" y="644.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">emergency stop</text>
+<text x="1037.0" y="662.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">人の危険の停止 / stops for</text>
+<text x="1037.0" y="680.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">danger</text>
+<rect x="70.0" y="750.0" width="295.0" height="165.0" rx="12" fill="#FFFFFF" stroke="#1F5C99" stroke-width="2"/>
+<rect x="70.0" y="760.0" width="7.0" height="145.0" rx="3" fill="#1F5C99" stroke="#1F5C99" stroke-width="0"/>
+<text x="92.0" y="812.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">PLC</text>
+<text x="92.0" y="834.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">programmable controller</text>
+<text x="92.0" y="852.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">入力→判断→出力 / input,</text>
+<text x="92.0" y="870.1" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">decide, output</text>
+<rect x="385.0" y="750.0" width="295.0" height="165.0" rx="12" fill="#FFFFFF" stroke="#6B3FA0" stroke-width="2"/>
+<rect x="385.0" y="760.0" width="7.0" height="145.0" rx="3" fill="#6B3FA0" stroke="#6B3FA0" stroke-width="0"/>
+<text x="407.0" y="822.2" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">インバータ</text>
+<text x="407.0" y="843.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">inverter</text>
+<text x="407.0" y="861.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">速度可変 / variable speed</text>
+<rect x="700.0" y="750.0" width="295.0" height="165.0" rx="12" fill="#FFFFFF" stroke="#1F5C99" stroke-width="2"/>
+<rect x="700.0" y="760.0" width="7.0" height="145.0" rx="3" fill="#1F5C99" stroke="#1F5C99" stroke-width="0"/>
+<text x="722.0" y="822.2" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">サーボアンプ</text>
+<text x="722.0" y="843.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">servo amplifier</text>
+<text x="722.0" y="861.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">フィードバック制御 / closed loop</text>
+<rect x="1015.0" y="750.0" width="295.0" height="165.0" rx="12" fill="#FFFFFF" stroke="#6B3FA0" stroke-width="2"/>
+<rect x="1015.0" y="760.0" width="7.0" height="145.0" rx="3" fill="#6B3FA0" stroke="#6B3FA0" stroke-width="0"/>
+<text x="1037.0" y="822.2" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">保護・接地</text>
+<text x="1037.0" y="843.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">protection and earthing</text>
+<text x="1037.0" y="861.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">感電・ノイズ / shock, noise</text>
+<rect x="70.0" y="960.0" width="1300.0" height="78.0" rx="8" fill="#E8F1FA" stroke="#2563A6" stroke-width="1.2"/>
+<text x="88.0" y="990.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="700" text-anchor="start">形・色・端子配置は機種で違う。公式カタログとマニュアルで確認する。</text>
+<text x="88.0" y="1014.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#526378" font-weight="400" text-anchor="start">Shape, colour and terminal layout differ by model; check the official catalogue and manual.</text>
+<rect x="56.0" y="1084.0" width="1328.0" height="60.0" rx="10" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
+<text x="76.0" y="1118.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#142B3F" font-weight="700" text-anchor="start">盤の主要機器の位置と役割。模式的な形であり実機の外観ではない</text>
+<text x="76.0" y="1140.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14.5" fill="#526378" font-weight="400" text-anchor="start">Position and role of the main panel devices; schematic shapes, not real appearance</text>
+<text x="1400" y="1192" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" text-anchor="end">D08-03 • 編集可能な図 / editable SVG</text>
 </svg>

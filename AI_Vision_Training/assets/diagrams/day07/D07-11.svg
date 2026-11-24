@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="960" viewBox="0 0 1440 960" role="img" aria-labelledby="title desc"><title id="title">動きの種類とハンドリング / Motion types and handling</title><desc id="desc">動きの種類とハンドリング / Motion types and handling — editable bilingual training diagram for 第7日 / Day 7.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#2563A6"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#A32B2B"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#1B7A4B"/></marker></defs><rect x="0" y="0" width="1440" height="960" fill="#F5F8FC"/><rect x="0" y="0" width="1440" height="12" fill="#2563A6"/>
+<text x="56.0" y="56.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#2563A6" font-weight="700" text-anchor="start">第7日 / Day 7</text>
+<text x="56.0" y="104.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="32" fill="#142B3F" font-weight="700" text-anchor="start">動きの種類とハンドリング</text>
+<text x="56.0" y="144.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="26" fill="#526378" font-weight="400" text-anchor="start">Motion types and handling</text>
+<rect x="70.0" y="190.0" width="310.0" height="200.0" rx="12" fill="#FFFFFF" stroke="#1F5C99" stroke-width="2"/>
+<rect x="70.0" y="200.0" width="7.0" height="180.0" rx="3" fill="#1F5C99" stroke="#1F5C99" stroke-width="0"/>
+<text x="92.0" y="269.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">直線運動</text>
+<text x="92.0" y="291.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">linear motion</text>
+<text x="92.0" y="309.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">シリンダ・電動リニア / cylinder,</text>
+<text x="92.0" y="327.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">electric linear</text>
+<rect x="405.0" y="190.0" width="310.0" height="200.0" rx="12" fill="#FFFFFF" stroke="#1F5C99" stroke-width="2"/>
+<rect x="405.0" y="200.0" width="7.0" height="180.0" rx="3" fill="#1F5C99" stroke="#1F5C99" stroke-width="0"/>
+<text x="427.0" y="269.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">回転運動</text>
+<text x="427.0" y="291.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">rotary motion</text>
+<text x="427.0" y="309.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">モーター・ロータリアクチュエータ /</text>
+<text x="427.0" y="327.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">motor, rotary actuator</text>
+<rect x="740.0" y="190.0" width="310.0" height="200.0" rx="12" fill="#FFFFFF" stroke="#1B7A4B" stroke-width="2"/>
+<rect x="740.0" y="200.0" width="7.0" height="180.0" rx="3" fill="#1B7A4B" stroke="#1B7A4B" stroke-width="0"/>
+<text x="762.0" y="269.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">把持</text>
+<text x="762.0" y="291.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">gripping</text>
+<text x="762.0" y="309.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">エア・電動グリッパ / air or</text>
+<text x="762.0" y="327.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">electric gripper</text>
+<rect x="1075.0" y="190.0" width="310.0" height="200.0" rx="12" fill="#FFFFFF" stroke="#0E7490" stroke-width="2"/>
+<rect x="1075.0" y="200.0" width="7.0" height="180.0" rx="3" fill="#0E7490" stroke="#0E7490" stroke-width="0"/>
+<text x="1097.0" y="269.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">真空吸着</text>
+<text x="1097.0" y="291.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">vacuum holding</text>
+<text x="1097.0" y="309.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">圧力差で保持 / holds by pressure</text>
+<text x="1097.0" y="327.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">difference</text>
+<rect x="70.0" y="440.0" width="620.0" height="250.0" rx="10" fill="#FFFFFF" stroke="#C1D0DD" stroke-width="1.4"/>
+<text x="86.0" y="470.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#142B3F" font-weight="700" text-anchor="start">真空吸着の条件</text>
+<text x="86.0" y="492.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">vacuum holding conditions</text>
+<text x="90.0" y="530.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#142B3F" font-weight="700" text-anchor="start">保持力は次で変わる / holding force depends on</text>
+<text x="90.0" y="570.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#142B3F" font-weight="400" text-anchor="start">・パッド面積 / cup area</text>
+<text x="90.0" y="600.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#142B3F" font-weight="400" text-anchor="start">・圧力差 / pressure difference</text>
+<text x="90.0" y="630.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#142B3F" font-weight="400" text-anchor="start">・表面状態 / surface condition</text>
+<text x="90.0" y="660.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#142B3F" font-weight="400" text-anchor="start">・ワーク重量と加速度 / weight and acceleration</text>
+<rect x="750.0" y="440.0" width="620.0" height="250.0" rx="10" fill="#FFFFFF" stroke="#C1D0DD" stroke-width="1.4"/>
+<text x="766.0" y="470.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#142B3F" font-weight="700" text-anchor="start">向かない面</text>
+<text x="766.0" y="492.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">unsuitable surfaces</text>
+<text x="770.0" y="530.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="400" text-anchor="start">・ざらつきが大きい / very rough</text>
+<text x="770.0" y="570.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="400" text-anchor="start">・通気性がある / porous</text>
+<text x="770.0" y="610.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="400" text-anchor="start">・反り・しわが大きい / warped or wrinkled</text>
+<text x="770.0" y="650.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="400" text-anchor="start">・油分が多い / oily</text>
+<rect x="70.0" y="720.0" width="1300.0" height="78.0" rx="8" fill="#E8F1FA" stroke="#2563A6" stroke-width="1.2"/>
+<text x="88.0" y="750.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="700" text-anchor="start">真空はすべての面に向くわけではない。表面と加速度で決まる。</text>
+<text x="88.0" y="774.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#526378" font-weight="400" text-anchor="start">Vacuum is not suitable for every surface; the surface and acceleration decide.</text>
+<rect x="56.0" y="844.0" width="1328.0" height="60.0" rx="10" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
+<text x="76.0" y="878.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#142B3F" font-weight="700" text-anchor="start">直線・回転・把持・真空の使い分けと、真空保持の条件</text>
+<text x="76.0" y="900.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14.5" fill="#526378" font-weight="400" text-anchor="start">Choosing linear, rotary, gripping or vacuum handling, and the conditions for vacuum holding</text>
+<text x="1400" y="952" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" text-anchor="end">D07-11 • 編集可能な図 / editable SVG</text>
+</svg>

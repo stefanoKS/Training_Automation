@@ -24,7 +24,7 @@ INKSCAPE_CANDIDATES = (
     Path("/usr/bin/inkscape"),
 )
 SIZE_RE = re.compile(r'<svg[^>]*width="(\d+)"[^>]*height="(\d+)"')
-COUNTS = {"day07": 9, "day08": 11, "day09": 9}
+COUNTS = {"day07": 14, "day08": 14, "day09": 11}
 
 
 def expected_sources() -> list[Path]:

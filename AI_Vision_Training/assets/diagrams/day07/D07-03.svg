@@ -1,50 +1,41 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="960" viewBox="0 0 1440 960" role="img" aria-labelledby="title desc"><title id="title">タクト・サイクル・実力能力 / Takt, cycle and effective capacity</title><desc id="desc">タクト・サイクル・実力能力 / Takt, cycle and effective capacity — editable bilingual training diagram for 第7日 / Day 7.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#2563A6"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#A32B2B"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#1B7A4B"/></marker></defs><rect x="0" y="0" width="1440" height="960" fill="#F5F8FC"/><rect x="0" y="0" width="1440" height="12" fill="#2563A6"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="860" viewBox="0 0 1440 860" role="img" aria-labelledby="title desc"><title id="title">タクト・サイクル・生産能力 / Takt time, cycle time and capacity</title><desc id="desc">タクト・サイクル・生産能力 / Takt time, cycle time and capacity — editable bilingual training diagram for 第7日 / Day 7.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#2563A6"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#A32B2B"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#1B7A4B"/></marker></defs><rect x="0" y="0" width="1440" height="860" fill="#F5F8FC"/><rect x="0" y="0" width="1440" height="12" fill="#2563A6"/>
 <text x="56.0" y="56.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#2563A6" font-weight="700" text-anchor="start">第7日 / Day 7</text>
-<text x="56.0" y="104.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="32" fill="#142B3F" font-weight="700" text-anchor="start">タクト・サイクル・実力能力</text>
-<text x="56.0" y="144.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="26" fill="#526378" font-weight="400" text-anchor="start">Takt, cycle and effective capacity</text>
-<rect x="70.0" y="190.0" width="620.0" height="300.0" rx="10" fill="#FFFFFF" stroke="#C1D0DD" stroke-width="1.4"/>
-<text x="86.0" y="220.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#142B3F" font-weight="700" text-anchor="start">時間の関係 / time relationship</text>
-<text x="86.0" y="242.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">target pace versus machine cycle</text>
-<path d="M110.0 330.0 L640.0 330.0" fill="none" stroke="#526378" stroke-width="3" marker-end="url(#arrow)"/>
-<text x="110.0" y="305.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">0 s</text>
-<text x="640.0" y="305.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">42 s</text>
-<rect x="110.0" y="345.0" width="530.0" height="22.0" rx="4" fill="#E6F4F7" stroke="#0E7490" stroke-width="1.4"/>
-<text x="375.0" y="362.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#0E7490" font-weight="600" text-anchor="middle">タクトタイム 42 s/個（目標）/ takt, target</text>
-<rect x="110.0" y="390.0" width="189.0" height="22.0" rx="4" fill="#E8F1FA" stroke="#1F5C99" stroke-width="1.4"/>
-<text x="205.0" y="407.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#1F5C99" font-weight="600" text-anchor="middle">サイクル 15 s/個 / cycle</text>
-<text x="110.0" y="450.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="600" text-anchor="start">サイクル &lt; タクト でも、停止と不良を別に考える。</text>
-<text x="110.0" y="474.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#526378" font-weight="400" text-anchor="start">Cycle &lt; takt, but downtime and defects must still be counted.</text>
-<rect x="720.0" y="190.0" width="650.0" height="300.0" rx="10" fill="#FFFFFF" stroke="#C1D0DD" stroke-width="1.4"/>
-<text x="736.0" y="220.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#142B3F" font-weight="700" text-anchor="start">能力の計算 / capacity calculation</text>
-<text x="736.0" y="242.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">theoretical, effective and required</text>
-<rect x="760.0" y="261.5" width="110.0" height="138.5" rx="4" fill="#1F5C99" stroke="#1F5C99" stroke-width="1"/>
-<text x="815.0" y="424.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#142B3F" font-weight="600" text-anchor="middle">理論 240</text>
-<text x="815.0" y="444.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#526378" font-weight="400" text-anchor="middle">theoretical /h</text>
-<text x="815.0" y="251.5" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#1F5C99" font-weight="700" text-anchor="middle">240</text>
-<rect x="930.0" y="284.7" width="110.0" height="115.3" rx="4" fill="#0E7490" stroke="#0E7490" stroke-width="1"/>
-<text x="985.0" y="424.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#142B3F" font-weight="600" text-anchor="middle">実力 199.92</text>
-<text x="985.0" y="444.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#526378" font-weight="400" text-anchor="middle">effective /h</text>
-<text x="985.0" y="274.7" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#0E7490" font-weight="700" text-anchor="middle">199.92</text>
-<rect x="1100.0" y="350.6" width="110.0" height="49.4" rx="4" fill="#1B7A4B" stroke="#1B7A4B" stroke-width="1"/>
-<text x="1155.0" y="424.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#142B3F" font-weight="600" text-anchor="middle">必要 85.71</text>
-<text x="1155.0" y="444.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#526378" font-weight="400" text-anchor="middle">required /h</text>
-<text x="1155.0" y="340.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#1B7A4B" font-weight="700" text-anchor="middle">85.71</text>
-<text x="760.0" y="470.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="600" text-anchor="start">実力 = 3600/15 × 0.85 × 0.98 = 199.92 個/時</text>
-<text x="760.0" y="492.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#526378" font-weight="400" text-anchor="start">effective = theoretical × availability × good yield</text>
-<rect x="70.0" y="540.0" width="1300.0" height="110.0" rx="10" fill="#EAF6EE" stroke="#1B7A4B" stroke-width="1.6"/>
-<text x="90.0" y="575.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#1B7A4B" font-weight="700" text-anchor="start">余裕の読み方 / reading the margin</text>
-<text x="90.0" y="605.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="400" text-anchor="start">必要 85.71 個/時 &lt; 実力 199.92 個/時。ただし、これは仮定値であり、実測ではない。</text>
-<text x="90.0" y="630.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#526378" font-weight="400" text-anchor="start">The requirement is below the effective capacity, but the inputs are assumptions, not measurements.</text>
-<rect x="70.0" y="700.0" width="26.0" height="18.0" rx="3" fill="#0E7490" stroke="#0E7490" stroke-width="1"/>
-<text x="106.0" y="715.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">タクト・実力 / takt and effective</text>
-<rect x="70.0" y="732.0" width="26.0" height="18.0" rx="3" fill="#1F5C99" stroke="#1F5C99" stroke-width="1"/>
-<text x="106.0" y="747.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">サイクル・理論 / cycle and theoretical</text>
-<rect x="70.0" y="764.0" width="26.0" height="18.0" rx="3" fill="#1B7A4B" stroke="#1B7A4B" stroke-width="1"/>
-<text x="106.0" y="779.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">必要能力 / required</text>
-<rect x="70.0" y="796.0" width="26.0" height="18.0" rx="3" fill="#A32B2B" stroke="#A32B2B" stroke-width="1"/>
-<text x="106.0" y="811.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">過信しない / do not over-trust</text>
-<rect x="56.0" y="844.0" width="1328.0" height="60.0" rx="10" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
-<text x="76.0" y="878.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#142B3F" font-weight="700" text-anchor="start">3つの時間と能力を混ぜない。タクトは目標、サイクルは実力、実力能力は停止と不良を含む。</text>
-<text x="76.0" y="900.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14.5" fill="#526378" font-weight="400" text-anchor="start">Keep takt, cycle and effective capacity separate. Only effective capacity includes downtime and defects.</text>
-<text x="1400" y="952" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" text-anchor="end">D07-03 • 編集可能な図 / editable SVG</text>
+<text x="56.0" y="104.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="32" fill="#142B3F" font-weight="700" text-anchor="start">タクト・サイクル・生産能力</text>
+<text x="56.0" y="144.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="26" fill="#526378" font-weight="400" text-anchor="start">Takt time, cycle time and capacity</text>
+<rect x="70.0" y="180.0" width="400.0" height="400.0" rx="10" fill="#FFFFFF" stroke="#C1D0DD" stroke-width="1.4"/>
+<text x="86.0" y="210.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#142B3F" font-weight="700" text-anchor="start">タクトタイム（必要ペース）</text>
+<text x="86.0" y="232.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">takt time (required pace)</text>
+<text x="90.0" y="290.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="20" fill="#142B3F" font-weight="700" text-anchor="start">生産時間 ÷ 必要数量</text>
+<text x="90.0" y="320.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">available time ÷ required pieces</text>
+<text x="90.0" y="390.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="24" fill="#2563A6" font-weight="700" text-anchor="start">420×60 ÷ 600 = 42 秒/個</text>
+<text x="90.0" y="425.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#526378" font-weight="400" text-anchor="start">42 s/piece</text>
+<text x="90.0" y="490.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="400" text-anchor="start">「間に合う速さ」の基準</text>
+<text x="90.0" y="515.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#526378" font-weight="400" text-anchor="start">the pace needed to finish on time</text>
+<rect x="500.0" y="180.0" width="400.0" height="400.0" rx="10" fill="#FFFFFF" stroke="#C1D0DD" stroke-width="1.4"/>
+<text x="516.0" y="210.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#142B3F" font-weight="700" text-anchor="start">サイクルタイム（機械の時間）</text>
+<text x="516.0" y="232.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">cycle time (machine time)</text>
+<text x="520.0" y="290.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="20" fill="#142B3F" font-weight="700" text-anchor="start">1サイクルの所要時間</text>
+<text x="520.0" y="320.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">time for one machine cycle</text>
+<text x="520.0" y="390.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="24" fill="#1F5C99" font-weight="700" text-anchor="start">15 秒/サイクル</text>
+<text x="520.0" y="425.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#526378" font-weight="400" text-anchor="start">15 s/cycle</text>
+<text x="520.0" y="490.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="400" text-anchor="start">「決められた動作時間」</text>
+<text x="520.0" y="515.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#526378" font-weight="400" text-anchor="start">the defined operation duration</text>
+<rect x="930.0" y="180.0" width="440.0" height="400.0" rx="10" fill="#FFFFFF" stroke="#C1D0DD" stroke-width="1.4"/>
+<text x="946.0" y="210.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#142B3F" font-weight="700" text-anchor="start">生産能力（個/時）</text>
+<text x="946.0" y="232.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">production capacity (pieces/hour)</text>
+<text x="950.0" y="280.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="20" fill="#142B3F" font-weight="700" text-anchor="start">3600 ÷ サイクル × 個数</text>
+<text x="950.0" y="310.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">3600 ÷ cycle × pieces per cycle</text>
+<text x="950.0" y="370.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="22" fill="#1B7A4B" font-weight="700" text-anchor="start">3600 ÷ 15 × 1 = 240 個/時</text>
+<text x="950.0" y="405.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start">240 pieces/hour</text>
+<text x="950.0" y="460.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="20" fill="#1B7A4B" font-weight="700" text-anchor="start">×2個/サイクル = 480 個/時</text>
+<text x="950.0" y="490.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">two pieces per cycle doubles it</text>
+<text x="950.0" y="540.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#B4541E" font-weight="700" text-anchor="start">個数を言わないと能力は決まらない</text>
+<text x="950.0" y="562.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#526378" font-weight="400" text-anchor="start">capacity is undefined without pieces per cycle</text>
+<rect x="70.0" y="620.0" width="1300.0" height="78.0" rx="8" fill="#E8F1FA" stroke="#2563A6" stroke-width="1.2"/>
+<text x="88.0" y="650.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="700" text-anchor="start">タクトは「必要」、サイクルは「機械」。単位を必ず書く。</text>
+<text x="88.0" y="674.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#526378" font-weight="400" text-anchor="start">Takt is what is required; cycle is the machine. Always write the unit.</text>
+<rect x="56.0" y="744.0" width="1328.0" height="60.0" rx="10" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
+<text x="76.0" y="778.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#142B3F" font-weight="700" text-anchor="start">タクト42秒/個に対してサイクル15秒なら速度は足りる。能力は個数/サイクルで変わる</text>
+<text x="76.0" y="800.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14.5" fill="#526378" font-weight="400" text-anchor="start">A 15 s cycle meets a 42 s takt; capacity changes with pieces per cycle</text>
+<text x="1400" y="852" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" text-anchor="end">D07-03 • 編集可能な図 / editable SVG</text>
 </svg>

@@ -1,9 +1,10 @@
-"""Tests for the Day 7-9 replacement curriculum.
+"""Tests for the revised Day 7-9 curriculum.
 
-The tests verify the actual curriculum, not merely that files exist:
-source PDF preservation, nine offline notebooks, independent calculations,
-PLC/sequence behaviour, commissioning statuses, diagrams, simulations, PDFs,
-timetable arithmetic and the protected Days 1-6 baseline.
+The tests verify the actual curriculum, not merely that files exist: source-PDF
+preservation, nine offline notebooks, independent calculations, sensor and PLC
+compatibility, restart prevention, interlocks, camera optics and timing,
+diagrams, the simulator, PDF structure and page budget, the timetable, the
+support documents and the protected Days 1-6 baseline.
 
 Run from the repository root or AI_Vision_Training:
     python -m pytest AI_Vision_Training/day07_09_support/tests -q
@@ -11,6 +12,7 @@ Run from the repository root or AI_Vision_Training:
 
 from __future__ import annotations
 
+import csv
 import json
 import math
 import re
@@ -40,21 +42,34 @@ import automation_models as am  # noqa: E402
 import build_day07_09_notebooks as builder  # noqa: E402
 
 FOLDERS = {
-    "day07": ("Day07_Automation_Concept_Mechanics", 9),
-    "day08": ("Day08_Electrical_PLC", 11),
-    "day09": ("Day09_Communication_Commissioning", 9),
+    "day07": ("Day07_Automation_Concept_Mechanics", 14),
+    "day08": ("Day08_Electrical_PLC", 14),
+    "day09": ("Day09_AI_Camera_Imaging", 11),
 }
 LESSONS = (
-    "Day07_01_Requirements",
-    "Day07_02_Mechanical_Architecture",
-    "Day07_03_Equipment_Selection",
+    "Day07_01_Capacity_And_Effect",
+    "Day07_02_Power_And_Actuators",
+    "Day07_03_Selection_Specifications",
     "Day08_01_Electrical_Fundamentals",
     "Day08_02_Sensors_and_IO",
     "Day08_03_Ladder_Sequence",
-    "Day09_01_Industrial_Networking",
-    "Day09_02_Commissioning",
-    "Day09_03_Automation_Proposal",
+    "Day09_01_Camera_Fundamentals",
+    "Day09_02_Lighting_and_Imaging_Environment",
+    "Day09_03_AI_Camera_System",
 )
+BILINGUAL_TOKENS = (
+    "学習目標", "Learning objectives", "前提", "Prerequisites",
+    "まとめ", "Summary", "完了チェックリスト", "Completion checklist",
+    "よくある間違い", "Troubleshooting",
+)
+
+
+def manuscript(name: str) -> Path:
+    for folder, _ in FOLDERS.values():
+        path = NOTEBOOKS / folder / f"{name}.md"
+        if path.is_file():
+            return path
+    raise FileNotFoundError(name)
 
 
 # --------------------------------------------------------------------------- #
@@ -72,10 +87,13 @@ def test_nine_notebooks_and_no_duplicate_active_course():
         matches = list(NOTEBOOKS.glob(f"*/{name}.ipynb"))
         assert len(matches) == 1, (name, matches)
         assert matches[0].with_suffix(".md").is_file()
-    for old in ("Day07_Machine_Fundamentals", "Day08_PLC_Control", "Day09_System_Integration"):
-        assert not (NOTEBOOKS / old).exists(), old
+    for obsolete in ("Day09_Communication_Commissioning", "Day07_Machine_Fundamentals",
+                     "Day08_PLC_Control", "Day09_System_Integration"):
+        assert not (NOTEBOOKS / obsolete).exists(), obsolete
+    for obsolete in ("Day07_01_Requirements", "Day09_01_Industrial_Networking",
+                     "Day09_02_Commissioning", "Day09_03_Automation_Proposal"):
+        assert not list(NOTEBOOKS.glob(f"*/{obsolete}.ipynb")), obsolete
     assert not (ROOT / "week2").exists()
-    assert not (NOTEBOOKS / "Day07_Machine_Fundamentals").exists()
 
 
 def test_manifest_and_fingerprints():
@@ -83,6 +101,7 @@ def test_manifest_and_fingerprints():
     specs = builder.lesson_specs(manifest)
     assert [spec.name for spec in specs] == list(LESSONS)
     assert {spec.duration_min for spec in specs} == {80, 85, 135}
+    assert [day["folder"] for day in manifest["days"]] == [folder for folder, _ in FOLDERS.values()]
     assert builder.stale_notebooks() == []
 
 
@@ -93,17 +112,21 @@ def test_notebook_structure_and_bilingual_content(name):
     nbformat.validate(notebook)
     codes = [cell for cell in notebook.cells if cell.cell_type == "code"]
     markdown = "\n".join("".join(cell.source) for cell in notebook.cells if cell.cell_type == "markdown")
-    assert len(codes) >= 3
     assert notebook.metadata["day07_09_source"] == f"{name}.md"
     assert notebook.metadata["day07_09_dependencies"]
-    for token in ("学習目標", "Learning objectives", "前提", "Prerequisites", "まとめ", "Summary",
-                  "完了チェックリスト", "Completion checklist", "トラブル", "Troubleshooting"):
+    for token in BILINGUAL_TOKENS:
         assert token in markdown, (name, token)
     assert re.search(r"[\u3040-\u30ff\u4e00-\u9fff]", markdown)
     assert re.search(r"\b(?:the|and|with|for|is|are)\b", markdown, re.I)
     for link in re.findall(r"!\[[^\]]*\]\(([^)]+)\)", markdown):
         assert (parent / link).is_file(), (name, link)
     assert "安全" in markdown and re.search(r"safety", markdown, re.I)
+    if name.startswith("Day07"):
+        assert codes == [], "Day 7 notebooks must not contain executable cells"
+        assert notebook.metadata["day07_09_executable_cells"] == 0
+        assert "実行するプログラムはありません" in markdown or "実行するセルはありません" in markdown
+    else:
+        assert len(codes) >= 1
 
 
 def test_every_notebook_executes_offline():
@@ -116,28 +139,45 @@ def test_every_notebook_executes_offline():
 
 
 # --------------------------------------------------------------------------- #
-# independent numerical checks
+# Day 7: capacity, mechanics, economics
 # --------------------------------------------------------------------------- #
 def test_capacity_numbers():
     assert am.takt_time_s(420, 600) == pytest.approx(42.0)
-    assert am.theoretical_capacity_per_h(15) == pytest.approx(240.0)
-    assert am.effective_capacity_per_h(15, 0.85, 0.98) == pytest.approx(199.92)
-    assert am.takt_time_s(450, 900) == pytest.approx(30.0)
-    assert am.effective_capacity_per_h(20, 0.80, 0.97) == pytest.approx(139.68)
+    assert am.capacity_per_h(15) == pytest.approx(240.0)
+    assert am.capacity_per_h(15, 2) == pytest.approx(480.0)
+    assert am.required_rate_per_h(600, 420) == pytest.approx(85.714285, abs=1e-5)
+    report = am.capacity_report()
+    assert report["takt_s"] == pytest.approx(42.0)
+    assert report["theoretical_per_h"] == pytest.approx(240.0)
+    assert report["cycle_meets_takt"] is True
+    assert am.capacity_table([10, 20])[1]["theoretical_per_h"] == pytest.approx(180.0)
+    for bad in ((0, 600), (420, 0), (-1, 10)):
+        with pytest.raises(ValueError):
+            am.takt_time_s(*bad)
     with pytest.raises(ValueError):
-        am.takt_time_s(0, 600)
+        am.capacity_per_h(0)
     with pytest.raises(ValueError):
-        am.effective_capacity_per_h(15, 85, 0.98)
+        am.capacity_per_h(15, 0)
+
+
+def test_no_availability_or_oee_model_remains():
+    for removed in ("effective_capacity_per_h", "describe_subnet",
+                    "commissioning_matrix", "prefix_from_mask"):
+        assert not hasattr(am, removed), removed
+    text = "\n".join(manuscript(name).read_text(encoding="utf-8") for name in LESSONS[:3])
+    assert "実力能力" not in text
+    assert "×稼働率" not in text and "× 稼働率" not in text
+    assert "稼働率" in text  # only as an explicit exclusion note
 
 
 def test_mechanical_numbers():
     assert am.friction_force_n(8, 0.25) == pytest.approx(19.62)
     assert am.design_force_n(19.62, 2) == pytest.approx(39.24)
     assert am.theoretical_bore_mm(39.24, 0.4) == pytest.approx(11.1761, abs=1e-3)
-    push = am.cylinder_force_n(20, 0.4)
-    pull = am.cylinder_force_n(20, 0.4, 8)
-    assert push == pytest.approx(125.66, abs=0.02)
-    assert pull == pytest.approx(105.56, abs=0.02)
+    push = am.cylinder_force_n(20, 0.5)
+    pull = am.cylinder_force_n(20, 0.5, 8)
+    assert push == pytest.approx(157.08, abs=0.01)
+    assert pull == pytest.approx(131.95, abs=0.01)
     assert push > pull
     with pytest.raises(ValueError):
         am.friction_force_n(-1, 0.25)
@@ -145,11 +185,14 @@ def test_mechanical_numbers():
         am.design_force_n(10, 0.5)
     with pytest.raises(ValueError):
         am.cylinder_force_n(16, 0.4, 16)
+    with pytest.raises(ValueError):
+        am.theoretical_bore_mm(10, 0)
 
 
 def test_motor_numbers():
     torque = am.motor_torque_nm(60, 1200)
     assert torque == pytest.approx(0.4775, abs=1e-4)
+    assert am.angular_speed_rad_s(1200) == pytest.approx(125.66, abs=0.01)
     assert am.reducer_output_speed_rpm(1200, 20) == pytest.approx(60)
     assert am.reducer_output_torque_nm(torque, 20, 1.0) == pytest.approx(9.5493, abs=1e-4)
     assert am.reducer_output_torque_nm(torque, 20, 0.90) == pytest.approx(8.5944, abs=1e-4)
@@ -161,133 +204,129 @@ def test_motor_numbers():
         am.reducer_output_torque_nm(torque, 20, 1.2)
 
 
+def test_payback_numbers():
+    report = am.payback_report()
+    assert report["minutes_per_day"] == pytest.approx(36.0)
+    assert report["hours_per_year"] == pytest.approx(132.0)
+    assert report["annual_value_jpy"] == pytest.approx(316_800)
+    assert report["payback_years"] == pytest.approx(1.42045, abs=1e-4)
+    with_cost = am.payback_report(annual_operating_cost_jpy=50_000)
+    assert with_cost["annual_net_benefit_jpy"] == pytest.approx(266_800)
+    assert with_cost["payback_years"] == pytest.approx(1.68666, abs=1e-4)
+    with pytest.raises(ValueError):
+        am.payback_years(0, 100)
+    assert am.payback_years(450_000, 0) == math.inf
+    assert am.payback_years(450_000, -1) == math.inf
+
+
+# --------------------------------------------------------------------------- #
+# Day 8: electrical, sensors, PLC
+# --------------------------------------------------------------------------- #
 def test_electrical_load_numbers():
-    loads = am.pdf_electrical_example()
-    assert loads[0].unit_current_a() == pytest.approx(0.125)
-    assert am.total_load_current_a(loads) == pytest.approx(0.73)
+    loads = am.training_power_budget()
+    assert am.total_load_current_a(loads) == pytest.approx(0.80)
     report = am.load_report(loads, 0.25)
-    assert report["planning_current_a"] == pytest.approx(0.9125)
+    assert report["total_power_w"] == pytest.approx(19.2)
+    assert report["planning_current_a"] == pytest.approx(1.00)
     assert report["is_sizing_approval"] is False
+    assert am.dc_power_w(24, 0.15) == pytest.approx(3.6)
+    assert am.energy_kwh(100, 8) == pytest.approx(0.8)
+    assert am.energy_cost_jpy(0.8, 30) == pytest.approx(24.0)
     with pytest.raises(ValueError):
         am.Load("bad", 1, 24, current_a=0.1, power_w=3).unit_current_a()
     with pytest.raises(ValueError):
         am.total_load_current_a([am.Load("x", -1, 24, current_a=0.1)])
-
-
-def test_payback_numbers():
-    report = am.payback_report()
-    assert report["minutes_per_day"] == pytest.approx(36.0)
-    assert report["annual_value_jpy"] == pytest.approx(316_800)
-    assert report["payback_years"] == pytest.approx(1.42045, abs=1e-4)
     with pytest.raises(ValueError):
-        am.payback_years(0, 100)
-    assert am.payback_report(annual_operating_cost_jpy=400_000)["payback_years"] == math.inf
+        am.dc_power_w(0, 1)
+
+
+def test_npn_pnp_compatibility():
+    pnp = am.plc_input_compatibility("PNP", "0V")
+    assert pnp["compatible"] is True
+    assert pnp["current_path"].startswith("+24V")
+    assert pnp["is_detection_principle"] is False
+    assert am.plc_input_compatibility("PNP", "+24V")["compatible"] is False
+    assert am.plc_input_compatibility("NPN", "+24V")["compatible"] is True
+    assert am.plc_input_compatibility("NPN", "0V")["compatible"] is False
+    with pytest.raises(ValueError):
+        am.plc_input_compatibility("XYZ", "0V")
+    with pytest.raises(ValueError):
+        am.plc_input_compatibility("PNP", "12V")
+
+
+def test_sensor_no_nc_is_separate_from_npn_pnp():
+    assert am.sensor_output_state(False, True) is True
+    assert am.sensor_output_state(True, True) is False
+    assert am.sensor_output_state(True, False) is True
+    with pytest.raises(ValueError):
+        am.sensor_output_state(1, True)  # type: ignore[arg-type]
 
 
 def test_canonical_io_is_unambiguous():
     rows = list(am.CANONICAL_IO)
     assert am.validate_io(rows) == []
     by_address = {row["address"]: row for row in rows}
-    assert by_address["Y1"]["device"].startswith("delayed")
-    assert "solenoid" in by_address["Y2"]["device"]
     assert by_address["X1"]["normal"].startswith("ON")
+    assert "solenoid" in by_address["Y2"]["device"]
+    assert "M1" in by_address
+    broken = [dict(row) for row in rows]
+    for row in broken:
+        if row["address"] == "Y0":
+            row["device"] = "solenoid valve"
+        if row["address"] == "X1":
+            row["normal"] = "OFF normally"
+    problems = am.validate_io(broken)
+    assert any("solenoid" in problem for problem in problems)
+    assert any("X1" in problem for problem in problems)
 
 
-# --------------------------------------------------------------------------- #
-# PLC and sequence behaviour
-# --------------------------------------------------------------------------- #
-def _fresh():
+def test_basic_seal_in_and_extended_gate():
+    basic = am.BasicSealIn()
+    assert basic.step(start=True, stop_ok=True) is True
+    assert basic.step(start=False, stop_ok=True) is True
+    assert basic.step(start=True, stop_ok=False) is False
+    assert basic.step(start=True, stop_ok=True) is True  # the flaw the extended logic removes
+
+    gate = am.StartGate()
+    gate.power_on()
+    assert gate.step(start=True)["run"] is False       # held START at power-up
+    assert gate.step(start=False)["armed"] is True      # released and at position
+    started = gate.step(start=True)
+    assert started["run"] is True and started["start_edge"] is True
+    assert gate.step(start=True, stop_ok=False)["run"] is False
+    assert gate.step(start=True, stop_ok=True)["run"] is False  # restored while START held
+    gate.step(start=False)
+    assert gate.step(start=True)["run"] is True         # a new edge starts again
+
+
+def test_start_gate_reset_is_not_a_start():
+    gate = am.StartGate()
+    gate.power_on()
+    gate.fault = True
+    result = gate.step(start=False, reset=True)
+    assert result["fault"] is False and result["run"] is False
+    gate.fault = True
+    refused = gate.step(start=True, reset=True)
+    assert refused["fault"] is True and refused["run"] is False
+
+
+def test_pusher_sequence_stop_priority_and_restart():
     plc = am.PusherSequence()
-    plc.step(am.PlcInputs(), 100)
-    return plc
-
-
-def test_start_release_self_holding_and_stop():
-    plc = _fresh()
     inputs = am.PlcInputs()
+    plc.step(inputs, 100)
     inputs.start = True
     snap = plc.step(inputs, 100)
-    assert snap.state == "READY" and snap.run and snap.y0_run_lamp
-    inputs.start = False
-    snap = plc.step(inputs, 100)
-    assert snap.run and snap.state == "EXTEND"
-    snap = plc.step(inputs, 100)
-    assert snap.state == "WAIT_EXTENDED"
-    inputs.stop_ok = False
-    snap = plc.step(inputs, 100)
-    assert snap.state == "IDLE" and not snap.run and snap.t0_ms == 0 and not snap.y2_extend_solenoid
-
-
-def test_stop_during_extension_and_timer():
-    plc = _fresh()
-    inputs = am.PlcInputs()
-    inputs.start = True
-    plc.step(inputs, 100)
+    assert snap.state == "READY" and snap.run
     inputs.start = False
     plc.step(inputs, 100)
     inputs.stop_ok = False
     snap = plc.step(inputs, 100)
-    assert snap.state == "IDLE" and not snap.y2_extend_solenoid
-    # timer path
-    plc = _fresh()
-    inputs = am.PlcInputs()
-    inputs.start = True
-    plc.step(inputs, 100)
-    inputs.start = False
-    for _ in range(10):
-        plc.step(inputs, 100)
-    inputs.stop_ok = False
-    snap = plc.step(inputs, 100)
-    assert snap.t0_ms == 0 and not snap.y1_delayed_lamp
+    assert snap.state == "IDLE" and not snap.run and not snap.y2_extend_solenoid
+    inputs.stop_ok = True
+    assert plc.step(inputs, 100).run is False  # permission restored, START not pressed
 
 
-def test_timer_threshold_and_reset():
-    plc = am.PusherSequence()
-    am.normal_cycle(plc)
-    inputs = am.PlcInputs()
-    while plc.t0_ms < 2999:
-        plc.step(inputs, 1)
-    snap = plc.snapshot()
-    assert snap.t0_ms == 2999 and not snap.y1_delayed_lamp
-    snap = plc.step(inputs, 1)
-    assert snap.t0_ms == 3000 and snap.y1_delayed_lamp
-    inputs.stop_ok = False
-    snap = plc.step(inputs, 1)
-    assert snap.t0_ms == 0 and not snap.y1_delayed_lamp
-
-
-def test_normal_cycle_and_position_confirmation():
-    result = am.normal_cycle()
-    final = result["final"]
-    assert final.state == "COMPLETE" and final.cycle_count == 1
-    states = result["visited"]
-    for expected in ("READY", "EXTEND", "WAIT_EXTENDED", "RETRACT", "WAIT_RETRACTED", "COMPLETE"):
-        assert expected in states
-
-
-def test_motion_timeout_and_sensor_conflict():
-    assert am.run_scenario("sensor_stuck_off")["final"].fault_code == "F001"
-    assert am.run_scenario("retract_stuck")["final"].fault_code == "F003"
-    assert am.run_scenario("motion_slow")["final"].fault_code == "F001"
-    assert am.run_scenario("sensor_conflict")["final"].fault_code == "F002"
-    assert am.run_scenario("sensor_stuck_off")["final"].state == "FAULT"
-
-
-def test_fault_reset_never_starts_motion():
-    plc = am.PusherSequence()
-    plc.step(am.PlcInputs(retracted=True, extended=True), 100)
-    assert plc.state == "FAULT"
-    held = am.PlcInputs(start=True, retracted=False, extended=False)
-    plc.step(held, 100, reset=False)
-    assert plc.step(held, 100, reset=True).state == "FAULT"
-    released = am.PlcInputs(start=False, retracted=True, extended=False)
-    plc.step(released, 100, reset=False)
-    plc.step(released, 100, reset=False)
-    snap = plc.step(released, 100, reset=True)
-    assert snap.state == "IDLE" and snap.fault_code is None and not snap.run and not snap.y2_extend_solenoid
-
-
-def test_power_restore_with_held_start_and_new_start():
+def test_pusher_sequence_power_up_with_held_start():
     plc = am.PusherSequence()
     plc.power_on()
     held = am.PlcInputs(start=True)
@@ -300,71 +339,114 @@ def test_power_restore_with_held_start_and_new_start():
     assert plc.step(held, 100).state == "READY"
 
 
-def test_repeat_cycle_and_invalid_transition():
-    plc = am.PusherSequence()
-    am.normal_cycle(plc)
-    released = am.PlcInputs()
-    plc.step(released, 100)
-    released.start = True
-    snap = plc.step(released, 100)
-    assert snap.state == "READY" and snap.cycle_count == 2
+def test_normal_cycle_and_invalid_transition():
+    result = am.normal_cycle()
+    final = result["final"]
+    assert final.state == "COMPLETE" and final.cycle_count == 1
+    for expected in ("READY", "EXTEND", "WAIT_EXTENDED", "RETRACT", "WAIT_RETRACTED", "COMPLETE"):
+        assert expected in result["visited"]
     with pytest.raises(ValueError):
         am.PusherSequence().transition_to("COMPLETE")
     with pytest.raises(ValueError):
         am.PusherSequence().step(am.PlcInputs(), 0)
-
-
-def test_commissioning_matrix_statuses_and_fields():
-    records = am.commissioning_matrix()
-    statuses = {record.test_id: record.status for record in records}
-    assert sum(status == "PASS" for status in statuses.values()) == 10
-    assert statuses["T11"] == "BLOCKED" and statuses["T12"] == "BLOCKED"
-    for record in records:
-        for field in ("test_id", "requirement_id", "preconditions", "procedure", "expected",
-                      "actual", "status", "evidence", "operator", "date", "corrective_action"):
-            assert getattr(record, field) is not None
-        if record.status != "PASS":
-            assert record.status in ("FAIL", "NOT TESTED", "BLOCKED")
     with pytest.raises(ValueError):
-        am.TestRecord("X", "R", "", "", "", "", "OK", "", "", "")
+        am.PusherSequence().step("not inputs", 100)  # type: ignore[arg-type]
+
+
+def test_motion_timeout_and_sensor_conflict():
+    plc = am.PusherSequence()
+    plc.step(am.PlcInputs(retracted=True, extended=True), 100)
+    assert plc.state == "FAULT" and plc.fault_code == "F002"
+    plc = am.PusherSequence()
+    released = am.PlcInputs()
+    plc.step(released, 100)
+    pressed = am.PlcInputs(start=True)
+    plc.step(pressed, 100)
+    pressed.start = False
+    plc.step(pressed, 100)
+    for _ in range(40):
+        snap = plc.step(pressed, 100)
+    assert snap.state == "FAULT" and snap.fault_code == "F001"
+
+
+def test_fault_reset_never_starts_motion():
+    plc = am.PusherSequence()
+    plc.step(am.PlcInputs(retracted=True, extended=True), 100)
+    assert plc.state == "FAULT"
+    held = am.PlcInputs(start=True, retracted=False, extended=False)
+    plc.step(held, 100, reset=False)
+    assert plc.step(held, 100, reset=True).state == "FAULT"
+    released = am.PlcInputs(start=False, retracted=True, extended=False)
+    plc.step(released, 100, reset=False)
+    snap = plc.step(released, 100, reset=True)
+    assert snap.state == "IDLE" and snap.fault_code is None and not snap.run
+
+
+def test_interlocks():
+    drive = am.MotorInterlock()
+    assert drive.step(True, False) == {"forward": True, "reverse": False, "conflict": False}
+    assert drive.step(False, True) == {"forward": False, "reverse": True, "conflict": False}
+    both = drive.step(True, True)
+    assert both["forward"] is False and both["reverse"] is False and both["conflict"] is True
+    stopped = drive.step(True, False, stop_ok=False)
+    assert stopped["forward"] is False and stopped["reverse"] is False
+    assert am.interlock_allows({"product": True, "retracted": True}, True) is True
+    assert am.interlock_allows({"product": False, "retracted": True}, True) is False
+    assert am.interlock_allows({"product": True}, False) is False
+    with pytest.raises(ValueError):
+        am.interlock_allows({}, True)
 
 
 # --------------------------------------------------------------------------- #
-# networking
+# Day 9: camera optics and inspection timing
 # --------------------------------------------------------------------------- #
-def test_subnet_slash24_and_slash25():
-    assert am.describe_subnet("192.168.10.10", 24)["network"] == "192.168.10.0"
-    assert am.describe_subnet("192.168.10.10", 24)["broadcast"] == "192.168.10.255"
-    assert am.describe_subnet("192.168.10.10", 24)["usable_hosts"] == 254
-    assert am.describe_subnet("192.168.10.130", 25)["network"] == "192.168.10.128"
-    assert am.describe_subnet("192.168.10.130", 25)["first_host"] == "192.168.10.129"
-    assert am.describe_subnet("192.168.10.130", 25)["last_host"] == "192.168.10.254"
-    assert am.same_subnet("192.168.10.130", "192.168.10.200", 25) is True
-    assert am.same_subnet("192.168.10.130", "192.168.10.20", 25) is False
-    assert am.prefix_from_mask("255.255.255.128") == 25
-    with pytest.raises(ValueError):
-        am.prefix_from_mask("255.255.0.255")
-    with pytest.raises(ValueError):
-        am.parse_ipv4("192.168.10.256")
-    with pytest.raises(ValueError):
-        am.parse_ipv4("192.168.010.1")
+def test_camera_optics_numbers():
+    sampling = am.object_space_sampling_mm_per_px(240, 1920)
+    assert sampling == pytest.approx(0.125)
+    assert am.defect_size_px(0.5, sampling) == pytest.approx(4.0)
+    assert am.defect_size_px(1.0, sampling) == pytest.approx(8.0)
+    assert am.motion_blur_mm(1000, 0.001) == pytest.approx(1.0)
+    assert am.motion_blur_px(1000, 0.001, sampling) == pytest.approx(8.0)
+    assert am.exposure_time_s(1, 1000, sampling) == pytest.approx(0.000125)
+    assert am.line_rate_lps(1000, 0.125) == pytest.approx(8000.0)
+    assert am.frame_interval_move_mm(1000, 30) == pytest.approx(33.3333, abs=1e-3)
+    for call in (
+        lambda: am.object_space_sampling_mm_per_px(0, 1920),
+        lambda: am.defect_size_px(0.5, 0),
+        lambda: am.motion_blur_mm(-1, 0.001),
+        lambda: am.exposure_time_s(1, 0, 0.125),
+        lambda: am.line_rate_lps(1000, 0),
+        lambda: am.frame_interval_move_mm(1000, 0),
+    ):
+        with pytest.raises(ValueError):
+            call()
 
 
-def test_subnet_edge_cases():
-    assert am.describe_subnet("10.0.0.0", 31)["usable_hosts"] == 2
-    assert am.describe_subnet("10.0.0.1", 31)["exclusion_rule"].startswith("/31")
-    assert am.describe_subnet("10.0.0.1", 32)["usable_hosts"] == 1
-    assert am.mask_from_prefix(0) == "0.0.0.0"
+def test_inspection_decision_never_turns_invalid_into_ok():
+    assert am.inspection_decision("OK") == "OK"
+    assert am.inspection_decision("NG") == "NG"
+    assert am.inspection_decision(None) == "INVALID"
+    assert am.inspection_decision("maybe") == "INVALID"
+    assert am.inspection_decision("OK", image_available=False) == "INVALID"
+    assert am.inspection_decision("OK", inference_ok=False) == "INVALID"
+    assert am.inspection_decision("OK", communication_ok=False) == "INVALID"
+    assert set(am.INSPECTION_RESULTS) == {"OK", "NG", "INVALID"}
+
+
+def test_imaging_checklist_is_bilingual():
+    items = am.imaging_checklist()
+    assert len(items) >= 12
+    for item in items:
+        assert item["item_ja"] and item["item_en"]
+        assert re.search(r"[\u3040-\u30ff\u4e00-\u9fff]", item["item_ja"])
+        assert re.search(r"[a-z]{3}", item["item_en"])
 
 
 # --------------------------------------------------------------------------- #
-# diagrams, simulations and PDFs
+# diagrams, simulator
 # --------------------------------------------------------------------------- #
 def test_diagrams_are_bilingual_and_referenced():
-    lesson_text = "\n".join(
-        (NOTEBOOKS / folder / f"{name}.md").read_text(encoding="utf-8")
-        for folder, _ in FOLDERS.values() for name in LESSONS if (NOTEBOOKS / folder / f"{name}.md").is_file()
-    )
+    lesson_text = "\n".join(manuscript(name).read_text(encoding="utf-8") for name in LESSONS)
     total = 0
     for day_key, (folder, count) in FOLDERS.items():
         for index in range(1, count + 1):
@@ -383,9 +465,12 @@ def test_diagrams_are_bilingual_and_referenced():
             png = SUPPORT / "reference_data" / "diagram_png" / day_key / f"{path.stem}.png"
             assert png.is_file() and png.stat().st_size > 20_000, png
             total += 1
-    assert total == 29
-    for old in ("D07-10.svg", "D08-12.svg", "D09-10.svg"):
-        assert not any(DIAGRAMS.glob(f"day0*/{old}")), old
+    assert total == 39
+    assert len(list(DIAGRAMS.glob("day07/*.svg"))) == 14
+    assert len(list(DIAGRAMS.glob("day08/*.svg"))) == 14
+    assert len(list(DIAGRAMS.glob("day09/*.svg"))) == 11
+    for stale in ("D07-15", "D08-15", "D09-12"):
+        assert not list(DIAGRAMS.glob(f"day0*/{stale}.svg")), stale
 
 
 def test_offline_html_simulator():
@@ -395,6 +480,7 @@ def test_offline_html_simulator():
     assert "<noscript>" in html
     assert "LOGIC-START" in html and "LOGIC-END" in html
     assert (SUPPORT / "simulations" / "fallback" / "sim_plc_sequence.png").stat().st_size > 20_000
+    assert not (SUPPORT / "simulations" / "fallback" / "sim_commissioning.png").exists()
     if shutil.which("node"):
         result = subprocess.run(["node", str(SUPPORT / "tests" / "run_simulation_logic_tests.js")],
                                 cwd=ROOT, capture_output=True, text=True, encoding="utf-8", errors="replace")
@@ -402,12 +488,15 @@ def test_offline_html_simulator():
         assert "SIMULATION LOGIC TESTS PASSED" in result.stdout
 
 
+# --------------------------------------------------------------------------- #
+# PDFs
+# --------------------------------------------------------------------------- #
 @pytest.mark.parametrize("day", ("Day07", "Day08", "Day09"))
 def test_pdf_contains_searchable_bilingual_content(day):
     path = PDF_DIR / f"{day}_explanation_ja_en.pdf"
-    assert path.is_file() and path.stat().st_size > 500_000
+    assert path.is_file() and path.stat().st_size > 400_000
     reader = PdfReader(str(path))
-    assert len(reader.pages) >= 20
+    assert len(reader.pages) >= 12
     text = "\n".join(page.extract_text() or "" for page in reader.pages)
     assert "目次 / Contents" in text
     assert "付録A 公式・確認カード" in text
@@ -419,7 +508,21 @@ def test_pdf_contains_searchable_bilingual_content(day):
     assert "](" not in text
     assert not re.search(r"</?(?:div|span|br|b|i|font)\b", text, re.I)
     assert sum(len(page.images) for page in reader.pages) >= 4
-    assert not re.search(r"\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\s*\n\s*\d{1,3}\b", text)
+
+
+def test_day09_pdf_within_page_limit():
+    reader = PdfReader(str(PDF_DIR / "Day09_explanation_ja_en.pdf"))
+    assert len(reader.pages) <= 19
+    text = "\n".join(page.extract_text() or "" for page in reader.pages)
+    for removed in ("サブネット", "試運転ゲート", "自動化提案", "Modbus"):
+        assert removed not in text, removed
+
+
+def test_day07_and_day08_pdfs_are_shorter_than_before():
+    day07 = len(PdfReader(str(PDF_DIR / "Day07_explanation_ja_en.pdf")).pages)
+    day08 = len(PdfReader(str(PDF_DIR / "Day08_explanation_ja_en.pdf")).pages)
+    assert day07 < 58, day07
+    assert day08 < 60, day08
 
 
 def test_pdf_pages_render_non_blank():
@@ -435,56 +538,94 @@ def test_pdf_pages_render_non_blank():
 
 
 # --------------------------------------------------------------------------- #
-# timetable, support documents and protected baseline
+# timetable and support documents
 # --------------------------------------------------------------------------- #
 def test_syllabus_rows_and_totals():
-    syllabus = (ROOT / "COURSE_SYLLABUS_DAY07_09.md").read_text(encoding="utf-8")
-    rows = re.findall(r"^\| (\d\d:\d\d)–(\d\d:\d\d) \| (\d+) \| .* \| (.*?) \|$", syllabus, re.M)
-    assert len(rows) == 40, len(rows)
-    for block in (rows[i:i + 10] for i in range(0, 40, 10)):
-        totals: dict[str, int] = {}
-        for start, end, duration, kind in block:
-            minutes = (int(end[:2]) * 60 + int(end[3:])) - (int(start[:2]) * 60 + int(start[3:]))
-            assert minutes == int(duration)
-            totals[kind.split(" / ")[0]] = totals.get(kind.split(" / ")[0], 0) + int(duration)
-        assert totals == {"講師": 120, "必須": 300, "休憩": 30, "昼食": 50, "提出": 30}
-        assert sum(totals.values()) == 530
-    assert "08:00–16:50" in syllabus
+    text = (ROOT / "COURSE_SYLLABUS_DAY07_09.md").read_text(encoding="utf-8")
+    assert "530分" in text
+    assert "08:00–16:50" in text
+    for slot in ("08:00–09:00", "09:00–10:20", "10:35–12:00", "12:50–13:50",
+                 "13:50–15:10", "15:25–16:20", "16:20–16:50"):
+        assert slot in text, slot
+    for name in ("07-01", "07-02", "07-03", "08-01", "08-02", "08-03", "09-01", "09-02", "09-03"):
+        assert name in text, name
+    assert "120分" in text and "300分" in text and "30分" in text and "50分" in text
 
 
-def test_support_documents_exist():
-    for path in (
-        SUPPORT / "README_ja_en.md",
-        SUPPORT / "SOURCES_AND_LICENSES.md",
-        SUPPORT / "curriculum_source_map.csv",
-        SUPPORT / "worksheets" / "Day07_Student_Worksheet_ja_en.md",
-        SUPPORT / "worksheets" / "Day08_Student_Worksheet_ja_en.md",
-        SUPPORT / "worksheets" / "Day09_Student_Worksheet_ja_en.md",
-        SUPPORT / "worksheets" / "Day07_Answer_Key_ja_en.md",
-        SUPPORT / "worksheets" / "Day08_Answer_Key_ja_en.md",
-        SUPPORT / "worksheets" / "Day09_Answer_Key_ja_en.md",
-        SUPPORT / "worksheets" / "Day07_09_Assessment_Rubric_ja_en.md",
-        SUPPORT / "worksheets" / "Glossary_ja_en.md",
-        ROOT / "docs" / "instructor" / "day07_instructor_guide.md",
-        ROOT / "docs" / "instructor" / "day08_instructor_guide.md",
-        ROOT / "docs" / "instructor" / "day09_instructor_guide.md",
-        ROOT / "docs" / "reference" / "Automation_Equipment_PDF_Errata_ja_en.md",
-        ROOT / "docs" / "reviews" / "Day07_09_PDF_Migration_Audit.md",
-        ROOT / "docs" / "reviews" / "Day07_09_Release_Review.md",
-    ):
-        assert path.is_file(), path
-        assert path.stat().st_size > 1200, path
+@pytest.mark.parametrize("day", ("Day07", "Day08", "Day09"))
+def test_worksheets_and_answer_keys_are_short_and_consistent(day):
+    sheet = (SUPPORT / "worksheets" / f"{day}_Student_Worksheet_ja_en.md").read_text(encoding="utf-8")
+    key = (SUPPORT / "worksheets" / f"{day}_Answer_Key_ja_en.md").read_text(encoding="utf-8")
+    tasks = re.findall(r"^## (T\d+)", sheet, re.M)
+    assert tasks, day
+    assert len(tasks) <= 3, (day, tasks)
+    assert "安全境界" in sheet and "Safety boundary" in sheet
+    assert "答え / Answer" in key or "答え / answer" in key
+    for task in tasks:
+        assert task in key, (day, task)
+
+
+def test_answer_key_numbers_are_reproducible():
+    day07 = (SUPPORT / "worksheets" / "Day07_Answer_Key_ja_en.md").read_text(encoding="utf-8")
+    assert "42 秒/個" in day07 and "240 個/時" in day07
+    assert "316,800" in day07 and "266,800" in day07 and "1.69" in day07
+    assert "9.81 N" in day07 and "19.62 N" in day07 and "7.07 mm" in day07
+    day08 = (SUPPORT / "worksheets" / "Day08_Answer_Key_ja_en.md").read_text(encoding="utf-8")
+    assert "0.60 A" in day08 and "14.4 W" in day08 and "0.72 A" in day08
+    day09 = (SUPPORT / "worksheets" / "Day09_Answer_Key_ja_en.md").read_text(encoding="utf-8")
+    assert "0.125 mm/px" in day09 and "4 px" in day09 and "8 px" in day09
+    assert am.payback_report(annual_operating_cost_jpy=50_000)["payback_years"] == pytest.approx(1.68666, abs=1e-4)
+
+
+@pytest.mark.parametrize("day", ("day07", "day08", "day09"))
+def test_instructor_guides_match_the_curriculum(day):
+    guide = (ROOT / "docs" / "instructor" / f"{day}_instructor_guide.md").read_text(encoding="utf-8")
+    for heading in ("学習目標 / learning objectives", "必要な教材 / required materials",
+                    "午前の説明", "午後のフォロー", "よくある誤解", "理解確認の質問",
+                    "ワークシートとの対応", "安全上の制約", "時間配分"):
+        assert heading in guide, (day, heading)
+    number = day[3:]
+    assert f"Day{number}_" in guide or f"{number}-01" in guide
 
 
 def test_curriculum_source_map_covers_every_page():
-    import csv
     rows = list(csv.DictReader((SUPPORT / "curriculum_source_map.csv").open(encoding="utf-8")))
     assert len(rows) == 51
     assert sorted(int(row["pdf_page"]) for row in rows) == list(range(1, 52))
     allowed = {"REQUIRED", "SUPPLEMENTARY", "INCORPORATED_ELSEWHERE",
-               "REPLACED_WITH_CORRECTED_CONTENT", "REFERENCE_ONLY"}
+               "REPLACED_WITH_CORRECTED_CONTENT", "REFERENCE_ONLY",
+               "CORRECTED_AND_INCORPORATED", "REMOVED_FROM_ACTIVE",
+               "SUPERSEDED_BY_NEW_AI_CAMERA"}
     assert {row["coverage_status"] for row in rows} <= allowed
     assert all(row["target_day"] and row["target_notebook"] for row in rows)
+    active = [row for row in rows if row["coverage_status"] in
+              ("REQUIRED", "CORRECTED_AND_INCORPORATED", "REPLACED_WITH_CORRECTED_CONTENT")]
+    assert active, "some source material must remain required"
+    for row in rows:
+        if row["coverage_status"] == "SUPERSEDED_BY_NEW_AI_CAMERA":
+            assert row["target_notebook"].startswith("Day09_")
+
+
+def test_glossary_and_quick_references():
+    glossary = (SUPPORT / "worksheets" / "Glossary_ja_en.md").read_text(encoding="utf-8")
+    compact = (SUPPORT / "worksheets" / "Glossary_day09_ja_en.md").read_text(encoding="utf-8")
+    assert glossary.count("|") > 100 and "タクトタイム" in glossary and "視野" in glossary
+    assert len(compact) < len(glossary) / 3
+    for word in ("サブネット", "試運転"):
+        assert word not in glossary, word
+    for day in ("day07", "day08", "day09"):
+        text = (SUPPORT / "reference_data" / f"quick_reference_{day}.md").read_text(encoding="utf-8")
+        assert "学習用" in text
+        assert text.count("|") > 20
+
+
+def test_obsolete_lessons_are_not_referenced_in_navigation():
+    for path in (ROOT / "README.md", ROOT / "START_HERE.md",
+                 SUPPORT / "README_ja_en.md", ROOT / "COURSE_SYLLABUS_DAY07_09.md"):
+        text = path.read_text(encoding="utf-8")
+        assert "Day09_Communication_Commissioning" not in text, path
+        assert "Day07_01_Requirements" not in text, path
+    assert "Day09_AI_Camera_Imaging" in (ROOT / "README.md").read_text(encoding="utf-8")
 
 
 def test_protected_days_1_to_6_baseline():

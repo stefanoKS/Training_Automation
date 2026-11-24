@@ -1,64 +1,73 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="940" viewBox="0 0 1440 940" role="img" aria-labelledby="title desc"><title id="title">DC24Vの電力供給と保護 / DC24V distribution and protection</title><desc id="desc">DC24Vの電力供給と保護 / DC24V distribution and protection — editable bilingual training diagram for 第8日 / Day 8.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#2563A6"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#A32B2B"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#1B7A4B"/></marker></defs><rect x="0" y="0" width="1440" height="940" fill="#F5F8FC"/><rect x="0" y="0" width="1440" height="12" fill="#2563A6"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1060" viewBox="0 0 1440 1060" role="img" aria-labelledby="title desc"><title id="title">電圧の使い分けと電力の流れ / Voltage applications and power distribution</title><desc id="desc">電圧の使い分けと電力の流れ / Voltage applications and power distribution — editable bilingual training diagram for 第8日 / Day 8.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#2563A6"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#A32B2B"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#1B7A4B"/></marker></defs><rect x="0" y="0" width="1440" height="1060" fill="#F5F8FC"/><rect x="0" y="0" width="1440" height="12" fill="#2563A6"/>
 <text x="56.0" y="56.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#2563A6" font-weight="700" text-anchor="start">第8日 / Day 8</text>
-<text x="56.0" y="104.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="32" fill="#142B3F" font-weight="700" text-anchor="start">DC24Vの電力供給と保護</text>
-<text x="56.0" y="144.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="26" fill="#526378" font-weight="400" text-anchor="start">DC24V distribution and protection</text>
-<rect x="80.0" y="300.0" width="150.0" height="150.0" rx="8" fill="#FBEEE6" stroke="#B4541E" stroke-width="2.2"/>
-<text x="155.0" y="350.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#B4541E" font-weight="700" text-anchor="middle">DC24V</text>
-<text x="155.0" y="374.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#B4541E" font-weight="700" text-anchor="middle">電源</text>
-<text x="155.0" y="398.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#526378" font-weight="400" text-anchor="middle">supply</text>
-<rect x="280.0" y="330.0" width="90.0" height="90.0" rx="4" fill="#FFFFFF" stroke="#B4541E" stroke-width="2"/>
-<text x="325.0" y="365.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#B4541E" font-weight="700" text-anchor="middle">遮断器</text>
-<text x="325.0" y="385.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#526378" font-weight="400" text-anchor="middle">breaker</text>
-<path d="M310 405 L345 355" stroke="#B4541E" stroke-width="2"/>
-<rect x="420.0" y="300.0" width="150.0" height="160.0" rx="6" fill="#FFFFFF" stroke="#2563A6" stroke-width="2"/>
-<text x="495.0" y="335.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#2563A6" font-weight="700" text-anchor="middle">端子台</text>
-<text x="495.0" y="355.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#526378" font-weight="400" text-anchor="middle">terminals</text>
-<rect x="440.0" y="375.0" width="110.0" height="10.0" rx="2" fill="#E8F1FA" stroke="#C1D0DD" stroke-width="1"/>
-<rect x="440.0" y="395.0" width="110.0" height="10.0" rx="2" fill="#E8F1FA" stroke="#C1D0DD" stroke-width="1"/>
-<rect x="440.0" y="415.0" width="110.0" height="10.0" rx="2" fill="#E8F1FA" stroke="#C1D0DD" stroke-width="1"/>
-<rect x="440.0" y="435.0" width="110.0" height="10.0" rx="2" fill="#E8F1FA" stroke="#C1D0DD" stroke-width="1"/>
-<rect x="760.0" y="240.0" width="250.0" height="58.0" rx="6" fill="#FFFFFF" stroke="#6B3FA0" stroke-width="2"/>
-<text x="775.0" y="264.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#6B3FA0" font-weight="700" text-anchor="start">PLC</text>
-<text x="775.0" y="284.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#526378" font-weight="400" text-anchor="start">X/Y</text>
-<path d="M570.0 380.0 L700.0 380.0" fill="none" stroke="#B4541E" stroke-width="2"/>
-<path d="M700.0 380.0 L700.0 269.0" fill="none" stroke="#B4541E" stroke-width="2"/>
-<path d="M700.0 269.0 L758.0 269.0" fill="none" stroke="#B4541E" stroke-width="2" marker-end="url(#arrow)"/>
-<rect x="760.0" y="320.0" width="250.0" height="58.0" rx="6" fill="#FFFFFF" stroke="#1B7A4B" stroke-width="2"/>
-<text x="775.0" y="344.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#1B7A4B" font-weight="700" text-anchor="start">センサー</text>
-<text x="775.0" y="364.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#526378" font-weight="400" text-anchor="start">0.06 A ×3</text>
-<path d="M570.0 380.0 L700.0 380.0" fill="none" stroke="#B4541E" stroke-width="2"/>
-<path d="M700.0 380.0 L700.0 349.0" fill="none" stroke="#B4541E" stroke-width="2"/>
-<path d="M700.0 349.0 L758.0 349.0" fill="none" stroke="#B4541E" stroke-width="2" marker-end="url(#arrow)"/>
-<rect x="760.0" y="400.0" width="250.0" height="58.0" rx="6" fill="#FFFFFF" stroke="#B4541E" stroke-width="2"/>
-<text x="775.0" y="424.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#B4541E" font-weight="700" text-anchor="start">ランプ</text>
-<text x="775.0" y="444.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#526378" font-weight="400" text-anchor="start">3 W ×2</text>
-<path d="M570.0 380.0 L700.0 380.0" fill="none" stroke="#B4541E" stroke-width="2"/>
-<path d="M700.0 380.0 L700.0 429.0" fill="none" stroke="#B4541E" stroke-width="2"/>
-<path d="M700.0 429.0 L758.0 429.0" fill="none" stroke="#B4541E" stroke-width="2" marker-end="url(#arrow)"/>
-<rect x="760.0" y="480.0" width="250.0" height="58.0" rx="6" fill="#FFFFFF" stroke="#B4541E" stroke-width="2"/>
-<text x="775.0" y="504.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#B4541E" font-weight="700" text-anchor="start">電磁弁</text>
-<text x="775.0" y="524.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#526378" font-weight="400" text-anchor="start">0.15 A ×2</text>
-<path d="M570.0 380.0 L700.0 380.0" fill="none" stroke="#B4541E" stroke-width="2"/>
-<path d="M700.0 380.0 L700.0 509.0" fill="none" stroke="#B4541E" stroke-width="2"/>
-<path d="M700.0 509.0 L758.0 509.0" fill="none" stroke="#B4541E" stroke-width="2" marker-end="url(#arrow)"/>
-<path d="M155.0 450.0 L155.0 560.0" fill="none" stroke="#526378" stroke-width="3"/>
-<path d="M155.0 560.0 L1010.0 560.0" fill="none" stroke="#526378" stroke-width="3"/>
-<path d="M1010.0 269.0 L1010.0 560.0" fill="none" stroke="#526378" stroke-width="2"/>
-<path d="M1010.0 349.0 L1010.0 560.0" fill="none" stroke="#526378" stroke-width="2"/>
-<path d="M1010.0 429.0 L1010.0 560.0" fill="none" stroke="#526378" stroke-width="2"/>
-<path d="M1010.0 509.0 L1010.0 560.0" fill="none" stroke="#526378" stroke-width="2"/>
-<text x="600.0" y="590.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="600" text-anchor="middle">0V return / 0V帰線</text>
-<path d="M155.0 560.0 L155.0 610.0" fill="none" stroke="#1B7A4B" stroke-width="2"/>
-<path d="M135.0 610.0 L175.0 610.0" fill="none" stroke="#1B7A4B" stroke-width="2"/>
-<path d="M142.0 620.0 L168.0 620.0" fill="none" stroke="#1B7A4B" stroke-width="2"/>
-<path d="M150.0 630.0 L160.0 630.0" fill="none" stroke="#1B7A4B" stroke-width="2"/>
-<text x="190.0" y="618.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#1B7A4B" font-weight="600" text-anchor="start">保護接地 / PE (concept)</text>
-<rect x="70.0" y="660.0" width="1300.0" height="120.0" rx="8" fill="#E8F1FA" stroke="#2563A6" stroke-width="1.4"/>
-<text x="90.0" y="695.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="700" text-anchor="start">保護は電線と機器を守る。感電防止とは別。</text>
-<text x="90.0" y="718.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#142B3F" font-weight="400" text-anchor="start">定格電圧・電流・遮断容量・電線保護・選択協調を確認する。</text>
-<text x="90.0" y="742.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#526378" font-weight="400" text-anchor="start">Protection protects wiring and equipment, not people. Check ratings, breaking capacity, wire protection and coordination.</text>
-<rect x="56.0" y="824.0" width="1328.0" height="60.0" rx="10" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
-<text x="76.0" y="858.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#142B3F" font-weight="700" text-anchor="start">電源→保護→分岐→負荷。0V帰線と保護接地を忘れない。 / Supply, protection, branches, loads. Do not forget the 0 V return and protective earth.</text>
-<text x="76.0" y="880.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14.5" fill="#526378" font-weight="400" text-anchor="start">A DC distribution concept, not a panel construction drawing.</text>
-<text x="1400" y="932" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" text-anchor="end">D08-02 • 編集可能な図 / editable SVG</text>
+<text x="56.0" y="104.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="32" fill="#142B3F" font-weight="700" text-anchor="start">電圧の使い分けと電力の流れ</text>
+<text x="56.0" y="144.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="26" fill="#526378" font-weight="400" text-anchor="start">Voltage applications and power distribution</text>
+<rect x="70.0" y="170.0" width="1300.0" height="190.0" rx="10" fill="#FFFFFF" stroke="#C1D0DD" stroke-width="1.4"/>
+<text x="86.0" y="200.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#142B3F" font-weight="700" text-anchor="start">AC電源と動力回路</text>
+<text x="86.0" y="222.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">AC supply and the power circuit</text>
+<rect x="90.0" y="210.0" width="360.0" height="120.0" rx="12" fill="#FFFFFF" stroke="#B4541E" stroke-width="2"/>
+<rect x="90.0" y="220.0" width="7.0" height="100.0" rx="3" fill="#B4541E" stroke="#B4541E" stroke-width="0"/>
+<text x="112.0" y="259.7" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">AC電源</text>
+<text x="112.0" y="281.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">AC supply</text>
+<text x="112.0" y="299.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">100V / 200V</text>
+<path d="M452.0 270.0 L538.0 270.0" fill="none" stroke="#2563A6" stroke-width="2.2" marker-end="url(#arrow)"/>
+<rect x="540.0" y="210.0" width="360.0" height="120.0" rx="12" fill="#FFFFFF" stroke="#A32B2B" stroke-width="2"/>
+<rect x="540.0" y="220.0" width="7.0" height="100.0" rx="3" fill="#A32B2B" stroke="#A32B2B" stroke-width="0"/>
+<text x="562.0" y="259.7" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">保護</text>
+<text x="562.0" y="281.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">protection</text>
+<text x="562.0" y="299.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">遮断器・漏電 / breaker, earth leakage</text>
+<path d="M902.0 270.0 L988.0 270.0" fill="none" stroke="#2563A6" stroke-width="2.2" marker-end="url(#arrow)"/>
+<rect x="990.0" y="210.0" width="360.0" height="120.0" rx="12" fill="#FFFFFF" stroke="#1F5C99" stroke-width="2"/>
+<rect x="990.0" y="220.0" width="7.0" height="100.0" rx="3" fill="#1F5C99" stroke="#1F5C99" stroke-width="0"/>
+<text x="1012.0" y="259.7" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">動力回路</text>
+<text x="1012.0" y="281.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">power circuit</text>
+<text x="1012.0" y="299.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">モーター・ドライブ / motor, drive</text>
+<rect x="70.0" y="390.0" width="1300.0" height="190.0" rx="10" fill="#FFFFFF" stroke="#C1D0DD" stroke-width="1.4"/>
+<text x="86.0" y="420.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#142B3F" font-weight="700" text-anchor="start">ACからDC24Vへ</text>
+<text x="86.0" y="442.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">AC to DC24V</text>
+<rect x="90.0" y="430.0" width="360.0" height="120.0" rx="12" fill="#FFFFFF" stroke="#B4541E" stroke-width="2"/>
+<rect x="90.0" y="440.0" width="7.0" height="100.0" rx="3" fill="#B4541E" stroke="#B4541E" stroke-width="0"/>
+<text x="112.0" y="479.7" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">AC電源</text>
+<text x="112.0" y="501.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">AC supply</text>
+<text x="112.0" y="519.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">100V / 200V</text>
+<path d="M452.0 490.0 L538.0 490.0" fill="none" stroke="#2563A6" stroke-width="2.2" marker-end="url(#arrow)"/>
+<rect x="540.0" y="430.0" width="360.0" height="120.0" rx="12" fill="#FFFFFF" stroke="#6B3FA0" stroke-width="2"/>
+<rect x="540.0" y="440.0" width="7.0" height="100.0" rx="3" fill="#6B3FA0" stroke="#6B3FA0" stroke-width="0"/>
+<text x="562.0" y="479.7" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">スイッチング電源</text>
+<text x="562.0" y="501.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">switching power supply</text>
+<text x="562.0" y="519.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">AC → 安定したDC / regulated DC</text>
+<path d="M902.0 490.0 L988.0 490.0" fill="none" stroke="#2563A6" stroke-width="2.2" marker-end="url(#arrow)"/>
+<rect x="990.0" y="430.0" width="360.0" height="120.0" rx="12" fill="#FFFFFF" stroke="#0E7490" stroke-width="2"/>
+<rect x="990.0" y="440.0" width="7.0" height="100.0" rx="3" fill="#0E7490" stroke="#0E7490" stroke-width="0"/>
+<text x="1012.0" y="479.7" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">DC24V分配</text>
+<text x="1012.0" y="501.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">DC24V distribution</text>
+<text x="1012.0" y="519.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">PLC・センサー・リレー・電磁弁</text>
+<rect x="70.0" y="610.0" width="1300.0" height="190.0" rx="10" fill="#FFFFFF" stroke="#C1D0DD" stroke-width="1.4"/>
+<text x="86.0" y="640.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#142B3F" font-weight="700" text-anchor="start">DC24Vから12V・5Vへ</text>
+<text x="86.0" y="662.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">DC24V to 12V and 5V</text>
+<rect x="90.0" y="650.0" width="360.0" height="120.0" rx="12" fill="#FFFFFF" stroke="#0E7490" stroke-width="2"/>
+<rect x="90.0" y="660.0" width="7.0" height="100.0" rx="3" fill="#0E7490" stroke="#0E7490" stroke-width="0"/>
+<text x="112.0" y="699.7" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">DC24V</text>
+<text x="112.0" y="721.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">DC24V</text>
+<text x="112.0" y="739.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">制御用 / control</text>
+<path d="M452.0 710.0 L538.0 710.0" fill="none" stroke="#2563A6" stroke-width="2.2" marker-end="url(#arrow)"/>
+<rect x="540.0" y="650.0" width="360.0" height="120.0" rx="12" fill="#FFFFFF" stroke="#6B3FA0" stroke-width="2"/>
+<rect x="540.0" y="660.0" width="7.0" height="100.0" rx="3" fill="#6B3FA0" stroke="#6B3FA0" stroke-width="0"/>
+<text x="562.0" y="699.7" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">DC/DCコンバータ</text>
+<text x="562.0" y="721.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">DC/DC converter</text>
+<text x="562.0" y="739.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">定格内で変換 / within ratings</text>
+<path d="M902.0 710.0 L988.0 710.0" fill="none" stroke="#2563A6" stroke-width="2.2" marker-end="url(#arrow)"/>
+<rect x="990.0" y="650.0" width="360.0" height="120.0" rx="12" fill="#FFFFFF" stroke="#1B7A4B" stroke-width="2"/>
+<rect x="990.0" y="660.0" width="7.0" height="100.0" rx="3" fill="#1B7A4B" stroke="#1B7A4B" stroke-width="0"/>
+<text x="1012.0" y="689.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">12V・5V機器</text>
+<text x="1012.0" y="711.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">12V and 5V devices</text>
+<text x="1012.0" y="729.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">カメラ・マイコン / camera,</text>
+<text x="1012.0" y="747.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">microcontroller</text>
+<rect x="70.0" y="820.0" width="1300.0" height="78.0" rx="8" fill="#E8F1FA" stroke="#2563A6" stroke-width="1.2"/>
+<text x="88.0" y="850.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="700" text-anchor="start">承認済みの施工図ではない。電圧の値だけで制御用・動力用は決まらない。</text>
+<text x="88.0" y="874.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#526378" font-weight="400" text-anchor="start">Not an approved installation drawing. Voltage alone does not define control or power circuits.</text>
+<rect x="56.0" y="944.0" width="1328.0" height="60.0" rx="10" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
+<text x="76.0" y="978.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#142B3F" font-weight="700" text-anchor="start">AC100/200Vは動力と機器電源、DC24Vは制御と負荷、12V/5Vは対応機器</text>
+<text x="76.0" y="1000.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14.5" fill="#526378" font-weight="400" text-anchor="start">AC100/200V for power and equipment supplies, DC24V for control and loads, 12V/5V for compatible devices</text>
+<text x="1400" y="1052" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" text-anchor="end">D08-02 • 編集可能な図 / editable SVG</text>
 </svg>

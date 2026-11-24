@@ -33,13 +33,13 @@ Python, AI ra chitra prashodhanako anubhab nabhaeka manisalai lakshit garera ban
 
 ## 0. 第7日〜第9日（自動化設備研修）/ Days 7–9 (automation course)
 
-第1週とは別に、**第7日〜第9日**の「自動化設備の構想から試運転まで」の3日間コースがあります。第1週の16ノートブックとは独立しており、Day 1〜6の教材は変更していません。
+第1週とは別に、**第7日〜第9日**の「自動化設備の基礎からAI検査カメラの自作まで」の3日間コースがあります。第1週の16ノートブックとは独立しており、Day 1〜6の教材は変更していません。
 
-Separately from Week 1, there is a **three-day Days 7–9 course** on automation equipment, from concept to commissioning. It is independent of the Week 1 set of 16 notebooks, and the Day 1–6 materials are unchanged.
+Separately from Week 1, there is a **three-day Days 7–9 course** that runs from automation fundamentals to building an AI inspection camera. It is independent of the Week 1 set of 16 notebooks, and the Day 1–6 materials are unchanged.
 
 - 時間割 / timetable: [`COURSE_SYLLABUS_DAY07_09.md`](COURSE_SYLLABUS_DAY07_09.md)
 - 入口・教材一覧 / entry point and materials: [`day07_09_support/README_ja_en.md`](day07_09_support/README_ja_en.md)
-- ノートブック / notebooks: [`notebooks/Day07_Automation_Concept_Mechanics/`](notebooks/Day07_Automation_Concept_Mechanics/), [`Day08_Electrical_PLC/`](notebooks/Day08_Electrical_PLC/), [`Day09_Communication_Commissioning/`](notebooks/Day09_Communication_Commissioning/)
+- ノートブック / notebooks: [`notebooks/Day07_Automation_Concept_Mechanics/`](notebooks/Day07_Automation_Concept_Mechanics/), [`Day08_Electrical_PLC/`](notebooks/Day08_Electrical_PLC/), [`Day09_AI_Camera_Imaging/`](notebooks/Day09_AI_Camera_Imaging/)
 - ワークシート / worksheets: [`day07_09_support/worksheets/`](day07_09_support/worksheets/)
 - 解説PDF / explanation PDFs: [`docs/pdf/Day07_explanation_ja_en.pdf`](docs/pdf/Day07_explanation_ja_en.pdf), Day08, Day09
 - 講師ガイド / instructor guides: [`docs/instructor/day07_instructor_guide.md`](docs/instructor/day07_instructor_guide.md), day08, day09

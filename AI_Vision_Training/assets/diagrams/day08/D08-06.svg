@@ -1,69 +1,65 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="980" viewBox="0 0 1440 980" role="img" aria-labelledby="title desc"><title id="title">NPN・PNPとPLC入力の電流経路 / NPN and PNP current paths through PLC inputs</title><desc id="desc">NPN・PNPとPLC入力の電流経路 / NPN and PNP current paths through PLC inputs — editable bilingual training diagram for 第8日 / Day 8.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#2563A6"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#A32B2B"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#1B7A4B"/></marker></defs><rect x="0" y="0" width="1440" height="980" fill="#F5F8FC"/><rect x="0" y="0" width="1440" height="12" fill="#2563A6"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900" role="img" aria-labelledby="title desc"><title id="title">入力から出力までの信号の流れ / Signal flow from input to output</title><desc id="desc">入力から出力までの信号の流れ / Signal flow from input to output — editable bilingual training diagram for 第8日 / Day 8.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#2563A6"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#A32B2B"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#1B7A4B"/></marker></defs><rect x="0" y="0" width="1440" height="900" fill="#F5F8FC"/><rect x="0" y="0" width="1440" height="12" fill="#2563A6"/>
 <text x="56.0" y="56.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#2563A6" font-weight="700" text-anchor="start">第8日 / Day 8</text>
-<text x="56.0" y="104.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="32" fill="#142B3F" font-weight="700" text-anchor="start">NPN・PNPとPLC入力の電流経路</text>
-<text x="56.0" y="144.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="26" fill="#526378" font-weight="400" text-anchor="start">NPN and PNP current paths through PLC inputs</text>
-<rect x="60.0" y="180.0" width="640.0" height="560.0" rx="10" fill="#FFFFFF" stroke="#C1D0DD" stroke-width="1.4"/>
-<text x="76.0" y="210.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#142B3F" font-weight="700" text-anchor="start">PNP + シンク入力（共通0V）</text>
-<text x="76.0" y="232.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start"></text>
-<text x="100.0" y="252.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#A32B2B" font-weight="700" text-anchor="start">+24V rail</text>
-<path d="M100.0 265.0 L650.0 265.0" fill="none" stroke="#A32B2B" stroke-width="3"/>
-<path d="M100.0 690.0 L650.0 690.0" fill="none" stroke="#526378" stroke-width="3"/>
-<text x="110.0" y="715.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#526378" font-weight="700" text-anchor="start">0V</text>
-<rect x="150.0" y="310.0" width="180.0" height="210.0" rx="8" fill="#EAF6EE" stroke="#1B7A4B" stroke-width="2"/>
-<text x="240.0" y="342.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="20" fill="#1B7A4B" font-weight="700" text-anchor="middle">PNP</text>
-<text x="240.0" y="366.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#526378" font-weight="400" text-anchor="middle">sensor</text>
-<path d="M200.0 265.0 L200.0 310.0" fill="none" stroke="#A32B2B" stroke-width="2"/>
-<text x="210.0" y="292.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#A32B2B" font-weight="700" text-anchor="start">+</text>
-<path d="M200.0 520.0 L200.0 690.0" fill="none" stroke="#526378" stroke-width="2"/>
-<text x="210.0" y="560.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#526378" font-weight="700" text-anchor="start">0V</text>
-<path d="M330.0 410.0 L430.0 410.0" fill="none" stroke="#1B7A4B" stroke-width="3" marker-end="url(#arrow)"/>
-<text x="352.0" y="392.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#1B7A4B" font-weight="700" text-anchor="start">OUT</text>
-<rect x="430.0" y="310.0" width="220.0" height="200.0" rx="8" fill="#F1ECF8" stroke="#6B3FA0" stroke-width="2"/>
-<text x="540.0" y="344.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#6B3FA0" font-weight="700" text-anchor="middle">PLC入力</text>
-<text x="540.0" y="366.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#526378" font-weight="400" text-anchor="middle">sinking input</text>
-<circle cx="500.0" cy="420.0" r="14.0" fill="#FFFFFF" stroke="#6B3FA0" stroke-width="1.6"/>
-<path d="M492 414 L508 414 L500 426 Z" fill="#6B3FA0"/>
-<text x="500.0" y="455.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#6B3FA0" font-weight="400" text-anchor="middle">入力回路</text>
-<path d="M650.0 470.0 L650.0 690.0" fill="none" stroke="#526378" stroke-width="2.4"/>
-<text x="600.0" y="500.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#526378" font-weight="700" text-anchor="middle">COM → 0V</text>
-<path d="M240 270 q0 35 0 35" fill="none" stroke="#A32B2B" stroke-width="2.4" marker-end="url(#arrow-red)"/>
-<path d="M340 400 q40 0 70 0" fill="none" stroke="#A32B2B" stroke-width="2.4" marker-end="url(#arrow-red)"/>
-<path d="M590 460 q30 0 55 0" fill="none" stroke="#A32B2B" stroke-width="2.4" marker-end="url(#arrow-red)"/>
-<path d="M650 540 q0 60 0 60" fill="none" stroke="#A32B2B" stroke-width="2.4" marker-end="url(#arrow-red)"/>
-<text x="150.0" y="600.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#A32B2B" font-weight="700" text-anchor="start">電流: +24V → センサー → 出力 → 入力 → COM(0V)</text>
-<text x="150.0" y="622.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#526378" font-weight="400" text-anchor="start">Current: +24 V → sensor → output → input → COM (0 V)</text>
-<rect x="740.0" y="180.0" width="640.0" height="560.0" rx="10" fill="#FFFFFF" stroke="#C1D0DD" stroke-width="1.4"/>
-<text x="756.0" y="210.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#142B3F" font-weight="700" text-anchor="start">NPN + ソース入力（共通+24V）</text>
-<text x="756.0" y="232.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start"></text>
-<text x="780.0" y="252.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#A32B2B" font-weight="700" text-anchor="start">+24V rail</text>
-<path d="M780.0 265.0 L1330.0 265.0" fill="none" stroke="#A32B2B" stroke-width="3"/>
-<path d="M780.0 690.0 L1330.0 690.0" fill="none" stroke="#526378" stroke-width="3"/>
-<text x="790.0" y="715.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#526378" font-weight="700" text-anchor="start">0V</text>
-<rect x="830.0" y="310.0" width="220.0" height="200.0" rx="8" fill="#F1ECF8" stroke="#6B3FA0" stroke-width="2"/>
-<text x="940.0" y="344.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#6B3FA0" font-weight="700" text-anchor="middle">PLC入力</text>
-<text x="940.0" y="366.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#526378" font-weight="400" text-anchor="middle">sourcing input</text>
-<circle cx="900.0" cy="420.0" r="14.0" fill="#FFFFFF" stroke="#6B3FA0" stroke-width="1.6"/>
-<path d="M892 414 L908 414 L900 426 Z" fill="#6B3FA0"/>
-<path d="M830.0 470.0 L830.0 265.0" fill="none" stroke="#A32B2B" stroke-width="2.4"/>
-<text x="780.0" y="300.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#A32B2B" font-weight="700" text-anchor="start">COM → +24V</text>
-<rect x="1110.0" y="310.0" width="180.0" height="210.0" rx="8" fill="#EAF6EE" stroke="#1B7A4B" stroke-width="2"/>
-<text x="1200.0" y="342.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="20" fill="#1B7A4B" font-weight="700" text-anchor="middle">NPN</text>
-<text x="1200.0" y="366.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#526378" font-weight="400" text-anchor="middle">sensor</text>
-<path d="M1240.0 265.0 L1240.0 310.0" fill="none" stroke="#A32B2B" stroke-width="2"/>
-<text x="1250.0" y="292.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#A32B2B" font-weight="700" text-anchor="start">+</text>
-<path d="M1200.0 520.0 L1200.0 690.0" fill="none" stroke="#526378" stroke-width="2"/>
-<path d="M1050.0 410.0 L1110.0 410.0" fill="none" stroke="#1B7A4B" stroke-width="3" marker-end="url(#arrow)"/>
-<text x="1078.0" y="392.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#1B7A4B" font-weight="700" text-anchor="start">OUT</text>
-<path d="M900 270 q0 35 0 35" fill="none" stroke="#A32B2B" stroke-width="2.4" marker-end="url(#arrow-red)"/>
-<path d="M990 400 q40 0 55 0" fill="none" stroke="#A32B2B" stroke-width="2.4" marker-end="url(#arrow-red)"/>
-<path d="M1180 540 q0 60 0 60" fill="none" stroke="#A32B2B" stroke-width="2.4" marker-end="url(#arrow-red)"/>
-<text x="780.0" y="600.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#A32B2B" font-weight="700" text-anchor="start">電流: +24V → COM → 入力 → 出力 → 0V</text>
-<text x="780.0" y="622.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#526378" font-weight="400" text-anchor="start">Current: +24 V → COM → input → output → 0 V</text>
-<rect x="60.0" y="770.0" width="1320.0" height="70.0" rx="8" fill="#F8E7E7" stroke="#A32B2B" stroke-width="1.4"/>
-<text x="80.0" y="800.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#A32B2B" font-weight="700" text-anchor="start">どちらも入力共通端子までの閉回路で考える。端子配置はPLCのハードウェアマニュアルで確認する。</text>
-<text x="80.0" y="822.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#526378" font-weight="400" text-anchor="start">Think in a closed circuit through the input common. Confirm terminal arrangement in the PLC hardware manual.</text>
-<rect x="56.0" y="864.0" width="1328.0" height="60.0" rx="10" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
-<text x="76.0" y="898.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#142B3F" font-weight="700" text-anchor="start">PNPはソース、NPNはシンク。PLC入力の共通端子の電位と入力方式で適合が決まる。</text>
-<text x="76.0" y="920.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14.5" fill="#526378" font-weight="400" text-anchor="start">PNP sources; NPN sinks. Compatibility depends on the input common potential and input circuit type.</text>
-<text x="1400" y="972" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" text-anchor="end">D08-06 • 編集可能な図 / editable SVG</text>
+<text x="56.0" y="104.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="32" fill="#142B3F" font-weight="700" text-anchor="start">入力から出力までの信号の流れ</text>
+<text x="56.0" y="144.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="26" fill="#526378" font-weight="400" text-anchor="start">Signal flow from input to output</text>
+<rect x="80.0" y="190.0" width="300.5" height="140.0" rx="12" fill="#FFFFFF" stroke="#1F5C99" stroke-width="2"/>
+<rect x="80.0" y="200.0" width="7.0" height="120.0" rx="3" fill="#1F5C99" stroke="#1F5C99" stroke-width="0"/>
+<text x="102.0" y="249.7" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">物理的な出来事</text>
+<text x="102.0" y="271.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">physical event</text>
+<text x="102.0" y="289.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">製品が来る / a product arrives</text>
+<path d="M382.5 260.0 L404.5 260.0" fill="none" stroke="#2563A6" stroke-width="2.2" marker-end="url(#arrow)"/>
+<rect x="406.5" y="190.0" width="300.5" height="140.0" rx="12" fill="#FFFFFF" stroke="#1B7A4B" stroke-width="2"/>
+<rect x="406.5" y="200.0" width="7.0" height="120.0" rx="3" fill="#1B7A4B" stroke="#1B7A4B" stroke-width="0"/>
+<text x="428.5" y="249.7" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">センサー</text>
+<text x="428.5" y="271.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">sensor</text>
+<text x="428.5" y="289.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">状態を電気に / state to a signal</text>
+<path d="M709.0 260.0 L731.0 260.0" fill="none" stroke="#2563A6" stroke-width="2.2" marker-end="url(#arrow)"/>
+<rect x="733.0" y="190.0" width="300.5" height="140.0" rx="12" fill="#FFFFFF" stroke="#6B3FA0" stroke-width="2"/>
+<rect x="733.0" y="200.0" width="7.0" height="120.0" rx="3" fill="#6B3FA0" stroke="#6B3FA0" stroke-width="0"/>
+<text x="755.0" y="239.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">PLC入力</text>
+<text x="755.0" y="261.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">PLC input</text>
+<text x="755.0" y="279.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">信号を受け取る / receives the</text>
+<text x="755.0" y="297.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">signal</text>
+<path d="M1035.5 260.0 L1057.5 260.0" fill="none" stroke="#2563A6" stroke-width="2.2" marker-end="url(#arrow)"/>
+<rect x="1059.5" y="190.0" width="300.5" height="140.0" rx="12" fill="#FFFFFF" stroke="#6B3FA0" stroke-width="2"/>
+<rect x="1059.5" y="200.0" width="7.0" height="120.0" rx="3" fill="#6B3FA0" stroke="#6B3FA0" stroke-width="0"/>
+<text x="1081.5" y="239.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">プログラム</text>
+<text x="1081.5" y="261.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">program</text>
+<text x="1081.5" y="279.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">条件を判断 / evaluates</text>
+<text x="1081.5" y="297.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">conditions</text>
+<rect x="80.0" y="400.0" width="300.5" height="140.0" rx="12" fill="#FFFFFF" stroke="#6B3FA0" stroke-width="2"/>
+<rect x="80.0" y="410.0" width="7.0" height="120.0" rx="3" fill="#6B3FA0" stroke="#6B3FA0" stroke-width="0"/>
+<text x="102.0" y="459.7" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">PLC出力</text>
+<text x="102.0" y="481.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">PLC output</text>
+<text x="102.0" y="499.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">指令を出す / issues a command</text>
+<path d="M382.5 470.0 L404.5 470.0" fill="none" stroke="#2563A6" stroke-width="2.2" marker-end="url(#arrow)"/>
+<rect x="406.5" y="400.0" width="300.5" height="140.0" rx="12" fill="#FFFFFF" stroke="#B4541E" stroke-width="2"/>
+<rect x="406.5" y="410.0" width="7.0" height="120.0" rx="3" fill="#B4541E" stroke="#B4541E" stroke-width="0"/>
+<text x="428.5" y="459.7" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">ドライバ・弁</text>
+<text x="428.5" y="481.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">driver or valve</text>
+<text x="428.5" y="499.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">負荷を動かす / drives the load</text>
+<path d="M709.0 470.0 L731.0 470.0" fill="none" stroke="#2563A6" stroke-width="2.2" marker-end="url(#arrow)"/>
+<rect x="733.0" y="400.0" width="300.5" height="140.0" rx="12" fill="#FFFFFF" stroke="#1F5C99" stroke-width="2"/>
+<rect x="733.0" y="410.0" width="7.0" height="120.0" rx="3" fill="#1F5C99" stroke="#1F5C99" stroke-width="0"/>
+<text x="755.0" y="459.7" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">アクチュエータ</text>
+<text x="755.0" y="481.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">actuator</text>
+<text x="755.0" y="499.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">実際に動く / moves</text>
+<path d="M1035.5 470.0 L1057.5 470.0" fill="none" stroke="#2563A6" stroke-width="2.2" marker-end="url(#arrow)"/>
+<rect x="1059.5" y="400.0" width="300.5" height="140.0" rx="12" fill="#FFFFFF" stroke="#1F5C99" stroke-width="2"/>
+<rect x="1059.5" y="410.0" width="7.0" height="120.0" rx="3" fill="#1F5C99" stroke="#1F5C99" stroke-width="0"/>
+<text x="1081.5" y="459.7" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">物理的な動き</text>
+<text x="1081.5" y="481.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">physical movement</text>
+<text x="1081.5" y="499.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">結果 / the result</text>
+<path d="M1300.0 340.0 L1300.0 396.0" fill="none" stroke="#2563A6" stroke-width="2.4" marker-end="url(#arrow)"/>
+<path d="M1250.0 545.0 L1250.0 640.0" fill="none" stroke="#1B7A4B" stroke-width="2.4" stroke-dasharray="7 5" marker-end="url(#arrow)"/>
+<path d="M1250.0 640.0 L330.0 640.0" fill="none" stroke="#1B7A4B" stroke-width="2.4" stroke-dasharray="7 5" marker-end="url(#arrow)"/>
+<path d="M330.0 640.0 L330.0 340.0" fill="none" stroke="#1B7A4B" stroke-width="2.4" stroke-dasharray="7 5" marker-end="url(#arrow)"/>
+<text x="400.0" y="630.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#1B7A4B" font-weight="600" text-anchor="start">位置センサーが結果を入力へ戻す（フィードバック） / a position sensor feeds the result back</text>
+<rect x="70.0" y="690.0" width="1300.0" height="78.0" rx="8" fill="#E8F1FA" stroke="#2563A6" stroke-width="1.2"/>
+<text x="88.0" y="720.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="700" text-anchor="start">指令を出しても、動いたことにはならない。確認入力を待つ。</text>
+<text x="88.0" y="744.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#526378" font-weight="400" text-anchor="start">A command does not prove motion; wait for the confirmation input.</text>
+<rect x="56.0" y="784.0" width="1328.0" height="60.0" rx="10" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
+<text x="76.0" y="818.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#142B3F" font-weight="700" text-anchor="start">物理 → センサー → 入力 → プログラム → 出力 → ドライバ → 動作 → フィードバック</text>
+<text x="76.0" y="840.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14.5" fill="#526378" font-weight="400" text-anchor="start">Physical event, sensor, input, program, output, driver, motion, feedback</text>
+<text x="1400" y="892" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" text-anchor="end">D08-06 • 編集可能な図 / editable SVG</text>
 </svg>

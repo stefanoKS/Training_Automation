@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1000" viewBox="0 0 1440 1000" role="img" aria-labelledby="title desc"><title id="title">インターロックの例 / Interlock example</title><desc id="desc">インターロックの例 / Interlock example — editable bilingual training diagram for 第8日 / Day 8.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#2563A6"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#A32B2B"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#1B7A4B"/></marker></defs><rect x="0" y="0" width="1440" height="1000" fill="#F5F8FC"/><rect x="0" y="0" width="1440" height="12" fill="#2563A6"/>
+<text x="56.0" y="56.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#2563A6" font-weight="700" text-anchor="start">第8日 / Day 8</text>
+<text x="56.0" y="104.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="32" fill="#142B3F" font-weight="700" text-anchor="start">インターロックの例</text>
+<text x="56.0" y="144.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="26" fill="#526378" font-weight="400" text-anchor="start">Interlock example</text>
+<rect x="70.0" y="170.0" width="1300.0" height="260.0" rx="10" fill="#FFFFFF" stroke="#C1D0DD" stroke-width="1.4"/>
+<text x="86.0" y="200.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#142B3F" font-weight="700" text-anchor="start">前進と後退の相互排他</text>
+<text x="86.0" y="222.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">mutual exclusion of forward and reverse</text>
+<path d="M170.0 290.0 L220.0 290.0" fill="none" stroke="#2563A6" stroke-width="2.4"/>
+<path d="M220.0 290.0 L239.0 290.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<path d="M239.0 272.0 L239.0 308.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<path d="M261.0 272.0 L261.0 308.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<path d="M261.0 290.0 L280.0 290.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<text x="250.0" y="332.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#2563A6" font-weight="700" text-anchor="middle">FWD_REQ</text>
+<path d="M170.0 290.0 L220.0 290.0" fill="none" stroke="#2563A6" stroke-width="2.4"/>
+<path d="M420.0 290.0 L439.0 290.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<path d="M439.0 272.0 L439.0 308.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<path d="M461.0 272.0 L461.0 308.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<path d="M461.0 290.0 L480.0 290.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<path d="M435.0 306.0 L465.0 274.0" fill="none" stroke="#2563A6" stroke-width="1.8"/>
+<text x="450.0" y="332.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#2563A6" font-weight="700" text-anchor="middle">REV_OUT</text>
+<path d="M280.0 290.0 L420.0 290.0" fill="none" stroke="#2563A6" stroke-width="2.4"/>
+<rect x="663.0" y="270.0" width="34.0" height="40.0" rx="17" fill="#FFFFFF" stroke="#2563A6" stroke-width="2.2"/>
+<path d="M618.0 290.0 L663.0 290.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<path d="M697.0 290.0 L742.0 290.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<text x="680.0" y="334.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#2563A6" font-weight="700" text-anchor="middle">FWD_OUT</text>
+<path d="M480.0 290.0 L618.0 290.0" fill="none" stroke="#2563A6" stroke-width="2.4"/>
+<path d="M170.0 380.0 L220.0 380.0" fill="none" stroke="#2563A6" stroke-width="2.4"/>
+<path d="M220.0 380.0 L239.0 380.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<path d="M239.0 362.0 L239.0 398.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<path d="M261.0 362.0 L261.0 398.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<path d="M261.0 380.0 L280.0 380.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<text x="250.0" y="422.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#2563A6" font-weight="700" text-anchor="middle">REV_REQ</text>
+<path d="M170.0 380.0 L220.0 380.0" fill="none" stroke="#2563A6" stroke-width="2.4"/>
+<path d="M420.0 380.0 L439.0 380.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<path d="M439.0 362.0 L439.0 398.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<path d="M461.0 362.0 L461.0 398.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<path d="M461.0 380.0 L480.0 380.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<path d="M435.0 396.0 L465.0 364.0" fill="none" stroke="#2563A6" stroke-width="1.8"/>
+<text x="450.0" y="422.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#2563A6" font-weight="700" text-anchor="middle">FWD_OUT</text>
+<path d="M280.0 380.0 L420.0 380.0" fill="none" stroke="#2563A6" stroke-width="2.4"/>
+<rect x="663.0" y="360.0" width="34.0" height="40.0" rx="17" fill="#FFFFFF" stroke="#2563A6" stroke-width="2.2"/>
+<path d="M618.0 380.0 L663.0 380.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<path d="M697.0 380.0 L742.0 380.0" fill="none" stroke="#2563A6" stroke-width="2"/>
+<text x="680.0" y="424.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#2563A6" font-weight="700" text-anchor="middle">REV_OUT</text>
+<path d="M480.0 380.0 L618.0 380.0" fill="none" stroke="#2563A6" stroke-width="2.4"/>
+<text x="90.0" y="250.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#B4541E" font-weight="700" text-anchor="start">相互に打ち消すだけの形は、スキャン順に依存する / cross-linked contacts depend on scan order</text>
+<rect x="70.0" y="460.0" width="620.0" height="260.0" rx="10" fill="#FFFFFF" stroke="#C1D0DD" stroke-width="1.4"/>
+<text x="86.0" y="490.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#142B3F" font-weight="700" text-anchor="start">教材の設計</text>
+<text x="86.0" y="512.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">teaching design</text>
+<text x="90.0" y="550.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="700" text-anchor="start">同時要求は両方OFF（拒否）。</text>
+<text x="90.0" y="580.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">Both requests OFF; the conflict is rejected.</text>
+<text x="90.0" y="630.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="400" text-anchor="start">決定的で、並び順に依存しない。</text>
+<text x="90.0" y="658.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#526378" font-weight="400" text-anchor="start">Deterministic and independent of rung order.</text>
+<text x="90.0" y="700.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#B4541E" font-weight="700" text-anchor="start">実際の反転接触器は電気的・機械的ILも必要。</text>
+<text x="90.0" y="724.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#526378" font-weight="400" text-anchor="start">Real reversing contactors also need electrical and mechanical interlocking.</text>
+<rect x="750.0" y="460.0" width="200.0" height="38.0" rx="2" fill="#E8F1FA" stroke="#C1D0DD" stroke-width="1"/>
+<text x="850.0" y="485.8" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="700" text-anchor="middle">要求 / request</text>
+<rect x="950.0" y="460.0" width="90.0" height="38.0" rx="2" fill="#E8F1FA" stroke="#C1D0DD" stroke-width="1"/>
+<text x="995.0" y="485.8" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="700" text-anchor="middle">FWD</text>
+<rect x="1040.0" y="460.0" width="90.0" height="38.0" rx="2" fill="#E8F1FA" stroke="#C1D0DD" stroke-width="1"/>
+<text x="1085.0" y="485.8" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="700" text-anchor="middle">REV</text>
+<rect x="1130.0" y="460.0" width="150.0" height="38.0" rx="2" fill="#E8F1FA" stroke="#C1D0DD" stroke-width="1"/>
+<text x="1205.0" y="485.8" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="700" text-anchor="middle">競合 / conflict</text>
+<rect x="750.0" y="498.0" width="200.0" height="48.0" rx="2" fill="#FFFFFF" stroke="#C1D0DD" stroke-width="1"/>
+<text x="762.0" y="529.7" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="400" text-anchor="start">前進のみ / forward only</text>
+<rect x="950.0" y="498.0" width="90.0" height="48.0" rx="2" fill="#FFFFFF" stroke="#C1D0DD" stroke-width="1"/>
+<text x="962.0" y="529.7" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="400" text-anchor="start">ON</text>
+<rect x="1040.0" y="498.0" width="90.0" height="48.0" rx="2" fill="#FFFFFF" stroke="#C1D0DD" stroke-width="1"/>
+<text x="1052.0" y="529.7" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="400" text-anchor="start">OFF</text>
+<rect x="1130.0" y="498.0" width="150.0" height="48.0" rx="2" fill="#FFFFFF" stroke="#C1D0DD" stroke-width="1"/>
+<text x="1142.0" y="529.7" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="400" text-anchor="start">なし / none</text>
+<rect x="750.0" y="546.0" width="200.0" height="48.0" rx="2" fill="#FFFFFF" stroke="#C1D0DD" stroke-width="1"/>
+<text x="762.0" y="577.7" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="400" text-anchor="start">後退のみ / reverse only</text>
+<rect x="950.0" y="546.0" width="90.0" height="48.0" rx="2" fill="#FFFFFF" stroke="#C1D0DD" stroke-width="1"/>
+<text x="962.0" y="577.7" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="400" text-anchor="start">OFF</text>
+<rect x="1040.0" y="546.0" width="90.0" height="48.0" rx="2" fill="#FFFFFF" stroke="#C1D0DD" stroke-width="1"/>
+<text x="1052.0" y="577.7" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="400" text-anchor="start">ON</text>
+<rect x="1130.0" y="546.0" width="150.0" height="48.0" rx="2" fill="#FFFFFF" stroke="#C1D0DD" stroke-width="1"/>
+<text x="1142.0" y="577.7" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="400" text-anchor="start">なし / none</text>
+<rect x="750.0" y="594.0" width="200.0" height="48.0" rx="2" fill="#FFFFFF" stroke="#C1D0DD" stroke-width="1"/>
+<text x="762.0" y="625.7" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="400" text-anchor="start">両方 / both</text>
+<rect x="950.0" y="594.0" width="90.0" height="48.0" rx="2" fill="#FFFFFF" stroke="#C1D0DD" stroke-width="1"/>
+<text x="962.0" y="625.7" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="400" text-anchor="start">OFF</text>
+<rect x="1040.0" y="594.0" width="90.0" height="48.0" rx="2" fill="#FFFFFF" stroke="#C1D0DD" stroke-width="1"/>
+<text x="1052.0" y="625.7" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="400" text-anchor="start">OFF</text>
+<rect x="1130.0" y="594.0" width="150.0" height="48.0" rx="2" fill="#FFFFFF" stroke="#C1D0DD" stroke-width="1"/>
+<text x="1142.0" y="625.7" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="400" text-anchor="start">あり / yes</text>
+<rect x="750.0" y="642.0" width="200.0" height="48.0" rx="2" fill="#FFFFFF" stroke="#C1D0DD" stroke-width="1"/>
+<text x="762.0" y="673.7" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="400" text-anchor="start">停止 / stop</text>
+<rect x="950.0" y="642.0" width="90.0" height="48.0" rx="2" fill="#FFFFFF" stroke="#C1D0DD" stroke-width="1"/>
+<text x="962.0" y="673.7" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="400" text-anchor="start">OFF</text>
+<rect x="1040.0" y="642.0" width="90.0" height="48.0" rx="2" fill="#FFFFFF" stroke="#C1D0DD" stroke-width="1"/>
+<text x="1052.0" y="673.7" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="400" text-anchor="start">OFF</text>
+<rect x="1130.0" y="642.0" width="150.0" height="48.0" rx="2" fill="#FFFFFF" stroke="#C1D0DD" stroke-width="1"/>
+<text x="1142.0" y="673.7" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="400" text-anchor="start">なし / none</text>
+<rect x="70.0" y="760.0" width="1300.0" height="78.0" rx="8" fill="#E8F1FA" stroke="#2563A6" stroke-width="1.2"/>
+<text x="88.0" y="790.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="700" text-anchor="start">ソフトのインターロックを、安全定格のガードとして扱わない。</text>
+<text x="88.0" y="814.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#526378" font-weight="400" text-anchor="start">Software interlocks are not safety-rated guarding functions.</text>
+<rect x="56.0" y="884.0" width="1328.0" height="60.0" rx="10" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
+<text x="76.0" y="918.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#142B3F" font-weight="700" text-anchor="start">反対側の出力で自分の指令を禁止する。同時要求は決定的に拒否する</text>
+<text x="76.0" y="940.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14.5" fill="#526378" font-weight="400" text-anchor="start">Each command is inhibited by the opposite output; simultaneous requests are deterministically rejected</text>
+<text x="1400" y="992" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" text-anchor="end">D08-13 • 編集可能な図 / editable SVG</text>
+</svg>

@@ -8,59 +8,78 @@
 | 量 / Quantity | 式 / Formula | 例 / Example |
 |---|---|---|
 | タクトタイム / takt time | 生産時間[秒] ÷ 必要数量 / available seconds ÷ required pieces | 420×60 ÷ 600 = **42 s/個** |
-| 理論能力 / theoretical capacity | 3600 ÷ サイクルタイム[秒] / 3600 ÷ cycle time | 3600 ÷ 15 = **240 個/時** |
-| 実力能力 / effective capacity | 理論能力 × 稼働率 × 良品率 / theoretical × availability × yield | 240×0.85×0.98 = **199.92 個/時** |
-| 必要能力 / required rate | 必要数量 ÷ 生産時間[h] / pieces ÷ hours | 600 ÷ 7 = **85.71 個/時** |
+| 必要生産能力 / required rate | 必要数量 ÷ 生産時間[h] / pieces ÷ hours | 600 ÷ 7 ≈ **85.71 個/時** |
+| 理論能力（サイクル）/ theoretical cycles | 3600 ÷ サイクルタイム[秒] / 3600 ÷ cycle time | 3600 ÷ 15 = **240 サイクル/時** |
+| 理論能力（個数）/ theoretical pieces | 3600 ÷ サイクルタイム × 1サイクルの個数 / × pieces per cycle | 240 × 1 = **240 個/時** |
 
-## 2. 力とシリンダ / force and cylinder
+- タクトは「必要なペース」、サイクルは「機械の時間」。 / Takt is the required pace; cycle is the machine time.
+- **1サイクルあたりの個数**を言わないと、能力は決まらない。 / Capacity is undefined without pieces per cycle.
+- 稼働率・OEEはこの研修の必須範囲外。 / Availability and OEE are outside this course.
 
-```text
-F_friction = μ × m × g
-F_design   = F_friction × factor
-D_theory   = √(4 × F_design / (π × P))
-F_push     = P × π × D² / 4
-F_pull     = P × π × (D² − d²) / 4
-```
-
-- m: 質量 [kg] / mass
-- g: 9.81 m/s²（教材値）/ teaching value
-- μ: 摩擦係数（単位なし）/ friction coefficient
-- P: シリンダにかかるゲージ圧 [Pa] / gauge pressure at the cylinder
-- D: 内径 [m] / bore
-- d: ロッド径 [m] / rod diameter
-- factor: 余裕係数（教材の仮定）/ teaching margin
-
-**例 / example**: 8 kg、μ=0.25 → 19.62 N。factor 2 → 39.24 N。P=0.4 MPa → D ≈ **11.18 mm**（理論下限）。
-**Example**: 8 kg, μ=0.25 → 19.62 N; factor 2 → 39.24 N; 0.4 MPa → D ≈ **11.18 mm** (theoretical lower bound).
-
-> 11.18 mm はカタログ選定ではありません。負荷率・速度・偏荷重・圧力損失・センサー対応を確認します。
-> 11.18 mm is not a catalogue selection. Check load factor, speed, side load, pressure loss and sensing.
-
-## 3. モーターと減速機 / motor and reducer
+## 2. 効果金額 / economic effect
 
 ```text
-ω = 2πn / 60
-T = P / ω
-n_out = n_in / ratio
-T_out = T_in × ratio × η
+1日の削減時間[h] = 1回の削減時間[s] × 1日の回数 ÷ 3600
+年間削減工数[h]  = 1日の削減時間 × 年間稼働日数
+労務費換算額[円]  = 年間削減工数 × 時給[円/時]
+年間純効果[円]    = 労務費換算額 − 年間運用費
+簡易回収期間[年]  = 設備導入費 ÷ 年間純効果
 ```
 
-**例 / example**: 60 W、1200 rpm → T ≈ **0.477 N·m**。20:1 → 60 rpm、理想 T ≈ **9.55 N·m**。η=0.90（追加仮定）→ **8.59 N·m**。
-**Example**: 60 W at 1200 rpm → T ≈ **0.477 N·m**; 20:1 → 60 rpm, ideal T ≈ **9.55 N·m**; η=0.90 (added assumption) → **8.59 N·m**.
+例 / example: 12 s × 180回/日 ÷ 3600 = **0.6 h/日** → × 220日 = **132 h/年** → × 2,400円 = **316,800 円/年**。
+運用費0なら回収期間 **450,000 ÷ 316,800 ≈ 1.42 年**。運用費50,000円なら **266,800 円/年 → 約1.69 年**。
 
-## 4. 空圧回路の確認 / pneumatic circuit checks
+- 削減時間がそのまま現金になるとは限らない。 / Saved time is not automatically cash.
+- 年間純効果が0以下なら、回収期間は意味を持たない。 / Payback is meaningless at zero or negative net benefit.
 
-- 空気源 → 遮断 → 空気準備（フィルタ・レギュレータ）→ 方向切替弁 → 速度制御 → シリンダ / source, isolation, preparation, directional valve, flow control, cylinder.
-- 遮断の下流に排気（ブリード）と圧力計 / bleed and gauge downstream of isolation.
-- 無通電時の弁位置は機種依存 / de-energised valve position is model-dependent.
-- 残圧は遮断だけでは抜けない / isolation alone does not release stored pressure.
-- 電磁弁OFFは安全状態を保証しない / de-energising a solenoid does not guarantee safety.
+## 3. シリンダの力 / cylinder force
 
-## 5. 提出前チェック / pre-submission checks
+```text
+押し側 F = P × π × D² ÷ 4          extension
+引き側 F = P × (π × (D² − d²) ÷ 4)  retraction
+理論内径 D = √(4 × F ÷ (π × P))
+摩擦力 F = μ × m × g
+```
 
-- [ ] タクトと実力能力を分けた / separated takt and effective capacity
-- [ ] 質量[kg]と力[N]を区別した / distinguished mass and force
-- [ ] 理論値とカタログ候補を分けた / separated theoretical values from catalogue candidates
-- [ ] 仮定・未確認・出典・版を書いた / recorded assumptions, open items, sources and revisions
-- [ ] 危険源と保護方策の方向性を書いた / wrote hazards and the direction of protective measures
-- [ ] 実機の通電・空圧・安全確認は行っていない / did not energise or pressurise real equipment
+- P：ゲージ圧 [MPa]、1 MPa = 1 N/mm² / gauge pressure
+- D：内径 [mm]、d：ロッド径 [mm]、m：質量 [kg]、g = 9.81 m/s²
+
+例 / examples:
+
+- D20、d8、P0.5 → 押し **157.08 N**、引き **131.95 N**
+- 8 kg、μ0.25 → 19.62 N → 余裕2 → 39.24 N → P0.4 MPa → D ≈ **11.18 mm**
+
+> 理論値です。背圧・摩擦・加速度・偏荷重・損失は含みません。11.18 mm はカタログ選定ではありません。
+> Theoretical values. Back pressure, friction, acceleration, offset loads and losses are excluded. 11.18 mm is not a catalogue selection.
+
+## 4. モーターと減速機 / motor and reducer
+
+```text
+角速度 ω = 2 × π × rpm ÷ 60        [rad/s]
+機械出力 P = T × ω                 [W]
+トルク T = P ÷ ω                   [N·m]
+出力回転数 = 入力回転数 ÷ 減速比
+出力トルク = 入力トルク × 減速比 × 減速機効率
+```
+
+例 / example: 60 W、1,200 rpm → T ≈ **0.477 N·m**。減速比20、効率0.90 → 出力 **60 rpm**、**約8.59 N·m**。
+
+- 機械出力と電気入力は別。 / Mechanical output and electrical input differ.
+- 減速機効率はモーター効率の代わりにならない。 / Reducer efficiency does not replace motor efficiency.
+
+## 5. 速度 / speed
+
+```text
+平均速度 = 移動距離 ÷ 移動時間
+```
+
+例 / example: 100 mm ÷ 0.5 s = **200 mm/s**。平均は最高速度ではない。 / Average is not peak speed.
+
+## 6. 選定前のチェック / before selecting
+
+- [ ] 質量 kg と力 N を分けた / mass and force separated
+- [ ] ストローク、速度、サイクルタイムを測った / stroke, speed, cycle time measured
+- [ ] 中間位置に止める必要があるか決めた / intermediate positions decided
+- [ ] 取付姿勢・偏荷重・ガイドを確認した / orientation, offset load, guides
+- [ ] 使える動力（空気・油・電気）を確認した / available power
+- [ ] 停止したときの動きを確認した / behaviour at stop

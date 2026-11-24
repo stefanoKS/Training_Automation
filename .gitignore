@@ -4,3 +4,6 @@
 venv/
 env/
 ENV/
+
+# pytest temporary directories
+pytest-of-*/

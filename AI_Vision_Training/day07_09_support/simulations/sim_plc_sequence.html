@@ -2,261 +2,234 @@
 <html lang="ja">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>押出し装置 PLCシミュレータ / Pusher PLC simulator</title>
+<title>PLC 論理シミュレータ / PLC logic simulator</title>
 <style>
-  :root { --ink:#142B3F; --muted:#526378; --blue:#1F5C99; --green:#1B7A4B;
-          --purple:#6B3FA0; --orange:#B4541E; --red:#A32B2B; --bg:#F5F8FC; }
-  * { box-sizing: border-box; }
-  body { margin:0; font-family:"Yu Gothic","Meiryo",system-ui,sans-serif; color:var(--ink); background:var(--bg); }
-  header { background:#1F5C99; color:#fff; padding:18px 24px; }
-  header h1 { margin:0 0 4px; font-size:22px; }
-  header p { margin:0; opacity:.9; font-size:13px; }
-  main { max-width:1180px; margin:0 auto; padding:20px; }
-  .grid { display:grid; grid-template-columns: 300px 1fr; gap:18px; }
-  @media (max-width: 820px) { .grid { grid-template-columns: 1fr; } }
-  .card { background:#fff; border:1px solid #C1D0DD; border-radius:12px; padding:16px; }
-  .card h2 { font-size:16px; margin:0 0 10px; color:var(--blue); }
-  button { font:inherit; padding:10px 12px; margin:4px 2px; border-radius:8px; border:1px solid #9DB2C6;
-           background:#fff; color:var(--ink); cursor:pointer; }
-  button:hover { background:#EAF1F8; }
-  button.primary { background:var(--blue); border-color:var(--blue); color:#fff; }
-  button.stop { background:#FBE9E9; border-color:var(--red); color:var(--red); }
-  button.reset { background:#F1ECF8; border-color:var(--purple); color:var(--purple); }
-  .state { font-size:26px; font-weight:700; letter-spacing:.5px; }
-  .badge { display:inline-block; padding:2px 9px; border-radius:999px; font-size:12px; font-weight:700; }
-  .on { background:#E3F4E9; color:var(--green); }
-  .off { background:#EEF1F4; color:var(--muted); }
-  .fault { background:#FBE3E3; color:var(--red); }
-  table { width:100%; border-collapse:collapse; font-size:13px; }
-  th, td { border-bottom:1px solid #E1E9F0; padding:6px 8px; text-align:left; }
-  th { color:var(--muted); font-weight:600; }
-  #trace { height:230px; overflow-y:auto; background:#0F1B26; color:#D8E6F2;
-           font-family:Consolas,monospace; font-size:12px; padding:10px; border-radius:8px; white-space:pre-wrap; }
-  .note { font-size:12px; color:var(--muted); line-height:1.55; }
-  .warn { border-left:5px solid var(--red); background:#FDF2F2; padding:10px 12px; border-radius:6px; }
-  .lamp { display:inline-block; width:16px; height:16px; border-radius:50%; margin-right:6px;
-          vertical-align:middle; border:1px solid #9DB2C6; background:#E7EDF3; }
-  .lamp.on { background:#2FA36B; border-color:#1B7A4B; }
-  .switches label { display:block; margin:8px 0; font-size:14px; }
-  input[type=checkbox] { transform:scale(1.25); margin-right:8px; }
+  :root { color-scheme: light; }
+  body { font-family: "Yu Gothic", Meiryo, system-ui, sans-serif; margin: 0; padding: 24px; background: #f5f8fc; color: #142b3f; }
+  h1 { font-size: 22px; margin: 0 0 4px; }
+  h2 { font-size: 16px; margin: 24px 0 8px; color: #1f5c99; }
+  .sub { color: #526378; font-size: 13px; margin: 0 0 16px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+  .card { background: #fff; border: 1px solid #c1d0dd; border-radius: 10px; padding: 14px; }
+  label { display: block; margin: 6px 0; font-size: 14px; }
+  button { font: inherit; padding: 6px 10px; margin: 4px 6px 4px 0; border-radius: 6px; border: 1px solid #1f5c99; background: #e8f1fa; cursor: pointer; }
+  button.stop { border-color: #a32b2b; background: #f8e7e7; }
+  table { border-collapse: collapse; width: 100%; font-size: 14px; }
+  th, td { border: 1px solid #c1d0dd; padding: 4px 6px; text-align: left; }
+  th { background: #eaf1f8; }
+  .on { color: #1b7a4b; font-weight: 700; }
+  .off { color: #526378; }
+  .warn { background: #fdf2f2; border: 2px solid #a32b2b; border-radius: 8px; padding: 10px; font-size: 13px; }
+  .log { font-family: Consolas, monospace; font-size: 12px; max-height: 220px; overflow: auto; background: #f2f6fa; padding: 8px; border-radius: 6px; }
 </style>
 </head>
 <body>
-<header>
-  <h1>押出し装置 PLCシミュレータ / Pusher machine PLC simulator</h1>
-  <p>オフライン教育用・決定論的モデル / Offline training model, deterministic. 安全PLCではありません / Not a safety PLC.</p>
-</header>
-<main>
-  <div class="warn">
-    <strong>安全境界 / Safety boundary:</strong>
-    本シミュレータは教育用です。実機の通電・空圧・安全機能の検証には使えません。非常停止・ガード・インターロック・再起動防止は、リスクアセスメントに基づく独立した安全系で設計・検証してください。<br>
-    This is a training simulator. It cannot verify real energisation, pneumatics or safety functions. Emergency stopping, guards, interlocks and restart prevention require an independent safety system designed from a risk assessment.
+<h1>PLC 論理シミュレータ / PLC logic simulator</h1>
+<p class="sub">教育用です。実機のPLC・モーター・電磁弁を動かしません。 / Educational only: it never drives real PLCs, motors or valves.</p>
+
+<p class="warn">このシミュレータは通常の制御の考え方を学ぶためのものです。安全機能（非常停止、ガード、安全扉）の設計・検証ではありません。 / This simulator teaches ordinary control logic. It is not a design or validation of safety functions.</p>
+
+<div class="grid">
+  <div class="card">
+    <h2>入力 / inputs</h2>
+    <label><input type="checkbox" id="start"> X0 START（押している間ON / ON while held）</label>
+    <label><input type="checkbox" id="stop" checked> X1 STOP_OK（物理NC・健全時ON / healthy ON）</label>
+    <label><input type="checkbox" id="retracted" checked> X2 後退端 / retracted</label>
+    <label><input type="checkbox" id="extended"> X3 前進端 / extended</label>
+    <h2>操作 / actions</h2>
+    <button id="press">STARTを押す（100 ms）/ press START</button>
+    <button class="stop" id="stopbtn">STOPを開く / open STOP</button>
+    <button id="power">復電（START保持）/ power restore with START held</button>
+    <label><input type="checkbox" id="mode"> 拡張ロジック（再起動防止）/ extended logic</label>
   </div>
-  <div class="grid" style="margin-top:18px;">
-    <section class="card switches">
-      <h2>入力 / Inputs</h2>
-      <label><input type="checkbox" id="start"> X0 START（押している間ON / ON while pressed）</label>
-      <label><input type="checkbox" id="stop" checked> X1 STOP_OK（物理NC・健全時ON / healthy ON）</label>
-      <label><input type="checkbox" id="retracted" checked> X2 後退端 / retracted</label>
-      <label><input type="checkbox" id="extended"> X3 前進端 / extended</label>
-      <hr>
-      <button class="primary" id="press">STARTを押す / press START</button>
-      <button class="stop" id="stopbtn">STOPを押す / press STOP</button>
-      <button class="reset" id="reset">故障リセット / fault reset</button>
-      <button id="power">復電（START保持）/ power restore with START held</button>
-      <hr>
-      <label><input type="checkbox" id="stuck"> 故障注入: X3がONにならない / fault: X3 never confirms</label>
-      <label><input type="checkbox" id="conflict"> 故障注入: X2とX3同時ON / fault: conflict</label>
-      <label><input type="checkbox" id="slow"> 故障注入: X3が4秒後にON / fault: X3 slow</label>
-      <p class="note">時間はシミュレーション上の値です。実機のスキャン周期・タイマー精度とは異なります。<br>
-      Times are simulated; real scan and timer behaviour differ.</p>
-    </section>
-    <section class="card">
-      <h2>状態 / State</h2>
-      <div class="state" id="state">IDLE</div>
-      <p id="faultline" class="note">fault: -</p>
-      <div class="grid" style="grid-template-columns:1fr 1fr; gap:12px;">
-        <div>
-          <p><span class="lamp" id="lamp-y0"></span>Y0 運転ランプ / RUN lamp</p>
-          <p><span class="lamp" id="lamp-y1"></span>Y1 遅延ランプ / delayed lamp</p>
-          <p><span class="lamp" id="lamp-y2"></span>Y2 前進指令 / extend command</p>
-        </div>
-        <div>
-          <table>
-            <tr><th>T0</th><td id="t0">0 ms</td></tr>
-            <tr><th>cycle count</th><td id="cycles">0</td></tr>
-            <tr><th>fresh start required</th><td id="fresh">true</td></tr>
-            <tr><th>START armed</th><td id="armed">false</td></tr>
-          </table>
-        </div>
-      </div>
-      <h2 style="margin-top:18px;">I/Oトレース / I/O trace</h2>
-      <div id="trace"></div>
-      <p class="note">「STARTを押す」は100msのパルスです。押しっぱなしにしても、復電後に自動起動しません。<br>
-      The START button produces a 100 ms pulse. Holding it does not restart the machine after power restoration.</p>
-    </section>
+
+  <div class="card">
+    <h2>状態 / state</h2>
+    <table>
+      <tr><th>項目 / item</th><th>値 / value</th></tr>
+      <tr><td>論理 / logic</td><td id="logic">basic</td></tr>
+      <tr><td>M1 START armed</td><td id="armed">false</td></tr>
+      <tr><td>M0 RUN</td><td id="run">false</td></tr>
+      <tr><td>Y0 運転表示灯 / RUN lamp</td><td id="y0">false</td></tr>
+      <tr><td>Y2 前進指令 / extend</td><td id="y2">false</td></tr>
+      <tr><td>前回のSTART / previous START</td><td id="prev">true</td></tr>
+    </table>
   </div>
-  <section class="card" style="margin-top:18px;">
-    <h2>確認すること / What to observe</h2>
-    <ol class="note">
-      <li>STARTを離してもRUNが続く（自己保持）/ RUN remains after START release.</li>
-      <li>STOPでRUN、Y0、Y1、Y2がOFFになり、T0が0に戻る / STOP clears outputs and resets T0.</li>
-      <li>3秒でY1がONになる / Y1 turns on at 3 s.</li>
-      <li>X3が来ないとF001でFAULTになる / missing X3 gives F001.</li>
-      <li>リセットしてもY2はONにならない / reset does not start motion.</li>
-      <li>復電時にSTARTを保持していても自動起動しない / no restart from a held START.</li>
-    </ol>
-  </section>
-  <noscript>
-    <p class="warn">このシミュレータにはJavaScriptが必要です。オフラインのPythonシミュレーション（Day08_03）も使用できます。<br>
-    JavaScript is required. The offline Python simulation in Day08_03 can be used instead.</p>
-  </noscript>
-</main>
+
+  <div class="card">
+    <h2>インターロック / interlock</h2>
+    <label><input type="checkbox" id="fwd"> 前進要求 / forward request</label>
+    <label><input type="checkbox" id="rev"> 後退要求 / reverse request</label>
+    <table>
+      <tr><td>FWD_OUT</td><td id="fwdout">false</td></tr>
+      <tr><td>REV_OUT</td><td id="revout">false</td></tr>
+      <tr><td>競合 / conflict</td><td id="conflict">false</td></tr>
+    </table>
+    <p class="sub">同時要求は両方OFF（拒否）。 / Simultaneous requests are rejected: both OFF.</p>
+  </div>
+</div>
+
+<h2>記録 / log</h2>
+<div class="log" id="log"></div>
+
+<noscript>このページはJavaScriptを有効にすると動作します。 / Enable JavaScript to use this page.</noscript>
+
 <script>
 /* LOGIC-START */
-const STATES = ["IDLE","READY","EXTEND","WAIT_EXTENDED","RETRACT","WAIT_RETRACTED","COMPLETE","FAULT"];
-const ALLOWED = {
-  IDLE:["READY","FAULT"], READY:["EXTEND","IDLE","FAULT"], EXTEND:["WAIT_EXTENDED","IDLE","FAULT"],
-  WAIT_EXTENDED:["RETRACT","IDLE","FAULT"], RETRACT:["WAIT_RETRACTED","IDLE","FAULT"],
-  WAIT_RETRACTED:["COMPLETE","IDLE","FAULT"], COMPLETE:["READY","IDLE","FAULT"], FAULT:["IDLE"]
-};
-class PusherSim {
-  constructor(timerMs = 3000, timeoutMs = 3000) {
-    this.timerMs = timerMs;
-    this.timeoutMs = timeoutMs;
-    this.powerOn(true);
-  }
-  powerOn(startHeld = true) {
-    this.state = "IDLE"; this.run = false; this.t0 = 0; this.motion = 0;
-    this.fault = null; this.cycles = 0; this.fresh = true; this.armed = false;
-    this.startPrev = !!startHeld; this.resetPrev = true; this.elapsed = 0;
-  }
-  transition(next) {
-    if (!STATES.includes(next)) throw new Error("unknown state " + next);
-    if (!ALLOWED[this.state].includes(next)) throw new Error("invalid transition " + this.state + " -> " + next);
-    this.state = next;
-  }
-  faultTo(code) {
-    this.state = "FAULT"; this.run = false; this.t0 = 0; this.motion = 0;
-    this.fault = code; this.fresh = true; this.armed = false;
-  }
-  step(inputs, reset = false, dt = 100) {
-    this.elapsed += dt;
-    const { start = false, stopOk = true, retracted = true, extended = false } = inputs;
-    if (retracted && extended && this.state !== "FAULT") this.faultTo("F002");
-    if (this.state === "FAULT") {
-      this.run = false; this.t0 = 0; this.motion = 0;
-      const edge = reset && !this.resetPrev;
-      if (edge && !start && stopOk) { this.transition("IDLE"); this.fault = null; this.fresh = true; this.armed = false; }
-      this.resetPrev = !!reset; this.startPrev = start;
-      return this.snapshot(inputs);
+// Pure logic block: no DOM access, so the node tests can evaluate it directly.
+
+function stepBasicSealIn(state, inputs) {
+  const run = Boolean(inputs.stopOk) && (Boolean(inputs.start) || Boolean(state.run));
+  return { run: run, armed: false };
+}
+
+// Extended logic: arm only after START is released at a confirmed position;
+// start only on a new rising edge while armed; STOP has priority.
+function stepExtended(state, inputs) {
+  let run = Boolean(state.run);
+  let armed = Boolean(state.armed);
+  const stopOk = Boolean(inputs.stopOk);
+  const retracted = Boolean(inputs.retracted);
+  const extended = Boolean(inputs.extended);
+  const edge = Boolean(inputs.start) && !Boolean(state.prevStart);
+  if (!stopOk) {
+    run = false;
+    armed = false;
+  } else {
+    if (!inputs.start && retracted && !extended) {
+      armed = true;
     }
-    if (!stopOk) {
-      if (this.state !== "IDLE") this.transition("IDLE");
-      this.run = false; this.t0 = 0; this.motion = 0; this.fresh = true; this.armed = false;
-      this.resetPrev = !!reset; this.startPrev = start;
-      return this.snapshot(inputs);
+    if (edge && armed && retracted && !extended) {
+      run = true;
+      armed = false;
     }
-    if (!start && (this.state === "IDLE" || this.state === "COMPLETE")) this.armed = true;
-    if (this.run) this.t0 = Math.min(this.t0 + dt, this.timerMs); else this.t0 = 0;
-    const edge = start && !this.startPrev;
-    let started = false;
-    if (edge && this.armed && (this.state === "IDLE" || this.state === "COMPLETE")) {
-      if (!retracted || extended) { this.armed = false; }
-      else {
-        this.transition("READY"); this.run = true; this.t0 = 0; this.motion = 0;
-        this.fresh = false; this.armed = false; this.cycles += 1; started = true;
-      }
-    }
-    if (!started) {
-      if (this.state === "READY") { this.transition("EXTEND"); this.motion = 0; }
-      else if (this.state === "EXTEND") { this.transition("WAIT_EXTENDED"); this.motion = 0; }
-      else if (this.state === "WAIT_EXTENDED") {
-        this.motion += dt;
-        if (extended && !retracted) { this.transition("RETRACT"); this.motion = 0; }
-        else if (this.motion > this.timeoutMs) this.faultTo("F001");
-      }
-      else if (this.state === "RETRACT") { this.transition("WAIT_RETRACTED"); this.motion = 0; }
-      else if (this.state === "WAIT_RETRACTED") {
-        this.motion += dt;
-        if (retracted && !extended) { this.transition("COMPLETE"); this.motion = 0; }
-        else if (this.motion > this.timeoutMs) this.faultTo("F003");
-      }
-    }
-    this.resetPrev = !!reset; this.startPrev = start;
-    return this.snapshot(inputs);
   }
-  snapshot(inputs = {}) {
-    return { state: this.state, run: this.run, y0: this.run,
-      y1: this.run && this.t0 >= this.timerMs, y2: this.state === "EXTEND" || this.state === "WAIT_EXTENDED",
-      t0: this.t0, fault: this.fault, cycles: this.cycles, fresh: this.fresh, armed: this.armed,
-      elapsed: this.elapsed, stopOk: inputs.stopOk !== false, retracted: !!inputs.retracted, extended: !!inputs.extended };
+  return { run: run, armed: armed };
+}
+
+function extendCommand(run, retracted, extended) {
+  return Boolean(run) && Boolean(retracted) && !Boolean(extended);
+}
+
+function stepInterlock(inputs) {
+  if (!inputs.stopOk) {
+    return { forward: false, reverse: false, conflict: false };
   }
+  if (inputs.forward && inputs.reverse) {
+    return { forward: false, reverse: false, conflict: true };
+  }
+  return { forward: Boolean(inputs.forward), reverse: Boolean(inputs.reverse), conflict: false };
+}
+
+function step(state, inputs) {
+  const core = state.extended ? stepExtended(state, inputs) : stepBasicSealIn(state, inputs);
+  return {
+    run: core.run,
+    armed: core.armed,
+    prevStart: Boolean(inputs.start),
+    y2: extendCommand(core.run, inputs.retracted, inputs.extended),
+  };
 }
 /* LOGIC-END */
 
-const sim = new PusherSim();
-let timer = null;
-const $ = (id) => document.getElementById(id);
-function readInputs() {
-  const stuck = $("stuck").checked;
-  const conflict = $("conflict").checked;
-  const slow = $("slow").checked;
-  let retracted = $("retracted").checked;
-  let extended = $("extended").checked;
-  if (conflict) { retracted = true; extended = true; }
-  if (stuck) extended = false;
-  if (slow && sim.state === "WAIT_EXTENDED" && sim.motion > 4000) extended = true;
-  return { start: $("start").checked, stopOk: $("stop").checked, retracted, extended };
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = {
+    stepBasicSealIn: stepBasicSealIn,
+    stepExtended: stepExtended,
+    extendCommand: extendCommand,
+    stepInterlock: stepInterlock,
+    step: step,
+  };
 }
-function render(snap) {
-  $("state").textContent = snap.state;
-  $("faultline").textContent = "fault: " + (snap.fault || "-");
-  $("faultline").className = snap.fault ? "badge fault" : "note";
-  $("lamp-y0").className = "lamp" + (snap.y0 ? " on" : "");
-  $("lamp-y1").className = "lamp" + (snap.y1 ? " on" : "");
-  $("lamp-y2").className = "lamp" + (snap.y2 ? " on" : "");
-  $("t0").textContent = snap.t0 + " ms";
-  $("cycles").textContent = snap.cycles;
-  $("fresh").textContent = String(snap.fresh);
-  $("armed").textContent = String(snap.armed);
+
+if (typeof document !== "undefined") {
+  var state = { run: false, armed: false, prevStart: true, extended: false };
+
+  function el(id) { return document.getElementById(id); }
+
+  function readInputs() {
+    return {
+      start: el("start").checked,
+      stopOk: el("stop").checked,
+      retracted: el("retracted").checked,
+      extended: el("extended").checked,
+    };
+  }
+
+  function render(snap) {
+    el("logic").textContent = state.extended ? "extended" : "basic";
+    el("armed").textContent = String(snap.armed);
+    el("run").textContent = String(snap.run);
+    el("y0").textContent = String(snap.run);
+    el("y2").textContent = String(snap.y2);
+    el("prev").textContent = String(snap.prevStart);
+    el("run").className = snap.run ? "on" : "off";
+    var inter = stepInterlock({
+      forward: el("fwd").checked,
+      reverse: el("rev").checked,
+      stopOk: el("stop").checked,
+    });
+    el("fwdout").textContent = String(inter.forward);
+    el("revout").textContent = String(inter.reverse);
+    el("conflict").textContent = String(inter.conflict);
+  }
+
+  function tick() {
+    var snap = step(state, readInputs());
+    state.run = snap.run;
+    state.armed = snap.armed;
+    state.prevStart = snap.prevStart;
+    render(snap);
+    return snap;
+  }
+
+  function log(message) {
+    var line = document.createElement("div");
+    line.textContent = message;
+    el("log").prepend(line);
+  }
+
+  function describe(snap) {
+    return "RUN=" + snap.run + " Y0=" + snap.run + " Y2=" + snap.y2 + " armed=" + snap.armed;
+  }
+
+  el("mode").addEventListener("change", function () {
+    state.extended = el("mode").checked;
+    state.armed = false;
+    state.prevStart = true;
+    log("mode -> " + (state.extended ? "extended" : "basic") + "; START armed reset");
+    tick();
+  });
+
+  el("press").addEventListener("click", function () {
+    el("start").checked = true;
+    log("START pressed: " + describe(tick()));
+    setTimeout(function () {
+      el("start").checked = false;
+      log("START released: " + describe(tick()));
+    }, 100);
+  });
+
+  el("stopbtn").addEventListener("click", function () {
+    el("stop").checked = false;
+    log("STOP opened: " + describe(tick()));
+  });
+
+  el("power").addEventListener("click", function () {
+    state.run = false;
+    state.armed = false;
+    state.prevStart = true;
+    el("start").checked = true;
+    log("power restored with START held: " + describe(tick()));
+  });
+
+  ["start", "stop", "retracted", "extended", "fwd", "rev"].forEach(function (id) {
+    el(id).addEventListener("change", function () { log(id + " changed: " + describe(tick())); });
+  });
+
+  log("ready: basic logic. Hold START then release; compare with extended logic.");
+  render(step(state, readInputs()));
 }
-function log(snap) {
-  const line = `${String(snap.elapsed).padStart(6)} ms  ${snap.state.padEnd(14)}  RUN=${snap.run ? 1 : 0} Y0=${snap.y0 ? 1 : 0} Y1=${snap.y1 ? 1 : 0} Y2=${snap.y2 ? 1 : 0}  T0=${String(snap.t0).padStart(4)}  fault=${snap.fault || "-"}`;
-  const trace = $("trace");
-  trace.textContent += (trace.textContent ? "\n" : "") + line;
-  trace.scrollTop = trace.scrollHeight;
-}
-function tick() {
-  const snap = sim.step(readInputs(), false, 100);
-  render(snap); log(snap);
-}
-function startTicking() { if (!timer) timer = setInterval(tick, 100); }
-function stopTicking() { if (timer) { clearInterval(timer); timer = null; } }
-$("press").addEventListener("click", () => {
-  $("start").checked = true; startTicking();
-  setTimeout(() => { $("start").checked = false; }, 120);
-});
-$("stopbtn").addEventListener("click", () => {
-  $("stop").checked = false; tick();
-  setTimeout(() => { $("stop").checked = true; tick(); }, 700);
-});
-$("reset").addEventListener("click", () => {
-  sim.step(readInputs(), true, 100); sim.step(readInputs(), false, 100);
-  render(sim.snapshot(readInputs())); log(sim.snapshot(readInputs()));
-});
-$("power").addEventListener("click", () => {
-  stopTicking(); $("trace").textContent = "";
-  $("start").checked = true;
-  sim.powerOn(true);
-  for (let i = 0; i < 10; i += 1) { const s = sim.step(readInputs(), false, 100); render(s); log(s); }
-  $("start").checked = false;
-  const s = sim.step(readInputs(), false, 100); render(s); log(s);
-  $("start").checked = true;
-  const s2 = sim.step(readInputs(), false, 100); render(s2); log(s2);
-});
-startTicking();
 </script>
 </body>
 </html>

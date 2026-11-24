@@ -1,69 +1,94 @@
 # 第8日 公式・確認カード / Day 8 formula and check card
 
-> このカードは学習用です。実機の配線・通電・安全設計を承認するものではありません。
-> This card is for learning. It does not approve real wiring, energisation or safety design.
+> このカードは学習用です。実機の盤の製作・配線・通電・保護機器の選定を承認するものではありません。
+> This card is for learning. It does not approve building, wiring, energising a real panel or selecting protective devices.
 
 ## 1. 電気の基本 / electrical basics
 
 ```text
-V = I × R
-P = V × I = I²R = V²/R
+V = I × R            (抵抗モデルが成り立つ場合 / where a resistive model applies)
+P = V × I            (直流 / DC)
+電力量[kWh] = 電力[kW] × 時間[h]
 ```
 
-**例 / example**: DC24V・6Wランプ → I = 6/24 = **0.25 A**、R ≈ **96 Ω**（動作点）。
-**Example**: 6 W lamp at 24 V → I = **0.25 A**, R ≈ **96 Ω** at the operating point.
+例 / examples:
 
-**負荷合計 / load total**: 3 W×2 + 0.06 A×3 + 0.15 A×2 → 0.25 + 0.18 + 0.30 = **0.73 A**（定常）。
-**Load total**: two 3 W lamps + three 0.06 A sensors + two 0.15 A valves → 0.25 + 0.18 + 0.30 = **0.73 A** steady state.
+- DC24V、0.15 A → **3.6 W**。2個で **0.30 A、7.2 W**。
+- 100 W を8時間 → **0.8 kWh**。30円/kWh（教材値）→ **24円**。
 
-> 0.73 A は電源選定の承認ではありません。突入電流・定格低下・電線・端子・保護を別に確認します。
-> 0.73 A is not approval of a supply selection. Check inrush, derating, wiring, terminals and protection separately.
+## 2. 電圧の使い分け / voltage applications
 
-## 2. 統一I/O表 / canonical I/O
+| 電圧 / Voltage | 主な使い道 / Typical use |
+|---|---|
+| AC100V | 一般機器の電源、小型機器 / common equipment supply, small equipment |
+| AC200V | 産業用の動力、対応するモーター駆動 / industrial power, compatible drives |
+| DC24V | PLC入出力、センサー、リレー、電磁弁 / PLC I/O, sensors, relays, valves |
+| DC12V | 一部のカメラ、電子機器 / some cameras and electronics |
+| DC5V | USB機器、マイコン / USB equipment, microcontrollers |
 
-| アドレス / Address | 機器 / Device | 正常時 / Normal |
+- 電圧だけで制御用・動力用は決まらない。 / Voltage alone does not define control or power.
+- ACは W と VA が違う（力率）。 / In AC, W and VA differ (power factor).
+
+## 3. 電源容量の例 / power budget example
+
+| 負荷 / Load | 数量 / Qty | 電流 / Current |
+|---|---:|---:|
+| PLC | 1 | 0.35 A |
+| センサー / sensors | 4 | 0.025 A each |
+| 電磁弁 / valves | 2 | 0.15 A each |
+| 表示灯 / lamp | 1 | 0.05 A |
+
+合計 **0.80 A**、**19.2 W**。計画余裕25%（教材値）→ **1.00 A**。
+
+- 同時使用・突入電流・温度・メーカーの定格低下・将来増設を確認する。
+- Check simultaneity, inrush, temperature, manufacturer derating and future expansion.
+
+## 4. 保護機器の守る範囲 / what protective devices cover
+
+| 機器 / Device | 守る / Covers | 守らない / Does not cover |
 |---|---|---|
-| X0 | START pushbutton | OFF; ON while pressed |
-| X1 | STOP_OK (physical NC) | ON while healthy |
-| X2 | retracted confirmation | ON at retracted end |
-| X3 | extended confirmation | ON at extended end |
-| M0 | RUN state | OFF at power-up |
-| Y0 | RUN lamp | OFF when stopped |
-| Y1 | delayed lamp (T0 done) | OFF before 3 s |
-| Y2 | extend solenoid command | OFF = spring return (training valve) |
-| T0 | 3 s on-delay timer | 0 when RUN off |
+| 配線用遮断器 / circuit breaker | 定格内の過電流、配線 / overcurrent within ratings, wiring | すべての故障 / every fault |
+| 漏電遮断器 / earth-leakage device | 設計に応じた漏れ電流 / specified leakage current | 過電流一般 / general overcurrent |
+| ヒューズ / fuse | 規定の過電流特性 / specified overcurrent characteristic | 再利用 / reuse |
+| サーマルリレー / overload relay | モーターなどの過負荷 / overload, commonly motors | 短絡保護 / short-circuit protection |
 
-> Y1は遅延ランプ専用。電磁弁はY2。アドレスは物理端子番号ではない。
-> Y1 is only the delayed lamp. The solenoid is Y2. Addresses are not physical terminals.
+## 5. NPN / PNP
 
-## 3. 自己保持 / self-holding
+| センサー出力 / Sensor | 動作時 / When active | PLC入力共通 / Input common | 電流 / Current |
+|---|---|---|---|
+| PNP | +から電流を出す / sources | 0V（シンク入力 / sinking） | +24V → センサー → PLC → 0V |
+| NPN | 0Vへ電流を引く / sinks | +24V（ソース入力 / sourcing） | +24V → PLC → センサー → 0V |
+
+- NPN/PNPは出力インターフェース。NO/NCは検出の論理。 / NPN/PNP is the interface; NO/NC is the detection logic.
+- PLC全体を「NPNのPLC」と呼べない。入力モジュールと配線で決まる。
+- 配線色は例。データシートに従う。 / Wire colours are examples; follow the datasheet.
+
+## 6. ラダー / ladder
 
 ```text
-(X0 AND X2) OR M0   → 直列 X1 → コイル M0
+AND  |--[ A ]--[ B ]--( Y )--|
+OR   |--+--[ A ]--+--( Y )--|
+     |  +--[ B ]--+
+NOT  |--[/ A ]-------( Y )--|
+自己保持 / seal-in: M0 = X1 AND (X0 OR M0)
 ```
 
-- M0の保持枝はX2を通らない / the M0 seal-in branch does not pass through X2.
-- STARTを離してもRUNが続く / RUN survives START release.
-- X1（停止許可）がOFFでRUNが落ち、T0がリセット / X1 OFF drops RUN and resets T0.
-- 復電時は新しいSTARTが必要 / a fresh START is required after power restoration.
+- 接点は論理状態の評価。物理接点や実電流ではない。 / Contacts evaluate logical states.
+- 物理NCのSTOPを、プログラムではON許可として使うことがある。 / A physical NC stop may appear as an ON permission.
 
-## 4. シーケンス状態 / sequence states
+## 7. 再起動防止の要点 / restart prevention
 
-IDLE → READY → EXTEND → WAIT_EXTENDED → RETRACT → WAIT_RETRACTED → COMPLETE → FAULT
+- 起動時RUN=OFF。 / RUN is OFF at power-up.
+- STARTが離れたことを確認してからアームする。 / Arm only after START is seen released.
+- 新しい立ち上がりだけで起動。 / Start only on a new rising edge.
+- STOPはSTARTより優先。 / STOP precedes START.
+- リセットは運転開始ではない。 / Reset is not a start.
+- 許可が戻っても自動で動かない。 / Restoring a permissive does not restart.
+- **安全機能ではない。** / **Not a safety function.**
 
-| 故障 / Fault | 検出 / Detection | 応答 / Response |
-|---|---|---|
-| F001 | 前進端が時間内に来ない / no X3 before timeout | Y2 OFF, RUN OFF, FAULT |
-| F002 | X2とX3が同時ON / both end sensors ON | 全出力OFF / all outputs OFF |
-| F003 | 後退端が時間内に来ない / no X2 before timeout | Y2 OFF, RUN OFF, FAULT |
+## 8. インターロック / interlock
 
-## 5. 提出前チェック / pre-submission checks
-
-- [ ] 物理NO/NCと論理接点を区別した / separated physical and logical contacts
-- [ ] NPN/PNPを入力共通端子まで説明した / explained NPN/PNP through the input common
-- [ ] 出力定格とサージ対策を確認した / checked output ratings and surge suppression
-- [ ] 自己保持の保持接点を書いた / included the seal-in contact
-- [ ] 位置確認とタイムアウトを状態に含めた / included position confirmation and timeouts
-- [ ] リセットが動作開始でないことを確認した / verified reset is not a start
-- [ ] 復電時の自動再起動を防いだ / prevented automatic restart on power restoration
-- [ ] 通常制御と安全機能を区別した / separated ordinary control from safety functions
+- 同時に成立してはいけない指令を成立させない。 / Prevent incompatible commands.
+- 相互に打ち消すだけの形はスキャン順に依存。同時要求は決定的に拒否する。
+- 実機の反転接触器は電気的・機械的インターロックも必要。 / Real reversing contactors also need electrical and mechanical interlocking.
+- ソフトのインターロックを安全定格のガードにしない。 / Not safety-rated guarding.

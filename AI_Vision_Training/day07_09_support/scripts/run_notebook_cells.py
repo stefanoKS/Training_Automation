@@ -16,7 +16,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 NOTEBOOKS = ROOT / "notebooks"
 FOLDERS = ("Day07_Automation_Concept_Mechanics", "Day08_Electrical_PLC",
-           "Day09_Communication_Commissioning")
+           "Day09_AI_Camera_Imaging")
 
 
 def run_all(show: bool = False) -> int:
@@ -51,8 +51,7 @@ def run_all(show: bool = False) -> int:
                         break
             finally:
                 os.chdir(old_cwd)
-            if code_index:
-                print(f"OK   {path.name}: {code_index} code cells")
+            print(f"OK   {path.name}: {code_index} code cells")
     return 1 if failures else 0
 
 

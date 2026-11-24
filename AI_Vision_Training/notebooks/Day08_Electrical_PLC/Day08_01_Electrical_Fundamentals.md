@@ -1,552 +1,292 @@
-# 第8日 01 電気の基礎と DC24V 制御 / Day 8-01 Electrical Fundamentals and DC24V Control
+# 第8日 01 電気の基礎・電圧の使い分け・制御盤の機器 / Day 8-01 Electrical Fundamentals, Voltage Applications and Control Panel Components
 
 > 所要時間 / Duration: **80分 / 80 minutes**
-> 元資料 / Source pages: 21–23
-> 共通題材 / Running example: 小型ワーク押出し装置 / small workpiece-pushing machine
+> 元PDF / Source pages: 21-23
+> 共通例 / Running example: DC24Vで動く小さな検査・仕分け装置 / a small DC24V inspection and sorting machine
 
 ## 1. 概要 / Overview
 
-このノートブックでは、電圧・電流・抵抗・電力の意味を、物理的なイメージから始めて、DC24V制御盤の設計につなげます。中心になる問いは、次の3つです。
+電気は「見えない」ので、苦手に感じる人が多い分野です。このノートブックでは、電圧・電流・抵抗・電力という4つの言葉を最初に整理し、**工場で使う電圧の役割**と、**制御盤の中にある機器**を1つずつ説明します。PLCの前に、まず「盤の中身」を知ることが目的です。回路ブレーカ、リレー、スイッチング電源が何をする部品かを、仮定せずに説明します。
 
-This notebook starts from the physical meaning of voltage, current, resistance and power, then connects them to a DC24V control panel. Three questions are central.
+Electricity is invisible, and many beginners find it difficult. This notebook first organises voltage, current, resistance and power, then explains **what each industrial voltage is used for** and **each device inside a control panel**. The aim is to know the panel before the PLC. It does not assume you already know what a circuit breaker, relay or switching power supply does.
 
-1. 機器が必要とする電圧と電流は何か。
-2. 電源は、その電流を余裕をもって供給できるか。
-3. PLCの出力は、その負荷を直接駆動できるか。
-
-1. What voltage and current does each device need?
-2. Can the power supply deliver that current with margin?
-3. Can the PLC output drive that load directly?
-
-**安全に関する前提 / Safety boundary**
-
-電気は、正しく扱わなければ感電・短絡・発熱・火災・不意動作の原因になります。本研修は教育用で、実機の配線・通電・絶縁測定・保護装置の選定を行いません。実作業は、電気設備の規格、社内ルール、有資格者、リスクアセスメント、遮断・無電圧確認・ロックアウトの手順に従ってください。
-
-Electricity can cause shock, short circuits, heat, fire and unexpected motion. This is a training course; it does not cover real wiring, energisation, insulation testing or protective-device selection. Real work follows electrical standards, company rules, qualified persons, risk assessment and isolation/lockout procedures.
+**安全に関する前提 / Safety boundary.** 本資料は学習用です。実際の盤の製作・配線・通電・絶縁測定・保護機器の選定を指示するものではありません。AC100V/200Vは感電・短絡・火災の危険があります。DC24Vでも短絡・発熱・火災・予期しない動作の危険があります。実作業は有資格者とリスクアセスメントのもとで行います。 / This is training material. It does not authorise building, wiring, energising or insulation-testing a real panel or selecting protective devices. AC100V/200V presents shock, short-circuit and fire hazards. Even DC24V presents short-circuit, overheating, fire and unexpected-motion hazards. Real work is done by qualified people under a risk assessment.
 
 ## 2. 学習目標 / Learning objectives
 
-1. 電圧・電流・抵抗・電力を、単位とともに説明できる。
-2. オームの法則 V = IR を使える。
-3. 直流電力 P = VI を計算できる。
-4. DCとACの違いを説明できる。
-5. DC24V制御の役割を説明できる。
-6. 負荷の定常電流を合計できる。
-7. 電源選定前に確認する項目を列挙できる。
-8. スイッチ・リレー・ランプの役割を区別できる。
-9. PLC出力と負荷の関係を説明できる。
-10. ヒューズ・遮断器・接地・絶縁の目的を説明できる。
-11. 「制御信号」と「負荷へ届ける電力」を区別できる。
-12. 0.73 Aの負荷例を計算し、電源選定の承認と混同しない。
+1. 電圧・電流・抵抗・電力・電力量を、自分の言葉で説明できる。
+2. ACとDC、直流のプラスとマイナスの意味を説明できる。
+3. AC100V・AC200V・DC24V・DC12V・DC5Vの主な使い道を説明できる。
+4. 制御盤の主要機器の役割を、1つずつ説明できる。
+5. 遮断器・漏電遮断器・ヒューズ・サーマルの違いを説明できる。
+6. 電流・電力・電力量を計算できる。
+7. 電源容量を検討するときに、足りない情報を指摘できる。
+8. 安全機能と通常の制御の違いを説明できる。
 
-By the end of this notebook you can:
+By the end you can explain voltage, current, resistance, power and electrical energy; explain AC and DC and DC polarity; state the main uses of AC100V, AC200V, DC24V, DC12V and DC5V; describe each main panel device; distinguish a circuit breaker, an earth-leakage device, a fuse and an overload relay; calculate current, power and energy; name the missing information in a power-supply sizing question; and distinguish safety functions from ordinary control.
 
-1. Explain voltage, current, resistance and power with units.
-2. Use Ohm's law, V = IR.
-3. Calculate DC power, P = VI.
-4. Explain the difference between DC and AC.
-5. Explain the role of DC24V control.
-6. Sum the steady-state current of loads.
-7. List the checks required before selecting a power supply.
-8. Distinguish switches, relays and indicator lamps.
-9. Explain the relation between a PLC output and its load.
-10. Explain the purpose of fuses, breakers, earthing and insulation.
-11. Distinguish a control signal from the power delivered to a load.
-12. Calculate the 0.73 A load example without treating it as approval of a power-supply design.
+## 3. 前提 / Prerequisites
 
-## 3. 前提知識 / Prerequisites
+第7日を終えていること。電卓を用意してください。 / Complete Day 7. Bring a calculator.
 
-第7日を終えていること。特に、電磁弁・センサー・ランプが「負荷」であり、PLCが「信号」を出す装置であることを確認してください。電気の専門知識は前提にしません。
+## 4. 電気の4つの言葉 / the four basic quantities
 
-Complete Day 7. In particular, confirm that solenoid valves, sensors and lamps are loads and that the PLC produces signals. No prior electrical expertise is assumed.
-
-### 実行環境 / executable environment
-
-このノートのコードは、リポジトリ内の `day07_09_support/examples/automation_models.py` を使います。最初のセルを実行してから、後のセルを順に実行してください。インターネット接続は不要です。
-
-The code uses `day07_09_support/examples/automation_models.py` in this repository. Run the first cell, then the following cells in order. No internet connection is required.
-
-```python exec id="setup"
-import sys, pathlib
-import matplotlib.pyplot as plt
-
-plt.rcParams["font.family"] = ["Meiryo", "Yu Gothic", "DejaVu Sans"]
-plt.rcParams["axes.unicode_minus"] = False
-
-def find_support(start):
-    for base in [start, *start.parents]:
-        if (base / "day07_09_support" / "examples" / "automation_models.py").is_file():
-            return base / "day07_09_support"
-    raise FileNotFoundError("Open this notebook inside the Training_Automation repository.")
-
-SUPPORT = find_support(pathlib.Path.cwd())
-sys.path.insert(0, str(SUPPORT / "examples"))
-import automation_models as am
-print("automation_models loaded from", SUPPORT.name)
-print("No internet, hardware, PLC software or compressed air is used.")
-```
-
-**期待される出力 / Expected output**
-
-```text
-automation_models loaded from day07_09_support
-No internet, hardware, PLC software or compressed air is used.
-```
-
-## 4. 電圧・電流・抵抗・電力 / Voltage, current, resistance and power
-
-**電圧 / voltage** は「電位差」です。高い電位と低い電位の差が、電荷を動かす力になります。単位は V（ボルト）。
-
-**Voltage** is a potential difference. The difference between a higher and a lower potential drives charge. The unit is the volt (V).
-
-**電流 / current** は「流れる電気の量」です。単位は A（アンペア）。電気の流れは、1秒間に断面を通過する電荷の量で表します。
-
-**Current** is the amount of charge flowing. The unit is the ampere (A), the charge passing a cross-section per second.
-
-**抵抗 / resistance** は「電流の流れにくさ」です。単位は Ω（オーム）。抵抗が大きいほど、同じ電圧では電流が小さくなります。
-
-**Resistance** is opposition to current flow. The unit is the ohm (Ω). A larger resistance gives less current at the same voltage.
-
-**電力 / power** は「単位時間当たりのエネルギー」です。単位は W（ワット）。電気がする仕事の速さです。
-
-**Power** is energy per unit time. The unit is the watt (W), the rate at which electrical energy is transferred.
-
-![電圧・電流・抵抗のアナロジー / voltage, current and resistance analogy](../../assets/diagrams/day08/D08-01.svg)
-
-*図 D08-01：水路のアナロジーです。水位差＝電圧、流量＝電流、管の狭さ＝抵抗に対応します。ただし、アナロジーはすべての電気現象を表すものではありません。 / Figure D08-01: a water analogy. Head difference = voltage, flow = current, pipe restriction = resistance. The analogy does not represent every electrical effect.*
-
-| 量 / Quantity | 記号 / Symbol | 単位 / Unit | 物理的な意味 / Physical meaning |
+| 言葉 / Term | 意味 / Meaning | 単位 / Unit | 水道のたとえ / water analogy |
 |---|---|---|---|
-| 電圧 / voltage | V | ボルト / volt (V) | 電位差 / potential difference |
-| 電流 / current | I | アンペア / ampere (A) | 電荷の流れ / flow of charge |
-| 抵抗 / resistance | R | オーム / ohm (Ω) | 流れにくさ / opposition to flow |
-| 電力 / power | P | ワット / watt (W) | エネルギー移動の速さ / rate of energy transfer |
+| 電圧 / voltage | 電気を押し出す力 / the push that drives current | V（ボルト） | 水圧 / water pressure |
+| 電流 / current | 流れる電気の量 / the amount flowing | A（アンペア） | 流量 / flow rate |
+| 抵抗 / resistance | 流れにくさ / how hard it is to flow | Ω（オーム） | 配管の細さ / pipe restriction |
+| 電力 / power | 1秒あたりの電気エネルギー / energy per second | W（ワット） | 単位時間あたりの仕事 / work per second |
 
-**アナロジーの限界 / Limits of the analogy**
+**電力と電力量は違います。** 電力は「瞬間の勢い」（W）、電力量は「積み重ねた量」（Wh、kWh）です。 / Power is an instantaneous rate (W); electrical energy is accumulated quantity (Wh, kWh).
 
-水路のアナロジーは直感的ですが、次の点は異なります。
+**水のたとえの限界 / limits of the water analogy.** 水のたとえは、電圧・電流・抵抗の関係をつかむのには便利です。しかし、交流、電磁誘導、静電気、電子の動きの向きなどは、水では正しく表せません。たとえは入口として使い、細かい話は電気の言葉で考えます。
 
-- 電流は1本の管の水のように「減る」のではなく、回路を流れて戻ります。
-- 電圧は「高さ」ではなく、2点間の差です。
-- 交流では向きと大きさが時間で変わります。
-- コイルやコンデンサは、時間遅れや逆起電力を生みます。
+The water analogy helps with voltage, current and resistance. It does not describe AC, electromagnetic induction, static charge or the direction of electron motion. Use it as an entry point, then think in electrical terms.
 
-The water analogy is intuitive but differs in important ways: current flows in a closed loop; voltage is a difference between two points; AC changes direction and magnitude with time; coils and capacitors introduce delay and back-EMF.
+![電圧・電流・抵抗の関係 / voltage, current and resistance](../../assets/diagrams/day08/D08-01.svg)
 
-## 5. オームの法則と電力 / Ohm's law and power
+*図 D08-01：電圧は水圧、電流は流量、抵抗は流れにくさに対応します。たとえの限界も図に示しています。 / Figure D08-01: voltage corresponds to pressure, current to flow and resistance to restriction, with the limits of the analogy.*
 
-**オームの法則 / Ohm's law**
+**ACとDC / AC and DC.** AC（交流）は向きと大きさが周期的に変わる電気です。DC（直流）は向きが一定の電気です。DCにはプラスとマイナスがあり、**逆接続すると動かない・壊れる・危険**な機器があります。
+
+AC alternates direction periodically; DC keeps one direction. DC has positive and negative, and reversing the connection can stop a device, damage it or create a hazard.
+
+## 5. 工場で使う電圧の役割 / industrial voltage applications
+
+| 電圧 / Voltage | 主な使い道 / Typical use | 注意 / Note |
+|---|---|---|
+| AC100V | 一般の機器の電源、小型機器、対応するAC/DC電源の入力 / common equipment supply, small equipment, input to compatible AC/DC supplies | 感電・短絡の危険 / shock and short-circuit hazard |
+| AC200V | 産業用の動力、対応するモーター駆動、機械設備 / industrial power, compatible motor drives, machinery | 単相と三相がある / single-phase or three-phase |
+| DC24V | PLCの入出力、センサー、リレー、電磁弁の制御 / PLC I/O, sensors, relays, solenoid valves | 論理信号だけでなく負荷にも使う / not only logic signals |
+| DC12V | 一部のカメラ、電子機器、小型の対応機器 / some cameras, electronics, small compatible devices | 24Vと混接続しない / never mix with 24V |
+| DC5V | USB給電の機器、マイコン、対応する低電圧電子機器 / USB-powered equipment, microcontrollers, compatible low-voltage electronics | 5V機器を24Vへ直結しない / never connect 5V devices to 24V |
+
+**大切な区別 / important distinctions.**
+
+- AC100VやAC200Vも、制御用の機器に使えます。 / AC100V and AC200V can also supply control equipment.
+- DC24Vは、論理信号だけでなく、電磁弁などの**負荷**にも使います。 / DC24V supplies actuator loads, not only logic signals.
+- モーターやアクチュエータには、DCや他のAC電圧を使うものもあります。 / Some motors and actuators use DC or other AC voltages.
+- **電圧の値だけでは「制御用か動力用か」は決まりません。** / Voltage alone does not define control or power circuits.
+- 産業用のAC200Vは、用途により単相か三相かが変わります。 / Industrial AC200V may be single-phase or three-phase.
+- 実際の電圧・電流・相数・周波数・インターフェースが機器の定格に合うかを確認します。 / Actual voltage, current, phase, frequency and interface must match the ratings.
+- 5V機器を24Vへ直結してはいけません。 / Never connect a 5V device directly to 24V.
+- 別のDC電圧系を、確認なしに共通接続してはいけません。 / Never assume different DC systems may share connections.
+- 低電圧でも、短絡・発熱・火災・予期しない動作の危険はあります。 / Low voltage still brings short-circuit, overheating, fire and unexpected-motion risks.
+
+![電圧の使い分けと電力の流れ / voltage applications and power distribution](../../assets/diagrams/day08/D08-02.svg)
+
+*図 D08-02：AC電源 → 保護 → 動力回路、AC → スイッチング電源 → DC24V → PLC・センサー・リレー・電磁弁、DC24V → DC/DC → 12V・5V。承認済みの施工図ではありません。 / Figure D08-02: AC supply through protection to the power circuit; AC through a switching power supply to DC24V distribution for PLC, sensors, relays and valves; DC24V through a DC/DC converter to 12V and 5V devices. This is not an approved installation drawing.*
+
+## 6. 制御盤の機器を1つずつ / control panel components one by one
+
+以下の機器は、図 D08-03 に**模式的な形**で示しています。実物の形・色・端子配置はメーカーと機種で異なるため、必ず公式カタログと取扱説明書で確認してください。 / The devices below appear as **schematic shapes** in Figure D08-03. Real appearance, colour and terminal layout differ by manufacturer and model; always check the official catalogue and manual.
+
+![制御盤の機器 / control panel components](../../assets/diagrams/day08/D08-03.svg)
+
+*図 D08-03：制御盤の主要機器の位置と役割。 / Figure D08-03: position and role of the main control panel components.*
+
+| 名称 / Name | 主な機能 / Primary function | 系の中での位置 / Position | 選定の要点 / Selection considerations | よくある誤解 / Common misunderstanding |
+|---|---|---|---|---|
+| 配線用遮断器・ブレーカー / circuit breaker | 定格内の過電流から回路と配線を保護する / protects circuits and wiring from applicable overcurrent | 電源の入口 / at the supply entry | 定格電流・遮断容量・特性 / rating, breaking capacity, trip curve | 「何でも保護する」/ that it protects everything |
+| 漏電遮断器 / earth-leakage protective device | 設計に応じた漏れ電流・残留電流を検出する / detects specified leakage or residual current | 電源の入口付近 / near the supply entry | 感度電流・動作時間 / sensitivity and operating time | 過電流保護と混同 / confusing it with overcurrent protection |
+| ヒューズ / fuse | 規定の過電流特性で回路を開く / opens the circuit under its specified overcurrent characteristics | 回路の保護箇所 / at the protected point | 定格・溶断特性 / rating and melting characteristic | 「何度でも使える」/ that it is reusable |
+| スイッチング電源 / switching power supply | 対応するAC入力から安定したDC出力を作る / converts a compatible AC input into a regulated DC output | ACとDCの境界 / between AC and DC | 入力電圧・出力電圧・出力電流・定格出力 / input, output, current, rated power | 出力電流を負荷の合計とだけ比べる / comparing only total current |
+| DC/DCコンバータ / DC/DC converter | あるDC電圧を別のDC電圧に変える / converts one DC voltage to another | DC分配の中 / inside DC distribution | 入力範囲・出力・効率 / input range, output, efficiency | 「何にでも使える」/ that any converter fits any load |
+| リレー / relay | 制御入力で接点や同等の出力を切り替える / uses a control input to switch contacts or an equivalent output | 信号と負荷の間 / between signal and load | コイル電圧・接点容量 / coil voltage and contact rating | 接点容量を無視 / ignoring contact rating |
+| 電磁接触器 / contactor | 適切な定格の動力負荷を開閉する / switches appropriately rated power loads | 動力回路 / in the power circuit | 定格電流・使用カテゴリ / rated current and utilisation category | リレーとの混同 / confusing it with a relay |
+| サーマルリレー・過負荷保護機器 / overload relay | 指定用途（多くはモーター）の過負荷保護 / overload protection for specified applications, commonly motors | モーターの前 / before the motor | 整定範囲・特性 / setting range and characteristic | 短絡保護と混同 / treating it as short-circuit protection |
+| 端子台 / terminal block | 配線を整理して接続する / organised connection points | 盤内の接続部 / panel connections | 定格・極数・取付 / rating, poles, mounting | 配線の整理だけと考える / thinking it is only tidiness |
+| 押しボタンスイッチ / pushbutton switch | 作業者の指令を入力する / operator commands | 盤の前面 / panel front | 接点構成・色・保護 / contact arrangement, colour, protection | 押している間だけが入力と知らない / not knowing it is momentary |
+| セレクタスイッチ / selector switch | 運転モードを選ぶ / selects an operating mode | 盤の前面 / panel front | 位置数・接点 / number of positions and contacts | モード切替の危険を過小評価 / underestimating mode-change hazards |
+| 表示灯 / indicator lamp | 設備の状態を表示する / displays equipment state | 盤の前面 / panel front | 電圧・色・寿命 / voltage, colour, life | 表示＝安全の証明と考える / assuming a lamp proves safety |
+| 非常停止機器 / emergency stop device | 人の危険を避けるために停止する / stops to avoid danger to people | 操作しやすい位置 / accessible position | 規格・カテゴリ・回路 / standard, category, circuit | PLCの停止で足りると考える / assuming PLC stop is enough |
+| PLC / programmable controller | 入力に応じて出力を制御する / processes inputs and controls outputs | 制御の中枢 / control centre | I/O数・電圧・通信 / I/O count, voltage, communication | 「PLC＝安全装置」/ "the PLC is the safety device" |
+| モータードライバ / motor driver | 指令に応じてモーターを制御する / controls a compatible motor | モーターの前 / before the motor | 対応モーター・電流 / compatible motor and current | 汎用の電源と考える / treating it as a general supply |
+| インバータ / inverter | 周波数を変えてモーター速度を変える / variable-frequency motor drive | 誘導モーターの前 / before an induction motor | 容量・特性・ノイズ / capacity, characteristics, noise | 位置決め装置と考える / assuming it positions precisely |
+| サーボアンプ / servo amplifier | サーボモーターをフィードバック制御する / closed-loop control of a servo motor | サーボ系の中 / in the servo system | 対応モーター・エンコーダ / compatible motor and encoder | 単体で位置決めできると考える / assuming it works without the motor and feedback |
+| 保護・接地 / protection and grounding | 感電・故障時の危険を減らし、ノイズを逃がす / reduces shock and fault hazards and provides a noise path | 盤全体 / whole panel | 接地方式・盤の保護等級 / earthing arrangement and enclosure protection | 接地は「なんとなく」でよいと考える / treating earthing as optional |
+
+**用語の注意 / terminology caution.** 「本質安全防爆（intrinsically safe）」は、爆発性雰囲気の区域で使う機器の特定の技術用語です。通常の24V制御を「本質安全だから安全」と呼ぶのは誤りです。
+
+"Intrinsically safe" is a specific technical term for equipment used in hazardous areas. Calling ordinary 24 V control "intrinsically safe" is wrong.
+
+**非常停止について / about emergency stop.** 非常停止ボタンをPLCの通常のラダーに1つ追加しただけでは、機械の安全要件を満たしません。安全機能は、リスクアセスメントに基づいて、独立した安全関連システムとして設計・検証します。
+
+Adding an emergency-stop button to ordinary PLC logic alone does not satisfy machine safety requirements. Safety functions are designed and validated as an independent safety-related system based on a risk assessment.
+
+![保護機器の違い / protective device differences](../../assets/diagrams/day08/D08-04.svg)
+
+*図 D08-04：遮断器・漏電遮断器・ヒューズ・サーマルリレーの守る範囲の違い。 / Figure D08-04: what each protective device does and does not cover.*
+
+![スイッチング電源とリレー・接触器 / switching power supply, relay and contactor](../../assets/diagrams/day08/D08-05.svg)
+
+*図 D08-05：スイッチング電源の入出力、DC/DCの役割、リレーと電磁接触器の違い。 / Figure D08-05: switching power supply input and output, the role of a DC/DC converter, and relay versus contactor.*
+
+## 7. 電流・電力・電力量の計算 / current, power and energy
+
+オームの法則（抵抗モデルが当てはまる場合）：
 
 ```text
 V = I × R
-I = V / R
-R = V / I
 ```
 
-**直流電力 / DC power**
+直流の電力：
 
 ```text
 P = V × I
-P = I² × R
-P = V² / R
 ```
 
-- **V**: 電圧 [V] / voltage
-- **I**: 電流 [A] / current
-- **R**: 抵抗 [Ω] / resistance
-- **P**: 電力 [W] / power
-
-**例：DC24V・6Wランプ / example: a 6 W lamp at DC24V**
+電力量（一定電力で使う場合）：
 
 ```text
-I = P / V = 6 / 24 = 0.25 A
+電力量[kWh] = 電力[kW] × 時間[h]
 ```
 
-3個なら、定常電流の合計は 0.25 × 3 = **0.75 A** です。ただし、ランプの突入電流、温度による抵抗変化、同時動作、電源の余裕は別に確認します。
+### 7.1 電磁弁の例 / solenoid valve example
 
-For three lamps the steady-state total is 0.75 A. Inrush current, temperature dependence, simultaneous operation and supply margin must still be checked.
-
-**DCとAC / DC and AC**
-
-| 項目 / Item | DC（直流）/ direct current | AC（交流）/ alternating current |
-|---|---|---|
-| 向き / direction | 一定 / constant | 周期的に変化 / changes periodically |
-| 例 / example | DC24V制御、バッテリー / 24 V control, battery | 工場の動力、AC100/200V / factory power |
-| 注意 / caution | 極性、短絡、誘導負荷 / polarity, short circuit, inductive load | 周波数、力率、感電、遮断 / frequency, power factor, shock, isolation |
-
-本研修の制御はDC24Vを前提にします。AC動力回路の設計・施工は、有資格者と社内ルールの範囲です。
-
-This course assumes DC24V control. AC power circuits are outside the scope and require qualified persons and company rules.
-
-## 6. DC24V制御と電源 / DC24V control and power supply
-
-DC24Vは、PLC、センサー、リレー、表示灯、電磁弁などで広く使われます。しかし、24Vでも短絡・発熱・不意動作の危険はあります。「低電圧だから安全」とは限りません。
-
-DC24V is widely used for PLCs, sensors, relays, lamps and solenoid valves. Even at 24 V, short circuits, heat and unexpected motion are hazards. "Low voltage" does not automatically mean "safe".
-
-![DC24Vの電力供給と保護 / DC24V distribution and protection](../../assets/diagrams/day08/D08-02.svg)
-
-*図 D08-02：電源、保護、分岐、負荷の関係を示します。実際の遮断器・ヒューズ・端子台の選定は、定格・遮断容量・電線保護・選択協調を確認して行います。 / Figure D08-02: the relation between supply, protection, branches and loads. Real breaker/fuse selection requires ratings, breaking capacity, wire protection and coordination.*
-
-**電源を選ぶ前に確認すること / Check before selecting a supply**
-
-| 確認項目 / Check | 内容 / Detail |
-|---|---|
-| 入力電圧 / input voltage | AC100V？AC200V？単相/三相？ / what is available? |
-| 出力電圧 / output voltage | DC24Vの許容範囲 / regulation range |
-| 定格電流 / rated current | 連続で出せる電流 / continuous output |
-| 突入電流 / inrush | ランプ・モーター・コンデンサ / lamps, motors, capacitors |
-| 負荷の同時動作 / simultaneity | 全負荷が同時にONか / all loads at once? |
-| 周囲温度 / ambient temperature | 高温では定格が下がる / derating |
-| 設置方法 / mounting | 密閉盤、通風、隣接機器 / enclosure, ventilation |
-| 保護 / protection | 短絡・過電流・過電圧 / short circuit, overcurrent, overvoltage |
-| 電線・端子 / wiring and terminals | 許容電流、端子定格 / ampacity and terminal rating |
-| 接地・絶縁 / earthing and insulation | 保護接地、SELV/PELV、絶縁 / PE, SELV/PELV, insulation |
-
-**電源容量の考え方 / Sizing logic**
-
-1. 負荷ごとの定常電流を求める。
-2. 同時に使う負荷を合計する。
-3. 突入電流と時間を確認する。
-4. 周囲温度・設置条件による定格低下を確認する。
-5. 電線・端子・保護装置の定格を確認する。
-6. 将来拡張と保守の余裕を、根拠を明示して加える。
-7. メーカーの電源マニュアルで最終確認する。
-
-1. Find the steady current of each load.
-2. Sum the loads that operate simultaneously.
-3. Check inrush current and duration.
-4. Check derating for ambient temperature and mounting.
-5. Check wire, terminal and protective-device ratings.
-6. Add margin for future expansion and maintenance with a stated basis.
-7. Confirm in the supply manufacturer's manual.
-
-> **重要 / Important**: 余裕率は、機器仕様・将来拡張・運用条件から決めます。「25%にすればよい」という万能の値はありません。本教材の25%は計算例です。
-> Margin comes from device specifications, future expansion and operating conditions. There is no universal "25% is correct". The 25% in this course is a worked example.
-
-## 7. スイッチ・リレー・ランプ / Switches, relays and lamps
-
-**スイッチ / switch** は、回路を開閉して信号や電力を切り替えます。**リレー / relay** は、コイルに電流を流すと電磁力で接点を切り替える部品です。小さな制御信号で、より大きな負荷を間接的に扱えます。**ランプ / indicator lamp** は、状態を人に知らせます。
-
-A **switch** opens or closes a circuit. A **relay** uses an electromagnetic coil to change contacts, allowing a small control signal to switch a larger load. An **indicator lamp** communicates state to a person.
-
-![スイッチとリレーの違い / switch versus relay](../../assets/diagrams/day08/D08-03.svg)
-
-*図 D08-03：スイッチは人が直接操作する接点、リレーはコイルの励磁で接点を動かします。どちらも接点定格と負荷種別を確認します。 / Figure D08-03: a switch is operated directly by a person; a relay moves contacts via an energised coil. Both require contact ratings and load-type checks.*
-
-**NOとNC / normally open and normally closed**
-
-- **NO（Normally Open）**: 通常は開。操作すると閉じる。
-- **NC（Normally Closed）**: 通常は閉。操作すると開く。
-
-- **NO**: normally open; closes when operated.
-- **NC**: normally closed; opens when operated.
-
-**物理接点と論理接点は別 / physical contacts are not logical contacts**
-
-物理的なNC接点は、通常時に導通しています。PLCのプログラムでは、その入力を「論理的にどう扱うか」を別に決めます。物理NCだからといって、ラダーで必ずNC命令を使うわけではありません。実際の入力状態（ON/OFF）を確認して論理を組み立てます。
-
-A physical NC contact conducts in its normal state. The PLC program separately decides how to evaluate that input. A physical NC device does not automatically mean an NC instruction in the ladder; build the logic from the actual ON/OFF state.
-
-**停止入力にNCを使う理由と限界 / why NC is used for stop inputs, and its limits**
-
-停止入力にNCを使うと、配線断線時に「停止側」と見なせる場合があります。ただし、断線検知の能力や本質的安全性は、回路全体の設計に依存します。非常停止は、リスク評価に基づく安全関連設計が必要で、通常のNCスイッチを付ければ足りるものではありません。
-
-An NC stop input can sometimes be arranged so that a broken wire looks like a stop request. However, fault detection and intrinsic safety depend on the whole circuit. Emergency stopping requires a safety-related design based on risk assessment; adding an ordinary NC switch is not sufficient.
-
-## 8. PLC出力と負荷 / PLC outputs and loads
-
-PLCは、プログラムで決めた信号を出力します。しかし、出力端子には電圧・電流の定格があり、すべての負荷を直接駆動できるわけではありません。
-
-A PLC outputs the signal decided by its program. But each output terminal has voltage and current ratings; not every load can be driven directly.
-
-![PLCから負荷までの構成 / PLC-to-load architecture](../../assets/diagrams/day08/D08-04.svg)
-
-*図 D08-04：PLC出力は「信号」であり、負荷に電力を届ける経路は別にあります。リレー出力とトランジスタ出力では、使える負荷と配線が違います。 / Figure D08-04: the PLC output is a signal; the path that delivers power to the load is separate. Relay and transistor outputs support different loads and wiring.*
-
-| 負荷 / Load | 主な仕様 / Main specification | 追加で確認 / Also check |
-|---|---|---|
-| 表示灯 / indicator lamp | 電圧、消費電流 / voltage, current | 極性、輝度、点灯条件 / polarity, brightness, condition |
-| 電磁弁 / solenoid valve | コイル電圧、W、応答時間 / coil voltage, power, response | サージ対策、無通電時の弁位置 / suppression, de-energised position |
-| リレーコイル / relay coil | コイル電圧、消費電力 / coil voltage, power | 逆起電力対策、接点側定格 / back-EMF, contact rating |
-| モータードライバ / motor driver | 制御入力方式、必要電源 / control input, supply | インターフェース、安全回路 / interface, safety circuit |
-
-**リレー出力とトランジスタ出力 / relay versus transistor output**
-
-| 項目 / Item | リレー出力 / relay output | トランジスタ出力 / transistor output |
-|---|---|---|
-| 接点 / contact | 機械接点 / mechanical contact | 半導体 / semiconductor |
-| 負荷 / load | AC・DCの広い負荷 / wide AC/DC load | DC負荷が中心 / mainly DC |
-| 寿命 / life | 接点寿命に依存 / contact life | 半導体寿命、過電流に注意 / semiconductor life, overcurrent |
-| 応答 / response | 比較的遅い / relatively slow | 速い / fast |
-| 極性 / polarity | 比較的自由 / relatively flexible | シンク/ソースの向きに注意 / sink/source |
-| 漏れ電流 / leakage | 小さい / low | OFF時の漏れに注意 / off-state leakage |
-
-**出力容量の確認 / checking output capacity**
-
-- 1点当たりの最大電流 / maximum current per point
-- 共通端子当たりの最大電流 / maximum current per common terminal
-- 同時ONする点数 / number of points ON together
-- 突入電流とサージ / inrush and surge
-- 誘導性負荷のサージ吸収 / inductive-load suppression
-- 出力素子の保護 / output protection
-
-> PLC出力を「無制限の電源」と考えてはいけません。出力定格を超えると、誤動作・破損・発熱の原因になります。負荷が大きい場合は、リレーやコンタクタを介します。
-> Do not treat a PLC output as an unrestricted power supply. Exceeding its rating causes malfunction, damage or heat. Use a relay or contactor for larger loads.
-
-### 電源容量の計画値を感度で見る / sensitivity of the planning current
-
-次のセルは、同じ0.73 Aの定常負荷に対して、余裕率を変えた計画値を示します。余裕率は設計判断であり、この表の値をそのまま採用するものではありません。
-
-The next cell shows planning values for the same 0.73 A steady load at different margins. The margin is a design decision; do not adopt these values directly.
-
-```python exec id="supply-margin"
-steady = 0.73
-print(f"steady-state load: {steady:.2f} A")
-print(f"{'margin':>8} {'planning current [A]':>22}")
-for margin in (0.0, 0.10, 0.25, 0.50, 1.00):
-    planning = steady * (1 + margin)
-    print(f"{margin:>8.0%} {planning:>22.2f}")
-print("\nMargin must come from device specifications, future expansion and operating conditions.")
-print("This table is not a power-supply selection or an approval.")
-```
-
-**期待される出力 / Expected output**
+DC24Vで0.15 Aの電磁弁：
 
 ```text
-steady-state load: 0.73 A
-  margin   planning current [A]
-      0%                   0.73
-     10%                   0.80
-     25%                   0.91
-     50%                   1.09
-    100%                   1.46
-
-Margin must come from device specifications, future expansion and operating conditions.
-This table is not a power-supply selection or an approval.
+P = 24 × 0.15 = 3.6 W
 ```
 
-## 9. 保護・接地・絶縁 / Protection, earthing and isolation
+2個同時に動かすと：
 
-**ヒューズ・遮断器 / fuse and circuit breaker**
+```text
+電流 = 0.30 A、電力 = 7.2 W
+```
 
-ヒューズや遮断器は、主に**電線と機器を過電流から守る**ためのものです。人の感電を防ぐ装置ではありません。定格電圧・定格電流・遮断容量・電線保護・選択協調を確認します。
+### 7.2 電源容量の検討例 / power budget example
 
-Fuses and breakers primarily **protect wiring and equipment from overcurrent**. They are not a device for preventing electric shock. Check voltage rating, current rating, breaking capacity, wire protection and coordination.
+| 負荷 / Load | 数量 / Qty | 1台の電流 / Unit current | 合計 / Total |
+|---|---:|---:|---:|
+| PLC | 1 | 0.35 A | 0.35 A |
+| センサー / sensors | 4 | 0.025 A | 0.10 A |
+| 電磁弁 / solenoid valves | 2 | 0.15 A | 0.30 A |
+| 表示灯 / indicator lamp | 1 | 0.05 A | 0.05 A |
+| 合計 / total | | | **0.80 A** |
 
-**接地と保護接地 / earthing and protective earth**
+```text
+合計電流 = 0.35 + 4×0.025 + 2×0.15 + 0.05 = 0.80 A
+DC出力   = 24 × 0.80 = 19.2 W
+```
 
-保護接地（PE）は、故障時に金属製の筐体などが危険な電位にならないようにするための重要な手段です。接地の方法は、設備の電気規格と社内ルールに従います。
+計画用の余裕を25%とすると、計画電流は1.00 Aです。**25%は教材の仮定**であり、設計基準ではありません。
 
-Protective earthing (PE) is an important measure to prevent metal enclosures from reaching a hazardous potential under fault conditions. Earthing practice follows electrical standards and company rules.
+```python exec id="power-budget"
+import sys, pathlib
 
-**絶縁・遮断・無電圧確認 / insulation, isolation and verification of de-energisation**
+start = pathlib.Path.cwd()
+root = next(p for p in [start, *start.parents]
+            if (p / "day07_09_support" / "examples" / "automation_models.py").is_file())
+sys.path.insert(0, str(root / "day07_09_support" / "examples"))
+import automation_models as am
 
-配線を変更するときは、その場所に電気が来ていないことを確実にします。遮断器をOFFにした「つもり」で作業せず、設備の構造、別電源、バックフィード、蓄電部を確認します。必要に応じて、検電、無電圧確認、ロックアウト・タグアウトを行います。
-
-Before changing wiring, make sure the location is de-energised. Do not rely on "I think the breaker is off". Check the equipment structure, alternative supplies, backfeed and stored energy. Use voltage verification, lockout and tagout as required.
-
-**制御信号と電力の区別 / control signal versus delivered power**
-
-| 概念 / Concept | 例 / Example | 役割 / Role |
-|---|---|---|
-| 制御信号 / control signal | PLCのY出力、センサー入力 / PLC Y output, sensor input | 状態を伝える / communicate state |
-| 負荷への電力 / power to load | DC24V電源から電磁弁への電流 / supply current to a valve | エネルギーを供給 / deliver energy |
-| 間接操作 / indirect operation | PLC出力→リレー→モーター / PLC → relay → motor | 大きい負荷を扱う / handle a larger load |
-
-## 10. 負荷電流の計算 / Load current calculation
-
-PDFの例を確認します。DC24Vのランプ（3W×2個）、センサー（0.06A×3個）、電磁弁コイル（0.15A×2個）を同時使用した場合の定常電流を求めます。
-
-Check the PDF example: at DC24V, two 3 W lamps, three sensors at 0.06 A each and two solenoid valve coils at 0.15 A each, all simultaneous. Find the steady-state total current.
-
-```python exec id="load-budget"
-loads = am.pdf_electrical_example()
-report = am.load_report(loads, supply_margin=0.25)
-
-print(f"{'load':<20} {'qty':>4} {'unit [A]':>10} {'total [A]':>10}")
+report = am.load_report(am.training_power_budget())
 for row in report["rows"]:
-    print(f"{row['name']:<20} {row['quantity']:>4} {row['unit_current_a']:>10.3f} {row['total_current_a']:>10.3f}")
-print(f"\nsteady-state total : {report['steady_total_a']:.2f} A")
-print(f"planning margin    : {report['margin_fraction']:.0%}")
-print(f"planning current   : {report['planning_current_a']:.2f} A")
-print(f"is sizing approval : {report['is_sizing_approval']}")
-print("This is a steady-state sum, not a power-supply selection or approval.")
+    print(f"{row['name']:<16} x{row['quantity']}  {row['total_current_a']:.3f} A  {row['total_power_w']:5.2f} W")
+print(f"steady total      {report['steady_total_a']:.2f} A  {report['total_power_w']:5.1f} W")
+print(f"planning (+25%)   {report['planning_current_a']:.2f} A")
+print("This is a training budget, not a power-supply sizing approval.")
 ```
 
-**期待される出力 / Expected output**
+**最終的な電源選定で確認すること / what final power-supply selection must consider.**
+
+- 同時に動く負荷はいくつか / which loads run simultaneously
+- ピーク電流 / peak current
+- 突入電流 / inrush current
+- 周囲温度 / ambient temperature
+- メーカーの定格低下（ディレーティング）/ manufacturer derating
+- 将来の増設 / future expansion
+- 出力特性 / output characteristics
+- 配線と保護機器の要件 / wiring and protective-device requirements
+
+**交流の電力 / AC power.** 交流では、電圧と電流の位相のずれにより、実際に仕事をする電力（W）と、見かけの電力（VA）が違います。この違いを「力率」と呼びます。初級では、**WとVAは別の量**であり、モーターなどの選定では力率を考える必要がある、と理解してください。直流の式を、そのまま交流モーターの電力計算に使ってはいけません。
+
+In AC circuits, the phase difference makes real power (W) differ from apparent power (VA); the ratio is the power factor. At beginner level it is enough to know that W and VA are different and that motor selection considers power factor. Do not apply DC formulas directly to AC motors.
+
+## 8. 電気代の例 / energy cost example
+
+100 Wの機器を8時間使う場合：
 
 ```text
-load                  qty   unit [A]  total [A]
-lamp                    2      0.125      0.250
-sensor                  3      0.060      0.180
-solenoid valve          2      0.150      0.300
-
-steady-state total : 0.73 A
-planning margin    : 25%
-planning current   : 0.91 A
-is sizing approval : False
-This is a steady-state sum, not a power-supply selection or approval.
+電力量 = 0.1 kW × 8 h = 0.8 kWh
+電気代 = 0.8 kWh × 30 円/kWh = 24 円
 ```
 
-**この結果の読み方 / How to read the result**
+**30円/kWhは教材用の仮定**です。実際の単価は契約により異なります。また、定格電力と実際の平均消費電力は違うことがあります。
 
-- 0.73 Aは、**定常状態の合計**です。
-- ランプの突入電流、電磁弁のサージ、同時ONの条件、周囲温度による電源の定格低下は含みません。
-- 0.91 Aは、25%の余裕を仮に置いた**計画値**です。承認された電源容量ではありません。
-- 電線の許容電流、端子の定格、ヒューズ・遮断器の定格、電源の出力定格を別に確認します。
+30 JPY/kWh is an illustrative value; real tariffs differ. Rated power and actual average consumption can also differ.
 
-- 0.73 A is the **steady-state sum**.
-- It excludes lamp inrush, valve surge, simultaneity assumptions and supply derating with ambient temperature.
-- 0.91 A is a **planning value** with a hypothetical 25% margin, not an approved supply rating.
-- Wire ampacity, terminal ratings, fuse/breaker ratings and supply output ratings require separate checks.
+## 9. 演習 / Exercises
 
-```python exec id="ohms-law"
-# DC24V・6Wランプの例 / 6 W lamp at DC24V
-voltage_v = 24.0
-lamp_power_w = 6.0
-lamp_current_a = lamp_power_w / voltage_v
-lamp_resistance_ohm = voltage_v / lamp_current_a
-print(f"one lamp current     : {lamp_current_a:.3f} A")
-print(f"one lamp resistance  : {lamp_resistance_ohm:.2f} ohm (at this operating point)")
-print(f"three lamps current  : {lamp_current_a * 3:.3f} A")
-print(f"three lamps power    : {lamp_power_w * 3:.1f} W")
+### 演習1 電力の計算 / exercise 1: power
 
-# 電線の電圧降下の概算 / rough voltage drop, copper conductor
-length_m = 10.0          # 片道 / one way
-current_a = 0.73
-area_mm2 = 0.75
-resistivity = 0.0175     # ohm*mm2/m, copper, 20 C, teaching value
-resistance = resistivity * (2 * length_m) / area_mm2
-drop_v = current_a * resistance
-print(f"\nloop resistance      : {resistance:.3f} ohm")
-print(f"voltage drop         : {drop_v:.3f} V")
-print(f"voltage at load      : {voltage_v - drop_v:.3f} V")
-print("Rough estimate only: includes no connector, fuse or temperature correction.")
-```
-
-**期待される出力 / Expected output**
+DC24Vで0.08 Aのセンサー3個の合計電力を求めてください。 / Find the total power of three sensors drawing 0.08 A each at DC24V.
 
 ```text
-one lamp current     : 0.250 A
-one lamp resistance  : 96.00 ohm (at this operating point)
-three lamps current  : 0.750 A
-three lamps power    : 18.0 W
-
-loop resistance      : 0.467 ohm
-voltage drop         : 0.341 V
-voltage at load      : 23.659 V
-Rough estimate only: includes no connector, fuse or temperature correction.
+1個の電力 = 24 × 0.08 = 1.92 W
+3個の合計 = 1.92 × 3 = 5.76 W
+合計電流   = 0.24 A
 ```
 
-**注意 / Caution**: ランプの抵抗は温度で変わります。上の96Ωは、6W・24Vの動作点での概算です。コイルや電子機器は、単純な抵抗として扱えません。
-> Lamp resistance changes with temperature. The 96 Ω is an estimate at the 6 W, 24 V operating point. Coils and electronic devices are not simple resistors.
+**答え / answer**：5.76 W（電流0.24 A）。 / 5.76 W (0.24 A total).
 
-## 11. 演習 / Exercises
+### 演習2 機器の役割 / exercise 2: component roles
 
-### 演習 A：オームの法則 / Exercise A: Ohm's law
+「ブレーカーを入れれば、モーターの過負荷も守られる」という文を正してください。 / Correct the statement "turning on the breaker also protects the motor from overload".
 
-DC24Vで0.25 Aが流れる負荷の抵抗を求めてください。次に、同じ負荷をDC12Vで使った場合の電流を求めてください。ただし、負荷を単純な抵抗と仮定します。
+**答え / answer**：配線用遮断器は主に過電流から配線と回路を保護します。モーターの過負荷保護には、サーマルリレーなどの過負荷保護機器を別に使います。両者は守る範囲が違います。 / A circuit breaker mainly protects wiring and circuits from overcurrent. Motor overload protection uses a separate overload device such as a thermal relay. Their coverage differs.
 
-Find the resistance of a load that draws 0.25 A at DC24V. Then find the current at DC12V, assuming a simple resistance.
+## 10. まとめ / Summary
 
-### 演習 B：電力 / Exercise B: power
+- 電圧は押す力、電流は流れる量、抵抗は流れにくさ、電力は1秒あたりのエネルギー。
+- AC100V/200Vは動力や機器電源、DC24Vは制御と負荷、12V/5Vは対応機器。
+- 電圧の値だけでは制御用か動力用かは決まらない。
+- 盤の機器は、それぞれ守る範囲と役割が違う。
+- 遮断器・漏電遮断器・ヒューズ・サーマルは別物。
+- 電力はV×I（直流）、電力量はkW×h。
+- 電源容量は、同時使用・突入電流・温度・余裕を含めて検討する。
+- 通常のPLC制御は、安全機能ではない。
 
-DC24V・0.15 Aの電磁弁コイルの消費電力を求めてください。2個同時に使う場合の合計電力も求めてください。
+Voltage is the push, current the flow, resistance the restriction, power the energy per second. AC100/200V serve power and equipment supplies; DC24V serves control and loads; 12V and 5V serve compatible devices. Voltage alone does not define control or power. Panel devices differ in what they protect. Breaker, earth-leakage device, fuse and overload relay are different. Power is V×I for DC; energy is kW×h. Supply sizing includes simultaneity, inrush, temperature and margin. Ordinary PLC control is not a safety function.
 
-Find the power of a solenoid coil at DC24V and 0.15 A, and the total for two coils.
+## 11. 完了チェックリスト / Completion checklist
 
-### 演習 C：負荷合計 / Exercise C: load total
+- [ ] 5つの電圧の使い道を、表を見ずに言える。
+- [ ] 制御盤の機器を10個以上、役割付きで言える。
+- [ ] 遮断器と漏電遮断器の違いを説明できる。
+- [ ] サーマルリレーが短絡保護ではないと説明できる。
+- [ ] 3.6 W、7.2 W、0.30 Aを計算できる。
+- [ ] 合計0.80 A、19.2 W、計画1.00 Aを再現できる。
+- [ ] 電力量0.8 kWh、24円を再現できる。
+- [ ] WとVAの違いを一言で説明できる。
 
-次の負荷の定常電流合計を求めてください。
+- [ ] I can state the use of each of the five voltages without the table.
+- [ ] I can name ten panel devices with their roles.
+- [ ] I can distinguish a circuit breaker from an earth-leakage device.
+- [ ] I can explain why an overload relay is not short-circuit protection.
+- [ ] I can calculate 3.6 W, 7.2 W and 0.30 A.
+- [ ] I can reproduce 0.80 A, 19.2 W and the 1.00 A planning value.
+- [ ] I can reproduce 0.8 kWh and 24 JPY.
+- [ ] I can explain W versus VA in one line.
 
-Find the steady-state total current.
+## 12. よくある間違い / Troubleshooting and common misunderstandings
 
-| 負荷 / Load | 数量 / Qty | 電圧 / Voltage | 電流または電力 / Current or power |
-|---|---|---|---|
-| ランプ / lamp | 2 | 24 V | 3 W each |
-| センサー / sensor | 3 | 24 V | 0.06 A each |
-| 電磁弁 / valve | 2 | 24 V | 0.15 A each |
+| よくある間違い / Common mistake | 正しい考え方 / Correct view |
+|---|---|
+| DC24Vなら安全 / DC24V is safe | 短絡・発熱・火災・予期しない動作の危険がある / short-circuit, heat, fire and unexpected motion remain |
+| 5Vの機器を24Vにつなぐ / connecting 5V devices to 24V | 定格を必ず確認。直結しない / check ratings; never connect directly |
+| ブレーカー＝すべての保護 / the breaker protects everything | 保護範囲は定格と特性の範囲内 / only within its ratings and characteristics |
+| サーマルリレー＝短絡保護 / overload relay is short-circuit protection | 過負荷保護。短絡は別 / overload only; short circuit is separate |
+| 表示灯がつけば安全 / a lamp means safe | 表示は状態の一部。安全の証明ではない / a lamp shows one state, not safety |
+| 電源の合計電流だけで容量を決める / sizing on total current alone | 突入・同時使用・温度・余裕を見る / include inrush, simultaneity, temperature and margin |
 
-### 演習 D：電源選定前の確認 / Exercise D: checks before supply selection
+## 13. 安全と次の学習 / safety and what comes next
 
-上の合計0.73 Aを使って、電源を選ぶ前に確認すべき項目を5つ以上書いてください。「0.73 Aより大きい電源を選ぶ」だけでは不十分です。
+電気の学習は、必ず「止める」「隔離する」「確認する」とセットです。感電、短絡、アーク、火災、予期しない起動は、学習用の図では再現できません。実機では、検電、ロックアウト、有資格者による確認が必須です。
 
-Using the 0.73 A total, list at least five checks before selecting a supply. "Choose a supply above 0.73 A" is not sufficient.
+Electrical learning always comes with stop, isolate and verify. Shock, short circuits, arcs, fire and unexpected starting cannot be reproduced by a training diagram. Real work requires voltage verification, lockout and qualified confirmation.
 
-### 演習 E：信号と電力 / Exercise E: signal and power
-
-「PLCのY出力で電磁弁を動かす」構成について、制御信号と負荷への電力の経路を分けて説明してください。PLC出力の定格を超える場合、どのような方法が考えられますか。
-
-For "the PLC Y output drives a solenoid valve", explain the control-signal path separately from the power path. What can be done if the load exceeds the PLC output rating?
-
-**提出物 / Deliverables**
-
-1. 負荷電流の計算書 / load-current calculation
-2. 電源選定前に確認すべき項目5つ以上 / at least five checks before supply selection
-3. 電圧降下の概算と仮定 / voltage-drop estimate and assumptions
-4. 信号と電力の経路図 / signal and power path sketch
-5. スイッチ・リレー・ランプの役割表 / roles of switch, relay and lamp
-
-## 12. 期待される結果 / Expected result
-
-- 電圧・電流・抵抗・電力の単位と意味を説明できる。
-- V = IR と P = VI を使える。
-- DC24Vの6Wランプが0.25 Aであることを計算できる。
-- 3W×2、0.06A×3、0.15A×2の合計が **0.73 A** であることを計算できる。
-- 0.73 Aが定常電流の合計であり、電源選定の承認ではないと説明できる。
-- 突入電流、定格低下、電線、端子、保護装置を別に確認すべきと説明できる。
-- 制御信号と負荷への電力を区別できる。
-
-- You can explain the units and meaning of voltage, current, resistance and power.
-- You can use V = IR and P = VI.
-- You can calculate 0.25 A for a 6 W lamp at DC24V.
-- You can calculate the **0.73 A** total for 3 W × 2, 0.06 A × 3 and 0.15 A × 2.
-- You can explain that 0.73 A is a steady-state sum, not approval of a power-supply selection.
-- You can explain that inrush, derating, wiring, terminals and protection require separate checks.
-- You can distinguish a control signal from the power delivered to a load.
-
-## 13. トラブルシューティング / Troubleshooting
-
-| 症状 / Symptom | 確認すること / Check | よくある原因 / Typical cause |
-|---|---|---|
-| ランプが暗い / lamp is dim | 電圧、電線の電圧降下、接点 / voltage, drop, contacts | 電源電圧不足、配線抵抗 / low supply, wiring resistance |
-| 電源が過負荷になる / supply overloads | 同時動作、突入電流、定格低下 / simultaneity, inrush, derating | 定常電流だけで選定 / selecting on steady current only |
-| 電磁弁が動かない / valve does not move | コイル電圧、極性、出力定格 / coil voltage, polarity, output rating | PLC出力容量不足、配線 / insufficient output, wiring |
-| ヒューズが切れる / fuse blows | 短絡、突入、定格 / short, inrush, rating | 配線ミス、サージ / wiring error, surge |
-| 出力が壊れる / output damaged | 誘導性負荷、サージ、共通電流 / inductive load, surge, common current | サージ対策なし、定格超過 / no suppression, over rating |
-
-## 14. まとめ / Summary
-
-- 電圧は電位差、電流は電荷の流れ、抵抗は流れにくさ、電力はエネルギーの移動速度。
-- V = IR、P = VI が基本。ただし負荷は単純な抵抗とは限らない。
-- DC24Vは制御で広く使われるが、短絡・発熱・不意動作の危険は残る。
-- 負荷電流は合計できるが、突入電流・定格低下・電線・端子・保護を別に確認する。
-- 0.73 Aは定常合計であり、電源選定の承認ではない。
-- スイッチは直接操作、リレーはコイルで接点を操作、ランプは状態表示。
-- PLC出力は信号であり、無制限の電源ではない。
-- ヒューズ・遮断器は主に電線と機器を守る。接地・絶縁・遮断・無電圧確認は別の対策。
-- 制御信号と負荷への電力を区別する。
-
-- Voltage is a potential difference; current is charge flow; resistance opposes flow; power is the rate of energy transfer.
-- V = IR and P = VI are basic, but loads are not always simple resistors.
-- DC24V is common for control, but short circuits, heat and unexpected motion remain hazards.
-- Load currents can be summed, but inrush, derating, wiring, terminals and protection need separate checks.
-- 0.73 A is a steady-state sum, not approval of a supply selection.
-- A switch is operated directly; a relay uses a coil; a lamp indicates state.
-- A PLC output is a signal, not an unrestricted supply.
-- Fuses and breakers mainly protect wiring and equipment. Earthing, insulation, isolation and de-energisation verification are separate measures.
-- Distinguish the control signal from the power delivered to the load.
-
-## 15. 完了チェックリスト / Completion checklist
-
-- [ ] 電圧・電流・抵抗・電力の単位を書いた / wrote the units of voltage, current, resistance and power
-- [ ] V = IR を使った / used V = IR
-- [ ] P = VI を使った / used P = VI
-- [ ] 6Wランプの0.25 Aを計算した / calculated 0.25 A for the 6 W lamp
-- [ ] 負荷合計0.73 Aを計算した / calculated the 0.73 A total
-- [ ] 0.73 Aが承認ではないと説明した / explained that 0.73 A is not approval
-- [ ] 突入電流・定格低下・電線・端子・保護を確認項目に入れた / included inrush, derating, wiring, terminals and protection
-- [ ] スイッチ・リレー・ランプの役割を区別した / distinguished switch, relay and lamp
-- [ ] 制御信号と電力の経路を分けた / separated the control signal from the power path
-- [ ] 電圧降下の概算と仮定を書いた / wrote the voltage-drop estimate and assumptions
+次は 08-02 で、センサー・入力・出力・NPN/PNP を学びます。 / Next, 08-02 covers sensors, inputs, outputs and NPN/PNP.

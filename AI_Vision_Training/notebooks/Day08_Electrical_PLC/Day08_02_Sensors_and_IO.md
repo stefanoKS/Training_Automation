@@ -1,488 +1,279 @@
-# 第8日 02 センサー・I/O・電気インターフェース / Day 8-02 Sensors, I/O and Electrical Interfaces
+# 第8日 02 センサーの種類・選定・入出力・NPN/PNP / Day 8-02 Sensor Types, Selection, I/O and NPN/PNP Interfaces
 
 > 所要時間 / Duration: **85分 / 85 minutes**
-> 元資料 / Source pages: 24–29, 48
-> 共通題材 / Running example: 小型ワーク押出し装置 / small workpiece-pushing machine
+> 元PDF / Source pages: 24-29, 48
+> 共通例 / Running example: シリンダの位置と製品の有無を検出する / detecting cylinder position and product presence
 
 ## 1. 概要 / Overview
 
-このノートブックでは、センサーが「何を検出するか」から始めて、センサーの信号方式（NPN/PNP）、PLC入力回路、出力回路、電磁弁の駆動、I/O表、配線図、通電前確認までを扱います。
+センサーは「設備の目」です。このノートブックでは、PLCを基準にして**入力（IN）と出力（OUT）**を整理し、代表的なセンサーの種類と選び方を学びます。後半は、実務でつまずきやすい**NPN/PNPとPLC入力の共通端子**を、電流の流れで説明します。最後に、PLC出力の種類と負荷の関係を確認します。
 
-This notebook starts from what a sensor detects, then covers its signal type (NPN/PNP), PLC input circuits, output circuits, solenoid driving, the I/O table, wiring diagrams and pre-power checks.
+Sensors are the eyes of a machine. This notebook organises **inputs and outputs** using the PLC as the reference, then covers the main sensor types and how to choose them. The second half explains **NPN/PNP and the PLC input common** through the conventional current path, which is where practical mistakes happen. It closes with PLC output types and their load limits.
 
-**このノートで最も間違えやすい点 / The most common mistakes**
-
-1. 物理的なNO/NC接点と、PLCプログラム上の論理接点を混同する。
-2. NPN/PNPを、PLC入力の共通端子の接続を無視して説明する。
-3. PLC出力を、無制限の電源と考える。
-4. Y1をランプと電磁弁の両方に使う。
-5. アドレス（X0など）と物理端子番号を同一視する。
-
-1. Confusing a physical NO/NC contact with a logical PLC contact.
-2. Explaining NPN/PNP while ignoring the PLC input common connection.
-3. Treating a PLC output as an unrestricted supply.
-4. Using Y1 for both a lamp and a solenoid.
-5. Treating an address such as X0 as a physical terminal number.
+**安全に関する前提 / Safety boundary.** センサーの検出は、安全の保証ではありません。安全用の光カーテンやインターロックは、通常のセンサーやPLCの入力とは別の、安全関連システムとして設計します。実機の配線・通電は有資格者が行います。 / Sensor detection is not a safety guarantee. Safety light curtains and interlocks are designed as safety-related systems, separate from ordinary sensors and PLC inputs. Real wiring and energisation are done by qualified people.
 
 ## 2. 学習目標 / Learning objectives
 
-1. センサーの目的を説明できる。
-2. リミットスイッチ、近接センサー、光電センサー、磁気センサーの違いを説明できる。
-3. アナログ信号とデジタル信号を区別できる。
-4. NPN出力とPNP出力の電流の向きを説明できる。
-5. PLC入力のシンク/ソースと共通端子の関係を説明できる。
-6. センサーとPLC入力の組み合わせを判定できる。
-7. PLC出力のリレー方式とトランジスタ方式を区別できる。
-8. 電磁弁の負荷とサージ対策を説明できる。
-9. 統一I/O表を作れる。
-10. 概略配線図を書ける。
-11. 通電前の確認項目を列挙できる。
+1. 入力と出力を、PLCを基準に説明できる。
+2. 指令と確認の違いを説明できる。
+3. 代表的なセンサーの検出原理と用途を説明できる。
+4. センサー選定の手順を、順番に言える。
+5. ON/OFF、アナログ、パルス、通信の違いを説明できる。
+6. PNPとNPNの電流経路を、図で説明できる。
+7. PLC入力の共通端子との整合を判断できる。
+8. PLC出力の種類と負荷の制約を説明できる。
 
-By the end of this notebook you can:
+By the end you can explain inputs and outputs relative to the PLC; distinguish a command from a confirmation; describe sensor principles and applications; state the sensor selection sequence; distinguish ON/OFF, analog, pulse and communication signals; explain PNP and NPN current paths with a diagram; judge PLC input common compatibility; and explain PLC output types and load limits.
 
-1. Explain the purpose of a sensor.
-2. Distinguish limit switches, proximity sensors, photoelectric sensors and magnetic sensors.
-3. Distinguish analog from digital signals.
-4. Explain the current direction of NPN and PNP outputs.
-5. Explain the relation between PLC input sink/source behaviour and the input common terminal.
-6. Judge whether a sensor and PLC input are compatible.
-7. Distinguish relay outputs from transistor outputs.
-8. Explain solenoid loads and surge suppression.
-9. Build a unified I/O table.
-10. Draw a conceptual wiring diagram.
-11. List pre-power checks.
+## 3. 前提 / Prerequisites
 
-## 3. 前提知識 / Prerequisites
+08-01 を終えていること。DC24Vの話と、リレー・電磁弁の話を覚えている前提で進めます。 / Complete 08-01; DC24V, relays and solenoid valves are assumed.
 
-第8日01（電圧・電流・電力、DC24V、PLC出力の定格）を終えていること。特に「信号」と「電力」の区別を確認してください。
+## 4. 入力と出力 / inputs and outputs
 
-Complete Day 8-01 (voltage, current, power, DC24V, PLC output ratings). In particular, confirm the distinction between a signal and power.
+PLCを基準に考えます。
 
-### 実行環境 / executable environment
+- **入力（IN）**：PLCが受け取る信号。
+- **出力（OUT）**：PLCが出す指令・信号。
 
-このノートのコードは、リポジトリ内の `day07_09_support/examples/automation_models.py` を使います。最初のセルを実行してから、後のセルを順に実行してください。インターネット接続は不要です。
+**入力の例 / input examples**：スタートボタン、ストップボタン、製品有無センサー、シリンダ後退端センサー、シリンダ前進端センサー、カメラの検査結果（対応する入力信号として）。
 
-The code uses `day07_09_support/examples/automation_models.py` in this repository. Run the first cell, then the following cells in order. No internet connection is required.
+**出力の例 / output examples**：表示灯、電磁弁、モーターの起動指令、モータードライブへの指令、不良品排出の指令。
 
-```python exec id="setup"
+![入力から出力までの流れ / from input to output](../../assets/diagrams/day08/D08-06.svg)
+
+*図 D08-06：物理的な出来事 → センサー → PLC入力 → プログラム → PLC出力 → ドライバ・電磁弁 → アクチュエータ → 物理的な動き。位置センサーは結果を入力へ戻します。 / Figure D08-06: physical event, sensor, PLC input, program, PLC output, driver or valve, actuator, physical movement. A position sensor feeds the result back as an input.*
+
+**指令と確認は違います / commands and confirmations differ.**
+
+- 「Y2をONにした」は**指令**です。
+- 「X3がONになった」は**確認**です。
+- 指令を出しただけでは、シリンダが動いたことは分かりません。
+- 確認が来ない場合の扱い（タイムアウトなど）を決めておきます。
+
+"Y2 is ON" is a command; "X3 is ON" is a confirmation. A command alone does not prove motion. Decide in advance what happens when the confirmation does not arrive.
+
+**PLC出力端子の定格 / output terminal ratings.** PLCの出力端子には、電圧・電流の限度があります。大きな負荷は、リレー・接触器・ドライバなど、適切な開閉機器を介して動かします。出力端子の定格を超えて直接つながないでください。
+
+PLC output terminals have voltage and current limits. Larger loads are switched through suitable devices such as relays, contactors or drivers. Never connect a load beyond the terminal rating directly.
+
+## 5. センサーの種類 / sensor types
+
+![センサーの種類 / sensor types](../../assets/diagrams/day08/D08-07.svg)
+
+*図 D08-07：代表的なセンサーの検出原理と用途。 / Figure D08-07: detection principles and applications of common sensors.*
+
+| センサー / Sensor | 検出の原理（初級） / Principle (beginner) | 検出できるもの / What it detects | 主な用途 / Applications | 主な制約 / Limitations | 選定の仕様 / Selection specifications |
+|---|---|---|---|---|---|
+| 透過型光電 / through-beam photoelectric | 投光器と受光器の間を遮る / object blocks the beam | 不透明な物、通過の有無 / opaque objects, passage | 通過検出、落下検出 / passage, drop detection | 取付に空間が必要 / needs space on both sides | 距離、応答時間、出力形式 / distance, response, output |
+| 反射型（再帰反射）/ retroreflective | 反射板からの光がさえぎられる / beam returns from a reflector | 比較的大きな物 / fairly large objects | 通過検出 / passage detection | 光沢面で誤検出 / shiny targets misbehave | 距離、ヒステリシス / distance, hysteresis |
+| 拡散反射型 / diffuse-reflective | 対象物からの反射光を受ける / light reflected by the target | 色・表面で距離が変わる / depends on colour and surface | 近距離の有無 / presence at short range | 黒・透明・光沢は苦手な場合 / black, clear or glossy targets | 設定距離、スポット径 / range, spot size |
+| 誘導型近接 / inductive proximity | 金属に近づくと変化 / responds to metal | 金属 / metal | 金属部品の有無 / metal part presence | 非金属は検出しない / not for non-metals | 検出距離、材質補正 / range, material derating |
+| 静電容量型近接 / capacitive proximity | 静電容量の変化 / capacitance change | 金属・非金属・液体 / metal, non-metal, liquid | 樹脂部品、液面 / plastic parts, level | 周囲の影響を受けやすい / sensitive to surroundings | 感度、材質 / sensitivity, material |
+| シリンダ用磁気センサー / magnetic cylinder sensor | ピストンの磁石を検出 / detects the piston magnet | 磁石を付けたピストン / magnetised piston | ストローク端の検出 / end position | 取付位置の調整が必要 / needs position adjustment | 対応シリンダ、応答 / cylinder compatibility |
+| リミットスイッチ / mechanical limit switch | 機械的な接触 / mechanical contact | 物理的な位置 / physical position | 端の確認、ドア / end confirmation, doors | 摩耗、接触の力 / wear, actuation force | 動作力、寿命 / actuating force, life |
+| 超音波 / ultrasonic | 音波の反射時間 / sound reflection time | 距離、透明物も比較的 / distance, some clear objects | 液面、距離 / level, distance | 風・形状の影響 / air currents, shape | 範囲、ビーム角 / range, beam angle |
+| 圧力センサー / pressure sensor | 圧力を電気信号に / pressure to a signal | 空気・油の圧力 / air or oil pressure | 圧力監視 / pressure monitoring | 種類・範囲の適合 / type and range matching | 範囲、出力、精度 / range, output, accuracy |
+| エンコーダ / encoder | 回転量をパルスに / rotation to pulses | 回転量・速度 / rotation, speed | ローラー回転、搬送量 / roller rotation, travel | 取付精度、ノイズ / mounting, noise | 分解能、出力形式 / resolution, output type |
+| カメラ・画像センサー / camera or vision sensor | 画像から特徴を取る / image features | 形状・色・欠陥 / shape, colour, defects | 外観検査 / appearance inspection | 照明と環境に依存 / lighting and environment | 解像度、視野、速度 / resolution, FOV, speed |
+
+**正直な限界 / honest limits.** 通常の反射型光電センサーが、すべての透明体や黒い対象を確実に検出するわけではありません。**実際の対象物で試すこと**が最も重要です。 / Ordinary reflective photoelectric sensors do not reliably detect every transparent or black target. Testing with the actual target is essential.
+
+**PVCシートのような材料では / for a material like PVC sheet.** 透明・半透明・光沢・黒・つや消しで、光の返り方が大きく変わります。透過型、拡散反射型、低角度照明と組み合わせた画像検査など、候補は複数あります。第9日で詳しく扱います。 / Clear, translucent, glossy, black and matte surfaces reflect light very differently. Through-beam, diffuse and imaging with low-angle lighting are all candidates; Day 9 covers this.
+
+## 6. センサー選定の手順 / sensor selection workflow
+
+![選定のフローチャート / sensor selection flowchart](../../assets/diagrams/day08/D08-08.svg)
+
+*図 D08-08：選定は「何を」「どんな材質で」「どれだけ離れて」「どれだけ速く」の順に整理します。 / Figure D08-08: selection proceeds from what, which material, at what distance, and how fast.*
+
+1. 何を検出したいか（有無、位置、距離、色、欠陥）。
+2. 対象物の材質・色・表面状態は何か。
+3. 必要な検出距離はいくつか。
+4. 対象物はどれだけ速く動くか。
+5. 必要な応答時間はいくつか。
+6. 環境はどうか（粉じん、水、油、温度、光）。
+7. 出力はデジタルかアナログか。
+8. 必要な電源電圧はいくつか。
+9. 出力インターフェースは何か（NPN/PNP、アナログ、パルス、通信）。
+10. どのPLC入力・インターフェースと整合するか。
+
+**信号の種類 / signal types.**
+
+- **ON/OFF（デジタル）**：ある／ない、の2値。
+- **アナログ**：連続した値。例として 0–10 V、4–20 mA。
+- **パルス**：回転量や流量を数える。
+- **通信**：値をデジタルデータとして送る。
+
+**4–20 mAの考え方 / about 4-20 mA.** 4 mAを「0」、20 mAを「最大」として扱うことが多い方式です。断線すると0 mAになるため、0 mAを正常値と区別しやすいという特徴があります。細かい計算はこの研修の範囲外です。
+
+A 4-20 mA loop commonly maps 4 mA to zero and 20 mA to full scale. A broken wire gives 0 mA, which is distinguishable from a valid zero. Detailed design calculations are outside this course.
+
+**PLC入力の定格 / PLC input ratings.** PLCの入力には、ONと判定する電圧・電流の範囲、OFFと判定する範囲、応答時間、フィルタ時間があります。センサーの出力形式と、PLC入力の共通端子の接続が合っているかを確認します。
+
+PLC inputs have defined ON and OFF thresholds, response times and filter times. Check that the sensor output type matches how the PLC input common is connected.
+
+## 7. NPNとPNP / NPN and PNP
+
+**NPNとPNPは「出力インターフェースの種類」であり、検出原理ではありません。** 同じ拡散反射型でも、PNP出力のものとNPN出力のものがあります。
+
+NPN and PNP are output-interface characteristics, not detection principles. The same diffuse-reflective sensor can be ordered with a PNP or an NPN output.
+
+### 7.1 PNP（プラスコモン） / PNP (positive switching)
+
+3線式のPNPセンサーは、動作時に**プラス電源から電流を出す（ソース）**動きをします。これを受けるPLC入力は、**入力共通端子を0V**にした「シンク入力」が一般的です。
+
+A conventional three-wire PNP sensor **sources** current from the positive supply when active. A compatible sinking PLC input commonly has its **input common at 0V**.
+
+```text
++24V → PNPセンサー出力 → PLC入力回路 → 0V（共通）
++24V → PNP sensor output → PLC input circuit → 0V (common)
+```
+
+### 7.2 NPN（マイナスコモン） / NPN (negative switching)
+
+3線式のNPNセンサーは、動作時に**0Vへ電流を引き込む（シンク）**動きをします。これを受けるPLC入力は、**入力共通端子を+24V**にした「ソース入力」が一般的です。
+
+A conventional three-wire NPN sensor **sinks** current toward 0V when active. A compatible sourcing PLC input commonly has its **input common at +24V**.
+
+```text
++24V（共通） → PLC入力回路 → NPNセンサー出力 → 0V
++24V (common) → PLC input circuit → NPN sensor output → 0V
+```
+
+![PNPとNPNの電流経路 / PNP and NPN current paths](../../assets/diagrams/day08/D08-09.svg)
+
+*図 D08-09：PNP（上）とNPN（下）の電流経路、PLC入力の共通端子、ONの条件。 / Figure D08-09: PNP (top) and NPN (bottom) current paths, the PLC input common, and the ON condition.*
+
+| センサー出力 / Sensor output | 動作時の動き / Behaviour when active | 適合する入力共通 / Compatible input common | 電流の向き / Current direction |
+|---|---|---|---|
+| PNP | +側から電流を出す / sources from + | 0V（シンク入力）/ 0V (sinking input) | +24V → センサー → PLC → 0V |
+| NPN | 0Vへ電流を引き込む / sinks to 0V | +24V（ソース入力）/ +24V (sourcing input) | +24V → PLC → センサー → 0V |
+
+```python exec id="npn-pnp"
 import sys, pathlib
-import matplotlib.pyplot as plt
 
-plt.rcParams["font.family"] = ["Meiryo", "Yu Gothic", "DejaVu Sans"]
-plt.rcParams["axes.unicode_minus"] = False
-
-def find_support(start):
-    for base in [start, *start.parents]:
-        if (base / "day07_09_support" / "examples" / "automation_models.py").is_file():
-            return base / "day07_09_support"
-    raise FileNotFoundError("Open this notebook inside the Training_Automation repository.")
-
-SUPPORT = find_support(pathlib.Path.cwd())
-sys.path.insert(0, str(SUPPORT / "examples"))
+start = pathlib.Path.cwd()
+root = next(p for p in [start, *start.parents]
+            if (p / "day07_09_support" / "examples" / "automation_models.py").is_file())
+sys.path.insert(0, str(root / "day07_09_support" / "examples"))
 import automation_models as am
-print("automation_models loaded from", SUPPORT.name)
-print("No internet, hardware, PLC software or compressed air is used.")
+
+for output_type in ("PNP", "NPN"):
+    for common in ("0V", "+24V"):
+        result = am.plc_input_compatibility(output_type, common)
+        mark = "OK  " if result["compatible"] else "NG  "
+        print(f"{mark}{output_type} sensor, input common {common:<4} : {result['current_path']}")
+print("Check the datasheet: wire colours and terminal numbers vary by product.")
 ```
 
-**期待される出力 / Expected output**
+**配線色について / about wire colours.** 茶＝+24V、青＝0V、黒＝出力、という並びは**よくある例**です。実際の配線は、必ずその製品のデータシートに従ってください。色だけで判断してはいけません。
 
-```text
-automation_models loaded from day07_09_support
-No internet, hardware, PLC software or compressed air is used.
-```
+Brown = +24V, blue = 0V and black = output is a **common example**. Actual wiring must follow the product datasheet; never decide from colour alone.
 
-## 4. センサーの目的と種類 / Sensor purpose and types
+**NO/NCとNPN/PNPは別 / NO/NC is separate from NPN/PNP.** センサーのNO（動作で出力ON）とNC（動作で出力OFF）は、検出の論理です。NPN/PNPは電流の向きです。この2つを混同すると、配線は合っているのに動作が逆、という症状になります。
 
-センサーは「物体があるか」だけを検出する装置ではありません。材質、色、反射率、形状、検出距離、設置スペース、周囲光、油や水、振動、繰返し精度によって方式を選びます。検出の信頼性が低いと、設備停止や不良につながります。
+Sensor NO (output ON when detecting) and NC (output OFF when detecting) describe the detection logic. NPN/PNP describe current direction. Confusing them produces correct wiring with inverted behaviour.
 
-A sensor does more than detect "is something there". Material, colour, reflectivity, shape, sensing distance, space, ambient light, oil, water, vibration and repeatability determine the technology. Poor detection reliability causes downtime and defects.
+## 8. センサー出力に合わせたPLCの選定 / selecting a PLC for the sensor output
 
-![センサーの種類 / sensor types](../../assets/diagrams/day08/D08-05.svg)
+確認する項目：
 
-*図 D08-05：検出対象と方式の対応を示します。同じ「位置検出」でも、金属、透明体、磁石、機械的接触で候補が変わります。 / Figure D08-05: the relation between target and technology. Even for "position detection", metal, transparent objects, magnets and mechanical contact lead to different candidates.*
+- 入力モジュールの電圧が合っているか / input module voltage compatibility
+- 入力共通端子の配線 / input common wiring
+- シンク入力かソース入力か / sourcing or sinking input
+- 設定変更できる入力、双方向入力があるか / configurable or bidirectional inputs
+- 入力電流とON/OFFしきい値 / input current and thresholds
+- 漏れ電流（OFF時に流れる微小電流）/ leakage current
+- 入力の応答時間とフィルタ / response time and filtering
+- 電気的な絶縁 / electrical isolation
 
-| 方式 / Type | 得意な例 / Good for | 確認ポイント / Checks |
-|---|---|---|
-| 光電センサー / photoelectric | 物体の有無、通過検出 / presence, passage | 色、反射、透明体、背景、距離 / colour, reflection, transparent target, background, distance |
-| 誘導形近接センサー / inductive proximity | 金属の接近・位置 / metal approach and position | 対象金属、距離、埋込条件 / target metal, distance, shielded mounting |
-| 静電容量形 / capacitive | 金属以外も含む近接検出 / non-metal proximity | 水分、堆積物、感度設定 / moisture, deposits, sensitivity |
-| 磁気センサー / magnetic | シリンダの磁石位置、扉開閉 / cylinder magnet, door | 対応シリンダ、取付、出力方式 / compatible cylinder, mounting, output |
-| リミットスイッチ / limit switch | 機械的接触による位置確認 / mechanical position confirmation | 接触力、寿命、位置ずれ / actuation force, life, drift |
-| エンコーダ / encoder | 回転・移動量 / rotation and travel | 分解能、出力方式、取付、ノイズ / resolution, output, mounting, noise |
+**PLC全体を「NPNのPLC」「PNPのPLC」と呼ぶのは正確ではありません。** 入力モジュールと配線で決まります。メーカーの用語も違うため、**電流の経路と共通端子の接続**を基準に理解してください。
 
-**アナログとデジタル / analog and digital**
+It is not accurate to call an entire PLC "an NPN PLC" or "a PNP PLC". The input module and the wiring decide. Manufacturer terminology varies, so use the conventional current path and the common-terminal connection as the reference.
 
-- **デジタル / digital**: ON/OFFの2状態。リミットスイッチ、近接センサー、光電センサーの多く。
-- **アナログ / analog**: 連続した値。0–10V、4–20mAなど。位置、圧力、距離の連続測定。
+**メーカー固有の事例について / about manufacturer-specific examples.** 実在の機種の端子番号や互換性は、公式ハードウェアマニュアルで確認する必要があります。この教材では、誤った端子番号を書かないために、**汎用の概念例**だけを示します。実機では必ず公式マニュアルを確認してください。
 
-- **Digital**: two states, ON/OFF. Most limit switches, proximity and photoelectric sensors.
-- **Analog**: a continuous value such as 0–10 V or 4–20 mA, used for continuous position, pressure or distance.
+Terminal numbers and compatibility for a real model must be checked in the official hardware manual. To avoid inventing terminal numbers, this material shows only a **generic conceptual example**. Always check the official manual for a real machine.
 
-PLCの入力がデジタルかアナログかで、接続先のユニットが変わります。アナログ入力は、分解能、入力範囲、基準電位、ノイズ対策を確認します。
+## 9. PLC出力の種類 / PLC output types
 
-Whether the PLC input is digital or analog determines the module. For analog inputs, check resolution, range, reference potential and noise measures.
-
-**センサー選定の5ステップ / five selection steps**
-
-1. 何を検出するか / what is detected
-2. 距離と応答時間 / distance and response time
-3. 対象物と背景 / target and background
-4. 取付場所・環境 / mounting and environment
-5. 信号・電源との整合 / signal and supply compatibility
-
-迷ったら、検出対象の実物でテストし、想定する最悪条件を試します。
-
-When in doubt, test with the actual target under the worst expected conditions.
-
-## 5. NPN・PNPとPLC入力 / NPN, PNP and PLC inputs
-
-3線式DCセンサーは、一般に次の3本を持ちます。
-
-A three-wire DC sensor generally has three conductors.
-
-| 線 / Wire | 一般的な色 / Typical colour | 役割 / Role |
-|---|---|---|
-| ＋電源 / + supply | 茶 / brown | DC24V |
-| 0V | 青 / blue | 0V |
-| 出力 / output | 黒 / black | 信号 / signal |
-
-**PNP出力 / PNP output（ソース / sourcing）**
-
-ONのとき、出力線を＋側につなぎます。電流は、＋24V → センサー → 出力線 → PLC入力端子 → PLC入力回路 → 入力共通端子（0V）の向きに流れます。したがって、PLC入力の共通端子が0V側にある**シンク入力**と組み合わせます。
-
-When ON, the output connects to the positive side. Current flows +24 V → sensor → output → PLC input terminal → PLC input circuit → input common (0 V). It therefore pairs with a **sinking input** whose common is at 0 V.
-
-**NPN出力 / NPN output（シンク / sinking）**
-
-ONのとき、出力線を0V側につなぎます。電流は、＋24V → PLC入力共通端子 → PLC入力回路 → 入力端子 → センサー出力 → 0Vの向きに流れます。したがって、PLC入力の共通端子が＋24V側にある**ソース入力**と組み合わせます。
-
-When ON, the output connects to 0 V. Current flows +24 V → PLC input common → PLC input circuit → input terminal → sensor output → 0 V. It therefore pairs with a **sourcing input** whose common is at +24 V.
-
-![NPNとPNPの電流経路 / NPN and PNP current paths](../../assets/diagrams/day08/D08-06.svg)
-
-*図 D08-06：左がPNP＋シンク入力、右がNPN＋ソース入力の概念図です。どちらも入力共通端子までの電流経路を含めて示しています。実際の端子配置はPLCのマニュアルで確認してください。 / Figure D08-06: left is PNP with a sinking input; right is NPN with a sourcing input. Both show the current path through the input common. Check the actual terminal arrangement in the PLC manual.*
-
-**よくある誤解 / common misunderstandings**
-
-| 誤解 / Misunderstanding | 正しい考え方 / Correct view |
-|---|---|
-| PNPは「＋の信号」なので、どのPLC入力でもつながる / a PNP "positive signal" works with any input | 入力共通端子の電位と入力回路の方式で決まる / it depends on the common potential and input circuit |
-| NPNは「－の信号」なので危険 / NPN is a "negative signal" and dangerous | 電流の向きが違うだけで、正しく組み合わせれば使える / it is a different current direction, usable when matched |
-| センサーの出力線だけを見ればよい / only the output wire matters | 電源、0V、入力共通端子を含む閉回路で考える / think in a closed circuit including supply, 0 V and input common |
-| 2線式も3線式と同じ / two-wire is the same as three-wire | 2線式は漏れ電流があり、OFF時の電圧を確認する / two-wire sensors have leakage; check OFF-state voltage |
-
-> **重要 / Important**: PLC入力の方式は、メーカー・機種・ユニットによって異なります。入力が双方向対応、フォトカプラ絶縁、グループごとの共通端子など、さまざまな構成があります。本教材の「シンク入力」「ソース入力」は教育用の整理であり、実機は必ずハードウェアマニュアルの結線図で確認してください。
-> PLC input arrangements differ by manufacturer, model and module: bidirectional inputs, opto-isolated groups, separate commons and more. The "sinking" and "sourcing" labels here are a teaching simplification. Always confirm with the hardware manual's wiring diagram.
-
-### 5.1 架空の互換性チェック / fictional compatibility check
-
-次の構成は**教育用の架空例**です。実在のPLCの仕様ではありません。
-
-The following are **fictional training configurations**, not real PLC specifications.
-
-| 構成 / Configuration | PLC入力 / PLC input | センサー出力 / sensor output | 判定 / Verdict |
+| 種類 / Type | 特徴 / Characteristic | 使える負荷の例 / Load examples | 注意 / Caution |
 |---|---|---|---|
-| A | シンク入力、共通0V / sinking, common 0 V | PNP（ソース）/ PNP sourcing | 適合 / compatible |
-| B | ソース入力、共通+24V / sourcing, common +24 V | NPN（シンク）/ NPN sinking | 適合 / compatible |
-| C | シンク入力、共通0V / sinking, common 0 V | NPN（シンク）/ NPN sinking | 不適合の可能性 / likely incompatible |
-| D | ソース入力、共通+24V / sourcing, common +24 V | PNP（ソース）/ PNP sourcing | 不適合の可能性 / likely incompatible |
-| E | 2線式対応入力 / two-wire capable input | 2線式 / two-wire | 漏れ電流・OFF電圧を確認 / check leakage and OFF voltage |
+| リレー出力 / relay output | 接点で開閉 / mechanical contacts | ランプ、小型リレー、小型電磁弁 / lamps, small relays, small valves | 寿命、開閉頻度、AC/DCの定格を確認 / life, switching frequency, AC/DC ratings |
+| シンク出力（トランジスタ）/ sinking transistor output | 0V側へ電流を引き込む / sinks to 0V | DC負荷 / DC loads | 極性、電流定格 / polarity, current rating |
+| ソース出力（トランジスタ）/ sourcing transistor output | +側から電流を出す / sources from + | DC負荷 / DC loads | 極性、電流定格 / polarity, current rating |
 
-```python exec id="sensor-compatibility"
-configurations = [
-    {"name": "A", "plc": "sinking", "sensor": "PNP", "two_wire": False},
-    {"name": "B", "plc": "sourcing", "sensor": "NPN", "two_wire": False},
-    {"name": "C", "plc": "sinking", "sensor": "NPN", "two_wire": False},
-    {"name": "D", "plc": "sourcing", "sensor": "PNP", "two_wire": False},
-    {"name": "E", "plc": "sinking", "sensor": "two-wire", "two_wire": True},
-]
+**リレー出力なら何でも開閉できるわけではありません。** 電圧、電流、種類（AC/DC）、突入電流、開閉頻度、寿命を確認します。誘導負荷（電磁弁、リレーコイル、モーター）にはサージ対策を考えます。サージは、コイルの電流を切ったときに発生する高い電圧です。
 
-def compatibility(plc: str, sensor: str, two_wire: bool) -> tuple[str, str]:
-    if two_wire:
-        return "CHECK", "two-wire sensor: verify leakage current and OFF-state voltage in the manual"
-    if plc == "sinking" and sensor == "PNP":
-        return "COMPATIBLE", "PNP sources current into a sinking input with common at 0 V"
-    if plc == "sourcing" and sensor == "NPN":
-        return "COMPATIBLE", "NPN sinks current from a sourcing input with common at +24 V"
-    return "LIKELY INCOMPATIBLE", "input common and sensor output direction do not match"
+Relay outputs cannot switch arbitrary loads. Check voltage, current, AC or DC, inrush, switching frequency and life. Inductive loads (solenoid valves, relay coils, motors) need surge suppression considered; a surge is the high voltage produced when a coil current is interrupted.
 
-for case in configurations:
-    verdict, reason = compatibility(case["plc"], case["sensor"], case["two_wire"])
-    print(f"{case['name']}: PLC={case['plc']:<9} sensor={case['sensor']:<9} -> {verdict}: {reason}")
-```
+**安全との区別 / safety distinction.** 出力のON/OFFは通常の制御です。安全機能（非常停止、ガード、安全扉）は、安全リレーや安全PLCなどを含む独立したシステムで実現します。
 
-**期待される出力 / Expected output**
-
-```text
-A: PLC=sinking   sensor=PNP       -> COMPATIBLE: PNP sources current into a sinking input with common at 0 V
-B: PLC=sourcing  sensor=NPN       -> COMPATIBLE: NPN sinks current from a sourcing input with common at +24 V
-C: PLC=sinking   sensor=NPN       -> LIKELY INCOMPATIBLE: input common and sensor output direction do not match
-D: PLC=sourcing  sensor=PNP       -> LIKELY INCOMPATIBLE: input common and sensor output direction do not match
-E: PLC=sinking   sensor=two-wire  -> CHECK: two-wire sensor: verify leakage current and OFF-state voltage in the manual
-```
-
-> この判定は出発点です。実際の適合は、センサーの負荷電流、漏れ電流、PLC入力のON電流・OFF電流、電圧降下、応答時間、配線長を含めて確認します。
-> This verdict is a starting point. Real compatibility includes sensor load current, leakage, PLC ON/OFF current, voltage drop, response time and cable length.
-
-## 6. PLC出力と電磁弁 / PLC outputs and solenoids
-
-PLC出力には、リレー方式とトランジスタ方式があります。前のノートで比較したように、接点方式か半導体方式かで、使える負荷・応答・配線が変わります。
-
-PLC outputs are relay or transistor type. As compared in the previous notebook, contact versus semiconductor changes the load, response and wiring.
-
-**電磁弁を駆動するときの確認 / checks when driving a solenoid**
-
-- コイルの定格電圧（DC24Vなど）/ coil rated voltage
-- コイルの消費電力・電流 / coil power and current
-- 突入電流と保持電流 / inrush and holding current
-- 応答時間 / response time
-- サージ（逆起電力）対策 / surge (back-EMF) suppression
-- 無通電時の弁位置 / de-energised valve position
-- 出力1点当たり、共通端子当たりの定格 / per-point and per-common ratings
-- 同時ONする負荷 / simultaneous loads
-- 漏れ電流が負荷に与える影響 / effect of leakage current
-
-**サージ対策 / surge suppression**
-
-電磁弁やリレーのコイルは誘導性負荷です。OFF時に逆起電力が発生し、出力素子や接点にダメージを与えることがあります。ダイオード、バリスタ、CR回路などのサージ吸収素子を使いますが、**方式によって弁の復帰時間が変わる**ことがあります。メーカーの推奨回路に従います。
-
-Solenoid and relay coils are inductive. Switching them off produces back-EMF that can damage output devices or contacts. Diodes, varistors or CR networks are used, but **the suppression method can change valve release time**. Follow the manufacturer's recommended circuit.
-
-**出力方式の違い / output type differences**
-
-| 項目 / Item | リレー出力 / relay output | トランジスタ出力 / transistor output |
-|---|---|---|
-| 電磁弁 / solenoid | AC/DCどちらも比較的柔軟 / relatively flexible | DCが中心、極性に注意 / mainly DC, polarity |
-| 応答 / response | 遅い / slower | 速い / fast |
-| 寿命 / life | 接点寿命 / contact life | 過電流・サージに弱い / sensitive to overcurrent and surge |
-| 漏れ電流 / leakage | 小さい / low | OFF時も微小漏れ / small OFF leakage |
-| サージ対策 / suppression | 接点保護が必要 / contact protection | 出力素子保護が必要 / device protection |
-
-## 7. 統一I/O表 / Unified I/O specification
-
-Day 8とDay 9で同じI/O表を使います。次の表が**このコースの唯一の正**です。X0〜X3、M0、Y0、Y1、Y2、T0を使います。Y1は**遅延ランプ専用**であり、電磁弁には使いません。電磁弁の前進指令は**Y2**です。
-
-Days 8 and 9 use the same I/O table. This is the **single source of truth** for the course: X0–X3, M0, Y0, Y1, Y2 and T0. Y1 is **only** the delayed lamp; it is never the solenoid. The extend command is **Y2**.
-
-| 種別 / Kind | アドレス / Address | 機器 / Device | 正常時の状態 / Normal state |
-|---|---|---|---|
-| 入力 / input | X0 | START押しボタン / START pushbutton | OFF（押している間ON）/ OFF, ON while pressed |
-| 入力 / input | X1 | STOP許可（物理NC停止） / STOP_OK from physical NC stop | 健全時ON / ON while healthy |
-| 入力 / input | X2 | 後退端確認 / retracted confirmation | 後退端でON / ON at retracted end |
-| 入力 / input | X3 | 前進端確認 / extended confirmation | 前進端でON / ON at extended end |
-| 内部 / internal | M0 | 運転状態 / RUN state | 電源投入時OFF / OFF at power-up |
-| 出力 / output | Y0 | 運転表示ランプ / RUN lamp | 停止時OFF / OFF when stopped |
-| 出力 / output | Y1 | 遅延表示ランプ（T0完了）/ delayed lamp (T0 done) | 3秒未満はOFF / OFF before 3 s |
-| 出力 / output | Y2 | 前進電磁弁指令 / extend solenoid command | OFF＝ばね戻り（訓練用弁）/ OFF = spring return (training valve) |
-| タイマー / timer | T0 | 3秒オン遅延 / 3 s on-delay | 運転OFFで0 / 0 when RUN off |
-
-**アドレスと端子は別 / addresses and terminals are different**
-
-X0、Y0などはプログラム上のアドレスです。物理端子番号、コモン端子、拡張ユニット上の位置は、実際のPLC構成で決まります。本教材のアドレスは**架空の訓練用**であり、実機の端子番号ではありません。
-
-X0, Y0 and similar are program addresses. Physical terminal numbers, common terminals and slot positions depend on the actual PLC configuration. The addresses here are **fictional training assignments**, not real terminal numbers.
-
-**物理接点と論理接点 / physical and logical contacts**
-
-X1は、物理的にはNCの停止ボタンから来ています。健全時はONです。PLCプログラムでは、X1を「ONなら許可」として扱います。ラダー上の接点記号は、物理接点のNO/NCとは別に、**入力状態をどう評価するか**で決めます。
-
-X1 comes from a physical NC stop button and is ON when healthy. The PLC program treats X1 as "permission when ON". The ladder contact symbol is chosen by **how the input state is evaluated**, not by the physical NO/NC label.
-
-```python exec id="io-table"
-rows = list(am.CANONICAL_IO)
-print(f"{'addr':<5} {'kind':<9} {'device':<58} normal")
-for row in rows:
-    print(f"{row['address']:<5} {row['kind']:<9} {row['device']:<58} {row['normal']}")
-
-problems = am.validate_io(rows)
-print("\nconsistency problems:", problems if problems else "none")
-print("Fictional training addresses. Terminal numbers depend on the selected PLC.")
-```
-
-**期待される出力 / Expected output**（抜粋 / excerpt）
-
-```text
-addr  kind      device                                                     normal
-X0    input     START pushbutton                                           OFF; momentary ON when pressed
-X1    input     STOP_OK permission from physical NC STOP                   ON while healthy
-...
-Y1    output    delayed indicator lamp (T0 done)                           OFF until 3 s of RUN
-Y2    output    EXTEND solenoid command                                    OFF = spring-return retract (training valve)
-
-consistency problems: none
-Fictional training addresses. Terminal numbers depend on the selected PLC.
-```
-
-### 7.1 I/O表の一貫性を検査する / validate the I/O table
-
-次のセルは、わざと誤った表を作り、検査がエラーを見つけることを示します。Y1に電磁弁を割り当てる誤りと、X1の正常状態をOFFと書く誤りを検出します。
-
-The next cell deliberately builds a wrong table and shows that the check finds both the Y1 solenoid misuse and the X1 normal-state error.
-
-```python exec id="io-validation"
-bad_rows = [dict(row) for row in am.CANONICAL_IO]
-for row in bad_rows:
-    if row["address"] == "Y1":
-        row["device"] = "extend solenoid valve"
-    if row["address"] == "X1":
-        row["normal"] = "OFF in normal condition"
-for problem in am.validate_io(bad_rows):
-    print("detected:", problem)
-```
-
-**期待される出力 / Expected output**
-
-```text
-detected: X1 STOP_OK is ON while the physical NC stop is healthy; its normal state is ON
-detected: Y1 is reserved for the delayed indicator lamp; use Y2 for the extend solenoid
-```
-
-## 8. 概略配線図 / Conceptual wiring diagram
-
-![PLC I/Oの概略配線 / conceptual PLC I/O wiring](../../assets/diagrams/day08/D08-07.svg)
-
-*図 D08-07：入力側はセンサーと入力共通、出力側はランプと電磁弁、電源と0Vを示します。実機の端子番号・コモン・保護・接地は、PLCと機器のマニュアルで確認してください。 / Figure D08-07: the input side shows sensors and the input common; the output side shows lamps and the solenoid, with supply and 0 V. Confirm real terminals, commons, protection and earthing in the PLC and device manuals.*
-
-**配線図に書くべき内容 / what a wiring diagram should show**
-
-- 電源の＋と0V / supply + and 0 V
-- 端子番号 / terminal numbers
-- PLC入力・出力の共通端子 / input and output commons
-- 機器の型式 / device model
-- 線番号 / wire numbers
-- 保護装置 / protective devices
-- 接地 / earthing
-- コネクタ / connectors
-- 予備端子 / spare terminals
-- 信号方式（NPN/PNP、シンク/ソース）/ signal type
-
-使用PLC・センサーの電気仕様が確定する前に、実機向けの配線を決め打ちしないでください。
-
-Do not fix real-machine wiring before the PLC and sensor electrical specifications are confirmed.
-
-## 9. 通電前の確認 / Pre-power verification
-
-通電前には、配線が正しいことを**電気を入れずに**確認します。
-
-Before applying power, verify the wiring **without energising it**.
-
-| 確認 / Check | 内容 / Detail |
-|---|---|
-| 遮断・無電圧 / isolation and zero energy | 遮断器、別電源、バックフィード、蓄電部 / breaker, alternative supply, backfeed, stored energy |
-| 図面との照合 / drawing check | 配線図、機器型式、端子番号 / drawing, model, terminal number |
-| 定格・極性 / ratings and polarity | 電圧、極性、信号方式、保護 / voltage, polarity, signal type, protection |
-| 導体 / conductors | ほつれ、露出、短絡、端子の緩み / strands, exposure, short, loose terminal |
-| 安全 / safety | 可動部への立入り、飛出し、ガード / access, ejection, guard |
-| 承認 / approval | 講師・有資格者の確認 / instructor or qualified person |
-
-> 本研修では、実機の通電・空圧供給を行いません。通電前確認は、実機作業の手順を理解するための机上演習です。
-> This course does not energise real equipment or supply compressed air. The pre-power check is a paper exercise to understand the real procedure.
+Output ON/OFF is ordinary control. Safety functions (emergency stop, guards, safety doors) are implemented in an independent system with safety relays or a safety PLC.
 
 ## 10. 演習 / Exercises
 
-### 演習 A：センサー方式を選ぶ / Exercise A: choose sensor technologies
+### 演習1 センサーの選択 / exercise 1: sensor selection
 
-次の3用途について、候補方式と選定上の不安を書いてください。
+「黒いゴム板の通過を検出したい。周囲に粉じんがある。検出距離は200 mm程度」という条件で、候補と確認事項を書いてください。 / For "detect the passage of a black rubber sheet, dusty environment, about 200 mm", name a candidate and what to check.
 
-For the three applications, write candidate technologies and the selection concerns.
+**答えの例 / example answer**：透過型光電センサーが候補。黒い対象は反射が少ないため、拡散反射型では不安定になりやすい。確認事項は、取付スペース、粉じんによるレンズ汚れ、応答時間、出力形式（PNP/NPN）、PLC入力との整合。実際のゴム板で試験する。 / A through-beam photoelectric sensor is a candidate because black targets reflect little light, making diffuse types unstable. Check mounting space, dust on the lenses, response time, output type (PNP/NPN) and PLC input compatibility, and test with the actual rubber sheet.
 
-1. 鉄部品が定位置に来たことを確認する。
-2. 透明な樹脂容器の通過を確認する。
-3. シリンダの後退端を確認する。
+### 演習2 NPN/PNPの整合 / exercise 2: NPN/PNP compatibility
 
-1. Confirm that a steel part has reached position.
-2. Confirm the passage of a transparent resin container.
-3. Confirm the retracted end of a cylinder.
+NPN出力のセンサーを、入力共通端子が0VのPLC入力に接続しました。正しく動くでしょうか。理由も書いてください。 / An NPN sensor is connected to a PLC input whose common is at 0V. Will it work? Explain.
 
-### 演習 B：NPN/PNPの電流経路 / Exercise B: NPN/PNP current paths
+**答え / answer**：通常は動きません。NPNは0Vへ電流を引き込む出力で、入力共通が+24Vのソース入力と組み合わせます。共通0VはPNP用のシンク入力の組み合わせです。ただし、双方向入力や設定変更できる機種もあるため、**必ずマニュアルで確認**します。 / Usually not. An NPN output sinks to 0V and pairs with a sourcing input whose common is +24V. A 0V common belongs with a PNP sensor and a sinking input. Some inputs are configurable or bidirectional, so always check the manual.
 
-PNPセンサーとシンク入力の組合せ、NPNセンサーとソース入力の組合せについて、電流の向きを矢印で書いてください。入力共通端子の電位も明記します。
+## 11. まとめ / Summary
 
-Draw the current direction for PNP with a sinking input and for NPN with a sourcing input. State the input common potential.
+- 入力はPLCが受け取る信号、出力はPLCが出す指令。
+- 指令と確認は別。確認が来ない場合を設計する。
+- センサーは、対象・距離・速さ・環境・出力形式の順に選ぶ。
+- NPN/PNPは出力インターフェース。NO/NCは検出の論理。別の話。
+- PNPは+から出し、共通0Vの入力へ。NPNは0Vへ引き、共通+24Vの入力へ。
+- PLC全体をNPN/PNPと呼べない。入力モジュールと配線で決まる。
+- 出力はリレー・シンク・ソースで制約が違う。定格を超えて直接つながない。
+- 通常の入力・出力は、安全機能ではない。
 
-### 演習 C：I/O表を作る / Exercise C: build the I/O table
+Inputs are received signals; outputs are commands. Commands and confirmations differ. Choose sensors by target, distance, speed, environment and output type. NPN/PNP describe the output interface; NO/NC describes detection logic. PNP sources into a 0V-common input; NPN sinks from a +24V-common input. A whole PLC is not NPN or PNP; the module and wiring decide. Relay, sinking and sourcing outputs have different limits. Ordinary I/O is not a safety function.
 
-押出し装置のI/O表を、X0〜X3、M0、Y0、Y1、Y2、T0を使って作ってください。Y1を電磁弁に使わないこと、X1の正常状態をONとすることに注意します。
+## 12. 完了チェックリスト / Completion checklist
 
-Build the pusher I/O table using X0–X3, M0, Y0, Y1, Y2 and T0. Do not use Y1 for the solenoid, and record X1 as ON in the normal condition.
+- [ ] 入力5例・出力5例を挙げられる。
+- [ ] 指令と確認の違いを、シリンダの例で説明できる。
+- [ ] センサー6種類以上の原理と用途を言える。
+- [ ] 選定手順10項目を、順番に言える。
+- [ ] ON/OFF・アナログ・パルス・通信の違いを説明できる。
+- [ ] PNPの電流経路を、+24Vから0Vまで書ける。
+- [ ] NPNの電流経路を、+24Vから0Vまで書ける。
+- [ ] 0V共通・+24V共通のどちらがどちらか説明できる。
+- [ ] リレー出力の制約を2つ以上言える。
 
-### 演習 D：出力容量を確認する / Exercise D: check output capacity
+- [ ] I can list five inputs and five outputs.
+- [ ] I can explain command versus confirmation with a cylinder.
+- [ ] I can describe six sensor types with principle and use.
+- [ ] I can state the ten selection steps in order.
+- [ ] I can distinguish ON/OFF, analog, pulse and communication.
+- [ ] I can draw the PNP path from +24V to 0V.
+- [ ] I can draw the NPN path from +24V to 0V.
+- [ ] I can say which sensor type goes with which input common.
+- [ ] I can give two limits of a relay output.
 
-ランプ2個、電磁弁1個、リレー1個をPLC出力で駆動する場合、直接接続できるかを判断するために必要な仕様を一覧にしてください。電圧、電流、突入、サージ、共通端子の定格を含めます。
+## 13. よくある間違い / Troubleshooting and common misunderstandings
 
-For two lamps, one solenoid and one relay driven from PLC outputs, list the specifications needed to judge direct connection: voltage, current, inrush, surge and common-terminal ratings.
+| よくある間違い / Common mistake | 正しい考え方 / Correct view |
+|---|---|
+| NPNとPNPを検出原理と考える / treating NPN/PNP as a detection principle | 出力インターフェースの種類 / an output-interface characteristic |
+| 配線色だけで判断する / deciding by wire colour | データシートで確認 / check the datasheet |
+| PLC全体がNPNだと考える / calling the whole PLC NPN | 入力モジュールと配線で決まる / module and wiring decide |
+| 指令を出せば動いたと考える / a command proves motion | 確認入力を待つ / wait for the confirmation input |
+| 反射型で透明体も確実に検出できる / reflective sensors detect any clear object | 実対象で試験する / test the actual target |
+| リレー出力で何でも開閉できる / relay outputs switch anything | 定格・種類・寿命を確認 / check ratings, type and life |
 
-### 演習 E：通電前チェック / Exercise E: pre-power check
+## 14. 安全と次の学習 / safety and what comes next
 
-自分が触る予定のPLCとランプについて、電源系統、入出力の役割、通電条件をチェックシート形式にまとめてください。
+センサーが検出したから安全、という考え方は危険です。安全扉、光カーテン、非常停止は、通常のセンサーとPLCの入力とは別の安全関連システムで実現します。次は 08-03 で、PLCとラダープログラム、自己保持、インターロックを学びます。
 
-For the PLC and lamps you would touch, write a checklist of supply circuits, I/O roles and conditions for energisation.
-
-**提出物 / Deliverables**
-
-1. 電気機器リスト / electrical equipment list
-2. センサー選定表 / sensor selection table
-3. I/O表（統一表と一致）/ I/O map matching the canonical table
-4. 入力共通・出力互換性の確認 / input-common and output-compatibility check
-5. 概略配線図 / conceptual wiring diagram
-
-## 11. 期待される結果 / Expected result
-
-- センサーの方式を、対象物と環境から選べる。
-- NPNとPNPの電流の向きを、入力共通端子を含めて説明できる。
-- PNP＋シンク入力、NPN＋ソース入力が適合することを説明できる。
-- Y1を遅延ランプ専用とし、電磁弁をY2に割り当てられる。
-- X1の正常状態がONであることを説明できる。
-- PLC出力の定格を確認し、必要ならリレーを介する判断ができる。
-- 通電前の確認項目を列挙できる。
-
-- You can select a sensor technology from the target and environment.
-- You can explain NPN and PNP current directions including the input common.
-- You can explain that PNP with a sinking input and NPN with a sourcing input are compatible.
-- You can keep Y1 for the delayed lamp and assign the solenoid to Y2.
-- You can explain that X1 is ON in the normal condition.
-- You can check PLC output ratings and decide when a relay is needed.
-- You can list pre-power checks.
-
-## 12. トラブルシューティング / Troubleshooting
-
-| 症状 / Symptom | 確認すること / Check | よくある原因 / Typical cause |
-|---|---|---|
-| センサーがONしない / sensor does not turn ON | 電源、0V、出力線、入力共通 / supply, 0 V, output wire, common | 結線違い、NPN/PNP不一致 / wiring error, NPN/PNP mismatch |
-| 常にONになる / always ON | 漏れ電流、短絡、論理 / leakage, short, logic | 2線式の漏れ、配線短絡 / two-wire leakage, short |
-| 入力が反転する / input appears inverted | 物理NCと論理NCの混同 / physical NC versus logical NC | ラダー接点の選び方 / contact selection |
-| 電磁弁が動かない / solenoid does not move | コイル電圧、極性、出力定格 / coil voltage, polarity, output rating | 出力容量不足、サージ / insufficient rating, surge |
-| 出力が壊れる / output damaged | 誘導性負荷、サージ、共通電流 / inductive load, surge, common current | サージ対策なし、定格超過 / no suppression, over rating |
-
-## 13. まとめ / Summary
-
-- センサーは、対象物・環境・信号方式で選ぶ。
-- NPN/PNPは、PLC入力の共通端子を含む電流経路で理解する。
-- PNPはソース、NPNはシンク。組み合わせるPLC入力の方式を確認する。
-- 物理接点のNO/NCと、ラダー上の論理接点は別である。
-- 統一I/O表はX0〜X3、M0、Y0、Y1、Y2、T0。Y1は遅延ランプ専用、電磁弁はY2。
-- アドレスと物理端子番号は別。実機はマニュアルで確認する。
-- PLC出力は信号であり、定格を超える負荷はリレーなどで間接操作する。
-- 通電前確認は、無電圧・図面照合・定格・導体・安全・承認の順で行う。
-
-- Select sensors by target, environment and signal type.
-- Understand NPN/PNP through the current path including the PLC input common.
-- PNP sources; NPN sinks. Confirm the PLC input type.
-- Physical NO/NC contacts and logical ladder contacts are different.
-- The canonical I/O is X0–X3, M0, Y0, Y1, Y2 and T0. Y1 is only the delayed lamp; the solenoid is Y2.
-- Addresses and physical terminal numbers are different. Confirm on the real PLC.
-- A PLC output is a signal; loads above its rating are driven through a relay or similar.
-- Pre-power checks cover zero energy, drawings, ratings, conductors, safety and approval.
-
-## 14. 完了チェックリスト / Completion checklist
-
-- [ ] センサー方式を3用途で比較した / compared sensor technologies for three applications
-- [ ] アナログとデジタルを区別した / distinguished analog and digital
-- [ ] NPN/PNPの電流経路を入力共通端子まで書いた / drew NPN/PNP paths including the input common
-- [ ] PNP＋シンク、NPN＋ソースの適合を説明した / explained PNP+sinking and NPN+sourcing
-- [ ] 2線式の漏れ電流に注意した / noted two-wire leakage
-- [ ] 統一I/O表を再現した / reproduced the canonical I/O table
-- [ ] Y1を電磁弁に使わなかった / did not use Y1 for the solenoid
-- [ ] X1の正常状態をONと書いた / recorded X1 as ON in normal condition
-- [ ] 出力容量とサージ対策を確認した / checked output ratings and surge suppression
-- [ ] 通電前チェック項目を作った / produced pre-power checks
+"Detected, therefore safe" is a dangerous assumption. Safety doors, light curtains and emergency stops belong to safety-related systems, separate from ordinary sensors and PLC inputs. Next, 08-03 covers the PLC, ladder programming, self-holding and interlocks.

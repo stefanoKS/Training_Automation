@@ -24,7 +24,7 @@ OUTPUT = ROOT / "day07_09_support" / "reference_data" / "reference_outputs.json"
 FOLDERS = (
     "Day07_Automation_Concept_Mechanics",
     "Day08_Electrical_PLC",
-    "Day09_Communication_Commissioning",
+    "Day09_AI_Camera_Imaging",
 )
 
 

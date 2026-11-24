@@ -1,45 +1,42 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="840" viewBox="0 0 1440 840" role="img" aria-labelledby="title desc"><title id="title">電圧・電流・抵抗のアナロジー / Voltage, current and resistance analogy</title><desc id="desc">電圧・電流・抵抗のアナロジー / Voltage, current and resistance analogy — editable bilingual training diagram for 第8日 / Day 8.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#2563A6"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#A32B2B"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#1B7A4B"/></marker></defs><rect x="0" y="0" width="1440" height="840" fill="#F5F8FC"/><rect x="0" y="0" width="1440" height="12" fill="#2563A6"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900" role="img" aria-labelledby="title desc"><title id="title">電圧・電流・抵抗の関係 / Voltage, current and resistance</title><desc id="desc">電圧・電流・抵抗の関係 / Voltage, current and resistance — editable bilingual training diagram for 第8日 / Day 8.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#2563A6"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#A32B2B"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#1B7A4B"/></marker></defs><rect x="0" y="0" width="1440" height="900" fill="#F5F8FC"/><rect x="0" y="0" width="1440" height="12" fill="#2563A6"/>
 <text x="56.0" y="56.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#2563A6" font-weight="700" text-anchor="start">第8日 / Day 8</text>
-<text x="56.0" y="104.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="32" fill="#142B3F" font-weight="700" text-anchor="start">電圧・電流・抵抗のアナロジー</text>
-<text x="56.0" y="144.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="26" fill="#526378" font-weight="400" text-anchor="start">Voltage, current and resistance analogy</text>
-<rect x="70.0" y="190.0" width="600.0" height="380.0" rx="10" fill="#FFFFFF" stroke="#C1D0DD" stroke-width="1.4"/>
-<text x="86.0" y="220.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#142B3F" font-weight="700" text-anchor="start">水路 / water circuit</text>
-<text x="86.0" y="242.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">head, flow and restriction</text>
-<rect x="120.0" y="250.0" width="180.0" height="130.0" rx="4" fill="#E6F4F7" stroke="#0E7490" stroke-width="2"/>
-<rect x="120.0" y="250.0" width="180.0" height="70.0" rx="12" fill="#BEE3EA" stroke="#0E7490" stroke-width="1"/>
-<text x="210.0" y="290.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#0E7490" font-weight="700" text-anchor="middle">水位差 h</text>
-<text x="210.0" y="312.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#526378" font-weight="400" text-anchor="middle">head</text>
-<path d="M300.0 340.0 L420.0 340.0" fill="none" stroke="#0E7490" stroke-width="8" marker-end="url(#arrow)"/>
-<path d="M420.0 340.0 L420.0 420.0" fill="none" stroke="#0E7490" stroke-width="8" marker-end="url(#arrow)"/>
-<path d="M420.0 420.0 L300.0 420.0" fill="none" stroke="#0E7490" stroke-width="8" marker-end="url(#arrow)"/>
-<rect x="380.0" y="360.0" width="30.0" height="40.0" rx="3" fill="#FFFFFF" stroke="#0E7490" stroke-width="1.6"/>
-<text x="440.0" y="370.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#0E7490" font-weight="700" text-anchor="start">流量 Q</text>
-<text x="440.0" y="390.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#526378" font-weight="400" text-anchor="start">flow</text>
-<text x="340.0" y="462.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#142B3F" font-weight="600" text-anchor="middle">管の狭さ = 抵抗 / restriction</text>
-<text x="210.0" y="500.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#142B3F" font-weight="400" text-anchor="middle">水位差 → 電圧、流量 → 電流、狭さ → 抵抗</text>
-<rect x="710.0" y="190.0" width="660.0" height="380.0" rx="10" fill="#FFFFFF" stroke="#C1D0DD" stroke-width="1.4"/>
-<text x="726.0" y="220.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#142B3F" font-weight="700" text-anchor="start">電気回路 / electrical circuit</text>
-<text x="726.0" y="242.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">battery, lamp and current</text>
-<rect x="760.0" y="270.0" width="80.0" height="150.0" rx="3" fill="#FFFFFF" stroke="#B4541E" stroke-width="2"/>
-<text x="800.0" y="320.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#B4541E" font-weight="700" text-anchor="middle">24 V</text>
-<text x="800.0" y="342.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#B4541E" font-weight="700" text-anchor="middle">電源</text>
-<path d="M840.0 285.0 L1180.0 285.0" fill="none" stroke="#B4541E" stroke-width="3" marker-end="url(#arrow)"/>
-<path d="M840.0 405.0 L1180.0 405.0" fill="none" stroke="#B4541E" stroke-width="3" marker-end="url(#arrow)"/>
-<circle cx="1180.0" cy="345.0" r="58.0" fill="#E8F1FA" stroke="#1F5C99" stroke-width="2"/>
-<text x="1180.0" y="340.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#1F5C99" font-weight="700" text-anchor="middle">負荷</text>
-<text x="1180.0" y="360.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#526378" font-weight="400" text-anchor="middle">lamp</text>
-<path d="M1180.0 285.0 L1180.0 287.0" fill="none" stroke="#B4541E" stroke-width="2"/>
-<text x="900.0" y="268.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#0E7490" font-weight="700" text-anchor="start">I = 0.25 A →</text>
-<text x="760.0" y="470.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#142B3F" font-weight="700" text-anchor="start">V = I × R        P = V × I</text>
-<text x="760.0" y="498.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">24 V × 0.25 A = 6 W</text>
-<rect x="760.0" y="520.0" width="560.0" height="42.0" rx="4" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
-<text x="775.0" y="539.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#142B3F" font-weight="400" text-anchor="start">アナロジーは直感用。電流は閉回路を流れて戻る。</text>
-<text x="775.0" y="555.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="10" fill="#526378" font-weight="400" text-anchor="start">Analogy only; current returns in a closed loop.</text>
-<rect x="70.0" y="610.0" width="1300.0" height="80.0" rx="8" fill="#F8E7E7" stroke="#A32B2B" stroke-width="1.4"/>
-<text x="90.0" y="642.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#A32B2B" font-weight="600" text-anchor="start">アナロジーの限界: 電圧は2点間の差、交流は向きが変わる、コイルは逆起電力を生む。</text>
-<text x="90.0" y="666.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#526378" font-weight="400" text-anchor="start">Limits: voltage is a difference between two points; AC changes direction; coils produce back-EMF.</text>
-<rect x="56.0" y="724.0" width="1328.0" height="60.0" rx="10" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
-<text x="76.0" y="758.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#142B3F" font-weight="700" text-anchor="start">電圧は電位差、電流は電荷の流れ、抵抗は流れにくさ、電力はエネルギーの移動速度。</text>
-<text x="76.0" y="780.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14.5" fill="#526378" font-weight="400" text-anchor="start">Voltage is a potential difference, current is charge flow, resistance opposes flow and power is the rate of energy transfer.</text>
-<text x="1400" y="832" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" text-anchor="end">D08-01 • 編集可能な図 / editable SVG</text>
+<text x="56.0" y="104.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="32" fill="#142B3F" font-weight="700" text-anchor="start">電圧・電流・抵抗の関係</text>
+<text x="56.0" y="144.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="26" fill="#526378" font-weight="400" text-anchor="start">Voltage, current and resistance</text>
+<rect x="70.0" y="180.0" width="620.0" height="340.0" rx="10" fill="#FFFFFF" stroke="#C1D0DD" stroke-width="1.4"/>
+<text x="86.0" y="210.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#142B3F" font-weight="700" text-anchor="start">水道のたとえ</text>
+<text x="86.0" y="232.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">the water analogy</text>
+<rect x="110.0" y="250.0" width="120.0" height="90.0" rx="6" fill="#E6F4F7" stroke="#0E7490" stroke-width="2"/>
+<text x="170.0" y="300.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#142B3F" font-weight="700" text-anchor="middle">水</text>
+<text x="110.0" y="375.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start">水圧 / pressure</text>
+<rect x="300.0" y="285.0" width="240.0" height="20.0" rx="12" fill="#D7E7F5" stroke="#0E7490" stroke-width="1.6"/>
+<text x="420.0" y="340.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start">流量 / flow</text>
+<rect x="540.0" y="265.0" width="40.0" height="60.0" rx="3" fill="#CBD5DF" stroke="#526378" stroke-width="1.6"/>
+<text x="500.0" y="360.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">細い管 / restriction</text>
+<path d="M230.0 295.0 L296.0 295.0" fill="none" stroke="#0E7490" stroke-width="2.4" marker-end="url(#arrow)"/>
+<text x="110.0" y="470.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">抵抗 = 流れにくさ / resistance is restriction</text>
+<rect x="750.0" y="180.0" width="620.0" height="340.0" rx="10" fill="#FFFFFF" stroke="#C1D0DD" stroke-width="1.4"/>
+<text x="766.0" y="210.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#142B3F" font-weight="700" text-anchor="start">電気の言葉</text>
+<text x="766.0" y="232.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">the electrical quantities</text>
+<text x="780.0" y="260.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#142B3F" font-weight="700" text-anchor="start">電圧 / voltage</text>
+<text x="1010.0" y="260.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#2563A6" font-weight="600" text-anchor="start">V（ボルト）</text>
+<text x="1150.0" y="260.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#526378" font-weight="400" text-anchor="start">押し出す力 / push</text>
+<text x="780.0" y="320.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#142B3F" font-weight="700" text-anchor="start">電流 / current</text>
+<text x="1010.0" y="320.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#2563A6" font-weight="600" text-anchor="start">A（アンペア）</text>
+<text x="1150.0" y="320.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#526378" font-weight="400" text-anchor="start">流れる量 / flow</text>
+<text x="780.0" y="380.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#142B3F" font-weight="700" text-anchor="start">抵抗 / resistance</text>
+<text x="1010.0" y="380.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#2563A6" font-weight="600" text-anchor="start">Ω（オーム）</text>
+<text x="1150.0" y="380.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#526378" font-weight="400" text-anchor="start">流れにくさ / restriction</text>
+<text x="780.0" y="440.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#142B3F" font-weight="700" text-anchor="start">電力 / power</text>
+<text x="1010.0" y="440.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#2563A6" font-weight="600" text-anchor="start">W（ワット）</text>
+<text x="1150.0" y="440.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#526378" font-weight="400" text-anchor="start">1秒あたり / per second</text>
+<rect x="70.0" y="560.0" width="1300.0" height="200.0" rx="10" fill="#FFFFFF" stroke="#C1D0DD" stroke-width="1.4"/>
+<text x="86.0" y="590.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#142B3F" font-weight="700" text-anchor="start">たとえの限界</text>
+<text x="86.0" y="612.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">limits of the analogy</text>
+<text x="90.0" y="650.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#142B3F" font-weight="400" text-anchor="start">交流・電磁誘導・静電気・電子の動きの向きは、水では正しく表せない。</text>
+<text x="90.0" y="680.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">AC, electromagnetic induction, static charge and electron motion are not represented by water.</text>
+<text x="90.0" y="720.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="400" text-anchor="start">たとえは入口。細かい話は電気の言葉で考える。 / The analogy is an entry point; think electrically afterwards.</text>
+<rect x="56.0" y="784.0" width="1328.0" height="60.0" rx="10" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
+<text x="76.0" y="818.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#142B3F" font-weight="700" text-anchor="start">電圧は水圧、電流は流量、抵抗は流れにくさ。電力は1秒あたりのエネルギー</text>
+<text x="76.0" y="840.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14.5" fill="#526378" font-weight="400" text-anchor="start">Voltage is pressure, current is flow, resistance is restriction, power is energy per second</text>
+<text x="1400" y="892" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" text-anchor="end">D08-01 • 編集可能な図 / editable SVG</text>
 </svg>

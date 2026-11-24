@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="920" viewBox="0 0 1440 920" role="img" aria-labelledby="title desc"><title id="title">撮像タイミングと遅れ / Inspection timing and latency</title><desc id="desc">撮像タイミングと遅れ / Inspection timing and latency — editable bilingual training diagram for 第9日 / Day 9.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#2563A6"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#A32B2B"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#1B7A4B"/></marker></defs><rect x="0" y="0" width="1440" height="920" fill="#F5F8FC"/><rect x="0" y="0" width="1440" height="12" fill="#2563A6"/>
+<text x="56.0" y="56.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#2563A6" font-weight="700" text-anchor="start">第9日 / Day 9</text>
+<text x="56.0" y="104.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="32" fill="#142B3F" font-weight="700" text-anchor="start">撮像タイミングと遅れ</text>
+<text x="56.0" y="144.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="26" fill="#526378" font-weight="400" text-anchor="start">Inspection timing and latency</text>
+<rect x="70.0" y="170.0" width="1300.0" height="300.0" rx="10" fill="#FFFFFF" stroke="#C1D0DD" stroke-width="1.4"/>
+<text x="86.0" y="200.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#142B3F" font-weight="700" text-anchor="start">時間の積み重ね</text>
+<text x="86.0" y="222.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">the accumulation of time</text>
+<rect x="110.0" y="280.0" width="200.0" height="90.0" rx="4" fill="#FFFFFF" stroke="#1F5C99" stroke-width="2"/>
+<text x="210.0" y="320.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="700" text-anchor="middle">撮像間隔</text>
+<text x="210.0" y="344.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#526378" font-weight="400" text-anchor="middle">interval</text>
+<rect x="310.0" y="280.0" width="140.0" height="90.0" rx="4" fill="#FFFFFF" stroke="#0E7490" stroke-width="2"/>
+<text x="380.0" y="320.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="700" text-anchor="middle">転送</text>
+<text x="380.0" y="344.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#526378" font-weight="400" text-anchor="middle">transfer</text>
+<rect x="450.0" y="280.0" width="220.0" height="90.0" rx="4" fill="#FFFFFF" stroke="#6B3FA0" stroke-width="2"/>
+<text x="560.0" y="320.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="700" text-anchor="middle">推論</text>
+<text x="560.0" y="344.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#526378" font-weight="400" text-anchor="middle">inference</text>
+<rect x="670.0" y="280.0" width="120.0" height="90.0" rx="4" fill="#FFFFFF" stroke="#1B7A4B" stroke-width="2"/>
+<text x="730.0" y="320.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="700" text-anchor="middle">判定</text>
+<text x="730.0" y="344.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#526378" font-weight="400" text-anchor="middle">decision</text>
+<rect x="790.0" y="280.0" width="160.0" height="90.0" rx="4" fill="#FFFFFF" stroke="#B4541E" stroke-width="2"/>
+<text x="870.0" y="320.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="700" text-anchor="middle">応答</text>
+<text x="870.0" y="344.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#526378" font-weight="400" text-anchor="middle">actuator</text>
+<path d="M110.0 400.0 L1310.0 400.0" fill="none" stroke="#C1D0DD" stroke-width="2"/>
+<text x="110.0" y="435.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="700" text-anchor="start">判定までの遅れ / end-to-end decision latency</text>
+<path d="M110.0 250.0 L110.0 460.0" fill="none" stroke="#C1D0DD" stroke-width="1.4"/>
+<path d="M840.0 250.0 L840.0 460.0" fill="none" stroke="#C1D0DD" stroke-width="1.4"/>
+<rect x="70.0" y="510.0" width="620.0" height="260.0" rx="10" fill="#FFFFFF" stroke="#C1D0DD" stroke-width="1.4"/>
+<text x="86.0" y="540.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#142B3F" font-weight="700" text-anchor="start">計算例</text>
+<text x="86.0" y="562.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">worked example</text>
+<text x="90.0" y="600.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17" fill="#142B3F" font-weight="700" text-anchor="start">30 FPS、材料1,000 mm/s</text>
+<text x="90.0" y="630.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">30 FPS at 1,000 mm/s</text>
+<text x="90.0" y="690.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="24" fill="#A32B2B" font-weight="700" text-anchor="start">1,000 ÷ 30 ≈ 33.33 mm</text>
+<text x="90.0" y="722.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#526378" font-weight="400" text-anchor="start">movement between nominal frames</text>
+<rect x="750.0" y="510.0" width="620.0" height="260.0" rx="10" fill="#FFFFFF" stroke="#C1D0DD" stroke-width="1.4"/>
+<text x="766.0" y="540.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#142B3F" font-weight="700" text-anchor="start">注意</text>
+<text x="766.0" y="562.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">caution</text>
+<text x="770.0" y="600.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="700" text-anchor="start">移動方向の視野と幅方向の視野を混同しない。</text>
+<text x="770.0" y="628.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#526378" font-weight="400" text-anchor="start">Do not confuse travel-direction FOV with width FOV.</text>
+<text x="770.0" y="676.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="400" text-anchor="start">FPSが足りても、完全な検査は約束できない。</text>
+<text x="770.0" y="704.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#526378" font-weight="400" text-anchor="start">Nominal FPS does not promise complete inspection.</text>
+<text x="770.0" y="744.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#B4541E" font-weight="700" text-anchor="start">カメラFPS ≠ 検査FPS / camera FPS is not inspection FPS</text>
+<rect x="56.0" y="804.0" width="1328.0" height="60.0" rx="10" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
+<text x="76.0" y="838.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#142B3F" font-weight="700" text-anchor="start">撮像間隔・転送・推論・判定・応答を積み上げて、全体の遅れを考える</text>
+<text x="76.0" y="860.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14.5" fill="#526378" font-weight="400" text-anchor="start">Add capture interval, transfer, inference, decision and actuator response</text>
+<text x="1400" y="912" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" text-anchor="end">D09-10 • 編集可能な図 / editable SVG</text>
+</svg>

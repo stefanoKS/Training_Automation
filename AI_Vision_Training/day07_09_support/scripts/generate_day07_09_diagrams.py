@@ -13,8 +13,8 @@ Design rules
   dotted = data. Arrows always show direction.
 * Every diagram has a caption band that says what the student should notice.
 
-The drawings are conceptual teaching figures, not construction drawings,
-not ISO 1219-1 pneumatic schematics and not safety-certified designs.
+The drawings are conceptual teaching figures: not construction drawings, not
+ISO 1219-1 pneumatic schematics and not safety-certified designs.
 """
 
 from __future__ import annotations
@@ -54,6 +54,16 @@ FILL_CONTROL = "#F1ECF8"
 FILL_ENERGY = "#FBEEE6"
 FILL_DATA = "#E6F4F7"
 FILL_HAZARD = "#F8E7E7"
+FILL_GREY = "#EEF2F6"
+
+FILL_COLOR = {
+    ENERGY: FILL_ENERGY,
+    DATA: FILL_DATA,
+    CONTROL: FILL_CONTROL,
+    GOOD: FILL_SENSOR,
+    MECH: FILL_MECH,
+    BAD: FILL_HAZARD,
+}
 
 
 # --------------------------------------------------------------------------- #
@@ -78,12 +88,6 @@ def chain(svg: Svg, items, y, h=120, x0=70, x1=1370, gap=26, accent=ACCENT) -> N
             svg.line(x + width + 2, y + h / 2, x + width + gap - 2, y + h / 2,
                      stroke=accent, sw=2.2)
     return width
-
-
-def arrow_label(svg: Svg, x1, y1, x2, y2, label, color=ACCENT, dash=None, size=14) -> None:
-    svg.line(x1, y1, x2, y2, stroke=color, sw=2.2, dash=dash)
-    mid_x, mid_y = (x1 + x2) / 2, (y1 + y2) / 2
-    svg.text(mid_x + 6, mid_y - 8, label, size, 600, color)
 
 
 def table_grid(svg: Svg, x, y, headers, rows, widths, row_h=42, header_h=38,
@@ -127,48 +131,58 @@ def ladder_contact(svg: Svg, x, y, nc, address, label=None) -> None:
 
 
 def ladder_coil(svg: Svg, x, y, address, label=None) -> None:
-    svg.parts.append(
-        f'<path d="M{x - 18} {y - 19} Q{x - 36} {y} {x - 18} {y + 19}" fill="none" '
-        f'stroke="{ACCENT}" stroke-width="2.4"/>'
-        f'<path d="M{x + 18} {y - 19} Q{x + 1} {y} {x + 18} {y + 19}" fill="none" '
-        f'stroke="{ACCENT}" stroke-width="2.4"/>'
-    )
-    svg.line(x - 48, y, x - 34, y, marker=False, sw=2)
-    svg.line(x + 18, y, x + 62, y, marker=False, sw=2)
+    svg.rect(x - 17, y - 20, 34, 40, fill=CARD, stroke=ACCENT, sw=2.2, rx=17)
+    svg.line(x - 62, y, x - 17, y, marker=False, sw=2)
+    svg.line(x + 17, y, x + 62, y, marker=False, sw=2)
     svg.text(x, y + 44, address, 15, 700, ACCENT, "middle")
     if label:
-        svg.text(x, y - 28, label, 13, 400, MUTED, "middle")
+        svg.text(x, y - 32, label, 13, 400, MUTED, "middle")
 
 
-def cylinder_symbol(svg: Svg, x, y, w=360, h=120, rod=90, ja="複動シリンダ", en="double-acting cylinder") -> None:
+def ladder_row(svg: Svg, y, elements, start_x=230, step=130, label=None) -> float:
+    """Draw one rung: contact/coil elements joined left to right. Returns the end x."""
+    x = start_x
+    previous_end = start_x - 80
+    svg.line(start_x - 80, y, start_x - 30, y, marker=False, sw=2.4)
+    for element in elements:
+        if element[0] == "contact":
+            _, nc, address, text = element
+            ladder_contact(svg, x, y, nc, address, text)
+            svg.line(previous_end, y, x - 30, y, marker=False, sw=2.4)
+            previous_end = x + 30
+            x += step
+        else:
+            _, address, text = element
+            ladder_coil(svg, x + 30, y, address, text)
+            svg.line(previous_end, y, x + 30 - 62, y, marker=False, sw=2.4)
+            previous_end = x + 30 + 62
+            x += step
+    if label:
+        svg.text(start_x - 80, y - 46, label, 15, 700, MUTED)
+    return previous_end
+
+
+def cylinder_symbol(svg: Svg, x, y, w=300, h=96, ja="複動シリンダ", en="double-acting cylinder") -> None:
     svg.rect(x, y, w, h, fill=FILL_MECH, stroke=MECH, sw=2.4, rx=8)
-    # piston and rod
     px = x + w * 0.58
     svg.rect(px - 8, y + 8, 16, h - 16, fill=MECH, stroke=MECH, sw=1)
-    svg.rect(px, y + h / 2 - 9, w - (px - x) + rod, 18, fill="#B9C9D9", stroke=MECH, sw=1.4, rx=3)
-    svg.text(x + w / 2, y + h + 26, ja, 16, 700, INK, "middle")
-    svg.text(x + w / 2, y + h + 46, en, 13, 400, MUTED, "middle")
+    svg.rect(px, y + h / 2 - 8, w * 0.56 + 46, 16, fill="#B9C9D9", stroke=MECH, sw=1.4, rx=3)
+    svg.text(x + w / 2, y + h + 24, ja, 15, 700, INK, "middle")
+    svg.text(x + w / 2, y + h + 44, en, 13, 400, MUTED, "middle")
 
 
-def valve_symbol(svg: Svg, x, y, ja="5/2 単一ソレノイド弁", en="5/2 single-solenoid valve") -> None:
-    w, h = 210, 110
+def valve_symbol(svg: Svg, x, y, ja="電磁弁", en="solenoid valve") -> None:
+    w, h = 190, 96
     svg.rect(x, y, w / 2, h, fill=FILL_ENERGY, stroke=ENERGY, sw=2, rx=2)
     svg.rect(x + w / 2, y, w / 2, h, fill=FILL_ENERGY, stroke=ENERGY, sw=2, rx=2)
-    # functional flow arrows (not a construction drawing)
-    svg.line(x + 18, y + 30, x + 78, y + 30, stroke=ENERGY, sw=2)
-    svg.line(x + 18, y + 80, x + 78, y + 80, stroke=ENERGY, sw=2)
-    svg.line(x + w / 2 + 18, y + 30, x + w / 2 + 78, y + 80, stroke=ENERGY, sw=2)
-    svg.line(x + w / 2 + 18, y + 80, x + w / 2 + 78, y + 30, stroke=ENERGY, sw=2)
-    # solenoid box and spring
-    svg.rect(x - 42, y + 30, 34, 50, fill=CARD, stroke=CONTROL, sw=1.8, rx=3)
-    svg.text(x - 25, y + 60, "SOL", 12, 700, CONTROL, "middle")
-    svg.parts.append(
-        f'<path d="M{x + w + 4} {y + 40} q12 15 0 30 q12 15 0 30" fill="none" stroke="{ENERGY}" stroke-width="1.8"/>'
-    )
-    svg.text(x + w / 2, y + h + 26, ja, 16, 700, INK, "middle")
-    svg.text(x + w / 2, y + h + 46, en, 13, 400, MUTED, "middle")
-    for index, port in enumerate(("P", "A", "B", "R1", "R2")):
-        svg.text(x + 14 + index * 42, y - 10, port, 13, 700, ENERGY)
+    svg.line(x + 16, y + 26, x + 70, y + 26, stroke=ENERGY, sw=2)
+    svg.line(x + 16, y + 70, x + 70, y + 70, stroke=ENERGY, sw=2)
+    svg.line(x + w / 2 + 16, y + 26, x + w / 2 + 70, y + 70, stroke=ENERGY, sw=2)
+    svg.line(x + w / 2 + 16, y + 70, x + w / 2 + 70, y + 26, stroke=ENERGY, sw=2)
+    svg.rect(x - 40, y + 24, 32, 46, fill=CARD, stroke=CONTROL, sw=1.8, rx=3)
+    svg.text(x - 24, y + 52, "SOL", 12, 700, CONTROL, "middle")
+    svg.text(x + w / 2, y + h + 24, ja, 15, 700, INK, "middle")
+    svg.text(x + w / 2, y + h + 44, en, 13, 400, MUTED, "middle")
 
 
 def hazard_marker(svg: Svg, x, y, ja="危険", en="hazard") -> None:
@@ -183,1383 +197,1310 @@ def hazard_marker(svg: Svg, x, y, ja="危険", en="hazard") -> None:
 
 def legend_swatches(svg: Svg, x, y, items) -> None:
     for index, item in enumerate(items):
-        color, label = item[0], item[1]
-        if len(item) >= 3:
-            label = f"{item[1]} / {item[2]}"
+        color = item[0]
+        label = f"{item[1]} / {item[2]}" if len(item) >= 3 else item[1]
         top = y + index * 32
         svg.rect(x, top, 26, 18, fill=color, stroke=color, sw=1, rx=3)
         svg.text(x + 36, top + 15, label, 14, 400, MUTED)
+
+
+def label_box(svg: Svg, x, y, w, h, ja, en, fill=CARD, stroke=GRID, size=13) -> None:
+    svg.rect(x, y, w, h, fill=fill, stroke=stroke, sw=1.4, rx=6)
+    svg.text(x + w / 2, y + h * 0.44, ja, size + 2, 700, INK, "middle")
+    svg.text(x + w / 2, y + h * 0.78, en, size - 1, 400, MUTED, "middle")
+
+
+def note(svg: Svg, y, ja, en, x=70, w=1300, stroke=ACCENT, fill=JP_BG) -> None:
+    svg.rect(x, y, w, 78, fill=fill, stroke=stroke, sw=1.2, rx=8)
+    svg.text(x + 18, y + 30, ja, 15, 700, INK)
+    svg.text(x + 18, y + 54, en, 13, 400, MUTED)
 
 
 # --------------------------------------------------------------------------- #
 # Day 7
 # --------------------------------------------------------------------------- #
 def d07_01() -> Svg:
-    svg = new_diagram("D07-01", "設備開発の8段階", "Eight stages of equipment development",
-                      "第7日 / Day 7", 980)
-    stages = [
-        ("① 課題抽出", "Problem finding", "困りごと一覧 / problem list", MECH),
-        ("② 現状把握", "Observation", "時間・数量・不良 / time, quantity, defects", MECH),
-        ("③ 構想・要求", "Concept and requirements", "要求仕様書 / requirements", CONTROL),
-        ("④ 比較・見積", "Comparison and estimate", "方式比較・概算 / options and estimate", CONTROL),
-        ("⑤ 詳細設計", "Detailed design", "図面・BOM・ラダー / drawings, BOM, ladder", SENSOR),
-        ("⑥ 調達・製作", "Procurement and build", "製作記録 / build record", SENSOR),
-        ("⑦ 試験・評価", "Test and evaluation", "試運転記録 / commissioning record", ENERGY),
-        ("⑧ 導入・保全", "Introduction and maintenance", "標準書・保全計画 / standards and plan", ENERGY),
+    svg = new_diagram("D07-01", "自動化設備の全体像", "Anatomy of an automation machine",
+                      "第7日 / Day 7", 900)
+    chain(svg, [
+        ("入力・材料", "input / material", "材料が入る / material arrives", MECH),
+        ("機械的な取扱い", "mechanical handling", "位置決め・搬送 / position, transport", MECH),
+        ("加工・検査", "process or inspection", "加工・撮像 / process, imaging", SENSOR),
+        ("出力・仕分け", "output or sorting", "良品・不良品 / good, reject", MECH),
+    ], y=180, h=130)
+    panel(svg, 70, 400, 1300, 340, "機械を説明する6つの要素", "the six elements that explain a machine")
+    items = [
+        ("構造", "structure", "フレーム・ガイド / frame, guide", MECH),
+        ("動力", "power source", "空気・油圧・電気 / air, oil, electricity", ENERGY),
+        ("アクチュエータ", "actuator", "シリンダ・モーター / cylinder, motor", MECH),
+        ("センサー", "sensor", "位置・有無 / position, presence", SENSOR),
+        ("制御装置", "controller", "PLC・PC / PLC, PC", CONTROL),
+        ("ワーク", "workpiece", "製品・材料 / product, material", DATA),
     ]
-    for row in range(2):
-        subset = stages[row * 4:(row + 1) * 4]
-        y = 230 + row * 290
-        for index, (ja, en, sub, color) in enumerate(subset):
-            x = 70 + index * 330
-            svg.card(x, y, 300, 170, ja, en, sub=sub, stroke=color, accent=color, fill=CARD)
-            if index < 3:
-                svg.line(x + 304, y + 85, x + 326, y + 85, stroke=color, sw=2.4)
-        if row == 0:
-            svg.line(1370, 405, 1370, 470, stroke=ACCENT, sw=2, marker=False)
-            svg.line(1370, 470, 70, 470, stroke=ACCENT, sw=2, marker=False)
-            svg.line(70, 470, 70, 520, stroke=ACCENT, sw=2)
-            svg.text(720, 500, "次の段階へ / to the next stage", 15, 600, ACCENT, "middle")
-    svg.line(140, 620, 140, 700, stroke=HAZARD, sw=2, dash="8 6")
-    svg.line(140, 700, 500, 700, stroke=HAZARD, sw=2, dash="8 6")
-    svg.line(500, 700, 500, 620, stroke=HAZARD, sw=2, dash="8 6")
-    svg.text(320, 728, "戻り（設計の成熟）/ iteration is how the design matures", 15, 700, HAZARD, "middle")
-    legend_swatches(svg, 70, 790, [
-        (MECH, "機械・構想 / mechanics and concept"),
-        (CONTROL, "要求・比較 / requirements and comparison"),
-        (SENSOR, "設計・製作 / design and build"),
-        (ENERGY, "試験・運用 / test and operation"),
-        (HAZARD, "戻り・危険 / iteration and hazard"),
-    ])
-    svg.footer("各段階の成果物が次段階の入力になる。成果物なしで進むと手戻りが大きい。",
-               "Each stage output feeds the next. Skipping a deliverable makes later rework larger.")
+    card_w = (1300 - 40 - 5 * 20) / 6
+    for index, (ja, en, sub, color) in enumerate(items):
+        x = 90 + index * (card_w + 20)
+        svg.card(x, 480, card_w, 150, ja, en, stroke=color, accent=color, sub=sub)
+    note(svg, 660, "自動化は「入力→取扱い→加工/検査→出力」の流れで説明できる。",
+         "Automation can be described as input, handling, process or inspection, and output.")
+    svg.footer("入力・取扱い・加工・検査・出力と、構造・動力・アクチュエータ・センサー・制御・ワーク",
+               "Input, handling, process, inspection and output; structure, power, actuator, sensor, controller and workpiece")
     return svg
 
 
 def d07_02() -> Svg:
-    svg = new_diagram("D07-02", "ECRSで押出し作業を見直す", "Re-examining the push task with ECRS",
-                      "第7日 / Day 7", 820)
-    cards = [
-        ("E なくす", "Eliminate", "レイアウト変更で押す必要を消す / remove the need to push", MECH),
-        ("C まとめる", "Combine", "押出しと検査を同じ動作にする / combine push and inspection", CONTROL),
-        ("R 順序・配置", "Rearrange", "投入口を押出し位置の真上へ / place the feed above the push point", SENSOR),
-        ("S 簡単にする", "Simplify", "ガイドとストッパで位置決め / guide and stopper instead of skill", ENERGY),
-    ]
-    for index, (ja, en, sub, color) in enumerate(cards):
-        svg.card(70 + index * 330, 220, 300, 200, ja, en, sub=sub, stroke=color, accent=color)
-        if index < 3:
-            svg.line(370 + index * 330, 320, 396 + index * 330, 320, stroke=color, sw=2.4)
-    svg.text(70, 490, "設備投資の前に / before capital investment", 20, 700, INK)
-    steps = [
-        ("現状 / current", "人が毎回押す / manual push"),
-        ("E・C・R / eliminate, combine, rearrange", "押す回数を減らす / fewer pushes"),
-        ("S・設備 / simplify, equipment", "残った動作だけ自動化 / automate what remains"),
-    ]
-    chain(svg, steps, 520, 120, x0=70, x1=1230, gap=40, accent=MECH)
-    svg.rect(1260, 520, 110, 120, fill=FILL_HAZARD, stroke=HAZARD, sw=1.6, rx=8)
-    svg.text(1315, 565, "投資", 18, 700, HAZARD, "middle")
-    svg.text(1315, 588, "invest", 13, 400, HAZARD, "middle")
-    svg.text(1315, 615, "最後", 13, 400, HAZARD, "middle")
-    svg.footer("E・C・Rを先に検討すると、設備費と工数を減らせる場合がある。 / E, C and R first can reduce both cost and effort.",
-               "Eliminate, combine and rearrange before buying equipment.")
+    svg = new_diagram("D07-02", "1サイクル15秒のタイムライン", "A 15-second cycle on a timeline",
+                      "第7日 / Day 7", 780)
+    ops = [("位置決め", "positioning", 4, MECH), ("検出", "detection", 2, SENSOR),
+           ("検査", "inspection", 5, DATA), ("動作", "actuation", 2, ENERGY),
+           ("戻り", "return", 2, MECH)]
+    x0, y = 100, 230
+    scale = 84
+    total = sum(op[2] for op in ops)
+    cursor = x0
+    svg.line(x0, y - 30, x0, y + 150, marker=False, sw=2, stroke=GRID)
+    for second in range(total + 1):
+        x = x0 + second * scale
+        svg.line(x, y, x, y + 10, marker=False, sw=1.6, stroke=GRID)
+        svg.text(x, y - 42, str(second), 14, 600, MUTED, "middle")
+    for ja, en, duration, color in ops:
+        width = duration * scale
+        svg.rect(cursor, y, width, 100, fill=FILL_MECH if color == MECH else CARD, stroke=color, sw=2, rx=4)
+        svg.text(cursor + width / 2, y + 42, ja, 17, 700, INK, "middle")
+        svg.text(cursor + width / 2, y + 66, en, 12, 400, MUTED, "middle")
+        svg.text(cursor + width / 2, y + 88, f"{duration} s", 13, 700, color, "middle")
+        cursor += width
+    svg.text(x0, 200, "時間 / time (s)", 14, 600, MUTED)
+    table_grid(svg, 100, 430, ["合計 / total", "逐次 / sequential", "重なり / overlap"],
+               [["15 s", "4+2+5+2+2 = 15 s", "図で確認してから合計 / check the timeline first"]],
+               [220, 320, 520], row_h=56, size=15)
+    note(svg, 560, "逐次なら足し算。重なる作業は図で確かめる。",
+         "Add the times when the operations are sequential; confirm overlaps on the drawing.")
+    svg.footer("1サイクルを時間軸に分けると、どこが長いか、どこが重なるかが見える",
+               "Laying one cycle on a timeline shows which operation is long and which can overlap")
     return svg
 
 
 def d07_03() -> Svg:
-    svg = new_diagram("D07-03", "タクト・サイクル・実力能力", "Takt, cycle and effective capacity",
-                      "第7日 / Day 7", 900)
-    panel(svg, 70, 190, 620, 300, "時間の関係 / time relationship", "target pace versus machine cycle")
-    svg.line(110, 330, 640, 330, stroke=MUTED, sw=3)
-    svg.text(110, 305, "0 s", 14, 400, MUTED)
-    svg.text(640, 305, "42 s", 14, 400, MUTED)
-    svg.rect(110, 345, 530, 22, fill=FILL_DATA, stroke=DATA, sw=1.4, rx=4)
-    svg.text(375, 362, "タクトタイム 42 s/個（目標）/ takt, target", 14, 600, DATA, "middle")
-    svg.rect(110, 390, 189, 22, fill=FILL_MECH, stroke=MECH, sw=1.4, rx=4)
-    svg.text(205, 407, "サイクル 15 s/個 / cycle", 13, 600, MECH, "middle")
-    svg.text(110, 450, "サイクル < タクト でも、停止と不良を別に考える。", 15, 600, INK)
-    svg.text(110, 474, "Cycle < takt, but downtime and defects must still be counted.", 13, 400, MUTED)
+    svg = new_diagram("D07-03", "タクト・サイクル・生産能力", "Takt time, cycle time and capacity",
+                      "第7日 / Day 7", 820)
+    panel(svg, 70, 180, 400, 400, "タクトタイム（必要ペース）", "takt time (required pace)")
+    svg.text(90, 290, "生産時間 ÷ 必要数量", 20, 700, INK)
+    svg.text(90, 320, "available time ÷ required pieces", 14, 400, MUTED)
+    svg.text(90, 390, "420×60 ÷ 600 = 42 秒/個", 24, 700, ACCENT)
+    svg.text(90, 425, "42 s/piece", 16, 400, MUTED)
+    svg.text(90, 490, "「間に合う速さ」の基準", 15, 400, INK)
+    svg.text(90, 515, "the pace needed to finish on time", 13, 400, MUTED)
 
-    panel(svg, 720, 190, 650, 300, "能力の計算 / capacity calculation", "theoretical, effective and required")
-    bar(svg, 760, 250, 110, 150, 240, 260, MECH, "理論 240", "theoretical /h")
-    bar(svg, 930, 250, 110, 150, 199.92, 260, DATA, "実力 199.92", "effective /h")
-    bar(svg, 1100, 250, 110, 150, 85.71, 260, SENSOR, "必要 85.71", "required /h")
-    svg.text(760, 470, "実力 = 3600/15 × 0.85 × 0.98 = 199.92 個/時", 15, 600, INK)
-    svg.text(760, 492, "effective = theoretical × availability × good yield", 13, 400, MUTED)
+    panel(svg, 500, 180, 400, 400, "サイクルタイム（機械の時間）", "cycle time (machine time)")
+    svg.text(520, 290, "1サイクルの所要時間", 20, 700, INK)
+    svg.text(520, 320, "time for one machine cycle", 14, 400, MUTED)
+    svg.text(520, 390, "15 秒/サイクル", 24, 700, MECH)
+    svg.text(520, 425, "15 s/cycle", 16, 400, MUTED)
+    svg.text(520, 490, "「決められた動作時間」", 15, 400, INK)
+    svg.text(520, 515, "the defined operation duration", 13, 400, MUTED)
 
-    svg.rect(70, 540, 1300, 110, fill=FILL_SENSOR, stroke=SENSOR, sw=1.6, rx=10)
-    svg.text(90, 575, "余裕の読み方 / reading the margin", 17, 700, SENSOR)
-    svg.text(90, 605, "必要 85.71 個/時 < 実力 199.92 個/時。ただし、これは仮定値であり、実測ではない。",
-             15, 400, INK)
-    svg.text(90, 630, "The requirement is below the effective capacity, but the inputs are assumptions, not measurements.",
-             13, 400, MUTED)
-    legend_swatches(svg, 70, 700, [
-        (DATA, "タクト・実力 / takt and effective"),
-        (MECH, "サイクル・理論 / cycle and theoretical"),
-        (SENSOR, "必要能力 / required"),
-        (HAZARD, "過信しない / do not over-trust"),
-    ])
-    svg.footer("3つの時間と能力を混ぜない。タクトは目標、サイクルは実力、実力能力は停止と不良を含む。",
-               "Keep takt, cycle and effective capacity separate. Only effective capacity includes downtime and defects.")
+    panel(svg, 930, 180, 440, 400, "生産能力（個/時）", "production capacity (pieces/hour)")
+    svg.text(950, 280, "3600 ÷ サイクル × 個数", 20, 700, INK)
+    svg.text(950, 310, "3600 ÷ cycle × pieces per cycle", 14, 400, MUTED)
+    svg.text(950, 370, "3600 ÷ 15 × 1 = 240 個/時", 22, 700, GOOD)
+    svg.text(950, 405, "240 pieces/hour", 15, 400, MUTED)
+    svg.text(950, 460, "×2個/サイクル = 480 個/時", 20, 700, GOOD)
+    svg.text(950, 490, "two pieces per cycle doubles it", 14, 400, MUTED)
+    svg.text(950, 540, "個数を言わないと能力は決まらない", 15, 700, WARN)
+    svg.text(950, 562, "capacity is undefined without pieces per cycle", 12, 400, MUTED)
+
+    note(svg, 620, "タクトは「必要」、サイクルは「機械」。単位を必ず書く。",
+         "Takt is what is required; cycle is the machine. Always write the unit.")
+    svg.footer("タクト42秒/個に対してサイクル15秒なら速度は足りる。能力は個数/サイクルで変わる",
+               "A 15 s cycle meets a 42 s takt; capacity changes with pieces per cycle")
     return svg
 
 
 def d07_04() -> Svg:
-    svg = new_diagram("D07-04", "手動・空圧・電動の3案比較", "Manual, pneumatic and electric concepts",
-                      "第7日 / Day 7", 860)
-    columns = [
-        ("A 手動治具", "Manual fixture", [
-            "ガイド・ストッパ・レバー / guide, stopper, lever",
-            "初期費用 低 / low initial cost",
-            "人手が残る / person remains",
-            "安全: 手と工具 / hands and tools",
-        ], MECH),
-        ("B 空圧半自動", "Pneumatic semi-auto", [
-            "シリンダ・弁・センサー・PLC / cylinder, valve, sensor, PLC",
-            "初期費用 中 / medium cost",
-            "2点間反復が得意 / good for two positions",
-            "安全: 手と可動部の分離 / separate hand from motion",
-        ], CONTROL),
-        ("C 電動全自動", "Electric full-auto", [
-            "電動アクチュエータ・供給・検査 / electric actuator, feed, inspection",
-            "初期費用 高 / high cost",
-            "多点・高能力 / multiple positions, high rate",
-            "安全: 危険源が増える / more hazards",
-        ], ENERGY),
-    ]
-    for index, (ja, en, bullets, color) in enumerate(columns):
-        x = 70 + index * 440
-        svg.rect(x, 210, 400, 360, fill=CARD, stroke=color, sw=2, rx=12)
-        svg.rect(x, 210, 400, 74, fill=color, stroke=color, sw=2, rx=12)
-        svg.text(x + 20, 242, ja, 23, 700, "white")
-        svg.text(x + 20, 268, en, 15, 400, "white")
-        for row, bullet in enumerate(bullets):
-            cursor = 318 + row * 58
-            for line in _wrap("• " + bullet, 356, 13):
-                svg.text(x + 20, cursor, line, 13, 400, INK)
-                cursor += 18
-    svg.rect(70, 610, 1300, 100, fill=JP_BG, stroke=ACCENT, sw=1.6, rx=10)
-    svg.text(90, 645, "同じ評価軸で比べる / compare on the same criteria", 17, 700, INK)
-    svg.text(90, 675, "初期費用・省人・品種変更・復旧性・安全・設置スペース・保守・納期",
-             14, 400, INK)
-    svg.text(90, 697, "initial cost, labour saving, flexibility, recovery, safety, space, maintenance, lead time",
-             12, 400, MUTED)
-    svg.footer("方式名ではなく「何を人に残すか」で比較する。必須の安全要求を満たさない案は、点数が高くても採用しない。",
-               "Compare what remains with the person, not the technology label. A concept that fails a mandatory safety requirement is not selected.")
+    svg = new_diagram("D07-04", "ボトルネックの考え方", "Understanding the bottleneck",
+                      "第7日 / Day 7", 760)
+    processes = [("工程A", "process A", 12, MECH), ("工程B", "process B", 20, BAD), ("工程C", "process C", 10, MECH)]
+    x = 120
+    for ja, en, seconds, color in processes:
+        label_box(svg, x, 210, 240, 90, ja, en, fill=CARD, stroke=color, size=18)
+        svg.text(x + 120, 350, f"{seconds} 秒/個", 26, 700, color, "middle")
+        svg.text(x + 120, 378, f"{seconds} s/piece", 15, 400, MUTED, "middle")
+        bar(svg, x + 60, 420, 120, 140, seconds, 20, color, "秒 / s")
+        if x < 800:
+            svg.line(x + 244, 255, x + 336, 255, stroke=ACCENT, sw=2.4)
+        x += 400
+    panel(svg, 70, 600, 1300, 120, "ライン全体の速さ = 一番遅い工程", "line output = the slowest process")
+    svg.text(90, 690, "工程Bが20秒なので、全体は20秒/個より速くならない。 / process B limits the line to 20 s/piece.",
+             16, 400, INK)
+    svg.footer("速いアクチュエータを入れても、律速工程が変わらなければ生産数は増えない",
+               "A faster actuator does not raise output while another process remains the limit")
     return svg
 
 
 def d07_05() -> Svg:
-    svg = new_diagram("D07-05", "要求から受入までの流れ", "From requirement to acceptance",
-                      "第7日 / Day 7", 820)
-    items = [
-        ("現場の困りごと", "shop-floor problem", "事実と測定値 / facts and measurements", MECH),
-        ("要求", "requirement", "何を達成するか / what must be achieved", CONTROL),
-        ("測定方法", "measurement method", "何を、どの条件で測るか / what and under which condition", SENSOR),
-        ("合格条件", "acceptance criterion", "誰が見ても合否を判断できる / another person can judge", ENERGY),
-    ]
-    chain(svg, items, 230, 170, x0=70, x1=1370, gap=34)
-    svg.rect(70, 470, 620, 210, fill=FILL_SENSOR, stroke=SENSOR, sw=1.6, rx=10)
-    svg.text(90, 505, "良い受入基準 / a good criterion", 18, 700, SENSOR)
-    svg.text(90, 545, "後退端で停止したとき、押出し面の位置が", 15, 400, INK)
-    svg.text(90, 570, "基準面から ±2 mm 以内。10回連続で測り、", 15, 400, INK)
-    svg.text(90, 595, "10回すべて合格。", 15, 400, INK)
-    svg.text(90, 635, "Measurand + condition + range + sample size", 13, 400, MUTED)
-    svg.rect(710, 470, 660, 210, fill=FILL_HAZARD, stroke=HAZARD, sw=1.6, rx=10)
-    svg.text(730, 505, "悪い要求 / a weak requirement", 18, 700, HAZARD)
-    svg.text(730, 545, "「速く動く」「安全」「簡単に交換」", 16, 400, INK)
-    svg.text(730, 575, "これでは合否を判断できない。", 14, 400, INK)
-    svg.text(730, 615, "測定方法・条件・回数・合格範囲を決める。", 14, 600, HAZARD)
-    svg.text(730, 640, "Define method, condition, sample size and pass range.", 12, 400, MUTED)
-    svg.footer("要求は、測定方法と合格条件が決まって初めて検証できる。 / A requirement is verifiable only when its measurement and pass condition are defined.",
-               "Write requirements so that another person can judge pass or fail.")
+    svg = new_diagram("D07-05", "効果金額の計算と前後比較", "Financial effect calculation and before/after comparison",
+                      "第7日 / Day 7", 880)
+    chain(svg, [
+        ("削減時間", "time saved", "12秒/回 / 12 s per operation", MECH),
+        ("年間工数", "annual hours", "132 時間/年 / 132 h/year", ENERGY),
+        ("金額換算", "monetary value", "316,800 円/年 / JPY/year", GOOD),
+        ("純効果", "net benefit", "316,800 − 運用費 / minus operating cost", CONTROL),
+        ("回収期間", "payback", "1.42 年 / years", DATA),
+    ], y=180, h=140)
+    panel(svg, 70, 400, 620, 300, "改善前 / before", "before the improvement")
+    bar(svg, 140, 470, 140, 150, 300, 300, BAD, "作業時間 / work time", "基準 / baseline")
+    svg.text(330, 510, "1回12秒を180回/日", 18, 700, INK)
+    svg.text(330, 540, "12 s × 180 per day", 14, 400, MUTED)
+    svg.text(330, 590, "年間 220日 / 220 days a year", 15, 400, INK)
+    svg.text(330, 615, "2,400 円/時 / JPY per hour", 15, 400, INK)
+
+    panel(svg, 720, 400, 650, 300, "改善後 / after", "after the improvement")
+    bar(svg, 790, 470, 140, 150, 240, 300, GOOD, "作業時間 / work time", "12秒短縮 / 12 s saved")
+    svg.text(980, 510, "132時間/年 を削減", 18, 700, INK)
+    svg.text(980, 540, "132 hours a year saved", 14, 400, MUTED)
+    svg.text(980, 590, "年間効果 316,800 円/年", 18, 700, GOOD)
+    svg.text(980, 615, "annual value 316,800 JPY/year", 14, 400, MUTED)
+    svg.text(980, 660, "※現金化できるかは別の話 / cash realisation is separate", 13, 400, WARN)
+
+    note(svg, 740, "回収期間 = 導入費 ÷ 年間純効果。純効果が0以下なら回収期間は意味を持たない。",
+         "Payback = investment ÷ annual net benefit. It is meaningless at zero or negative net benefit.")
+    svg.footer("削減時間 → 年間工数 → 金額 → 純効果 → 回収期間の順に計算する",
+               "Calculate in the order: time saved, annual hours, money, net benefit, payback")
     return svg
 
 
 def d07_06() -> Svg:
-    svg = new_diagram("D07-06", "押出し装置の機械構成", "Annotated architecture of the pusher machine",
-                      "第7日 / Day 7", 1000)
-    # frame and guide
-    svg.rect(120, 600, 1100, 28, fill=FILL_MECH, stroke=MECH, sw=2.4, rx=4)
-    svg.text(130, 623, "フレーム / frame", 14, 600, MECH)
-    svg.line(240, 505, 900, 505, stroke=MECH, sw=4, marker=False)
-    svg.text(250, 545, "ガイド / guide", 14, 600, MECH)
-    # cylinder drawn explicitly so the rod direction is unambiguous
-    svg.rect(180, 400, 250, 90, fill=FILL_MECH, stroke=MECH, sw=2.4, rx=8)
-    svg.rect(298, 408, 14, 74, fill=MECH, stroke=MECH, sw=1)
-    svg.rect(312, 437, 198, 16, fill="#B9C9D9", stroke=MECH, sw=1.4, rx=3)
-    svg.text(305, 382, "複動シリンダ / double-acting cylinder", 13, 700, INK, "middle")
-    svg.rect(200, 392, 22, 8, fill=CARD, stroke=ENERGY, sw=1.2, rx=1)
-    svg.rect(330, 392, 22, 8, fill=CARD, stroke=ENERGY, sw=1.2, rx=1)
-    svg.text(211, 386, "A", 10, 700, ENERGY, "middle")
-    svg.text(341, 386, "B", 10, 700, ENERGY, "middle")
-    # pusher and workpiece
-    svg.rect(510, 440, 120, 50, fill="#D7E4F0", stroke=MECH, sw=1.6, rx=4)
-    svg.text(570, 470, "押し板 / pusher", 12, 700, INK, "middle")
-    svg.rect(670, 425, 130, 65, fill="#F2E6D0", stroke=WARN, sw=2, rx=4)
-    svg.text(735, 453, "ワーク", 13, 700, INK, "middle")
-    svg.text(735, 472, "workpiece", 11, 400, MUTED, "middle")
-    svg.text(735, 404, "8 kg（仮）/ hypothetical", 11, 400, MUTED, "middle")
-    # sensors near the guide, with adjacent labels
-    for x, label in ((500, "X2 後退端 / retracted"), (810, "X3 前進端 / extended")):
-        svg.rect(x, 518, 46, 24, fill=FILL_SENSOR, stroke=SENSOR, sw=1.8, rx=4)
-        svg.text(x + 23, 535, "S", 13, 700, SENSOR, "middle")
-        svg.text(x + 56, 536, label, 10, 600, SENSOR)
-    # hazard at the pinch point
-    hazard_marker(svg, 640, 360)
-    svg.text(640, 310, "挟まれ / pinch point", 12, 700, HAZARD, "middle")
-    # valve and controller
-    valve_symbol(svg, 180, 700, "電磁弁 / solenoid valve", "")
-    svg.rect(880, 680, 300, 110, fill=FILL_CONTROL, stroke=CONTROL, sw=2, rx=8)
-    svg.text(1030, 715, "PLC / 制御器", 18, 700, CONTROL, "middle")
-    svg.text(1030, 740, "X0-X3 / Y0-Y2 / T0", 14, 400, INK, "middle")
-    svg.text(1030, 766, "fictional training addresses", 12, 400, MUTED, "middle")
-    # energy and signal lines
-    svg.line(390, 760, 390, 470, stroke=ENERGY, sw=2.4, dash="8 6", marker=False)
-    svg.line(390, 470, 341, 470, stroke=ENERGY, sw=2.4, dash="8 6", marker=False)
-    svg.line(341, 470, 341, 404, stroke=ENERGY, sw=2.4, dash="8 6")
-    svg.line(390, 760, 880, 760, stroke=ENERGY, sw=2.4, dash="8 6", marker=False)
-    svg.text(450, 785, "圧縮空気 / compressed air (conceptual)", 12, 600, ENERGY)
-    svg.line(1010, 678, 1010, 745, stroke=CONTROL, sw=2, dash="3 5", marker=False)
-    svg.line(1010, 745, 400, 745, stroke=CONTROL, sw=2, dash="3 5")
-    svg.text(700, 732, "制御信号 / control signal", 11, 600, CONTROL)
-    # legend as a single bilingual line
-    svg.rect(70, 855, 1300, 64, fill=JP_BG, stroke=ACCENT, sw=1, rx=6)
-    svg.text(90, 880, "凡例 / legend: 青=機械 / mechanical・緑=センサー / sensing・紫=制御 / control・橙=エネルギー / energy・赤=危険 / hazard",
-             12, 600, INK)
-    svg.text(90, 902, "色だけでなく、形・線種・ラベルでも区別する。 / Distinguish by shape, line style and labels, not colour alone.", 10, 400, MUTED)
-    svg.footer("シリンダは動かす、ガイドは案内する、センサーは状態を測る、弁はエネルギーを切り替える、PLCは信号を出す。",
-               "The cylinder moves, the guide aligns, the sensor measures state, the valve switches energy and the PLC issues signals.")
+    svg = new_diagram("D07-06", "空圧・油圧・電気の比較", "Pneumatic, hydraulic and electrical power compared",
+                      "第7日 / Day 7", 980)
+    columns = [
+        ("空圧 / pneumatic", ENERGY, ["エネルギー: 圧縮空気", "力: 軽〜中負荷", "速度: 流量制御", "位置: 2位置が基本",
+                                      "保守: ドレン・漏れ", "制約: 圧縮性・残留圧力"]),
+        ("油圧 / hydraulic", MECH, ["エネルギー: 加圧オイル", "力: 高い力を出しやすい", "速度: 流量制御",
+                                     "位置: 中間は難しい", "保守: 油管理・漏れ", "制約: 発熱・高圧危険"]),
+        ("電気 / electric", CONTROL, ["エネルギー: 電力", "力: 減速機で増幅", "速度: 精密制御",
+                                       "位置: 得意（サーボ）", "保守: 比較的少ない", "制約: 保持・電気安全"]),
+    ]
+    for index, (title, color, rows) in enumerate(columns):
+        x = 70 + index * 440
+        svg.rect(x, 180, 400, 620, fill=CARD, stroke=color, sw=2, rx=12)
+        svg.text(x + 200, 225, title, 22, 700, color, "middle")
+        for row_index, text in enumerate(rows):
+            svg.text(x + 24, 285 + row_index * 62, text, 15, 400, INK)
+    note(svg, 830, "どれが一番よいかではなく、用途で選ぶ。絶対的な順位はない。",
+         "This is not a ranking. Choose by application; there is no universal order.")
+    svg.footer("空圧・油圧・電気の典型的な特徴。長所と制約を両方書く",
+               "Typical characteristics of pneumatic, hydraulic and electrical power, including limitations")
     return svg
 
 
 def d07_07() -> Svg:
-    svg = new_diagram("D07-07", "機能的な空圧回路（概念）", "Functional pneumatic circuit (concept)",
-                      "第7日 / Day 7", 980)
-    # air source
-    svg.circle(130, 330, 46, fill=FILL_ENERGY, stroke=ENERGY, sw=2.4)
-    svg.text(130, 325, "空気源", 15, 700, ENERGY, "middle")
-    svg.text(130, 345, "air source", 11, 400, ENERGY, "middle")
-    # isolation valve
-    svg.rect(230, 300, 80, 60, fill=CARD, stroke=ENERGY, sw=2, rx=4)
-    svg.line(245, 330, 295, 330, stroke=ENERGY, sw=2, marker=False)
-    svg.line(245, 345, 295, 315, stroke=ENERGY, sw=2, marker=False)
-    svg.text(270, 388, "遮断・ロック", 13, 700, ENERGY, "middle")
-    svg.text(270, 406, "isolation", 11, 400, MUTED, "middle")
-    # FRL
-    svg.rect(360, 280, 150, 100, fill=CARD, stroke=ENERGY, sw=2, rx=4)
-    svg.text(435, 315, "フィルタ", 13, 700, ENERGY, "middle")
-    svg.text(435, 335, "レギュレータ", 13, 700, ENERGY, "middle")
-    svg.text(435, 355, "FRL", 14, 700, ENERGY, "middle")
-    svg.circle(435, 365, 0.1)
-    # gauge
-    svg.circle(435, 405, 18, fill=CARD, stroke=ENERGY, sw=1.6)
-    svg.text(435, 410, "P", 12, 700, ENERGY, "middle")
-    # valve
-    valve_symbol(svg, 640, 280, "方向切替弁 / directional valve", "")
-    svg.text(745, 440, "5/2 単一ソレノイド・ばね戻り（機能表現）", 12, 600, ENERGY, "middle")
-    svg.text(745, 458, "functional representation, not ISO 1219-1", 10, 400, MUTED, "middle")
-    # cylinder
-    cylinder_symbol(svg, 1030, 250, 330, 110, rod=40, ja="", en="")
-    svg.text(1195, 236, "複動シリンダ / double-acting cylinder", 14, 700, INK, "middle")
-    # lines
-    svg.line(176, 330, 230, 330, stroke=ENERGY, sw=2.4)
-    svg.line(310, 330, 360, 330, stroke=ENERGY, sw=2.4)
-    svg.line(510, 330, 640, 330, stroke=ENERGY, sw=2.4)
-    svg.line(850, 290, 1030, 290, stroke=ENERGY, sw=2.4)
-    svg.line(850, 340, 1030, 340, stroke=ENERGY, sw=2.4)
-    # flow controls
-    for y, label in ((290, "FC-A"), (340, "FC-B")):
-        svg.rect(895, y - 12, 40, 24, fill=CARD, stroke=ENERGY, sw=1.6, rx=2)
-        svg.parts.append(
-            f'<path d="M905 {y - 6} L925 {y + 6}" stroke="{ENERGY}" stroke-width="1.6"/>'
-            f'<path d="M905 {y + 6} L925 {y - 6}" stroke="{ENERGY}" stroke-width="1.6"/>'
-        )
-        svg.text(915, y - 18, label, 10, 600, ENERGY, "middle")
-    # exhaust
-    svg.line(745, 390, 745, 455, stroke=ENERGY, sw=2, dash="7 5")
-    svg.text(765, 478, "排気 / exhaust", 12, 600, ENERGY)
-    # position sensors
-    for x, label in ((1080, "前進端 / extended"), (1250, "後退端 / retracted")):
-        svg.rect(x, 400, 80, 30, fill=FILL_SENSOR, stroke=SENSOR, sw=1.8, rx=3)
-        svg.text(x + 40, 420, "S", 14, 700, SENSOR, "middle")
-        svg.text(x + 40, 455, label, 11, 600, SENSOR, "middle")
-    # bleed
-    svg.line(310, 360, 310, 500, stroke=ENERGY, sw=2, dash="6 5")
-    svg.circle(310, 508, 8, fill=CARD, stroke=ENERGY, sw=1.6)
-    svg.text(325, 514, "残圧排気 / bleed", 12, 600, ENERGY)
-    # notes
-    svg.rect(70, 560, 1300, 210, fill=FILL_HAZARD, stroke=HAZARD, sw=1.4, rx=10)
-    svg.text(90, 595, "この図は概念です。実配管・弁型式・安全設計を確定するものではありません。", 16, 700, HAZARD)
-    svg.text(90, 622, "This is a concept. It does not define piping, valve model or safety design.", 13, 400, MUTED)
-    svg.text(90, 655, "・無通電の弁位置は機種で異なる。負荷・配管・トラップ空気で動き方が変わる。", 14, 400, INK)
-    svg.text(90, 680, "・遮断しただけでは残圧は抜けない。排気と零確認が必要。", 14, 400, INK)
-    svg.text(90, 705, "・電磁弁をOFFにしても、シリンダが安全な状態になる保証はない。", 14, 600, HAZARD)
-    svg.text(90, 730, "De-energising a solenoid does not guarantee a safe cylinder state.", 12, 400, MUTED)
-    legend_swatches(svg, 1100, 560, [])
-    svg.footer("空気は 発生→遮断→空気準備→方向切替→速度制御→シリンダ の順に流れる。遮断・排気・零確認は別の対策。",
-               "Air flows source, isolation, preparation, directional valve, flow control, cylinder. Isolation, bleed and zero verification are separate measures.")
+    svg = new_diagram("D07-07", "油圧のエネルギーの流れ", "Hydraulic energy flow",
+                      "第7日 / Day 7", 820)
+    chain(svg, [
+        ("電動機", "electric motor", "ポンプを回す / drives the pump", CONTROL),
+        ("油圧ポンプ", "hydraulic pump", "オイルを加圧 / pressurises oil", MECH),
+        ("リリーフ弁", "relief valve", "最高圧を制限 / limits pressure", ENERGY),
+    ], y=190, h=140, x0=80, x1=800)
+    chain(svg, [
+        ("方向制御弁", "directional valve", "流れを切替 / switches flow", ENERGY),
+        ("油圧シリンダ", "hydraulic cylinder", "直線運動 / linear motion", MECH),
+        ("タンク・戻り", "tank and return", "油を戻す / returns oil", DATA),
+    ], y=380, h=140, x0=80, x1=800)
+    svg.line(800, 260, 900, 380, stroke=MECH, sw=2.4)
+    panel(svg, 930, 190, 440, 330, "高圧の危険", "high-pressure hazards")
+    for index, text in enumerate(["オイル漏れ / oil leakage", "発熱 / heat generation",
+                                  "汚れ管理 / contamination control", "蓄えられた圧力 / stored energy"]):
+        svg.text(950, 275 + index * 40, text, 15, 400, INK)
+    hazard_marker(svg, 1250, 460)
+    note(svg, 570, "油圧は大きな力が得意。ただし漏れ・発熱・高圧の危険を必ず扱う。",
+         "Hydraulics suit high force, but leakage, heat and high pressure must be managed.")
+    svg.footer("電動機 → ポンプ → 加圧オイル → 弁 → アクチュエータ → タンクの機能的な流れ",
+               "Functional flow: motor, pump, pressurised oil, valve, actuator, tank")
     return svg
 
 
 def d07_08() -> Svg:
-    svg = new_diagram("D07-08", "ガイドと側荷重", "Guides and side load",
+    svg = new_diagram("D07-08", "空圧のエネルギーの流れ", "Pneumatic energy flow",
                       "第7日 / Day 7", 860)
-    # correct arrangement
-    panel(svg, 70, 190, 620, 380, "正しい: ガイドで受ける", "correct: the guide carries the load")
-    svg.rect(120, 400, 480, 30, fill=FILL_MECH, stroke=MECH, sw=2, rx=3)
-    svg.text(360, 425, "ガイドレール / guide rail", 13, 600, MECH, "middle")
-    svg.rect(300, 330, 120, 70, fill="#D7E4F0", stroke=MECH, sw=2, rx=4)
-    svg.text(360, 370, "押し板 / pusher", 13, 700, INK, "middle")
-    svg.rect(220, 250, 280, 60, fill="#F2E6D0", stroke=WARN, sw=2, rx=4)
-    svg.text(360, 286, "ワーク / workpiece", 13, 700, INK, "middle")
-    svg.line(360, 310, 360, 330, stroke=HAZARD, sw=3)
-    svg.text(455, 315, "重心 / centre of gravity", 12, 600, HAZARD)
-    svg.line(240, 400, 240, 345, stroke=SENSOR, sw=2.4)
-    svg.line(540, 400, 540, 345, stroke=SENSOR, sw=2.4)
-    svg.text(250, 440, "反力 / reaction", 12, 600, SENSOR)
-    svg.text(475, 440, "反力 / reaction", 12, 600, SENSOR)
-    # wrong arrangement
-    panel(svg, 720, 190, 650, 380, "不適切: ロッドで受ける", "incorrect: the rod carries the load")
-    svg.rect(760, 400, 560, 30, fill=FILL_MECH, stroke=MECH, sw=2, rx=3)
-    svg.rect(1000, 350, 18, 50, fill=MECH, stroke=MECH, sw=1)
-    svg.rect(820, 250, 260, 70, fill="#F2E6D0", stroke=WARN, sw=2, rx=4)
-    svg.text(950, 290, "長い押し板 / long pusher", 13, 700, INK, "middle")
-    svg.line(950, 320, 950, 350, stroke=MECH, sw=4)
-    svg.parts.append(
-        f'<path d="M1009 300 q70 40 -20 80" fill="none" stroke="{HAZARD}" stroke-width="3" stroke-dasharray="7 5"/>'
-    )
-    svg.text(1085, 320, "曲げモーメント", 13, 700, HAZARD)
-    svg.text(1085, 340, "bending moment", 11, 400, MUTED)
-    hazard_marker(svg, 1010, 470)
-    svg.text(1060, 500, "シール・ロッド損傷 / seal and rod damage", 12, 600, HAZARD)
-    # formula
-    svg.rect(70, 610, 1300, 90, fill=JP_BG, stroke=ACCENT, sw=1.4, rx=8)
-    svg.text(90, 645, "M = F × L   （F: 横荷重 [N], L: 距離 [m], M: モーメント [N·m]）", 16, 700, INK)
-    svg.text(90, 672, "Side load creates a moment. Support it with the guide, not with the cylinder rod.", 13, 400, MUTED)
-    svg.footer("ワークの質量と回転はガイドに負担させる。ロッドは横荷重を受ける部品ではない。",
-               "Let the guide carry mass and rotation. The cylinder rod is not a side-load bearing.")
+    chain(svg, [
+        ("コンプレッサ", "compressor", "空気を圧縮 / compresses air", ENERGY),
+        ("フィルタ・レギュレータ", "filter and regulator", "ごみ除去・圧力調整 / clean and set pressure", DATA),
+        ("電磁弁", "solenoid valve", "流れを切替 / switches flow", CONTROL),
+    ], y=190, h=140, x0=80, x1=800)
+    chain(svg, [
+        ("流量制御弁", "flow control valve", "速度を調整 / sets speed", ENERGY),
+        ("シリンダ", "cylinder", "直線運動 / linear motion", MECH),
+        ("位置センサー", "position sensor", "端を確認 / confirms the end", SENSOR),
+    ], y=380, h=140, x0=80, x1=800)
+    svg.line(800, 260, 900, 380, stroke=ENERGY, sw=2.4)
+    panel(svg, 930, 190, 440, 330, "空圧の制約", "pneumatic limitations")
+    for index, text in enumerate(["圧縮性で速度が変わる / speed varies with load",
+                                  "中間位置は苦手 / weak at intermediate positions",
+                                  "漏れはエネルギー損失 / leaks waste energy",
+                                  "残留圧力で動く / residual pressure moves it"]):
+        svg.text(950, 275 + index * 40, text, 14, 400, INK)
+    note(svg, 570, "フィルタレギュレータはFRLユニットではない。潤滑は機器が要求する場合だけ。",
+         "A filter regulator is not an FRL unit. Lubricate only where the equipment requires it.")
+    svg.footer("コンプレッサからシリンダまでの空圧の流れと、各機器の役割",
+               "Pneumatic flow from compressor to cylinder, with the role of each component")
     return svg
 
 
 def d07_09() -> Svg:
-    svg = new_diagram("D07-09", "力のつり合いと内径選定", "Free body and bore selection",
+    svg = new_diagram("D07-09", "単動・複動シリンダと受圧面積", "Single-acting and double-acting cylinders, and effective areas",
                       "第7日 / Day 7", 900)
-    # free body
-    panel(svg, 70, 190, 560, 360, "ワークに働く力 / forces on the workpiece", "free-body diagram")
-    svg.rect(240, 330, 180, 90, fill="#F2E6D0", stroke=WARN, sw=2, rx=4)
-    svg.text(330, 380, "m = 8 kg", 15, 700, INK, "middle")
-    ax = 330
-    ay = 420
-    # weight
-    svg.line(ax, ay, ax, ay + 80, stroke=HAZARD, sw=3)
-    svg.text(ax + 12, ay + 90, "mg = 78.48 N", 13, 600, HAZARD)
-    # normal
-    svg.line(ax, ay, ax, ay - 70, stroke=SENSOR, sw=3)
-    svg.text(ax + 12, ay - 76, "N", 13, 600, SENSOR)
-    # push
-    svg.line(240, 375, 140, 375, stroke=MECH, sw=3)
-    svg.text(150, 355, "F_push", 13, 600, MECH)
-    # friction
-    svg.line(420, 400, 520, 400, stroke=ENERGY, sw=3)
-    svg.text(430, 430, "F_friction = μmg", 12, 600, ENERGY)
-    svg.text(110, 510, "F_friction = 0.25 × 8 × 9.81 = 19.62 N", 13, 600, INK)
-    # bore graph
-    panel(svg, 670, 190, 700, 360, "内径と理論推力 / bore and theoretical force", "at 0.4 MPa, push side")
-    axis_x, axis_y = 720, 470
-    svg.line(axis_x, axis_y, 1320, axis_y, stroke=MUTED, sw=2, marker=False)
-    svg.line(axis_x, axis_y, axis_x, 250, stroke=MUTED, sw=2, marker=False)
-    svg.text(1320, 492, "内径 / bore [mm]", 13, 400, MUTED, "end")
-    svg.text(700, 250, "力 [N]", 13, 400, MUTED, "end")
-    for bore in (12, 16, 20, 25, 32, 40):
-        x = axis_x + (bore - 10) * 17
-        force = 0.4e6 * 3.141592653589793 * (bore / 1000) ** 2 / 4
-        y = axis_y - force * 1.35
-        svg.circle(x, y, 5, fill=MECH, stroke=MECH, sw=1)
-        svg.text(x, y - 12, f"{bore}", 11, 400, MUTED, "middle")
-    svg.line(axis_x, axis_y - 39.24 * 1.35, 1320, axis_y - 39.24 * 1.35, stroke=HAZARD, sw=1.8, dash="7 5")
-    svg.text(1240, axis_y - 39.24 * 1.35 - 8, "設計力 39.24 N", 12, 600, HAZARD, "end")
-    svg.text(1120, 520, "理論内径 11.18 mm は下限。", 13, 600, INK, "end")
-    svg.text(1120, 542, "カタログ選定ではない。", 13, 600, HAZARD, "end")
-    # selection chain
-    svg.rect(70, 610, 1300, 100, fill=FILL_SENSOR, stroke=SENSOR, sw=1.4, rx=8)
-    svg.text(90, 645, "力 → 設計力 → 理論内径 → 候補 → 負荷率・速度・モーメント・圧力損失・センサー → 未確認記録",
-             15, 700, INK)
-    svg.text(90, 670, "force → design force → theoretical bore → candidates → load factor, speed, moment, pressure loss, sensing → open items",
-             12, 400, MUTED)
-    svg.text(90, 696, "11.18 mm を超える最小内径をそのまま選ぶ、という意味ではない。 / It does not mean choosing the smallest bore above 11.18 mm.",
-             13, 600, HAZARD)
-    svg.footer("質量と力を区別し、摩擦力・余裕係数・圧力から理論下限を出す。カタログ選定は別の作業。",
-               "Distinguish mass from force, then derive a theoretical lower bound. Catalogue selection is a separate task.")
+    panel(svg, 70, 180, 620, 300, "単動（ばね戻り）", "single-acting (spring return)")
+    svg.rect(110, 270, 380, 90, fill=FILL_MECH, stroke=MECH, sw=2.4, rx=8)
+    svg.rect(300, 258, 16, 114, fill=MECH, stroke=MECH, sw=1)
+    svg.rect(316, 312, 210, 16, fill="#B9C9D9", stroke=MECH, sw=1.4, rx=3)
+    svg.parts.append('<path d="M240 300 q10 -14 20 0 q10 14 20 0 q10 -14 20 0" fill="none" stroke="%s" stroke-width="2"/>' % ENERGY)
+    svg.text(440, 400, "戻りはばね / return by spring", 15, 400, MUTED)
+    svg.text(110, 440, "空気は片側だけ / air on one side only", 15, 400, INK)
+
+    panel(svg, 750, 180, 620, 300, "複動（両側に空気）", "double-acting (air both sides)")
+    svg.rect(790, 270, 380, 90, fill=FILL_MECH, stroke=MECH, sw=2.4, rx=8)
+    svg.rect(980, 258, 16, 114, fill=MECH, stroke=MECH, sw=1)
+    svg.rect(996, 312, 210, 16, fill="#B9C9D9", stroke=MECH, sw=1.4, rx=3)
+    svg.line(760, 300, 786, 300, stroke=ENERGY, sw=2)
+    svg.line(1176, 300, 1202, 300, stroke=ENERGY, sw=2)
+    svg.text(860, 400, "押しも引きも空気 / air for both directions", 15, 400, MUTED)
+    svg.text(790, 440, "戻り方を設計で決める / the return method is designed", 15, 400, INK)
+
+    panel(svg, 70, 520, 1300, 250, "受圧面積 / effective areas", "effective areas")
+    svg.text(100, 610, "押し側 A = π × D² ÷ 4", 22, 700, MECH)
+    svg.text(100, 645, "extension: full piston area", 15, 400, MUTED)
+    svg.text(100, 700, "0.5 × π × 20² ÷ 4 ≈ 157.08 N", 20, 700, INK)
+    svg.text(700, 610, "引き側 A = π × (D² − d²) ÷ 4", 22, 700, MECH)
+    svg.text(700, 645, "retraction: piston area minus rod area", 15, 400, MUTED)
+    svg.text(700, 700, "0.5 × π × (20² − 8²) ÷ 4 ≈ 131.95 N", 20, 700, INK)
+    svg.text(100, 750, "1 MPa = 1 N/mm² / ゲージ圧で計算 / use gauge pressure", 14, 400, MUTED)
+    svg.footer("ロッドがある分、引き側の面積と力は小さくなる。値は理論値",
+               "The rod reduces the retraction area and force; the values are theoretical")
     return svg
+
+
+def d07_10() -> Svg:
+    svg = new_diagram("D07-10", "電動アクチュエータのエネルギーの流れ", "Electric actuator energy flow",
+                      "第7日 / Day 7", 800)
+    chain(svg, [
+        ("電源", "electrical supply", "AC/DC / AC or DC", ENERGY),
+        ("ドライバ", "driver", "指令を作る / produces the command", CONTROL),
+        ("モーター", "motor", "回転を作る / produces rotation", MECH),
+        ("伝達機構", "transmission", "ねじ・ベルト・ギヤ / screw, belt, gear", MECH),
+        ("負荷", "load", "ワークを動かす / moves the workpiece", DATA),
+    ], y=200, h=150)
+    panel(svg, 70, 420, 1300, 220, "制御とフィードバックはシステム全体で決まる", "control and feedback are system-level properties")
+    svg.text(90, 510, "・モーター単体では位置決めの可否は決まらない / a motor alone does not decide positioning capability", 15, 400, INK)
+    svg.text(90, 545, "・エンコーダ付きステッピングもある / stepping systems can include an encoder", 15, 400, INK)
+    svg.text(90, 580, "・サーボが常に最適とは限らない / a servo is not always the best answer", 15, 400, INK)
+    note(svg, 660, "用途・精度・速度・コストで選ぶ。動力とアクチュエータは別の概念。",
+         "Choose by application, accuracy, speed and cost. Power source and actuator differ.")
+    svg.footer("電気の供給からドライバ、モーター、伝達機構、負荷までの流れ",
+               "From the electrical supply through driver, motor and transmission to the load")
+    return svg
+
+
+def d07_11() -> Svg:
+    svg = new_diagram("D07-11", "動きの種類とハンドリング", "Motion types and handling",
+                      "第7日 / Day 7", 860)
+    cards = [
+        ("直線運動", "linear motion", "シリンダ・電動リニア / cylinder, electric linear", MECH),
+        ("回転運動", "rotary motion", "モーター・ロータリアクチュエータ / motor, rotary actuator", MECH),
+        ("把持", "gripping", "エア・電動グリッパ / air or electric gripper", SENSOR),
+        ("真空吸着", "vacuum holding", "圧力差で保持 / holds by pressure difference", DATA),
+    ]
+    for index, (ja, en, sub, color) in enumerate(cards):
+        x = 70 + index * 335
+        svg.card(x, 190, 310, 200, ja, en, stroke=color, accent=color, sub=sub)
+    panel(svg, 70, 440, 620, 250, "真空吸着の条件", "vacuum holding conditions")
+    svg.text(90, 530, "保持力は次で変わる / holding force depends on", 16, 700, INK)
+    for index, text in enumerate(["パッド面積 / cup area", "圧力差 / pressure difference",
+                                  "表面状態 / surface condition", "ワーク重量と加速度 / weight and acceleration"]):
+        svg.text(90, 570 + index * 30, f"・{text}", 14, 400, INK)
+    panel(svg, 750, 440, 620, 250, "向かない面", "unsuitable surfaces")
+    for index, text in enumerate(["ざらつきが大きい / very rough", "通気性がある / porous",
+                                  "反り・しわが大きい / warped or wrinkled", "油分が多い / oily"]):
+        svg.text(770, 530 + index * 40, f"・{text}", 15, 400, INK)
+    note(svg, 720, "真空はすべての面に向くわけではない。表面と加速度で決まる。",
+         "Vacuum is not suitable for every surface; the surface and acceleration decide.")
+    svg.footer("直線・回転・把持・真空の使い分けと、真空保持の条件",
+               "Choosing linear, rotary, gripping or vacuum handling, and the conditions for vacuum holding")
+    return svg
+
+
+def d07_12() -> Svg:
+    svg = new_diagram("D07-12", "モーターの使い分け", "Choosing between motor types",
+                      "第7日 / Day 7", 900)
+    columns = [
+        ("AC誘導モーター", "AC induction motor", GOOD,
+         ["連続回転 / continuous rotation", "インバータで速度可変", "位置決めは苦手",
+          "例: コンベヤ搬送", "利点: 丈夫・安価", "制約: 停止精度"]),
+        ("サーボモーター", "servo motor", MECH,
+         ["高精度の位置・速度", "エンコーダでフィードバック", "アンプで調整が必要",
+          "例: 精密位置決め", "利点: 追従性", "制約: コスト・調整"]),
+        ("ステッピングモーター", "stepping motor", CONTROL,
+         ["決めた角度ずつ回転", "パルス数で角度", "脱調に注意",
+          "例: 軽い位置決め", "利点: 安価で簡単", "制約: 発熱・脱調"]),
+    ]
+    for index, (ja, en, color, rows) in enumerate(columns):
+        x = 70 + index * 440
+        svg.rect(x, 180, 400, 600, fill=CARD, stroke=color, sw=2, rx=12)
+        svg.text(x + 200, 220, ja, 21, 700, color, "middle")
+        svg.text(x + 200, 248, en, 14, 400, MUTED, "middle")
+        for row_index, text in enumerate(rows):
+            svg.text(x + 24, 305 + row_index * 70, text, 15, 400, INK)
+    note(svg, 810, "制御方式とフィードバックはシステム全体で決まる。型で決めつけない。",
+         "Control method and feedback are system properties; do not decide from the type name alone.")
+    svg.footer("AC誘導・サーボ・ステッピングの比較と、製造業での使い分け",
+               "AC induction, servo and stepping motors compared for manufacturing applications")
+    return svg
+
+
+def d07_13() -> Svg:
+    svg = new_diagram("D07-13", "仕様の意味", "What the selection specifications mean",
+                      "第7日 / Day 7", 940)
+    panel(svg, 70, 180, 620, 240, "荷重と質量", "load and mass")
+    svg.rect(110, 250, 150, 70, fill="#D9C7A8", stroke="#8A6A3A", sw=2, rx=4)
+    svg.text(185, 292, "8 kg", 20, 700, INK, "middle")
+    svg.line(160, 350, 160, 400, stroke=BAD, sw=3)
+    svg.text(185, 385, "F = 8 × 9.81 = 78.5 N", 16, 700, BAD)
+    svg.text(110, 420, "質量kgと力Nは別の量 / mass in kg and force in N differ", 13, 400, MUTED)
+
+    panel(svg, 750, 180, 620, 240, "ストロークと速度", "stroke and speed")
+    svg.line(790, 320, 1290, 320, stroke=MECH, sw=3)
+    svg.line(790, 305, 790, 335, stroke=MECH, sw=3)
+    svg.line(1290, 305, 1290, 335, stroke=MECH, sw=3)
+    svg.text(1040, 300, "100 mm", 18, 700, MECH, "middle")
+    svg.text(1040, 370, "200 mm/s（平均） / average", 16, 400, INK, "middle")
+
+    panel(svg, 70, 460, 620, 250, "推力とトルク", "thrust and torque")
+    svg.line(110, 580, 300, 580, stroke=MECH, sw=4)
+    svg.text(150, 610, "推力 F [N]", 16, 700, MECH)
+    svg.circle(430, 580, 60, fill=CARD, stroke=CONTROL, sw=3)
+    svg.line(430, 580, 500, 550, stroke=CONTROL, sw=3)
+    svg.text(455, 660, "T = r × F [N·m]", 16, 700, CONTROL)
+
+    panel(svg, 750, 460, 620, 250, "偏荷重", "offset load")
+    svg.rect(800, 520, 60, 120, fill=FILL_MECH, stroke=MECH, sw=2, rx=4)
+    svg.line(860, 530, 1090, 530, stroke=MECH, sw=3)
+    svg.line(1090, 530, 1090, 610, stroke=BAD, sw=3)
+    svg.text(840, 660, "距離 × 力 がモーメント / distance × force is a moment", 14, 700, BAD)
+    svg.text(880, 500, "L [mm]", 15, 400, MUTED)
+
+    note(svg, 750, "位置決め精度は目標との差、繰返し精度は同じ指令でのばらつき。",
+         "Positioning accuracy is the error to the target; repeatability is the spread for one command.")
+    svg.footer("荷重・質量・ストローク・速度・推力・トルク・偏荷重の意味",
+               "Meaning of load, mass, stroke, speed, thrust, torque and offset load")
+    return svg
+
+
+def d07_14() -> Svg:
+    svg = new_diagram("D07-14", "選定の進め方", "Selection workflow",
+                      "第7日 / Day 7", 820)
+    chain(svg, [
+        ("要求の整理", "gather requirements", "力・ストローク・速度 / force, stroke, speed", MECH),
+        ("方式の候補", "candidate technologies", "空圧・電動など / pneumatic or electric", ENERGY),
+        ("計算", "calculation", "推力・トルク / thrust, torque", DATA),
+        ("カタログ確認", "catalogue check", "負荷率・偏荷重 / load ratio, offset load", CONTROL),
+        ("実機確認", "real-machine check", "安全・取付・環境 / safety, mounting, environment", SENSOR),
+    ], y=190, h=150)
+    panel(svg, 70, 430, 1300, 190, "カタログの前に決めること", "decide before opening the catalogue")
+    svg.text(90, 520, "何を動かすか / どの方向か / どのくらいの力か / 何秒で動かすか / どこに止めるか",
+             16, 400, INK)
+    svg.text(90, 555, "what moves, in which direction, with what force, in what time, to which position",
+             14, 400, MUTED)
+    svg.text(90, 600, "周囲の環境 / 保守性 / 停止時の動き / 予算", 16, 400, INK)
+    svg.text(90, 630, "environment, maintainability, behaviour at stop, budget", 14, 400, MUTED)
+    note(svg, 660, "計算は候補を絞る道具。最終選定ではない。",
+         "Calculation narrows candidates; it is not the final selection.")
+    svg.footer("要求 → 候補 → 計算 → カタログ → 実機確認の順に進める",
+               "Proceed in the order: requirements, candidates, calculation, catalogue, real-machine check")
+    return svg
+
+
+DAY7 = [d07_01, d07_02, d07_03, d07_04, d07_05, d07_06, d07_07,
+        d07_08, d07_09, d07_10, d07_11, d07_12, d07_13, d07_14]
 
 
 # --------------------------------------------------------------------------- #
 # Day 8
 # --------------------------------------------------------------------------- #
 def d08_01() -> Svg:
-    svg = new_diagram("D08-01", "電圧・電流・抵抗のアナロジー", "Voltage, current and resistance analogy",
-                      "第8日 / Day 8", 840)
-    panel(svg, 70, 190, 600, 380, "水路 / water circuit", "head, flow and restriction")
-    svg.rect(120, 250, 180, 130, fill=FILL_DATA, stroke=DATA, sw=2, rx=4)
-    svg.rect(120, 250, 180, 70, fill="#BEE3EA", stroke=DATA, sw=1)
-    svg.text(210, 290, "水位差 h", 15, 700, DATA, "middle")
-    svg.text(210, 312, "head", 12, 400, MUTED, "middle")
-    svg.line(300, 340, 420, 340, stroke=DATA, sw=8)
-    svg.line(420, 340, 420, 420, stroke=DATA, sw=8)
-    svg.line(420, 420, 300, 420, stroke=DATA, sw=8)
-    svg.rect(380, 360, 30, 40, fill=CARD, stroke=DATA, sw=1.6, rx=3)
-    svg.text(440, 370, "流量 Q", 14, 700, DATA)
-    svg.text(440, 390, "flow", 11, 400, MUTED)
-    svg.text(340, 462, "管の狭さ = 抵抗 / restriction", 13, 600, INK, "middle")
-    svg.text(210, 500, "水位差 → 電圧、流量 → 電流、狭さ → 抵抗", 13, 400, INK, "middle")
+    svg = new_diagram("D08-01", "電圧・電流・抵抗の関係", "Voltage, current and resistance",
+                      "第8日 / Day 8", 900)
+    panel(svg, 70, 180, 620, 340, "水道のたとえ", "the water analogy")
+    svg.rect(110, 250, 120, 90, fill=FILL_DATA, stroke=DATA, sw=2, rx=6)
+    svg.text(170, 300, "水", 18, 700, INK, "middle")
+    svg.text(110, 375, "水圧 / pressure", 15, 400, MUTED)
+    svg.rect(300, 285, 240, 20, fill="#D7E7F5", stroke=DATA, sw=1.6)
+    svg.text(420, 340, "流量 / flow", 15, 400, MUTED)
+    svg.rect(540, 265, 40, 60, fill="#CBD5DF", stroke=MUTED, sw=1.6, rx=3)
+    svg.text(500, 360, "細い管 / restriction", 14, 400, MUTED)
+    svg.line(230, 295, 296, 295, stroke=DATA, sw=2.4)
+    svg.text(110, 470, "抵抗 = 流れにくさ / resistance is restriction", 14, 400, MUTED)
 
-    panel(svg, 710, 190, 660, 380, "電気回路 / electrical circuit", "battery, lamp and current")
-    svg.rect(760, 270, 80, 150, fill=CARD, stroke=ENERGY, sw=2, rx=3)
-    svg.text(800, 320, "24 V", 15, 700, ENERGY, "middle")
-    svg.text(800, 342, "電源", 13, 700, ENERGY, "middle")
-    svg.line(840, 285, 1180, 285, stroke=ENERGY, sw=3)
-    svg.line(840, 405, 1180, 405, stroke=ENERGY, sw=3)
-    svg.circle(1180, 345, 58, fill=FILL_MECH, stroke=MECH, sw=2)
-    svg.text(1180, 340, "負荷", 14, 700, MECH, "middle")
-    svg.text(1180, 360, "lamp", 12, 400, MUTED, "middle")
-    svg.line(1180, 285, 1180, 287, stroke=ENERGY, sw=2, marker=False)
-    svg.text(900, 268, "I = 0.25 A →", 14, 700, DATA)
-    svg.text(760, 470, "V = I × R        P = V × I", 18, 700, INK)
-    svg.text(760, 498, "24 V × 0.25 A = 6 W", 14, 400, MUTED)
-    svg.rect(760, 520, 560, 42, fill=JP_BG, stroke=ACCENT, sw=1, rx=4)
-    svg.text(775, 539, "アナロジーは直感用。電流は閉回路を流れて戻る。", 12, 400, INK)
-    svg.text(775, 555, "Analogy only; current returns in a closed loop.", 10, 400, MUTED)
+    panel(svg, 750, 180, 620, 340, "電気の言葉", "the electrical quantities")
+    rows = [
+        ("電圧 / voltage", "V（ボルト）", "押し出す力 / push"),
+        ("電流 / current", "A（アンペア）", "流れる量 / flow"),
+        ("抵抗 / resistance", "Ω（オーム）", "流れにくさ / restriction"),
+        ("電力 / power", "W（ワット）", "1秒あたり / per second"),
+    ]
+    for index, (name, unit, meaning) in enumerate(rows):
+        top = 260 + index * 60
+        svg.text(780, top, name, 16, 700, INK)
+        svg.text(1010, top, unit, 15, 600, ACCENT)
+        svg.text(1150, top, meaning, 12, 400, MUTED)
 
-    svg.rect(70, 610, 1300, 80, fill=FILL_HAZARD, stroke=HAZARD, sw=1.4, rx=8)
-    svg.text(90, 642, "アナロジーの限界: 電圧は2点間の差、交流は向きが変わる、コイルは逆起電力を生む。", 14, 600, HAZARD)
-    svg.text(90, 666, "Limits: voltage is a difference between two points; AC changes direction; coils produce back-EMF.", 12, 400, MUTED)
-    svg.footer("電圧は電位差、電流は電荷の流れ、抵抗は流れにくさ、電力はエネルギーの移動速度。",
-               "Voltage is a potential difference, current is charge flow, resistance opposes flow and power is the rate of energy transfer.")
+    panel(svg, 70, 560, 1300, 200, "たとえの限界", "limits of the analogy")
+    svg.text(90, 650, "交流・電磁誘導・静電気・電子の動きの向きは、水では正しく表せない。",
+             16, 400, INK)
+    svg.text(90, 680, "AC, electromagnetic induction, static charge and electron motion are not represented by water.",
+             14, 400, MUTED)
+    svg.text(90, 720, "たとえは入口。細かい話は電気の言葉で考える。 / The analogy is an entry point; think electrically afterwards.",
+             15, 400, INK)
+    svg.footer("電圧は水圧、電流は流量、抵抗は流れにくさ。電力は1秒あたりのエネルギー",
+               "Voltage is pressure, current is flow, resistance is restriction, power is energy per second")
     return svg
 
 
 def d08_02() -> Svg:
-    svg = new_diagram("D08-02", "DC24Vの電力供給と保護", "DC24V distribution and protection",
+    svg = new_diagram("D08-02", "電圧の使い分けと電力の流れ", "Voltage applications and power distribution",
                       "第8日 / Day 8", 900)
-    # supply
-    svg.rect(80, 300, 150, 150, fill=FILL_ENERGY, stroke=ENERGY, sw=2.2, rx=8)
-    svg.text(155, 350, "DC24V", 18, 700, ENERGY, "middle")
-    svg.text(155, 374, "電源", 14, 700, ENERGY, "middle")
-    svg.text(155, 398, "supply", 12, 400, MUTED, "middle")
-    # breaker
-    svg.rect(280, 330, 90, 90, fill=CARD, stroke=ENERGY, sw=2, rx=4)
-    svg.text(325, 365, "遮断器", 13, 700, ENERGY, "middle")
-    svg.text(325, 385, "breaker", 11, 400, MUTED, "middle")
-    svg.parts.append(f'<path d="M310 405 L345 355" stroke="{ENERGY}" stroke-width="2"/>')
-    # terminal block
-    svg.rect(420, 300, 150, 160, fill=CARD, stroke=ACCENT, sw=2, rx=6)
-    svg.text(495, 335, "端子台", 15, 700, ACCENT, "middle")
-    svg.text(495, 355, "terminals", 11, 400, MUTED, "middle")
-    for i in range(4):
-        svg.rect(440, 375 + i * 20, 110, 10, fill=JP_BG, stroke=GRID, sw=1, rx=2)
-    # branches
-    branches = [
-        ("PLC", CONTROL, 240, "X/Y"),
-        ("センサー", SENSOR, 320, "0.06 A ×3"),
-        ("ランプ", WARN, 400, "3 W ×2"),
-        ("電磁弁", ENERGY, 480, "0.15 A ×2"),
-    ]
-    for index, (ja, color, y, note) in enumerate(branches):
-        svg.rect(760, y, 250, 58, fill=CARD, stroke=color, sw=2, rx=6)
-        svg.text(775, y + 24, ja, 15, 700, color)
-        svg.text(775, y + 44, note, 11, 400, MUTED)
-        svg.line(570, 380, 700, 380, stroke=ENERGY, sw=2, marker=False)
-        svg.line(700, 380, 700, y + 29, stroke=ENERGY, sw=2, marker=False)
-        svg.line(700, y + 29, 758, y + 29, stroke=ENERGY, sw=2)
-    # return rail
-    svg.line(155, 450, 155, 560, stroke=MUTED, sw=3, marker=False)
-    svg.line(155, 560, 1010, 560, stroke=MUTED, sw=3, marker=False)
-    for y in (269, 349, 429, 509):
-        svg.line(1010, y, 1010, 560, stroke=MUTED, sw=2, marker=False)
-    svg.text(600, 590, "0V return / 0V帰線", 14, 600, MUTED, "middle")
-    # earth
-    svg.line(155, 560, 155, 610, stroke=GOOD, sw=2, marker=False)
-    svg.line(135, 610, 175, 610, stroke=GOOD, sw=2, marker=False)
-    svg.line(142, 620, 168, 620, stroke=GOOD, sw=2, marker=False)
-    svg.line(150, 630, 160, 630, stroke=GOOD, sw=2, marker=False)
-    svg.text(190, 618, "保護接地 / PE (concept)", 12, 600, GOOD)
-    # notes
-    svg.rect(70, 660, 1300, 120, fill=JP_BG, stroke=ACCENT, sw=1.4, rx=8)
-    svg.text(90, 695, "保護は電線と機器を守る。感電防止とは別。", 15, 700, INK)
-    svg.text(90, 718, "定格電圧・電流・遮断容量・電線保護・選択協調を確認する。", 13, 400, INK)
-    svg.text(90, 742, "Protection protects wiring and equipment, not people. Check ratings, breaking capacity, wire protection and coordination.", 11, 400, MUTED)
-    svg.footer("電源→保護→分岐→負荷。0V帰線と保護接地を忘れない。 / Supply, protection, branches, loads. Do not forget the 0 V return and protective earth.",
-               "A DC distribution concept, not a panel construction drawing.")
+    panel(svg, 70, 170, 1300, 190, "AC電源と動力回路", "AC supply and the power circuit")
+    chain(svg, [("AC電源", "AC supply", "100V / 200V", ENERGY),
+                ("保護", "protection", "遮断器・漏電 / breaker, earth leakage", HAZARD),
+                ("動力回路", "power circuit", "モーター・ドライブ / motor, drive", MECH)],
+          y=210, h=120, x0=90, x1=1350, gap=90)
+
+    panel(svg, 70, 390, 1300, 190, "ACからDC24Vへ", "AC to DC24V")
+    chain(svg, [("AC電源", "AC supply", "100V / 200V", ENERGY),
+                ("スイッチング電源", "switching power supply", "AC → 安定したDC / regulated DC", CONTROL),
+                ("DC24V分配", "DC24V distribution", "PLC・センサー・リレー・電磁弁", DATA)],
+          y=430, h=120, x0=90, x1=1350, gap=90)
+
+    panel(svg, 70, 610, 1300, 190, "DC24Vから12V・5Vへ", "DC24V to 12V and 5V")
+    chain(svg, [("DC24V", "DC24V", "制御用 / control", DATA),
+                ("DC/DCコンバータ", "DC/DC converter", "定格内で変換 / within ratings", CONTROL),
+                ("12V・5V機器", "12V and 5V devices", "カメラ・マイコン / camera, microcontroller", SENSOR)],
+          y=650, h=120, x0=90, x1=1350, gap=90)
+    note(svg, 820, "承認済みの施工図ではない。電圧の値だけで制御用・動力用は決まらない。",
+         "Not an approved installation drawing. Voltage alone does not define control or power circuits.")
+    svg.footer("AC100/200Vは動力と機器電源、DC24Vは制御と負荷、12V/5Vは対応機器",
+               "AC100/200V for power and equipment supplies, DC24V for control and loads, 12V/5V for compatible devices")
     return svg
 
 
 def d08_03() -> Svg:
-    svg = new_diagram("D08-03", "スイッチとリレーの違い", "Switch versus relay",
-                      "第8日 / Day 8", 830)
-    panel(svg, 70, 190, 620, 330, "スイッチ: 人が接点を操作", "switch: a person operates the contact")
-    svg.line(130, 270, 530, 270, stroke=ENERGY, sw=3)
-    svg.text(150, 255, "+24V", 13, 700, ENERGY)
-    svg.line(300, 270, 300, 310, stroke=ENERGY, sw=2, marker=False)
-    svg.line(300, 310, 380, 350, stroke=MECH, sw=2.4, marker=False)
-    svg.line(380, 310, 300, 350, stroke=MECH, sw=2.4, marker=False)
-    svg.text(340, 390, "スイッチ / switch", 13, 700, MECH, "middle")
-    svg.circle(480, 320, 30, fill=FILL_MECH, stroke=MECH, sw=2)
-    svg.text(480, 325, "負荷", 12, 700, MECH, "middle")
-    svg.line(530, 270, 530, 320, stroke=ENERGY, sw=2, marker=False)
-    svg.line(480, 350, 480, 420, stroke=MUTED, sw=2, marker=False)
-    svg.text(480, 440, "0V", 12, 700, MUTED, "middle")
-    svg.text(130, 490, "接点定格・操作頻度・負荷種別を確認する。", 13, 400, INK)
-
-    panel(svg, 710, 190, 660, 330, "リレー: コイルで接点を操作", "relay: a coil operates the contact")
-    svg.line(760, 260, 1160, 260, stroke=ENERGY, sw=3)
-    svg.text(775, 245, "+24V", 13, 700, ENERGY)
-    svg.rect(850, 285, 120, 70, fill=FILL_CONTROL, stroke=CONTROL, sw=2, rx=4)
-    svg.text(910, 315, "コイル", 13, 700, CONTROL, "middle")
-    svg.text(910, 335, "coil", 11, 400, MUTED, "middle")
-    svg.line(910, 260, 910, 285, stroke=ENERGY, sw=2, marker=False)
-    svg.line(910, 355, 910, 420, stroke=MUTED, sw=2, marker=False)
-    svg.text(910, 440, "0V", 12, 700, MUTED, "middle")
-    svg.line(1040, 320, 1130, 320, stroke=CONTROL, sw=2, dash="4 4")
-    svg.text(1080, 305, "電磁力", 12, 600, CONTROL, "middle")
-    svg.line(1180, 260, 1280, 260, stroke=ENERGY, sw=2, marker=False)
-    svg.line(1180, 350, 1280, 350, stroke=ENERGY, sw=2, marker=False)
-    svg.line(1180, 260, 1180, 285, stroke=ENERGY, sw=2, marker=False)
-    svg.line(1180, 350, 1180, 325, stroke=ENERGY, sw=2, marker=False)
-    svg.text(1230, 390, "接点 / contact", 12, 600, MECH, "middle")
-    svg.text(760, 490, "小さな信号で大きな負荷を間接操作できる。", 13, 400, INK)
-    # truth table
-    table_grid(svg, 70, 560, ["物理接点 / contact", "通常 / normal", "操作 / operated"],
-               [["NO", "開 / open", "閉 / closed"], ["NC", "閉 / closed", "開 / open"]],
-               [360, 250, 250], row_h=38)
-    svg.rect(980, 560, 390, 120, fill=FILL_HAZARD, stroke=HAZARD, sw=1.2, rx=8)
-    svg.text(1000, 592, "物理NC ≠ ラダーのNC命令", 14, 700, HAZARD)
-    svg.text(1000, 616, "physical NC is not automatically", 11, 400, MUTED)
-    svg.text(1000, 636, "a logical NC instruction.", 11, 400, MUTED)
-    svg.text(1000, 660, "入力のON/OFFで論理を組み立てる。", 12, 600, INK)
-    svg.footer("スイッチは直接、リレーはコイルを介して接点を動かす。どちらも接点定格と負荷種別を確認する。",
-               "A switch operates a contact directly; a relay uses a coil. Both require contact ratings and load-type checks.")
+    svg = new_diagram("D08-03", "制御盤の機器", "Control panel components",
+                      "第8日 / Day 8", 1060)
+    components = [
+        ("配線用遮断器", "circuit breaker", "過電流保護 / overcurrent"),
+        ("漏電遮断器", "earth-leakage device", "漏れ電流 / leakage"),
+        ("ヒューズ", "fuse", "規定特性で溶断 / opens on overcurrent"),
+        ("スイッチング電源", "switching power supply", "AC → DC"),
+        ("DC/DCコンバータ", "DC/DC converter", "DC → DC"),
+        ("リレー", "relay", "信号で接点 / switches contacts"),
+        ("電磁接触器", "contactor", "動力負荷 / power loads"),
+        ("サーマルリレー", "overload relay", "モーター保護 / motor overload"),
+        ("端子台", "terminal block", "接続点 / connection points"),
+        ("押しボタン", "pushbutton", "作業者の指令 / operator input"),
+        ("表示灯", "indicator lamp", "状態表示 / state display"),
+        ("非常停止", "emergency stop", "人の危険の停止 / stops for danger"),
+        ("PLC", "programmable controller", "入力→判断→出力 / input, decide, output"),
+        ("インバータ", "inverter", "速度可変 / variable speed"),
+        ("サーボアンプ", "servo amplifier", "フィードバック制御 / closed loop"),
+        ("保護・接地", "protection and earthing", "感電・ノイズ / shock, noise"),
+    ]
+    card_w = (1300 - 60 - 3 * 20) / 4
+    for index, (ja, en, sub) in enumerate(components):
+        row, col = divmod(index, 4)
+        x = 70 + col * (card_w + 20)
+        y = 180 + row * 190
+        svg.card(x, y, card_w, 165, ja, en, stroke=MECH if col % 2 == 0 else CONTROL,
+                 accent=MECH if col % 2 == 0 else CONTROL, sub=sub)
+    note(svg, 960, "形・色・端子配置は機種で違う。公式カタログとマニュアルで確認する。",
+         "Shape, colour and terminal layout differ by model; check the official catalogue and manual.")
+    svg.footer("盤の主要機器の位置と役割。模式的な形であり実機の外観ではない",
+               "Position and role of the main panel devices; schematic shapes, not real appearance")
     return svg
 
 
 def d08_04() -> Svg:
-    svg = new_diagram("D08-04", "PLC出力から負荷まで", "From PLC output to load",
-                      "第8日 / Day 8", 850)
-    svg.rect(120, 250, 300, 300, fill=FILL_CONTROL, stroke=CONTROL, sw=2.2, rx=10)
-    svg.text(270, 290, "PLC", 24, 700, CONTROL, "middle")
-    svg.text(270, 316, "program", 12, 400, MUTED, "middle")
-    svg.rect(170, 360, 200, 60, fill=CARD, stroke=CONTROL, sw=1.6, rx=4)
-    svg.text(270, 388, "出力ユニット", 14, 700, CONTROL, "middle")
-    svg.text(270, 407, "relay or transistor", 11, 400, MUTED, "middle")
-    svg.text(150, 470, "Y0 / Y1 / Y2", 13, 700, CONTROL)
-
-    # relay output branch
-    svg.rect(520, 230, 300, 130, fill=CARD, stroke=MECH, sw=2, rx=8)
-    svg.text(670, 262, "リレー出力", 15, 700, MECH, "middle")
-    svg.text(670, 282, "relay output", 11, 400, MUTED, "middle")
-    svg.text(670, 315, "接点で負荷回路を開閉", 12, 400, INK, "middle")
-    svg.text(670, 338, "AC/DC, slower, contact life", 11, 400, MUTED, "middle")
-
-    # transistor output branch
-    svg.rect(520, 400, 300, 130, fill=CARD, stroke=SENSOR, sw=2, rx=8)
-    svg.text(670, 432, "トランジスタ出力", 15, 700, SENSOR, "middle")
-    svg.text(670, 452, "transistor output", 11, 400, MUTED, "middle")
-    svg.text(670, 485, "DC負荷, 速い, 漏れ電流", 12, 400, INK, "middle")
-    svg.text(670, 508, "DC load, fast, leakage", 11, 400, MUTED, "middle")
-
-    # loads
-    for y, label, note in ((255, "ランプ / lamp", "Y0, Y1"), (425, "電磁弁 / solenoid", "Y2 + suppression")):
-        svg.rect(900, y - 40, 260, 100, fill=CARD, stroke=ENERGY, sw=2, rx=8)
-        svg.text(1030, y - 5, label, 15, 700, ENERGY, "middle")
-        svg.text(1030, y + 18, note, 11, 400, MUTED, "middle")
-        svg.line(826, y + 10, 896, y + 10, stroke=ENERGY, sw=2.4)
-    # signal vs power
-    svg.line(420, 320, 516, 295, stroke=CONTROL, sw=2, dash="4 5")
-    svg.text(468, 300, "信号", 11, 600, CONTROL, "middle")
-    svg.line(1220, 175, 1220, 245, stroke=ENERGY, sw=2.4, dash="8 6")
-    svg.line(1220, 245, 1160, 245, stroke=ENERGY, sw=2.4, dash="8 6")
-    svg.text(1240, 210, "負荷電源", 12, 600, ENERGY)
-    # note
-    svg.rect(120, 610, 1200, 90, fill=FILL_HAZARD, stroke=HAZARD, sw=1.4, rx=8)
-    svg.text(140, 645, "PLC出力は信号であり、無制限の電源ではない。定格を超える負荷はリレー等で間接操作する。", 15, 700, HAZARD)
-    svg.text(140, 670, "A PLC output is a signal, not an unrestricted supply. Use a relay for loads above the rating.", 12, 400, MUTED)
-    svg.footer("信号の経路と、負荷に電力を届ける経路を分けて考える。 / Separate the signal path from the power path.",
-               "Check per-point and per-common ratings, inrush, surge and leakage.")
+    svg = new_diagram("D08-04", "保護機器の違い", "What each protective device covers",
+                      "第8日 / Day 8", 880)
+    panels = [
+        ("配線用遮断器", "circuit breaker", MECH,
+         ["守る: 定格内の過電流、配線", "protects: overcurrent within ratings, wiring"],
+         ["守らない: すべての故障", "does not: every fault"]),
+        ("漏電遮断器", "earth-leakage device", HAZARD,
+         ["守る: 設計に応じた漏れ電流", "protects: specified leakage current"],
+         ["守らない: 過電流一般", "does not: general overcurrent"]),
+        ("ヒューズ", "fuse", ENERGY,
+         ["守る: 規定の過電流特性", "protects: specified overcurrent characteristic"],
+         ["注意: 溶断後は交換", "note: replaced after operation"]),
+        ("サーマルリレー", "overload relay", CONTROL,
+         ["守る: モーターなどの過負荷", "protects: overload, commonly motors"],
+         ["守らない: 短絡保護", "does not: short-circuit protection"]),
+    ]
+    for index, (ja, en, color, good, bad) in enumerate(panels):
+        x = 70 + index * 335
+        svg.rect(x, 180, 305, 440, fill=CARD, stroke=color, sw=2, rx=12)
+        svg.text(x + 152, 225, ja, 19, 700, color, "middle")
+        svg.text(x + 152, 250, en, 13, 400, MUTED, "middle")
+        svg.rect(x + 20, 280, 265, 130, fill=FILL_SENSOR, stroke=GOOD, sw=1.4, rx=8)
+        svg.text(x + 30, 320, good[0], 14, 700, INK)
+        svg.text(x + 30, 350, good[1], 12, 400, MUTED)
+        svg.rect(x + 20, 430, 265, 130, fill=FILL_HAZARD, stroke=BAD, sw=1.4, rx=8)
+        svg.text(x + 30, 470, bad[0], 14, 700, INK)
+        svg.text(x + 30, 500, bad[1], 12, 400, MUTED)
+    note(svg, 650, "守る範囲は、定格と特性の範囲内。組み合わせで初めて系統を保護する。",
+         "Each device protects within its ratings and characteristics; the combination protects the system.")
+    svg.footer("遮断器・漏電遮断器・ヒューズ・サーマルリレーの守る範囲の違い",
+               "Differences in the coverage of breaker, earth-leakage device, fuse and overload relay")
     return svg
 
 
 def d08_05() -> Svg:
-    svg = new_diagram("D08-05", "センサーの種類と選び方", "Sensor types and selection",
+    svg = new_diagram("D08-05", "スイッチング電源・DC/DC・リレーと接触器", "Switching power supply, DC/DC converter, relay and contactor",
                       "第8日 / Day 8", 860)
-    cards = [
-        ("光電 / photoelectric", "物体の有無・通過", "presence and passage",
-         "色・反射・透明体・背景 / colour, reflection, transparent target, background", DATA),
-        ("誘導形近接 / inductive", "金属の接近・位置", "metal approach and position",
-         "対象金属・距離・埋込 / target metal, distance, shielded mounting", SENSOR),
-        ("静電容量形 / capacitive", "金属以外の近接", "non-metal proximity",
-         "水分・堆積物・感度 / moisture, deposits, sensitivity", SENSOR),
-        ("磁気 / magnetic", "シリンダの磁石位置", "cylinder magnet position",
-         "対応シリンダ・取付 / compatible cylinder, mounting", CONTROL),
-        ("リミット / limit switch", "機械的接触", "mechanical contact",
-         "接触力・寿命・位置ずれ / force, life, drift", MECH),
-        ("エンコーダ / encoder", "回転・移動量", "rotation and travel",
-         "分解能・出力・ノイズ / resolution, output, noise", ENERGY),
-    ]
-    for index, (ja, ja_sub, en_sub, check, color) in enumerate(cards):
-        row, col = divmod(index, 3)
-        x = 70 + col * 440
-        y = 200 + row * 270
-        svg.rect(x, y, 400, 220, fill=CARD, stroke=color, sw=2, rx=10)
-        svg.rect(x, y, 8, 220, fill=color, stroke=color, sw=0, rx=3)
-        svg.text(x + 26, y + 36, ja, 18, 700, color)
-        svg.text(x + 26, y + 62, ja_sub, 14, 700, INK)
-        svg.text(x + 26, y + 84, en_sub, 12, 400, MUTED)
-        svg.text(x + 26, y + 120, "確認 / check:", 12, 700, INK)
-        for line_index, line in enumerate(_wrap(check, 340, 13)):
-            svg.text(x + 26, y + 145 + line_index * 20, line, 13, 400, MUTED)
-    svg.rect(70, 760, 1300, 70, fill=JP_BG, stroke=ACCENT, sw=1.2, rx=8)
-    svg.text(90, 790, "選定5ステップ: 対象 → 距離・応答 → 対象物と背景 → 取付・環境 → 信号・電源",
-             14, 700, INK)
-    svg.text(90, 812, "Five steps: target, distance and response, target and background, mounting and environment, signal and supply.",
-             11, 400, MUTED)
-    svg.footer("方式名ではなく、対象物・環境・信号方式で選ぶ。迷ったら実物で最悪条件を試す。",
-               "Select by target, environment and signal type, not by technology name. Test the worst case with the real target.")
+    panel(svg, 70, 180, 620, 300, "スイッチング電源", "switching power supply")
+    svg.rect(110, 260, 120, 90, fill=FILL_ENERGY, stroke=ENERGY, sw=2, rx=6)
+    svg.text(170, 300, "AC入力", 15, 700, INK, "middle")
+    svg.text(170, 325, "AC input", 12, 400, MUTED, "middle")
+    svg.line(232, 305, 330, 305, stroke=ENERGY, sw=2.4)
+    svg.rect(334, 260, 150, 90, fill=FILL_CONTROL, stroke=CONTROL, sw=2, rx=6)
+    svg.text(409, 295, "変換", 16, 700, INK, "middle")
+    svg.text(409, 320, "conversion", 12, 400, MUTED, "middle")
+    svg.line(486, 305, 560, 305, stroke=CONTROL, sw=2.4)
+    svg.rect(564, 260, 100, 90, fill=FILL_DATA, stroke=DATA, sw=2, rx=6)
+    svg.text(614, 295, "DC出力", 15, 700, INK, "middle")
+    svg.text(614, 320, "DC output", 12, 400, MUTED, "middle")
+    svg.text(110, 400, "入力電圧・出力電圧・出力電流・定格出力を確認", 14, 400, INK)
+    svg.text(110, 430, "check input, output voltage and current, rated power", 12, 400, MUTED)
+
+    panel(svg, 750, 180, 620, 300, "DC/DCコンバータ", "DC/DC converter")
+    svg.rect(790, 260, 120, 90, fill=FILL_DATA, stroke=DATA, sw=2, rx=6)
+    svg.text(850, 300, "DC24V", 15, 700, INK, "middle")
+    svg.line(912, 305, 1010, 305, stroke=DATA, sw=2.4)
+    svg.rect(1014, 260, 160, 90, fill=FILL_CONTROL, stroke=CONTROL, sw=2, rx=6)
+    svg.text(1094, 295, "変換", 16, 700, INK, "middle")
+    svg.text(1094, 320, "conversion", 12, 400, MUTED, "middle")
+    svg.line(1176, 305, 1250, 305, stroke=CONTROL, sw=2.4)
+    svg.rect(1254, 260, 90, 90, fill=FILL_SENSOR, stroke=SENSOR, sw=2, rx=6)
+    svg.text(1299, 295, "12V/5V", 14, 700, INK, "middle")
+    svg.text(790, 400, "入力範囲・出力・効率を確認", 14, 400, INK)
+    svg.text(790, 430, "check input range, output and efficiency", 12, 400, MUTED)
+
+    panel(svg, 70, 510, 620, 240, "リレー", "relay")
+    svg.text(90, 600, "制御入力で接点を切り替える", 16, 700, INK)
+    svg.text(90, 628, "a control input switches contacts", 13, 400, MUTED)
+    svg.text(90, 675, "コイル電圧と接点容量を確認", 15, 400, INK)
+    svg.text(90, 700, "check coil voltage and contact rating", 12, 400, MUTED)
+
+    panel(svg, 750, 510, 620, 240, "電磁接触器", "contactor")
+    svg.text(770, 600, "定格の大きい動力負荷を開閉する", 16, 700, INK)
+    svg.text(770, 628, "switches appropriately rated power loads", 13, 400, MUTED)
+    svg.text(770, 675, "定格電流と使用カテゴリを確認", 15, 400, INK)
+    svg.text(770, 700, "check rated current and utilisation category", 12, 400, MUTED)
+    svg.footer("AC→DCの変換、DC→DCの変換、信号用リレーと動力用接触器の違い",
+               "AC-to-DC conversion, DC-to-DC conversion, and signal relay versus power contactor")
     return svg
 
 
-def _wrap(text: str, max_width: float, size: float) -> list[str]:
-    lines = []
-    current = ""
-    for char in text:
-        if current and text_width(current + char, size) > max_width:
-            lines.append(current)
-            current = char
-        else:
-            current += char
-    if current:
-        lines.append(current)
-    return lines
-
-
 def d08_06() -> Svg:
-    svg = new_diagram("D08-06", "NPN・PNPとPLC入力の電流経路", "NPN and PNP current paths through PLC inputs",
-                      "第8日 / Day 8", 980)
-    # ---------------- PNP + sinking input
-    panel(svg, 60, 180, 640, 560, "PNP + シンク入力（共通0V）", "")
-    svg.text(100, 252, "+24V rail", 13, 700, HAZARD)
-    svg.line(100, 265, 650, 265, stroke=HAZARD, sw=3, marker=False)
-    svg.line(100, 690, 650, 690, stroke=MUTED, sw=3, marker=False)
-    svg.text(110, 715, "0V", 13, 700, MUTED)
-    # sensor
-    svg.rect(150, 310, 180, 210, fill=FILL_SENSOR, stroke=SENSOR, sw=2, rx=8)
-    svg.text(240, 342, "PNP", 20, 700, SENSOR, "middle")
-    svg.text(240, 366, "sensor", 12, 400, MUTED, "middle")
-    svg.line(200, 265, 200, 310, stroke=HAZARD, sw=2, marker=False)
-    svg.text(210, 292, "+", 12, 700, HAZARD)
-    svg.line(200, 520, 200, 690, stroke=MUTED, sw=2, marker=False)
-    svg.text(210, 560, "0V", 12, 700, MUTED)
-    svg.line(330, 410, 430, 410, stroke=SENSOR, sw=3)
-    svg.text(352, 392, "OUT", 12, 700, SENSOR)
-    # PLC input
-    svg.rect(430, 310, 220, 200, fill=FILL_CONTROL, stroke=CONTROL, sw=2, rx=8)
-    svg.text(540, 344, "PLC入力", 16, 700, CONTROL, "middle")
-    svg.text(540, 366, "sinking input", 11, 400, MUTED, "middle")
-    svg.circle(500, 420, 14, fill=CARD, stroke=CONTROL, sw=1.6)
-    svg.parts.append(f'<path d="M492 414 L508 414 L500 426 Z" fill="{CONTROL}"/>')
-    svg.text(500, 455, "入力回路", 11, 400, CONTROL, "middle")
-    # common path to 0 V
-    svg.line(650, 470, 650, 690, stroke=MUTED, sw=2.4, marker=False)
-    svg.text(600, 500, "COM → 0V", 11, 700, MUTED, "middle")
-    # current arrows
-    svg.parts.append(f'<path d="M240 270 q0 35 0 35" fill="none" stroke="{HAZARD}" stroke-width="2.4" marker-end="url(#arrow-red)"/>')
-    svg.parts.append(f'<path d="M340 400 q40 0 70 0" fill="none" stroke="{HAZARD}" stroke-width="2.4" marker-end="url(#arrow-red)"/>')
-    svg.parts.append(f'<path d="M590 460 q30 0 55 0" fill="none" stroke="{HAZARD}" stroke-width="2.4" marker-end="url(#arrow-red)"/>')
-    svg.parts.append(f'<path d="M650 540 q0 60 0 60" fill="none" stroke="{HAZARD}" stroke-width="2.4" marker-end="url(#arrow-red)"/>')
-    svg.text(150, 600, "電流: +24V → センサー → 出力 → 入力 → COM(0V)", 13, 700, HAZARD)
-    svg.text(150, 622, "Current: +24 V → sensor → output → input → COM (0 V)", 11, 400, MUTED)
-
-    # ---------------- NPN + sourcing input
-    panel(svg, 740, 180, 640, 560, "NPN + ソース入力（共通+24V）", "")
-    svg.text(780, 252, "+24V rail", 13, 700, HAZARD)
-    svg.line(780, 265, 1330, 265, stroke=HAZARD, sw=3, marker=False)
-    svg.line(780, 690, 1330, 690, stroke=MUTED, sw=3, marker=False)
-    svg.text(790, 715, "0V", 13, 700, MUTED)
-    # PLC input
-    svg.rect(830, 310, 220, 200, fill=FILL_CONTROL, stroke=CONTROL, sw=2, rx=8)
-    svg.text(940, 344, "PLC入力", 16, 700, CONTROL, "middle")
-    svg.text(940, 366, "sourcing input", 11, 400, MUTED, "middle")
-    svg.circle(900, 420, 14, fill=CARD, stroke=CONTROL, sw=1.6)
-    svg.parts.append(f'<path d="M892 414 L908 414 L900 426 Z" fill="{CONTROL}"/>')
-    svg.line(830, 470, 830, 265, stroke=HAZARD, sw=2.4, marker=False)
-    svg.text(780, 300, "COM → +24V", 11, 700, HAZARD)
-    # sensor
-    svg.rect(1110, 310, 180, 210, fill=FILL_SENSOR, stroke=SENSOR, sw=2, rx=8)
-    svg.text(1200, 342, "NPN", 20, 700, SENSOR, "middle")
-    svg.text(1200, 366, "sensor", 12, 400, MUTED, "middle")
-    svg.line(1240, 265, 1240, 310, stroke=HAZARD, sw=2, marker=False)
-    svg.text(1250, 292, "+", 12, 700, HAZARD)
-    svg.line(1200, 520, 1200, 690, stroke=MUTED, sw=2, marker=False)
-    svg.line(1050, 410, 1110, 410, stroke=SENSOR, sw=3)
-    svg.text(1078, 392, "OUT", 12, 700, SENSOR)
-    # current arrows
-    svg.parts.append(f'<path d="M900 270 q0 35 0 35" fill="none" stroke="{HAZARD}" stroke-width="2.4" marker-end="url(#arrow-red)"/>')
-    svg.parts.append(f'<path d="M990 400 q40 0 55 0" fill="none" stroke="{HAZARD}" stroke-width="2.4" marker-end="url(#arrow-red)"/>')
-    svg.parts.append(f'<path d="M1180 540 q0 60 0 60" fill="none" stroke="{HAZARD}" stroke-width="2.4" marker-end="url(#arrow-red)"/>')
-    svg.text(780, 600, "電流: +24V → COM → 入力 → 出力 → 0V", 13, 700, HAZARD)
-    svg.text(780, 622, "Current: +24 V → COM → input → output → 0 V", 11, 400, MUTED)
-
-    svg.rect(60, 770, 1320, 70, fill=FILL_HAZARD, stroke=HAZARD, sw=1.4, rx=8)
-    svg.text(80, 800, "どちらも入力共通端子までの閉回路で考える。端子配置はPLCのハードウェアマニュアルで確認する。", 14, 700, HAZARD)
-    svg.text(80, 822, "Think in a closed circuit through the input common. Confirm terminal arrangement in the PLC hardware manual.", 11, 400, MUTED)
-    svg.footer("PNPはソース、NPNはシンク。PLC入力の共通端子の電位と入力方式で適合が決まる。",
-               "PNP sources; NPN sinks. Compatibility depends on the input common potential and input circuit type.")
+    svg = new_diagram("D08-06", "入力から出力までの信号の流れ", "Signal flow from input to output",
+                      "第8日 / Day 8", 900)
+    chain(svg, [("物理的な出来事", "physical event", "製品が来る / a product arrives", MECH),
+                ("センサー", "sensor", "状態を電気に / state to a signal", SENSOR),
+                ("PLC入力", "PLC input", "信号を受け取る / receives the signal", CONTROL),
+                ("プログラム", "program", "条件を判断 / evaluates conditions", CONTROL)],
+          y=190, h=140, x0=80, x1=1360)
+    chain(svg, [("PLC出力", "PLC output", "指令を出す / issues a command", CONTROL),
+                ("ドライバ・弁", "driver or valve", "負荷を動かす / drives the load", ENERGY),
+                ("アクチュエータ", "actuator", "実際に動く / moves", MECH),
+                ("物理的な動き", "physical movement", "結果 / the result", MECH)],
+          y=400, h=140, x0=80, x1=1360)
+    svg.line(1300, 340, 1300, 396, stroke=ACCENT, sw=2.4)
+    svg.line(1250, 545, 1250, 640, stroke=SENSOR, sw=2.4, dash="7 5")
+    svg.line(1250, 640, 330, 640, stroke=SENSOR, sw=2.4, dash="7 5")
+    svg.line(330, 640, 330, 340, stroke=SENSOR, sw=2.4, dash="7 5")
+    svg.text(400, 630, "位置センサーが結果を入力へ戻す（フィードバック） / a position sensor feeds the result back", 14, 600, SENSOR)
+    note(svg, 690, "指令を出しても、動いたことにはならない。確認入力を待つ。",
+         "A command does not prove motion; wait for the confirmation input.")
+    svg.footer("物理 → センサー → 入力 → プログラム → 出力 → ドライバ → 動作 → フィードバック",
+               "Physical event, sensor, input, program, output, driver, motion, feedback")
     return svg
 
 
 def d08_07() -> Svg:
-    svg = new_diagram("D08-07", "統一I/O表と概略配線", "Canonical I/O map and conceptual wiring",
-                      "第8日 / Day 8", 980)
-    # PLC body
-    svg.rect(520, 210, 400, 560, fill=FILL_CONTROL, stroke=CONTROL, sw=2.2, rx=10)
-    svg.text(720, 250, "PLC", 26, 700, CONTROL, "middle")
-    svg.text(720, 276, "fictional training addresses", 11, 400, MUTED, "middle")
-    # input rows
-    inputs = [
-        ("X0", "START pushbutton", "OFF; ON while pressed"),
-        ("X1", "STOP_OK (physical NC)", "ON while healthy"),
-        ("X2", "retracted confirmation", "ON at retracted end"),
-        ("X3", "extended confirmation", "ON at extended end"),
+    svg = new_diagram("D08-07", "センサーの種類と原理", "Sensor types and detection principles",
+                      "第8日 / Day 8", 1040)
+    sensors = [
+        ("透過型光電", "through-beam", "光を遮る / blocks the beam", "不透明物・通過 / opaque, passage", MECH),
+        ("再帰反射型", "retroreflective", "反射板の光を遮る / blocks the return", "比較的大きな物 / larger objects", MECH),
+        ("拡散反射型", "diffuse-reflective", "対象の反射光 / light from the target", "近距離の有無 / presence nearby", DATA),
+        ("誘導型近接", "inductive proximity", "金属の影響 / responds to metal", "金属部品 / metal parts", ENERGY),
+        ("静電容量型", "capacitive proximity", "容量変化 / capacitance change", "樹脂・液体 / plastic, liquid", CONTROL),
+        ("磁気シリンダ", "magnetic cylinder", "ピストンの磁石 / piston magnet", "ストローク端 / end positions", SENSOR),
+        ("リミットスイッチ", "limit switch", "機械的接触 / mechanical contact", "端の確認 / end confirmation", MECH),
+        ("超音波", "ultrasonic", "音波の反射 / sound reflection", "距離・液面 / distance, level", DATA),
+        ("圧力センサー", "pressure sensor", "圧力を信号に / pressure to a signal", "空気・油の圧力 / air or oil", ENERGY),
+        ("エンコーダ", "encoder", "回転をパルスに / rotation to pulses", "回転量・速度 / rotation, speed", CONTROL),
+        ("カメラ", "camera", "画像から特徴 / features from an image", "外観検査 / appearance", SENSOR),
     ]
-    for index, (addr, device, normal) in enumerate(inputs):
-        y = 330 + index * 70
-        svg.rect(90, y - 24, 380, 58, fill=CARD, stroke=SENSOR, sw=1.6, rx=6)
-        svg.text(104, y - 2, f"{addr}  {device}", 13, 700, SENSOR)
-        svg.text(104, y + 18, normal, 11, 400, MUTED)
-        svg.line(470, y + 5, 520, y + 5, stroke=SENSOR, sw=2)
-        svg.text(540, y + 10, f"{addr}", 14, 700, SENSOR)
-    svg.text(90, 660, "入力共通 / input common", 13, 700, MUTED)
-    svg.line(90, 680, 500, 680, stroke=MUTED, sw=2, marker=False)
-    svg.line(500, 680, 500, 610, stroke=MUTED, sw=2, marker=False)
-    svg.line(500, 610, 520, 610, stroke=MUTED, sw=2, marker=False)
-    # output rows
-    outputs = [
-        ("Y0", "RUN indicator lamp", "ON while RUN"),
-        ("Y1", "delayed indicator lamp", "ON after T0 = 3 s"),
-        ("Y2", "extend solenoid command", "OFF = spring return"),
-    ]
-    for index, (addr, device, normal) in enumerate(outputs):
-        y = 330 + index * 80
-        svg.rect(970, y - 24, 380, 62, fill=CARD, stroke=ENERGY, sw=1.6, rx=6)
-        svg.text(984, y - 2, f"{addr}  {device}", 13, 700, ENERGY)
-        svg.text(984, y + 18, normal, 11, 400, MUTED)
-        svg.line(920, y + 6, 970, y + 6, stroke=ENERGY, sw=2)
-        svg.text(890, y + 11, f"{addr}", 14, 700, ENERGY, "end")
-    svg.text(970, 660, "出力共通 / output common", 13, 700, MUTED)
-    svg.line(970, 680, 1350, 680, stroke=MUTED, sw=2, marker=False)
-    svg.line(920, 680, 920, 610, stroke=MUTED, sw=2, marker=False)
-    svg.line(920, 610, 900, 610, stroke=MUTED, sw=2, marker=False)
-    # internal state
-    svg.rect(560, 390, 320, 60, fill=JP_BG, stroke=CONTROL, sw=1.2, rx=6)
-    svg.text(720, 416, "M0 RUN  /  T0 timer", 14, 700, CONTROL, "middle")
-    svg.text(720, 436, "internal state, not a terminal", 10, 400, MUTED, "middle")
-    # note
-    svg.rect(70, 760, 1300, 90, fill=FILL_HAZARD, stroke=HAZARD, sw=1.4, rx=8)
-    svg.text(90, 792, "Y1は遅延ランプ専用。電磁弁はY2。アドレスと物理端子番号は別。", 15, 700, HAZARD)
-    svg.text(90, 815, "Y1 is only the delayed lamp; the solenoid is Y2. Addresses are not physical terminal numbers.", 11, 400, MUTED)
-    svg.text(90, 836, "実機の端子・コモン・保護・接地は、PLCと機器のマニュアルで確認する。", 12, 400, INK)
-    svg.footer("Day 8とDay 9で同じI/O表を使う。アドレス・機器・正常状態を一致させる。",
-               "Days 8 and 9 use the same I/O table. Keep address, device and normal state consistent.")
+    card_w = (1300 - 40 - 3 * 20) / 4
+    for index, (ja, en, principle, use, color) in enumerate(sensors):
+        row, col = divmod(index, 4)
+        x = 70 + col * (card_w + 20)
+        y = 180 + row * 210
+        svg.card(x, y, card_w, 180, ja, en, stroke=color, accent=color, sub=f"{principle} / {use}")
+    note(svg, 880, "反射型が透明体・黒色を必ず検出するわけではない。実対象で試験する。",
+         "Reflective sensors do not reliably detect every clear or black target; test the actual target.")
+    svg.footer("代表的なセンサーの検出原理と用途。制約は材質・色・距離で変わる",
+               "Detection principles and applications; limitations depend on material, colour and distance")
     return svg
 
 
 def d08_08() -> Svg:
-    svg = new_diagram("D08-08", "正しい自己保持回路", "Correct self-holding circuit",
-                      "第8日 / Day 8", 900)
-    # rails
-    svg.line(150, 230, 150, 600, stroke=INK, sw=3, marker=False)
-    svg.line(1290, 230, 1290, 600, stroke=INK, sw=3, marker=False)
-    svg.text(150, 215, "L", 14, 700, INK, "middle")
-    svg.text(1290, 215, "N", 14, 700, INK, "middle")
-    # rung 1
-    y = 320
-    svg.line(150, y, 300, y, stroke=INK, sw=2, marker=False)
-    svg.line(300, y, 300, y - 70, stroke=INK, sw=2, marker=False)
-    svg.line(300, y, 300, y + 70, stroke=INK, sw=2, marker=False)
-    svg.line(300, y - 70, 370, y - 70, stroke=INK, sw=2, marker=False)
-    svg.line(300, y + 70, 370, y + 70, stroke=INK, sw=2, marker=False)
-    ladder_contact(svg, 400, y - 70, False, "X0", "START / 押している間ON")
-    ladder_contact(svg, 540, y - 70, False, "X2", "後退端 / start only")
-    ladder_contact(svg, 400, y + 70, False, "M0", "保持 / seal-in")
-    svg.line(430, y - 70, 510, y - 70, stroke=INK, sw=2, marker=False)
-    svg.line(570, y - 70, 700, y - 70, stroke=INK, sw=2, marker=False)
-    svg.line(430, y + 70, 700, y + 70, stroke=INK, sw=2, marker=False)
-    svg.line(700, y - 70, 700, y + 70, stroke=INK, sw=2, marker=False)
-    svg.line(700, y, 880, y, stroke=INK, sw=2, marker=False)
-    ladder_contact(svg, 950, y, False, "X1", "停止許可 / stop permission")
-    svg.line(880, y, 920, y, stroke=INK, sw=2, marker=False)
-    svg.line(980, y, 1072, y, stroke=INK, sw=2, marker=False)
-    ladder_coil(svg, 1120, y, "M0", "RUN state")
-    svg.line(1182, y, 1290, y, stroke=INK, sw=2, marker=False)
-    # rung 2
-    y2 = 500
-    svg.line(150, y2, 370, y2, stroke=INK, sw=2, marker=False)
-    ladder_contact(svg, 400, y2, False, "M0", "RUN")
-    svg.line(430, y2, 980, y2, stroke=INK, sw=2, marker=False)
-    ladder_contact(svg, 1010, y2, False, "T0.DN", "3 s done")
-    svg.line(1040, y2, 1092, y2, stroke=INK, sw=2, marker=False)
-    ladder_coil(svg, 1140, y2, "Y1", "delayed lamp")
-    svg.line(1202, y2, 1290, y2, stroke=INK, sw=2, marker=False)
-    # labels
-    svg.rect(70, 620, 1300, 110, fill=JP_BG, stroke=ACCENT, sw=1.2, rx=8)
-    svg.text(90, 652, "並列枝: (X0 AND X2) OR M0   直列: X1（停止許可）", 16, 700, INK)
-    svg.text(90, 678, "M0の保持枝はX2を通らない。だから前進してX2がOFFになってもRUNを維持できる。", 13, 400, INK)
-    svg.text(90, 702, "The M0 seal-in branch does not pass through X2, so RUN survives X2 turning OFF.", 11, 400, MUTED)
-    svg.rect(70, 760, 1300, 80, fill=FILL_HAZARD, stroke=HAZARD, sw=1.3, rx=8)
-    svg.text(90, 792, "元PDFの31ページには、この並列保持接点がない。STARTを離すとRUNが消える。", 14, 700, HAZARD)
-    svg.text(90, 815, "The source PDF page 31 lacks this parallel holding contact, so RUN would drop when START is released.", 11, 400, MUTED)
-    svg.footer("STARTを離してもRUNが続く。STOP許可がOFFになるとRUNが落ち、T0もリセットされる。",
-               "RUN survives START release. When stop permission goes OFF, RUN drops and T0 resets.")
+    svg = new_diagram("D08-08", "センサー選定の手順", "Sensor selection workflow",
+                      "第8日 / Day 8", 1000)
+    steps = [
+        ("何を検出するか", "what to detect"),
+        ("対象の材質・色", "material and colour"),
+        ("必要な検出距離", "required distance"),
+        ("対象の速さ", "target speed"),
+        ("必要な応答時間", "response time"),
+        ("環境（粉じん・水・油）", "environment"),
+        ("デジタルかアナログか", "digital or analog"),
+        ("必要な電源電圧", "supply voltage"),
+        ("出力インターフェース", "output interface"),
+        ("PLC入力との整合", "PLC input compatibility"),
+    ]
+    for index, (ja, en) in enumerate(steps):
+        col = index // 5
+        row = index % 5
+        x = 80 + col * 660
+        y = 190 + row * 140
+        svg.circle(x + 40, y + 45, 26, fill=JP_BG, stroke=ACCENT, sw=2)
+        svg.text(x + 40, y + 53, str(index + 1), 20, 700, ACCENT, "middle")
+        label_box(svg, x + 80, y, 540, 90, ja, en, size=15)
+        if row < 4:
+            svg.line(x + 40, y + 75, x + 40, y + 130, stroke=ACCENT, sw=2)
+    svg.line(620, 470, 740, 470, stroke=ACCENT, sw=2.4)
+    svg.line(740, 470, 740, 235, stroke=ACCENT, sw=2.4)
+    panel(svg, 80, 900, 1300, 90, "信号の種類", "signal types")
+    svg.text(100, 975, "ON/OFF・アナログ（0–10V、4–20mA）・パルス・通信 / ON/OFF, analog, pulse, communication",
+             15, 400, INK)
+    svg.footer("対象 → 距離 → 速さ → 環境 → 信号 → PLC入力の順に整理する",
+               "Work through target, distance, speed, environment, signal and PLC input")
     return svg
 
 
 def d08_09() -> Svg:
-    svg = new_diagram("D08-09", "状態ベースのシーケンス", "State-based sequence",
-                      "第8日 / Day 8", 900)
-    positions = {
-        "IDLE": (70, 300),
-        "READY": (270, 300),
-        "EXTEND": (470, 300),
-        "WAIT_EXTENDED": (690, 300),
-        "RETRACT": (910, 300),
-        "WAIT_RETRACTED": (1130, 300),
-        "COMPLETE": (1130, 520),
-        "FAULT": (620, 560),
-    }
-    colors = {
-        "IDLE": MUTED, "READY": CONTROL, "EXTEND": ENERGY, "WAIT_EXTENDED": SENSOR,
-        "RETRACT": ENERGY, "WAIT_RETRACTED": SENSOR, "COMPLETE": GOOD, "FAULT": HAZARD,
-    }
-    subtitles = {
-        "IDLE": "all OFF / fresh START",
-        "READY": "Y0 ON / run",
-        "EXTEND": "Y2 ON / command",
-        "WAIT_EXTENDED": "wait X3 / timeout F001",
-        "RETRACT": "Y2 OFF / command",
-        "WAIT_RETRACTED": "wait X2 / timeout F003",
-        "COMPLETE": "Y0, Y1 / new START",
-        "FAULT": "all OFF / reset only",
-    }
-    for state, (x, y) in positions.items():
-        w = 180
-        svg.rect(x, y, w, 86, fill=CARD, stroke=colors[state], sw=2.4, rx=10)
-        svg.text(x + w / 2, y + 34, state, 14 if len(state) > 12 else 17, 700, colors[state], "middle")
-        svg.text(x + w / 2, y + 60, subtitles[state], 10, 400, MUTED, "middle")
-    for start, end in (("IDLE", "READY"), ("READY", "EXTEND"), ("EXTEND", "WAIT_EXTENDED"),
-                       ("WAIT_EXTENDED", "RETRACT"), ("RETRACT", "WAIT_RETRACTED")):
-        x1, y1 = positions[start]
-        x2, y2 = positions[end]
-        svg.line(x1 + 182, y1 + 43, x2 - 2, y2 + 43, stroke=INK, sw=2)
-    # wait retracted -> complete
-    svg.line(1300, 388, 1300, 518, stroke=GOOD, sw=2)
-    svg.text(1290, 470, "X2 ON, X3 OFF", 10, 600, GOOD, "end")
-    # timeouts bus (above COMPLETE, below the top row)
-    svg.line(780, 388, 780, 440, stroke=HAZARD, sw=2, dash="6 4", marker=False)
-    svg.line(1160, 388, 1160, 440, stroke=HAZARD, sw=2, dash="6 4", marker=False)
-    svg.line(780, 440, 1160, 440, stroke=HAZARD, sw=2, dash="6 4", marker=False)
-    svg.line(780, 440, 780, 558, stroke=HAZARD, sw=2, dash="6 4")
-    svg.text(795, 425, "F001", 10, 700, HAZARD)
-    svg.text(1070, 425, "F003", 10, 700, HAZARD)
-    # complete -> ready (new START)
-    svg.line(1220, 608, 1220, 720, stroke=GOOD, sw=2, marker=False)
-    svg.line(1220, 720, 360, 720, stroke=GOOD, sw=2, marker=False)
-    svg.line(360, 720, 360, 388, stroke=GOOD, sw=2)
-    svg.text(790, 742, "new START / 新しいSTART（位置確認後のみ）", 11, 600, GOOD, "middle")
-    # reset -> IDLE
-    svg.line(620, 600, 500, 600, stroke=HAZARD, sw=2, marker=False)
-    svg.line(500, 600, 500, 670, stroke=HAZARD, sw=2, marker=False)
-    svg.line(500, 670, 160, 670, stroke=HAZARD, sw=2, marker=False)
-    svg.line(160, 670, 160, 388, stroke=HAZARD, sw=2)
-    svg.text(515, 628, "reset + START released", 10, 600, HAZARD)
-    svg.text(515, 645, "reset does not start motion", 9, 400, MUTED)
-    # note
-    svg.rect(70, 775, 1300, 80, fill=JP_BG, stroke=ACCENT, sw=1.2, rx=8)
-    svg.text(90, 805, "指令（EXTEND/RETRACT）と確認（WAIT_EXTENDED/WAIT_RETRACTED）を分ける。", 13, 700, INK)
-    svg.text(90, 827, "確認が来なければタイムアウトでFAULT。リセットは動作開始ではない。", 11, 400, INK)
-    svg.text(90, 845, "A command is not a confirmation. Missing confirmation gives FAULT; reset is not a start.", 10, 400, MUTED)
-    svg.footer("状態ごとに出力と遷移条件を決める。位置確認とタイムアウトを状態に含める。",
-               "Define outputs and transitions per state. Include position confirmation and timeouts in the states.")
+    svg = new_diagram("D08-09", "PNP・NPNとPLC入力の電流経路", "PNP and NPN current paths through PLC inputs",
+                      "第8日 / Day 8", 980)
+    panel(svg, 70, 170, 620, 380, "PNP：+側から電流を出す", "PNP sources current from +24V")
+    svg.line(100, 260, 660, 260, stroke=ENERGY, sw=3)
+    svg.text(100, 245, "+24V", 16, 700, ENERGY)
+    svg.line(100, 500, 660, 500, stroke=MUTED, sw=3)
+    svg.text(100, 525, "0V（入力共通）/ input common", 15, 700, MUTED)
+    svg.rect(190, 300, 150, 90, fill=FILL_SENSOR, stroke=SENSOR, sw=2, rx=6)
+    svg.text(265, 335, "PNPセンサー", 16, 700, INK, "middle")
+    svg.text(265, 360, "PNP sensor", 13, 400, MUTED, "middle")
+    svg.line(265, 262, 265, 298, stroke=ENERGY, sw=2.4)
+    svg.rect(420, 300, 150, 90, fill=FILL_CONTROL, stroke=CONTROL, sw=2, rx=6)
+    svg.text(495, 335, "PLC入力", 16, 700, INK, "middle")
+    svg.text(495, 360, "PLC input", 13, 400, MUTED, "middle")
+    svg.line(342, 345, 418, 345, stroke=BAD, sw=2.8)
+    svg.line(495, 392, 495, 498, stroke=BAD, sw=2.8)
+    svg.text(348, 330, "出力", 12, 700, BAD)
+    svg.text(348, 346, "output", 10, 400, BAD)
+    svg.text(505, 450, "電流 / current", 13, 700, BAD)
+
+    panel(svg, 750, 170, 620, 380, "NPN：0Vへ電流を引き込む", "NPN sinks current toward 0V")
+    svg.line(780, 260, 1340, 260, stroke=ENERGY, sw=3)
+    svg.text(780, 245, "+24V（入力共通）/ input common", 15, 700, ENERGY)
+    svg.line(780, 500, 1340, 500, stroke=MUTED, sw=3)
+    svg.text(780, 525, "0V", 16, 700, MUTED)
+    svg.rect(1100, 300, 150, 90, fill=FILL_SENSOR, stroke=SENSOR, sw=2, rx=6)
+    svg.text(1175, 335, "NPNセンサー", 16, 700, INK, "middle")
+    svg.text(1175, 360, "NPN sensor", 13, 400, MUTED, "middle")
+    svg.line(1175, 392, 1175, 498, stroke=BAD, sw=2.8)
+    svg.rect(870, 300, 150, 90, fill=FILL_CONTROL, stroke=CONTROL, sw=2, rx=6)
+    svg.text(945, 335, "PLC入力", 16, 700, INK, "middle")
+    svg.text(945, 360, "PLC input", 13, 400, MUTED, "middle")
+    svg.line(945, 262, 945, 298, stroke=ENERGY, sw=2.4)
+    svg.line(1022, 345, 1098, 345, stroke=BAD, sw=2.8)
+    svg.text(1185, 450, "電流 / current", 13, 700, BAD)
+
+    table_grid(svg, 70, 590, ["センサー / sensor", "動作時 / when active", "入力共通 / input common", "電流 / current"],
+               [["PNP", "+から出す / sources", "0V（シンク入力）", "+24V → センサー → PLC → 0V"],
+                ["NPN", "0Vへ引く / sinks", "+24V（ソース入力）", "+24V → PLC → センサー → 0V"]],
+               [180, 300, 300, 520], row_h=52, size=15)
+    note(svg, 760, "NPN/PNPは出力インターフェース。検出原理ではない。配線色は例でありデータシートに従う。",
+         "NPN/PNP describe the output interface, not the detection principle. Wire colours are examples; follow the datasheet.")
+    svg.footer("PNPは共通0Vの入力へ、NPNは共通+24Vの入力へ。電流の向きで理解する",
+               "PNP pairs with a 0V-common input; NPN with a +24V-common input. Understand it by current direction")
     return svg
 
 
 def d08_10() -> Svg:
-    svg = new_diagram("D08-10", "タイミングチャート", "Timing chart",
-                      "第8日 / Day 8", 900)
-    # time axis
-    x0, x1 = 250, 1330
-    svg.line(x0, 780, x1, 780, stroke=MUTED, sw=2, marker=False)
-    for second in range(0, 9):
-        x = x0 + (x1 - x0) * second / 8
-        svg.line(x, 775, x, 785, stroke=MUTED, sw=1.5, marker=False)
-        svg.text(x, 805, f"{second}s", 11, 400, MUTED, "middle")
-    rows = [
-        ("START", [(0, 0.4, 1), (0.4, 8, 0)], CONTROL),
-        ("X1 STOP_OK", [(0, 8, 1)], SENSOR),
-        ("M0 RUN", [(0.5, 8, 1)], CONTROL),
-        ("T0", [(0.5, 3.5, 1), (3.5, 8, 1)], MUTED),
-        ("Y1", [(3.5, 8, 1)], GOOD),
-        ("Y2 extend", [(0.8, 2.8, 1)], ENERGY),
-        ("X3 extended", [(1.8, 3.4, 1)], SENSOR),
-    ]
-    for index, (label, segments, color) in enumerate(rows):
-        y = 220 + index * 72
-        svg.text(230, y + 5, label, 13, 700, color, "end")
-        svg.line(x0, y + 18, x1, y + 18, stroke=GRID, sw=1, marker=False)
-        for start, end, level in segments:
-            left = x0 + (x1 - x0) * start / 8
-            right = x0 + (x1 - x0) * end / 8
-            top = y - 12 if level else y + 18
-            svg.line(left, top, right, top, stroke=color, sw=2.6, marker=False)
-            if 0 <= start <= 8:
-                svg.line(left, y - 12, left, y + 18, stroke=color, sw=1.4, marker=False)
-    # annotations
-    for second, text in ((0.4, "release"), (1.8, "X3 ON"), (3.5, "3 s"), (3.2, "STOP")):
-        x = x0 + (x1 - x0) * second / 8
-        svg.line(x, 190, x, 740, stroke=HAZARD, sw=1, dash="3 4", marker=False)
-        svg.text(x, 182, text, 11, 600, HAZARD, "middle")
-    svg.rect(70, 840, 1300, 46, fill=JP_BG, stroke=ACCENT, sw=1, rx=6)
-    svg.text(90, 868, "模式図です。実機の時間はスキャン周期・入力フィルタ・タイマー分解能で変わります。 / Schematic only; real timing depends on scan, filter and timer resolution.",
-             11, 400, INK)
-    svg.footer("STARTを離してもM0は続く。T0はM0の間だけ進み、3秒でY1がON。STOPで全てリセット。",
-               "M0 continues after START release. T0 advances while RUN is on; Y1 turns on at 3 s. STOP resets all.")
+    svg = new_diagram("D08-10", "ラダーの基本と物理接点・論理接点", "Ladder basics, and physical versus logical contacts",
+                      "第8日 / Day 8", 1000)
+    panel(svg, 70, 170, 1300, 300, "AND・OR・NOT", "AND, OR and NOT")
+    ladder_row(svg, 260, [("contact", False, "A", None), ("contact", False, "B", None),
+                          ("coil", "Y", "Y = A AND B")], start_x=230, step=150)
+    ladder_row(svg, 350, [("contact", False, "A", None), ("coil", "Y", "Y = A OR B")], start_x=230, step=150)
+    ladder_row(svg, 440, [("contact", True, "A", None), ("coil", "Y", "Y = NOT A")], start_x=230, step=150)
+    svg.text(700, 350, "並列はOR。直列はAND。NC接点は否定。", 15, 400, MUTED)
+    svg.text(700, 375, "series is AND; parallel is OR; an NC contact negates", 13, 400, MUTED)
+
+    panel(svg, 70, 500, 620, 300, "物理接点", "physical contact")
+    svg.text(90, 590, "物理NCのSTOPを、健全時にPLC入力ONとなるように配線する。", 15, 400, INK)
+    svg.text(90, 618, "Wire a physical NC stop so the PLC input is ON while healthy.", 13, 400, MUTED)
+    svg.text(90, 670, "プログラムでは「ONで許可」として使う。", 15, 400, INK)
+    svg.text(90, 698, "In the program the state is used as an ON permission.", 13, 400, MUTED)
+    svg.text(90, 750, "断線したときにONかOFFかを設計者が理解する。", 15, 700, WARN)
+    svg.text(90, 775, "Know whether a broken wire produces ON or OFF.", 12, 400, MUTED)
+
+    panel(svg, 750, 500, 620, 300, "論理接点とタイマー", "logical contact and timer")
+    ladder_row(svg, 600, [("contact", False, "M0", None), ("contact", False, "T0", None),
+                          ("coil", "Y1", "on-delay")], start_x=880, step=150)
+    svg.text(770, 700, "T0はM0がONの間だけ時間を数える。", 15, 400, INK)
+    svg.text(770, 728, "T0 counts only while M0 is ON.", 13, 400, MUTED)
+    svg.text(770, 770, "図の接点は論理状態の評価であり、実接点や実電流ではない。", 14, 700, INK)
+    note(svg, 840, "物理的にNCのスイッチを、必ずNC論理接点で使う規則はない。",
+         "There is no rule that a physically NC switch must use an NC logical instruction.")
+    svg.footer("NO/NC接点・コイル・AND/OR/NOT・物理接点と論理接点・オンディレイタイマー",
+               "NO/NC contacts, coils, AND/OR/NOT, physical versus logical contacts, on-delay timer")
     return svg
 
 
 def d08_11() -> Svg:
-    svg = new_diagram("D08-11", "異常処理マトリクス", "Fault handling matrix",
-                      "第8日 / Day 8", 880)
-    headers = ["異常 / fault", "検出 / detection", "応答 / response", "リセット・再起動 / reset and restart"]
-    rows = [
-        ["前進端未確認 / extend not confirmed", "WAIT_EXTENDED 3 s 超過", "F001, Y2 OFF, RUN OFF", "原因除去→reset→new START"],
-        ["後退端未確認 / retract not confirmed", "WAIT_RETRACTED 3 s 超過", "F003, Y2 OFF, RUN OFF", "原因除去→reset→new START"],
-        ["前後端同時ON / both sensors ON", "X2 and X3 both ON", "F002, all outputs OFF", "原因除去→reset→new START"],
-        ["停止操作 / stop operated", "X1 OFF", "RUN OFF, Y2 OFF, T0=0", "停止解除→new START"],
-        ["停電・復電 / power restore", "initialisation", "outputs OFF, RUN OFF", "new STARTのみ / fresh START only"],
-        ["リセット中のSTART / START held", "reset and START ON", "reset refused", "STARTを離す / release START"],
+    svg = new_diagram("D08-11", "基本の自己保持回路", "The basic self-holding circuit",
+                      "第8日 / Day 8", 900)
+    panel(svg, 70, 170, 1300, 330, "基本の自己保持（教材用）", "basic self-holding (teaching example)")
+    ladder_row(svg, 300, [("contact", False, "X1", "STOP_OK"), ("contact", False, "X0", "START"),
+                          ("coil", "M0", "RUN")], start_x=230, step=170)
+    svg.line(430, 300, 430, 380, stroke=ACCENT, sw=2.4)
+    svg.line(430, 380, 520, 380, stroke=ACCENT, sw=2.4)
+    svg.line(520, 380, 520, 330, stroke=ACCENT, sw=2.4)
+    svg.line(490, 380, 550, 380, stroke=ACCENT, sw=2.4)
+    svg.text(470, 415, "M0の保持枝 / the M0 holding branch", 14, 700, ACCENT)
+    ladder_row(svg, 470, [("contact", False, "M0", None), ("coil", "Y0", "RUN lamp")],
+               start_x=230, step=170)
+
+    panel(svg, 70, 530, 1300, 290, "5つの場面", "five situations")
+    situations = [
+        "1. STARTを離す → RUNが続く（保持）/ release START: RUN stays on",
+        "2. STARTを押す → RUNになる / press START: RUN turns on",
+        "3. 押してから離す → RUNのまま / press then release: still RUN",
+        "4. STOP許可がOFF → RUNがOFF / permission OFF: RUN off",
+        "5. STOP許可が戻る → STARTを押しっぱなしだとRUNが戻る / permission restored: RUN returns while START is held",
     ]
-    table_grid(svg, 60, 190, headers, rows, [360, 300, 300, 330], row_h=72, size=13)
-    svg.rect(60, 710, 1290, 100, fill=FILL_HAZARD, stroke=HAZARD, sw=1.4, rx=8)
-    svg.text(80, 742, "リセットは動作開始ではない。復電時も、保持ビットや押しっぱなしのSTARTで自動再起動しない。", 14, 700, HAZARD)
-    svg.text(80, 765, "Reset is not a start. Power restoration must not restart from a retained bit or a held START.", 11, 400, MUTED)
-    svg.text(80, 790, "通常のPLC制御と安全機能は別。この表は安全教育用で、安全PLCの設計ではない。", 12, 600, INK)
-    svg.footer("異常の検出・応答・リセット・再起動をセットで設計する。 / Design detection, response, reset and restart together.",
-               "A fault response without a restart rule is incomplete.")
+    for index, text in enumerate(situations):
+        color = BAD if index == 4 else INK
+        svg.text(90, 600 + index * 40, text, 15, 700 if index == 4 else 400, color)
+    note(svg, 850, "基本回路は「記憶」の説明用。再起動防止の機能はない。",
+         "The basic circuit explains memory; it has no restart prevention.")
+    svg.footer("自己保持は並列のM0接点による。5番目の場面が拡張ロジックの出発点",
+               "Self-holding comes from the parallel M0 contact; situation 5 motivates the extended logic")
     return svg
+
+
+def d08_12() -> Svg:
+    svg = new_diagram("D08-12", "再起動防止を含む拡張ロジック", "Extended logic with restart prevention",
+                      "第8日 / Day 8", 1290)
+    panel(svg, 70, 170, 1300, 620, "汎用的な概念ラダー（機種固有ではない）", "generic conceptual ladder (not model-specific)")
+    ladder_row(svg, 300, [("contact", True, "X0", None), ("contact", False, "X1", None),
+                          ("contact", False, "X2", None), ("contact", True, "X3", None),
+                          ("coil", "M1", "armed")], start_x=200, step=125)
+    svg.text(90, 250, "N1 STARTが離れているときだけアーム / arm only while START is released", 13, 400, MUTED)
+    ladder_row(svg, 450, [("contact", False, "X0", None), ("contact", False, "M1", None),
+                          ("contact", False, "P", "edge"), ("contact", False, "X1", None),
+                          ("coil", "M2", "accept")], start_x=200, step=125)
+    svg.text(90, 372, "N2 新しい立ち上がりだけで起動を受け付ける / accept only a new rising edge", 13, 400, MUTED)
+    ladder_row(svg, 600, [("contact", False, "X1", None), ("contact", True, "FAULT", None),
+                          ("contact", False, "M2", None), ("coil", "M0", "RUN")], start_x=200, step=125)
+    svg.text(90, 522, "N3 STOP許可とFAULTで解除。M0は自己保持 / STOP and FAULT clear it; M0 seals in", 13, 400, MUTED)
+    ladder_row(svg, 730, [("contact", False, "RESET", None), ("contact", True, "X0", None),
+                          ("contact", False, "X1", None), ("coil", "RST", "FAULT")], start_x=200, step=125)
+    svg.text(90, 674, "N4 リセットはSTARTを離しているときだけ。運転は開始しない / reset only with START released; it never starts", 13, 400, MUTED)
+
+    panel(svg, 70, 820, 620, 240, "必要条件", "requirements")
+    for index, text in enumerate(["起動時RUN=OFF / RUN is OFF at power-up",
+                                  "保持されたSTARTでは起動しない / a held START does not start",
+                                  "STOPはSTARTより優先 / STOP precedes START",
+                                  "リセットは運転開始ではない / reset is not a start"]):
+        svg.text(90, 900 + index * 34, f"・{text}", 14, 400, INK)
+    panel(svg, 750, 820, 620, 240, "確認", "checks")
+    for index, text in enumerate(["STARTを離して押し直すまで動かない / no motion until START is released and pressed",
+                                  "許可が戻っても自動で動かない / restoring a permissive does not restart",
+                                  "異常復帰でも自動で動かない / fault recovery does not restart",
+                                  "安全機能ではない / not a safety function"]):
+        svg.text(770, 900 + index * 34, f"・{text}", 14, 400, INK)
+    note(svg, 1090, "シミュレーションは教育用モデル。実機PLCの実装や安全機能の証明ではない。",
+         "The simulation is a teaching model; it does not prove a real PLC implementation or a safety function.")
+    svg.footer("アーム・立ち上がり検出・STOP優先・位置確認・リセット分離で再起動を防ぐ",
+               "Arming, edge detection, STOP precedence, position confirmation and a separate reset prevent restart")
+    return svg
+
+
+def d08_13() -> Svg:
+    svg = new_diagram("D08-13", "インターロックの例", "Interlock example",
+                      "第8日 / Day 8", 880)
+    panel(svg, 70, 170, 1300, 260, "前進と後退の相互排他", "mutual exclusion of forward and reverse")
+    ladder_row(svg, 290, [("contact", False, "FWD_REQ", None), ("contact", True, "REV_OUT", None),
+                          ("coil", "FWD_OUT", None)], start_x=250, step=200)
+    ladder_row(svg, 380, [("contact", False, "REV_REQ", None), ("contact", True, "FWD_OUT", None),
+                          ("coil", "REV_OUT", None)], start_x=250, step=200)
+    svg.text(90, 250, "相互に打ち消すだけの形は、スキャン順に依存する / cross-linked contacts depend on scan order",
+             14, 700, WARN)
+
+    panel(svg, 70, 460, 620, 260, "教材の設計", "teaching design")
+    svg.text(90, 550, "同時要求は両方OFF（拒否）。", 17, 700, INK)
+    svg.text(90, 580, "Both requests OFF; the conflict is rejected.", 14, 400, MUTED)
+    svg.text(90, 630, "決定的で、並び順に依存しない。", 15, 400, INK)
+    svg.text(90, 658, "Deterministic and independent of rung order.", 13, 400, MUTED)
+    svg.text(90, 700, "実際の反転接触器は電気的・機械的ILも必要。", 14, 700, WARN)
+    svg.text(90, 724, "Real reversing contactors also need electrical and mechanical interlocking.", 12, 400, MUTED)
+
+    table_grid(svg, 750, 460, ["要求 / request", "FWD", "REV", "競合 / conflict"],
+               [["前進のみ / forward only", "ON", "OFF", "なし / none"],
+                ["後退のみ / reverse only", "OFF", "ON", "なし / none"],
+                ["両方 / both", "OFF", "OFF", "あり / yes"],
+                ["停止 / stop", "OFF", "OFF", "なし / none"]],
+               [200, 90, 90, 150], row_h=48, size=15)
+    note(svg, 760, "ソフトのインターロックを、安全定格のガードとして扱わない。",
+         "Software interlocks are not safety-rated guarding functions.")
+    svg.footer("反対側の出力で自分の指令を禁止する。同時要求は決定的に拒否する",
+               "Each command is inhibited by the opposite output; simultaneous requests are deterministically rejected")
+    return svg
+
+
+def d08_14() -> Svg:
+    svg = new_diagram("D08-14", "シーケンスとタイミング", "Sequence and timing",
+                      "第8日 / Day 8", 900)
+    chain(svg, [("製品検出", "product detected", "X4", SENSOR),
+                ("前進指令", "extend command", "Y2", CONTROL),
+                ("前進端の確認", "extended confirmed", "X3", SENSOR),
+                ("後退指令", "retract command", "Y2 OFF", CONTROL),
+                ("後退端の確認", "retracted confirmed", "X2", SENSOR)],
+          y=190, h=140, x0=70, x1=1370, gap=24)
+    panel(svg, 70, 400, 1300, 300, "タイミングとタイムアウト", "timing and timeout")
+    svg.line(110, 500, 1310, 500, stroke=GRID, sw=2)
+    segments = [("前進指令", "extend", 200, MECH), ("確認待ち", "wait", 300, ENERGY),
+                ("後退", "retract", 200, MECH), ("確認待ち", "wait", 250, ENERGY)]
+    cursor = 120
+    for ja, en, width, color in segments:
+        svg.rect(cursor, 470, width, 60, fill=CARD, stroke=color, sw=2, rx=3)
+        svg.text(cursor + width / 2, 495, ja, 14, 700, INK, "middle")
+        svg.text(cursor + width / 2, 516, en, 12, 400, MUTED, "middle")
+        cursor += width
+    svg.line(620, 440, 620, 560, stroke=BAD, sw=3, dash="8 6")
+    svg.text(630, 440, "タイムアウト（教材値3秒）/ timeout (training value 3 s)", 14, 700, BAD)
+    svg.text(110, 620, "指令と確認は別。確認が来ない場合を設計する。", 16, 400, INK)
+    svg.text(110, 648, "Commands and confirmations differ; design the missing-confirmation case.", 14, 400, MUTED)
+    svg.text(110, 690, "電磁弁OFF＝必ず停止、ではない。ばね戻りでは動くことがある。", 15, 700, WARN)
+    svg.text(110, 712, "OFF does not always mean stopped; a spring-return valve can move.", 12, 400, MUTED)
+    svg.footer("製品検出 → 前進 → 確認 → 後退 → 確認。タイムアウトの位置を決める",
+               "Product detection, extend, confirm, retract, confirm, with a defined timeout")
+    return svg
+
+
+DAY8 = [d08_01, d08_02, d08_03, d08_04, d08_05, d08_06, d08_07,
+        d08_08, d08_09, d08_10, d08_11, d08_12, d08_13, d08_14]
 
 
 # --------------------------------------------------------------------------- #
 # Day 9
 # --------------------------------------------------------------------------- #
 def d09_01() -> Svg:
-    svg = new_diagram("D09-01", "LANとスイッチ", "LAN and switch",
-                      "第9日 / Day 9", 850)
-    # switch
-    svg.rect(570, 380, 300, 130, fill=FILL_DATA, stroke=DATA, sw=2.4, rx=8)
-    svg.text(720, 425, "スイッチ", 20, 700, DATA, "middle")
-    svg.text(720, 450, "L2 switch", 13, 400, MUTED, "middle")
-    svg.text(720, 478, "同一LAN内を中継", 12, 400, INK, "middle")
-    devices = [
-        ("PC", "192.168.10.10", 220, 240, DATA),
-        ("PLC", "192.168.10.20", 1020, 240, CONTROL),
-        ("HMI", "192.168.10.40", 220, 590, SENSOR),
-        ("カメラ / camera", "192.168.10.30", 1020, 590, ENERGY),
+    svg = new_diagram("D09-01", "撮像の流れ", "The imaging chain",
+                      "第9日 / Day 9", 900)
+    chain(svg, [("対象物", "object", "シート・製品 / sheet, product", MECH),
+                ("照明", "illumination", "光を当てる / lights the object", ENERGY),
+                ("レンズ", "lens", "結像する / forms the image", CONTROL),
+                ("撮像素子", "image sensor", "光を電気に / light to signal", SENSOR),
+                ("デジタル画像", "digital image", "画素の集まり / array of pixels", DATA),
+                ("コンピュータ", "computer", "処理・AI / processing, AI", CONTROL)],
+          y=190, h=150, x0=60, x1=1380, gap=22)
+    panel(svg, 70, 420, 1300, 330, "カメラの要素", "camera elements")
+    items = [
+        ("画素", "pixel", "画像の最小単位 / smallest unit"),
+        ("解像度", "resolution", "横×縦の画素数 / pixels across and down"),
+        ("センササイズ", "sensor size", "撮像素子の大きさ / physical size"),
+        ("露光", "exposure", "光を受ける時間 / collection time"),
+        ("ゲイン", "gain", "信号の増幅 / amplification"),
+        ("トリガ", "trigger", "撮影のきっかけ / capture start"),
     ]
-    for name, ip, x, y, color in devices:
-        svg.rect(x, y, 240, 100, fill=CARD, stroke=color, sw=2, rx=8)
-        svg.text(x + 120, y + 34, name, 16, 700, color, "middle")
-        svg.text(x + 120, y + 60, ip, 14, 600, INK, "middle")
-        svg.text(x + 120, y + 82, "/24", 11, 400, MUTED, "middle")
-    svg.line(460, 290, 660, 380, stroke=DATA, sw=2.2)
-    svg.line(1020, 290, 780, 380, stroke=DATA, sw=2.2)
-    svg.line(460, 640, 660, 510, stroke=DATA, sw=2.2)
-    svg.line(1020, 640, 780, 510, stroke=DATA, sw=2.2)
-    # router
-    svg.rect(1120, 390, 220, 110, fill=CARD, stroke=WARN, sw=2, rx=8)
-    svg.text(1230, 425, "ルータ / router", 15, 700, WARN, "middle")
-    svg.text(1230, 448, "別ネットワークへ", 11, 400, INK, "middle")
-    svg.text(1230, 468, "gateway", 11, 400, MUTED, "middle")
-    svg.line(870, 445, 1118, 445, stroke=WARN, sw=2, dash="7 5")
-    # legend
-    svg.rect(60, 730, 1320, 50, fill=JP_BG, stroke=ACCENT, sw=1, rx=6)
-    svg.text(80, 760, "同じスイッチにつながっていても、別サブネットなら通常はルータが必要。 / A shared switch does not remove the need for a router between subnets.",
-             12, 400, INK)
-    svg.footer("スイッチは同一LAN内を中継し、ルータは別ネットワークへつなぐ。IPとマスクで到達範囲が決まる。",
-               "A switch forwards within a LAN; a router connects networks. IP and mask define reachability.")
+    card_w = (1300 - 40 - 5 * 20) / 6
+    for index, (ja, en, sub) in enumerate(items):
+        x = 90 + index * (card_w + 20)
+        svg.card(x, 490, card_w, 230, ja, en, stroke=DATA, accent=DATA, sub=sub)
+    note(svg, 780, "産業用カメラは画像を撮る装置。AI推論はPCなどが行う。",
+         "An industrial camera captures images; AI inference runs on a PC or processor.")
+    svg.footer("物体 → 照明 → レンズ → 撮像素子 → デジタル画像 → コンピュータ",
+               "Object, illumination, lens, image sensor, digital image, computer")
     return svg
 
 
 def d09_02() -> Svg:
-    svg = new_diagram("D09-02", "IPv4とサブネットマスク", "IPv4 and subnet masks",
+    svg = new_diagram("D09-02", "解像度と欠陥のピクセル数", "Resolution and the pixel size of a defect",
                       "第9日 / Day 9", 900)
-    # octet bar
-    svg.text(70, 205, "IPv4 = 32ビット = 4オクテット / 32 bits in four octets", 16, 700, INK)
-    for index, octet in enumerate(("192", "168", "10", "20")):
-        x = 70 + index * 240
-        svg.rect(x, 225, 240, 70, fill=FILL_DATA if index < 3 else FILL_CONTROL,
-                 stroke=DATA if index < 3 else CONTROL, sw=1.6, rx=4)
-        svg.text(x + 120, 260, octet, 22, 700, INK, "middle")
-        svg.text(x + 120, 284, f"octet {index + 1}", 10, 400, MUTED, "middle")
-    # /24 bar
-    svg.text(70, 350, "/24: 先頭24ビットがネットワーク部 / first 24 bits are network", 15, 700, INK)
-    svg.rect(70, 370, 720, 34, fill=FILL_DATA, stroke=DATA, sw=1.4, rx=3)
-    svg.rect(790, 370, 240, 34, fill=FILL_CONTROL, stroke=CONTROL, sw=1.4, rx=3)
-    svg.text(430, 394, "network 192.168.10", 13, 700, INK, "middle")
-    svg.text(910, 394, "host 0-255", 13, 700, CONTROL, "middle")
-    # /25 bar
-    svg.text(70, 455, "/25: ネットワーク部が25ビットに増える / the network part grows to 25 bits", 15, 700, INK)
-    svg.rect(70, 475, 480, 34, fill=FILL_DATA, stroke=DATA, sw=1.4, rx=3)
-    svg.rect(550, 475, 240, 34, fill=FILL_SENSOR, stroke=SENSOR, sw=1.4, rx=3)
-    svg.rect(790, 475, 240, 34, fill=FILL_CONTROL, stroke=CONTROL, sw=1.4, rx=3)
-    svg.text(310, 499, "network 192.168.10.0", 12, 700, INK, "middle")
-    svg.text(670, 499, "subnet .128", 12, 700, SENSOR, "middle")
-    svg.text(910, 499, "host 0-127", 12, 700, CONTROL, "middle")
-    # table
-    headers = ["項目 / item", "/24 example", "/25 example"]
-    rows = [
-        ["IP", "192.168.10.10", "192.168.10.130"],
-        ["mask", "255.255.255.0", "255.255.255.128"],
-        ["network", "192.168.10.0", "192.168.10.128"],
-        ["broadcast", "192.168.10.255", "192.168.10.255"],
-        ["assignable", ".1 - .254 (254)", ".129 - .254 (126)"],
-    ]
-    table_grid(svg, 70, 560, headers, rows, [220, 400, 400], row_h=42, size=13)
-    svg.rect(1130, 560, 250, 230, fill=FILL_HAZARD, stroke=HAZARD, sw=1.4, rx=8)
-    svg.text(1150, 595, "同じ第3オクテット", 13, 700, HAZARD)
-    svg.text(1150, 617, "でも別サブネット", 13, 700, HAZARD)
-    svg.text(1150, 639, "same third octet,", 10, 400, MUTED)
-    svg.text(1150, 657, "different subnet", 10, 400, MUTED)
-    svg.text(1150, 685, ".20/25 → .0/25", 12, 600, INK)
-    svg.text(1150, 707, ".130/25 → .128/25", 12, 600, INK)
-    svg.text(1150, 735, "マスクと一緒に判定", 11, 600, HAZARD)
-    svg.text(1150, 755, "judge with the mask", 10, 400, MUTED)
-    svg.footer("ネットワーク・ブロードキャスト・割当可能範囲を、マスクと一緒に計算する。",
-               "Calculate network, broadcast and assignable range together with the mask.")
+    for index, (cols, label, mm_per_px) in enumerate([(12, "低解像度 / low resolution", 0.5),
+                                                      (24, "中解像度 / medium", 0.25),
+                                                      (48, "高解像度 / high", 0.125)]):
+        x = 90 + index * 440
+        cell = 220 / cols
+        svg.rect(x, 200, 220, 220, fill="#FFFFFF", stroke=GRID, sw=1.4)
+        for row in range(cols):
+            for col in range(cols):
+                if (row + col) % 2 == 0:
+                    svg.rect(x + col * cell, 200 + row * cell, cell, cell,
+                             fill="#EDF2F7", stroke="none", sw=0, rx=0)
+        defect = max(cell * (0.5 / mm_per_px), 1)
+        sx = x + 220 * 0.42
+        sy = 200 + 220 * 0.42
+        svg.rect(sx, sy, defect, defect, fill=BAD, stroke=BAD, sw=1, rx=0)
+        svg.text(x + 110, 455, label, 16, 700, INK, "middle")
+        svg.text(x + 110, 480, f"{mm_per_px} mm/px", 14, 400, MUTED, "middle")
+        pixels = 0.5 / mm_per_px
+        svg.text(x + 110, 512, f"0.5 mm ≈ {pixels:g} px", 16, 700, BAD, "middle")
+    panel(svg, 70, 560, 1300, 220, "ピクセル数だけで検出は決まらない", "pixel count alone does not decide detection")
+    svg.text(90, 650, "・光学分解能・ピント・コントラスト・照明・動体ぶれ", 15, 400, INK)
+    svg.text(90, 675, "  optical resolution, focus, contrast, lighting, motion blur", 12, 400, MUTED)
+    svg.text(90, 715, "・レンズ性能・撮像素子・前処理・AI入力解像度・検証データ", 15, 400, INK)
+    svg.text(90, 740, "  lens quality, sensor, preprocessing, model input resolution, validation data", 12, 400, MUTED)
+    note(svg, 800, "1,920 px・視野240 mm → 0.125 mm/px。0.5 mmの欠陥は約4 px。",
+         "1920 px across 240 mm is 0.125 mm/px; a 0.5 mm defect covers about 4 pixels.")
+    svg.footer("同じ欠陥でも解像度でピクセル数が変わる。4 pxでも検出保証ではない",
+               "The same defect covers different pixel counts; four pixels is not a guarantee")
     return svg
 
 
 def d09_03() -> Svg:
-    svg = new_diagram("D09-03", "同一サブネットとルーティング", "Same subnet and routing",
-                      "第9日 / Day 9", 830)
-    # same subnet
-    panel(svg, 60, 190, 620, 290, "同一サブネット / same subnet", "192.168.10.0/24")
-    svg.rect(100, 300, 240, 80, fill=CARD, stroke=DATA, sw=2, rx=6)
-    svg.text(220, 332, "PC", 15, 700, DATA, "middle")
-    svg.text(220, 354, "192.168.10.10", 12, 400, MUTED, "middle")
-    svg.rect(440, 300, 200, 80, fill=CARD, stroke=CONTROL, sw=2, rx=6)
-    svg.text(540, 332, "PLC", 15, 700, CONTROL, "middle")
-    svg.text(540, 354, "192.168.10.20", 12, 400, MUTED, "middle")
-    svg.line(342, 340, 438, 340, stroke=GOOD, sw=3)
-    svg.text(390, 325, "直接", 11, 700, GOOD, "middle")
-    svg.text(390, 365, "direct", 10, 400, MUTED, "middle")
-    svg.text(100, 430, "同じネットワーク。スイッチ内で通信できる。", 13, 400, INK)
-    # different subnet
-    panel(svg, 720, 190, 650, 290, "別サブネット / different subnet", "192.168.10.0/24 and 192.168.20.0/24")
-    svg.rect(760, 300, 220, 80, fill=CARD, stroke=DATA, sw=2, rx=6)
-    svg.text(870, 332, "PC", 15, 700, DATA, "middle")
-    svg.text(870, 354, "192.168.10.10/24", 12, 400, MUTED, "middle")
-    svg.rect(1110, 300, 220, 80, fill=CARD, stroke=CONTROL, sw=2, rx=6)
-    svg.text(1220, 332, "PLC", 15, 700, CONTROL, "middle")
-    svg.text(1220, 354, "192.168.20.20/24", 12, 400, MUTED, "middle")
-    svg.rect(980, 420, 150, 60, fill=CARD, stroke=WARN, sw=2, rx=6)
-    svg.text(1055, 447, "ルータ", 15, 700, WARN, "middle")
-    svg.text(1055, 466, "router", 10, 400, MUTED, "middle")
-    svg.line(980, 340, 982, 420, stroke=WARN, sw=2, dash="6 4")
-    svg.line(1110, 340, 1108, 420, stroke=WARN, sw=2, dash="6 4")
-    svg.text(760, 500, "別ネットワーク。通常はルータとゲートウェイ設定が必要。", 13, 400, INK)
-    # note
-    svg.rect(60, 540, 1310, 130, fill=JP_BG, stroke=ACCENT, sw=1.2, rx=8)
-    svg.text(80, 575, "同一サブネットかどうかは、同じマスクで計算したネットワークアドレスが一致するかで判定する。", 15, 700, INK)
-    svg.text(80, 600, "Two addresses are in the same subnet when their network addresses, computed with the same mask, are equal.", 11, 400, MUTED)
-    svg.text(80, 630, "ゲートウェイは、別ネットワークへ出るための次の通信先。 / The gateway is the next hop to another network.", 12, 400, INK)
-    svg.footer("物理的に同じスイッチでも、別サブネットならルーティングが必要。 / Even on one switch, different subnets require routing.",
-               "Same subnet is a logical condition, not a cable condition.")
+    svg = new_diagram("D09-03", "視野・作動距離・被写界深度", "Field of view, working distance and depth of field",
+                      "第9日 / Day 9", 980)
+    panel(svg, 70, 170, 620, 360, "広い視野・短い作動距離", "wide field of view, short working distance")
+    svg.rect(200, 230, 120, 40, fill=FILL_CONTROL, stroke=CONTROL, sw=2, rx=4)
+    svg.text(260, 220, "カメラ / camera", 13, 700, CONTROL, "middle")
+    svg.poly([(230, 272), (290, 272), (470, 450), (50, 450)], fill=FILL_DATA, stroke=DATA, sw=1.6, marker=False)
+    svg.line(260, 450, 260, 480, stroke=MUTED, sw=1.6, marker=False)
+    svg.text(270, 500, "作動距離 WD / working distance", 13, 400, MUTED)
+    svg.line(60, 440, 460, 440, stroke=MECH, sw=3, marker=False)
+    svg.text(260, 430, "広い視野 / wide FOV", 14, 700, MECH, "middle")
+
+    panel(svg, 750, 170, 620, 360, "狭い視野・長い作動距離", "narrow field of view, long working distance")
+    svg.rect(1030, 230, 120, 40, fill=FILL_CONTROL, stroke=CONTROL, sw=2, rx=4)
+    svg.text(1090, 220, "カメラ / camera", 13, 700, CONTROL, "middle")
+    svg.poly([(1060, 272), (1120, 272), (1190, 450), (990, 450)], fill=FILL_DATA, stroke=DATA, sw=1.6, marker=False)
+    svg.line(1090, 450, 1090, 480, stroke=MUTED, sw=1.6, marker=False)
+    svg.text(1100, 500, "長い作動距離 / long WD", 13, 400, MUTED)
+    svg.line(1000, 440, 1180, 440, stroke=MECH, sw=3, marker=False)
+    svg.text(1090, 430, "狭い視野 / narrow FOV", 14, 700, MECH, "middle")
+
+    panel(svg, 70, 570, 1300, 240, "ピントと被写界深度", "focus and depth of field")
+    for index, (label, width, color) in enumerate([("浅い / shallow", 160, BAD),
+                                                   ("深い / deep", 420, GOOD)]):
+        y = 620 + index * 70
+        svg.rect(520, y, width, 34, fill=CARD, stroke=color, sw=2, rx=4)
+        svg.text(530, y + 23, label, 14, 700, color)
+    svg.text(110, 790, "絞ると深くなる。光は減る。 / stopping down deepens it and reduces light.", 14, 400, MUTED)
+    note(svg, 840, "焦点距離だけでレンズは選べない。視野・WD・センササイズ・絞りを見る。",
+         "A lens is not chosen from focal length alone; FOV, WD, sensor size and aperture matter.")
+    svg.footer("広い視野と狭い視野、短いWDと長いWD、浅い被写界深度と深い被写界深度",
+               "Wide and narrow FOV, short and long working distance, shallow and deep depth of field")
     return svg
 
 
 def d09_04() -> Svg:
-    svg = new_diagram("D09-04", "TCP・UDP・ポート・プロトコル", "TCP, UDP, ports and protocols",
-                      "第9日 / Day 9", 850)
-    layers = [
-        ("アプリケーション / application", "Modbus TCP, vendor protocol, HMI", CONTROL),
-        ("ポート / port", "502 (Modbus TCP), 80, vendor ports", SENSOR),
-        ("トランスポート / transport", "TCP (connection, retransmission) or UDP (connectionless)", DATA),
-        ("ネットワーク / network", "IPv4 address, subnet mask, gateway", ENERGY),
-        ("物理 / physical", "Ethernet cable, switch, link", MECH),
-    ]
-    for index, (ja, en, color) in enumerate(layers):
-        y = 210 + index * 105
-        svg.rect(120, y, 900, 84, fill=CARD, stroke=color, sw=2, rx=8)
-        svg.rect(120, y, 10, 84, fill=color, stroke=color, sw=0, rx=3)
-        svg.text(150, y + 34, ja, 16, 700, color)
-        svg.text(150, y + 58, en, 12, 400, MUTED)
-        svg.text(960, y + 50, f"L{5 - index}", 14, 700, color, "end")
-    svg.rect(1060, 210, 320, 250, fill=FILL_DATA, stroke=DATA, sw=1.4, rx=8)
-    svg.text(1080, 245, "IPアドレス", 15, 700, DATA)
-    svg.text(1080, 268, "which device", 11, 400, MUTED)
-    svg.text(1080, 300, "ポート", 15, 700, SENSOR)
-    svg.text(1080, 323, "which service", 11, 400, MUTED)
-    svg.text(1080, 355, "TCP/UDP", 15, 700, MUTED)
-    svg.text(1080, 378, "how data is carried", 11, 400, MUTED)
-    svg.text(1080, 410, "アプリ / app", 15, 700, CONTROL)
-    svg.text(1080, 433, "what the bytes mean", 11, 400, MUTED)
-    svg.rect(1060, 490, 320, 160, fill=FILL_HAZARD, stroke=HAZARD, sw=1.2, rx=8)
-    svg.text(1080, 522, "リンク・IP・アプリは別", 13, 700, HAZARD)
-    svg.text(1080, 545, "ping OK ≠ Modbus OK", 12, 600, INK)
-    svg.text(1080, 568, "cable OK ≠ IP OK", 12, 600, INK)
-    svg.text(1080, 591, "IP OK ≠ application OK", 12, 600, INK)
-    svg.text(1080, 620, "each layer must be checked.", 10, 400, MUTED)
-    svg.footer("IPは機器、ポートはサービス、TCP/UDPは運び方、アプリはデータの意味を決める。",
-               "IP selects the device, the port selects the service, TCP/UDP carry the data and the application defines its meaning.")
+    svg = new_diagram("D09-04", "グローバルとローリングシャッター", "Global and rolling shutter",
+                      "第9日 / Day 9", 860)
+    panel(svg, 70, 170, 620, 360, "グローバルシャッター", "global shutter")
+    svg.rect(120, 240, 520, 240, fill="#FFFFFF", stroke=GRID, sw=1.4)
+    svg.rect(240, 300, 120, 120, fill=FILL_MECH, stroke=MECH, sw=2.4, rx=2)
+    svg.text(400, 400, "→ 移動 / motion", 14, 600, MUTED)
+    svg.text(120, 520, "全画素が同じ時間に露光する / all pixels expose at the same time", 15, 400, INK)
+    svg.text(120, 548, "行ごとの時間ずれによるゆがみがない / no row-timing distortion", 13, 400, MUTED)
+
+    panel(svg, 750, 170, 620, 360, "ローリングシャッター", "rolling shutter")
+    svg.rect(800, 240, 520, 240, fill="#FFFFFF", stroke=GRID, sw=1.4)
+    svg.parts.append(
+        f'<path d="M920 300 L1040 300 L1000 420 L880 420 Z" fill="{FILL_MECH}" stroke="{MECH}" stroke-width="2.4"/>')
+    svg.text(1080, 400, "→ 移動 / motion", 14, 600, MUTED)
+    svg.text(800, 520, "行ごとに時間をずらして露光する / rows expose at different times", 15, 400, INK)
+    svg.text(800, 548, "動く対象では像が斜めにゆがむことがある / a moving object can skew", 13, 700, BAD)
+
+    panel(svg, 70, 570, 1300, 190, "共通の注意", "common caution")
+    svg.text(90, 650, "グローバルでも、動体ぶれはなくならない。ぶれは露光時間で決まる。",
+             16, 400, INK)
+    svg.text(90, 680, "A global shutter does not remove motion blur; blur depends on exposure time.",
+             14, 400, MUTED)
+    svg.text(90, 720, "移動するシートの寸法・位置の判断では、ゆがみの影響を確認する。",
+             14, 400, INK)
+    svg.footer("グローバルは行ごとの時間ずれを避ける。ぶれは露光で決まる",
+               "A global shutter avoids row-timing distortion; blur is set by exposure")
     return svg
 
 
 def d09_05() -> Svg:
-    svg = new_diagram("D09-05", "ネットワーク構成と通信設定", "Network block diagram and configuration record",
-                      "第9日 / Day 9", 900)
-    # switch
-    svg.rect(600, 380, 240, 100, fill=FILL_DATA, stroke=DATA, sw=2.2, rx=8)
-    svg.text(720, 420, "スイッチ / switch", 15, 700, DATA, "middle")
-    svg.text(720, 445, "192.168.10.0/24", 11, 400, MUTED, "middle")
-    nodes = [
-        ("PC", "192.168.10.10", 120, 220, DATA),
-        ("PLC", "192.168.10.20", 1080, 220, CONTROL),
-        ("カメラ", "192.168.10.30", 120, 600, ENERGY),
-        ("HMI", "192.168.10.40", 1080, 600, SENSOR),
-    ]
-    for name, ip, x, y, color in nodes:
-        svg.rect(x, y, 250, 80, fill=CARD, stroke=color, sw=2, rx=6)
-        svg.text(x + 125, y + 30, name, 15, 700, color, "middle")
-        svg.text(x + 125, y + 52, ip, 12, 400, MUTED, "middle")
-    svg.line(372, 260, 640, 380, stroke=DATA, sw=2)
-    svg.line(1080, 260, 800, 380, stroke=CONTROL, sw=2)
-    svg.line(372, 640, 640, 480, stroke=ENERGY, sw=2)
-    svg.line(1080, 640, 800, 480, stroke=SENSOR, sw=2)
-    # data labels
-    svg.text(470, 300, "Modbus TCP :502", 11, 700, CONTROL)
-    svg.text(820, 300, "state / result", 11, 600, CONTROL)
-    svg.text(470, 620, "images", 11, 700, ENERGY)
-    svg.text(820, 620, "HMI data", 11, 600, SENSOR)
-    # router/gateway
-    svg.rect(640, 680, 200, 70, fill=CARD, stroke=WARN, sw=2, rx=6)
-    svg.text(740, 708, "GW 192.168.10.1", 12, 700, WARN, "middle")
-    svg.text(740, 728, "to other networks", 10, 400, MUTED, "middle")
-    svg.line(720, 480, 720, 678, stroke=WARN, sw=2, dash="6 4")
-    # record table
-    svg.rect(70, 780, 1300, 60, fill=JP_BG, stroke=ACCENT, sw=1, rx=6)
-    svg.text(90, 807, "記録: 機器 / IP / マスク / GW / プロトコル / ポート / 版 / 変更日 / 復旧手順", 13, 700, INK)
-    svg.text(90, 828, "Record: device, IP, mask, gateway, protocol, port, revision, change date and recovery procedure.", 10, 400, MUTED)
-    svg.footer("設定を変更する前に構成を記録する。記録がなければ復旧できない。 / Record the configuration before changing it; without a record, recovery is not possible.",
-               "All addresses are fictional training values.")
+    svg = new_diagram("D09-05", "露光と動体ぶれ", "Exposure and motion blur",
+                      "第9日 / Day 9", 880)
+    panel(svg, 70, 170, 1300, 300, "速度・露光・移動量", "speed, exposure and movement")
+    svg.text(90, 250, "材料速度 1,000 mm/s、露光 1 ms", 18, 700, INK)
+    svg.text(90, 280, "material speed 1,000 mm/s, exposure 1 ms", 14, 400, MUTED)
+    svg.text(90, 340, "移動量 = 1,000 × 0.001 = 1 mm", 22, 700, BAD)
+    svg.text(90, 372, "movement during exposure = 1 mm", 15, 400, MUTED)
+    svg.text(90, 420, "1 px = 0.125 mm/px のとき  1 ÷ 0.125 = 8 px", 20, 700, BAD)
+    svg.text(90, 448, "at 0.125 mm/px the blur is 8 pixels", 15, 400, MUTED)
+    svg.text(760, 250, "1 px以内の目標", 18, 700, GOOD)
+    svg.text(760, 280, "target of one pixel or less", 14, 400, MUTED)
+    svg.text(760, 340, "露光 ≈ 0.125 ÷ 1,000 = 0.125 ms", 22, 700, GOOD)
+    svg.text(760, 372, "exposure about 0.125 ms", 15, 400, MUTED)
+    svg.text(760, 420, "※例示的な目標であり保証ではない", 15, 700, WARN)
+    svg.text(760, 448, "an illustrative target, not a guarantee", 13, 400, MUTED)
+
+    panel(svg, 70, 510, 1300, 240, "短くすると光が減る", "shorter exposure collects less light")
+    svg.rect(110, 590, 500, 40, fill=FILL_ENERGY, stroke=ENERGY, sw=2, rx=4)
+    svg.text(360, 617, "露光1 ms：光が多い / more light", 15, 700, INK, "middle")
+    svg.rect(110, 650, 125, 40, fill=FILL_ENERGY, stroke=ENERGY, sw=2, rx=4)
+    svg.text(260, 677, "露光0.125 ms：光が1/8 / one eighth of the light", 14, 700, BAD)
+    svg.text(110, 730, "照明の明るさと画質（ノイズ・コントラスト）に直結する。", 14, 400, MUTED)
+    svg.footer("ぶれ = 速度 × 露光時間。短い露光は光量とのトレードオフ",
+               "Blur is speed times exposure; a shorter exposure trades against light")
     return svg
 
 
 def d09_06() -> Svg:
-    svg = new_diagram("D09-06", "段階的な試運転ゲート", "Staged commissioning gates",
-                      "第9日 / Day 9", 980)
-    gates = [
-        ("G0", "文書 / documentation", "要求・図面・BOM・I/O・ラダー・試験計画", "paper review", CONTROL),
-        ("G1", "機械 / mechanical", "取付・ガイド・ストローク・カバー", "inspection", MECH),
-        ("G2", "電気（隔離）/ electrical", "配線・極性・保護・接地・無電圧", "qualified, isolated", ENERGY),
-        ("G3", "オフライン制御 / offline", "自己保持・タイマー・シーケンス・異常", "simulation", SENSOR),
-        ("G4", "監督下準備 / readiness", "ガード・隔離・残留エネルギー・復旧", "supervisor", WARN),
-        ("G5", "通電試験 / energised", "承認された手順のみ", "NOT PERFORMED", HAZARD),
-        ("G6", "最終受入 / acceptance", "要求との照合・記録・引継ぎ", "acceptor", GOOD),
+    svg = new_diagram("D09-06", "照明の種類", "Lighting types",
+                      "第9日 / Day 9", 1000)
+    cards = [
+        ("バックライト", "backlight", "シルエット・透過", "silhouette, transmission", ENERGY),
+        ("リング照明", "ring light", "レンズ周囲から", "around the lens", DATA),
+        ("バー照明", "bar light", "直線・方向", "linear, directional", CONTROL),
+        ("拡散照明", "diffuse lighting", "光沢・むらを低減", "gloss and unevenness", GOOD),
+        ("同軸照明", "coaxial lighting", "平面の反射面", "flat reflective surfaces", MECH),
+        ("低角度・暗視野", "low angle, dark field", "傷・異物・微細な凹凸", "scratches, particles, relief", BAD),
     ]
-    for index, (code, ja, detail, approval, color) in enumerate(gates):
-        y = 190 + index * 105
-        svg.rect(110, y, 120, 80, fill=color, stroke=color, sw=2, rx=8)
-        svg.text(170, y + 48, code, 24, 700, "white", "middle")
-        svg.rect(240, y, 780, 80, fill=CARD, stroke=color, sw=1.8, rx=8)
-        svg.text(260, y + 30, ja, 15, 700, color)
-        svg.text(260, y + 54, detail, 11, 400, MUTED)
-        svg.text(800, y + 53, approval, 10, 600, MUTED, "end")
-        if index < len(gates) - 1:
-            svg.line(170, y + 82, 170, y + 103, stroke=color, sw=2)
-        if code == "G5":
-            svg.text(920, y + 50, "課程では未実施", 12, 700, HAZARD, "middle")
-            svg.text(920, y + 68, "not required", 10, 400, MUTED, "middle")
-    svg.text(1000, 250, "前のゲートが", 13, 700, INK)
-    svg.text(1000, 272, "完了するまで", 13, 700, INK)
-    svg.text(1000, 294, "次へ進まない", 13, 700, HAZARD)
-    svg.text(1000, 330, "Do not pass a gate", 11, 400, MUTED)
-    svg.text(1000, 350, "until the previous", 11, 400, MUTED)
-    svg.text(1000, 370, "gate is complete.", 11, 400, MUTED)
-    svg.rect(990, 430, 360, 210, fill=FILL_HAZARD, stroke=HAZARD, sw=1.3, rx=8)
-    svg.text(1010, 462, "G5は必須ではない", 14, 700, HAZARD)
-    svg.text(1010, 486, "Energised testing is optional", 11, 400, MUTED)
-    svg.text(1010, 515, "未実施は BLOCKED または", 12, 600, INK)
-    svg.text(1010, 537, "NOT TESTED と記録する。", 12, 600, INK)
-    svg.text(1010, 560, "PASS にしない。", 12, 700, HAZARD)
-    svg.text(1010, 588, "Never record an unperformed", 10, 400, MUTED)
-    svg.text(1010, 606, "energised test as PASS.", 10, 400, MUTED)
-    svg.footer("文書→機械→電気（隔離）→オフライン→監督下準備→承認された通電→受入の順。G5は必須ではない。",
-               "Documentation, mechanics, isolated electrical, offline, supervised readiness, approved energised, acceptance. G5 is optional.")
+    card_w = (1300 - 40 - 2 * 20) / 3
+    for index, (ja, en, ja2, en2, color) in enumerate(cards):
+        row, col = divmod(index, 3)
+        x = 70 + col * (card_w + 20)
+        y = 180 + row * 290
+        svg.rect(x, y, card_w, 260, fill=CARD, stroke=color, sw=2, rx=12)
+        svg.rect(x + 30, y + 30, 90, 46, fill=FILL_COLOR.get(color, FILL_GREY), stroke=color, sw=1.8, rx=4)
+        svg.text(x + 75, y + 60, "光", 16, 700, INK, "middle")
+        svg.line(x + 130, y + 53, x + 210, y + 100, stroke=color, sw=2)
+        svg.rect(x + 160, y + 100, 90, 24, fill="#E3E8EE", stroke=MUTED, sw=1.4, rx=3)
+        svg.text(x + 205, y + 150, ja, 18, 700, color, "middle")
+        svg.text(x + 205, y + 175, en, 13, 400, MUTED, "middle")
+        svg.text(x + 30, y + 215, f"{ja2} / {en2}", 13, 400, INK)
+    note(svg, 790, "効果は材質と欠陥形状に依存する。1種類で全欠陥は見えない。",
+         "Effectiveness depends on material and defect geometry; one type does not show every defect.")
+    svg.footer("バックライト・リング・バー・拡散・同軸・低角度の模式的な比較",
+               "Schematic comparison of backlight, ring, bar, diffuse, coaxial and low-angle lighting")
     return svg
 
 
 def d09_07() -> Svg:
-    svg = new_diagram("D09-07", "試験結果の4状態", "Four test-result states",
-                      "第9日 / Day 9", 820)
-    states = [
-        ("PASS", "期待と一致した", "matched the expected result", GOOD, 90, 250),
-        ("FAIL", "期待と違った", "did not match", HAZARD, 560, 250),
-        ("NOT TESTED", "まだ実施していない", "not yet performed", MUTED, 1030, 250),
-        ("BLOCKED", "前提・許可・設備がない", "cannot be performed", WARN, 560, 470),
-    ]
-    for label, ja, en, color, x, y in states:
-        svg.rect(x, y, 320, 150, fill=CARD, stroke=color, sw=2.6, rx=10)
-        svg.text(x + 160, y + 44, label, 20, 700, color, "middle")
-        svg.text(x + 160, y + 78, ja, 14, 700, INK, "middle")
-        svg.text(x + 160, y + 104, en, 11, 400, MUTED, "middle")
-        svg.text(x + 160, y + 130, "evidence required" if label == "PASS" else "", 10, 400, MUTED, "middle")
-    svg.line(410, 325, 558, 325, stroke=GOOD, sw=2)
-    svg.line(880, 325, 1028, 325, stroke=GOOD, sw=2)
-    svg.line(720, 402, 720, 468, stroke=HAZARD, sw=2, dash="6 4")
-    svg.text(1050, 520, "BLOCKEDをPASSに", 12, 700, HAZARD)
-    svg.text(1050, 540, "読み替えない", 12, 700, HAZARD)
-    svg.text(1050, 565, "never reinterpret", 10, 400, MUTED)
-    svg.text(1050, 583, "BLOCKED as PASS", 10, 400, MUTED)
-    svg.rect(70, 660, 1300, 90, fill=JP_BG, stroke=ACCENT, sw=1.2, rx=8)
-    svg.text(90, 692, "記録には、試験ID、要求ID、前提、手順、期待、実測、合否、証跡、実施者、日付、是正処置を入れる。", 13, 700, INK)
-    svg.text(90, 715, "A record contains test ID, requirement ID, preconditions, procedure, expected, actual, status, evidence, operator, date and corrective action.", 10, 400, MUTED)
-    svg.text(90, 738, "PASSは証跡とセット。 / PASS comes with evidence.", 12, 600, GOOD)
-    svg.footer("PASS・FAIL・NOT TESTED・BLOCKEDを区別する。未実施を合格にしない。",
-               "Distinguish PASS, FAIL, NOT TESTED and BLOCKED. An unperformed test is not a pass.")
+    svg = new_diagram("D09-07", "カメラと照明の配置", "Camera and lighting arrangement",
+                      "第9日 / Day 9", 980)
+    svg.rect(120, 200, 1200, 480, fill="#FBFCFE", stroke=GRID, sw=2, rx=10)
+    svg.text(140, 232, "囲い・遮光 / enclosure and light shield", 14, 700, MUTED)
+    svg.line(180, 520, 1260, 520, stroke=MECH, sw=6, marker=False)
+    svg.text(700, 556, "材料（移動するシート）/ material (moving sheet)", 15, 700, MECH, "middle")
+    svg.line(180, 520, 180, 560, stroke=MECH, sw=1.6, marker=False)
+    svg.line(1260, 520, 1260, 560, stroke=MECH, sw=1.6, marker=False)
+    svg.rect(660, 260, 120, 60, fill=FILL_CONTROL, stroke=CONTROL, sw=2.4, rx=6)
+    svg.text(720, 250, "カメラ / camera", 14, 700, CONTROL, "middle")
+    svg.text(740, 336, "固定した作動距離 / fixed working distance", 13, 400, MUTED, "start")
+    svg.line(720, 320, 720, 470, stroke=DATA, sw=2, dash="7 5")
+    svg.rect(620, 580, 200, 40, fill=FILL_ENERGY, stroke=ENERGY, sw=2, rx=4)
+    svg.text(720, 646, "バックライト / backlight", 14, 700, ENERGY, "middle")
+    svg.line(720, 580, 720, 524, stroke=ENERGY, sw=2)
+    svg.rect(300, 400, 90, 60, fill=FILL_DATA, stroke=DATA, sw=2, rx=4)
+    svg.text(345, 390, "斜め照明 / oblique", 13, 700, DATA, "middle")
+    svg.line(345, 462, 430, 516, stroke=DATA, sw=2)
+    svg.rect(1010, 430, 90, 60, fill=FILL_HAZARD, stroke=BAD, sw=2, rx=4)
+    svg.text(1055, 420, "低角度 / low angle", 13, 700, BAD, "middle")
+    svg.line(1010, 476, 930, 518, stroke=BAD, sw=2)
+    svg.line(720, 240, 720, 200, stroke=CONTROL, sw=3, marker=False)
+    svg.text(760, 214, "調整可能な取付 / adjustable mount", 13, 400, MUTED)
+    note(svg, 700, "剛性・固定・遮光・清掃性・安全アクセスで配置を決める。",
+         "Arrangement follows rigidity, fixation, shielding, cleanability and safe access.")
+    svg.footer("材料の上にカメラ、後ろにバックライト、斜め照明、低角度照明、囲い、固定WD",
+               "Camera above the material, backlight behind, oblique and low-angle lighting, enclosure, fixed working distance")
     return svg
 
 
 def d09_08() -> Svg:
-    svg = new_diagram("D09-08", "課題から提案までの流れ", "From problem to proposal",
-                      "第9日 / Day 9", 900)
-    steps = [
-        ("課題", "problem", "現状・測定 / current state"),
-        ("要求", "requirements", "能力・品質・安全 / capacity, quality, safety"),
-        ("構想", "concept", "3案比較 / three options"),
-        ("機械", "mechanical", "駆動・ガイド・センサー / drive, guide, sensor"),
-        ("電気・PLC", "electrical and PLC", "I/O・シーケンス / I/O and sequence"),
-        ("通信", "communication", "IP・プロトコル / IP and protocol"),
-        ("試験", "test", "ゲート・受入 / gates and acceptance"),
-        ("提案", "proposal", "費用・リスク・次 / cost, risk, next"),
+    svg = new_diagram("D09-08", "撮像条件の比較（合成例）", "Imaging conditions compared (synthetic)",
+                      "第9日 / Day 9", 1000)
+    tiles = [
+        ("露出不足", "underexposed", "#4A5560"),
+        ("適正", "correct", "#B9C4CE"),
+        ("露出過多", "overexposed", "#F7FAFC"),
+        ("低コントラスト", "low contrast", "#C9CED4"),
+        ("高コントラスト", "high contrast", "#8A939C"),
+        ("グレア", "glare", "#FFFFFF"),
+        ("拡散照明", "diffuse light", "#AEB8C2"),
+        ("方向を変えた照明", "changed direction", "#9AA5B0"),
     ]
-    for index, (ja, en, sub) in enumerate(steps):
+    tile_w, tile_h = 300, 150
+    for index, (ja, en, grey) in enumerate(tiles):
         row, col = divmod(index, 4)
-        x = 70 + col * 330
-        y = 230 + row * 260
-        color = (MECH, CONTROL, SENSOR, ENERGY)[index % 4]
-        svg.rect(x, y, 300, 180, fill=CARD, stroke=color, sw=2, rx=10)
-        svg.text(x + 20, y + 40, f"{index + 1}. {ja}", 18, 700, color)
-        svg.text(x + 20, y + 64, en, 13, 400, MUTED)
-        for line_index, line in enumerate(_wrap(sub, 250, 14)):
-            svg.text(x + 20, y + 100 + line_index * 22, line, 13, 400, INK)
-        if col < 3:
-            svg.line(x + 304, y + 90, x + 326, y + 90, stroke=color, sw=2.2)
-    # return loop
-    svg.line(1280, 410, 1360, 410, stroke=HAZARD, sw=2, dash="7 5")
-    svg.line(1360, 410, 1360, 690, stroke=HAZARD, sw=2, dash="7 5", marker=False)
-    svg.line(1360, 690, 70, 690, stroke=HAZARD, sw=2, dash="7 5", marker=False)
-    svg.line(70, 690, 70, 640, stroke=HAZARD, sw=2, dash="7 5")
-    svg.text(720, 715, "測定・レビューで戻る / iterate with measurement and review", 13, 700, HAZARD, "middle")
-    # final chain
-    svg.rect(70, 760, 1300, 60, fill=JP_BG, stroke=ACCENT, sw=1, rx=6)
-    svg.text(90, 795, "何を改善するか → どんな機械か → どう動くか → どう検知するか → PLCがどう制御するか → どう通信するか → どう試験するか → 何が残るか",
-             12, 700, INK)
-    svg.footer("提案は1枚の絵ではなく、要求から試験までの一貫した流れ。 / A proposal is a consistent chain from requirement to test, not a single picture.",
-               "Each step must remain traceable to the previous one.")
+        x = 70 + col * (tile_w + 20)
+        y = 190 + row * 230
+        svg.rect(x, y, tile_w, tile_h, fill=grey, stroke=GRID, sw=2, rx=4)
+        if index == 5:
+            svg.circle(x + 150, y + 70, 46, fill="#FFFFFF", stroke="#FFFFFF", sw=0)
+        else:
+            svg.circle(x + 150, y + 70, 26, fill="#5B6670" if index != 4 else "#3A434C", stroke="none", sw=0)
+        svg.text(x + tile_w / 2, y + tile_h + 30, ja, 15, 700, INK, "middle")
+        svg.text(x + tile_w / 2, y + tile_h + 54, en, 13, 400, MUTED, "middle")
+    panel(svg, 70, 660, 1300, 130, "合成例について", "about these synthetic examples")
+    svg.text(90, 740, "これらは学習用の合成例です。実際のPVC工場の測定値ではありません。",
+             16, 700, WARN)
+    svg.text(90, 768, "These are synthetic teaching examples, not measurements from a real PVC line.",
+             14, 400, MUTED)
+    note(svg, 820, "露出・ピント・コントラスト・グレア・照明方向は、見え方を大きく変える。",
+         "Exposure, focus, contrast, glare and light direction change what is visible.")
+    svg.footer("露出不足・適正・露出過多、低/高コントラスト、グレア、拡散、照明方向の比較（合成）",
+               "Underexposed, correct, overexposed, low/high contrast, glare, diffuse and direction changes (synthetic)")
     return svg
 
 
 def d09_09() -> Svg:
-    svg = new_diagram("D09-09", "費用対効果と回収期間", "Cost, benefit and payback",
-                      "第9日 / Day 9", 880)
-    # formula
-    svg.rect(70, 190, 1300, 110, fill=JP_BG, stroke=ACCENT, sw=1.4, rx=8)
-    svg.text(90, 230, "年間効果 = 削減時間/日 × 稼働日 × 時間単価", 18, 700, INK)
-    svg.text(90, 256, "annual value = time saved per day × working days × hourly rate", 13, 400, MUTED)
-    svg.text(90, 282, "回収期間 = 投資 ÷ (年間効果 − 年間運用費)    payback = investment / (annual benefit − annual operating cost)", 12, 600, ACCENT)
-    # numbers
-    values = [
-        ("削減 / saved", "12 s × 180 = 36 min/day", MECH),
-        ("年間 / annual", "0.6 h × 220 × 2,400 = 316,800 JPY", SENSOR),
-        ("投資 / investment", "450,000 JPY", ENERGY),
-        ("回収 / payback", "450,000 / 316,800 = 1.42 years", GOOD),
-    ]
-    for index, (label, value, color) in enumerate(values):
-        x = 70 + index * 330
-        svg.rect(x, 340, 300, 120, fill=CARD, stroke=color, sw=2, rx=8)
-        svg.text(x + 16, 372, label, 13, 700, color)
-        for line_index, line in enumerate(_wrap(value, 260, 14)):
-            svg.text(x + 16, 404 + line_index * 22, line, 14, 600, INK)
-    # sensitivity bars
-    svg.text(70, 520, "投資と運用費による回収期間の変化 / payback sensitivity", 16, 700, INK)
-    scenarios = [
-        ("300k, 0", 300_000, 0, 0.95),
-        ("450k, 0", 450_000, 0, 1.42),
-        ("600k, 0", 600_000, 0, 1.89),
-        ("450k, 100k", 450_000, 100_000, 2.07),
-        ("450k, 200k", 450_000, 200_000, 3.61),
-    ]
-    base_y = 720
-    for index, (label, investment, operating, years) in enumerate(scenarios):
-        x = 90 + index * 250
-        height = min(150, years * 40)
-        color = GOOD if years <= 1.5 else (WARN if years <= 3 else HAZARD)
-        svg.rect(x, base_y - height, 120, height, fill=color, stroke=color, sw=1, rx=4)
-        svg.text(x + 60, base_y + 22, label, 11, 600, MUTED, "middle")
-        svg.text(x + 60, base_y - height - 8, f"{years:.2f} y", 13, 700, color, "middle")
-    svg.line(70, base_y, 1340, base_y, stroke=MUTED, sw=1.6, marker=False)
-    svg.text(1260, 545, "運用費が増えると", 12, 600, HAZARD)
-    svg.text(1260, 565, "回収は長くなる", 12, 600, HAZARD)
-    svg.text(1260, 590, "効果が実現しなければ", 12, 600, HAZARD)
-    svg.text(1260, 610, "回収は無限", 12, 700, HAZARD)
-    svg.footer("1.42年は仮定した数値での単純回収。労務時間の換算価値と、実現する利益を区別する。",
-               "1.42 years is a simple payback on assumed numbers. Distinguish labour-time value from realised profit.")
+    svg = new_diagram("D09-09", "AI検査システムの構成", "AI inspection system architecture",
+                      "第9日 / Day 9", 1080)
+    chain(svg, [("カメラ・レンズ・照明", "camera, lens, lighting", "画像を作る / creates the image", SENSOR),
+                ("画像取込み", "image acquisition", "PCへ転送 / transfer to the PC", DATA),
+                ("前処理", "preprocessing", "リサイズ・変換 / resize, convert", CONTROL)],
+          y=180, h=130, x0=70, x1=1380, gap=40)
+    chain(svg, [("AI推論", "AI inference", "モデルで判定 / model output", CONTROL),
+                ("検査判定", "inspection decision", "OK / NG / 無効", DATA),
+                ("PLC通信", "PLC communication", "結果を渡す / send the result", CONTROL)],
+          y=360, h=130, x0=70, x1=1380, gap=40)
+    chain(svg, [("機械設備", "mechanical equipment", "仕分け・停止 / sort, stop", MECH),
+                ("センサー", "sensor", "結果を確認 / confirms the result", SENSOR),
+                ("記録・画像保存", "logging and image storage", "任意 / optional", DATA)],
+          y=540, h=130, x0=70, x1=1380, gap=40)
+    svg.line(1290, 312, 1290, 356, stroke=ACCENT, sw=2.4)
+    svg.line(1290, 492, 1290, 536, stroke=ACCENT, sw=2.4)
+    panel(svg, 70, 730, 620, 240, "矢印の種類", "arrow types")
+    legend_swatches(svg, 90, 800, [(DATA, "画像データ", "image data"),
+                                   (CONTROL, "制御信号", "control signal"),
+                                   (ENERGY, "電力", "power")])
+    legend_swatches(svg, 340, 800, [(MECH, "機械動作", "mechanical"),
+                                    (SENSOR, "フィードバック", "feedback")])
+    panel(svg, 750, 730, 620, 240, "役割の分離", "separation of roles")
+    svg.text(770, 810, "AIは結果を制御装置へ渡す。", 15, 700, INK)
+    svg.text(770, 838, "AI passes results to the controller.", 13, 400, MUTED)
+    svg.text(770, 886, "危険な動作は機械側の制御と安全で扱う。", 14, 400, INK)
+    svg.text(770, 914, "Hazardous motion is handled by the machine control and safety system.", 12, 400, MUTED)
+    note(svg, 990, "記録と画像保存は任意。制御と安全の役割を混ぜない。",
+         "Logging and storage are optional; do not mix control and safety roles.")
+    svg.footer("画像データ・制御信号・電力・機械動作・フィードバックを区別して描く",
+               "Distinguish image data, control signals, power, mechanical movement and feedback")
     return svg
 
 
-# --------------------------------------------------------------------------- #
-# entry point
-# --------------------------------------------------------------------------- #
-BUILDERS = {
-    "D07-01": d07_01, "D07-02": d07_02, "D07-03": d07_03, "D07-04": d07_04,
-    "D07-05": d07_05, "D07-06": d07_06, "D07-07": d07_07, "D07-08": d07_08, "D07-09": d07_09,
-    "D08-01": d08_01, "D08-02": d08_02, "D08-03": d08_03, "D08-04": d08_04,
-    "D08-05": d08_05, "D08-06": d08_06, "D08-07": d08_07, "D08-08": d08_08,
-    "D08-09": d08_09, "D08-10": d08_10, "D08-11": d08_11,
-    "D09-01": d09_01, "D09-02": d09_02, "D09-03": d09_03, "D09-04": d09_04,
-    "D09-05": d09_05, "D09-06": d09_06, "D09-07": d09_07, "D09-08": d09_08, "D09-09": d09_09,
-}
+def d09_10() -> Svg:
+    svg = new_diagram("D09-10", "撮像タイミングと遅れ", "Inspection timing and latency",
+                      "第9日 / Day 9", 900)
+    panel(svg, 70, 170, 1300, 300, "時間の積み重ね", "the accumulation of time")
+    segments = [("撮像間隔", "interval", 200, MECH), ("転送", "transfer", 140, DATA),
+                ("推論", "inference", 220, CONTROL), ("判定", "decision", 120, SENSOR),
+                ("応答", "actuator", 160, ENERGY)]
+    cursor = 110
+    for ja, en, width, color in segments:
+        svg.rect(cursor, 280, width, 90, fill=CARD, stroke=color, sw=2, rx=4)
+        svg.text(cursor + width / 2, 320, ja, 15, 700, INK, "middle")
+        svg.text(cursor + width / 2, 344, en, 12, 400, MUTED, "middle")
+        cursor += width
+    svg.line(110, 400, 1310, 400, stroke=GRID, sw=2, marker=False)
+    svg.text(110, 435, "判定までの遅れ / end-to-end decision latency", 14, 700, MUTED)
+    svg.line(110, 250, 110, 460, stroke=GRID, sw=1.4, marker=False)
+    svg.line(840, 250, 840, 460, stroke=GRID, sw=1.4, marker=False)
+
+    panel(svg, 70, 510, 620, 260, "計算例", "worked example")
+    svg.text(90, 600, "30 FPS、材料1,000 mm/s", 17, 700, INK)
+    svg.text(90, 630, "30 FPS at 1,000 mm/s", 14, 400, MUTED)
+    svg.text(90, 690, "1,000 ÷ 30 ≈ 33.33 mm", 24, 700, BAD)
+    svg.text(90, 722, "movement between nominal frames", 13, 400, MUTED)
+
+    panel(svg, 750, 510, 620, 260, "注意", "caution")
+    svg.text(770, 600, "移動方向の視野と幅方向の視野を混同しない。", 15, 700, INK)
+    svg.text(770, 628, "Do not confuse travel-direction FOV with width FOV.", 12, 400, MUTED)
+    svg.text(770, 676, "FPSが足りても、完全な検査は約束できない。", 15, 400, INK)
+    svg.text(770, 704, "Nominal FPS does not promise complete inspection.", 12, 400, MUTED)
+    svg.text(770, 744, "カメラFPS ≠ 検査FPS / camera FPS is not inspection FPS", 14, 700, WARN)
+    svg.footer("撮像間隔・転送・推論・判定・応答を積み上げて、全体の遅れを考える",
+               "Add capture interval, transfer, inference, decision and actuator response")
+    return svg
+
+
+def d09_11() -> Svg:
+    svg = new_diagram("D09-11", "最終チェックリストとPC・PLC・機械", "Final checklist and the PC, PLC and machine relationship",
+                      "第9日 / Day 9", 980)
+    panel(svg, 70, 170, 700, 500, "撮像条件の記録", "record the imaging conditions")
+    items = ["カメラ機種 / camera model", "レンズ / lens", "作動距離 / working distance",
+             "視野 / field of view", "カメラ角度 / camera angle", "照明の種類と位置 / light type and position",
+             "露光時間・ゲイン / exposure, gain", "フレームレート／ライン速度 / frame or line rate",
+             "材料速度 / material speed", "代表的な欠陥サンプル / defect samples"]
+    for index, text in enumerate(items):
+        svg.text(90, 260 + index * 38, f"・{text}", 15, 400, INK)
+
+    panel(svg, 810, 170, 560, 500, "PC・PLC・機械", "the PC, PLC and machine")
+    svg.rect(850, 250, 200, 80, fill=FILL_CONTROL, stroke=CONTROL, sw=2, rx=6)
+    svg.text(950, 290, "PC", 20, 700, INK, "middle")
+    svg.text(950, 315, "AI推論 / inference", 12, 400, MUTED, "middle")
+    svg.line(1052, 290, 1130, 290, stroke=CONTROL, sw=2.4)
+    svg.rect(1134, 250, 200, 80, fill=FILL_DATA, stroke=DATA, sw=2, rx=6)
+    svg.text(1234, 290, "PLC", 20, 700, INK, "middle")
+    svg.text(1234, 315, "結果を受け取る / receives", 12, 400, MUTED, "middle")
+    svg.line(1234, 332, 1234, 420, stroke=MECH, sw=2.4)
+    svg.rect(1100, 424, 270, 80, fill=FILL_MECH, stroke=MECH, sw=2, rx=6)
+    svg.text(1235, 462, "機械設備", 18, 700, INK, "middle")
+    svg.text(1235, 487, "machine", 12, 400, MUTED, "middle")
+    svg.line(1100, 464, 1030, 464, stroke=SENSOR, sw=2.2, dash="7 5")
+    svg.text(880, 456, "フィードバック / feedback", 12, 700, SENSOR)
+    svg.text(850, 560, "AIは結果を渡す。危険な動作は機械側で扱う。", 14, 400, INK)
+    svg.text(850, 588, "AI passes the result; the machine handles hazardous motion.", 12, 400, MUTED)
+    svg.text(850, 630, "無効（INVALID）をOKにしない。", 14, 700, WARN)
+
+    note(svg, 720, "短いチェックリストで十分。提案書や発表は不要。",
+         "A short checklist is enough; no proposal document or presentation is required.")
+    svg.footer("撮像条件の記録項目と、PC・PLC・機械設備の関係",
+               "Imaging-condition record items and the PC, PLC and machine relationship")
+    return svg
+
+
+DAY9 = [d09_01, d09_02, d09_03, d09_04, d09_05, d09_06,
+        d09_07, d09_08, d09_09, d09_10, d09_11]
 
 
 def build() -> list[Path]:
-    outputs = []
-    for fid, builder in BUILDERS.items():
-        day = fid[:3].lower().replace("d0", "day0")
-        folder = DIAGRAMS / day
-        folder.mkdir(parents=True, exist_ok=True)
+    outputs: list[Path] = []
+    for builder in DAY7 + DAY8 + DAY9:
         svg = builder()
-        output = folder / f"{fid}.svg"
-        svg.save(output)
-        outputs.append(output)
+        folder = DIAGRAMS / f"day{svg.fid[1:3]}"
+        folder.mkdir(parents=True, exist_ok=True)
+        path = folder / f"{svg.fid}.svg"
+        svg.save(path)
+        outputs.append(path)
+        print(f"Wrote {path.relative_to(ROOT)} ({svg.width}x{svg.height})")
     return outputs
 
 
 def main() -> int:
     outputs = build()
-    for path in outputs:
-        print(f"Wrote {path.relative_to(ROOT)}")
-    print(f"Generated {len(outputs)} diagrams")
+    print(f"Wrote {len(outputs)} diagrams")
     return 0
 
 
 if __name__ == "__main__":
     raise SystemExit(main())
-
-

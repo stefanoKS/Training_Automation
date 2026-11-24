@@ -38,6 +38,7 @@ GENERATOR_PATH = Path(__file__).resolve()
 FINGERPRINT_SCHEMA = "day07_09_notebook_v3"
 EXEC_FENCE = re.compile(r"^```python\s+exec(?:\s+id=\"(?P<id>[^\"]+)\")?\s*$")
 IMAGE_RE = re.compile(r"!\[[^\]]*\]\(([^)\s]+)\)")
+MIN_CODE_CELLS = {"day07": 0, "day08": 1, "day09": 1}
 
 
 @dataclass(frozen=True)
@@ -189,6 +190,9 @@ def parse_manuscript(text: str) -> list[dict]:
                 index += 1
             continue
 
+        if line.startswith("## ") and markdown_buffer and "".join(markdown_buffer).strip():
+            flush_markdown()
+
         markdown_buffer.append(line)
         index += 1
 
@@ -233,8 +237,12 @@ def build_notebook(spec: LessonSpec, manifest: dict) -> tuple[dict, list[dict]]:
                     "source": raw["source"],
                 }
             )
-    if code_number < 3:
-        raise ValueError(f"{spec.name}: requires at least 3 executable cells, found {code_number}")
+    # Day 7 is deliberately paper-and-calculator work: no executable cells.
+    minimum = MIN_CODE_CELLS.get(spec.day_id, 1)
+    if code_number < minimum:
+        raise ValueError(f"{spec.name}: requires at least {minimum} executable cells, found {code_number}")
+    if spec.day_id == "day07" and code_number:
+        raise ValueError(f"{spec.name}: Day 7 student notebooks must not contain executable cells")
 
     combined, deps = fingerprint(spec, text)
     notebook = {

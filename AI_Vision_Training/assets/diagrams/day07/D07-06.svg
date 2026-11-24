@@ -1,69 +1,36 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1080" viewBox="0 0 1440 1080" role="img" aria-labelledby="title desc"><title id="title">押出し装置の機械構成 / Annotated architecture of the pusher machine</title><desc id="desc">押出し装置の機械構成 / Annotated architecture of the pusher machine — editable bilingual training diagram for 第7日 / Day 7.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#2563A6"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#A32B2B"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#1B7A4B"/></marker></defs><rect x="0" y="0" width="1440" height="1080" fill="#F5F8FC"/><rect x="0" y="0" width="1440" height="12" fill="#2563A6"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1060" viewBox="0 0 1440 1060" role="img" aria-labelledby="title desc"><title id="title">空圧・油圧・電気の比較 / Pneumatic, hydraulic and electrical power compared</title><desc id="desc">空圧・油圧・電気の比較 / Pneumatic, hydraulic and electrical power compared — editable bilingual training diagram for 第7日 / Day 7.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#2563A6"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#A32B2B"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#1B7A4B"/></marker></defs><rect x="0" y="0" width="1440" height="1060" fill="#F5F8FC"/><rect x="0" y="0" width="1440" height="12" fill="#2563A6"/>
 <text x="56.0" y="56.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#2563A6" font-weight="700" text-anchor="start">第7日 / Day 7</text>
-<text x="56.0" y="104.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="32" fill="#142B3F" font-weight="700" text-anchor="start">押出し装置の機械構成</text>
-<text x="56.0" y="144.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="26" fill="#526378" font-weight="400" text-anchor="start">Annotated architecture of the pusher machine</text>
-<rect x="120.0" y="600.0" width="1100.0" height="28.0" rx="4" fill="#E8F1FA" stroke="#1F5C99" stroke-width="2.4"/>
-<text x="130.0" y="623.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#1F5C99" font-weight="600" text-anchor="start">フレーム / frame</text>
-<path d="M240.0 505.0 L900.0 505.0" fill="none" stroke="#1F5C99" stroke-width="4"/>
-<text x="250.0" y="545.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#1F5C99" font-weight="600" text-anchor="start">ガイド / guide</text>
-<rect x="180.0" y="400.0" width="250.0" height="90.0" rx="8" fill="#E8F1FA" stroke="#1F5C99" stroke-width="2.4"/>
-<rect x="298.0" y="408.0" width="14.0" height="74.0" rx="12" fill="#1F5C99" stroke="#1F5C99" stroke-width="1"/>
-<rect x="312.0" y="437.0" width="198.0" height="16.0" rx="3" fill="#B9C9D9" stroke="#1F5C99" stroke-width="1.4"/>
-<text x="305.0" y="382.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#142B3F" font-weight="700" text-anchor="middle">複動シリンダ / double-acting cylinder</text>
-<rect x="200.0" y="392.0" width="22.0" height="8.0" rx="1" fill="#FFFFFF" stroke="#B4541E" stroke-width="1.2"/>
-<rect x="330.0" y="392.0" width="22.0" height="8.0" rx="1" fill="#FFFFFF" stroke="#B4541E" stroke-width="1.2"/>
-<text x="211.0" y="386.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="10" fill="#B4541E" font-weight="700" text-anchor="middle">A</text>
-<text x="341.0" y="386.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="10" fill="#B4541E" font-weight="700" text-anchor="middle">B</text>
-<rect x="510.0" y="440.0" width="120.0" height="50.0" rx="4" fill="#D7E4F0" stroke="#1F5C99" stroke-width="1.6"/>
-<text x="570.0" y="470.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#142B3F" font-weight="700" text-anchor="middle">押し板 / pusher</text>
-<rect x="670.0" y="425.0" width="130.0" height="65.0" rx="4" fill="#F2E6D0" stroke="#B4541E" stroke-width="2"/>
-<text x="735.0" y="453.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#142B3F" font-weight="700" text-anchor="middle">ワーク</text>
-<text x="735.0" y="472.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#526378" font-weight="400" text-anchor="middle">workpiece</text>
-<text x="735.0" y="404.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#526378" font-weight="400" text-anchor="middle">8 kg（仮）/ hypothetical</text>
-<rect x="500.0" y="518.0" width="46.0" height="24.0" rx="4" fill="#EAF6EE" stroke="#1B7A4B" stroke-width="1.8"/>
-<text x="523.0" y="535.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#1B7A4B" font-weight="700" text-anchor="middle">S</text>
-<text x="556.0" y="536.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="10" fill="#1B7A4B" font-weight="600" text-anchor="start">X2 後退端 / retracted</text>
-<rect x="810.0" y="518.0" width="46.0" height="24.0" rx="4" fill="#EAF6EE" stroke="#1B7A4B" stroke-width="1.8"/>
-<text x="833.0" y="535.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#1B7A4B" font-weight="700" text-anchor="middle">S</text>
-<text x="866.0" y="536.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="10" fill="#1B7A4B" font-weight="600" text-anchor="start">X3 前進端 / extended</text>
-<path d="M640 338 L662 376 L618 376 Z" fill="#FBE3E3" stroke="#A32B2B" stroke-width="2.4"/>
-<text x="640.0" y="368.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="20" fill="#A32B2B" font-weight="700" text-anchor="middle">!</text>
-<text x="640.0" y="400.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#A32B2B" font-weight="700" text-anchor="middle">危険</text>
-<text x="640.0" y="418.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#A32B2B" font-weight="400" text-anchor="middle">hazard</text>
-<text x="640.0" y="310.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#A32B2B" font-weight="700" text-anchor="middle">挟まれ / pinch point</text>
-<rect x="180.0" y="700.0" width="105.0" height="110.0" rx="2" fill="#FBEEE6" stroke="#B4541E" stroke-width="2"/>
-<rect x="285.0" y="700.0" width="105.0" height="110.0" rx="2" fill="#FBEEE6" stroke="#B4541E" stroke-width="2"/>
-<path d="M198.0 730.0 L258.0 730.0" fill="none" stroke="#B4541E" stroke-width="2" marker-end="url(#arrow)"/>
-<path d="M198.0 780.0 L258.0 780.0" fill="none" stroke="#B4541E" stroke-width="2" marker-end="url(#arrow)"/>
-<path d="M303.0 730.0 L363.0 780.0" fill="none" stroke="#B4541E" stroke-width="2" marker-end="url(#arrow)"/>
-<path d="M303.0 780.0 L363.0 730.0" fill="none" stroke="#B4541E" stroke-width="2" marker-end="url(#arrow)"/>
-<rect x="138.0" y="730.0" width="34.0" height="50.0" rx="3" fill="#FFFFFF" stroke="#6B3FA0" stroke-width="1.8"/>
-<text x="155.0" y="760.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#6B3FA0" font-weight="700" text-anchor="middle">SOL</text>
-<path d="M394 740 q12 15 0 30 q12 15 0 30" fill="none" stroke="#B4541E" stroke-width="1.8"/>
-<text x="285.0" y="836.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#142B3F" font-weight="700" text-anchor="middle">電磁弁 / solenoid valve</text>
-<text x="285.0" y="856.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#526378" font-weight="400" text-anchor="middle"></text>
-<text x="194.0" y="690.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#B4541E" font-weight="700" text-anchor="start">P</text>
-<text x="236.0" y="690.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#B4541E" font-weight="700" text-anchor="start">A</text>
-<text x="278.0" y="690.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#B4541E" font-weight="700" text-anchor="start">B</text>
-<text x="320.0" y="690.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#B4541E" font-weight="700" text-anchor="start">R1</text>
-<text x="362.0" y="690.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#B4541E" font-weight="700" text-anchor="start">R2</text>
-<rect x="880.0" y="680.0" width="300.0" height="110.0" rx="8" fill="#F1ECF8" stroke="#6B3FA0" stroke-width="2"/>
-<text x="1030.0" y="715.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#6B3FA0" font-weight="700" text-anchor="middle">PLC / 制御器</text>
-<text x="1030.0" y="740.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#142B3F" font-weight="400" text-anchor="middle">X0-X3 / Y0-Y2 / T0</text>
-<text x="1030.0" y="766.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#526378" font-weight="400" text-anchor="middle">fictional training addresses</text>
-<path d="M390.0 760.0 L390.0 470.0" fill="none" stroke="#B4541E" stroke-width="2.4" stroke-dasharray="8 6"/>
-<path d="M390.0 470.0 L341.0 470.0" fill="none" stroke="#B4541E" stroke-width="2.4" stroke-dasharray="8 6"/>
-<path d="M341.0 470.0 L341.0 404.0" fill="none" stroke="#B4541E" stroke-width="2.4" stroke-dasharray="8 6" marker-end="url(#arrow)"/>
-<path d="M390.0 760.0 L880.0 760.0" fill="none" stroke="#B4541E" stroke-width="2.4" stroke-dasharray="8 6"/>
-<text x="450.0" y="785.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#B4541E" font-weight="600" text-anchor="start">圧縮空気 / compressed air (conceptual)</text>
-<path d="M1010.0 678.0 L1010.0 745.0" fill="none" stroke="#6B3FA0" stroke-width="2" stroke-dasharray="3 5"/>
-<path d="M1010.0 745.0 L400.0 745.0" fill="none" stroke="#6B3FA0" stroke-width="2" stroke-dasharray="3 5" marker-end="url(#arrow)"/>
-<text x="700.0" y="732.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#6B3FA0" font-weight="600" text-anchor="start">制御信号 / control signal</text>
-<rect x="70.0" y="855.0" width="1300.0" height="64.0" rx="6" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
-<text x="90.0" y="880.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#142B3F" font-weight="600" text-anchor="start">凡例 / legend: 青=機械 / mechanical・緑=センサー / sensing・紫=制御 / control・橙=エネルギー / energy・赤=危険 / hazard</text>
-<text x="90.0" y="902.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="10" fill="#526378" font-weight="400" text-anchor="start">色だけでなく、形・線種・ラベルでも区別する。 / Distinguish by shape, line style and labels, not colour alone.</text>
-<rect x="56.0" y="964.0" width="1328.0" height="60.0" rx="10" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
-<text x="76.0" y="998.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#142B3F" font-weight="700" text-anchor="start">シリンダは動かす、ガイドは案内する、センサーは状態を測る、弁はエネルギーを切り替える、PLCは信号を出す。</text>
-<text x="76.0" y="1020.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14.5" fill="#526378" font-weight="400" text-anchor="start">The cylinder moves, the guide aligns, the sensor measures state, the valve switches energy and the PLC issues signals.</text>
-<text x="1400" y="1072" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" text-anchor="end">D07-06 • 編集可能な図 / editable SVG</text>
+<text x="56.0" y="104.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="32" fill="#142B3F" font-weight="700" text-anchor="start">空圧・油圧・電気の比較</text>
+<text x="56.0" y="144.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="26" fill="#526378" font-weight="400" text-anchor="start">Pneumatic, hydraulic and electrical power compared</text>
+<rect x="70.0" y="180.0" width="400.0" height="620.0" rx="12" fill="#FFFFFF" stroke="#B4541E" stroke-width="2"/>
+<text x="270.0" y="225.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="22" fill="#B4541E" font-weight="700" text-anchor="middle">空圧 / pneumatic</text>
+<text x="94.0" y="285.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="400" text-anchor="start">エネルギー: 圧縮空気</text>
+<text x="94.0" y="347.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="400" text-anchor="start">力: 軽〜中負荷</text>
+<text x="94.0" y="409.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="400" text-anchor="start">速度: 流量制御</text>
+<text x="94.0" y="471.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="400" text-anchor="start">位置: 2位置が基本</text>
+<text x="94.0" y="533.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="400" text-anchor="start">保守: ドレン・漏れ</text>
+<text x="94.0" y="595.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="400" text-anchor="start">制約: 圧縮性・残留圧力</text>
+<rect x="510.0" y="180.0" width="400.0" height="620.0" rx="12" fill="#FFFFFF" stroke="#1F5C99" stroke-width="2"/>
+<text x="710.0" y="225.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="22" fill="#1F5C99" font-weight="700" text-anchor="middle">油圧 / hydraulic</text>
+<text x="534.0" y="285.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="400" text-anchor="start">エネルギー: 加圧オイル</text>
+<text x="534.0" y="347.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="400" text-anchor="start">力: 高い力を出しやすい</text>
+<text x="534.0" y="409.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="400" text-anchor="start">速度: 流量制御</text>
+<text x="534.0" y="471.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="400" text-anchor="start">位置: 中間は難しい</text>
+<text x="534.0" y="533.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="400" text-anchor="start">保守: 油管理・漏れ</text>
+<text x="534.0" y="595.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="400" text-anchor="start">制約: 発熱・高圧危険</text>
+<rect x="950.0" y="180.0" width="400.0" height="620.0" rx="12" fill="#FFFFFF" stroke="#6B3FA0" stroke-width="2"/>
+<text x="1150.0" y="225.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="22" fill="#6B3FA0" font-weight="700" text-anchor="middle">電気 / electric</text>
+<text x="974.0" y="285.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="400" text-anchor="start">エネルギー: 電力</text>
+<text x="974.0" y="347.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="400" text-anchor="start">力: 減速機で増幅</text>
+<text x="974.0" y="409.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="400" text-anchor="start">速度: 精密制御</text>
+<text x="974.0" y="471.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="400" text-anchor="start">位置: 得意（サーボ）</text>
+<text x="974.0" y="533.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="400" text-anchor="start">保守: 比較的少ない</text>
+<text x="974.0" y="595.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="400" text-anchor="start">制約: 保持・電気安全</text>
+<rect x="70.0" y="830.0" width="1300.0" height="78.0" rx="8" fill="#E8F1FA" stroke="#2563A6" stroke-width="1.2"/>
+<text x="88.0" y="860.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="700" text-anchor="start">どれが一番よいかではなく、用途で選ぶ。絶対的な順位はない。</text>
+<text x="88.0" y="884.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#526378" font-weight="400" text-anchor="start">This is not a ranking. Choose by application; there is no universal order.</text>
+<rect x="56.0" y="944.0" width="1328.0" height="60.0" rx="10" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
+<text x="76.0" y="978.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#142B3F" font-weight="700" text-anchor="start">空圧・油圧・電気の典型的な特徴。長所と制約を両方書く</text>
+<text x="76.0" y="1000.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14.5" fill="#526378" font-weight="400" text-anchor="start">Typical characteristics of pneumatic, hydraulic and electrical power, including limitations</text>
+<text x="1400" y="1052" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" text-anchor="end">D07-06 • 編集可能な図 / editable SVG</text>
 </svg>

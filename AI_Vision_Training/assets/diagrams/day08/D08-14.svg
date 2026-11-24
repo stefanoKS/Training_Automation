@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900" role="img" aria-labelledby="title desc"><title id="title">シーケンスとタイミング / Sequence and timing</title><desc id="desc">シーケンスとタイミング / Sequence and timing — editable bilingual training diagram for 第8日 / Day 8.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#2563A6"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#A32B2B"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#1B7A4B"/></marker></defs><rect x="0" y="0" width="1440" height="900" fill="#F5F8FC"/><rect x="0" y="0" width="1440" height="12" fill="#2563A6"/>
+<text x="56.0" y="56.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#2563A6" font-weight="700" text-anchor="start">第8日 / Day 8</text>
+<text x="56.0" y="104.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="32" fill="#142B3F" font-weight="700" text-anchor="start">シーケンスとタイミング</text>
+<text x="56.0" y="144.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="26" fill="#526378" font-weight="400" text-anchor="start">Sequence and timing</text>
+<rect x="70.0" y="190.0" width="240.8" height="140.0" rx="12" fill="#FFFFFF" stroke="#1B7A4B" stroke-width="2"/>
+<rect x="70.0" y="200.0" width="7.0" height="120.0" rx="3" fill="#1B7A4B" stroke="#1B7A4B" stroke-width="0"/>
+<text x="92.0" y="249.7" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">製品検出</text>
+<text x="92.0" y="271.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">product detected</text>
+<text x="92.0" y="289.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">X4</text>
+<path d="M312.8 260.0 L332.8 260.0" fill="none" stroke="#2563A6" stroke-width="2.2" marker-end="url(#arrow)"/>
+<rect x="334.8" y="190.0" width="240.8" height="140.0" rx="12" fill="#FFFFFF" stroke="#6B3FA0" stroke-width="2"/>
+<rect x="334.8" y="200.0" width="7.0" height="120.0" rx="3" fill="#6B3FA0" stroke="#6B3FA0" stroke-width="0"/>
+<text x="356.8" y="249.7" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">前進指令</text>
+<text x="356.8" y="271.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">extend command</text>
+<text x="356.8" y="289.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">Y2</text>
+<path d="M577.6 260.0 L597.6 260.0" fill="none" stroke="#2563A6" stroke-width="2.2" marker-end="url(#arrow)"/>
+<rect x="599.6" y="190.0" width="240.8" height="140.0" rx="12" fill="#FFFFFF" stroke="#1B7A4B" stroke-width="2"/>
+<rect x="599.6" y="200.0" width="7.0" height="120.0" rx="3" fill="#1B7A4B" stroke="#1B7A4B" stroke-width="0"/>
+<text x="621.6" y="249.7" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">前進端の確認</text>
+<text x="621.6" y="271.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">extended confirmed</text>
+<text x="621.6" y="289.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">X3</text>
+<path d="M842.4 260.0 L862.4 260.0" fill="none" stroke="#2563A6" stroke-width="2.2" marker-end="url(#arrow)"/>
+<rect x="864.4" y="190.0" width="240.8" height="140.0" rx="12" fill="#FFFFFF" stroke="#6B3FA0" stroke-width="2"/>
+<rect x="864.4" y="200.0" width="7.0" height="120.0" rx="3" fill="#6B3FA0" stroke="#6B3FA0" stroke-width="0"/>
+<text x="886.4" y="249.7" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">後退指令</text>
+<text x="886.4" y="271.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">retract command</text>
+<text x="886.4" y="289.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">Y2 OFF</text>
+<path d="M1107.2 260.0 L1127.2 260.0" fill="none" stroke="#2563A6" stroke-width="2.2" marker-end="url(#arrow)"/>
+<rect x="1129.2" y="190.0" width="240.8" height="140.0" rx="12" fill="#FFFFFF" stroke="#1B7A4B" stroke-width="2"/>
+<rect x="1129.2" y="200.0" width="7.0" height="120.0" rx="3" fill="#1B7A4B" stroke="#1B7A4B" stroke-width="0"/>
+<text x="1151.2" y="249.7" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">後退端の確認</text>
+<text x="1151.2" y="271.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">retracted confirmed</text>
+<text x="1151.2" y="289.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">X2</text>
+<rect x="70.0" y="400.0" width="1300.0" height="300.0" rx="10" fill="#FFFFFF" stroke="#C1D0DD" stroke-width="1.4"/>
+<text x="86.0" y="430.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#142B3F" font-weight="700" text-anchor="start">タイミングとタイムアウト</text>
+<text x="86.0" y="452.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">timing and timeout</text>
+<path d="M110.0 500.0 L1310.0 500.0" fill="none" stroke="#C1D0DD" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="120.0" y="470.0" width="200.0" height="60.0" rx="3" fill="#FFFFFF" stroke="#1F5C99" stroke-width="2"/>
+<text x="220.0" y="495.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#142B3F" font-weight="700" text-anchor="middle">前進指令</text>
+<text x="220.0" y="516.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#526378" font-weight="400" text-anchor="middle">extend</text>
+<rect x="320.0" y="470.0" width="300.0" height="60.0" rx="3" fill="#FFFFFF" stroke="#B4541E" stroke-width="2"/>
+<text x="470.0" y="495.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#142B3F" font-weight="700" text-anchor="middle">確認待ち</text>
+<text x="470.0" y="516.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#526378" font-weight="400" text-anchor="middle">wait</text>
+<rect x="620.0" y="470.0" width="200.0" height="60.0" rx="3" fill="#FFFFFF" stroke="#1F5C99" stroke-width="2"/>
+<text x="720.0" y="495.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#142B3F" font-weight="700" text-anchor="middle">後退</text>
+<text x="720.0" y="516.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#526378" font-weight="400" text-anchor="middle">retract</text>
+<rect x="820.0" y="470.0" width="250.0" height="60.0" rx="3" fill="#FFFFFF" stroke="#B4541E" stroke-width="2"/>
+<text x="945.0" y="495.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#142B3F" font-weight="700" text-anchor="middle">確認待ち</text>
+<text x="945.0" y="516.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#526378" font-weight="400" text-anchor="middle">wait</text>
+<path d="M620.0 440.0 L620.0 560.0" fill="none" stroke="#A32B2B" stroke-width="3" stroke-dasharray="8 6" marker-end="url(#arrow)"/>
+<text x="630.0" y="440.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#A32B2B" font-weight="700" text-anchor="start">タイムアウト（教材値3秒）/ timeout (training value 3 s)</text>
+<text x="110.0" y="620.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#142B3F" font-weight="400" text-anchor="start">指令と確認は別。確認が来ない場合を設計する。</text>
+<text x="110.0" y="648.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">Commands and confirmations differ; design the missing-confirmation case.</text>
+<text x="110.0" y="690.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#B4541E" font-weight="700" text-anchor="start">電磁弁OFF＝必ず停止、ではない。ばね戻りでは動くことがある。</text>
+<text x="110.0" y="712.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#526378" font-weight="400" text-anchor="start">OFF does not always mean stopped; a spring-return valve can move.</text>
+<rect x="56.0" y="784.0" width="1328.0" height="60.0" rx="10" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
+<text x="76.0" y="818.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#142B3F" font-weight="700" text-anchor="start">製品検出 → 前進 → 確認 → 後退 → 確認。タイムアウトの位置を決める</text>
+<text x="76.0" y="840.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14.5" fill="#526378" font-weight="400" text-anchor="start">Product detection, extend, confirm, retract, confirm, with a defined timeout</text>
+<text x="1400" y="892" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" text-anchor="end">D08-14 • 編集可能な図 / editable SVG</text>
+</svg>

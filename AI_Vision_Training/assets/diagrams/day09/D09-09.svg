@@ -1,46 +1,85 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="880" viewBox="0 0 1440 880" role="img" aria-labelledby="title desc"><title id="title">費用対効果と回収期間 / Cost, benefit and payback</title><desc id="desc">費用対効果と回収期間 / Cost, benefit and payback — editable bilingual training diagram for 第9日 / Day 9.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#2563A6"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#A32B2B"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#1B7A4B"/></marker></defs><rect x="0" y="0" width="1440" height="880" fill="#F5F8FC"/><rect x="0" y="0" width="1440" height="12" fill="#2563A6"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1220" viewBox="0 0 1440 1220" role="img" aria-labelledby="title desc"><title id="title">AI検査システムの構成 / AI inspection system architecture</title><desc id="desc">AI検査システムの構成 / AI inspection system architecture — editable bilingual training diagram for 第9日 / Day 9.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#2563A6"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#A32B2B"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#1B7A4B"/></marker></defs><rect x="0" y="0" width="1440" height="1220" fill="#F5F8FC"/><rect x="0" y="0" width="1440" height="12" fill="#2563A6"/>
 <text x="56.0" y="56.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#2563A6" font-weight="700" text-anchor="start">第9日 / Day 9</text>
-<text x="56.0" y="104.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="32" fill="#142B3F" font-weight="700" text-anchor="start">費用対効果と回収期間</text>
-<text x="56.0" y="144.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="26" fill="#526378" font-weight="400" text-anchor="start">Cost, benefit and payback</text>
-<rect x="70.0" y="190.0" width="1300.0" height="110.0" rx="8" fill="#E8F1FA" stroke="#2563A6" stroke-width="1.4"/>
-<text x="90.0" y="230.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#142B3F" font-weight="700" text-anchor="start">年間効果 = 削減時間/日 × 稼働日 × 時間単価</text>
-<text x="90.0" y="256.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#526378" font-weight="400" text-anchor="start">annual value = time saved per day × working days × hourly rate</text>
-<text x="90.0" y="282.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#2563A6" font-weight="600" text-anchor="start">回収期間 = 投資 ÷ (年間効果 − 年間運用費)    payback = investment / (annual benefit − annual operating cost)</text>
-<rect x="70.0" y="340.0" width="300.0" height="120.0" rx="8" fill="#FFFFFF" stroke="#1F5C99" stroke-width="2"/>
-<text x="86.0" y="372.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#1F5C99" font-weight="700" text-anchor="start">削減 / saved</text>
-<text x="86.0" y="404.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#142B3F" font-weight="600" text-anchor="start">12 s × 180 = 36 min/day</text>
-<rect x="400.0" y="340.0" width="300.0" height="120.0" rx="8" fill="#FFFFFF" stroke="#1B7A4B" stroke-width="2"/>
-<text x="416.0" y="372.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#1B7A4B" font-weight="700" text-anchor="start">年間 / annual</text>
-<text x="416.0" y="404.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#142B3F" font-weight="600" text-anchor="start">0.6 h × 220 × 2,400 = 316,800 JPY</text>
-<rect x="730.0" y="340.0" width="300.0" height="120.0" rx="8" fill="#FFFFFF" stroke="#B4541E" stroke-width="2"/>
-<text x="746.0" y="372.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#B4541E" font-weight="700" text-anchor="start">投資 / investment</text>
-<text x="746.0" y="404.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#142B3F" font-weight="600" text-anchor="start">450,000 JPY</text>
-<rect x="1060.0" y="340.0" width="300.0" height="120.0" rx="8" fill="#FFFFFF" stroke="#1B7A4B" stroke-width="2"/>
-<text x="1076.0" y="372.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#1B7A4B" font-weight="700" text-anchor="start">回収 / payback</text>
-<text x="1076.0" y="404.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#142B3F" font-weight="600" text-anchor="start">450,000 / 316,800 = 1.42 years</text>
-<text x="70.0" y="520.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#142B3F" font-weight="700" text-anchor="start">投資と運用費による回収期間の変化 / payback sensitivity</text>
-<rect x="90.0" y="682.0" width="120.0" height="38.0" rx="4" fill="#1B7A4B" stroke="#1B7A4B" stroke-width="1"/>
-<text x="150.0" y="742.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#526378" font-weight="600" text-anchor="middle">300k, 0</text>
-<text x="150.0" y="674.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#1B7A4B" font-weight="700" text-anchor="middle">0.95 y</text>
-<rect x="340.0" y="663.2" width="120.0" height="56.8" rx="4" fill="#1B7A4B" stroke="#1B7A4B" stroke-width="1"/>
-<text x="400.0" y="742.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#526378" font-weight="600" text-anchor="middle">450k, 0</text>
-<text x="400.0" y="655.2" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#1B7A4B" font-weight="700" text-anchor="middle">1.42 y</text>
-<rect x="590.0" y="644.4" width="120.0" height="75.6" rx="4" fill="#B4541E" stroke="#B4541E" stroke-width="1"/>
-<text x="650.0" y="742.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#526378" font-weight="600" text-anchor="middle">600k, 0</text>
-<text x="650.0" y="636.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#B4541E" font-weight="700" text-anchor="middle">1.89 y</text>
-<rect x="840.0" y="637.2" width="120.0" height="82.8" rx="4" fill="#B4541E" stroke="#B4541E" stroke-width="1"/>
-<text x="900.0" y="742.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#526378" font-weight="600" text-anchor="middle">450k, 100k</text>
-<text x="900.0" y="629.2" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#B4541E" font-weight="700" text-anchor="middle">2.07 y</text>
-<rect x="1090.0" y="575.6" width="120.0" height="144.4" rx="4" fill="#A32B2B" stroke="#A32B2B" stroke-width="1"/>
-<text x="1150.0" y="742.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#526378" font-weight="600" text-anchor="middle">450k, 200k</text>
-<text x="1150.0" y="567.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#A32B2B" font-weight="700" text-anchor="middle">3.61 y</text>
-<path d="M70.0 720.0 L1340.0 720.0" fill="none" stroke="#526378" stroke-width="1.6"/>
-<text x="1260.0" y="545.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#A32B2B" font-weight="600" text-anchor="start">運用費が増えると</text>
-<text x="1260.0" y="565.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#A32B2B" font-weight="600" text-anchor="start">回収は長くなる</text>
-<text x="1260.0" y="590.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#A32B2B" font-weight="600" text-anchor="start">効果が実現しなければ</text>
-<text x="1260.0" y="610.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#A32B2B" font-weight="700" text-anchor="start">回収は無限</text>
-<rect x="56.0" y="764.0" width="1328.0" height="60.0" rx="10" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
-<text x="76.0" y="798.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#142B3F" font-weight="700" text-anchor="start">1.42年は仮定した数値での単純回収。労務時間の換算価値と、実現する利益を区別する。</text>
-<text x="76.0" y="820.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14.5" fill="#526378" font-weight="400" text-anchor="start">1.42 years is a simple payback on assumed numbers. Distinguish labour-time value from realised profit.</text>
-<text x="1400" y="872" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" text-anchor="end">D09-09 • 編集可能な図 / editable SVG</text>
+<text x="56.0" y="104.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="32" fill="#142B3F" font-weight="700" text-anchor="start">AI検査システムの構成</text>
+<text x="56.0" y="144.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="26" fill="#526378" font-weight="400" text-anchor="start">AI inspection system architecture</text>
+<rect x="70.0" y="180.0" width="410.0" height="130.0" rx="12" fill="#FFFFFF" stroke="#1B7A4B" stroke-width="2"/>
+<rect x="70.0" y="190.0" width="7.0" height="110.0" rx="3" fill="#1B7A4B" stroke="#1B7A4B" stroke-width="0"/>
+<text x="92.0" y="234.7" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">カメラ・レンズ・照明</text>
+<text x="92.0" y="256.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">camera, lens, lighting</text>
+<text x="92.0" y="274.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">画像を作る / creates the image</text>
+<path d="M482.0 245.0 L518.0 245.0" fill="none" stroke="#2563A6" stroke-width="2.2" marker-end="url(#arrow)"/>
+<rect x="520.0" y="180.0" width="410.0" height="130.0" rx="12" fill="#FFFFFF" stroke="#0E7490" stroke-width="2"/>
+<rect x="520.0" y="190.0" width="7.0" height="110.0" rx="3" fill="#0E7490" stroke="#0E7490" stroke-width="0"/>
+<text x="542.0" y="234.7" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">画像取込み</text>
+<text x="542.0" y="256.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">image acquisition</text>
+<text x="542.0" y="274.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">PCへ転送 / transfer to the PC</text>
+<path d="M932.0 245.0 L968.0 245.0" fill="none" stroke="#2563A6" stroke-width="2.2" marker-end="url(#arrow)"/>
+<rect x="970.0" y="180.0" width="410.0" height="130.0" rx="12" fill="#FFFFFF" stroke="#6B3FA0" stroke-width="2"/>
+<rect x="970.0" y="190.0" width="7.0" height="110.0" rx="3" fill="#6B3FA0" stroke="#6B3FA0" stroke-width="0"/>
+<text x="992.0" y="234.7" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">前処理</text>
+<text x="992.0" y="256.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">preprocessing</text>
+<text x="992.0" y="274.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">リサイズ・変換 / resize, convert</text>
+<rect x="70.0" y="360.0" width="410.0" height="130.0" rx="12" fill="#FFFFFF" stroke="#6B3FA0" stroke-width="2"/>
+<rect x="70.0" y="370.0" width="7.0" height="110.0" rx="3" fill="#6B3FA0" stroke="#6B3FA0" stroke-width="0"/>
+<text x="92.0" y="414.7" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">AI推論</text>
+<text x="92.0" y="436.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">AI inference</text>
+<text x="92.0" y="454.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">モデルで判定 / model output</text>
+<path d="M482.0 425.0 L518.0 425.0" fill="none" stroke="#2563A6" stroke-width="2.2" marker-end="url(#arrow)"/>
+<rect x="520.0" y="360.0" width="410.0" height="130.0" rx="12" fill="#FFFFFF" stroke="#0E7490" stroke-width="2"/>
+<rect x="520.0" y="370.0" width="7.0" height="110.0" rx="3" fill="#0E7490" stroke="#0E7490" stroke-width="0"/>
+<text x="542.0" y="414.7" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">検査判定</text>
+<text x="542.0" y="436.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">inspection decision</text>
+<text x="542.0" y="454.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">OK / NG / 無効</text>
+<path d="M932.0 425.0 L968.0 425.0" fill="none" stroke="#2563A6" stroke-width="2.2" marker-end="url(#arrow)"/>
+<rect x="970.0" y="360.0" width="410.0" height="130.0" rx="12" fill="#FFFFFF" stroke="#6B3FA0" stroke-width="2"/>
+<rect x="970.0" y="370.0" width="7.0" height="110.0" rx="3" fill="#6B3FA0" stroke="#6B3FA0" stroke-width="0"/>
+<text x="992.0" y="414.7" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">PLC通信</text>
+<text x="992.0" y="436.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">PLC communication</text>
+<text x="992.0" y="454.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">結果を渡す / send the result</text>
+<rect x="70.0" y="540.0" width="410.0" height="130.0" rx="12" fill="#FFFFFF" stroke="#1F5C99" stroke-width="2"/>
+<rect x="70.0" y="550.0" width="7.0" height="110.0" rx="3" fill="#1F5C99" stroke="#1F5C99" stroke-width="0"/>
+<text x="92.0" y="594.7" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">機械設備</text>
+<text x="92.0" y="616.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">mechanical equipment</text>
+<text x="92.0" y="634.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">仕分け・停止 / sort, stop</text>
+<path d="M482.0 605.0 L518.0 605.0" fill="none" stroke="#2563A6" stroke-width="2.2" marker-end="url(#arrow)"/>
+<rect x="520.0" y="540.0" width="410.0" height="130.0" rx="12" fill="#FFFFFF" stroke="#1B7A4B" stroke-width="2"/>
+<rect x="520.0" y="550.0" width="7.0" height="110.0" rx="3" fill="#1B7A4B" stroke="#1B7A4B" stroke-width="0"/>
+<text x="542.0" y="594.7" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">センサー</text>
+<text x="542.0" y="616.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">sensor</text>
+<text x="542.0" y="634.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">結果を確認 / confirms the result</text>
+<path d="M932.0 605.0 L968.0 605.0" fill="none" stroke="#2563A6" stroke-width="2.2" marker-end="url(#arrow)"/>
+<rect x="970.0" y="540.0" width="410.0" height="130.0" rx="12" fill="#FFFFFF" stroke="#0E7490" stroke-width="2"/>
+<rect x="970.0" y="550.0" width="7.0" height="110.0" rx="3" fill="#0E7490" stroke="#0E7490" stroke-width="0"/>
+<text x="992.0" y="594.7" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">記録・画像保存</text>
+<text x="992.0" y="616.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">logging and image storage</text>
+<text x="992.0" y="634.4" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">任意 / optional</text>
+<path d="M1290.0 312.0 L1290.0 356.0" fill="none" stroke="#2563A6" stroke-width="2.4" marker-end="url(#arrow)"/>
+<path d="M1290.0 492.0 L1290.0 536.0" fill="none" stroke="#2563A6" stroke-width="2.4" marker-end="url(#arrow)"/>
+<rect x="70.0" y="730.0" width="620.0" height="240.0" rx="10" fill="#FFFFFF" stroke="#C1D0DD" stroke-width="1.4"/>
+<text x="86.0" y="760.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#142B3F" font-weight="700" text-anchor="start">矢印の種類</text>
+<text x="86.0" y="782.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">arrow types</text>
+<rect x="90.0" y="800.0" width="26.0" height="18.0" rx="3" fill="#0E7490" stroke="#0E7490" stroke-width="1"/>
+<text x="126.0" y="815.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">画像データ / image data</text>
+<rect x="90.0" y="832.0" width="26.0" height="18.0" rx="3" fill="#6B3FA0" stroke="#6B3FA0" stroke-width="1"/>
+<text x="126.0" y="847.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">制御信号 / control signal</text>
+<rect x="90.0" y="864.0" width="26.0" height="18.0" rx="3" fill="#B4541E" stroke="#B4541E" stroke-width="1"/>
+<text x="126.0" y="879.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">電力 / power</text>
+<rect x="340.0" y="800.0" width="26.0" height="18.0" rx="3" fill="#1F5C99" stroke="#1F5C99" stroke-width="1"/>
+<text x="376.0" y="815.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">機械動作 / mechanical</text>
+<rect x="340.0" y="832.0" width="26.0" height="18.0" rx="3" fill="#1B7A4B" stroke="#1B7A4B" stroke-width="1"/>
+<text x="376.0" y="847.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">フィードバック / feedback</text>
+<rect x="750.0" y="730.0" width="620.0" height="240.0" rx="10" fill="#FFFFFF" stroke="#C1D0DD" stroke-width="1.4"/>
+<text x="766.0" y="760.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#142B3F" font-weight="700" text-anchor="start">役割の分離</text>
+<text x="766.0" y="782.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">separation of roles</text>
+<text x="770.0" y="810.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="700" text-anchor="start">AIは結果を制御装置へ渡す。</text>
+<text x="770.0" y="838.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#526378" font-weight="400" text-anchor="start">AI passes results to the controller.</text>
+<text x="770.0" y="886.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#142B3F" font-weight="400" text-anchor="start">危険な動作は機械側の制御と安全で扱う。</text>
+<text x="770.0" y="914.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#526378" font-weight="400" text-anchor="start">Hazardous motion is handled by the machine control and safety system.</text>
+<rect x="70.0" y="990.0" width="1300.0" height="78.0" rx="8" fill="#E8F1FA" stroke="#2563A6" stroke-width="1.2"/>
+<text x="88.0" y="1020.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="700" text-anchor="start">記録と画像保存は任意。制御と安全の役割を混ぜない。</text>
+<text x="88.0" y="1044.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#526378" font-weight="400" text-anchor="start">Logging and storage are optional; do not mix control and safety roles.</text>
+<rect x="56.0" y="1104.0" width="1328.0" height="60.0" rx="10" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
+<text x="76.0" y="1138.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#142B3F" font-weight="700" text-anchor="start">画像データ・制御信号・電力・機械動作・フィードバックを区別して描く</text>
+<text x="76.0" y="1160.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14.5" fill="#526378" font-weight="400" text-anchor="start">Distinguish image data, control signals, power, mechanical movement and feedback</text>
+<text x="1400" y="1212" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" text-anchor="end">D09-09 • 編集可能な図 / editable SVG</text>
 </svg>

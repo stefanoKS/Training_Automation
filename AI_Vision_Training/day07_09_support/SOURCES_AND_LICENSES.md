@@ -46,9 +46,9 @@ All SVG figures were created for this repository and are editable. They are not 
 
 ## 4. シミュレーション / simulations
 
-`simulations/sim_plc_sequence.html` は、この教材用に自作したオフラインのJavaScriptシミュレータです。ブラウザの外部通信、実機接続、PLCソフトウェアを使用しません。`automation_models.py` のPythonモデルと同じ状態機械を、教育用に簡略化して実装しています。
+`simulations/sim_plc_sequence.html` は、この教材用に自作したオフラインのJavaScriptシミュレータです。ブラウザの外部通信、実機接続、PLCソフトウェアを使用しません。基本の自己保持と、再起動防止を含む拡張ロジック、前進・後退のインターロックを、`automation_models.py` と同じ考え方で実装しています。`tests/run_simulation_logic_tests.js` がロジック部分だけを node で検証します。
 
-`simulations/sim_plc_sequence.html` is an original offline JavaScript simulator for this course. It makes no external network calls and connects to no hardware or PLC software. It implements a teaching simplification of the same state machine as the Python model in `automation_models.py`.
+`simulations/sim_plc_sequence.html` is an original offline JavaScript simulator. It makes no external network calls and connects to no hardware or PLC software. It implements the basic seal-in, the extended restart-prevention logic and the forward/reverse interlock in the same spirit as `automation_models.py`; `tests/run_simulation_logic_tests.js` exercises the logic block with node.
 
 フォールバックPNGは、JavaScriptが使えない場合の静的説明図です。シミュレーションの実行結果ではありません。
 
@@ -67,24 +67,31 @@ The following are entry points for teaching. They do not guarantee the content o
 | 非常停止 / emergency stop | ISO 13850:2015 | https://www.iso.org/standard/59970.html |
 | 機械の電気設備 / electrical equipment of machines | IEC 60204-1:2016+A1:2021 | https://webstore.iec.ch/en/publication/71256 |
 | PLCプログラミング / PLC programming | IEC 61131-3 | https://webstore.iec.ch/en/publication/68533 |
-| 空圧選定 / pneumatic selection | SMC cylinder selection | https://www.smcworld.com/select/air/en-jp/ |
+| 空圧 / pneumatic technology | SMC (entry point) | https://www.smcworld.com/en-jp/ |
+| 空圧・油圧機器 / pneumatic and hydraulic components | CKD (entry point) | https://www.ckd.co.jp/en/ |
 | PLCマニュアル / PLC manuals | Mitsubishi Electric FA | https://www.mitsubishielectric.co.jp/fa/download/search.page |
-| センサー技術 / sensor technology | Omron proximity sensor guide | https://www.fa.omron.co.jp/guide/technicalguide/41/17/ |
-| Modbus | Modbus specifications | https://www.modbus.org/modbus-specifications |
-| /31サブネット / /31 subnet | RFC 3021 | https://www.rfc-editor.org/rfc/rfc3021 |
+| センサー・PLC技術資料 / sensor and PLC guides | Omron FA (entry point) | https://www.fa.omron.co.jp/ |
+| モーター選定 / motor selection | Oriental Motor (entry point) | https://www.orientalmotor.co.jp/en/ |
+| カメラ技術資料 / camera documentation | Basler (entry point) | https://docs.baslerweb.com/ |
+| 照明技術 / lighting technology | CCS (entry point) | https://www.ccs-grp.com/en/ |
+| 光学・撮像 / optics and imaging | Edmund Optics knowledge center | https://www.edmundoptics.com/knowledge-center/ |
 
 **確認日 / checked:** 2026-11-23（研修資料作成時 / course build date）
 
 ## 6. 数値・仮定 / numbers and assumptions
 
 - 数値は、元PDFの例と、この教材で明示した仮定に基づく。
-- 摩擦係数、余裕係数、効率、稼働率、良品率、タイムアウト、投資額、労務費は、教育用の仮定であり、実機の値ではない。
+- 摩擦係数、余裕係数、効率、タイムアウト、投資額、労務費、電気料金、余裕率（25%・20%）は、教育用の仮定であり、実機の値ではない。
+- 稼働率・良品率による能力計算は、この研修の必須範囲から外している。
 - 実機の型式・部品番号は割り当てていない。候補は仕様クラスとして扱う。
+- カメラ・レンズ・照明のメーカー固有の仕様値は引用していない。
 - シミュレーション結果は、決定論的なモデルの出力であり、実機の測定値ではない。
 
 - Values come from the source examples and the assumptions stated in this course.
-- Friction, margin, efficiency, availability, yield, timeout, investment and labour rate are teaching assumptions, not real-machine values.
+- Friction, margin, efficiency, timeout, investment, labour rate, electricity rate and planning margins (25%, 20%) are teaching assumptions, not real-machine values.
+- Availability and yield capacity models are outside the required scope of this course.
 - No real part numbers are assigned; candidates are treated as specification classes.
+- No manufacturer-specific camera, lens or lighting figures are quoted.
 - Simulation results are deterministic model outputs, not real measurements.
 
 ## 7. 生成物 / generated artefacts

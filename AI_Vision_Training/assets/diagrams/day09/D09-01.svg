@@ -1,40 +1,93 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="940" viewBox="0 0 1440 940" role="img" aria-labelledby="title desc"><title id="title">LANとスイッチ / LAN and switch</title><desc id="desc">LANとスイッチ / LAN and switch — editable bilingual training diagram for 第9日 / Day 9.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#2563A6"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#A32B2B"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#1B7A4B"/></marker></defs><rect x="0" y="0" width="1440" height="940" fill="#F5F8FC"/><rect x="0" y="0" width="1440" height="12" fill="#2563A6"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1020" viewBox="0 0 1440 1020" role="img" aria-labelledby="title desc"><title id="title">撮像の流れ / The imaging chain</title><desc id="desc">撮像の流れ / The imaging chain — editable bilingual training diagram for 第9日 / Day 9.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#2563A6"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#A32B2B"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#1B7A4B"/></marker></defs><rect x="0" y="0" width="1440" height="1020" fill="#F5F8FC"/><rect x="0" y="0" width="1440" height="12" fill="#2563A6"/>
 <text x="56.0" y="56.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#2563A6" font-weight="700" text-anchor="start">第9日 / Day 9</text>
-<text x="56.0" y="104.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="32" fill="#142B3F" font-weight="700" text-anchor="start">LANとスイッチ</text>
-<text x="56.0" y="144.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="26" fill="#526378" font-weight="400" text-anchor="start">LAN and switch</text>
-<rect x="570.0" y="380.0" width="300.0" height="130.0" rx="8" fill="#E6F4F7" stroke="#0E7490" stroke-width="2.4"/>
-<text x="720.0" y="425.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="20" fill="#0E7490" font-weight="700" text-anchor="middle">スイッチ</text>
-<text x="720.0" y="450.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#526378" font-weight="400" text-anchor="middle">L2 switch</text>
-<text x="720.0" y="478.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#142B3F" font-weight="400" text-anchor="middle">同一LAN内を中継</text>
-<rect x="220.0" y="240.0" width="240.0" height="100.0" rx="8" fill="#FFFFFF" stroke="#0E7490" stroke-width="2"/>
-<text x="340.0" y="274.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#0E7490" font-weight="700" text-anchor="middle">PC</text>
-<text x="340.0" y="300.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#142B3F" font-weight="600" text-anchor="middle">192.168.10.10</text>
-<text x="340.0" y="322.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#526378" font-weight="400" text-anchor="middle">/24</text>
-<rect x="1020.0" y="240.0" width="240.0" height="100.0" rx="8" fill="#FFFFFF" stroke="#6B3FA0" stroke-width="2"/>
-<text x="1140.0" y="274.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#6B3FA0" font-weight="700" text-anchor="middle">PLC</text>
-<text x="1140.0" y="300.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#142B3F" font-weight="600" text-anchor="middle">192.168.10.20</text>
-<text x="1140.0" y="322.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#526378" font-weight="400" text-anchor="middle">/24</text>
-<rect x="220.0" y="590.0" width="240.0" height="100.0" rx="8" fill="#FFFFFF" stroke="#1B7A4B" stroke-width="2"/>
-<text x="340.0" y="624.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#1B7A4B" font-weight="700" text-anchor="middle">HMI</text>
-<text x="340.0" y="650.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#142B3F" font-weight="600" text-anchor="middle">192.168.10.40</text>
-<text x="340.0" y="672.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#526378" font-weight="400" text-anchor="middle">/24</text>
-<rect x="1020.0" y="590.0" width="240.0" height="100.0" rx="8" fill="#FFFFFF" stroke="#B4541E" stroke-width="2"/>
-<text x="1140.0" y="624.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#B4541E" font-weight="700" text-anchor="middle">カメラ / camera</text>
-<text x="1140.0" y="650.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#142B3F" font-weight="600" text-anchor="middle">192.168.10.30</text>
-<text x="1140.0" y="672.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#526378" font-weight="400" text-anchor="middle">/24</text>
-<path d="M460.0 290.0 L660.0 380.0" fill="none" stroke="#0E7490" stroke-width="2.2" marker-end="url(#arrow)"/>
-<path d="M1020.0 290.0 L780.0 380.0" fill="none" stroke="#0E7490" stroke-width="2.2" marker-end="url(#arrow)"/>
-<path d="M460.0 640.0 L660.0 510.0" fill="none" stroke="#0E7490" stroke-width="2.2" marker-end="url(#arrow)"/>
-<path d="M1020.0 640.0 L780.0 510.0" fill="none" stroke="#0E7490" stroke-width="2.2" marker-end="url(#arrow)"/>
-<rect x="1120.0" y="390.0" width="220.0" height="110.0" rx="8" fill="#FFFFFF" stroke="#B4541E" stroke-width="2"/>
-<text x="1230.0" y="425.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#B4541E" font-weight="700" text-anchor="middle">ルータ / router</text>
-<text x="1230.0" y="448.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#142B3F" font-weight="400" text-anchor="middle">別ネットワークへ</text>
-<text x="1230.0" y="468.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#526378" font-weight="400" text-anchor="middle">gateway</text>
-<path d="M870.0 445.0 L1118.0 445.0" fill="none" stroke="#B4541E" stroke-width="2" stroke-dasharray="7 5" marker-end="url(#arrow)"/>
-<rect x="60.0" y="730.0" width="1320.0" height="50.0" rx="6" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
-<text x="80.0" y="760.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#142B3F" font-weight="400" text-anchor="start">同じスイッチにつながっていても、別サブネットなら通常はルータが必要。 / A shared switch does not remove the need for a router between subnets.</text>
-<rect x="56.0" y="824.0" width="1328.0" height="60.0" rx="10" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
-<text x="76.0" y="858.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#142B3F" font-weight="700" text-anchor="start">スイッチは同一LAN内を中継し、ルータは別ネットワークへつなぐ。IPとマスクで到達範囲が決まる。</text>
-<text x="76.0" y="880.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14.5" fill="#526378" font-weight="400" text-anchor="start">A switch forwards within a LAN; a router connects networks. IP and mask define reachability.</text>
-<text x="1400" y="932" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" text-anchor="end">D09-01 • 編集可能な図 / editable SVG</text>
+<text x="56.0" y="104.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="32" fill="#142B3F" font-weight="700" text-anchor="start">撮像の流れ</text>
+<text x="56.0" y="144.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="26" fill="#526378" font-weight="400" text-anchor="start">The imaging chain</text>
+<rect x="60.0" y="190.0" width="201.7" height="150.0" rx="12" fill="#FFFFFF" stroke="#1F5C99" stroke-width="2"/>
+<rect x="60.0" y="200.0" width="7.0" height="130.0" rx="3" fill="#1F5C99" stroke="#1F5C99" stroke-width="0"/>
+<text x="82.0" y="244.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">対象物</text>
+<text x="82.0" y="266.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">object</text>
+<text x="82.0" y="284.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">シート・製品 /</text>
+<text x="82.0" y="302.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">sheet, product</text>
+<path d="M263.7 265.0 L281.7 265.0" fill="none" stroke="#2563A6" stroke-width="2.2" marker-end="url(#arrow)"/>
+<rect x="283.7" y="190.0" width="201.7" height="150.0" rx="12" fill="#FFFFFF" stroke="#B4541E" stroke-width="2"/>
+<rect x="283.7" y="200.0" width="7.0" height="130.0" rx="3" fill="#B4541E" stroke="#B4541E" stroke-width="0"/>
+<text x="305.7" y="244.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">照明</text>
+<text x="305.7" y="266.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">illumination</text>
+<text x="305.7" y="284.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">光を当てる / lights</text>
+<text x="305.7" y="302.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">the object</text>
+<path d="M487.3 265.0 L505.3 265.0" fill="none" stroke="#2563A6" stroke-width="2.2" marker-end="url(#arrow)"/>
+<rect x="507.3" y="190.0" width="201.7" height="150.0" rx="12" fill="#FFFFFF" stroke="#6B3FA0" stroke-width="2"/>
+<rect x="507.3" y="200.0" width="7.0" height="130.0" rx="3" fill="#6B3FA0" stroke="#6B3FA0" stroke-width="0"/>
+<text x="529.3" y="244.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">レンズ</text>
+<text x="529.3" y="266.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">lens</text>
+<text x="529.3" y="284.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">結像する / forms</text>
+<text x="529.3" y="302.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">the image</text>
+<path d="M711.0 265.0 L729.0 265.0" fill="none" stroke="#2563A6" stroke-width="2.2" marker-end="url(#arrow)"/>
+<rect x="731.0" y="190.0" width="201.7" height="150.0" rx="12" fill="#FFFFFF" stroke="#1B7A4B" stroke-width="2"/>
+<rect x="731.0" y="200.0" width="7.0" height="130.0" rx="3" fill="#1B7A4B" stroke="#1B7A4B" stroke-width="0"/>
+<text x="753.0" y="244.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">撮像素子</text>
+<text x="753.0" y="266.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">image sensor</text>
+<text x="753.0" y="284.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">光を電気に / light</text>
+<text x="753.0" y="302.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">to signal</text>
+<path d="M934.7 265.0 L952.7 265.0" fill="none" stroke="#2563A6" stroke-width="2.2" marker-end="url(#arrow)"/>
+<rect x="954.7" y="190.0" width="201.7" height="150.0" rx="12" fill="#FFFFFF" stroke="#0E7490" stroke-width="2"/>
+<rect x="954.7" y="200.0" width="7.0" height="130.0" rx="3" fill="#0E7490" stroke="#0E7490" stroke-width="0"/>
+<text x="976.7" y="244.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">デジタル画像</text>
+<text x="976.7" y="266.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">digital image</text>
+<text x="976.7" y="284.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">画素の集まり /</text>
+<text x="976.7" y="302.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">array of pixels</text>
+<path d="M1158.3 265.0 L1176.3 265.0" fill="none" stroke="#2563A6" stroke-width="2.2" marker-end="url(#arrow)"/>
+<rect x="1178.3" y="190.0" width="201.7" height="150.0" rx="12" fill="#FFFFFF" stroke="#6B3FA0" stroke-width="2"/>
+<rect x="1178.3" y="200.0" width="7.0" height="130.0" rx="3" fill="#6B3FA0" stroke="#6B3FA0" stroke-width="0"/>
+<text x="1200.3" y="244.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">コンピュータ</text>
+<text x="1200.3" y="266.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">computer</text>
+<text x="1200.3" y="284.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">処理・AI /</text>
+<text x="1200.3" y="302.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">processing, AI</text>
+<rect x="70.0" y="420.0" width="1300.0" height="330.0" rx="10" fill="#FFFFFF" stroke="#C1D0DD" stroke-width="1.4"/>
+<text x="86.0" y="450.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#142B3F" font-weight="700" text-anchor="start">カメラの要素</text>
+<text x="86.0" y="472.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#526378" font-weight="400" text-anchor="start">camera elements</text>
+<rect x="90.0" y="490.0" width="193.3" height="230.0" rx="12" fill="#FFFFFF" stroke="#0E7490" stroke-width="2"/>
+<rect x="90.0" y="500.0" width="7.0" height="210.0" rx="3" fill="#0E7490" stroke="#0E7490" stroke-width="0"/>
+<text x="112.0" y="584.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">画素</text>
+<text x="112.0" y="606.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">pixel</text>
+<text x="112.0" y="624.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">画像の最小単位 /</text>
+<text x="112.0" y="642.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">smallest unit</text>
+<rect x="303.3" y="490.0" width="193.3" height="230.0" rx="12" fill="#FFFFFF" stroke="#0E7490" stroke-width="2"/>
+<rect x="303.3" y="500.0" width="7.0" height="210.0" rx="3" fill="#0E7490" stroke="#0E7490" stroke-width="0"/>
+<text x="325.3" y="575.2" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">解像度</text>
+<text x="325.3" y="596.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">resolution</text>
+<text x="325.3" y="614.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">横×縦の画素数 /</text>
+<text x="325.3" y="632.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">pixels across and</text>
+<text x="325.3" y="650.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">down</text>
+<rect x="516.7" y="490.0" width="193.3" height="230.0" rx="12" fill="#FFFFFF" stroke="#0E7490" stroke-width="2"/>
+<rect x="516.7" y="500.0" width="7.0" height="210.0" rx="3" fill="#0E7490" stroke="#0E7490" stroke-width="0"/>
+<text x="538.7" y="584.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">センササイズ</text>
+<text x="538.7" y="606.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">sensor size</text>
+<text x="538.7" y="624.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">撮像素子の大きさ /</text>
+<text x="538.7" y="642.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">physical size</text>
+<rect x="730.0" y="490.0" width="193.3" height="230.0" rx="12" fill="#FFFFFF" stroke="#0E7490" stroke-width="2"/>
+<rect x="730.0" y="500.0" width="7.0" height="210.0" rx="3" fill="#0E7490" stroke="#0E7490" stroke-width="0"/>
+<text x="752.0" y="584.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">露光</text>
+<text x="752.0" y="606.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">exposure</text>
+<text x="752.0" y="624.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">光を受ける時間 /</text>
+<text x="752.0" y="642.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">collection time</text>
+<rect x="943.3" y="490.0" width="193.3" height="230.0" rx="12" fill="#FFFFFF" stroke="#0E7490" stroke-width="2"/>
+<rect x="943.3" y="500.0" width="7.0" height="210.0" rx="3" fill="#0E7490" stroke="#0E7490" stroke-width="0"/>
+<text x="965.3" y="584.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">ゲイン</text>
+<text x="965.3" y="606.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">gain</text>
+<text x="965.3" y="624.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">信号の増幅 /</text>
+<text x="965.3" y="642.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">amplification</text>
+<rect x="1156.7" y="490.0" width="193.3" height="230.0" rx="12" fill="#FFFFFF" stroke="#0E7490" stroke-width="2"/>
+<rect x="1156.7" y="500.0" width="7.0" height="210.0" rx="3" fill="#0E7490" stroke="#0E7490" stroke-width="0"/>
+<text x="1178.7" y="584.9" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="21.0" fill="#142B3F" font-weight="700" text-anchor="start">トリガ</text>
+<text x="1178.7" y="606.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#526378" font-weight="400" text-anchor="start">trigger</text>
+<text x="1178.7" y="624.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">撮影のきっかけ /</text>
+<text x="1178.7" y="642.6" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" font-weight="400" text-anchor="start" font-style="italic">capture start</text>
+<rect x="70.0" y="780.0" width="1300.0" height="78.0" rx="8" fill="#E8F1FA" stroke="#2563A6" stroke-width="1.2"/>
+<text x="88.0" y="810.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="700" text-anchor="start">産業用カメラは画像を撮る装置。AI推論はPCなどが行う。</text>
+<text x="88.0" y="834.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#526378" font-weight="400" text-anchor="start">An industrial camera captures images; AI inference runs on a PC or processor.</text>
+<rect x="56.0" y="904.0" width="1328.0" height="60.0" rx="10" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
+<text x="76.0" y="938.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#142B3F" font-weight="700" text-anchor="start">物体 → 照明 → レンズ → 撮像素子 → デジタル画像 → コンピュータ</text>
+<text x="76.0" y="960.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14.5" fill="#526378" font-weight="400" text-anchor="start">Object, illumination, lens, image sensor, digital image, computer</text>
+<text x="1400" y="1012" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" text-anchor="end">D09-01 • 編集可能な図 / editable SVG</text>
 </svg>

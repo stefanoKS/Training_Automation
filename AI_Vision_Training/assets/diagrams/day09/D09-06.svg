@@ -1,73 +1,60 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1060" viewBox="0 0 1440 1060" role="img" aria-labelledby="title desc"><title id="title">段階的な試運転ゲート / Staged commissioning gates</title><desc id="desc">段階的な試運転ゲート / Staged commissioning gates — editable bilingual training diagram for 第9日 / Day 9.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#2563A6"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#A32B2B"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#1B7A4B"/></marker></defs><rect x="0" y="0" width="1440" height="1060" fill="#F5F8FC"/><rect x="0" y="0" width="1440" height="12" fill="#2563A6"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1000" viewBox="0 0 1440 1000" role="img" aria-labelledby="title desc"><title id="title">照明の種類 / Lighting types</title><desc id="desc">照明の種類 / Lighting types — editable bilingual training diagram for 第9日 / Day 9.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#2563A6"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#A32B2B"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#1B7A4B"/></marker></defs><rect x="0" y="0" width="1440" height="1000" fill="#F5F8FC"/><rect x="0" y="0" width="1440" height="12" fill="#2563A6"/>
 <text x="56.0" y="56.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="19" fill="#2563A6" font-weight="700" text-anchor="start">第9日 / Day 9</text>
-<text x="56.0" y="104.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="32" fill="#142B3F" font-weight="700" text-anchor="start">段階的な試運転ゲート</text>
-<text x="56.0" y="144.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="26" fill="#526378" font-weight="400" text-anchor="start">Staged commissioning gates</text>
-<rect x="110.0" y="190.0" width="120.0" height="80.0" rx="8" fill="#6B3FA0" stroke="#6B3FA0" stroke-width="2"/>
-<text x="170.0" y="238.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="24" fill="white" font-weight="700" text-anchor="middle">G0</text>
-<rect x="240.0" y="190.0" width="780.0" height="80.0" rx="8" fill="#FFFFFF" stroke="#6B3FA0" stroke-width="1.8"/>
-<text x="260.0" y="220.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#6B3FA0" font-weight="700" text-anchor="start">文書 / documentation</text>
-<text x="260.0" y="244.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#526378" font-weight="400" text-anchor="start">要求・図面・BOM・I/O・ラダー・試験計画</text>
-<text x="800.0" y="243.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="10" fill="#526378" font-weight="600" text-anchor="end">paper review</text>
-<path d="M170.0 272.0 L170.0 293.0" fill="none" stroke="#6B3FA0" stroke-width="2" marker-end="url(#arrow)"/>
-<rect x="110.0" y="295.0" width="120.0" height="80.0" rx="8" fill="#1F5C99" stroke="#1F5C99" stroke-width="2"/>
-<text x="170.0" y="343.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="24" fill="white" font-weight="700" text-anchor="middle">G1</text>
-<rect x="240.0" y="295.0" width="780.0" height="80.0" rx="8" fill="#FFFFFF" stroke="#1F5C99" stroke-width="1.8"/>
-<text x="260.0" y="325.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#1F5C99" font-weight="700" text-anchor="start">機械 / mechanical</text>
-<text x="260.0" y="349.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#526378" font-weight="400" text-anchor="start">取付・ガイド・ストローク・カバー</text>
-<text x="800.0" y="348.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="10" fill="#526378" font-weight="600" text-anchor="end">inspection</text>
-<path d="M170.0 377.0 L170.0 398.0" fill="none" stroke="#1F5C99" stroke-width="2" marker-end="url(#arrow)"/>
-<rect x="110.0" y="400.0" width="120.0" height="80.0" rx="8" fill="#B4541E" stroke="#B4541E" stroke-width="2"/>
-<text x="170.0" y="448.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="24" fill="white" font-weight="700" text-anchor="middle">G2</text>
-<rect x="240.0" y="400.0" width="780.0" height="80.0" rx="8" fill="#FFFFFF" stroke="#B4541E" stroke-width="1.8"/>
-<text x="260.0" y="430.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#B4541E" font-weight="700" text-anchor="start">電気（隔離）/ electrical</text>
-<text x="260.0" y="454.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#526378" font-weight="400" text-anchor="start">配線・極性・保護・接地・無電圧</text>
-<text x="800.0" y="453.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="10" fill="#526378" font-weight="600" text-anchor="end">qualified, isolated</text>
-<path d="M170.0 482.0 L170.0 503.0" fill="none" stroke="#B4541E" stroke-width="2" marker-end="url(#arrow)"/>
-<rect x="110.0" y="505.0" width="120.0" height="80.0" rx="8" fill="#1B7A4B" stroke="#1B7A4B" stroke-width="2"/>
-<text x="170.0" y="553.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="24" fill="white" font-weight="700" text-anchor="middle">G3</text>
-<rect x="240.0" y="505.0" width="780.0" height="80.0" rx="8" fill="#FFFFFF" stroke="#1B7A4B" stroke-width="1.8"/>
-<text x="260.0" y="535.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#1B7A4B" font-weight="700" text-anchor="start">オフライン制御 / offline</text>
-<text x="260.0" y="559.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#526378" font-weight="400" text-anchor="start">自己保持・タイマー・シーケンス・異常</text>
-<text x="800.0" y="558.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="10" fill="#526378" font-weight="600" text-anchor="end">simulation</text>
-<path d="M170.0 587.0 L170.0 608.0" fill="none" stroke="#1B7A4B" stroke-width="2" marker-end="url(#arrow)"/>
-<rect x="110.0" y="610.0" width="120.0" height="80.0" rx="8" fill="#B4541E" stroke="#B4541E" stroke-width="2"/>
-<text x="170.0" y="658.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="24" fill="white" font-weight="700" text-anchor="middle">G4</text>
-<rect x="240.0" y="610.0" width="780.0" height="80.0" rx="8" fill="#FFFFFF" stroke="#B4541E" stroke-width="1.8"/>
-<text x="260.0" y="640.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#B4541E" font-weight="700" text-anchor="start">監督下準備 / readiness</text>
-<text x="260.0" y="664.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#526378" font-weight="400" text-anchor="start">ガード・隔離・残留エネルギー・復旧</text>
-<text x="800.0" y="663.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="10" fill="#526378" font-weight="600" text-anchor="end">supervisor</text>
-<path d="M170.0 692.0 L170.0 713.0" fill="none" stroke="#B4541E" stroke-width="2" marker-end="url(#arrow)"/>
-<rect x="110.0" y="715.0" width="120.0" height="80.0" rx="8" fill="#A32B2B" stroke="#A32B2B" stroke-width="2"/>
-<text x="170.0" y="763.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="24" fill="white" font-weight="700" text-anchor="middle">G5</text>
-<rect x="240.0" y="715.0" width="780.0" height="80.0" rx="8" fill="#FFFFFF" stroke="#A32B2B" stroke-width="1.8"/>
-<text x="260.0" y="745.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#A32B2B" font-weight="700" text-anchor="start">通電試験 / energised</text>
-<text x="260.0" y="769.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#526378" font-weight="400" text-anchor="start">承認された手順のみ</text>
-<text x="800.0" y="768.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="10" fill="#526378" font-weight="600" text-anchor="end">NOT PERFORMED</text>
-<path d="M170.0 797.0 L170.0 818.0" fill="none" stroke="#A32B2B" stroke-width="2" marker-end="url(#arrow)"/>
-<text x="920.0" y="765.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#A32B2B" font-weight="700" text-anchor="middle">課程では未実施</text>
-<text x="920.0" y="783.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="10" fill="#526378" font-weight="400" text-anchor="middle">not required</text>
-<rect x="110.0" y="820.0" width="120.0" height="80.0" rx="8" fill="#1B7A4B" stroke="#1B7A4B" stroke-width="2"/>
-<text x="170.0" y="868.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="24" fill="white" font-weight="700" text-anchor="middle">G6</text>
-<rect x="240.0" y="820.0" width="780.0" height="80.0" rx="8" fill="#FFFFFF" stroke="#1B7A4B" stroke-width="1.8"/>
-<text x="260.0" y="850.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#1B7A4B" font-weight="700" text-anchor="start">最終受入 / acceptance</text>
-<text x="260.0" y="874.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#526378" font-weight="400" text-anchor="start">要求との照合・記録・引継ぎ</text>
-<text x="800.0" y="873.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="10" fill="#526378" font-weight="600" text-anchor="end">acceptor</text>
-<text x="1000.0" y="250.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#142B3F" font-weight="700" text-anchor="start">前のゲートが</text>
-<text x="1000.0" y="272.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#142B3F" font-weight="700" text-anchor="start">完了するまで</text>
-<text x="1000.0" y="294.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#A32B2B" font-weight="700" text-anchor="start">次へ進まない</text>
-<text x="1000.0" y="330.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#526378" font-weight="400" text-anchor="start">Do not pass a gate</text>
-<text x="1000.0" y="350.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#526378" font-weight="400" text-anchor="start">until the previous</text>
-<text x="1000.0" y="370.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#526378" font-weight="400" text-anchor="start">gate is complete.</text>
-<rect x="990.0" y="430.0" width="360.0" height="210.0" rx="8" fill="#F8E7E7" stroke="#A32B2B" stroke-width="1.3"/>
-<text x="1010.0" y="462.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14" fill="#A32B2B" font-weight="700" text-anchor="start">G5は必須ではない</text>
-<text x="1010.0" y="486.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="11" fill="#526378" font-weight="400" text-anchor="start">Energised testing is optional</text>
-<text x="1010.0" y="515.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#142B3F" font-weight="600" text-anchor="start">未実施は BLOCKED または</text>
-<text x="1010.0" y="537.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#142B3F" font-weight="600" text-anchor="start">NOT TESTED と記録する。</text>
-<text x="1010.0" y="560.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="12" fill="#A32B2B" font-weight="700" text-anchor="start">PASS にしない。</text>
-<text x="1010.0" y="588.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="10" fill="#526378" font-weight="400" text-anchor="start">Never record an unperformed</text>
-<text x="1010.0" y="606.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="10" fill="#526378" font-weight="400" text-anchor="start">energised test as PASS.</text>
-<rect x="56.0" y="944.0" width="1328.0" height="60.0" rx="10" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
-<text x="76.0" y="978.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#142B3F" font-weight="700" text-anchor="start">文書→機械→電気（隔離）→オフライン→監督下準備→承認された通電→受入の順。G5は必須ではない。</text>
-<text x="76.0" y="1000.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14.5" fill="#526378" font-weight="400" text-anchor="start">Documentation, mechanics, isolated electrical, offline, supervised readiness, approved energised, acceptance. G5 is optional.</text>
-<text x="1400" y="1052" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" text-anchor="end">D09-06 • 編集可能な図 / editable SVG</text>
+<text x="56.0" y="104.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="32" fill="#142B3F" font-weight="700" text-anchor="start">照明の種類</text>
+<text x="56.0" y="144.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="26" fill="#526378" font-weight="400" text-anchor="start">Lighting types</text>
+<rect x="70.0" y="180.0" width="406.7" height="260.0" rx="12" fill="#FFFFFF" stroke="#B4541E" stroke-width="2"/>
+<rect x="100.0" y="210.0" width="90.0" height="46.0" rx="4" fill="#FBEEE6" stroke="#B4541E" stroke-width="1.8"/>
+<text x="145.0" y="240.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#142B3F" font-weight="700" text-anchor="middle">光</text>
+<path d="M200.0 233.0 L280.0 280.0" fill="none" stroke="#B4541E" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="230.0" y="280.0" width="90.0" height="24.0" rx="3" fill="#E3E8EE" stroke="#526378" stroke-width="1.4"/>
+<text x="275.0" y="330.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#B4541E" font-weight="700" text-anchor="middle">バックライト</text>
+<text x="275.0" y="355.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#526378" font-weight="400" text-anchor="middle">backlight</text>
+<text x="100.0" y="395.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#142B3F" font-weight="400" text-anchor="start">シルエット・透過 / silhouette, transmission</text>
+<rect x="496.7" y="180.0" width="406.7" height="260.0" rx="12" fill="#FFFFFF" stroke="#0E7490" stroke-width="2"/>
+<rect x="526.7" y="210.0" width="90.0" height="46.0" rx="4" fill="#E6F4F7" stroke="#0E7490" stroke-width="1.8"/>
+<text x="571.7" y="240.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#142B3F" font-weight="700" text-anchor="middle">光</text>
+<path d="M626.7 233.0 L706.7 280.0" fill="none" stroke="#0E7490" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="656.7" y="280.0" width="90.0" height="24.0" rx="3" fill="#E3E8EE" stroke="#526378" stroke-width="1.4"/>
+<text x="701.7" y="330.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#0E7490" font-weight="700" text-anchor="middle">リング照明</text>
+<text x="701.7" y="355.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#526378" font-weight="400" text-anchor="middle">ring light</text>
+<text x="526.7" y="395.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#142B3F" font-weight="400" text-anchor="start">レンズ周囲から / around the lens</text>
+<rect x="923.3" y="180.0" width="406.7" height="260.0" rx="12" fill="#FFFFFF" stroke="#6B3FA0" stroke-width="2"/>
+<rect x="953.3" y="210.0" width="90.0" height="46.0" rx="4" fill="#F1ECF8" stroke="#6B3FA0" stroke-width="1.8"/>
+<text x="998.3" y="240.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#142B3F" font-weight="700" text-anchor="middle">光</text>
+<path d="M1053.3 233.0 L1133.3 280.0" fill="none" stroke="#6B3FA0" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="1083.3" y="280.0" width="90.0" height="24.0" rx="3" fill="#E3E8EE" stroke="#526378" stroke-width="1.4"/>
+<text x="1128.3" y="330.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#6B3FA0" font-weight="700" text-anchor="middle">バー照明</text>
+<text x="1128.3" y="355.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#526378" font-weight="400" text-anchor="middle">bar light</text>
+<text x="953.3" y="395.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#142B3F" font-weight="400" text-anchor="start">直線・方向 / linear, directional</text>
+<rect x="70.0" y="470.0" width="406.7" height="260.0" rx="12" fill="#FFFFFF" stroke="#1B7A4B" stroke-width="2"/>
+<rect x="100.0" y="500.0" width="90.0" height="46.0" rx="4" fill="#EAF6EE" stroke="#1B7A4B" stroke-width="1.8"/>
+<text x="145.0" y="530.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#142B3F" font-weight="700" text-anchor="middle">光</text>
+<path d="M200.0 523.0 L280.0 570.0" fill="none" stroke="#1B7A4B" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="230.0" y="570.0" width="90.0" height="24.0" rx="3" fill="#E3E8EE" stroke="#526378" stroke-width="1.4"/>
+<text x="275.0" y="620.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#1B7A4B" font-weight="700" text-anchor="middle">拡散照明</text>
+<text x="275.0" y="645.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#526378" font-weight="400" text-anchor="middle">diffuse lighting</text>
+<text x="100.0" y="685.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#142B3F" font-weight="400" text-anchor="start">光沢・むらを低減 / gloss and unevenness</text>
+<rect x="496.7" y="470.0" width="406.7" height="260.0" rx="12" fill="#FFFFFF" stroke="#1F5C99" stroke-width="2"/>
+<rect x="526.7" y="500.0" width="90.0" height="46.0" rx="4" fill="#E8F1FA" stroke="#1F5C99" stroke-width="1.8"/>
+<text x="571.7" y="530.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#142B3F" font-weight="700" text-anchor="middle">光</text>
+<path d="M626.7 523.0 L706.7 570.0" fill="none" stroke="#1F5C99" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="656.7" y="570.0" width="90.0" height="24.0" rx="3" fill="#E3E8EE" stroke="#526378" stroke-width="1.4"/>
+<text x="701.7" y="620.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#1F5C99" font-weight="700" text-anchor="middle">同軸照明</text>
+<text x="701.7" y="645.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#526378" font-weight="400" text-anchor="middle">coaxial lighting</text>
+<text x="526.7" y="685.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#142B3F" font-weight="400" text-anchor="start">平面の反射面 / flat reflective surfaces</text>
+<rect x="923.3" y="470.0" width="406.7" height="260.0" rx="12" fill="#FFFFFF" stroke="#A32B2B" stroke-width="2"/>
+<rect x="953.3" y="500.0" width="90.0" height="46.0" rx="4" fill="#F8E7E7" stroke="#A32B2B" stroke-width="1.8"/>
+<text x="998.3" y="530.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="16" fill="#142B3F" font-weight="700" text-anchor="middle">光</text>
+<path d="M1053.3 523.0 L1133.3 570.0" fill="none" stroke="#A32B2B" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="1083.3" y="570.0" width="90.0" height="24.0" rx="3" fill="#E3E8EE" stroke="#526378" stroke-width="1.4"/>
+<text x="1128.3" y="620.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="18" fill="#A32B2B" font-weight="700" text-anchor="middle">低角度・暗視野</text>
+<text x="1128.3" y="645.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#526378" font-weight="400" text-anchor="middle">low angle, dark field</text>
+<text x="953.3" y="685.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#142B3F" font-weight="400" text-anchor="start">傷・異物・微細な凹凸 / scratches, particles, relief</text>
+<rect x="70.0" y="790.0" width="1300.0" height="78.0" rx="8" fill="#E8F1FA" stroke="#2563A6" stroke-width="1.2"/>
+<text x="88.0" y="820.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#142B3F" font-weight="700" text-anchor="start">効果は材質と欠陥形状に依存する。1種類で全欠陥は見えない。</text>
+<text x="88.0" y="844.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="13" fill="#526378" font-weight="400" text-anchor="start">Effectiveness depends on material and defect geometry; one type does not show every defect.</text>
+<rect x="56.0" y="884.0" width="1328.0" height="60.0" rx="10" fill="#E8F1FA" stroke="#2563A6" stroke-width="1"/>
+<text x="76.0" y="918.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="17.0" fill="#142B3F" font-weight="700" text-anchor="start">バックライト・リング・バー・拡散・同軸・低角度の模式的な比較</text>
+<text x="76.0" y="940.0" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="14.5" fill="#526378" font-weight="400" text-anchor="start">Schematic comparison of backlight, ring, bar, diffuse, coaxial and low-angle lighting</text>
+<text x="1400" y="992" font-family="Arial, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif" font-size="15" fill="#526378" text-anchor="end">D09-06 • 編集可能な図 / editable SVG</text>
 </svg>

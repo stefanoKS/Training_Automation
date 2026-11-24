@@ -305,10 +305,38 @@ The source PDF is generally readable but has these layout problems.
 | 項目 / Item | 改善 / improvement |
 |---|---|
 | 5日→3日 / five days to three | 元の5日間の学習目標を、3日×3ノートブックに再配置。重複を削除し、実習時間を確保。 / remapped into three days and nine notebooks; duplicates removed |
-| AI・カメラ中心の旧教材 / old vision-centred course | 元PDFの機械・電気・PLC・通信・試運転の流れに置換。 / replaced by the source PDF's mechanical, electrical, PLC, network and commissioning flow |
-| 用語の一貫性 / terminology | 「タクト」「サイクル」「実力能力」「停止許可」「リセット」などを用語集で固定。 / fixed in the glossary |
+| AI・カメラ中心の旧教材 / old vision-centred course | **2026-11-24 改訂で更新 / updated 2026-11-24:** 第9日は再び AI 検査カメラ（カメラ・レンズ・照明・撮像環境・構成）を中心とする内容になった。ただし今回は元PDFの機械・電気・PLCの流れを第7日・第8日に残している。 / Day 9 is again centred on the AI inspection camera, while the source PDF's mechanical, electrical and PLC flow stays in Days 7 and 8. |
+| 用語の一貫性 / terminology | 「タクト」「サイクル」「停止許可」「リセット」などを用語集で固定。稼働率・良品率による能力計算は必須範囲から外した。 / fixed in the glossary; availability and yield capacity models were removed |
 | BLOCKEDの扱い / BLOCKED | 未実施を合格にしない記録規則を追加。 / added a rule that unperformed tests are not passes |
 | 初学者向け / beginners | 物理的意味→図→計算→演習→確認→期待結果の順に統一。 / consistent explanation → visual → worked example → exercise → check → expected result |
+
+---
+
+## E-10 2026-11-24 改訂後の参照先 / reference anchors after the 2026-11-24 revision
+
+本文の技術的な修正内容は有効なままです。改訂でセル名・節番号・図番号が変わった箇所の現在の参照先を示します。履歴は書き換えていません。
+
+The technical corrections above remain valid. Where the revision changed cell names, section numbers or figure numbers, the current anchors are listed below. The historical text is not rewritten.
+
+| 旧参照 / old reference | 現在の参照 / current reference |
+|---|---|
+| `Day08_03` の `sim-selfhold` セル / the `sim-selfhold` cell | `Day08_03_Ladder_Sequence` の `seal-in-vs-extended`（基本回路と拡張ロジックの比較）/ the `seal-in-vs-extended` cell |
+| `Day08_03` の状態遷移表 / state table | 08-03 §10「基本のシーケンス」と §8「拡張ロジック」 / sections 8 and 10 |
+| `Day08_02` の `sensor-compatibility` セル | `Day08_02_Sensors_and_IO` の `npn-pnp` セル / the `npn-pnp` cell |
+| `Day08_02` の `io-validation` セル | 08-02 §4 の統一I/O表と `validate_io` のテスト / the I/O table and `validate_io` test |
+| `D08-06.svg`（センサー方式の図）/ sensor types figure | `D08-07.svg`。`D08-06` は入力→出力の信号の流れ / `D08-07`; `D08-06` is now the I/O signal flow |
+| `Day07_03` の `cylinder-calculator` | `Day07_03` §6–§7（紙と電卓）と `test_mechanical_numbers` / sections 6-7 and the test |
+| `Day07_03` の `motor-calculator` / `motor-curve` | `Day07_03` §8 と `test_motor_numbers` / section 8 and the test |
+| `Day07_03` の `bom-hash` | 削除。BOM と版管理は必須教材から外した / removed with BOM and version fingerprinting |
+| ネットワーク・試運転・提案の各節 / networking, commissioning, proposal sections | `Day09_Communication_Commissioning` は削除。相当する記述は `curriculum_source_map.csv` の `REMOVED_FROM_ACTIVE` / `SUPERSEDED_BY_NEW_AI_CAMERA` 行を参照 / the folder was removed; see the source-map rows |
+
+**改訂後の数値の不変条件 / numeric invariants after the revision**
+
+- タクト42秒/個、必要能力85.71個/時、理論能力240個/時（15秒・1個/サイクル）。
+- 労務費換算316,800円/年、回収1.42年（運用費0）、1.69年（運用費50,000円）。
+- 押し側157.08 N、引き側131.95 N（D20・d8・0.5 MPa）。11.18 mm は理論最小内径であり選定ではない。
+- 電気負荷0.80 A / 19.2 W、計画1.00 A（25%は教材の仮定）。
+- 1ピクセル0.125 mm/px、欠陥4 px、ぶれ1 mm / 8 px、露光0.125 ms、8,000 line/s、33.33 mm。
 
 ---
 

@@ -8,9 +8,9 @@ The Day 7–9 PDFs use a separate pipeline. Canonical sources are the `.md` manu
 
 | ファイル / File | 内容 / Contents | 生成 / build |
 |---|---|---|
-| `Day07_explanation_ja_en.pdf` | 第7日：構想・機械設計 / Day 7: planning and mechanical design | `python day07_09_support/scripts/export_day07_09_pdf.py` |
-| `Day08_explanation_ja_en.pdf` | 第8日：電気・PLC / Day 8: electrical and PLC | 同上 / same |
-| `Day09_explanation_ja_en.pdf` | 第9日：通信・試運転・提案 / Day 9: communication, commissioning, proposal | 同上 / same |
+| `Day07_explanation_ja_en.pdf` | 第7日：自動化の基礎・動力・選定 / Day 7: automation fundamentals, power, selection | `python day07_09_support/scripts/export_day07_09_pdf.py` |
+| `Day08_explanation_ja_en.pdf` | 第8日：電気・センサー・PLC・ラダー / Day 8: electricity, sensors, PLC, ladder | 同上 / same |
+| `Day09_explanation_ja_en.pdf` | 第9日：AI検査カメラ・照明・構成 / Day 9: AI inspection camera, lighting, architecture | 同上 / same |
 
 ```powershell
 # AI_Vision_Training フォルダで / in the AI_Vision_Training folder
@@ -20,9 +20,13 @@ The Day 7–9 PDFs use a separate pipeline. Canonical sources are the `.md` manu
 .\.venv\Scripts\python.exe day07_09_support\scripts\check_day07_09_pdfs.py
 ```
 
-第7日〜第9日のPDFは、実行可能セルのコードと参考出力、図、公式カード、用語集、参考文献を含みます。PDF生成時にノートブックのコードは実行しません（参考出力は別スクリプトで事前に取得します）。全ページをPNGに描画して点検します。
+第7日〜第9日のPDFは、実行可能セルのコードと参考出力（第8日・第9日）、図、公式カード、用語集、参考文献を含みます。第7日は実行するセルがありません。PDF生成時にノートブックのコードは実行しません（参考出力は別スクリプトで事前に取得します）。全ページをPNGに描画して点検します。
 
-The Day 7–9 PDFs contain code cells with reference outputs, diagrams, formula cards, the glossary and references. The exporter does not execute notebook code (reference outputs are captured beforehand). Every page is rendered to PNG for inspection.
+**第9日は19ページ以内**という上限があります。そのため、第9日だけは判型を詰め（余白12 mm・本文8.8 pt・表7.8 pt以上）、目次を表紙と同じページに置き、付録Aを公式カードの前半に限り、短縮版の用語集を使います。図は紙面では小さくなるため、講師は `assets/diagrams/day09/` のSVG/PNGを投影してください。
+
+The Day 7–9 PDFs contain code cells with reference outputs (Days 8 and 9), diagrams, formula cards, the glossary and references. Day 7 has no executable cells. The exporter does not execute notebook code (reference outputs are captured beforehand). Every page is rendered to PNG for inspection.
+
+**Day 9 has a hard 19-page limit.** Day 9 therefore uses tighter margins (12 mm), a smaller body size (8.8 pt, with table text at 7.8 pt or larger), the contents on the cover page, the first half of the formula card as Appendix A, and the compact glossary. Figures are small on paper, so instructors should project the SVG/PNG files in `assets/diagrams/day09/`.
 
 ---
 
